@@ -5,7 +5,7 @@ Namespace Gestores
     Public Class GestorCargo
 
         Sub CrearCargo(unCargo As Cargo)
-
+            'Prueba branch maestro
         End Sub
 
         Function MostrarCargo() As Cargo
