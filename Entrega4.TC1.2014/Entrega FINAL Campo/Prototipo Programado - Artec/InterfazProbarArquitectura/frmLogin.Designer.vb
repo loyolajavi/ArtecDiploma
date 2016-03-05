@@ -32,6 +32,7 @@ Partial Class frmLogin
         Me.InglésToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtUsuario = New System.Windows.Forms.TextBox()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,10 +84,20 @@ Partial Class frmLogin
         resources.ApplyResources(Me.txtUsuario, "txtUsuario")
         Me.txtUsuario.Name = "txtUsuario"
         '
+        'LabelX1
+        '
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        resources.ApplyResources(Me.LabelX1, "LabelX1")
+        Me.LabelX1.Name = "LabelX1"
+        '
         'frmLogin
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.LabelX1)
         Me.Controls.Add(Me.txtUsuario)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ToolStrip1)
@@ -109,5 +120,6 @@ Partial Class frmLogin
     Friend WithEvents InglésToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtUsuario As System.Windows.Forms.TextBox
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
 
 End Class
