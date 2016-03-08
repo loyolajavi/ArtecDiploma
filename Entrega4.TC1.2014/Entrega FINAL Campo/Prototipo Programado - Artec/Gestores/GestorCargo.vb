@@ -10,7 +10,7 @@ Namespace Gestores
 
         Function MostrarCargo() As Cargo
             'hola q tal bifurcacion dos
-
+            'ESTO TIENE QUE APARECER EN BIFURACACION/BRANCH 05/03/2016 y NO EN MAESTRA
         End Function
 
         Sub ModificarCargo(unCargo As Cargo)
