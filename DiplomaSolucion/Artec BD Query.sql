@@ -73,12 +73,59 @@ create table Prioridad
 )
 
 
-
+--Eliminarla
 create table TipoBien
 (
 	IdTipoBien int not null identity(1,1),
 	DescripTipoBien varchar(300) not null,
 	Constraint [PK_TipoBien] primary key (IdTipoBien)
+)
+
+
+create table Categoria
+(
+	IdCategoria int not null identity(1,1),
+	DescripCategoria varchar(20) not null,
+	Constraint [PK_Categoria] primary key (IdCategoria)
+)
+
+
+
+create table SubCategoria
+(
+	IdSubCategoria int not null identity(1,1),
+	DescripSubcategoria varchar(300) not null,
+	IdCategoria int not null,
+	Constraint [PK_SubCategoria] primary key (IdSubCategoria)
+)
+
+
+
+create table Bien
+(
+	IdBien int not null identity(1,1),
+	IdSubCategoria int not null,
+	DescripBien varchar(300) not null,
+	Homologado bit not null,
+	IdTipoLicencia int not null,
+	IdMarca int not null,
+	IdModeloVersion int null,
+	Constraint [PK_Bien] primary key (IdBien)
+)
+
+
+create table Inventario
+(
+	IdInventario int not null identity(1,1),
+	SerialMaster nvarchar (300) null,
+	SerieKey nvarchar (300) not null,
+	FechaSuscrip datetime null,
+	FechaFinSuscrip datetime null,
+	IdIngreso int not null,
+	IdDeposito int not null,
+	IdEstado int not null,
+	DescripTipoBien varchar(300) not null,
+	Constraint [PK_Inventario] primary key (IdInventario)
 )
 
 
