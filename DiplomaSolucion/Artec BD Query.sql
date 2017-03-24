@@ -3,14 +3,14 @@ go
 
 create table Solicitud 
 (
-	NroSolicitud INT not null identity (1,1),
+	IdSolicitud INT not null identity (1,1),
 	FechaInicio datetime not null,
 	FechaFin datetime,
 	IdDependencia INT not null,
 	IdPrioridad int not null,
 	IdResponsable int not null,
 	IdEstado int not null,
-	CONSTRAINT [PK_Solicitud] primary key (NroSolicitud)
+	CONSTRAINT [PK_Solicitud] primary key (IdSolicitud)
 )
 
 create table Nota
@@ -122,6 +122,7 @@ create table Bien
 create table Inventario
 (
 	IdInventario int not null identity(1,1),
+	IdBien int not null,
 	SerialMaster nvarchar (300) null,
 	SerieKey nvarchar (300) not null,
 	FechaSuscrip datetime null,
@@ -130,7 +131,7 @@ create table Inventario
 	IdDeposito int not null,
 	IdEstado int not null,
 	DescripTipoBien varchar(300) not null,
-	Constraint [PK_Inventario] primary key (IdInventario)
+	Constraint [PK_Inventario] primary key (IdInventario, IdBien)
 )
 
 
@@ -335,20 +336,86 @@ create table RelCotSolDetalle
 )
 
 
-create table RelDepUsuarioCargo
+create table RelDepAgenteCargo
 (
 	IdAgente int not null,
 	IdDependencia int not null,
 	IdCargo int not null,
-	Constraint [PK_RelDepenUsuario] primary key (IdAgente, IdDependencia, IdCargo)
+	Constraint [PK_RelDepAgenteCargo] primary key (IdAgente, IdDependencia, IdCargo)
 )
 
 
-create table RelSolDetalleUsuario
+create table RelSolDetalleAgente
 (
 	IdSolicitudDetalle int not null,
 	IdSolicitud int not null,
 	IdAgente int not null,
-	Constraint [PK_RelSolDetalleUsuario] primary key (IdSolicitudDetalle, IdSolicitud, IdAgente)
+	Constraint [PK_RelSolDetalleAgente] primary key (IdSolicitudDetalle, IdSolicitud, IdAgente)
 )
 
+
+
+
+--*********************************************
+--*********************************************
+--RELACIONES
+--*********************************************
+--*********************************************
+
+--FORANEAS DE RelDepAgenteCargo******************************************
+ALTER TABLE RelDepAgenteCargo ADD CONSTRAINT [FK_RelDepAgenteCar_Cargo] 
+FOREIGN KEY (IdCargo) REFERENCES Cargo(IdCargo)
+
+ALTER TABLE RelDepAgenteCargo ADD CONSTRAINT [FK_RelDepAgenteCar_Agente] 
+FOREIGN KEY (IdAgente) REFERENCES Agente(IdAgente)
+
+ALTER TABLE RelDepAgenteCargo ADD CONSTRAINT [FK_RelDepAgenteCar_Dependencia] 
+FOREIGN KEY (IdDependencia) REFERENCES Dependencia(IdDependencia)
+
+
+--FORANEAS DE Nota******************************************
+ALTER TABLE Nota ADD CONSTRAINT [FK_Nota_Solicitud] 
+FOREIGN KEY (IdSolicitud) REFERENCES Solicitud(IdSolicitud)
+
+
+--FORANEAS DE SOLICITUD******************************************
+ALTER TABLE Solicitud ADD CONSTRAINT [FK_Solicitud_Dependencia] 
+FOREIGN KEY (IdDependencia) REFERENCES Dependencia(IdDependencia)
+
+ALTER TABLE Solicitud ADD CONSTRAINT [FK_Solicitud_Estado] 
+FOREIGN KEY (IdEstado) REFERENCES EstadoSolicitud(IdEstadoSolicitud)
+
+ALTER TABLE Solicitud ADD CONSTRAINT [FK_Solicitud_Prioridad] 
+FOREIGN KEY (IdPrioridad) REFERENCES Prioridad(IdPrioridad)
+
+
+--FORANEAS DE SOLICDETALLE******************************************
+ALTER TABLE SolicDetalle ADD CONSTRAINT [FK_SolicDetalle_Solicitud] 
+FOREIGN KEY (IdSolicitud) REFERENCES Solicitud(IdSolicitud)
+
+ALTER TABLE SolicDetalle ADD CONSTRAINT [FK_SolicDetalle_EstadoSolDetalle] 
+FOREIGN KEY (IdEstadoSolDetalle) REFERENCES EstadoSolDetalle(IdEstadoSolDetalle)
+
+ALTER TABLE SolicDetalle ADD CONSTRAINT [FK_SolicDetalle_SubCategoria] 
+FOREIGN KEY (IdSubCategoria) REFERENCES SubCategoria(IdSubCategoria)
+
+
+--FORANEAS DE RelSolDetalleAgente******************************************
+ALTER TABLE RelSolDetalleAgente ADD CONSTRAINT [FK_RelSolDetalleAgente_SolicDetalle] 
+FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
+
+ALTER TABLE RelSolDetalleAgente ADD CONSTRAINT [FK_RelSolDetalleAgente_Agente] 
+FOREIGN KEY (IdAgente) REFERENCES Agente(IdAgente)
+
+
+--FORANEAS DE RelCotSolDetalle******************************************
+ALTER TABLE RelCotSolDetalle ADD CONSTRAINT [FK_RelCotSolDetalle_SolicDetalle] 
+FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
+
+ALTER TABLE RelCotSolDetalle ADD CONSTRAINT [FK_RelCotSolDetalle_Cotizacion] 
+FOREIGN KEY (IdCotizacion) REFERENCES Cotizacion(IdCotizacion)
+
+
+--FORANEAS DE COTIZACION******************************************
+--ALTER TABLE RelCotSolDetalle ADD CONSTRAINT [FK_RelCotSolDetalle_SolicDetalle] 
+--FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
