@@ -127,9 +127,9 @@ create table Inventario
 	SerieKey nvarchar (300) not null,
 	FechaSuscrip datetime null,
 	FechaFinSuscrip datetime null,
-	IdIngreso int not null,
+	IdAdquisicion int not null,
 	IdDeposito int not null,
-	IdEstado int not null,
+	IdEstadoInventario int not null,
 	DescripTipoBien varchar(300) not null,
 	Constraint [PK_Inventario] primary key (IdInventario, IdBien)
 )
@@ -152,7 +152,7 @@ create table AsigDetalle
 	IdAsigDetalle int not null identity(1,1),
 	IdAsignacion int not null,
 	IdInventario int not null,
-	IdSolicDetalle int null,
+	IdSolicitudDetalle int null,
 	IdTipoAsignacion int not null,
 	IdAgente int null,
 	Observacion varchar(300) null,
@@ -160,7 +160,8 @@ create table AsigDetalle
 	Constraint [PK_AsigDetalle] primary key (IdAsigDetalle, IdAsignacion)
 )
 
-
+Alter table AsigDetalle
+add IdBien int not null
 
 create table TipoAsignacion
 (
@@ -199,7 +200,7 @@ create table Deposito
 (
 	IdDeposito int not null identity(1,1),
 	NombreDeposito varchar(100) not null,
-	Direccion varchar(500) not null,
+	IdDireccion int not null,
 	Constraint [PK_Deposito] primary key (IdDeposito)
 )
 
@@ -267,6 +268,9 @@ create table Direccion
 	Constraint [PK_Direccion] primary key (IdDireccion)
 )
 
+alter table Direccion
+add Piso varchar(10) null
+
 
 create table Provincia
 (
@@ -283,6 +287,10 @@ create table Cotizacion
 	IdProveedor int not null,
 	Constraint [PK_Cotizacion] primary key (IdCotizacion)
 )
+
+alter table Cotizacion
+add IdPartidaDetalle int not null,
+IdPartida int not null
 
 
 create table Partida
@@ -301,10 +309,14 @@ create table PartidaDetalle
 (
 	IdPartidaDetalle int not null identity(1,1),
 	IdPartida int not null,
-	IdSolicDetalle int not null,
+	IdSolicitudDetalle int not null,
 	IdAdquisicion int null,
 	Constraint [PK_PartidaDetalle] primary key (IdPartidaDetalle, IdPartida)
 )
+
+alter table PartidaDetalle
+add IdSolicitud int not null
+
 
 
 create table Rendicion
@@ -353,6 +365,26 @@ create table RelSolDetalleAgente
 	Constraint [PK_RelSolDetalleAgente] primary key (IdSolicitudDetalle, IdSolicitud, IdAgente)
 )
 
+
+create table RelProveedorDire
+(
+	IdProveedor int not null,
+	IdDireccion int not null,
+	Constraint [PK_RelProveedorDire] primary key (IdProveedor, IdDireccion)
+)
+
+alter table RelProveedorDire
+add activo bit not null
+
+create table RelProveedorTel
+(
+	IdProveedor int not null,
+	IdTelefono int not null,
+	Constraint [PK_RelProveedorTel] primary key (IdProveedor, IdTelefono)
+)
+
+alter table RelProveedorTel
+add activo bit not null
 
 
 
@@ -417,5 +449,110 @@ FOREIGN KEY (IdCotizacion) REFERENCES Cotizacion(IdCotizacion)
 
 
 --FORANEAS DE COTIZACION******************************************
---ALTER TABLE RelCotSolDetalle ADD CONSTRAINT [FK_RelCotSolDetalle_SolicDetalle] 
---FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
+ALTER TABLE Cotizacion ADD CONSTRAINT [FK_Cotizacion_PartidaDetalle] 
+FOREIGN KEY (IdPartidaDetalle, IdPartida) REFERENCES PartidaDetalle(IdPartidaDetalle, IdPartida)
+
+ALTER TABLE Cotizacion ADD CONSTRAINT [FK_Cotizacion_Proveedor] 
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+
+--FORANEAS DE PARTIDADETALLE******************************************
+ALTER TABLE PartidaDetalle ADD CONSTRAINT [FK_PartidaDetalle_Partida] 
+FOREIGN KEY (IdPartida) REFERENCES Partida(IdPartida)
+
+ALTER TABLE PartidaDetalle ADD CONSTRAINT [FK_PartidaDetalle_Adquisicion] 
+FOREIGN KEY (IdAdquisicion) REFERENCES Adquisicion(IdAdquisicion)
+
+ALTER TABLE PartidaDetalle ADD CONSTRAINT [FK_PartidaDetalle_SolicDetalle] 
+FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
+
+
+--FORANEAS DE RENDICION******************************************
+ALTER TABLE Rendicion ADD CONSTRAINT [FK_Rendicion_Partida] 
+FOREIGN KEY (IdPartida) REFERENCES Partida(IdPartida)
+
+
+--FORANEAS DE ADQUISICION******************************************
+ALTER TABLE Adquisicion ADD CONSTRAINT [FK_Adquisicion_Proveedor] 
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+
+ALTER TABLE Adquisicion ADD CONSTRAINT [FK_Adquisicion_Rendicion] 
+FOREIGN KEY (IdRendicion) REFERENCES Rendicion(IdRendicion)
+
+ALTER TABLE Adquisicion ADD CONSTRAINT [FK_Adquisicion_TipoAdquisicion] 
+FOREIGN KEY (IdTipoAdquisicion) REFERENCES TipoAdquisicion(IdTipoAdquisicion)
+
+
+--FORANEAS DE SubCategoria******************************************
+ALTER TABLE SubCategoria ADD CONSTRAINT [FK_SubCategoria_Categoria] 
+FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria)
+
+--FORANEAS DE BIEN******************************************
+ALTER TABLE Bien ADD CONSTRAINT [FK_Bien_SubCategoria] 
+FOREIGN KEY (IdSubCategoria) REFERENCES SubCategoria(IdSubCategoria)
+
+ALTER TABLE Bien ADD CONSTRAINT [FK_Bien_Marca] 
+FOREIGN KEY (IdMarca) REFERENCES Marca(IdMarca)
+
+ALTER TABLE Bien ADD CONSTRAINT [FK_Bien_ModeloVersion] 
+FOREIGN KEY (IdModeloVersion) REFERENCES ModeloVersion(IdModeloVersion)
+
+
+--FORANEAS DE INVENTARIO******************************************
+ALTER TABLE Inventario ADD CONSTRAINT [FK_Inventario_Bien] 
+FOREIGN KEY (IdBien) REFERENCES Bien(IdBien)
+
+ALTER TABLE Inventario ADD CONSTRAINT [FK_Inventario_Adquisicion] 
+FOREIGN KEY (IdAdquisicion) REFERENCES Adquisicion(IdAdquisicion)
+
+ALTER TABLE Inventario ADD CONSTRAINT [FK_Inventario_Deposito] 
+FOREIGN KEY (IdDeposito) REFERENCES Deposito(IdDeposito)
+
+ALTER TABLE Inventario ADD CONSTRAINT [FK_Inventario_Estado] 
+FOREIGN KEY (IdEstadoInventario) REFERENCES EstadoInventario(IdEstadoInventario)
+
+
+--FORANEAS DE ASIGNACION******************************************
+ALTER TABLE Asignacion ADD CONSTRAINT [FK_Asignacion_Dependencia] 
+FOREIGN KEY (IdDependencia) REFERENCES Dependencia(IdDependencia)
+
+--FORANEAS DE ASIGDETALLE******************************************
+ALTER TABLE AsigDetalle ADD CONSTRAINT [FK_AsigDetalle_Asignacion] 
+FOREIGN KEY (IdAsignacion) REFERENCES Asignacion(IdAsignacion)
+
+ALTER TABLE AsigDetalle ADD CONSTRAINT [FK_AsigDetalle_Inventario] 
+FOREIGN KEY (IdInventario, IdBien) REFERENCES Inventario(IdInventario, IdBien)
+
+ALTER TABLE AsigDetalle ADD CONSTRAINT [FK_AsigDetalle_TipoAsignacion] 
+FOREIGN KEY (IdTipoAsignacion) REFERENCES TipoAsignacion(IdTipoAsignacion)
+
+ALTER TABLE AsigDetalle ADD CONSTRAINT [FK_AsigDetalle_SolicDetalle] 
+FOREIGN KEY (IdSolicitudDetalle, IdSolicitud) REFERENCES SolicDetalle(IdSolicitudDetalle, IdSolicitud)
+
+ALTER TABLE AsigDetalle ADD CONSTRAINT [FK_AsigDetalle_Agente] 
+FOREIGN KEY (IdAgente) REFERENCES Agente(IdAgente)
+
+--FORANEAS DE DEPOSITO******************************************
+ALTER TABLE Deposito ADD CONSTRAINT [FK_Deposito_Direccion]
+FOREIGN KEY (IdDireccion) REFERENCES Direccion(IdDireccion)
+
+--FORANEAS DE DIRECCION******************************************
+ALTER TABLE Direccion ADD CONSTRAINT [FK_Direccion_Provincia]
+FOREIGN KEY (IdProvincia) REFERENCES Provincia(IdProvincia)
+
+--FORANEAS DE RelProveedorDire******************************************
+ALTER TABLE RelProveedorDire ADD CONSTRAINT [FK_RelProveedorDire_Proveedor]
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+
+ALTER TABLE RelProveedorDire ADD CONSTRAINT [FK_RelProveedorDire_Direccion]
+FOREIGN KEY (IdDireccion) REFERENCES Direccion(IdDireccion)
+
+--FORANEAS DE RelProveedorTel******************************************
+ALTER TABLE RelProveedorTel ADD CONSTRAINT [FK_RelProveedorTel_Proveedor]
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+
+ALTER TABLE RelProveedorTel ADD CONSTRAINT [FK_RelProveedorTel_Telefono]
+FOREIGN KEY (IdTelefono) REFERENCES Telefono(IdTelefono)
+
+--FORANEAS DE TELEFONO******************************************
+ALTER TABLE Telefono ADD CONSTRAINT [FK_Telefono_TipoTelefono]
+FOREIGN KEY (IdTipoTelefono) REFERENCES TipoTelefono(IdTipoTelefono)
