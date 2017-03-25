@@ -39,7 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLLDependencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ARTEC.DAL\ARTEC.DAL.csproj">
+      <Project>{370dabfc-3c85-479c-9376-ba07012aae14}</Project>
+      <Name>ARTEC.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ARTEC.ENTIDADES\ARTEC.ENTIDADES.csproj">
+      <Project>{2fe80535-5bea-4c2c-a951-d08c99e8ba22}</Project>
+      <Name>ARTEC.ENTIDADES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Loyola\Framework.Loyola\Framework.Loyola.vbproj">
+      <Project>{c41970ae-cc94-48fe-8b17-1424fdc32083}</Project>
+      <Name>Framework.Loyola</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using ARTEC.BLL;
 
 namespace ARTEC.GUI
 {
@@ -21,6 +22,12 @@ namespace ARTEC.GUI
             groupPanel1.Visible = true;
             labelX8.Location = new Point(402, 308);
             dataGridViewX1.Visible = true;
+        }
+
+        private void CrearSolicitud_Load(object sender, EventArgs e)
+        {
+            BLL.BLLDependencia prubabll = new BLL.BLLDependencia();
+            prubabll.prueba();
         }
 
 

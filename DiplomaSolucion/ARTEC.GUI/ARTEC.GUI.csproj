@@ -79,6 +79,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ARTEC.BLL\ARTEC.BLL.csproj">
+      <Project>{f0784a66-c127-46f0-8039-35ffc5d3d6d3}</Project>
+      <Name>ARTEC.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ARTEC.ENTIDADES\ARTEC.ENTIDADES.csproj">
+      <Project>{2fe80535-5bea-4c2c-a951-d08c99e8ba22}</Project>
+      <Name>ARTEC.ENTIDADES</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.Loyola\Framework.Loyola\Framework.Loyola.vbproj">
       <Project>{c41970ae-cc94-48fe-8b17-1424fdc32083}</Project>
       <Name>Framework.Loyola</Name>
