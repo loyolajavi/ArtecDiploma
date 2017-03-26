@@ -485,7 +485,6 @@ namespace ARTEC.GUI
             this.dataGridViewX1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewX1.Size = new System.Drawing.Size(302, 136);
             this.dataGridViewX1.TabIndex = 7;
-            this.dataGridViewX1.Visible = false;
             // 
             // buttonX1
             // 
@@ -591,7 +590,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "CrearSolicitud";
             this.Text = "Crear Solicitud";
             this.Load += new System.EventHandler(this.CrearSolicitud_Load);

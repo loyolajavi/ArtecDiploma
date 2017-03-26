@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using ARTEC.BLL;
+using ARTEC.ENTIDADES;
 
 namespace ARTEC.GUI
 {
@@ -27,7 +28,9 @@ namespace ARTEC.GUI
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
             BLL.BLLDependencia prubabll = new BLL.BLLDependencia();
-            prubabll.prueba();
+            dataGridViewX1.DataSource = null;
+            List<Dependencia> unasDependencias = prubabll.prueba();
+            dataGridViewX1.DataSource = unasDependencias;
         }
 
 

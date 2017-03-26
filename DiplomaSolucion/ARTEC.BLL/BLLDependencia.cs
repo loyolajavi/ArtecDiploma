@@ -20,10 +20,11 @@ namespace ARTEC.BLL
 
         DALDependencia pruebaDAL = new DALDependencia();
 
-        public void prueba()
+        public List<Dependencia> prueba()
         {
 
-            pruebaDAL.prueba();
+            //pruebaDAL.prueba();
+            return pruebaDAL.TraerTodos();
 
         }
 

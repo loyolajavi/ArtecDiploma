@@ -1,0 +1,8 @@
+CREATE PROCEDURE DependenciaTraerTodos
+
+AS
+
+SET NOCOUNT ON
+
+SELECT *
+FROM Dependencia
