@@ -38,27 +38,22 @@ Public Class ManejaCadenas
     End Function
 
 
-    Public Shared lista As New List(Of String)
+    'Public Shared lista As New List(Of String)
     Public Shared Function SepararTexto(ByVal texto As String, ByVal plimitador As Char) As List(Of String)
 
+        Dim lista As New List(Of String)
 
         Dim vector() As String
 
-
-
         vector = Split(texto, plimitador)
 
-
         For j = LBound(vector) To UBound(vector)
-
-
-
 
             lista.Add(vector(j))
 
         Next
 
-
+        Return lista
 
 
 

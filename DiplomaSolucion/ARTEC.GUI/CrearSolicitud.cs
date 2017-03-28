@@ -42,27 +42,54 @@ namespace ARTEC.GUI
 
         }
 
-
+        /// <summary>
+        /// Evento para buscar las dependencias mientras se escribe (búsqueda dinámica)
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void textBoxX1_TextChanged(object sender, EventArgs e)
         {
-            
+
             if  (textBoxX1.Text != "" & textBoxX1.Text != " " & textBoxX1 != null)
             {
-                dataGridViewX1.DataSource = null;
 
-                var res = (from d in unasDependencias
-                           where d.NombreDependencia.ToLower().Contains(textBoxX1.Text.ToLower())
-                           select d).ToList();
+                List<Dependencia> res = new List<Dependencia>();
 
-                if (res.Count == 0)
+                foreach (var unaDep in unasDependencias)
                 {
-                    dataGridViewX1.DataSource = null;
+                    res.Add(unaDep);
                 }
-                else
+
+                List<string> Palabras = new List<string>();
+                Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
+
+                foreach (string unaPalabra in Palabras)
                 {
-                    dataGridViewX1.DataSource = res;
+                    if ((unaPalabra.ToString() == "") || (unaPalabra.ToString() == " "))
+                    {
+
+                    }
+                    else 
+                    {
+                        dataGridViewX1.DataSource = null;
+
+                        res = (from d in res
+                               where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
+                               select d).ToList();
+
+                        if (res.Count == 0)
+                        {
+                            dataGridViewX1.DataSource = null;
+                        }
+                        else
+                        {
+                            dataGridViewX1.DataSource = res;
+                        }
+                        
+                    }
                 }
                 res = null;
+
             }
             else
             {
