@@ -565,10 +565,12 @@ namespace ARTEC.GUI
             this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
             this.textBoxX1.ForeColor = System.Drawing.Color.Black;
             this.textBoxX1.Location = new System.Drawing.Point(15, 50);
+            this.textBoxX1.Multiline = true;
             this.textBoxX1.Name = "textBoxX1";
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(321, 22);
             this.textBoxX1.TabIndex = 1;
+            this.textBoxX1.TextChanged += new System.EventHandler(this.textBoxX1_TextChanged);
             // 
             // labelX1
             // 

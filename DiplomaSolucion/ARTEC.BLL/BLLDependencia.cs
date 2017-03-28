@@ -18,13 +18,17 @@ namespace ARTEC.BLL
             
         //}
 
-        DALDependencia pruebaDAL = new DALDependencia();
+        DALDependencia GestorDependencia = new DALDependencia();
 
-        public List<Dependencia> prueba()
+        /// <summary>
+        /// Traer todas las dependencias.
+        /// </summary>
+        /// <returns>List<Dependencia></returns>
+        public List<Dependencia> TraerTodos()
         {
 
             //pruebaDAL.prueba();
-            return pruebaDAL.TraerTodos();
+            return GestorDependencia.TraerTodos();
 
         }
 
