@@ -185,55 +185,85 @@ namespace ARTEC.GUI
         private void textBoxX1_TextChanged(object sender, EventArgs e)
         {
             //comboBoxEx4.DataSource = null;
-            bool flagDep = false;
-            if (textBoxX1.Text != "" & textBoxX1.Text != " " & textBoxX1 != null)
+            //bool flagNoDep = false;
+            //if (textBoxX1.Text != "" & textBoxX1.Text != " " & textBoxX1 != null)
+            if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
                 List<Dependencia> res = new List<Dependencia>();
 
-                foreach (var unaDep in unasDependencias)
-                {
-                    res.Add(unaDep);
-                }
+                //foreach (var unaDep in unasDependencias)
+                //{
+                    res = (List<Dependencia>)unasDependencias.ToList();
+                    //res.Add(unaDep);
+                //}
 
                 List<string> Palabras = new List<string>();
                 Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
 
                 foreach (string unaPalabra in Palabras)
                 {
-                    if ((unaPalabra.ToString() != "") & (unaPalabra.ToString() != " "))
-                    {
+                    //if ((unaPalabra.ToString() != "") & (unaPalabra.ToString() != " "))
+                    //if (unaPalabra.ToString() != " ")
+                    //{
                         res = (List<Dependencia>)(from d in res
                                                   where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
                                                   select d).ToList();
-                    }
-                    else
-                    {
-                        flagDep = true;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    flagNoDep = true;
+                    //}
 
                 }
 
-                if (res.Count == 0 || flagDep == true)
+                //if (res.Count == 0 || flagNoDep == true)
+                if (res.Count > 0)
+                {
+                    if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
+                    {
+                        comboBoxEx4.Visible = false;
+                        comboBoxEx4.DroppedDown = false;
+                        comboBoxEx4.DataSource = null;
+                    }
+                    else
+                    {
+                        comboBoxEx4.DataSource = null;
+                        comboBoxEx4.DataSource = res;
+                        comboBoxEx4.DisplayMember = "NombreDependencia";
+                        comboBoxEx4.ValueMember = "IdDependencia";
+                        comboBoxEx4.Visible = true;
+                        comboBoxEx4.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+                else
                 {
                     comboBoxEx4.Visible = false;
                     comboBoxEx4.DroppedDown = false;
                     comboBoxEx4.DataSource = null;
                 }
-                else if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
-                {
+                
+                //if (res.Count == 0)
+                //{
+                //    comboBoxEx4.Visible = false;
+                //    comboBoxEx4.DroppedDown = false;
+                //    comboBoxEx4.DataSource = null;
+                //}
+                //else if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
+                //{
                     
-                }
-                else
-                {
-                    comboBoxEx4.DroppedDown = false;
-                    comboBoxEx4.DataSource = null;
-                    comboBoxEx4.DataSource = res;
-                    comboBoxEx4.DisplayMember = "NombreDependencia";
-                    comboBoxEx4.ValueMember = "IdDependencia";
-                    comboBoxEx4.Visible = true;
-                    comboBoxEx4.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
-                }
+                //}
+                //else
+                //{
+                //    comboBoxEx4.DroppedDown = false;
+                //    comboBoxEx4.DataSource = null;
+                //    comboBoxEx4.DataSource = res;
+                //    comboBoxEx4.DisplayMember = "NombreDependencia";
+                //    comboBoxEx4.ValueMember = "IdDependencia";
+                //    comboBoxEx4.Visible = true;
+                //    comboBoxEx4.DroppedDown = true;
+                //    Cursor.Current = Cursors.Default;
+                //}
                 //res = null;
 
             }

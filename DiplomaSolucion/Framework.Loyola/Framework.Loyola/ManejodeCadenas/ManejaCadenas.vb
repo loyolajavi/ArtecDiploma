@@ -49,7 +49,10 @@ Public Class ManejaCadenas
 
         For j = LBound(vector) To UBound(vector)
 
-            lista.Add(vector(j))
+            If Not (String.IsNullOrWhiteSpace(vector(j))) Then
+                lista.Add(vector(j))
+            End If
+
 
         Next
 
