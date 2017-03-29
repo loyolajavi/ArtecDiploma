@@ -13,13 +13,6 @@ namespace ARTEC.DAL
     public class DALDependencia
     {
 
-        public void prueba()
-        {
-
-            MotorBD.MotorBD.prueba();
-
-        }
-
 
         public List<Dependencia> TraerTodos()
         {

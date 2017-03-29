@@ -118,31 +118,6 @@ namespace ARTEC.DAL.MotorBD
 
 
 
-        public static void prueba(){
-            try
-                {
-                    Conexion = new SqlConnection(connectionStringName);
-
-                    if (Conexion != null && Conexion.State == ConnectionState.Closed)
-                    {
-                        Conexion.Open();
-                    }
-
-                    string hola = Conexion.ServerVersion; 
-
-                    Transaccion = Conexion.BeginTransaction();
-                    
-                }
-            catch (Exception es)
-            {
-                Transaccion.Rollback();
-                throw;
-            }
-            finally
-            {
-                Conexion.Close();
-            }
-        }
 
     }
 }
