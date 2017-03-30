@@ -14,12 +14,13 @@ namespace ARTEC.GUI
 {
     public partial class CrearSolicitud : DevComponents.DotNetBar.Metro.MetroForm
     {
-
         List<Dependencia> unasDependencias = new List<Dependencia>();
+        Solicitud unaSolicitud;
 
         public CrearSolicitud()
         {
             InitializeComponent();
+            unaSolicitud = new Solicitud();
         }
 
         private void buttonX1_Click(object sender, EventArgs e)
@@ -31,192 +32,27 @@ namespace ARTEC.GUI
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
-            //dataGridViewX1.DataSource = null;
-            //List<Dependencia> unasDependencias = prubabll.prueba();
-            //dataGridViewX1.DataSource = unasDependencias;
             unasDependencias = ManagerDependencia.TraerTodos();
-
-
-
-
-
         }
-        ///**************************1************************************************
-        /// <summary>
-        /// Evento para buscar las dependencias mientras se escribe (búsqueda dinámica)
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        //private void textBoxX1_TextChanged(object sender, EventArgs e)
-        //{
 
-        //    if  (textBoxX1.Text != "" & textBoxX1.Text != " " & textBoxX1 != null)
-        //    {
-
-        //        List<Dependencia> res = new List<Dependencia>();
-
-        //        foreach (var unaDep in unasDependencias)
-        //        {
-        //            res.Add(unaDep);
-        //        }
-
-        //        List<string> Palabras = new List<string>();
-        //        Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
-
-        //        foreach (string unaPalabra in Palabras)
-        //        {
-        //            if ((unaPalabra.ToString() == "") || (unaPalabra.ToString() == " "))
-        //            {
-
-        //            }
-        //            else 
-        //            {
-        //                dataGridViewX1.DataSource = null;
-
-        //                res = (from d in res
-        //                       where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
-        //                       select d).ToList();
-
-        //                if (res.Count == 0)
-        //                {
-        //                    dataGridViewX1.DataSource = null;
-        //                }
-        //                else
-        //                {
-        //                    dataGridViewX1.DataSource = res;
-        //                }
-
-        //            }
-        //        }
-        //        res = null;
-
-        //    }
-        //    else
-        //    {
-        //        dataGridViewX1.DataSource = null;
-        //    }
-
-        //}
-        ///**************************1************************************************
-
-
-        ///**************************2************************************************
-        //private void comboBoxEx4_TextChanged(object sender, EventArgs e)
-        //{
-
-        //    if (comboBoxEx4.SelectedIndex < 0)
-        //    {
-
-        //        if (comboBoxEx4.Text != "" & comboBoxEx4.Text != " " & comboBoxEx4 != null)
-        //        {
-        //            string aux = comboBoxEx4.Text;
-        //            List<Dependencia> res = new List<Dependencia>();
-
-        //            foreach (var unaDep in unasDependencias)
-        //            {
-        //                res.Add(unaDep);
-        //            }
-
-        //            List<string> Palabras = new List<string>();
-        //            Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(comboBoxEx4.Text, ' ');
-
-        //            foreach (string unaPalabra in Palabras)
-        //            {
-        //                if ((unaPalabra.ToString() == "") || (unaPalabra.ToString() == " "))
-        //                {
-
-        //                }
-        //                else
-        //                {
-        //                    //comboBoxEx4.Items.Clear();
-        //                    //comboBoxEx4.DataSource = null;
-
-        //                    res = (List<Dependencia>)(from d in res
-        //                           where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
-        //                           select d).ToList();
-
-
-
-        //                }
-
-        //            }
-        //            if (res.Count == 0)
-        //            {
-        //                //comboBoxEx4.Items.Clear();
-        //                comboBoxEx4.DataSource = null;
-        //            }
-        //            else
-        //            {
-        //                //comboBoxEx4.DataSource = null;
-        //                //foreach (Dependencia item in res)
-        //                //{
-        //                //    comboBoxEx4.Items.Add(item.NombreDependencia);
-        //                //    comboBoxEx4.DroppedDown = true;
-        //                //    Cursor.Current = Cursors.Default;
-        //                //comboBoxEx4.SelectionStart = comboBoxEx4.Text.Length + 1;
-        //                //}
-
-        //                // ME FALTA AGREGAR LO Q ESCRIBO AL DATASOURCE Y YASTA
-        //                res.Insert(0, new Dependencia { IdDependencia = 0, NombreDependencia = aux });
-        //                comboBoxEx4.DataSource = res;
-        //                comboBoxEx4.DisplayMember = "NombreDependencia";
-        //                comboBoxEx4.ValueMember = "IdDependencia";
-        //                comboBoxEx4.DroppedDown = true;
-        //                Cursor.Current = Cursors.Default;
-        //                comboBoxEx4.SelectionStart = comboBoxEx4.Text.Length + 1;
-        //            }
-        //            res = null;
-
-        //        }
-
-        //        else
-        //        {
-        //            //comboBoxEx4.Items.Clear();
-        //            comboBoxEx4.DataSource = null;
-        //        }
-        //    }
-        //}
-        ///**************************2************************************************
-
-
-        ///**************************3************************************************
-        ///Con Dropdown style en dropdownList y un text box
 
         private void textBoxX1_TextChanged(object sender, EventArgs e)
         {
-            //comboBoxEx4.DataSource = null;
-            //bool flagNoDep = false;
-            //if (textBoxX1.Text != "" & textBoxX1.Text != " " & textBoxX1 != null)
             if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
                 List<Dependencia> res = new List<Dependencia>();
-
-                //foreach (var unaDep in unasDependencias)
-                //{
-                    res = (List<Dependencia>)unasDependencias.ToList();
-                    //res.Add(unaDep);
-                //}
+                res = (List<Dependencia>)unasDependencias.ToList();
 
                 List<string> Palabras = new List<string>();
                 Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
 
                 foreach (string unaPalabra in Palabras)
                 {
-                    //if ((unaPalabra.ToString() != "") & (unaPalabra.ToString() != " "))
-                    //if (unaPalabra.ToString() != " ")
-                    //{
                         res = (List<Dependencia>)(from d in res
                                                   where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
                                                   select d).ToList();
-                    //}
-                    //else
-                    //{
-                    //    flagNoDep = true;
-                    //}
-
                 }
 
-                //if (res.Count == 0 || flagNoDep == true)
                 if (res.Count > 0)
                 {
                     if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
@@ -242,32 +78,7 @@ namespace ARTEC.GUI
                     comboBoxEx4.DroppedDown = false;
                     comboBoxEx4.DataSource = null;
                 }
-                
-                //if (res.Count == 0)
-                //{
-                //    comboBoxEx4.Visible = false;
-                //    comboBoxEx4.DroppedDown = false;
-                //    comboBoxEx4.DataSource = null;
-                //}
-                //else if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
-                //{
-                    
-                //}
-                //else
-                //{
-                //    comboBoxEx4.DroppedDown = false;
-                //    comboBoxEx4.DataSource = null;
-                //    comboBoxEx4.DataSource = res;
-                //    comboBoxEx4.DisplayMember = "NombreDependencia";
-                //    comboBoxEx4.ValueMember = "IdDependencia";
-                //    comboBoxEx4.Visible = true;
-                //    comboBoxEx4.DroppedDown = true;
-                //    Cursor.Current = Cursors.Default;
-                //}
-                //res = null;
-
             }
-
             else
             {
                 comboBoxEx4.Visible = false;
@@ -276,33 +87,28 @@ namespace ARTEC.GUI
             }
         }
 
-        private void comboBoxEx4_Click(object sender, EventArgs e)
+
+
+        private void comboBoxEx4_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //if (comboBoxEx4.Items.Count > 0)
-            //{
-                textBoxX1.Text = comboBoxEx4.SelectedText.ToString();
-            //}
+            if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
+            {
+                if (comboBoxEx4.SelectedIndex > -1)
+                {
+                    ComboBox cbo = (ComboBox)sender;
+                    Dependencia unaDep = new Dependencia();
+                    unaSolicitud.laDependencia = unaDep;
+                    unaSolicitud.laDependencia.IdDependencia = (int)cbo.SelectedValue;
+                    textBoxX1.Text = cbo.GetItemText(cbo.SelectedItem);
+                    textBoxX1.SelectionStart = textBoxX1.Text.Length + 1;
+                }
+            }
         }
-        ///**************************3************************************************
 
 
 
 
-        //Por ahi tengo que pasar esto al autocompelte de string, para que funcione el mouse (hay q revisar eso), y dps para obtener el valor, agarro el string, lo busco en el objeto usado para linq y ahí agarro el id.
 
-        //ESTO ES OTRA FORMA DE HACER LO QUE HICE ARRIBA
-        //Try a simpler method without Linq:
-
-        //using (var GC = new GroundCommanderEntities())            
-        //{                    
-        //    foreach (var Current in GC.IMF_Extensions)
-        //    {
-        //        if (Current.Description.Contains(Search_txt.Text))
-        //        {
-        //            Coll.Add(Current.Description);
-        //        }
-        //    }
-        //}
 
 
 
