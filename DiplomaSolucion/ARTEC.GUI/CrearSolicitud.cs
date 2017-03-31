@@ -16,6 +16,7 @@ namespace ARTEC.GUI
     {
         List<Dependencia> unasDependencias = new List<Dependencia>();
         Solicitud unaSolicitud;
+        Dependencia unaDep;
 
         public CrearSolicitud()
         {
@@ -96,9 +97,8 @@ namespace ARTEC.GUI
                 if (comboBoxEx4.SelectedIndex > -1)
                 {
                     ComboBox cbo = (ComboBox)sender;
-                    Dependencia unaDep = new Dependencia();
-                    unaSolicitud.laDependencia = unaDep;
-                    unaSolicitud.laDependencia.IdDependencia = (int)cbo.SelectedValue;
+                    unaDep = new Dependencia();
+                    unaDep.IdDependencia = (int)cbo.SelectedValue;
                     textBoxX1.Text = cbo.GetItemText(cbo.SelectedItem);
                     textBoxX1.SelectionStart = textBoxX1.Text.Length + 1;
                 }
@@ -106,8 +106,15 @@ namespace ARTEC.GUI
         }
 
 
+        public void prueba(){
+        
+            //Ejemplo de cómo implementar una relación de Agregación en capas
+            //BLLDependencia MediadorDependencia = new BLLDependencia();
 
-
+            //unaSolicitud.laDependencia = MediadorDependencia.CrearDependencia(unaDep);
+        
+        }
+        
 
 
 
