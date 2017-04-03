@@ -16,6 +16,12 @@
         Id="532ea607-fb19-44b8-8502-3351b05452be"
         name="StandardProfileL3" />
     </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="f30034f8-4806-4df9-999d-f82b5c6b3713">
+      <profileInstance
+        Id="c66de3f7-4dcc-4a48-ae8f-de2103282a25"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
   </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
@@ -39,6 +45,18 @@
             isComposite="false" />
         </ownedAttributesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5c9b1bd0-372f-4381-96f2-b95988a27e0c"
+        LastKnownName="ARTEC"
+        LastKnownLocation="Package_1626.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="11eda9ce-8fed-4913-b0e8-d35e4eac7e54"
+        LastKnownName="System"
+        LastKnownLocation="Package2_1626.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class Solicitud
+    public class TipoBien
     {
 
+        public int IdTipoBien { get; set; }
+        public string DescripTipoBien { get; set; }
 
-        public Dependencia laDependencia { get; set; }
+        //enum TipoDeBien { Hard, Soft };
 
 
     }

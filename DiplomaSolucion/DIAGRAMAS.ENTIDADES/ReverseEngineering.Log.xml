@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Registro de generación de código/transformación de texto">
+  <MessageClass Name="Message" Label="Mensaje" Option="Mostrar mensajes informativos" />
+  <MessageClass Name="Warning" Label="Advertencia" Option="Mostrar advertencias" />
+  <MessageClass Name="Error" Label="Error" Option="Mostrar errores" />
+  <MessageClass Name="Property" Label="Propiedad" Option="Mostrar metadatos" />
+  <MessageClass Name="Diagnostic" Label="Mensaje" Option="Mostrar mensajes de diagnóstico" />
+  <Message Timestamp="2017-04-02T16:34:58" Importance="High" Text="Se inició la ingeniería inversa." />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: '0e2469b3-089a-4799-838a-87c66c6518f9' -  (ClassifierTemplateParameter)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC' -  (Package)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES' -  (Package)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Bien' -  (Interface)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Categoria' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Medium" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware' -  (Class)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::DescripBien' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::Hardware' -  (Operation)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::IdBien' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::unaCategoria' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::unaMarca' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::unModelo' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware::unosInventariosHard' -  (Property)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::InventarioHard' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Marca' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::ModeloVersion' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::System' -  (Package)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::System::Collections' -  (Package)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::System::Collections::Generic' -  (Package)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::System::Collections::Generic::List' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'DIAGRAMAS.ENTIDADES::System::Collections::Generic::List&lt;InventarioHard‎&gt;' -  (Class)  (ingeniería inversa parcial, definición no actualizada) " />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'Integer' -  (PrimitiveType)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa del elemento en el modelo UML: 'String' -  (PrimitiveType)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa de la relación en el modelo UML: DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware a DIAGRAMAS.ENTIDADES::System::Collections::Generic::List&lt;InventarioHard‎&gt; (Association)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa de la relación en el modelo UML: DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware a DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Categoria (Association)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa de la relación en el modelo UML: DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware a DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Marca (Association)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa de la relación en el modelo UML: DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware a DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::ModeloVersion (Association)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="Diagnostic" Text="Se realizó ingeniería inversa de la relación en el modelo UML: DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Hardware a DIAGRAMAS.ENTIDADES::ARTEC::ENTIDADES::Bien (InterfaceRealization)" />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="High" Text="Se realizó ingeniería inversa total de los siguientes tipos: (1)." />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="High" Text="Se realizó ingeniería inversa parcial de los siguientes tipos: (7). Estos tipos no se incluyeron en la selección original, por lo que no se realizó ingeniería inversa de sus definiciones completas. En su lugar, esta operación superficial se limita a asegurarse de que estos tipos existen en el modelo UML porque son necesarios para describir a otros elementos por completo." />
+  <Message Timestamp="2017-04-02T16:34:59" Importance="High" Text="La operación de ingeniería inversa se completó con (0) errores y (0) advertencias." />
+</Log>

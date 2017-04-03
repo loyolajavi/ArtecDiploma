@@ -13,11 +13,6 @@ namespace ARTEC.BLL
     public class BLLDependencia
     {
 
-        //public List<ENTIDADES.Dependencia> MostrarTodos()
-        //{ 
-            
-        //}
-
         DALDependencia GestorDependencia = new DALDependencia();
 
         /// <summary>
@@ -27,7 +22,6 @@ namespace ARTEC.BLL
         public List<Dependencia> TraerTodos()
         {
 
-            //pruebaDAL.prueba();
             return GestorDependencia.TraerTodos();
 
         }

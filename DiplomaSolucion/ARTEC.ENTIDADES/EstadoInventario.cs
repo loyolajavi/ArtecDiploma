@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class Dependencia
+    public class EstadoInventario
     {
 
-        public int IdDependencia { get; set; }
-        public string NombreDependencia { get; set; }
-
+        public int IdEstadoInventario { get; set; }
+        public string DescripEstadoInv { get; set; }
+   
     }
 }

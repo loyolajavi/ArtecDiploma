@@ -17,6 +17,9 @@ namespace ARTEC.GUI
         List<Dependencia> unasDependencias = new List<Dependencia>();
         Solicitud unaSolicitud;
         Dependencia unaDep;
+        List<TipoBien> unosTipoBien = new List<TipoBien>();
+        List<Categoria> unasCategorias;
+        int AuxTipoHard = 1;
 
         public CrearSolicitud()
         {
@@ -26,14 +29,25 @@ namespace ARTEC.GUI
 
         private void buttonX1_Click(object sender, EventArgs e)
         {
-            groupPanel1.Visible = true;
             labelX8.Location = new Point(402, 308);
         }
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
+            ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();
+            
+            ///Para poder seleccionar Hard o Soft
+            BLLTipoBien ManagerTipoBien = new BLLTipoBien();
+            unosTipoBien = ManagerTipoBien.TraerTodos();
+            cboTipoBien.DataSource = null;
+            cboTipoBien.DataSource = unosTipoBien;
+            cboTipoBien.DisplayMember = "DescripTipoBien";
+            cboTipoBien.ValueMember = "IdTipoBien";
+
+
+
         }
 
 
@@ -89,7 +103,7 @@ namespace ARTEC.GUI
         }
 
 
-
+        //Al seleccionar una dependencia del combo, guarda el idDependencia, el nombre y cierra el combo
         private void comboBoxEx4_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
@@ -106,14 +120,112 @@ namespace ARTEC.GUI
         }
 
 
-        public void prueba(){
-        
-            //Ejemplo de cómo implementar una relación de Agregación en capas
-            //BLLDependencia MediadorDependencia = new BLLDependencia();
+        //public void prueba(){
+        //    //Ejemplo de cómo implementar una relación de Agregación en capas
+        //    //BLLDependencia MediadorDependencia = new BLLDependencia();
+        //    //unaSolicitud.laDependencia = MediadorDependencia.CrearDependencia(unaDep);
+        //}
 
-            //unaSolicitud.laDependencia = MediadorDependencia.CrearDependencia(unaDep);
-        
+
+
+        /// <summary>
+        /// Habilitar Controles según Hard/Soft
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboTipoBien_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            {
+                gboxAsociados.Enabled = false;
+                txtCantBien.ReadOnly = false;
+                lblCantidad.Enabled = true;
+                AuxTipoHard = 1;
+            }
+            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            {
+                gboxAsociados.Enabled = true;
+                txtCantBien.ReadOnly = true;
+                lblCantidad.Enabled = false;
+                AuxTipoHard = 2;
+            }
         }
+
+        private void txtBien_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+                    //Traigo las categorias de Hard
+                    BLLCategoria ManagerCategoria = new BLLCategoria();
+                    if (unasCategorias == null)
+                    {
+                        unasCategorias = new List<Categoria>();
+                        if (AuxTipoHard == 1)
+                        {
+                            unasCategorias = ManagerCategoria.CategoriaTraerTodosHard();
+                        }
+                        else if (AuxTipoHard == 2)
+                        {
+                            //unasCategorias = ManagerCategoria.CategoriaTraerTodosHard(); CON SOFT HACER
+                        }
+                    }
+
+
+                    List<Categoria> resCat = new List<Categoria>();
+                    resCat = (List<Categoria>)unasCategorias.ToList();
+
+                    List<string> Palabras = new List<string>();
+                    Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
+
+                    foreach (string unaPalabra in Palabras)
+                    {
+                        resCat = (List<Categoria>)(from cat in resCat
+                                                   where cat.DescripCategoria.ToLower().Contains(unaPalabra.ToLower())
+                                                   select cat).ToList();
+                    }
+
+                    if (resCat.Count > 0)
+                    {
+                        if (resCat.Count == 1 && string.Equals(resCat.First().DescripCategoria, txtBien.Text))
+                        {
+                            cboBien.Visible = false;
+                            cboBien.DroppedDown = false;
+                            cboBien.DataSource = null;
+                        }
+                        else
+                        {
+                            cboBien.DataSource = null;
+                            cboBien.DataSource = resCat;
+                            cboBien.DisplayMember = "DescripCategoria";
+                            cboBien.ValueMember = "IdCategoria";
+                            cboBien.Visible = true;
+                            cboBien.DroppedDown = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                    else
+                    {
+                        cboBien.Visible = false;
+                        cboBien.DroppedDown = false;
+                        cboBien.DataSource = null;
+                    }
+            }
+            else
+            {
+                cboBien.Visible = false;
+                cboBien.DroppedDown = false;
+                cboBien.DataSource = null;
+            }
+        }
+
+        private void cboBien_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
         
 
 

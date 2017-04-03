@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class Dependencia
+    public interface IFactoryBien
     {
 
-        public int IdDependencia { get; set; }
-        public string NombreDependencia { get; set; }
+        Bien CrearBien();
 
     }
 }
