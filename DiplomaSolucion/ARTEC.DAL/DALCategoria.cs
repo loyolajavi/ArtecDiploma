@@ -16,13 +16,55 @@ namespace ARTEC.DAL
 
         public List<Categoria> CategoriaTraerTodosHard()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
+            try
+            {
+                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
+                {
+                    List<Categoria> unasCategorias = new List<Categoria>();
+                    unasCategorias = Mapeador.Mapear<Categoria>(ds);
+                    return unasCategorias;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+           
+        }
+
+
+        public List<Categoria> CategoriaTraerTodosSoft()
+        {
+            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosSoft"))
             {
                 List<Categoria> unasCategorias = new List<Categoria>();
                 unasCategorias = Mapeador.Mapear<Categoria>(ds);
                 return unasCategorias;
             }
         }
+
+
+        public List<Categoria> CategoriaTraerTodos()
+        {
+            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
+            {
+                List<Categoria> unasCategorias = new List<Categoria>();
+                unasCategorias = Mapeador.Mapear<Categoria>(ds);
+                return unasCategorias;
+            }
+        }
+
+
+        public List<DTOCategoria> CategoriaTraerTodosPru()
+        {
+            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
+            {
+                List<DTOCategoria> unasCategorias = new List<DTOCategoria>();
+                unasCategorias = Mapeador.Mapear<DTOCategoria>(ds);
+                return unasCategorias;
+            }
+        }
+
 
     }
 }

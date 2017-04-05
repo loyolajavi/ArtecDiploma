@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public abstract class Bien
+    public interface Bien
     {
 
         int IdBien { get; set; }
         string DescripBien { get; set; }
-        //TipoBien unTipoBien { get; set; }
 
         Categoria unaCategoria { get; set; }
 

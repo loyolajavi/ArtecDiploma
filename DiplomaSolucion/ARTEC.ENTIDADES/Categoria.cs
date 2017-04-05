@@ -9,12 +9,15 @@ namespace ARTEC.ENTIDADES
     public class Categoria
     {
 
-        #region Properties
 
         public int IdCategoria { get; set; }
         public string DescripCategoria { get; set; }
+        public List<Bien> unosBienes { get; set; }
 
-        #endregion
+        public override String ToString()
+        {
+            return this.DescripCategoria;
+        } 
 
     }
 }

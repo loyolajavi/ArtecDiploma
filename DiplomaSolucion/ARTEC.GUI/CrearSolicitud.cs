@@ -17,9 +17,11 @@ namespace ARTEC.GUI
         List<Dependencia> unasDependencias = new List<Dependencia>();
         Solicitud unaSolicitud;
         Dependencia unaDep;
+        Categoria unaCat;
         List<TipoBien> unosTipoBien = new List<TipoBien>();
-        List<Categoria> unasCategorias;
-        int AuxTipoHard = 1;
+        List<Categoria> unasCategoriasHard;
+        List<Categoria> unasCategoriasSoft;
+        int AuxTipoCategoria = 1;
 
         public CrearSolicitud()
         {
@@ -27,9 +29,18 @@ namespace ARTEC.GUI
             unaSolicitud = new Solicitud();
         }
 
-        private void buttonX1_Click(object sender, EventArgs e)
+        private void txtAgregarDetalle_Click(object sender, EventArgs e)
         {
-            labelX8.Location = new Point(402, 308);
+            SolicDetalle unDetalleSolicitud = new SolicDetalle();
+            unDetalleSolicitud.unaCategoria.IdCategoria = unaCat.IdCategoria;
+            unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+            unDetalleSolicitud.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+            unaSolicitud.unosDetallesSolicitud.Add(unDetalleSolicitud);
+
+            grillaDetalles.DataSource = null;
+            //HACER ESTO: Consultar a la BD la descrip de la categoria IdCategoria, guardarlo 
+            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            
         }
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
@@ -37,7 +48,7 @@ namespace ARTEC.GUI
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();
-            
+
             ///Para poder seleccionar Hard o Soft
             BLLTipoBien ManagerTipoBien = new BLLTipoBien();
             unosTipoBien = ManagerTipoBien.TraerTodos();
@@ -46,7 +57,14 @@ namespace ARTEC.GUI
             cboTipoBien.DisplayMember = "DescripTipoBien";
             cboTipoBien.ValueMember = "IdTipoBien";
 
-
+            //Traigo categorias para dps filtrar por hard o soft
+            BLLCategoria ManagerCategoria = new BLLCategoria();
+            unasCategoriasHard = new List<Categoria>();
+            unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHard();
+            unasCategoriasSoft = new List<Categoria>();
+            unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
+                
+        
 
         }
 
@@ -63,9 +81,9 @@ namespace ARTEC.GUI
 
                 foreach (string unaPalabra in Palabras)
                 {
-                        res = (List<Dependencia>)(from d in res
-                                                  where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
-                                                  select d).ToList();
+                    res = (List<Dependencia>)(from d in res
+                                              where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
+                                              select d).ToList();
                 }
 
                 if (res.Count > 0)
@@ -140,75 +158,73 @@ namespace ARTEC.GUI
                 gboxAsociados.Enabled = false;
                 txtCantBien.ReadOnly = false;
                 lblCantidad.Enabled = true;
-                AuxTipoHard = 1;
+                txtBien.Clear();
+                AuxTipoCategoria = 1;
             }
             if ((int)cboTipoBien.SelectedValue == 2)//Software
             {
                 gboxAsociados.Enabled = true;
                 txtCantBien.ReadOnly = true;
                 lblCantidad.Enabled = false;
-                AuxTipoHard = 2;
+                txtBien.Clear();
+                AuxTipoCategoria = 2;
             }
         }
 
+        //Busqueda Dinamica BIENES(CATEGORIAS)
         private void txtBien_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtBien.Text))
             {
-                    //Traigo las categorias de Hard
-                    BLLCategoria ManagerCategoria = new BLLCategoria();
-                    if (unasCategorias == null)
-                    {
-                        unasCategorias = new List<Categoria>();
-                        if (AuxTipoHard == 1)
-                        {
-                            unasCategorias = ManagerCategoria.CategoriaTraerTodosHard();
-                        }
-                        else if (AuxTipoHard == 2)
-                        {
-                            //unasCategorias = ManagerCategoria.CategoriaTraerTodosHard(); CON SOFT HACER
-                        }
-                    }
+                
+                List<Categoria> resCat = new List<Categoria>();
+                //Traigo las categorias de Hard
+                if (AuxTipoCategoria == 1)
+                {
+                    resCat = (List<Categoria>)unasCategoriasHard.ToList();
+                }
+                //Traigo las categorias de Soft
+                else
+                {
+                    resCat = (List<Categoria>)unasCategoriasSoft.ToList();
+                }
+                
 
+                List<string> Palabras = new List<string>();
+                Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
 
-                    List<Categoria> resCat = new List<Categoria>();
-                    resCat = (List<Categoria>)unasCategorias.ToList();
+                foreach (string unaPalabra in Palabras)
+                {
+                    resCat = (List<Categoria>)(from cat in resCat
+                                               where cat.DescripCategoria.ToLower().Contains(unaPalabra.ToLower())
+                                               select cat).ToList();
+                }
 
-                    List<string> Palabras = new List<string>();
-                    Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
-
-                    foreach (string unaPalabra in Palabras)
-                    {
-                        resCat = (List<Categoria>)(from cat in resCat
-                                                   where cat.DescripCategoria.ToLower().Contains(unaPalabra.ToLower())
-                                                   select cat).ToList();
-                    }
-
-                    if (resCat.Count > 0)
-                    {
-                        if (resCat.Count == 1 && string.Equals(resCat.First().DescripCategoria, txtBien.Text))
-                        {
-                            cboBien.Visible = false;
-                            cboBien.DroppedDown = false;
-                            cboBien.DataSource = null;
-                        }
-                        else
-                        {
-                            cboBien.DataSource = null;
-                            cboBien.DataSource = resCat;
-                            cboBien.DisplayMember = "DescripCategoria";
-                            cboBien.ValueMember = "IdCategoria";
-                            cboBien.Visible = true;
-                            cboBien.DroppedDown = true;
-                            Cursor.Current = Cursors.Default;
-                        }
-                    }
-                    else
+                if (resCat.Count > 0)
+                {
+                    if (resCat.Count == 1 && string.Equals(resCat.First().DescripCategoria, txtBien.Text))
                     {
                         cboBien.Visible = false;
                         cboBien.DroppedDown = false;
                         cboBien.DataSource = null;
                     }
+                    else
+                    {
+                        cboBien.DataSource = null;
+                        cboBien.DataSource = resCat;
+                        cboBien.DisplayMember = "DescripCategoria";
+                        cboBien.ValueMember = "IdCategoria";
+                        cboBien.Visible = true;
+                        cboBien.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+                else
+                {
+                    cboBien.Visible = false;
+                    cboBien.DroppedDown = false;
+                    cboBien.DataSource = null;
+                }
             }
             else
             {
@@ -220,13 +236,23 @@ namespace ARTEC.GUI
 
         private void cboBien_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+                if (cboBien.SelectedIndex > -1)
+                {
+                    ComboBox cbo2 = (ComboBox)sender;
+                    unaCat = new Categoria();
+                    unaCat.IdCategoria = (int)cbo2.SelectedValue;
+                    txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    txtBien.SelectionStart = txtBien.Text.Length + 1;
+                }
+            }
         }
 
 
 
 
-        
+
 
 
 

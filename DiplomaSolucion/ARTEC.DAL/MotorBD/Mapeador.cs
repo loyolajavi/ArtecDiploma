@@ -13,15 +13,20 @@ namespace ARTEC.DAL.MotorBD
 
         public static List<T> Mapear<T>(DataSet unDataSet) where T : new()
         {
-            IList<PropertyInfo> Propiedades = typeof(T).GetProperties().ToList();
             List<T> ListaResultado = new List<T>();
-
-            foreach (var row in unDataSet.Tables[0].Rows)
+            try
             {
-                var Item = CargarPropiedad<T>((DataRow) row, Propiedades);
-                ListaResultado.Add(Item);
+                IList<PropertyInfo> Propiedades = typeof(T).GetProperties().ToList();
+                foreach (var row in unDataSet.Tables[0].Rows)
+                {
+                    var Item = CargarPropiedad<T>((DataRow)row, Propiedades);
+                    ListaResultado.Add(Item);
+                }
             }
-
+            catch (Exception es)
+            {
+                throw;
+            }
             return ListaResultado;
         }
 
@@ -30,10 +35,26 @@ namespace ARTEC.DAL.MotorBD
         {
             T unaInstancia = new T();
 
-            foreach (var prop in properties)
+            try
             {
-                prop.SetValue(unaInstancia, row[prop.Name], null);
+                foreach (var prop in properties)
+                {
+                    if (prop.CanWrite)
+                    {
+                        try
+                        {
+                            prop.SetValue(unaInstancia, row[prop.Name], null);
+                        }
+                        catch (IndexOutOfRangeException es)
+                        {
+                        }
+                    }
+                }
             }
+            catch (Exception es)
+            {
+            }
+
             return unaInstancia;
         }
         

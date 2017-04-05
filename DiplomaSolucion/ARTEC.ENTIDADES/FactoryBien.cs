@@ -11,21 +11,20 @@ namespace ARTEC.ENTIDADES
     public class FactoryBien
     {
 
-        //TipoBien unTipoBien;
 
-        //public static List<Bien> CrearBienes(int unTipoBien)
-        //{
+        public static IEnumerable<Bien> CrearBienes(int unTipoBien)
+        {
 
-        //    if (unTipoBien == 1)
-        //    {
-        //        List<Hardware> unosHard = new List<Hardware>();
-        //        return (List<Bien>)unosHard;
-        //    }
-        //    else
-        //    {
-        //        return new List<Software>();
-        //    }
-        //}
+            if (unTipoBien == 1)
+            {
+                List<Hardware> unosHard = new List<Hardware>();
+                return (IEnumerable<Bien>)unosHard;
+            }
+            else
+            {
+                return new List<Software>();
+            }
+        }
 
     }
 }

@@ -18,6 +18,21 @@ namespace ARTEC.BLL
             return GestorCategoria.CategoriaTraerTodosHard();
         }
 
+        public List<Categoria> CategoriaTraerTodosSoft()
+        {
+            return GestorCategoria.CategoriaTraerTodosSoft();
+        }
+
+        public List<Categoria> CategoriaTraerTodos()
+        {
+            return GestorCategoria.CategoriaTraerTodos();
+        }
+
+
+        public List<DTOCategoria> CategoriaTraerTodosPru()
+        {
+            return GestorCategoria.CategoriaTraerTodosPru();
+        }
 
     }
 }

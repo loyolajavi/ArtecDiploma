@@ -43,7 +43,9 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="Dependencia.cs" />
     <Compile Include="Deposito.cs" />
+    <Compile Include="DTOCategoria.cs" />
     <Compile Include="EstadoInventario.cs" />
+    <Compile Include="EstadoSolDetalle.cs" />
     <Compile Include="FactoryBien.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="IFactoryBien.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Modelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Software.cs" />
+    <Compile Include="SolicDetalle.cs" />
     <Compile Include="Solicitud.cs" />
     <Compile Include="TipoBien.cs" />
   </ItemGroup>
