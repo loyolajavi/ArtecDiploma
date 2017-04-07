@@ -35,6 +35,7 @@ namespace ARTEC.GUI
         private void txtAgregarDetalle_Click(object sender, EventArgs e)
         {
             //FIJARME QUE SI NO ESTA ECRITO EL BIEN NO ME DEJE AGREGAR UN DETALLE
+            //TMB FALTA QUE PARA PODER AGREGAR UN DETALLE PRIMERO ASOCIE USUARIOS
             if (ValidDep2.Validate())
             {
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
