@@ -13,9 +13,14 @@ namespace ARTEC.ENTIDADES
         public string DescripSolDetalle { get; set; }
 
         public enum EnumEstadoSolDetalle
-	{
-	         Pendiente, Solucionado, Cerrado
-	}
+        {
+            Pendiente, Solucionado, Cerrado
+        }
+
+        public override string ToString()
+        {
+            return this.DescripSolDetalle;
+        }
 
 
     }

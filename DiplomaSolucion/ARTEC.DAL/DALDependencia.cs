@@ -26,6 +26,21 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Agente> TraerAgentesDependencia(int idDependencia)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdDependencia", idDependencia)
+			};
+
+            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesPorIdDependencia", parameters))
+            {
+                List<Agente> unaLista = new List<Agente>();
+                unaLista = Mapeador.Mapear<Agente>(ds);
+                return unaLista;
+            }
+        }
         
 
     }

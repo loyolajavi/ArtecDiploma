@@ -18,10 +18,12 @@ namespace ARTEC.GUI
         Solicitud unaSolicitud;
         Dependencia unaDep;
         Categoria unaCat;
+        Agente unAgen;
         List<TipoBien> unosTipoBien = new List<TipoBien>();
         List<Categoria> unasCategoriasHard;
         List<Categoria> unasCategoriasSoft;
         int AuxTipoCategoria = 1;
+        List<Agente> unosAgentes;
 
         public CrearSolicitud()
         {
@@ -29,19 +31,48 @@ namespace ARTEC.GUI
             unaSolicitud = new Solicitud();
         }
 
+        //Agregar Detalle Click
         private void txtAgregarDetalle_Click(object sender, EventArgs e)
         {
-            SolicDetalle unDetalleSolicitud = new SolicDetalle();
-            unDetalleSolicitud.unaCategoria.IdCategoria = unaCat.IdCategoria;
-            unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
-            unDetalleSolicitud.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
-            unaSolicitud.unosDetallesSolicitud.Add(unDetalleSolicitud);
+            //FIJARME QUE SI NO ESTA ECRITO EL BIEN NO ME DEJE AGREGAR UN DETALLE
+            if (ValidDep2.Validate())
+            {
+                SolicDetalle unDetalleSolicitud = new SolicDetalle();
+                unDetalleSolicitud.unaCategoria = unaCat;
+                if (AuxTipoCategoria == 1)
+                {
+                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);//COMPROBAR QUE CANTIDAD ESTE ECRITO CON VALIDATOR
+                }
+                else
+                {
+                    AgregarSoftware(ref unDetalleSolicitud);
+                }
+                unDetalleSolicitud.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+                unDetalleSolicitud.unEstado.DescripSolDetalle = "Pendiente";
+                unaSolicitud.unosDetallesSolicitud.Add(unDetalleSolicitud);
 
-            grillaDetalles.DataSource = null;
-            //HACER ESTO: Consultar a la BD la descrip de la categoria IdCategoria, guardarlo 
-            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            
+                grillaDetalles.DataSource = null;
+                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                //Formato de la grillaDetalles
+                grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grillaDetalles.Columns[0].HeaderText = "#";
+                grillaDetalles.Columns[1].HeaderText = "Bien";
+                grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[3].Width = 80;
+                grillaDetalles.Columns[3].HeaderText = "Estado";
+            }
+
+
         }
+
+
+        private void AgregarSoftware(ref SolicDetalle unDetSolic)
+        {
+            unDetSolic.Cantidad = 1;
+        }
+
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
@@ -63,53 +94,82 @@ namespace ARTEC.GUI
             unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHard();
             unasCategoriasSoft = new List<Categoria>();
             unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
-                
-        
+
+
 
         }
 
-
+        //Busqueda dinámica de Dependencias
         private void textBoxX1_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
-                List<Dependencia> res = new List<Dependencia>();
-                res = (List<Dependencia>)unasDependencias.ToList();
-
-                List<string> Palabras = new List<string>();
-                Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
-
-                foreach (string unaPalabra in Palabras)
+                
+                if (grillaDetalles.DataSource != null)
                 {
-                    res = (List<Dependencia>)(from d in res
-                                              where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
-                                              select d).ToList();
-                }
-
-                if (res.Count > 0)
-                {
-                    if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
+                    DialogResult resmbox = MessageBox.Show("Si cambia de Fiscalía se eliminarán los detalles", "Confirmar", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
                     {
-                        comboBoxEx4.Visible = false;
-                        comboBoxEx4.DroppedDown = false;
-                        comboBoxEx4.DataSource = null;
+                        grillaDetalles.DataSource = null;
+                        grillaAgentesAsociados.DataSource = null;
+                        unaSolicitud.unosDetallesSolicitud.Clear();
+                        BusquedaDependencias();
                     }
-                    else
+                    else if (resmbox == DialogResult.No)
                     {
-                        comboBoxEx4.DataSource = null;
-                        comboBoxEx4.DataSource = res;
-                        comboBoxEx4.DisplayMember = "NombreDependencia";
-                        comboBoxEx4.ValueMember = "IdDependencia";
-                        comboBoxEx4.Visible = true;
-                        comboBoxEx4.DroppedDown = true;
-                        Cursor.Current = Cursors.Default;
+                        textBoxX1.Text = unaDep.NombreDependencia;
+                        textBoxX1.SelectionStart = textBoxX1.Text.Length + 1;
                     }
                 }
                 else
                 {
+                    BusquedaDependencias();
+                }
+
+
+            }
+            else
+            {
+                comboBoxEx4.Visible = false;
+                comboBoxEx4.DroppedDown = false;
+                comboBoxEx4.DataSource = null;
+            }
+        }
+
+
+        private void BusquedaDependencias()
+        {
+            List<Dependencia> res = new List<Dependencia>();
+            res = (List<Dependencia>)unasDependencias.ToList();
+
+            List<string> Palabras = new List<string>();
+            Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
+
+            foreach (string unaPalabra in Palabras)
+            {
+                res = (List<Dependencia>)(from d in res
+                                          where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
+                                          select d).ToList();
+            }
+
+            if (res.Count > 0)
+            {
+                if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
+                {
                     comboBoxEx4.Visible = false;
                     comboBoxEx4.DroppedDown = false;
                     comboBoxEx4.DataSource = null;
+
+                }
+                else
+                {
+                    comboBoxEx4.DataSource = null;
+                    comboBoxEx4.DataSource = res;
+                    comboBoxEx4.DisplayMember = "NombreDependencia";
+                    comboBoxEx4.ValueMember = "IdDependencia";
+                    comboBoxEx4.Visible = true;
+                    comboBoxEx4.DroppedDown = true;
+                    Cursor.Current = Cursors.Default;
                 }
             }
             else
@@ -117,6 +177,7 @@ namespace ARTEC.GUI
                 comboBoxEx4.Visible = false;
                 comboBoxEx4.DroppedDown = false;
                 comboBoxEx4.DataSource = null;
+                unosAgentes = null;//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
             }
         }
 
@@ -130,9 +191,17 @@ namespace ARTEC.GUI
                 {
                     ComboBox cbo = (ComboBox)sender;
                     unaDep = new Dependencia();
-                    unaDep.IdDependencia = (int)cbo.SelectedValue;
+                    unaDep = (Dependencia)cbo.SelectedItem;
                     textBoxX1.Text = cbo.GetItemText(cbo.SelectedItem);
                     textBoxX1.SelectionStart = textBoxX1.Text.Length + 1;
+
+                    //Traer los agentes de la dependencia seleccionada
+                    BLLDependencia managerDependenciaAg = new BLLDependencia();
+                    unosAgentes = new List<Agente>();
+                    unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaDep.IdDependencia);
+                    //ValidDep2.Validate();//Creo q lo puedo borrar
+                    txtAgente.Clear();
+
                 }
             }
         }
@@ -167,6 +236,7 @@ namespace ARTEC.GUI
                 txtCantBien.ReadOnly = true;
                 lblCantidad.Enabled = false;
                 txtBien.Clear();
+                txtCantBien.Clear();
                 AuxTipoCategoria = 2;
             }
         }
@@ -176,7 +246,7 @@ namespace ARTEC.GUI
         {
             if (!string.IsNullOrWhiteSpace(txtBien.Text))
             {
-                
+
                 List<Categoria> resCat = new List<Categoria>();
                 //Traigo las categorias de Hard
                 if (AuxTipoCategoria == 1)
@@ -188,7 +258,7 @@ namespace ARTEC.GUI
                 {
                     resCat = (List<Categoria>)unasCategoriasSoft.ToList();
                 }
-                
+
 
                 List<string> Palabras = new List<string>();
                 Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
@@ -242,7 +312,8 @@ namespace ARTEC.GUI
                 {
                     ComboBox cbo2 = (ComboBox)sender;
                     unaCat = new Categoria();
-                    unaCat.IdCategoria = (int)cbo2.SelectedValue;
+                    unaCat = (Categoria)cbo2.SelectedItem;
+
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
                 }
@@ -250,6 +321,92 @@ namespace ARTEC.GUI
         }
 
 
+
+        //Busqueda Dinamica Agentes por Dependencia
+        private void txtAgente_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidDep2.Validate())
+            {
+                if (!string.IsNullOrWhiteSpace(txtAgente.Text) & unosAgentes != null)
+                {
+
+                    List<Agente> resAgente = new List<Agente>();
+                    resAgente = (List<Agente>)unosAgentes.ToList();
+                    List<string> Palabras = new List<string>();
+                    Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
+
+                    foreach (string unaPalabra in Palabras)
+                    {
+                        resAgente = (List<Agente>)(from cat in resAgente
+                                                   where cat.ApellidoAgente.ToLower().Contains(unaPalabra.ToLower())
+                                                   select cat).ToList();
+                    }
+
+                    if (resAgente.Count > 0)
+                    {
+                        if (resAgente.Count == 1 && string.Equals(resAgente.First().ApellidoAgente, txtAgente.Text))
+                        {
+                            cboAgentesAsociados.Visible = false;
+                            cboAgentesAsociados.DroppedDown = false;
+                            cboAgentesAsociados.DataSource = null;
+                        }
+                        else
+                        {
+                            cboAgentesAsociados.DataSource = null;
+                            cboAgentesAsociados.DataSource = resAgente;
+                            cboAgentesAsociados.DisplayMember = "ApellidoAgente";
+                            cboAgentesAsociados.ValueMember = "IdAgente";
+                            cboAgentesAsociados.Visible = true;
+                            cboAgentesAsociados.DroppedDown = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                    else
+                    {
+                        cboAgentesAsociados.Visible = false;
+                        cboAgentesAsociados.DroppedDown = false;
+                        cboAgentesAsociados.DataSource = null;
+                    }
+                }
+                else
+                {
+                    cboAgentesAsociados.Visible = false;
+                    cboAgentesAsociados.DroppedDown = false;
+                    cboAgentesAsociados.DataSource = null;
+                }
+            }
+
+
+        }
+
+        //Al seleccionar un AGENTE del combo, guarda el IdAgente, el apellido y cierra el combo
+        private void cboAgentesAsociados_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtAgente.Text))
+            {
+                if (cboAgentesAsociados.SelectedIndex > -1)
+                {
+                    ComboBox cbo3 = (ComboBox)sender;
+                    unAgen = new Agente();
+                    unAgen = (Agente)cbo3.SelectedItem;
+
+                    txtAgente.Text = cbo3.GetItemText(cbo3.SelectedItem);
+                    txtAgente.SelectionStart = txtAgente.Text.Length + 1;
+                }
+            }
+        }
+
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if(string.Equals(e.ControlToValidate.Text, unaDep.NombreDependencia))
+            {
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
+            }
+        }
 
 
 
