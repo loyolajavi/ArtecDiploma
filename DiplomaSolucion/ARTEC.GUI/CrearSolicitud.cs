@@ -24,6 +24,7 @@ namespace ARTEC.GUI
         List<Categoria> unasCategoriasSoft;
         int AuxTipoCategoria = 1;
         List<Agente> unosAgentes;
+        List<Agente> unosAgentesAsociados;
 
         public CrearSolicitud()
         {
@@ -42,15 +43,27 @@ namespace ARTEC.GUI
                 unDetalleSolicitud.unaCategoria = unaCat;
                 if (AuxTipoCategoria == 1)
                 {
-                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);//COMPROBAR QUE CANTIDAD ESTE ECRITO CON VALIDATOR
+                    AgregarHardware(ref unDetalleSolicitud);
                 }
                 else
                 {
                     AgregarSoftware(ref unDetalleSolicitud);
                 }
-                unDetalleSolicitud.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
-                unDetalleSolicitud.unEstado.DescripSolDetalle = "Pendiente";
-                unaSolicitud.unosDetallesSolicitud.Add(unDetalleSolicitud);
+               
+            }
+
+        }
+
+
+        private void AgregarHardware(ref SolicDetalle unDetSolic)
+        {
+
+            if (validCantBien.Validate())
+            {
+                unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
+                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+                unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+                unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
                 grillaDetalles.DataSource = null;
                 grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
@@ -65,13 +78,28 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns[3].HeaderText = "Estado";
             }
 
-
+           
         }
 
 
         private void AgregarSoftware(ref SolicDetalle unDetSolic)
         {
             unDetSolic.Cantidad = 1;
+            unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+            unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+            unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+
+            grillaDetalles.DataSource = null;
+            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            //Formato de la grillaDetalles
+            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].HeaderText = "#";
+            grillaDetalles.Columns[1].HeaderText = "Bien";
+            grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[3].Width = 80;
+            grillaDetalles.Columns[3].HeaderText = "Estado";
         }
 
 
@@ -96,7 +124,7 @@ namespace ARTEC.GUI
             unasCategoriasSoft = new List<Categoria>();
             unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
 
-
+            unosAgentesAsociados = new List<Agente>();
 
         }
 
@@ -407,6 +435,19 @@ namespace ARTEC.GUI
             {
                 e.IsValid = false;
             }
+        }
+
+        private void btnAsociarAgente_Click(object sender, EventArgs e)
+        {
+            unosAgentesAsociados.Add(unAgen);
+            grillaAgentesAsociados.DataSource = null;
+            grillaAgentesAsociados.DataSource = unosAgentesAsociados;
+            grillaAgentesAsociados.Columns[0].Visible = false;
+            grillaAgentesAsociados.Columns[3].Visible = false;
+            grillaAgentesAsociados.Columns[4].Visible = false;
+            //grillaAgentesAsociados.Columns[0].Visible = false;
+            //grillaAgentesAsociados.Columns[0].Visible = false;
+
         }
 
 
