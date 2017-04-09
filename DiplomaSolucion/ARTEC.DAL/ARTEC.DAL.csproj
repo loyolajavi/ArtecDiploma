@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALDependencia.cs" />
+    <Compile Include="DALEstadoSolicitud.cs" />
     <Compile Include="DALHardware.cs" />
+    <Compile Include="DALPrioridad.cs" />
     <Compile Include="DALTipoBien.cs" />
     <Compile Include="MotorBD\Mapeador.cs" />
     <Compile Include="MotorBD\MotorBD.cs" />

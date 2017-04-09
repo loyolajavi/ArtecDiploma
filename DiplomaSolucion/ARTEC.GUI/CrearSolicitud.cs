@@ -25,6 +25,8 @@ namespace ARTEC.GUI
         int AuxTipoCategoria = 1;
         List<Agente> unosAgentes;
         List<Agente> unosAgentesAsociados;
+        List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
+        List<Prioridad> unasPrioridades = new List<Prioridad>();
 
         public CrearSolicitud()
         {
@@ -84,22 +86,25 @@ namespace ARTEC.GUI
 
         private void AgregarSoftware(ref SolicDetalle unDetSolic)
         {
-            unDetSolic.Cantidad = 1;
-            unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
-            unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
-            unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+            if (validCantBien.Validate())
+            {
+                unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
+                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+                unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+                unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
-            grillaDetalles.DataSource = null;
-            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            //Formato de la grillaDetalles
-            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grillaDetalles.Columns[0].HeaderText = "#";
-            grillaDetalles.Columns[1].HeaderText = "Bien";
-            grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            grillaDetalles.Columns[3].Width = 80;
-            grillaDetalles.Columns[3].HeaderText = "Estado";
+                grillaDetalles.DataSource = null;
+                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                //Formato de la grillaDetalles
+                grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grillaDetalles.Columns[0].HeaderText = "#";
+                grillaDetalles.Columns[1].HeaderText = "Bien";
+                grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[3].Width = 80;
+                grillaDetalles.Columns[3].HeaderText = "Estado";
+            }
         }
 
 
@@ -125,6 +130,25 @@ namespace ARTEC.GUI
             unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
 
             unosAgentesAsociados = new List<Agente>();
+
+
+            ///Traer Estados Solicitud
+            BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
+            unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+            cboEstadoSolicitud.DataSource = null;
+            cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
+            cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
+            cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+
+
+            ///Traer Prioridad
+            BLLPrioridad ManagerPrioridad = new BLLPrioridad();
+            unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+            cboPrioridad.DataSource = null;
+            cboPrioridad.DataSource = unasPrioridades;
+            cboPrioridad.DisplayMember = "DescripPrioridad";
+            cboPrioridad.ValueMember = "IdPrioridad";
+
 
         }
 
@@ -258,6 +282,10 @@ namespace ARTEC.GUI
                 lblCantidad.Enabled = true;
                 txtBien.Clear();
                 AuxTipoCategoria = 1;
+                txtCantBien.Clear();
+                txtAgente.Clear();
+                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                grillaAgentesAsociados.DataSource = null;
             }
             if ((int)cboTipoBien.SelectedValue == 2)//Software
             {
@@ -395,6 +423,7 @@ namespace ARTEC.GUI
                         cboAgentesAsociados.Visible = false;
                         cboAgentesAsociados.DroppedDown = false;
                         cboAgentesAsociados.DataSource = null;
+                        unAgen = null; // GUARDA
                     }
                 }
                 else
@@ -437,18 +466,46 @@ namespace ARTEC.GUI
             }
         }
 
+        //Asociar Agentes al software ingresado
         private void btnAsociarAgente_Click(object sender, EventArgs e)
         {
-            unosAgentesAsociados.Add(unAgen);
+            int CantSuma = 0;
+            if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
+            {
+                CantSuma = Int32.Parse(txtCantBien.Text);
+            }
+
+            if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
+                //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
+            {
+
+                var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
+                if (resultado.Count() > 0)
+                {
+                    MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");        
+                }
+                else
+                {
+                    unosAgentesAsociados.Add(unAgen);
+                    CantSuma += 1;
+                    txtCantBien.Text = CantSuma.ToString();
+                }
+            }
+            else
+            {
+                unosAgentesAsociados.Add(unAgen);
+                CantSuma += 1;
+                txtCantBien.Text = CantSuma.ToString();
+            }
+            
             grillaAgentesAsociados.DataSource = null;
             grillaAgentesAsociados.DataSource = unosAgentesAsociados;
             grillaAgentesAsociados.Columns[0].Visible = false;
             grillaAgentesAsociados.Columns[3].Visible = false;
             grillaAgentesAsociados.Columns[4].Visible = false;
-            //grillaAgentesAsociados.Columns[0].Visible = false;
-            //grillaAgentesAsociados.Columns[0].Visible = false;
 
         }
+
 
 
 

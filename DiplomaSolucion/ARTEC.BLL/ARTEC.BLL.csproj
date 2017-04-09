@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="BLLCategoria.cs" />
     <Compile Include="BLLDependencia.cs" />
+    <Compile Include="BLLEstadoSolicitud.cs" />
     <Compile Include="BLLHardware.cs" />
+    <Compile Include="BLLPrioridad.cs" />
     <Compile Include="BLLTipoBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
