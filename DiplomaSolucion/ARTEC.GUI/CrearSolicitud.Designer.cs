@@ -29,12 +29,12 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearSolicitud));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gboxNotas = new System.Windows.Forms.GroupBox();
             this.richTextBoxEx1 = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
@@ -49,6 +49,9 @@ namespace ARTEC.GUI
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnSeleccionarArchivo = new DevComponents.DotNetBar.ButtonX();
+            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.gboxBienes = new System.Windows.Forms.GroupBox();
             this.gboxAsociados = new System.Windows.Forms.GroupBox();
@@ -72,21 +75,20 @@ namespace ARTEC.GUI
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.ValidDep2 = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.validCantBien = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.btnCrearSolicitud = new DevComponents.DotNetBar.ButtonX();
-            this.btnSeleccionarArchivo = new DevComponents.DotNetBar.ButtonX();
-            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.gboxBienes.SuspendLayout();
             this.gboxAsociados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaAgentesAsociados)).BeginInit();
@@ -94,7 +96,6 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -345,6 +346,50 @@ namespace ARTEC.GUI
             this.panel2.Size = new System.Drawing.Size(601, 104);
             this.panel2.TabIndex = 7;
             // 
+            // dataGridViewX1
+            // 
+            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dataGridViewX1.Location = new System.Drawing.Point(7, 35);
+            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.Size = new System.Drawing.Size(585, 65);
+            this.dataGridViewX1.TabIndex = 4;
+            // 
+            // btnSeleccionarArchivo
+            // 
+            this.btnSeleccionarArchivo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSeleccionarArchivo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSeleccionarArchivo.Location = new System.Drawing.Point(9, 10);
+            this.btnSeleccionarArchivo.Name = "btnSeleccionarArchivo";
+            this.btnSeleccionarArchivo.Size = new System.Drawing.Size(116, 18);
+            this.btnSeleccionarArchivo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSeleccionarArchivo.TabIndex = 2;
+            this.btnSeleccionarArchivo.Text = "Seleccionar un archivo";
+            // 
+            // textBoxX2
+            // 
+            this.textBoxX2.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX2.Border.Class = "TextBoxBorder";
+            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX2.Location = new System.Drawing.Point(7, 8);
+            this.textBoxX2.Name = "textBoxX2";
+            this.textBoxX2.PreventEnterBeep = true;
+            this.textBoxX2.Size = new System.Drawing.Size(338, 22);
+            this.textBoxX2.TabIndex = 3;
+            // 
             // buttonX3
             // 
             this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -542,7 +587,7 @@ namespace ARTEC.GUI
             this.txtCantBien.Size = new System.Drawing.Size(36, 22);
             this.txtCantBien.TabIndex = 5;
             this.txtCantBien.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.validCantBien.SetValidator1(this.txtCantBien, this.requiredFieldValidator1);
+            this.validCantBien.SetValidator3(this.txtCantBien, this.requiredFieldValidator1);
             // 
             // lblCantidad
             // 
@@ -616,6 +661,7 @@ namespace ARTEC.GUI
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(315, 22);
             this.textBoxX1.TabIndex = 1;
+            this.ValidDep2.SetValidator1(this.textBoxX1, this.customValidator1);
             this.validDependencia.SetValidator1(this.textBoxX1, this.requiredFieldValidator2);
             this.textBoxX1.TextChanged += new System.EventHandler(this.textBoxX1_TextChanged);
             // 
@@ -663,6 +709,12 @@ namespace ARTEC.GUI
             this.ValidDep2.ErrorProvider = this.errorProvider2;
             this.ValidDep2.Highlighter = this.highlighter2;
             // 
+            // customValidator1
+            // 
+            this.customValidator1.ErrorMessage = "Your error message here.";
+            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidator1_ValidateValue);
+            // 
             // errorProvider2
             // 
             this.errorProvider2.ContainerControl = this;
@@ -677,11 +729,6 @@ namespace ARTEC.GUI
             this.validCantBien.ContainerControl = this;
             this.validCantBien.ErrorProvider = this.errorProvider3;
             this.validCantBien.Highlighter = this.highlighter3;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider3
             // 
@@ -704,49 +751,10 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.TabIndex = 22;
             this.btnCrearSolicitud.Text = "Crear";
             // 
-            // btnSeleccionarArchivo
+            // requiredFieldValidator1
             // 
-            this.btnSeleccionarArchivo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSeleccionarArchivo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSeleccionarArchivo.Location = new System.Drawing.Point(9, 10);
-            this.btnSeleccionarArchivo.Name = "btnSeleccionarArchivo";
-            this.btnSeleccionarArchivo.Size = new System.Drawing.Size(116, 18);
-            this.btnSeleccionarArchivo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSeleccionarArchivo.TabIndex = 2;
-            this.btnSeleccionarArchivo.Text = "Seleccionar un archivo";
-            // 
-            // textBoxX2
-            // 
-            this.textBoxX2.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX2.Border.Class = "TextBoxBorder";
-            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX2.Location = new System.Drawing.Point(7, 8);
-            this.textBoxX2.Name = "textBoxX2";
-            this.textBoxX2.PreventEnterBeep = true;
-            this.textBoxX2.Size = new System.Drawing.Size(338, 22);
-            this.textBoxX2.TabIndex = 3;
-            // 
-            // dataGridViewX1
-            // 
-            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(7, 35);
-            this.dataGridViewX1.Name = "dataGridViewX1";
-            this.dataGridViewX1.Size = new System.Drawing.Size(585, 65);
-            this.dataGridViewX1.TabIndex = 4;
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // CrearSolicitud
             // 
@@ -765,6 +773,7 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput1)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.gboxBienes.ResumeLayout(false);
             this.gboxAsociados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grillaAgentesAsociados)).EndInit();
@@ -772,7 +781,6 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -821,10 +829,11 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.SuperValidator validCantBien;
         private System.Windows.Forms.ErrorProvider errorProvider3;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter3;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.ButtonX btnCrearSolicitud;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
         private DevComponents.DotNetBar.ButtonX btnSeleccionarArchivo;
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

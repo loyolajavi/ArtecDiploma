@@ -39,7 +39,7 @@ namespace ARTEC.GUI
         {
             //FIJARME QUE SI NO ESTA ECRITO EL BIEN NO ME DEJE AGREGAR UN DETALLE
             //TMB FALTA QUE PARA PODER AGREGAR UN DETALLE PRIMERO ASOCIE USUARIOS
-            if (ValidDep2.Validate())
+            if (validDependencia.Validate() && ValidDep2.Validate())
             {
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
                 unDetalleSolicitud.unaCategoria = unaCat;
@@ -166,6 +166,8 @@ namespace ARTEC.GUI
                         grillaDetalles.DataSource = null;
                         grillaAgentesAsociados.DataSource = null;
                         unaSolicitud.unosDetallesSolicitud.Clear();
+                        unosAgentesAsociados.Clear();
+                        unosAgentes.Clear();//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
                         BusquedaDependencias();
                     }
                     else if (resmbox == DialogResult.No)
@@ -230,7 +232,7 @@ namespace ARTEC.GUI
                 comboBoxEx4.Visible = false;
                 comboBoxEx4.DroppedDown = false;
                 comboBoxEx4.DataSource = null;
-                unosAgentes = null;//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
+                //unosAgentes = null;//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
             }
         }
 
@@ -454,35 +456,32 @@ namespace ARTEC.GUI
             }
         }
 
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
-        {
-            if(string.Equals(e.ControlToValidate.Text, unaDep.NombreDependencia))
-            {
-                e.IsValid = true;
-            }
-            else
-            {
-                e.IsValid = false;
-            }
-        }
-
         //Asociar Agentes al software ingresado
         private void btnAsociarAgente_Click(object sender, EventArgs e)
         {
-            int CantSuma = 0;
-            if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
+            if (ValidDep2.Validate())
             {
-                CantSuma = Int32.Parse(txtCantBien.Text);
-            }
-
-            if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
-                //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
-            {
-
-                var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
-                if (resultado.Count() > 0)
+                int CantSuma = 0;
+                if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
                 {
-                    MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");        
+                    CantSuma = Int32.Parse(txtCantBien.Text);
+                }
+
+                if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
+                //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
+                {
+
+                    var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
+                    if (resultado.Count() > 0)
+                    {
+                        MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                    }
+                    else
+                    {
+                        unosAgentesAsociados.Add(unAgen);
+                        CantSuma += 1;
+                        txtCantBien.Text = CantSuma.ToString();
+                    }
                 }
                 else
                 {
@@ -490,22 +489,37 @@ namespace ARTEC.GUI
                     CantSuma += 1;
                     txtCantBien.Text = CantSuma.ToString();
                 }
+
+                grillaAgentesAsociados.DataSource = null;
+                grillaAgentesAsociados.DataSource = unosAgentesAsociados;
+                grillaAgentesAsociados.Columns[0].Visible = false;
+                grillaAgentesAsociados.Columns[3].Visible = false;
+                grillaAgentesAsociados.Columns[4].Visible = false;
+
+            }
+           
+        }
+
+        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+
+            if (unaDep == null)
+            {
+                e.IsValid = false;
             }
             else
             {
-                unosAgentesAsociados.Add(unAgen);
-                CantSuma += 1;
-                txtCantBien.Text = CantSuma.ToString();
+                if (string.Equals(e.ControlToValidate.Text, unaDep.NombreDependencia))
+                {
+                    e.IsValid = true;
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
             }
             
-            grillaAgentesAsociados.DataSource = null;
-            grillaAgentesAsociados.DataSource = unosAgentesAsociados;
-            grillaAgentesAsociados.Columns[0].Visible = false;
-            grillaAgentesAsociados.Columns[3].Visible = false;
-            grillaAgentesAsociados.Columns[4].Visible = false;
-
         }
-
 
 
 
