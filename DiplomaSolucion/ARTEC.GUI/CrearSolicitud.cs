@@ -27,6 +27,7 @@ namespace ARTEC.GUI
         List<Agente> unosAgentesAsociados;
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
         List<Prioridad> unasPrioridades = new List<Prioridad>();
+        int ContDetalles = 0;
 
         public CrearSolicitud()
         {
@@ -39,7 +40,7 @@ namespace ARTEC.GUI
         {
             //FIJARME QUE SI NO ESTA ECRITO EL BIEN NO ME DEJE AGREGAR UN DETALLE
             //TMB FALTA QUE PARA PODER AGREGAR UN DETALLE PRIMERO ASOCIE USUARIOS
-            if (validDependencia.Validate() && ValidDep2.Validate())
+            if (validDependencia.Validate() && ValidDep2.Validate() && validBien.Validate())
             {
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
                 unDetalleSolicitud.unaCategoria = unaCat;
@@ -51,6 +52,8 @@ namespace ARTEC.GUI
                 {
                     AgregarSoftware(ref unDetalleSolicitud);
                 }
+
+
                
             }
 
@@ -62,6 +65,10 @@ namespace ARTEC.GUI
 
             if (validCantBien.Validate())
             {
+                //Conteo Detalles
+                ContDetalles += 1;
+                unDetSolic.IdSolicitudDetalle = ContDetalles;
+
                 unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
                 unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
                 unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
@@ -73,7 +80,7 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].HeaderText = "#";
+                grillaDetalles.Columns[0].HeaderText = "Item";
                 grillaDetalles.Columns[1].HeaderText = "Bien";
                 grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 grillaDetalles.Columns[3].Width = 80;
@@ -88,9 +95,14 @@ namespace ARTEC.GUI
         {
             if (validCantBien.Validate())
             {
+                //Conteo Detalles
+                ContDetalles += 1;
+                unDetSolic.IdSolicitudDetalle = ContDetalles;
+
                 unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
                 unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
                 unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+                unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
                 unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
                 grillaDetalles.DataSource = null;
@@ -168,6 +180,8 @@ namespace ARTEC.GUI
                         unaSolicitud.unosDetallesSolicitud.Clear();
                         unosAgentesAsociados.Clear();
                         unosAgentes.Clear();//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
+                        //Reseteo el contador de detalles
+                        ContDetalles = 0;
                         BusquedaDependencias();
                     }
                     else if (resmbox == DialogResult.No)
@@ -375,6 +389,8 @@ namespace ARTEC.GUI
 
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
+                    //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
+                    validBien.Validate();
                 }
             }
         }
@@ -500,7 +516,7 @@ namespace ARTEC.GUI
            
         }
 
-        private void customValidator1_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        private void customValidatorDependencia_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
 
             if (unaDep == null)
@@ -519,6 +535,87 @@ namespace ARTEC.GUI
                 }
             }
             
+        }
+
+        private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+
+            //Para obtener el detalle en donde se hizo click
+            //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
+            int DetalleSeleccionado = e.RowIndex + 1;
+            SolicDetalle unDetSolic = new SolicDetalle();
+
+            unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+
+            txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+            txtCantBien.Text = unDetSolic.Cantidad.ToString();
+            
+            //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
+            unaCat = unDetSolic.unaCategoria;
+            List<TipoBien> unosTipoBienAux = new List<TipoBien>();
+            BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+            unosTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+
+            if (unosTipoBienAux.First().IdTipoBien == 1)
+            {
+                //HARDWARE
+                gboxAsociados.Enabled = false;
+                txtCantBien.ReadOnly = false;
+                lblCantidad.Enabled = true;
+                AuxTipoCategoria = 1;//HARDCODEADO
+                cboTipoBien.SelectedValue = 1;//HARDCODEADO
+                txtAgente.Clear();
+                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                grillaAgentesAsociados.DataSource = null;
+
+            }
+            else
+            {
+                gboxAsociados.Enabled = true;
+                txtCantBien.ReadOnly = true;
+                lblCantidad.Enabled = false;
+                AuxTipoCategoria = 2;//HARDCODEADO
+                cboTipoBien.SelectedValue = 2;//HARDCODEADO
+                txtAgente.Clear();
+                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                grillaAgentesAsociados.DataSource = null;
+                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
+                //No mostrar columnas que no necesito de los agentes asociados
+                grillaAgentesAsociados.Columns[0].Visible = false;
+                grillaAgentesAsociados.Columns[3].Visible = false;
+                grillaAgentesAsociados.Columns[4].Visible = false;
+
+
+
+
+            }
+
+        }
+
+        //NOTA AL AIRE: GUARDA QUE NO VALIDA SI CANTIDAD ES 0
+        private void customValidatorBien_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                if (string.Equals(e.ControlToValidate.Text, unaCat.DescripCategoria))
+                {
+                    e.IsValid = true;
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
+            }
         }
 
 

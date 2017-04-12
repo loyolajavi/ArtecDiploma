@@ -25,7 +25,14 @@ namespace ARTEC.ENTIDADES
             get { return _unEstado; }
             set { _unEstado = value; }
         }
-        
+
+        private List<Agente> _unosAgentes = new List<Agente>();
+        public List<Agente> unosAgentes
+        {
+            get { return _unosAgentes; }
+            set { _unosAgentes = value; }
+        }
+
 
     }
 }
