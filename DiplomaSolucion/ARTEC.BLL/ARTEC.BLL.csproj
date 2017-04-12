@@ -45,6 +45,7 @@
     <Compile Include="BLLHardware.cs" />
     <Compile Include="BLLPrioridad.cs" />
     <Compile Include="BLLTipoBien.cs" />
+    <Compile Include="BLLUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

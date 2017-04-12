@@ -46,6 +46,7 @@
     <Compile Include="DALHardware.cs" />
     <Compile Include="DALPrioridad.cs" />
     <Compile Include="DALTipoBien.cs" />
+    <Compile Include="DALUsuario.cs" />
     <Compile Include="MotorBD\Mapeador.cs" />
     <Compile Include="MotorBD\MotorBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

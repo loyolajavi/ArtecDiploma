@@ -28,6 +28,7 @@ namespace ARTEC.GUI
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
         List<Prioridad> unasPrioridades = new List<Prioridad>();
         int ContDetalles = 0;
+        List<Usuario> unosUsuarios = new List<Usuario>();
 
         public CrearSolicitud()
         {
@@ -160,6 +161,17 @@ namespace ARTEC.GUI
             cboPrioridad.DataSource = unasPrioridades;
             cboPrioridad.DisplayMember = "DescripPrioridad";
             cboPrioridad.ValueMember = "IdPrioridad";
+
+            //Traer UsuariosSistema
+            BLLUsuario ManagerUsuario = new BLLUsuario();
+            unosUsuarios = ManagerUsuario.UsuarioTraerTodos();
+            cboAsignado.DataSource = null;
+            cboAsignado.DataSource = unosUsuarios;
+            cboAsignado.DisplayMember = "NombreUsuario";
+            cboAsignado.ValueMember = "IdUsuario";
+
+            //Cargar fecha Inicio
+            txtFechaInicio.Text = DateTime.Today.ToString("d");
 
 
         }
@@ -616,6 +628,11 @@ namespace ARTEC.GUI
                     e.IsValid = false;
                 }
             }
+        }
+
+        private void btnCrearSolicitud_Click(object sender, EventArgs e)
+        {
+
         }
 
 
