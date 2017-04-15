@@ -81,11 +81,12 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].HeaderText = "Item";
-                grillaDetalles.Columns[1].HeaderText = "Bien";
-                grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[3].Width = 80;
-                grillaDetalles.Columns[3].HeaderText = "Estado";
+                grillaDetalles.Columns[0].HeaderText = "#";
+                grillaDetalles.Columns[2].HeaderText = "Bien";
+                grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[4].Width = 80;
+                grillaDetalles.Columns[4].HeaderText = "Estado";
+                grillaDetalles.Columns[1].Visible = false;
             }
 
            
