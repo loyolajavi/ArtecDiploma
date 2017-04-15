@@ -10,6 +10,7 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdSolicitudDetalle { get; set; }
+        public int IdSolicitud { get; set; }
         
         private Categoria _unaCategoria = new Categoria();
         public Categoria unaCategoria

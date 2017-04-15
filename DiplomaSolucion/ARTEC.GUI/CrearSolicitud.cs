@@ -71,7 +71,7 @@ namespace ARTEC.GUI
                 unDetSolic.IdSolicitudDetalle = ContDetalles;
 
                 unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
-                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
                 unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
                 unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
@@ -101,7 +101,7 @@ namespace ARTEC.GUI
                 unDetSolic.IdSolicitudDetalle = ContDetalles;
 
                 unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
-                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente;
+                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO En hard tmb
                 unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
                 unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);

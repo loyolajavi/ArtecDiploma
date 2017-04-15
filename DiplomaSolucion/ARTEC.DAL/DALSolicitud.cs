@@ -17,9 +17,6 @@ namespace ARTEC.DAL
         {
 
 
-           
-
-
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@FechaInicio", laSolicitud.FechaInicio),
@@ -29,15 +26,31 @@ namespace ARTEC.DAL
                 new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario)
 			};
 
-
             try
             {
 
                 MotorBD.MotorBD.ConexionIniciar();
                 MotorBD.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)MotorBD.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudCrear", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
+                {
+
+                    SqlParameter[] parametersSolicitudDetalles = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                        new SqlParameter("@IdSolicitud", IDDevuelto),
+                        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
+                        new SqlParameter("@Cantidad", item.Cantidad),
+                        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolDetalle)
+			        };
+
+                    MotorBD.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles); 
+                }
+
                 MotorBD.MotorBD.TransaccionAceptar();
-                return Decimal.ToInt32(Resultado);
+                return IDDevuelto;
             }
             catch (Exception es)
             {
