@@ -11,17 +11,46 @@ namespace ARTEC.DAL.MotorBD
 {
     internal static class MotorBD
     {
-        public static string connectionStringName
-        {
-            get { return _connectionStringName; }
-            internal set { }
-        }
+        //public static string connectionStringName
+        //{
+        //    get { return _connectionStringName; }
+        //    internal set { }
+        //}//NO LO USO PORQUE EL CONNSTRINGNAME ES SOLAMENTE PARA USO INTERNO DE ESTA CLASE PORQ LO BUSCO DIRECTO DEL APP.CONFIG ACA ADENTRO
 
         private static string _connectionStringName = System.Configuration.ConfigurationManager.ConnectionStrings["BDArtec"].ConnectionString;
         private static SqlTransaction Transaccion;
         private static SqlCommand Comando;
         private static SqlConnection Conexion;
 
+
+        public static void ConexionIniciar()
+        {
+            Conexion = new SqlConnection(_connectionStringName);
+            if (Conexion != null && Conexion.State == ConnectionState.Closed)
+            {
+                Conexion.Open();
+            }
+        }
+
+        public static void TransaccionIniciar()
+        {
+            Transaccion = Conexion.BeginTransaction();
+        }
+
+        public static void TransaccionAceptar()
+        {
+            Transaccion.Commit();
+        }
+
+        public static void ConexionFinalizar()
+        {
+            Conexion.Close();
+        }
+
+        public static void TransaccionCancelar()
+        {
+            Transaccion.Rollback();
+        }
 
         public static DataSet EjecutarDataSet(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
         {
@@ -30,19 +59,13 @@ namespace ARTEC.DAL.MotorBD
 
             try
             {
-                Conexion = new SqlConnection(connectionStringName);
-
-                if (Conexion != null && Conexion.State == ConnectionState.Closed)
-                {
-                    Conexion.Open();
-                }
-
-                Transaccion = Conexion.BeginTransaction();
+                ConexionIniciar();
+                TransaccionIniciar();
 
                 using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
                 {
                     Resultado = CrearDataSet(Comando);
-                    Transaccion.Commit();
+                    TransaccionAceptar();
                     return Resultado;
                 }
 
@@ -50,13 +73,13 @@ namespace ARTEC.DAL.MotorBD
             }
             catch (Exception ex)
             {
-                Transaccion.Rollback();   
+                TransaccionCancelar();
                 throw;
             }
 
             finally
             {
-                Conexion.Close();
+                ConexionFinalizar();
             }
 
         }
@@ -115,6 +138,25 @@ namespace ARTEC.DAL.MotorBD
             return ResultadoDataSet;
         }
 
+
+        public static object EjecutarScalar(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        {
+            object Resultado;
+
+            try
+            {
+                using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
+                {
+                    Resultado = Comando.ExecuteScalar();
+                    return Resultado;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
 
 
 

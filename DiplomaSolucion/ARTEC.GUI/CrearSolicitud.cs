@@ -633,6 +633,19 @@ namespace ARTEC.GUI
         private void btnCrearSolicitud_Click(object sender, EventArgs e)
         {
 
+
+            unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
+            //FECHA FIN VER Q SI ESTA ESCRITA
+            unaSolicitud.laDependencia = unaDep;
+            unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
+            unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
+            unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+
+
+            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+            ManagerSolicitud.SolicitudCrear(unaSolicitud);
+
+
         }
 
 
