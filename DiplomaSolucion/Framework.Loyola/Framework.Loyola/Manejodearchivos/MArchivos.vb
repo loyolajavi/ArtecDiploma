@@ -79,7 +79,7 @@ Public Class MArchivos
     End Sub
 
 
-    Public Sub CopiarArchivo(Origen As String, Destino As String)
+    Public Shared Sub CopiarArchivo(Origen As String, Destino As String)
 
         ' ruta del archivo origen y el nuevo path y nombre  
         Try

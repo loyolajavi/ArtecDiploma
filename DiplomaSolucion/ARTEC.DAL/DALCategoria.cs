@@ -14,6 +14,10 @@ namespace ARTEC.DAL
     public class DALCategoria
     {
 
+        /// <summary>
+        /// Traer todas las categorías que sean Hardware
+        /// </summary>
+        /// <returns></returns>
         public List<Categoria> CategoriaTraerTodosHard()
         {
             try

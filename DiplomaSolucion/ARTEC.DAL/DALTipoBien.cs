@@ -27,7 +27,7 @@ namespace ARTEC.DAL
         }
 
 
-        public List<TipoBien> TipoBienTraerTipoBienPorIdCategoria(int idCategoria)
+        public TipoBien TipoBienTraerTipoBienPorIdCategoria(int idCategoria)
         {
 
 
@@ -39,8 +39,8 @@ namespace ARTEC.DAL
             using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoBienTraerTipoBienPorIdCategoria", parameters))
             {
 
-                List<TipoBien> unaLista = new List<TipoBien>();
-                unaLista = Mapeador.Mapear<TipoBien>(ds);
+                TipoBien unaLista = new TipoBien();
+                unaLista = Mapeador.MapearUno<TipoBien>(ds);
                 return unaLista;
 
             }

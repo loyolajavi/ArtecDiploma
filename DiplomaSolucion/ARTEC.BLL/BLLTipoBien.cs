@@ -24,7 +24,7 @@ namespace ARTEC.BLL
         }
 
 
-        public List<TipoBien> TipoBienTraerTipoBienPorIdCategoria(int idCategoria)
+        public TipoBien TipoBienTraerTipoBienPorIdCategoria(int idCategoria)
         {
             return GestorTipoBien.TipoBienTraerTipoBienPorIdCategoria(idCategoria);
         }

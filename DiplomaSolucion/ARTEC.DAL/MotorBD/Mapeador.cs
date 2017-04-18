@@ -57,6 +57,25 @@ namespace ARTEC.DAL.MotorBD
 
             return unaInstancia;
         }
+
+
+        public static T MapearUno<T>(DataSet unDataSet) where T : new()
+        {
+            T ListaResultado = new T();
+            try
+            {
+                IList<PropertyInfo> Propiedades = typeof(T).GetProperties().ToList();
+                foreach (var row in unDataSet.Tables[0].Rows)
+                {
+                    ListaResultado = CargarPropiedad<T>((DataRow)row, Propiedades);
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            return ListaResultado;
+        }
         
 
     }

@@ -9,6 +9,7 @@ using DevComponents.DotNetBar;
 using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
+using System.IO;
 
 namespace ARTEC.GUI
 {
@@ -114,10 +115,11 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grillaDetalles.Columns[0].HeaderText = "#";
-                grillaDetalles.Columns[1].HeaderText = "Bien";
-                grillaDetalles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[3].Width = 80;
-                grillaDetalles.Columns[3].HeaderText = "Estado";
+                grillaDetalles.Columns[2].HeaderText = "Bien";
+                grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grillaDetalles.Columns[4].Width = 80;
+                grillaDetalles.Columns[4].HeaderText = "Estado";
+                grillaDetalles.Columns[1].Visible = false;
             }
         }
 
@@ -182,7 +184,7 @@ namespace ARTEC.GUI
         {
             if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
-                
+                //AGREGAR QUE SE ELIMINEN LOS USUARIOS ASOCIADOS AL CAMBIAR LA FISCALIA (SIN TENER DETALLES AGREGADOS)
                 if (grillaDetalles.DataSource != null)
                 {
                     DialogResult resmbox = MessageBox.Show("Si cambia de Fiscalía se eliminarán los detalles", "Confirmar", MessageBoxButtons.YesNo);
@@ -281,7 +283,8 @@ namespace ARTEC.GUI
                     BLLDependencia managerDependenciaAg = new BLLDependencia();
                     unosAgentes = new List<Agente>();
                     unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaDep.IdDependencia);
-                    //ValidDep2.Validate();//Creo q lo puedo borrar
+                    //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+                    ValidDep2.Validate();
                     txtAgente.Clear();
 
                 }
@@ -486,7 +489,7 @@ namespace ARTEC.GUI
         }
 
         //Asociar Agentes al software ingresado
-        private void btnAsociarAgente_Click(object sender, EventArgs e)
+        private void btnAsociarAgente_Click(object sender, EventArgs e)//VALIDAR QUE NO DEJE AGREGARDETALLE SI NO HAY UN AGENTE ASOCIADO
         {
             if (ValidDep2.Validate())
             {
@@ -532,7 +535,7 @@ namespace ARTEC.GUI
         private void customValidatorDependencia_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
 
-            if (unaDep == null)
+            if (string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
                 e.IsValid = false;
             }
@@ -571,11 +574,11 @@ namespace ARTEC.GUI
             
             //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
             unaCat = unDetSolic.unaCategoria;
-            List<TipoBien> unosTipoBienAux = new List<TipoBien>();
+            TipoBien unTipoBienAux = new TipoBien();
             BLLTipoBien managerTipoBienAux = new BLLTipoBien();
-            unosTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
 
-            if (unosTipoBienAux.First().IdTipoBien == 1)
+            if (unTipoBienAux.IdTipoBien == 1)
             {
                 //HARDWARE
                 gboxAsociados.Enabled = false;
@@ -634,22 +637,80 @@ namespace ARTEC.GUI
         private void btnCrearSolicitud_Click(object sender, EventArgs e)
         {
 
+            if (ValidDep2.Validate())
+            {
 
-            unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-            //FECHA FIN VER Q SI ESTA ESCRITA
-            unaSolicitud.laDependencia = unaDep;
-            unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
-            unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
-            unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+                unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
+                //FECHA FIN VER Q SI ESTA ESCRITA
+                unaSolicitud.laDependencia = unaDep;
+                unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
+                unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
+                unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
 
 
-            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            ManagerSolicitud.SolicitudCrear(unaSolicitud);
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                ManagerSolicitud.SolicitudCrear(unaSolicitud);
 
+
+            }
+
+            
 
         }
 
 
+        //Estilo que se aplica cuando se arrastra un archivo a pnlAdjuntos
+        private void pnlAdjuntos_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+            pnlAdjuntos.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        //Copiar el archivo
+        private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
+        {
+            //Agarro la ruta de los archivos arrastrados
+            string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            foreach (var item in unArchivo)
+            {
+                //Agarro el nombre del archivo
+                string NombreArchivo = Path.GetFileName(item);
+                if (ValidarAdjunto(item))
+                {
+                    //Copio el archivo
+                    Framework.Loyola.MArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
+                    pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+                }
+                else
+                {
+                    MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                }
+                
+            }
+        }
+
+        //Estilo que se aplica cuando se sale de pnladjuntos (en el evento de arrastrar archivos)
+        private void pnlAdjuntos_DragLeave(object sender, EventArgs e)
+        {
+            pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+
+        /// <summary>
+        /// Valida si la extesión del adjunto es correcta
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public bool ValidarAdjunto(string RutaCompletaArchivo)
+        {
+            string ext = Path.GetExtension(RutaCompletaArchivo).ToLower();
+            if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp") || (ext == ".pdf") || (ext == ".txt"))
+            {
+                return true;
+            }
+            return false;
+        }
 
 
 
