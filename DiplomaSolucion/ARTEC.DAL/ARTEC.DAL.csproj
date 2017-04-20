@@ -51,6 +51,7 @@
     <Compile Include="MotorBD\Mapeador.cs" />
     <Compile Include="MotorBD\MotorBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\DALIdioma.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ARTEC.ENTIDADES\ARTEC.ENTIDADES.csproj">

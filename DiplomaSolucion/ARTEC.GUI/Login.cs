@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using ARTEC.BLL;
+using ARTEC.BLL.Servicios;
+using ARTEC.ENTIDADES;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -39,6 +43,26 @@ namespace ARTEC.GUI
             pnlNombreUsuarioI.Style.BackColor1.Color = Color.White;
             pnlNombreUsuario.Style.BackColor1.Color = Color.White;
         }
+
+        private void lblSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            BLLIdioma ManagerIdioma = new BLLIdioma();
+            ManagerIdioma.Traducir(this.FindForm(), 1);
+
+        }
+
+
+
+
+        
+
+
+
 
 
     }

@@ -72,12 +72,14 @@ namespace ARTEC.GUI
             // 
             // 
             this.lblSalir.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblSalir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSalir.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSalir.Location = new System.Drawing.Point(354, 31);
             this.lblSalir.Name = "lblSalir";
             this.lblSalir.Size = new System.Drawing.Size(25, 20);
             this.lblSalir.TabIndex = 1;
             this.lblSalir.Text = "Salir";
+            this.lblSalir.Click += new System.EventHandler(this.lblSalir_Click);
             // 
             // btnLogin
             // 
@@ -134,6 +136,7 @@ namespace ARTEC.GUI
             this.txtPass.Location = new System.Drawing.Point(70, 12);
             this.txtPass.Multiline = true;
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.PreventEnterBeep = true;
             this.txtPass.Size = new System.Drawing.Size(278, 35);
             this.txtPass.TabIndex = 17;
@@ -257,6 +260,7 @@ namespace ARTEC.GUI
             this.KeyPreview = true;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Login_Load);
             this.pnlBotonLogin.ResumeLayout(false);
             this.pnlPass.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
