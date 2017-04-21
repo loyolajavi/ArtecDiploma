@@ -13,7 +13,74 @@ namespace ARTEC.DAL.Servicios
     public class DALIdioma
     {
 
-        public static List<Etiqueta> _EtiquetasCompartidas;
+        public List<Idioma> IdiomaTraerTodos()
+        {
+            try
+            {
+                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
+                {
+                    List<Idioma> unaLista = new List<Idioma>();
+                    unaLista = Mapeador.Mapear<Idioma>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public void EtiquetasTraerTodosPorIdioma(int elIdioma)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdIdioma", elIdioma)
+			};
+
+            try
+            {
+                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EtiquetasTraerTodosPorIdioma", parameters))
+                {
+                    Idioma._EtiquetasCompartidas = Mapeador.Mapear<Etiqueta>(ds);
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+        public void IdiomaActualizarIdiomaActual(int elIdIdioma, bool Valor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdIdioma", elIdIdioma),
+                new SqlParameter("@IdiomaActual", Valor)
+			};
+
+            try
+            {
+
+                MotorBD.MotorBD.ConexionIniciar();
+                MotorBD.MotorBD.TransaccionIniciar();
+                MotorBD.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaActualizarIdiomaActual", parameters);
+                MotorBD.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                MotorBD.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                MotorBD.MotorBD.ConexionFinalizar();
+            }
+        }
+
         //public List<Etiqueta> EtiquetasCompartidas
         //{
         //    get { return _EtiquetasCompartidas; }
@@ -49,21 +116,6 @@ namespace ARTEC.DAL.Servicios
         //    }
         //}
 
-
-        public void ObtenerEtiquetas()
-        {
-            try
-            {
-                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EtiquetaTraerTodos"))
-                {
-                    _EtiquetasCompartidas = Mapeador.Mapear<Etiqueta>(ds);
-                }
-            }
-            catch (Exception es)
-            {
-                throw;
-            }
-        }
 
     }
 }

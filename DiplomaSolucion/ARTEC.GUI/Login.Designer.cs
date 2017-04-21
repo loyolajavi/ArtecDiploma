@@ -41,6 +41,7 @@ namespace ARTEC.GUI
             this.txtNombreUsuario = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.pnlNombreUsuarioI = new DevComponents.DotNetBar.PanelEx();
             this.pnlTitulo = new DevComponents.DotNetBar.PanelEx();
+            this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.pnlBotonLogin.SuspendLayout();
             this.pnlPass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -52,6 +53,7 @@ namespace ARTEC.GUI
             // 
             this.pnlBotonLogin.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlBotonLogin.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlBotonLogin.Controls.Add(this.cboIdioma);
             this.pnlBotonLogin.Controls.Add(this.lblSalir);
             this.pnlBotonLogin.Controls.Add(this.btnLogin);
             this.pnlBotonLogin.DisabledBackColor = System.Drawing.Color.Empty;
@@ -244,6 +246,20 @@ namespace ARTEC.GUI
             this.pnlTitulo.TabIndex = 16;
             this.pnlTitulo.Text = "Ingrese a su cuenta";
             // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DisplayMember = "Text";
+            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
+            this.cboIdioma.FormattingEnabled = true;
+            this.cboIdioma.ItemHeight = 16;
+            this.cboIdioma.Location = new System.Drawing.Point(3, 28);
+            this.cboIdioma.Name = "cboIdioma";
+            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
+            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboIdioma.TabIndex = 2;
+            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -255,7 +271,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBotonLogin);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.Name = "Login";
@@ -284,5 +299,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblSalir;
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
     }
 }

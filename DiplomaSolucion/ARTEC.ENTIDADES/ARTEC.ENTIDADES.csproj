@@ -59,6 +59,7 @@
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\Etiqueta.cs" />
+    <Compile Include="Servicios\Idioma.cs" />
     <Compile Include="Software.cs" />
     <Compile Include="SolicDetalle.cs" />
     <Compile Include="Solicitud.cs" />

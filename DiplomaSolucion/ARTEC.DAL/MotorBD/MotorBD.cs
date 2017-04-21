@@ -55,8 +55,7 @@ namespace ARTEC.DAL.MotorBD
         public static DataSet EjecutarDataSet(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
         {
             DataSet Resultado;
-
-
+            
             try
             {
                 ConexionIniciar();
@@ -68,8 +67,6 @@ namespace ARTEC.DAL.MotorBD
                     TransaccionAceptar();
                     return Resultado;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -156,6 +153,23 @@ namespace ARTEC.DAL.MotorBD
                 throw;
             }
 
+        }
+
+
+
+        public static void EjecutarNonQuery(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        {
+            try
+            {
+                using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
+                {
+                    Comando.ExecuteNonQuery();
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
 

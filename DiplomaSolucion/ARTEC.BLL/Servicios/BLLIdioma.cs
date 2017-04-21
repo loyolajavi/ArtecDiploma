@@ -13,16 +13,27 @@ namespace ARTEC.BLL.Servicios
     {
 
         DALIdioma GestorIdioma = new DALIdioma();
+        public static Idioma unIdiomaActual;
+        public List<Idioma> unosIdiomas = new List<Idioma>();
+
+        public List<Idioma> IdiomaTraerTodos()
+        {
+            return GestorIdioma.IdiomaTraerTodos();
+        }
+
 
         public void Traducir(Control unForm, int elIdioma)
         {
-            DALIdioma._EtiquetasCompartidas = null;
-            GestorIdioma.ObtenerEtiquetas();////FALTA FILTRAR POR EL IDIOMA EN EL STORE PROCEDURE Y ACA TMB ENVIANDO POR PARAMETRO EL IDIOMA
+            Idioma._EtiquetasCompartidas = null;
+            //Obtengo las etiquetas y las pongo en la static variable de Etiquetas
+            GestorIdioma.EtiquetasTraerTodosPorIdioma(elIdioma);
+            //Obtengo todos los controles del formulario
             IEnumerable<Control> unosControles = ObtenerControles(unForm);
 
+            //Coloco el texto en cada control
             foreach (Control unControl in unosControles)
             {
-                foreach (Etiqueta unaEtiqueta in DALIdioma._EtiquetasCompartidas)
+                foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
                 {
                     if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
                     {
@@ -31,8 +42,6 @@ namespace ARTEC.BLL.Servicios
                 }
             }
         }
-
-
 
         public static IEnumerable<Control> ObtenerControles(Control parent)
         {
@@ -48,6 +57,40 @@ namespace ARTEC.BLL.Servicios
             return controls;
         
         }
+
+
+
+        public void CambiarIdioma(Control unControlCI, Idioma unIdioma)
+        {
+            
+            if (unIdioma.IdIdioma != BLLIdioma.unIdiomaActual.IdIdioma)
+            {
+                unosIdiomas = IdiomaTraerTodos();
+
+                foreach (var ItemIdioma in unosIdiomas)
+                {
+                    //Cambio el estado de los idiomas
+                    if (ItemIdioma.IdIdioma == unIdioma.IdIdioma)
+                    {
+                        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, true);
+                    }
+                    else
+                    {
+                        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, false);
+                    }
+                }
+
+                Traducir(unControlCI, unIdioma.IdIdioma);
+                BLLIdioma.unIdiomaActual = unIdioma;
+            }
+        }
+
+
+        public void IdiomaActualizarIdiomaActual(int elIdIdioma, bool Valor)
+        {
+            GestorIdioma.IdiomaActualizarIdiomaActual(elIdIdioma, Valor);
+        }
+
 
     }
 }

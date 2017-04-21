@@ -15,6 +15,12 @@ namespace ARTEC.GUI
 {
     public partial class Login : DevComponents.DotNetBar.Metro.MetroForm
     {
+
+        List<Idioma> unosIdiomas = new List<Idioma>();
+        BLLIdioma ManagerIdioma = new BLLIdioma();
+        
+
+
         public Login()
         {
             InitializeComponent();
@@ -51,10 +57,29 @@ namespace ARTEC.GUI
 
         private void Login_Load(object sender, EventArgs e)
         {
-            BLLIdioma ManagerIdioma = new BLLIdioma();
-            ManagerIdioma.Traducir(this.FindForm(), 1);
+            //Traigo todos los idiomas
+            unosIdiomas = ManagerIdioma.IdiomaTraerTodos();
+            cboIdioma.DataSource = null;
+            cboIdioma.DisplayMember = "NombreIdioma";
+            cboIdioma.ValueMember = "IdIdioma";
+            cboIdioma.DataSource = unosIdiomas;
+
+            //Obtengo el utilizado la última vez
+            BLLIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
+            cboIdioma.SelectedItem = BLLIdioma.unIdiomaActual;
+
+            //Traduzco con el IdiomaActual
+            ManagerIdioma.Traducir(this.FindForm(), BLLIdioma.unIdiomaActual.IdIdioma);
 
         }
+
+        private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ManagerIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
+        }
+
+
+
 
 
 
