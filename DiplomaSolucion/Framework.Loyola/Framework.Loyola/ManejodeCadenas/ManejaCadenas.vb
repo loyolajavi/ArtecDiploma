@@ -47,7 +47,7 @@ Public Class ManejaCadenas
 
         vector = Split(texto, plimitador)
 
-        For j = LBound(vector) To UBound(vector)
+        For j = vector.GetUpperBound(0) To vector.GetLowerBound(0)
 
             If Not (String.IsNullOrWhiteSpace(vector(j))) Then
                 lista.Add(vector(j))

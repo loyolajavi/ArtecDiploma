@@ -107,9 +107,9 @@
       <Project>{2fe80535-5bea-4c2c-a951-d08c99e8ba22}</Project>
       <Name>ARTEC.ENTIDADES</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework.Loyola\Framework.Loyola\Framework.Loyola.vbproj">
-      <Project>{c41970ae-cc94-48fe-8b17-1424fdc32083}</Project>
-      <Name>Framework.Loyola</Name>
+    <ProjectReference Include="..\ARTEC.FRAMEWORK\ARTEC.FRAMEWORK.csproj">
+      <Project>{a75ad20b-6439-4a18-af52-d12d4b170f63}</Project>
+      <Name>ARTEC.FRAMEWORK</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

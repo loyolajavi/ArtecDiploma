@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using System.IO;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.GUI
 {
@@ -227,7 +228,7 @@ namespace ARTEC.GUI
             res = (List<Dependencia>)unasDependencias.ToList();
 
             List<string> Palabras = new List<string>();
-            Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
+            Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(textBoxX1.Text, ' ');
 
             foreach (string unaPalabra in Palabras)
             {
@@ -350,7 +351,7 @@ namespace ARTEC.GUI
 
 
                 List<string> Palabras = new List<string>();
-                Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
+                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
 
                 foreach (string unaPalabra in Palabras)
                 {
@@ -424,7 +425,7 @@ namespace ARTEC.GUI
                     List<Agente> resAgente = new List<Agente>();
                     resAgente = (List<Agente>)unosAgentes.ToList();
                     List<string> Palabras = new List<string>();
-                    Palabras = Framework.Loyola.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
+                    Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
 
                     foreach (string unaPalabra in Palabras)
                     {
@@ -678,7 +679,7 @@ namespace ARTEC.GUI
                 if (ValidarAdjunto(item))
                 {
                     //Copio el archivo
-                    Framework.Loyola.MArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
+                    FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
                     pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
                 }
                 else

@@ -22,6 +22,7 @@ namespace ARTEC.DAL
         {
             try
             {
+                //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
                 using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
                 {
                     List<Categoria> unasCategorias = new List<Categoria>();

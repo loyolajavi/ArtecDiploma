@@ -28,278 +28,281 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
-            this.textBoxX5 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX6 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX5 = new DevComponents.DotNetBar.LabelX();
-            this.labelX6 = new DevComponents.DotNetBar.LabelX();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gboxRespaldar = new System.Windows.Forms.GroupBox();
+            this.btnRespaldar = new DevComponents.DotNetBar.ButtonX();
+            this.btnExaminarRespaldar = new DevComponents.DotNetBar.ButtonX();
+            this.txtObservaciones = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblObservaciones = new DevComponents.DotNetBar.LabelX();
+            this.txtDestino = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtNombreRespaldar = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblDestinoRespaldar = new DevComponents.DotNetBar.LabelX();
+            this.lblNombreRespaldar = new DevComponents.DotNetBar.LabelX();
+            this.gboxRestaurar = new System.Windows.Forms.GroupBox();
+            this.btnRestaurar = new DevComponents.DotNetBar.ButtonX();
+            this.btnExaminarRestaurar = new DevComponents.DotNetBar.ButtonX();
+            this.txtUbicacion = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtNombreRestaurar = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblUbicacionRestaurar = new DevComponents.DotNetBar.LabelX();
+            this.lblNombreRestaurar = new DevComponents.DotNetBar.LabelX();
+            this.gboxRespaldar.SuspendLayout();
+            this.gboxRestaurar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gboxRespaldar
             // 
-            this.groupBox1.Controls.Add(this.buttonX1);
-            this.groupBox1.Controls.Add(this.buttonX2);
-            this.groupBox1.Controls.Add(this.textBoxX3);
-            this.groupBox1.Controls.Add(this.labelX3);
-            this.groupBox1.Controls.Add(this.textBoxX2);
-            this.groupBox1.Controls.Add(this.textBoxX1);
-            this.groupBox1.Controls.Add(this.labelX2);
-            this.groupBox1.Controls.Add(this.labelX1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(503, 193);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Respaldar (Realizar Backup)";
+            this.gboxRespaldar.Controls.Add(this.btnRespaldar);
+            this.gboxRespaldar.Controls.Add(this.btnExaminarRespaldar);
+            this.gboxRespaldar.Controls.Add(this.txtObservaciones);
+            this.gboxRespaldar.Controls.Add(this.lblObservaciones);
+            this.gboxRespaldar.Controls.Add(this.txtDestino);
+            this.gboxRespaldar.Controls.Add(this.txtNombreRespaldar);
+            this.gboxRespaldar.Controls.Add(this.lblDestinoRespaldar);
+            this.gboxRespaldar.Controls.Add(this.lblNombreRespaldar);
+            this.gboxRespaldar.Location = new System.Drawing.Point(12, 12);
+            this.gboxRespaldar.Name = "gboxRespaldar";
+            this.gboxRespaldar.Size = new System.Drawing.Size(503, 193);
+            this.gboxRespaldar.TabIndex = 1;
+            this.gboxRespaldar.TabStop = false;
+            this.gboxRespaldar.Text = "Respaldar (Realizar Backup)";
             // 
-            // buttonX1
+            // btnRespaldar
             // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(213, 157);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(75, 23);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 2;
-            this.buttonX1.Text = "Respaldar";
+            this.btnRespaldar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRespaldar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRespaldar.Location = new System.Drawing.Point(213, 157);
+            this.btnRespaldar.Name = "btnRespaldar";
+            this.btnRespaldar.Size = new System.Drawing.Size(75, 23);
+            this.btnRespaldar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRespaldar.TabIndex = 2;
+            this.btnRespaldar.Text = "Respaldar";
+            this.btnRespaldar.Click += new System.EventHandler(this.btnRespaldar_Click);
             // 
-            // labelX1
+            // btnExaminarRespaldar
             // 
+            this.btnExaminarRespaldar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExaminarRespaldar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExaminarRespaldar.Location = new System.Drawing.Point(412, 57);
+            this.btnExaminarRespaldar.Name = "btnExaminarRespaldar";
+            this.btnExaminarRespaldar.Size = new System.Drawing.Size(75, 22);
+            this.btnExaminarRespaldar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExaminarRespaldar.TabIndex = 6;
+            this.btnExaminarRespaldar.Text = "Examinar";
+            this.btnExaminarRespaldar.Click += new System.EventHandler(this.btnExaminarRespaldar_Click);
             // 
+            // txtObservaciones
             // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(11, 23);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(55, 23);
-            this.labelX1.TabIndex = 0;
-            this.labelX1.Text = "Nombre";
-            // 
-            // labelX2
-            // 
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(11, 56);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(55, 23);
-            this.labelX2.TabIndex = 1;
-            this.labelX2.Text = "Destino";
-            // 
-            // textBoxX1
-            // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            this.txtObservaciones.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(90, 22);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.Size = new System.Drawing.Size(158, 22);
-            this.textBoxX1.TabIndex = 2;
+            this.txtObservaciones.Border.Class = "TextBoxBorder";
+            this.txtObservaciones.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtObservaciones.DisabledBackColor = System.Drawing.Color.White;
+            this.txtObservaciones.ForeColor = System.Drawing.Color.Black;
+            this.txtObservaciones.Location = new System.Drawing.Point(90, 91);
+            this.txtObservaciones.Multiline = true;
+            this.txtObservaciones.Name = "txtObservaciones";
+            this.txtObservaciones.PreventEnterBeep = true;
+            this.txtObservaciones.Size = new System.Drawing.Size(316, 50);
+            this.txtObservaciones.TabIndex = 5;
             // 
-            // textBoxX2
-            // 
-            this.textBoxX2.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX2.Border.Class = "TextBoxBorder";
-            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX2.Location = new System.Drawing.Point(90, 57);
-            this.textBoxX2.Name = "textBoxX2";
-            this.textBoxX2.PreventEnterBeep = true;
-            this.textBoxX2.Size = new System.Drawing.Size(316, 22);
-            this.textBoxX2.TabIndex = 3;
-            // 
-            // labelX3
+            // lblObservaciones
             // 
             // 
             // 
             // 
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(11, 102);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(75, 23);
-            this.labelX3.TabIndex = 4;
-            this.labelX3.Text = "Observaciones";
+            this.lblObservaciones.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblObservaciones.Location = new System.Drawing.Point(11, 102);
+            this.lblObservaciones.Name = "lblObservaciones";
+            this.lblObservaciones.Size = new System.Drawing.Size(75, 23);
+            this.lblObservaciones.TabIndex = 4;
+            this.lblObservaciones.Text = "Observaciones";
             // 
-            // textBoxX3
+            // txtDestino
             // 
-            this.textBoxX3.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX3.Location = new System.Drawing.Point(90, 91);
-            this.textBoxX3.Multiline = true;
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.PreventEnterBeep = true;
-            this.textBoxX3.Size = new System.Drawing.Size(316, 50);
-            this.textBoxX3.TabIndex = 5;
-            // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(412, 57);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(75, 22);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 6;
-            this.buttonX2.Text = "Examinar";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonX3);
-            this.groupBox2.Controls.Add(this.buttonX4);
-            this.groupBox2.Controls.Add(this.textBoxX5);
-            this.groupBox2.Controls.Add(this.textBoxX6);
-            this.groupBox2.Controls.Add(this.labelX5);
-            this.groupBox2.Controls.Add(this.labelX6);
-            this.groupBox2.Location = new System.Drawing.Point(12, 225);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(503, 132);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Restaurar";
-            // 
-            // buttonX3
-            // 
-            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX3.Location = new System.Drawing.Point(213, 98);
-            this.buttonX3.Name = "buttonX3";
-            this.buttonX3.Size = new System.Drawing.Size(75, 23);
-            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX3.TabIndex = 2;
-            this.buttonX3.Text = "Restaurar";
-            // 
-            // buttonX4
-            // 
-            this.buttonX4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX4.Location = new System.Drawing.Point(412, 63);
-            this.buttonX4.Name = "buttonX4";
-            this.buttonX4.Size = new System.Drawing.Size(75, 22);
-            this.buttonX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX4.TabIndex = 6;
-            this.buttonX4.Text = "Examinar";
-            // 
-            // textBoxX5
-            // 
-            this.textBoxX5.BackColor = System.Drawing.Color.White;
+            this.txtDestino.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX5.Border.Class = "TextBoxBorder";
-            this.textBoxX5.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX5.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX5.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX5.Location = new System.Drawing.Point(90, 63);
-            this.textBoxX5.Name = "textBoxX5";
-            this.textBoxX5.PreventEnterBeep = true;
-            this.textBoxX5.Size = new System.Drawing.Size(316, 22);
-            this.textBoxX5.TabIndex = 3;
+            this.txtDestino.Border.Class = "TextBoxBorder";
+            this.txtDestino.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDestino.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDestino.ForeColor = System.Drawing.Color.Black;
+            this.txtDestino.Location = new System.Drawing.Point(90, 57);
+            this.txtDestino.Name = "txtDestino";
+            this.txtDestino.PreventEnterBeep = true;
+            this.txtDestino.Size = new System.Drawing.Size(316, 22);
+            this.txtDestino.TabIndex = 3;
             // 
-            // textBoxX6
+            // txtNombreRespaldar
             // 
-            this.textBoxX6.BackColor = System.Drawing.Color.White;
+            this.txtNombreRespaldar.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX6.Border.Class = "TextBoxBorder";
-            this.textBoxX6.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX6.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX6.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX6.Location = new System.Drawing.Point(90, 30);
-            this.textBoxX6.Name = "textBoxX6";
-            this.textBoxX6.PreventEnterBeep = true;
-            this.textBoxX6.Size = new System.Drawing.Size(158, 22);
-            this.textBoxX6.TabIndex = 2;
+            this.txtNombreRespaldar.Border.Class = "TextBoxBorder";
+            this.txtNombreRespaldar.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNombreRespaldar.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNombreRespaldar.ForeColor = System.Drawing.Color.Black;
+            this.txtNombreRespaldar.Location = new System.Drawing.Point(90, 22);
+            this.txtNombreRespaldar.Name = "txtNombreRespaldar";
+            this.txtNombreRespaldar.PreventEnterBeep = true;
+            this.txtNombreRespaldar.Size = new System.Drawing.Size(158, 22);
+            this.txtNombreRespaldar.TabIndex = 2;
             // 
-            // labelX5
+            // lblDestinoRespaldar
             // 
             // 
             // 
             // 
-            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(11, 62);
-            this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(75, 23);
-            this.labelX5.TabIndex = 1;
-            this.labelX5.Text = "Ubicación";
+            this.lblDestinoRespaldar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDestinoRespaldar.Location = new System.Drawing.Point(11, 56);
+            this.lblDestinoRespaldar.Name = "lblDestinoRespaldar";
+            this.lblDestinoRespaldar.Size = new System.Drawing.Size(55, 23);
+            this.lblDestinoRespaldar.TabIndex = 1;
+            this.lblDestinoRespaldar.Text = "Destino";
             // 
-            // labelX6
-            // 
-            // 
+            // lblNombreRespaldar
             // 
             // 
-            this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(11, 29);
-            this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(103, 23);
-            this.labelX6.TabIndex = 0;
-            this.labelX6.Text = "Nombre";
+            // 
+            // 
+            this.lblNombreRespaldar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblNombreRespaldar.Location = new System.Drawing.Point(11, 23);
+            this.lblNombreRespaldar.Name = "lblNombreRespaldar";
+            this.lblNombreRespaldar.Size = new System.Drawing.Size(55, 23);
+            this.lblNombreRespaldar.TabIndex = 0;
+            this.lblNombreRespaldar.Text = "Nombre";
+            // 
+            // gboxRestaurar
+            // 
+            this.gboxRestaurar.Controls.Add(this.btnRestaurar);
+            this.gboxRestaurar.Controls.Add(this.btnExaminarRestaurar);
+            this.gboxRestaurar.Controls.Add(this.txtUbicacion);
+            this.gboxRestaurar.Controls.Add(this.txtNombreRestaurar);
+            this.gboxRestaurar.Controls.Add(this.lblUbicacionRestaurar);
+            this.gboxRestaurar.Controls.Add(this.lblNombreRestaurar);
+            this.gboxRestaurar.Location = new System.Drawing.Point(12, 225);
+            this.gboxRestaurar.Name = "gboxRestaurar";
+            this.gboxRestaurar.Size = new System.Drawing.Size(503, 132);
+            this.gboxRestaurar.TabIndex = 7;
+            this.gboxRestaurar.TabStop = false;
+            this.gboxRestaurar.Text = "Restaurar";
+            // 
+            // btnRestaurar
+            // 
+            this.btnRestaurar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRestaurar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRestaurar.Location = new System.Drawing.Point(213, 98);
+            this.btnRestaurar.Name = "btnRestaurar";
+            this.btnRestaurar.Size = new System.Drawing.Size(75, 23);
+            this.btnRestaurar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRestaurar.TabIndex = 2;
+            this.btnRestaurar.Text = "Restaurar";
+            // 
+            // btnExaminarRestaurar
+            // 
+            this.btnExaminarRestaurar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnExaminarRestaurar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnExaminarRestaurar.Location = new System.Drawing.Point(412, 63);
+            this.btnExaminarRestaurar.Name = "btnExaminarRestaurar";
+            this.btnExaminarRestaurar.Size = new System.Drawing.Size(75, 22);
+            this.btnExaminarRestaurar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnExaminarRestaurar.TabIndex = 6;
+            this.btnExaminarRestaurar.Text = "Examinar";
+            this.btnExaminarRestaurar.Click += new System.EventHandler(this.btnExaminarRestaurar_Click);
+            // 
+            // txtUbicacion
+            // 
+            this.txtUbicacion.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtUbicacion.Border.Class = "TextBoxBorder";
+            this.txtUbicacion.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtUbicacion.DisabledBackColor = System.Drawing.Color.White;
+            this.txtUbicacion.ForeColor = System.Drawing.Color.Black;
+            this.txtUbicacion.Location = new System.Drawing.Point(90, 63);
+            this.txtUbicacion.Name = "txtUbicacion";
+            this.txtUbicacion.PreventEnterBeep = true;
+            this.txtUbicacion.Size = new System.Drawing.Size(316, 22);
+            this.txtUbicacion.TabIndex = 3;
+            // 
+            // txtNombreRestaurar
+            // 
+            this.txtNombreRestaurar.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtNombreRestaurar.Border.Class = "TextBoxBorder";
+            this.txtNombreRestaurar.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNombreRestaurar.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNombreRestaurar.ForeColor = System.Drawing.Color.Black;
+            this.txtNombreRestaurar.Location = new System.Drawing.Point(90, 30);
+            this.txtNombreRestaurar.Name = "txtNombreRestaurar";
+            this.txtNombreRestaurar.PreventEnterBeep = true;
+            this.txtNombreRestaurar.Size = new System.Drawing.Size(158, 22);
+            this.txtNombreRestaurar.TabIndex = 2;
+            // 
+            // lblUbicacionRestaurar
+            // 
+            // 
+            // 
+            // 
+            this.lblUbicacionRestaurar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblUbicacionRestaurar.Location = new System.Drawing.Point(11, 62);
+            this.lblUbicacionRestaurar.Name = "lblUbicacionRestaurar";
+            this.lblUbicacionRestaurar.Size = new System.Drawing.Size(75, 23);
+            this.lblUbicacionRestaurar.TabIndex = 1;
+            this.lblUbicacionRestaurar.Text = "Ubicación";
+            // 
+            // lblNombreRestaurar
+            // 
+            // 
+            // 
+            // 
+            this.lblNombreRestaurar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblNombreRestaurar.Location = new System.Drawing.Point(11, 29);
+            this.lblNombreRestaurar.Name = "lblNombreRestaurar";
+            this.lblNombreRestaurar.Size = new System.Drawing.Size(103, 23);
+            this.lblNombreRestaurar.TabIndex = 0;
+            this.lblNombreRestaurar.Text = "Nombre";
             // 
             // Backup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(528, 379);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gboxRestaurar);
+            this.Controls.Add(this.gboxRespaldar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Backup";
             this.Text = "Respaldo y Restauración de la BD";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.gboxRespaldar.ResumeLayout(false);
+            this.gboxRestaurar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
-        private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX3;
-        private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.ButtonX buttonX2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private DevComponents.DotNetBar.ButtonX buttonX3;
-        private DevComponents.DotNetBar.ButtonX buttonX4;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX5;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX6;
-        private DevComponents.DotNetBar.LabelX labelX5;
-        private DevComponents.DotNetBar.LabelX labelX6;
+        private System.Windows.Forms.GroupBox gboxRespaldar;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDestino;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNombreRespaldar;
+        private DevComponents.DotNetBar.LabelX lblDestinoRespaldar;
+        private DevComponents.DotNetBar.LabelX lblNombreRespaldar;
+        private DevComponents.DotNetBar.ButtonX btnRespaldar;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtObservaciones;
+        private DevComponents.DotNetBar.LabelX lblObservaciones;
+        private DevComponents.DotNetBar.ButtonX btnExaminarRespaldar;
+        private System.Windows.Forms.GroupBox gboxRestaurar;
+        private DevComponents.DotNetBar.ButtonX btnRestaurar;
+        private DevComponents.DotNetBar.ButtonX btnExaminarRestaurar;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtUbicacion;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNombreRestaurar;
+        private DevComponents.DotNetBar.LabelX lblUbicacionRestaurar;
+        private DevComponents.DotNetBar.LabelX lblNombreRestaurar;
 
     }
 }
