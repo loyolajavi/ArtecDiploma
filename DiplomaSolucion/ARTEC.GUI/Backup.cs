@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -41,38 +42,89 @@ namespace ARTEC.GUI
 
         private void btnRespaldar_Click(object sender, EventArgs e)
         {
+            if (vldRespaldo.Validate())
+            {
+                if (ServicioBackup.Respaldar(txtNombreRespaldar.Text, txtDestino.Text, txtObservaciones.Text))
+                {
+                    MessageBox.Show("Backup realizado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No pudo realizarse el Backup");
+                }
+            }
             
-        //    if (txtRuta.Text.Length != 3)
-        //    {
-        //        txtRuta.Text = txtRuta.Text + "\\" + txtNombre.Text + ".bak";
-        //    }
-        //    else
-        //    {
-        //        txtRuta.Text = txtRuta.Text + txtNombre.Text + ".bak";
-        //    }
-
-
-        //    try
-        //    {
-        //        unaConexion.ConexionIniciar("Data Source=PCJAVI\\SQLExpress;Initial Catalog=PatenteFamiliaEjemplo;Integrated Security=SSPI");
-
-        //        StringBuilder sCmd = new StringBuilder();
-
-        //        unaConexion.Ejecutar("BACKUP DATABASE [" + txtBase.Text + "] TO DISK = N'" + txtRuta.Text + "' WITH DESCRIPTION = N'" + txtObs.Text + "', NOFORMAT, NOINIT, NAME = N'" + txtNombre.Text + "', SKIP, NOREWIND, NOUNLOAD,  STATS = 10", false, IConexion.TipoRetorno.SinResultado);
-        //        Interaction.MsgBox("Backup realizado");
-        //        this.Close();
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        unaConexion.ConexionFinalizar();
-        //    }
         }
+
+
+        private void btnRestaurar_Click(object sender, EventArgs e)
+        {
+            if (vldRestaurar.Validate())
+            {
+                if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
+                {
+                    MessageBox.Show("Se restauró la base de datos correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No pudo restaurarse la base de datos");
+                }
+            }
+        }
+
+
+
+        private void customvldNombreRespaldo_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNombreRespaldar.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void customvldtxtDestino_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtDestino.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+
+
+        private void VldtxtNombreRestaurar(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNombreRestaurar.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void VldtxtUbicacion(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtUbicacion.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+
 
 
 

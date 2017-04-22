@@ -71,6 +71,7 @@ namespace ARTEC.GUI
             //Traduzco con el IdiomaActual
             ManagerIdioma.Traducir(this.FindForm(), BLLIdioma.unIdiomaActual.IdIdioma);
 
+
         }
 
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)

@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ManejaCadenas.cs" />
     <Compile Include="Servicios\ManejoArchivos.cs" />
+    <Compile Include="Servicios\ServicioBackup.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

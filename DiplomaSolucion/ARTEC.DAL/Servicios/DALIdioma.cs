@@ -18,7 +18,6 @@ namespace ARTEC.DAL.Servicios
             try
             {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
-                //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
                 {
                     List<Idioma> unaLista = new List<Idioma>();
                     unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Idioma>(ds);
