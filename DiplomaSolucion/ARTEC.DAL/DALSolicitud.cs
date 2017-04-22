@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.DAL
 {
@@ -29,9 +29,9 @@ namespace ARTEC.DAL
             try
             {
 
-                MotorBD.MotorBD.ConexionIniciar();
-                MotorBD.MotorBD.TransaccionIniciar();
-                var Resultado = (decimal)MotorBD.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudCrear", parameters);
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
 
                 foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
@@ -46,20 +46,20 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolDetalle)
 			        };
 
-                    MotorBD.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles); 
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles); 
                 }
 
-                MotorBD.MotorBD.TransaccionAceptar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return IDDevuelto;
             }
             catch (Exception es)
             {
-                MotorBD.MotorBD.TransaccionCancelar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
             finally
             {
-                MotorBD.MotorBD.ConexionFinalizar();
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
 
 

@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.DAL
 {
@@ -15,10 +15,10 @@ namespace ARTEC.DAL
 
         public List<Hardware> TraerHardware()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "HardwareTraerHardware"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "HardwareTraerHardware"))
             {
                 List<Hardware> unosHard = new List<Hardware>();
-                unosHard = Mapeador.Mapear<Hardware>(ds);
+                unosHard = FRAMEWORK.Persistencia.Mapeador.Mapear<Hardware>(ds);
                 return unosHard;
             }
         }

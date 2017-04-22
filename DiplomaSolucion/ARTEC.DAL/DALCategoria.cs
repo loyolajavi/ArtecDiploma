@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 
 namespace ARTEC.DAL
@@ -22,11 +22,10 @@ namespace ARTEC.DAL
         {
             try
             {
-                //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
-                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHard"))
                 {
                     List<Categoria> unasCategorias = new List<Categoria>();
-                    unasCategorias = Mapeador.Mapear<Categoria>(ds);
+                    unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
                     return unasCategorias;
                 }
             }
@@ -40,10 +39,10 @@ namespace ARTEC.DAL
 
         public List<Categoria> CategoriaTraerTodosSoft()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosSoft"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosSoft"))
             {
                 List<Categoria> unasCategorias = new List<Categoria>();
-                unasCategorias = Mapeador.Mapear<Categoria>(ds);
+                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
                 return unasCategorias;
             }
         }
@@ -51,10 +50,10 @@ namespace ARTEC.DAL
 
         public List<Categoria> CategoriaTraerTodos()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
             {
                 List<Categoria> unasCategorias = new List<Categoria>();
-                unasCategorias = Mapeador.Mapear<Categoria>(ds);
+                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
                 return unasCategorias;
             }
         }
@@ -62,10 +61,10 @@ namespace ARTEC.DAL
 
         public List<DTOCategoria> CategoriaTraerTodosPru()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
             {
                 List<DTOCategoria> unasCategorias = new List<DTOCategoria>();
-                unasCategorias = Mapeador.Mapear<DTOCategoria>(ds);
+                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<DTOCategoria>(ds);
                 return unasCategorias;
             }
         }

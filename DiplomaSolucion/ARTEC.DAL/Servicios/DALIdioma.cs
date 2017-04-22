@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES.Servicios;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.DAL.Servicios
 {
@@ -17,10 +17,11 @@ namespace ARTEC.DAL.Servicios
         {
             try
             {
-                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
+                //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "IdiomaTraerTodos"))
                 {
                     List<Idioma> unaLista = new List<Idioma>();
-                    unaLista = Mapeador.Mapear<Idioma>(ds);
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Idioma>(ds);
                     return unaLista;
                 }
             }
@@ -41,9 +42,9 @@ namespace ARTEC.DAL.Servicios
 
             try
             {
-                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EtiquetasTraerTodosPorIdioma", parameters))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EtiquetasTraerTodosPorIdioma", parameters))
                 {
-                    Idioma._EtiquetasCompartidas = Mapeador.Mapear<Etiqueta>(ds);
+                    Idioma._EtiquetasCompartidas = FRAMEWORK.Persistencia.Mapeador.Mapear<Etiqueta>(ds);
                 }
             }
             catch (Exception es)
@@ -65,19 +66,19 @@ namespace ARTEC.DAL.Servicios
             try
             {
 
-                MotorBD.MotorBD.ConexionIniciar();
-                MotorBD.MotorBD.TransaccionIniciar();
-                MotorBD.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaActualizarIdiomaActual", parameters);
-                MotorBD.MotorBD.TransaccionAceptar();
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaActualizarIdiomaActual", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                MotorBD.MotorBD.TransaccionCancelar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
             finally
             {
-                MotorBD.MotorBD.ConexionFinalizar();
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
@@ -16,11 +16,11 @@ namespace ARTEC.DAL
 
         public List<TipoBien> TraerTodos()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoBienTraerTodos"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoBienTraerTodos"))
             {
 
                 List<TipoBien> unaLista = new List<TipoBien>();
-                unaLista = Mapeador.Mapear<TipoBien>(ds);
+                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<TipoBien>(ds);
                 return unaLista;
 
             }
@@ -36,11 +36,11 @@ namespace ARTEC.DAL
 				new SqlParameter("@IdCategoria", idCategoria)
 			};
 
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoBienTraerTipoBienPorIdCategoria", parameters))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoBienTraerTipoBienPorIdCategoria", parameters))
             {
 
                 TipoBien unaLista = new TipoBien();
-                unaLista = Mapeador.MapearUno<TipoBien>(ds);
+                unaLista = FRAMEWORK.Persistencia.Mapeador.MapearUno<TipoBien>(ds);
                 return unaLista;
 
             }

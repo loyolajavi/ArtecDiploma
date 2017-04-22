@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.DAL
 {
@@ -17,10 +17,10 @@ namespace ARTEC.DAL
         {
             try
             {
-                using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerTodos"))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerTodos"))
                 {
                     List<Usuario> unaLista = new List<Usuario>();
-                    unaLista = Mapeador.Mapear<Usuario>(ds);
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Usuario>(ds);
                     return unaLista;
                 }
             }

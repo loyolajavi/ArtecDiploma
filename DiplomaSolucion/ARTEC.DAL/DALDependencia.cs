@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
-using ARTEC.DAL.MotorBD;
+using ARTEC.FRAMEWORK;
 
 namespace ARTEC.DAL
 {
@@ -16,10 +16,10 @@ namespace ARTEC.DAL
 
         public List<Dependencia> TraerTodos()
         {
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerTodos"))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerTodos"))
             {
                 List<Dependencia> unaLista = new List<Dependencia>();
-                unaLista = Mapeador.Mapear<Dependencia>(ds);
+                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
 
                 return unaLista;
             }
@@ -34,10 +34,10 @@ namespace ARTEC.DAL
 				new SqlParameter("@IdDependencia", idDependencia)
 			};
 
-            using (DataSet ds = MotorBD.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesPorIdDependencia", parameters))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesPorIdDependencia", parameters))
             {
                 List<Agente> unaLista = new List<Agente>();
-                unaLista = Mapeador.Mapear<Agente>(ds);
+                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds);
                 return unaLista;
             }
         }
