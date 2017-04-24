@@ -11,6 +11,8 @@ namespace ARTEC.ENTIDADES
 
         public int IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
+        public string Pass { get; set; }
+
 
     }
 }

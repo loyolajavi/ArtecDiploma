@@ -31,5 +31,35 @@ namespace ARTEC.DAL
 
         }
 
+
+        public bool UsuarioTraerPorLogin(string NomUs, string PassHash)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Us", NomUs),
+                new SqlParameter("@Pass", PassHash)
+			};
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerPorLogin", parameters))
+                {
+                    FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = FRAMEWORK.Persistencia.Mapeador.MapearUno<Usuario>(ds);
+                    if (!string.IsNullOrEmpty(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            return false;
+
+        }
+
+
     }
 }

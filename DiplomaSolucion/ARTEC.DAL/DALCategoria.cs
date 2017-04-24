@@ -59,15 +59,7 @@ namespace ARTEC.DAL
         }
 
 
-        public List<DTOCategoria> CategoriaTraerTodosPru()
-        {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
-            {
-                List<DTOCategoria> unasCategorias = new List<DTOCategoria>();
-                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<DTOCategoria>(ds);
-                return unasCategorias;
-            }
-        }
+
 
 
     }

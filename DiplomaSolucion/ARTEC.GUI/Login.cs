@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.BLL.Servicios;
 using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -84,9 +85,19 @@ namespace ARTEC.GUI
         {
             if (vldNombreUs.Validate() && vldtxtPass.Validate())
             {
-                //Hacer un HashSet y encriptar la contraseña
-                usuarioLogueado.NombreUsuario = txtNombreUsuario.Text;
-                //Contraseña y demás
+                //usuarioLogueado.Pass = ServicioSecurizacion.AplicarHash(txtPass.Text);
+                //usuarioLogueado.NombreUsuario = txtNombreUsuario.Text;
+
+                BLLUsuario unManagerUsuario = new BLLUsuario();
+
+                
+
+                //if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
+                if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, txtPass.Text))
+                {
+                    MessageBox.Show(ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario);
+                }
+
             }
         }
 

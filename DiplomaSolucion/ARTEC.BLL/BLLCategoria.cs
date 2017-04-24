@@ -29,10 +29,6 @@ namespace ARTEC.BLL
         }
 
 
-        public List<DTOCategoria> CategoriaTraerTodosPru()
-        {
-            return GestorCategoria.CategoriaTraerTodosPru();
-        }
 
     }
 }

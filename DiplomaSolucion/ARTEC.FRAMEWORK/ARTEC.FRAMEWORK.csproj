@@ -46,8 +46,15 @@
     <Compile Include="Servicios\ManejaCadenas.cs" />
     <Compile Include="Servicios\ManejoArchivos.cs" />
     <Compile Include="Servicios\ServicioBackup.cs" />
+    <Compile Include="Servicios\ServicioLogin.cs" />
+    <Compile Include="Servicios\ServicioSecurizacion.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ARTEC.ENTIDADES\ARTEC.ENTIDADES.csproj">
+      <Project>{2fe80535-5bea-4c2c-a951-d08c99e8ba22}</Project>
+      <Name>ARTEC.ENTIDADES</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

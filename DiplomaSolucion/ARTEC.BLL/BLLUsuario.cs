@@ -18,5 +18,16 @@ namespace ARTEC.BLL
             return GestorUsuario.UsuarioTraerTodos();
         }
 
+
+        public bool UsuarioTraerPorLogin(string NomUs, string PassHash)
+        {
+            if (GestorUsuario.UsuarioTraerPorLogin(NomUs, PassHash))
+            {
+                return true;
+            }
+            return false;
+            
+        }
+
     }
 }

@@ -45,7 +45,6 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="Dependencia.cs" />
     <Compile Include="Deposito.cs" />
-    <Compile Include="DTOCategoria.cs" />
     <Compile Include="EstadoInventario.cs" />
     <Compile Include="EstadoSolDetalle.cs" />
     <Compile Include="EstadoSolicitud.cs" />
