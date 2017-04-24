@@ -28,8 +28,10 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.pnlBotonLogin = new DevComponents.DotNetBar.PanelEx();
+            this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblSalir = new DevComponents.DotNetBar.LabelX();
             this.btnLogin = new DevComponents.DotNetBar.ButtonX();
             this.pnlPass = new DevComponents.DotNetBar.PanelEx();
@@ -41,12 +43,21 @@ namespace ARTEC.GUI
             this.txtNombreUsuario = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.pnlNombreUsuarioI = new DevComponents.DotNetBar.PanelEx();
             this.pnlTitulo = new DevComponents.DotNetBar.PanelEx();
-            this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.vldNombreUs = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customvldtxtNombreUsuario = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.vldtxtPass = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customvldtxtPass1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.pnlBotonLogin.SuspendLayout();
             this.pnlPass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlNombreUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBotonLogin
@@ -67,6 +78,20 @@ namespace ARTEC.GUI
             this.pnlBotonLogin.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.pnlBotonLogin.Style.GradientAngle = 90;
             this.pnlBotonLogin.TabIndex = 0;
+            // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DisplayMember = "Text";
+            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
+            this.cboIdioma.FormattingEnabled = true;
+            this.cboIdioma.ItemHeight = 16;
+            this.cboIdioma.Location = new System.Drawing.Point(3, 28);
+            this.cboIdioma.Name = "cboIdioma";
+            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
+            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboIdioma.TabIndex = 2;
+            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
             // lblSalir
             // 
@@ -94,6 +119,7 @@ namespace ARTEC.GUI
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.TextColor = System.Drawing.Color.White;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // pnlPass
             // 
@@ -142,6 +168,7 @@ namespace ARTEC.GUI
             this.txtPass.PreventEnterBeep = true;
             this.txtPass.Size = new System.Drawing.Size(278, 35);
             this.txtPass.TabIndex = 17;
+            this.vldtxtPass.SetValidator1(this.txtPass, this.customvldtxtPass1);
             this.txtPass.Enter += new System.EventHandler(this.txtPass_Enter);
             this.txtPass.Leave += new System.EventHandler(this.txtPass_Leave);
             // 
@@ -207,6 +234,7 @@ namespace ARTEC.GUI
             this.txtNombreUsuario.PreventEnterBeep = true;
             this.txtNombreUsuario.Size = new System.Drawing.Size(278, 36);
             this.txtNombreUsuario.TabIndex = 18;
+            this.vldNombreUs.SetValidator1(this.txtNombreUsuario, this.customvldtxtNombreUsuario);
             this.txtNombreUsuario.Enter += new System.EventHandler(this.txtNombreUsuario_Enter);
             this.txtNombreUsuario.Leave += new System.EventHandler(this.txtNombreUsuario_Leave);
             // 
@@ -246,19 +274,47 @@ namespace ARTEC.GUI
             this.pnlTitulo.TabIndex = 16;
             this.pnlTitulo.Text = "Ingrese a su cuenta";
             // 
-            // cboIdioma
+            // vldNombreUs
             // 
-            this.cboIdioma.DisplayMember = "Text";
-            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
-            this.cboIdioma.FormattingEnabled = true;
-            this.cboIdioma.ItemHeight = 16;
-            this.cboIdioma.Location = new System.Drawing.Point(3, 28);
-            this.cboIdioma.Name = "cboIdioma";
-            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
-            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboIdioma.TabIndex = 2;
-            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
+            this.vldNombreUs.ContainerControl = this;
+            this.vldNombreUs.ErrorProvider = this.errorProvider1;
+            this.vldNombreUs.Highlighter = this.highlighter1;
+            // 
+            // customvldtxtNombreUsuario
+            // 
+            this.customvldtxtNombreUsuario.ErrorMessage = "Campo requerido";
+            this.customvldtxtNombreUsuario.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtNombreUsuario.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.vldtxtNombreUsuario);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // vldtxtPass
+            // 
+            this.vldtxtPass.ContainerControl = this;
+            this.vldtxtPass.ErrorProvider = this.errorProvider2;
+            this.vldtxtPass.Highlighter = this.highlighter2;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
+            // 
+            // highlighter2
+            // 
+            this.highlighter2.ContainerControl = this;
+            // 
+            // customvldtxtPass1
+            // 
+            this.customvldtxtPass1.ErrorMessage = "Campo Requerido";
+            this.customvldtxtPass1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtPass1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventVldTxtPass1);
             // 
             // Login
             // 
@@ -281,6 +337,8 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlNombreUsuario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,5 +358,13 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private System.Windows.Forms.PictureBox pictureBox2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldNombreUs;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtNombreUsuario;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldtxtPass;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter2;
+        private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtPass1;
     }
 }

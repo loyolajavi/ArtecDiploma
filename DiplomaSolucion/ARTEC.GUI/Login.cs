@@ -18,6 +18,7 @@ namespace ARTEC.GUI
 
         List<Idioma> unosIdiomas = new List<Idioma>();
         BLLIdioma ManagerIdioma = new BLLIdioma();
+        public static Usuario usuarioLogueado = new Usuario();
         
 
 
@@ -78,6 +79,42 @@ namespace ARTEC.GUI
         {
             ManagerIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (vldNombreUs.Validate() && vldtxtPass.Validate())
+            {
+                //Hacer un HashSet y encriptar la contraseña
+                usuarioLogueado.NombreUsuario = txtNombreUsuario.Text;
+                //Contraseña y demás
+            }
+        }
+
+        private void vldtxtNombreUsuario(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNombreUsuario.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void EventVldTxtPass1(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPass.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+
 
 
 
