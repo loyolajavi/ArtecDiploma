@@ -85,15 +85,12 @@ namespace ARTEC.GUI
         {
             if (vldNombreUs.Validate() && vldtxtPass.Validate())
             {
-                //usuarioLogueado.Pass = ServicioSecurizacion.AplicarHash(txtPass.Text);
-                //usuarioLogueado.NombreUsuario = txtNombreUsuario.Text;
-
                 BLLUsuario unManagerUsuario = new BLLUsuario();
 
-                
+                //string pas = ServicioSecurizacion.AplicarHash("1234");
+                //MessageBox.Show(pas);
 
-                //if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
-                if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, txtPass.Text))
+                if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
                 {
                     MessageBox.Show(ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario);
                 }
