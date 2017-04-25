@@ -321,26 +321,26 @@ namespace ARTEC.GUI
             this.txtFechaInicio.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtFechaInicio.TabIndex = 11;
             // 
-            // labelX6
+            // lblMailContacto
             // 
             // 
             // 
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX6.Location = new System.Drawing.Point(803, 50);
-            this.labelX6.Name = "labelX6";
+            this.labelX6.Name = "lblMailContacto";
             this.labelX6.Size = new System.Drawing.Size(65, 22);
             this.labelX6.TabIndex = 10;
             this.labelX6.Text = "Finalización";
             // 
-            // labelX5
+            // lblDireccion
             // 
             // 
             // 
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Location = new System.Drawing.Point(665, 50);
-            this.labelX5.Name = "labelX5";
+            this.labelX5.Name = "lblDireccion";
             this.labelX5.Size = new System.Drawing.Size(48, 22);
             this.labelX5.TabIndex = 9;
             this.labelX5.Text = "Creación";
@@ -361,7 +361,7 @@ namespace ARTEC.GUI
             this.pnlAdjuntos.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragEnter);
             this.pnlAdjuntos.DragLeave += new System.EventHandler(this.pnlAdjuntos_DragLeave);
             // 
-            // dataGridViewX1
+            // GrillaProductos
             // 
             this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -374,7 +374,7 @@ namespace ARTEC.GUI
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle49;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(7, 35);
-            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.Name = "GrillaProductos";
             this.dataGridViewX1.Size = new System.Drawing.Size(585, 65);
             this.dataGridViewX1.TabIndex = 4;
             // 
@@ -389,7 +389,7 @@ namespace ARTEC.GUI
             this.btnSeleccionarArchivo.TabIndex = 2;
             this.btnSeleccionarArchivo.Text = "Seleccionar un archivo";
             // 
-            // textBoxX2
+            // txtAlias
             // 
             this.textBoxX2.BackColor = System.Drawing.Color.White;
             // 
@@ -400,7 +400,7 @@ namespace ARTEC.GUI
             this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
             this.textBoxX2.ForeColor = System.Drawing.Color.Black;
             this.textBoxX2.Location = new System.Drawing.Point(7, 8);
-            this.textBoxX2.Name = "textBoxX2";
+            this.textBoxX2.Name = "txtAlias";
             this.textBoxX2.PreventEnterBeep = true;
             this.textBoxX2.Size = new System.Drawing.Size(527, 22);
             this.textBoxX2.TabIndex = 3;
@@ -662,7 +662,7 @@ namespace ARTEC.GUI
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "Dependencia";
             // 
-            // textBoxX1
+            // txtRazon
             // 
             this.textBoxX1.BackColor = System.Drawing.Color.White;
             // 
@@ -674,7 +674,7 @@ namespace ARTEC.GUI
             this.textBoxX1.ForeColor = System.Drawing.Color.Black;
             this.textBoxX1.Location = new System.Drawing.Point(21, 50);
             this.textBoxX1.Multiline = true;
-            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.Name = "txtRazon";
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(315, 22);
             this.textBoxX1.TabIndex = 1;

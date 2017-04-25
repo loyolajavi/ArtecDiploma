@@ -61,7 +61,7 @@ namespace ARTEC.FRAMEWORK.Servicios
             {
 
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "BaseDatosRestaurar", parameters);
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "BaseDatosRestaurar", parameters);//CINT FALTA EL STORE PROCEDURE
             }
             catch (Exception es)
             {

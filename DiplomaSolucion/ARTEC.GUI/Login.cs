@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using ARTEC.BLL;
-using ARTEC.BLL.Servicios;
 using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
@@ -18,7 +17,6 @@ namespace ARTEC.GUI
     {
 
         List<Idioma> unosIdiomas = new List<Idioma>();
-        BLLIdioma ManagerIdioma = new BLLIdioma();
         public static Usuario usuarioLogueado = new Usuario();
         
 
@@ -60,27 +58,32 @@ namespace ARTEC.GUI
         private void Login_Load(object sender, EventArgs e)
         {
             //Traigo todos los idiomas
-            unosIdiomas = ManagerIdioma.IdiomaTraerTodos();
+            unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
             cboIdioma.DataSource = null;
             cboIdioma.DisplayMember = "NombreIdioma";
             cboIdioma.ValueMember = "IdIdioma";
             cboIdioma.DataSource = unosIdiomas;
 
             //Obtengo el utilizado la última vez
-            BLLIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
-            cboIdioma.SelectedItem = BLLIdioma.unIdiomaActual;
+            ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
+            cboIdioma.SelectedItem = ServicioIdioma.unIdiomaActual;
 
             //Traduzco con el IdiomaActual
-            ManagerIdioma.Traducir(this.FindForm(), BLLIdioma.unIdiomaActual.IdIdioma);
+            ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);
 
 
         }
 
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ManagerIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
+            ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
         }
 
+        /// <summary>
+        /// Evento para loguear a un usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (vldNombreUs.Validate() && vldtxtPass.Validate())
@@ -90,9 +93,14 @@ namespace ARTEC.GUI
                 //string pas = ServicioSecurizacion.AplicarHash("1234");
                 //MessageBox.Show(pas);
 
+                //Consulta us y pass coincidentes y loguea al usuario
                 if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
                 {
                     MessageBox.Show(ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario);
+                }
+                else
+                {
+                    MessageBox.Show("El usuario y/o contraseña son incorrectos");
                 }
 
             }

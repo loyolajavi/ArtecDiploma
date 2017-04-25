@@ -124,6 +124,11 @@ namespace ARTEC.GUI
             }
         }
 
+        private void Backup_Load(object sender, EventArgs e)
+        {
+            ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);
+        }
+
 
 
 

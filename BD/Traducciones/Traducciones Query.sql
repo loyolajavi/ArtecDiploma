@@ -12,3 +12,26 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lbl
 
 
 
+//Proveedor Crear
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblRazonSocial', 'Razón Social', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblAlias', 'Alias', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblContacto', 'Contacto', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblTelefono', 'Teléfono/s', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblDireccion', 'Dirección', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblMailContacto', 'Mail del Contacto', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblMailEmpresa', 'Mail de la Empresa', 1, 4)
+
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('gpanelProductos', 'Productos', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnAgregarProd', 'Agregar', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnCrearProveedor', 'Crear', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('ProveedorCrear', 'Crear Proveedor', 1, 4)
+
+
+
+
+
+
+
+
+
+

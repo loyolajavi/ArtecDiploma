@@ -47,15 +47,15 @@ namespace ARTEC.GUI
             this.lblUbicacionRestaurar = new DevComponents.DotNetBar.LabelX();
             this.lblNombreRestaurar = new DevComponents.DotNetBar.LabelX();
             this.vldRespaldo = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customvldtxtDestino = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customvldNombreRespaldo = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.vldRestaurar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customvldtxtUbicacion = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.customvldtxtNombreRestaurar = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customvldNombreRespaldo = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customvldtxtDestino = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customvldtxtNombreRestaurar = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.customvldtxtUbicacion = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.gboxRespaldar.SuspendLayout();
             this.gboxRestaurar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -293,6 +293,18 @@ namespace ARTEC.GUI
             this.vldRespaldo.ErrorProvider = this.errorProvider1;
             this.vldRespaldo.Highlighter = this.highlighter1;
             // 
+            // customvldtxtDestino
+            // 
+            this.customvldtxtDestino.ErrorMessage = "Your error message here.";
+            this.customvldtxtDestino.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtDestino.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customvldtxtDestino_ValidateValue);
+            // 
+            // customvldNombreRespaldo
+            // 
+            this.customvldNombreRespaldo.ErrorMessage = "Your error message here.";
+            this.customvldNombreRespaldo.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldNombreRespaldo.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customvldNombreRespaldo_ValidateValue);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -308,6 +320,18 @@ namespace ARTEC.GUI
             this.vldRestaurar.ErrorProvider = this.errorProvider2;
             this.vldRestaurar.Highlighter = this.highlighter2;
             // 
+            // customvldtxtUbicacion
+            // 
+            this.customvldtxtUbicacion.ErrorMessage = "Your error message here.";
+            this.customvldtxtUbicacion.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtUbicacion.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.VldtxtUbicacion);
+            // 
+            // customvldtxtNombreRestaurar
+            // 
+            this.customvldtxtNombreRestaurar.ErrorMessage = "Your error message here.";
+            this.customvldtxtNombreRestaurar.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtNombreRestaurar.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.VldtxtNombreRestaurar);
+            // 
             // errorProvider2
             // 
             this.errorProvider2.ContainerControl = this;
@@ -316,30 +340,6 @@ namespace ARTEC.GUI
             // highlighter2
             // 
             this.highlighter2.ContainerControl = this;
-            // 
-            // customvldNombreRespaldo
-            // 
-            this.customvldNombreRespaldo.ErrorMessage = "Your error message here.";
-            this.customvldNombreRespaldo.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customvldNombreRespaldo.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customvldNombreRespaldo_ValidateValue);
-            // 
-            // customvldtxtDestino
-            // 
-            this.customvldtxtDestino.ErrorMessage = "Your error message here.";
-            this.customvldtxtDestino.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customvldtxtDestino.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customvldtxtDestino_ValidateValue);
-            // 
-            // customvldtxtNombreRestaurar
-            // 
-            this.customvldtxtNombreRestaurar.ErrorMessage = "Your error message here.";
-            this.customvldtxtNombreRestaurar.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customvldtxtNombreRestaurar.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.VldtxtNombreRestaurar);
-            // 
-            // customvldtxtUbicacion
-            // 
-            this.customvldtxtUbicacion.ErrorMessage = "Your error message here.";
-            this.customvldtxtUbicacion.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customvldtxtUbicacion.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.VldtxtUbicacion);
             // 
             // Backup
             // 
@@ -352,6 +352,7 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Backup";
             this.Text = "Respaldo y Restauración de la BD";
+            this.Load += new System.EventHandler(this.Backup_Load);
             this.gboxRespaldar.ResumeLayout(false);
             this.gboxRestaurar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

@@ -13,7 +13,5 @@ namespace ARTEC.ENTIDADES.Servicios
         public string NombreIdioma { get; set; }
         public bool IdiomaActual { get; set; }
         
-        public static List<Etiqueta> _EtiquetasCompartidas;
-
     }
 }
