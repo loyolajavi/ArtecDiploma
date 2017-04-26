@@ -82,18 +82,22 @@ namespace ARTEC.GUI
         /// <param name="e"></param>
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //ESTE CODIGO VA EN LOGIN
+            //******************************************************************************************************************************************************//
             //ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);//Cambiaba el idioma del propio formulario solamente
+            //******************************************************************************************************************************************************//
+            
+            //ESTE CODIGO VA EN EL MENU PRINCIPAL
+            //******************************************************************************************************************************************************//
             //Para cambiar el idioma de todos los formularios abiertos
-            //foreach (Control unForm in Application.OpenForms)
-            //{
-            //    ServicioIdioma.CambiarIdioma(unForm, (Idioma)cboIdioma.SelectedItem);
-            //} 
-
             ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
             foreach (Control unForm in Application.OpenForms)
             {
                 ServicioIdioma.Traducir(unForm, ServicioIdioma.unIdiomaActual.IdIdioma);
             } 
+            //******************************************************************************************************************************************************//
+            
+            
         }
 
         /// <summary>
