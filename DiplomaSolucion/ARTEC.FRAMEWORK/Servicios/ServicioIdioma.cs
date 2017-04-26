@@ -35,9 +35,12 @@ namespace ARTEC.FRAMEWORK.Servicios
 
         public static void Traducir(Control unForm, int elIdioma)
         {
-            _EtiquetasCompartidas = null;
-            //Obtengo las etiquetas y las pongo en la static variable de Etiquetas
-            EtiquetasTraerTodosPorIdioma(elIdioma);
+            //Obtengo las etiquetas de la BD una única vez para todos los formularios y las pongo en la static variable de Etiquetas (si cambio de idioma voy a la bd de nuevo)
+            if (_EtiquetasCompartidas == null)
+            {
+                EtiquetasTraerTodosPorIdioma(elIdioma);
+            }
+            
             //Obtengo todos los controles del formulario
             IEnumerable<Control> unosControles = ObtenerControles(unForm);
 
@@ -97,10 +100,12 @@ namespace ARTEC.FRAMEWORK.Servicios
         public static void CambiarIdioma(Control unControlCI, Idioma unIdioma)
         {
 
-            if (unIdioma.IdIdioma != ServicioIdioma.unIdiomaActual.IdIdioma)
-            {
+            //if (unIdioma.IdIdioma != ServicioIdioma.unIdiomaActual.IdIdioma)
+            //{
                 List<Idioma> unosIdiomas = new List<Idioma>();
                 unosIdiomas = IdiomaTraerTodos();
+
+                _EtiquetasCompartidas = null;
 
                 foreach (var ItemIdioma in unosIdiomas)
                 {
@@ -117,7 +122,8 @@ namespace ARTEC.FRAMEWORK.Servicios
 
                 Traducir(unControlCI, unIdioma.IdIdioma);
                 ServicioIdioma.unIdiomaActual = unIdioma;
-            }
+                
+            //}
         }
 
 

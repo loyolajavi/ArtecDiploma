@@ -17,7 +17,6 @@ namespace ARTEC.GUI
     {
 
         List<Idioma> unosIdiomas = new List<Idioma>();
-        public static Usuario usuarioLogueado = new Usuario();
         
 
 
@@ -71,12 +70,30 @@ namespace ARTEC.GUI
             //Traduzco con el IdiomaActual
             ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);
 
+            Prueba frmPrueba = new Prueba();
+            frmPrueba.Show();
 
         }
 
+        /// <summary>
+        /// Evento para modificar el idioma
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);//Cambiaba el idioma del propio formulario solamente
+            //Para cambiar el idioma de todos los formularios abiertos
+            //foreach (Control unForm in Application.OpenForms)
+            //{
+            //    ServicioIdioma.CambiarIdioma(unForm, (Idioma)cboIdioma.SelectedItem);
+            //} 
+
             ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
+            foreach (Control unForm in Application.OpenForms)
+            {
+                ServicioIdioma.Traducir(unForm, ServicioIdioma.unIdiomaActual.IdIdioma);
+            } 
         }
 
         /// <summary>
