@@ -20,7 +20,7 @@ namespace ARTEC.FRAMEWORK.Servicios
 
 
 
-            for (int j = vector.GetUpperBound(0); j <= vector.GetLowerBound(0); j++)
+            for (int j = vector.GetLowerBound(0); j <= vector.GetUpperBound(0); j++)
             {
                 if (!(string.IsNullOrWhiteSpace(vector[j])))
                 {

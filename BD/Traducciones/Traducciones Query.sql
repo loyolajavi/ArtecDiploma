@@ -26,6 +26,10 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btn
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnCrearProveedor', 'Crear', 1, 4)
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('ProveedorCrear', 'Crear Proveedor', 1, 4)
 
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnTelefono', 'Agregar', 1, 4)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnDireccion', 'Agregar', 1, 4)
+
+
 
 
 

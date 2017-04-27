@@ -18,7 +18,7 @@ namespace ARTEC.GUI
     public partial class ProveedorCrear : DevComponents.DotNetBar.Metro.MetroForm
     {
 
-        Proveedor nuevoProveedor;
+        Proveedor nuevoProveedor = new Proveedor();
         List<Categoria> unasCategorias = new List<Categoria>();
         Categoria unaCat;
         List<Categoria> CategoriasAsociadas = new List<Categoria>();
@@ -126,11 +126,18 @@ namespace ARTEC.GUI
 
         private void btnCrearProveedor_Click(object sender, EventArgs e)
         {
-            nuevoProveedor = new Proveedor();
+            
             nuevoProveedor.RazonSocialProv = txtRazon.Text;
             nuevoProveedor.AliasProv = txtAlias.Text;
-            nuevoProveedor.ContactoProv = txtContacto.Text;
+            nuevoProveedor.ContactoProv = txtDireccion.Text;
             //SEGUIR
+        }
+
+        private void btnTelefono_Click(object sender, EventArgs e)
+        {
+            Telefono unTel = new Telefono();
+            
+            //nuevoProveedor.unosTelefonos.Add
         }
 
 
