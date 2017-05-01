@@ -21,6 +21,13 @@ namespace ARTEC.DAL
                 List<Dependencia> unaLista = new List<Dependencia>();
                 unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
 
+                foreach (Dependencia Dep in unaLista)
+                {
+                    DALTipoDependencia GestorTipoDep = new DALTipoDependencia();
+                    Dep.unTipoDep = GestorTipoDep.TipoDependenciaTraerPorDependencia(Dep.IdDependencia);
+                }
+
+
                 return unaLista;
             }
         }
@@ -41,7 +48,23 @@ namespace ARTEC.DAL
                 return unaLista;
             }
         }
-        
+
+        public List<Agente> TraerAgentesResp(int idDependencia)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdDependencia", idDependencia)
+			};
+
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesResp", parameters))
+            {
+                List<Agente> unaLista = new List<Agente>();
+                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds);
+                return unaLista;
+            }
+        }
+
 
     }
 }

@@ -31,6 +31,7 @@ namespace ARTEC.GUI
         List<Prioridad> unasPrioridades = new List<Prioridad>();
         int ContDetalles = 0;
         List<Usuario> unosUsuarios = new List<Usuario>();
+        List<Agente> unosAgentesResp;
 
         public CrearSolicitud()
         {
@@ -73,22 +74,57 @@ namespace ARTEC.GUI
                 unDetSolic.IdSolicitudDetalle = ContDetalles;
 
                 unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
-                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
-                unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
-                unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+                BLLPolitica ManagerPolitica = new BLLPolitica();
+                if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetSolic.unaCategoria.IdCategoria, unDetSolic.Cantidad))
+                {
+                    unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
+                    unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+                    unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
-                grillaDetalles.DataSource = null;
-                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                //Formato de la grillaDetalles
-                grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].HeaderText = "#";
-                grillaDetalles.Columns[2].HeaderText = "Bien";
-                grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[4].Width = 80;
-                grillaDetalles.Columns[4].HeaderText = "Estado";
-                grillaDetalles.Columns[1].Visible = false;
+                    grillaDetalles.DataSource = null;
+                    grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                    //Formato de la grillaDetalles
+                    grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    grillaDetalles.Columns[0].HeaderText = "#";
+                    grillaDetalles.Columns[2].HeaderText = "Bien";
+                    grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                    grillaDetalles.Columns[4].Width = 80;
+                    grillaDetalles.Columns[4].HeaderText = "Estado";
+                    grillaDetalles.Columns[1].Visible = false;
+                }
+                else
+	            {
+                    DialogResult resmbox = MessageBox.Show("Este pedido no cumple con las políticas de Informática ¿Desea continuar?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                    {
+                        unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
+                        unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+                        unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+
+                        grillaDetalles.DataSource = null;
+                        grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                        //Formato de la grillaDetalles
+                        grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                        grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        grillaDetalles.Columns[0].HeaderText = "#";
+                        grillaDetalles.Columns[2].HeaderText = "Bien";
+                        grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                        grillaDetalles.Columns[4].Width = 80;
+                        grillaDetalles.Columns[4].HeaderText = "Estado";
+                        grillaDetalles.Columns[1].Visible = false;
+                    }
+                    else
+                    {
+
+                    }
+	            }
+                
+
+                
+                
             }
 
            
@@ -185,7 +221,7 @@ namespace ARTEC.GUI
         {
             if (!string.IsNullOrWhiteSpace(textBoxX1.Text))
             {
-                //AGREGAR QUE SE ELIMINEN LOS USUARIOS ASOCIADOS AL CAMBIAR LA FISCALIA (SIN TENER DETALLES AGREGADOS)
+                //AGREGAR QUE SE ELIMINEN los detalles de USUARIOS ASOCIADOS en soft AL CAMBIAR LA FISCALIA (SIN TENER DETALLES AGREGADOS)
                 if (grillaDetalles.DataSource != null)
                 {
                     DialogResult resmbox = MessageBox.Show("Si cambia de Fiscalía se eliminarán los detalles", "Confirmar", MessageBoxButtons.YesNo);
@@ -198,6 +234,7 @@ namespace ARTEC.GUI
                         unosAgentes.Clear();//asi no me aparecen agentes cuando cambio el texto dps de elegir una dependencia
                         //Reseteo el contador de detalles
                         ContDetalles = 0;
+                        txtCantBien.Clear();
                         BusquedaDependencias();
                     }
                     else if (resmbox == DialogResult.No)
@@ -239,15 +276,17 @@ namespace ARTEC.GUI
 
             if (res.Count > 0)
             {
-                if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
-                {
-                    comboBoxEx4.Visible = false;
-                    comboBoxEx4.DroppedDown = false;
-                    comboBoxEx4.DataSource = null;
 
-                }
-                else
-                {
+                //ESTO ERA PARA QUE NO QUEDE FLASHADO EL CBOBOX AL PASAR DE MUCHOS RESULTADOS RESULTADO A UNO SOLO AL ESCRIBIR LA FISCALIA JUSTA A MANO, PERO HACIA QUE NO SE EJECUTE BIEN LO DE CARGAR LOS AGENTES
+                //if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
+                //{
+                //    //comboBoxEx4.Visible = false;
+                //    //comboBoxEx4.DroppedDown = false;
+                //    //comboBoxEx4.DataSource = null;
+
+                //}
+                //else
+                //{
                     comboBoxEx4.DataSource = null;
                     comboBoxEx4.DataSource = res;
                     comboBoxEx4.DisplayMember = "NombreDependencia";
@@ -255,7 +294,7 @@ namespace ARTEC.GUI
                     comboBoxEx4.Visible = true;
                     comboBoxEx4.DroppedDown = true;
                     Cursor.Current = Cursors.Default;
-                }
+                //}
             }
             else
             {
@@ -284,6 +323,14 @@ namespace ARTEC.GUI
                     BLLDependencia managerDependenciaAg = new BLLDependencia();
                     unosAgentes = new List<Agente>();
                     unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaDep.IdDependencia);
+
+                    
+                    unosAgentesResp = new List<Agente>();
+                    unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaDep.IdDependencia);
+                    cboAgenteResp.DataSource = null;
+                    cboAgenteResp.DataSource = unosAgentesResp;
+                    cboAgenteResp.DisplayMember = "ApellidoAgente";
+                    cboAgenteResp.ValueMember = "IdAgente";
                     //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
                     ValidDep2.Validate();
                     txtAgente.Clear();

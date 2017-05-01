@@ -30,8 +30,8 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btn
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnDireccion', 'Agregar', 1, 4)
 
 
-
-
+//CrearSolicitud
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblAgenteResponsable', 'Responsable', 1, 2)
 
 
 

@@ -32,6 +32,10 @@ namespace ARTEC.BLL
             return GestorDependencia.TraerAgentesDependencia(idDependencia);
         }
 
+        public List<Agente> TraerAgentesResp(int idDependencia)
+        {
+            return GestorDependencia.TraerAgentesResp(idDependencia);
+        }
 
     }
 }

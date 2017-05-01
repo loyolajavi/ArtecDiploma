@@ -11,7 +11,9 @@ namespace ARTEC.ENTIDADES
 
         public int IdDependencia { get; set; }
         public string NombreDependencia { get; set; }
-        public List<Agente> unosAgentes { get; set; }
+        //public List<Agente> unosAgentes { get; set; }
+        public TipoDependencia unTipoDep { get; set; }
+
 
     }
 }
