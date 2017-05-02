@@ -22,6 +22,14 @@ namespace ARTEC.ENTIDADES
             get { return _unosDetallesSolicitud; }
             set { _unosDetallesSolicitud = value; }
         }
+
+        private List<Nota> _unasNotas = new List<Nota>();
+        
+        public List<Nota> unasNotas
+        {
+            get { return _unasNotas; }
+            set { _unasNotas = value; }
+        }
         
 
     }

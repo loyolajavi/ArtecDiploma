@@ -32,6 +32,10 @@ namespace ARTEC.GUI
         int ContDetalles = 0;
         List<Usuario> unosUsuarios = new List<Usuario>();
         List<Agente> unosAgentesResp;
+        List<string> unosAdjuntos = new List<string>();
+        List<Nota> unasNotas = new List<Nota>();
+
+
 
         public CrearSolicitud()
         {
@@ -39,126 +43,73 @@ namespace ARTEC.GUI
             unaSolicitud = new Solicitud();
         }
 
+
+
         //Agregar Detalle Click
         private void txtAgregarDetalle_Click(object sender, EventArgs e)
         {
-            //FIJARME QUE SI NO ESTA ECRITO EL BIEN NO ME DEJE AGREGAR UN DETALLE
-            //TMB FALTA QUE PARA PODER AGREGAR UN DETALLE PRIMERO ASOCIE USUARIOS
             if (validDependencia.Validate() && ValidDep2.Validate() && validBien.Validate())
             {
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
                 unDetalleSolicitud.unaCategoria = unaCat;
-                if (AuxTipoCategoria == 1)
+
+                if (validCantBien.Validate())
                 {
-                    AgregarHardware(ref unDetalleSolicitud);
-                }
-                else
-                {
-                    AgregarSoftware(ref unDetalleSolicitud);
-                }
+                    //Conteo Detalles
+                    ContDetalles += 1;
+                    unDetalleSolicitud.IdSolicitudDetalle = ContDetalles;
 
-
-               
-            }
-
-        }
-
-
-        private void AgregarHardware(ref SolicDetalle unDetSolic)
-        {
-
-            if (validCantBien.Validate())
-            {
-                //Conteo Detalles
-                ContDetalles += 1;
-                unDetSolic.IdSolicitudDetalle = ContDetalles;
-
-                unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
-                BLLPolitica ManagerPolitica = new BLLPolitica();
-                if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetSolic.unaCategoria.IdCategoria, unDetSolic.Cantidad))
-                {
-                    unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
-                    unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
-                    unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
-
-                    grillaDetalles.DataSource = null;
-                    grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                    //Formato de la grillaDetalles
-                    grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                    grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    grillaDetalles.Columns[0].HeaderText = "#";
-                    grillaDetalles.Columns[2].HeaderText = "Bien";
-                    grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                    grillaDetalles.Columns[4].Width = 80;
-                    grillaDetalles.Columns[4].HeaderText = "Estado";
-                    grillaDetalles.Columns[1].Visible = false;
-                }
-                else
-	            {
-                    DialogResult resmbox = MessageBox.Show("Este pedido no cumple con las políticas de Informática ¿Desea continuar?", "Advertencia", MessageBoxButtons.YesNo);
-                    if (resmbox == DialogResult.Yes)
+                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+                    BLLPolitica ManagerPolitica = new BLLPolitica();
+                    if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
                     {
-                        unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
-                        unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
-                        unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
-
-                        grillaDetalles.DataSource = null;
-                        grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                        //Formato de la grillaDetalles
-                        grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                        grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        grillaDetalles.Columns[0].HeaderText = "#";
-                        grillaDetalles.Columns[2].HeaderText = "Bien";
-                        grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                        grillaDetalles.Columns[4].Width = 80;
-                        grillaDetalles.Columns[4].HeaderText = "Estado";
-                        grillaDetalles.Columns[1].Visible = false;
+                        AgregarDetalleConfirmado(ref unDetalleSolicitud);
                     }
                     else
                     {
-
+                        DialogResult resmbox = MessageBox.Show("Este pedido no cumple con las políticas de Informática ¿Desea continuar?", "Advertencia", MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                        {
+                            AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        }
+                        else
+                        {
+                            //FIJARME SI HAY QUE RESETEAR ALGO
+                        }
                     }
-	            }
-                
-
-                
-                
+                }
             }
-
-           
         }
 
 
-        private void AgregarSoftware(ref SolicDetalle unDetSolic)
+
+        private void AgregarDetalleConfirmado(ref SolicDetalle unDetSolic)
         {
-            if (validCantBien.Validate())
+
+            if (AuxTipoCategoria == 2)//Categoria de Software
             {
-                //Conteo Detalles
-                ContDetalles += 1;
-                unDetSolic.IdSolicitudDetalle = ContDetalles;
-
-                unDetSolic.Cantidad = Int32.Parse(txtCantBien.Text);
-                unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO En hard tmb
-                unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-                unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
-
-                grillaDetalles.DataSource = null;
-                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                //Formato de la grillaDetalles
-                grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                grillaDetalles.Columns[0].HeaderText = "#";
-                grillaDetalles.Columns[2].HeaderText = "Bien";
-                grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                grillaDetalles.Columns[4].Width = 80;
-                grillaDetalles.Columns[4].HeaderText = "Estado";
-                grillaDetalles.Columns[1].Visible = false;
             }
+            unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
+            unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+            unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+
+            grillaDetalles.DataSource = null;
+            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            //Formato de la grillaDetalles
+            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].HeaderText = "#";
+            grillaDetalles.Columns[2].HeaderText = "Bien";
+            grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[4].Width = 80;
+            grillaDetalles.Columns[4].HeaderText = "Estado";
+            grillaDetalles.Columns[1].Visible = false;
         }
+
+
+
 
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
@@ -213,8 +164,9 @@ namespace ARTEC.GUI
             //Cargar fecha Inicio
             txtFechaInicio.Text = DateTime.Today.ToString("d");
 
-
         }
+
+
 
         //Busqueda dinámica de Dependencias
         private void textBoxX1_TextChanged(object sender, EventArgs e)
@@ -247,8 +199,6 @@ namespace ARTEC.GUI
                 {
                     BusquedaDependencias();
                 }
-
-
             }
             else
             {
@@ -257,6 +207,7 @@ namespace ARTEC.GUI
                 comboBoxEx4.DataSource = null;
             }
         }
+
 
 
         private void BusquedaDependencias()
@@ -306,6 +257,7 @@ namespace ARTEC.GUI
         }
 
 
+
         //Al seleccionar una dependencia del combo, guarda el idDependencia, el nombre y cierra el combo
         private void comboBoxEx4_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -340,13 +292,6 @@ namespace ARTEC.GUI
         }
 
 
-        //public void prueba(){
-        //    //Ejemplo de cómo implementar una relación de Agregación en capas
-        //    //BLLDependencia MediadorDependencia = new BLLDependencia();
-        //    //unaSolicitud.laDependencia = MediadorDependencia.CrearDependencia(unaDep);
-        //}
-
-
 
         /// <summary>
         /// Habilitar Controles según Hard/Soft
@@ -377,6 +322,8 @@ namespace ARTEC.GUI
                 AuxTipoCategoria = 2;
             }
         }
+
+
 
         //Busqueda Dinamica BIENES(CATEGORIAS)
         private void txtBien_TextChanged(object sender, EventArgs e)
@@ -440,6 +387,8 @@ namespace ARTEC.GUI
                 cboBien.DataSource = null;
             }
         }
+
+
 
         private void cboBien_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -505,7 +454,7 @@ namespace ARTEC.GUI
                         cboAgentesAsociados.Visible = false;
                         cboAgentesAsociados.DroppedDown = false;
                         cboAgentesAsociados.DataSource = null;
-                        unAgen = null; // GUARDA
+                        //unAgen = null; // GUARDA
                     }
                 }
                 else
@@ -516,8 +465,9 @@ namespace ARTEC.GUI
                 }
             }
 
-
         }
+
+
 
         //Al seleccionar un AGENTE del combo, guarda el IdAgente, el apellido y cierra el combo
         private void cboAgentesAsociados_SelectionChangeCommitted(object sender, EventArgs e)
@@ -536,25 +486,36 @@ namespace ARTEC.GUI
             }
         }
 
+
+
         //Asociar Agentes al software ingresado
         private void btnAsociarAgente_Click(object sender, EventArgs e)//VALIDAR QUE NO DEJE AGREGARDETALLE SI NO HAY UN AGENTE ASOCIADO
         {
             if (ValidDep2.Validate())
             {
-                int CantSuma = 0;
-                if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
+                if (validAgenteAsoc.Validate())
                 {
-                    CantSuma = Int32.Parse(txtCantBien.Text);
-                }
-
-                if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
-                //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
-                {
-
-                    var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
-                    if (resultado.Count() > 0)
+                    int CantSuma = 0;
+                    if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
                     {
-                        MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                        CantSuma = Int32.Parse(txtCantBien.Text);
+                    }
+
+                    if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
+                    //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
+                    {
+
+                        var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
+                        if (resultado.Count() > 0)
+                        {
+                            MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                        }
+                        else
+                        {
+                            unosAgentesAsociados.Add(unAgen);
+                            CantSuma += 1;
+                            txtCantBien.Text = CantSuma.ToString();
+                        }
                     }
                     else
                     {
@@ -562,23 +523,18 @@ namespace ARTEC.GUI
                         CantSuma += 1;
                         txtCantBien.Text = CantSuma.ToString();
                     }
-                }
-                else
-                {
-                    unosAgentesAsociados.Add(unAgen);
-                    CantSuma += 1;
-                    txtCantBien.Text = CantSuma.ToString();
-                }
 
-                grillaAgentesAsociados.DataSource = null;
-                grillaAgentesAsociados.DataSource = unosAgentesAsociados;
-                grillaAgentesAsociados.Columns[0].Visible = false;
-                grillaAgentesAsociados.Columns[3].Visible = false;
-                grillaAgentesAsociados.Columns[4].Visible = false;
-
+                    grillaAgentesAsociados.DataSource = null;
+                    grillaAgentesAsociados.DataSource = unosAgentesAsociados;
+                    grillaAgentesAsociados.Columns[0].Visible = false;
+                    grillaAgentesAsociados.Columns[3].Visible = false;
+                    grillaAgentesAsociados.Columns[4].Visible = false;
+                }
             }
            
         }
+
+
 
         private void customValidatorDependencia_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
@@ -600,6 +556,7 @@ namespace ARTEC.GUI
             }
             
         }
+
 
         private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -632,8 +589,8 @@ namespace ARTEC.GUI
                 gboxAsociados.Enabled = false;
                 txtCantBien.ReadOnly = false;
                 lblCantidad.Enabled = true;
-                AuxTipoCategoria = 1;//HARDCODEADO
-                cboTipoBien.SelectedValue = 1;//HARDCODEADO
+                AuxTipoCategoria = 1;//HARDWARE
+                cboTipoBien.SelectedValue = 1;//HARDWARE
                 txtAgente.Clear();
                 unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
                 grillaAgentesAsociados.DataSource = null;
@@ -644,8 +601,8 @@ namespace ARTEC.GUI
                 gboxAsociados.Enabled = true;
                 txtCantBien.ReadOnly = true;
                 lblCantidad.Enabled = false;
-                AuxTipoCategoria = 2;//HARDCODEADO
-                cboTipoBien.SelectedValue = 2;//HARDCODEADO
+                AuxTipoCategoria = 2;//SOFTWARE
+                cboTipoBien.SelectedValue = 2;//SOFTWARE
                 txtAgente.Clear();
                 unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
                 grillaAgentesAsociados.DataSource = null;
@@ -662,7 +619,8 @@ namespace ARTEC.GUI
 
         }
 
-        //NOTA AL AIRE: GUARDA QUE NO VALIDA SI CANTIDAD ES 0
+
+        //FIJARSE QUE NO VALIDA SI CANTIDAD ES 0
         private void customValidatorBien_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBien.Text))
@@ -714,6 +672,7 @@ namespace ARTEC.GUI
             pnlAdjuntos.BorderStyle = BorderStyle.Fixed3D;
         }
 
+
         //Copiar el archivo
         private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
         {
@@ -728,14 +687,25 @@ namespace ARTEC.GUI
                     //Copio el archivo
                     FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
                     pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+
+                    //Añado a la grilla el nombre del archivo
+                    
+                    unosAdjuntos.Add(NombreArchivo);
+
+                    lstAdjuntos.DataSource = null;
+                    lstAdjuntos.DataSource = unosAdjuntos;
+                    
+                    //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+                    
                 }
                 else
                 {
                     MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
                 }
-                
             }
         }
+
+
 
         //Estilo que se aplica cuando se sale de pnladjuntos (en el evento de arrastrar archivos)
         private void pnlAdjuntos_DragLeave(object sender, EventArgs e)
@@ -758,6 +728,44 @@ namespace ARTEC.GUI
                 return true;
             }
             return false;
+        }
+
+        private void btnNotas_Click(object sender, EventArgs e)
+        {
+            Nota unaNota = new Nota();
+            unaNota.FechaNota = DateTime.Now;
+            unaNota.DescripNota = txtNotas.Text;
+            unasNotas.Add(unaNota);
+            GrillaNotas.DataSource = null;
+            GrillaNotas.DataSource = unasNotas;
+            GrillaNotas.Columns[0].Visible = false;
+
+        }
+
+        private void EventValidatetxtAgente(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtAgente.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                if (unAgen != null)
+                {
+                    if (string.Equals(e.ControlToValidate.Text, unAgen.ApellidoAgente))
+                    {
+                        e.IsValid = true;
+                    }
+                    else
+                    {
+                        e.IsValid = false;
+                    }
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
+            }
         }
 
 
