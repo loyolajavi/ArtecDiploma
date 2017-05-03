@@ -29,12 +29,12 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearSolicitud));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -43,7 +43,7 @@ namespace ARTEC.GUI
             this.gboxNotas = new System.Windows.Forms.GroupBox();
             this.btnNotas = new DevComponents.DotNetBar.ButtonX();
             this.GrillaNotas = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.txtNotas = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.txtNota = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.txtFechaFin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.cboAsignado = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboPrioridad = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -85,7 +85,6 @@ namespace ARTEC.GUI
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.validCantBien = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.validBien = new DevComponents.DotNetBar.Validator.SuperValidator();
@@ -93,9 +92,13 @@ namespace ARTEC.GUI
             this.errorProvider4 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter4 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.validAgenteAsoc = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customtxtAgente = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider5 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter5 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customtxtAgente = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.validNota = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.customtxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -112,6 +115,7 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider6)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -184,7 +188,7 @@ namespace ARTEC.GUI
             // 
             this.gboxNotas.Controls.Add(this.btnNotas);
             this.gboxNotas.Controls.Add(this.GrillaNotas);
-            this.gboxNotas.Controls.Add(this.txtNotas);
+            this.gboxNotas.Controls.Add(this.txtNota);
             this.gboxNotas.Location = new System.Drawing.Point(15, 489);
             this.gboxNotas.Name = "gboxNotas";
             this.gboxNotas.Size = new System.Drawing.Size(928, 131);
@@ -206,34 +210,38 @@ namespace ARTEC.GUI
             // 
             // GrillaNotas
             // 
+            this.GrillaNotas.AllowUserToOrderColumns = true;
+            this.GrillaNotas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaNotas.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaNotas.DefaultCellStyle = dataGridViewCellStyle7;
             this.GrillaNotas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaNotas.Location = new System.Drawing.Point(6, 54);
             this.GrillaNotas.Name = "GrillaNotas";
             this.GrillaNotas.Size = new System.Drawing.Size(913, 71);
             this.GrillaNotas.TabIndex = 9;
             // 
-            // txtNotas
+            // txtNota
             // 
             // 
             // 
             // 
-            this.txtNotas.BackgroundStyle.Class = "RichTextBoxBorder";
-            this.txtNotas.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtNotas.Location = new System.Drawing.Point(6, 21);
-            this.txtNotas.Name = "txtNotas";
-            this.txtNotas.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang11274{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}" +
+            this.txtNota.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtNota.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNota.Location = new System.Drawing.Point(6, 21);
+            this.txtNota.MaxLength = 300;
+            this.txtNota.Name = "txtNota";
+            this.txtNota.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang11274{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}" +
     "}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
-            this.txtNotas.Size = new System.Drawing.Size(832, 27);
-            this.txtNotas.TabIndex = 8;
+            this.txtNota.Size = new System.Drawing.Size(832, 27);
+            this.txtNota.TabIndex = 8;
+            this.validNota.SetValidator1(this.txtNota, this.customtxtNota);
             // 
             // txtFechaFin
             // 
@@ -449,6 +457,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -460,14 +469,14 @@ namespace ARTEC.GUI
             // GrillaAdjuntos
             // 
             this.GrillaAdjuntos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAdjuntos.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAdjuntos.DefaultCellStyle = dataGridViewCellStyle8;
             this.GrillaAdjuntos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAdjuntos.Location = new System.Drawing.Point(7, 35);
             this.GrillaAdjuntos.Name = "GrillaAdjuntos";
@@ -549,14 +558,14 @@ namespace ARTEC.GUI
             this.grillaAgentesAsociados.BackgroundColor = System.Drawing.Color.White;
             this.grillaAgentesAsociados.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grillaAgentesAsociados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaAgentesAsociados.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaAgentesAsociados.DefaultCellStyle = dataGridViewCellStyle9;
             this.grillaAgentesAsociados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaAgentesAsociados.Location = new System.Drawing.Point(48, 52);
             this.grillaAgentesAsociados.Name = "grillaAgentesAsociados";
@@ -651,35 +660,35 @@ namespace ARTEC.GUI
             this.grillaDetalles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grillaDetalles.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetalles.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grillaDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.grillaDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaDetalles.DefaultCellStyle = dataGridViewCellStyle9;
-            this.grillaDetalles.EnableHeadersVisualStyles = false;
-            this.grillaDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaDetalles.Location = new System.Drawing.Point(327, 13);
-            this.grillaDetalles.Name = "grillaDetalles";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grillaDetalles.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.grillaDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.grillaDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaDetalles.DefaultCellStyle = dataGridViewCellStyle11;
+            this.grillaDetalles.EnableHeadersVisualStyles = false;
+            this.grillaDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.grillaDetalles.Location = new System.Drawing.Point(327, 13);
+            this.grillaDetalles.Name = "grillaDetalles";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grillaDetalles.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.grillaDetalles.Size = new System.Drawing.Size(592, 274);
             this.grillaDetalles.TabIndex = 7;
             this.grillaDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaDetalles_CellClick);
@@ -700,7 +709,6 @@ namespace ARTEC.GUI
             this.txtCantBien.Size = new System.Drawing.Size(36, 22);
             this.txtCantBien.TabIndex = 5;
             this.txtCantBien.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.validCantBien.SetValidator3(this.txtCantBien, this.requiredFieldValidator1);
             // 
             // lblCantidad
             // 
@@ -838,11 +846,6 @@ namespace ARTEC.GUI
             this.validCantBien.ErrorProvider = this.errorProvider3;
             this.validCantBien.Highlighter = this.highlighter3;
             // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // errorProvider3
             // 
             this.errorProvider3.ContainerControl = this;
@@ -879,6 +882,12 @@ namespace ARTEC.GUI
             this.validAgenteAsoc.ErrorProvider = this.errorProvider5;
             this.validAgenteAsoc.Highlighter = this.highlighter5;
             // 
+            // customtxtAgente
+            // 
+            this.customtxtAgente.ErrorMessage = "Your error message here.";
+            this.customtxtAgente.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customtxtAgente.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidatetxtAgente);
+            // 
             // errorProvider5
             // 
             this.errorProvider5.ContainerControl = this;
@@ -888,11 +897,26 @@ namespace ARTEC.GUI
             // 
             this.highlighter5.ContainerControl = this;
             // 
-            // customtxtAgente
+            // validNota
             // 
-            this.customtxtAgente.ErrorMessage = "Your error message here.";
-            this.customtxtAgente.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customtxtAgente.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidatetxtAgente);
+            this.validNota.ContainerControl = this;
+            this.validNota.ErrorProvider = this.errorProvider6;
+            this.validNota.Highlighter = this.highlighter6;
+            // 
+            // errorProvider6
+            // 
+            this.errorProvider6.ContainerControl = this;
+            this.errorProvider6.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider6.Icon")));
+            // 
+            // highlighter6
+            // 
+            this.highlighter6.ContainerControl = this;
+            // 
+            // customtxtNota
+            // 
+            this.customtxtNota.ErrorMessage = "Your error message here.";
+            this.customtxtNota.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customtxtNota.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidtxtNota);
             // 
             // CrearSolicitud
             // 
@@ -921,6 +945,7 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -947,7 +972,7 @@ namespace ARTEC.GUI
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaInicio;
         private DevComponents.DotNetBar.LabelX labelX6;
         private DevComponents.DotNetBar.LabelX labelX5;
-        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtNotas;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtNota;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboTipoBien;
         private System.Windows.Forms.GroupBox gboxAsociados;
@@ -973,7 +998,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnSeleccionarArchivo;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAdjuntos;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
-        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.SuperValidator validBien;
         private System.Windows.Forms.ErrorProvider errorProvider4;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter4;
@@ -987,5 +1011,9 @@ namespace ARTEC.GUI
         private System.Windows.Forms.ErrorProvider errorProvider5;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter5;
         private DevComponents.DotNetBar.Validator.CustomValidator customtxtAgente;
+        private DevComponents.DotNetBar.Validator.SuperValidator validNota;
+        private System.Windows.Forms.ErrorProvider errorProvider6;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter6;
+        private DevComponents.DotNetBar.Validator.CustomValidator customtxtNota;
     }
 }

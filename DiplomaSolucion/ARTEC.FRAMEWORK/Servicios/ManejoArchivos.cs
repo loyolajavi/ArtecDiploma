@@ -26,5 +26,23 @@ namespace ARTEC.FRAMEWORK.Servicios
 
         }
 
+
+
+        /// <summary>
+        /// Valida si la extesión del adjunto es correcta
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public static bool ValidarAdjunto(string RutaCompletaArchivo)
+        {
+            string ext = Path.GetExtension(RutaCompletaArchivo).ToLower();
+            if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp") || (ext == ".pdf") || (ext == ".txt"))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

@@ -1,3 +1,4 @@
+--PantallaBackup
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('gboxRespaldar', 'Respaldar (Realizar Backup)', 1, 3)
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblDestinoRespaldar', 'Destino', 1, 3)
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblNombreRespaldar', 'Nombre', 1, 3)
@@ -12,7 +13,7 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lbl
 
 
 
-//Proveedor Crear
+--Proveedor Crear
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblRazonSocial', 'Razón Social', 1, 4)
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblAlias', 'Alias', 1, 4)
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblContacto', 'Contacto', 1, 4)
@@ -30,11 +31,13 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btn
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnDireccion', 'Agregar', 1, 4)
 
 
-//CrearSolicitud
+--CrearSolicitud
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('lblAgenteResponsable', 'Responsable', 1, 2)
 
 
-
+--Mensajes
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('Mensaje1', 'Este pedido no cumple con las políticas de Informática ¿Desea continuar?', 1, 2)
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('Mensaje1', 'The request does not comply with the IT policies ¿Continue?', 2, 2)
 
 
 

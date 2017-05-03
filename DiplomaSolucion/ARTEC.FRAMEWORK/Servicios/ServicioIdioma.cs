@@ -155,6 +155,14 @@ namespace ARTEC.FRAMEWORK.Servicios
         }
 
 
+        public static Etiqueta MostrarMensaje(string EtiquetaMensaje)
+        {
+            Etiqueta MensajeRetorno = new Etiqueta();
+
+            MensajeRetorno = _EtiquetasCompartidas.Find(x => x.NombreControl == EtiquetaMensaje);
+            return MensajeRetorno;
+        }
+
 
     }
 }

@@ -11,6 +11,8 @@ using ARTEC.ENTIDADES;
 using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
+using ARTEC.FRAMEWORK.Servicios;
+
 
 namespace ARTEC.GUI
 {
@@ -67,7 +69,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        DialogResult resmbox = MessageBox.Show("Este pedido no cumple con las políticas de Informática ¿Desea continuar?", "Advertencia", MessageBoxButtons.YesNo);
+                        DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
                         if (resmbox == DialogResult.Yes)
                         {
                             AgregarDetalleConfirmado(ref unDetalleSolicitud);
@@ -89,6 +91,8 @@ namespace ARTEC.GUI
             if (AuxTipoCategoria == 2)//Categoria de Software
             {
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
+                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
             }
             unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
             unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
@@ -647,13 +651,19 @@ namespace ARTEC.GUI
             {
 
                 unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-                //FECHA FIN VER Q SI ESTA ESCRITA
+                //***FECHA FIN VER Q SI ESTA ESCRITA
                 unaSolicitud.laDependencia = unaDep;
                 unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
                 unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
                 unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+                if (unasNotas != null)
+                {
+                    unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                }
 
-
+                //***HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
+                //***AGREGAR LOS ADJUNTOS
+                //***AGREGAR EN EL STORE LAS NOTAS
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                 ManagerSolicitud.SolicitudCrear(unaSolicitud);
 
@@ -676,31 +686,37 @@ namespace ARTEC.GUI
         //Copiar el archivo
         private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
         {
-            //Agarro la ruta de los archivos arrastrados
-            string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            foreach (var item in unArchivo)
+            if (unosAdjuntos.Count > 2)
             {
-                //Agarro el nombre del archivo
-                string NombreArchivo = Path.GetFileName(item);
-                if (ValidarAdjunto(item))
+                MessageBox.Show("No pueden adjuntarse más de 3 archivos");
+            }
+            else
+            {
+                //Agarro la ruta de los archivos arrastrados
+                string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                foreach (var item in unArchivo)
                 {
-                    //Copio el archivo
-                    FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
-                    pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+                    //Agarro el nombre del archivo
+                    string NombreArchivo = Path.GetFileName(item);
+                    if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(item))
+                    {
+                        //Copio el archivo
+                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
+                        pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
 
-                    //Añado a la grilla el nombre del archivo
-                    
-                    unosAdjuntos.Add(NombreArchivo);
+                        //Añado a la grilla el nombre del archivo
+                        unosAdjuntos.Add(NombreArchivo);
 
-                    lstAdjuntos.DataSource = null;
-                    lstAdjuntos.DataSource = unosAdjuntos;
-                    
-                    //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
-                    
-                }
-                else
-                {
-                    MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                        lstAdjuntos.DataSource = null;
+                        lstAdjuntos.DataSource = unosAdjuntos;
+
+                        //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                    }
                 }
             }
         }
@@ -714,33 +730,22 @@ namespace ARTEC.GUI
         }
 
 
-        /// <summary>
-        /// Valida si la extesión del adjunto es correcta
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        public bool ValidarAdjunto(string RutaCompletaArchivo)
-        {
-            string ext = Path.GetExtension(RutaCompletaArchivo).ToLower();
-            if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp") || (ext == ".pdf") || (ext == ".txt"))
-            {
-                return true;
-            }
-            return false;
-        }
 
         private void btnNotas_Click(object sender, EventArgs e)
         {
-            Nota unaNota = new Nota();
-            unaNota.FechaNota = DateTime.Now;
-            unaNota.DescripNota = txtNotas.Text;
-            unasNotas.Add(unaNota);
-            GrillaNotas.DataSource = null;
-            GrillaNotas.DataSource = unasNotas;
-            GrillaNotas.Columns[0].Visible = false;
-
+            if (validNota.Validate())
+            {
+                Nota unaNota = new Nota();
+                unaNota.FechaNota = DateTime.Now;
+                unaNota.DescripNota = txtNota.Text;
+                unasNotas.Add(unaNota);
+                GrillaNotas.DataSource = null;
+                GrillaNotas.DataSource = unasNotas;
+                GrillaNotas.Columns[0].Visible = false;
+            }
         }
+
+
 
         private void EventValidatetxtAgente(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
@@ -765,6 +770,20 @@ namespace ARTEC.GUI
                 {
                     e.IsValid = false;
                 }
+            }
+        }
+
+
+
+        private void EventValidtxtNota(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNota.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
             }
         }
 
