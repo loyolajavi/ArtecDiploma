@@ -46,7 +46,7 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolDetalle)
 			        };
 
-                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles); 
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
@@ -61,9 +61,44 @@ namespace ARTEC.DAL
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
+        }
 
+
+
+        public List<Solicitud> SolicitudBuscar(int NroSolic)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@NroSolicitud", NroSolic)
+			};
+
+            try
+            {
+                //*********SEGUIR MAPEANDO Y FIJARME QUE EL STORE PROCEDURE ESTE COMPLETO
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
+                {
+                    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+
+
+                    List<Prioridad> unaListaPrioridades = new List<Prioridad>();
+                    unaListaPrioridades = FRAMEWORK.Persistencia.Mapeador.Mapear<Prioridad>(ds);
+
+
+                    unaListaSolicitudes[0].UnaPrioridad = unaListaPrioridades[0]; 
+                    
+                    return unaListaSolicitudes;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
+
+
 
     }
 }

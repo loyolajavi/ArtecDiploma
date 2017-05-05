@@ -12,6 +12,9 @@ namespace ARTEC.ENTIDADES
         public int IdPrioridad { get; set; }
         public string DescripPrioridad { get; set; }
 
-
+        public override string ToString()
+        {
+            return this.DescripPrioridad;
+        }
     }
 }

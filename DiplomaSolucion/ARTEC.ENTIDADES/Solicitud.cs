@@ -9,6 +9,7 @@ namespace ARTEC.ENTIDADES
     public class Solicitud
     {
 
+        public int IdSolicitud { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public Prioridad UnaPrioridad { get; set; }

@@ -23,5 +23,11 @@ namespace ARTEC.BLL
             return false;
         }
 
+
+        public List<Solicitud> SolicitudBuscar(int NroSolic)
+        {
+            return GestorSolicitud.SolicitudBuscar(NroSolic);
+        }
+
     }
 }

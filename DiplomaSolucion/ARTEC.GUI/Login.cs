@@ -70,8 +70,8 @@ namespace ARTEC.GUI
             //Traduzco con el IdiomaActual
             ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);
 
-            Prueba frmPrueba = new Prueba();
-            frmPrueba.Show();
+            //Prueba frmPrueba = new Prueba();
+            //frmPrueba.Show();
 
         }
 
