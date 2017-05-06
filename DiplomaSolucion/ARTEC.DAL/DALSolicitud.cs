@@ -80,19 +80,42 @@ namespace ARTEC.DAL
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                     unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
 
-
                     List<Prioridad> unaListaPrioridades = new List<Prioridad>();
                     unaListaPrioridades = FRAMEWORK.Persistencia.Mapeador.Mapear<Prioridad>(ds);
+                    foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    {
+                        foreach (Prioridad laPrioridad in unaListaPrioridades)
+                        {
+                            laSolicitud.UnaPrioridad = laPrioridad;
+                        }
+                    }
+
+                    List<EstadoSolicitud> unaListaEstadoSolicitud = new List<EstadoSolicitud>();
+                    unaListaEstadoSolicitud = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
+                    foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    {
+                        foreach (EstadoSolicitud elEstadoSolicitud in unaListaEstadoSolicitud)
+                        {
+                            laSolicitud.UnEstado = elEstadoSolicitud;
+                        }
+                    }
 
 
-                    unaListaSolicitudes[0].UnaPrioridad = unaListaPrioridades[0]; 
-                    
+                    List<Dependencia> unaListaDependencias = new List<Dependencia>();
+                    unaListaDependencias = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
+                     foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    {
+                        foreach (Dependencia unaDependencia in unaListaDependencias)
+                        {
+                            laSolicitud.laDependencia = unaDependencia;
+                        }
+                    }
+
                     return unaListaSolicitudes;
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
 

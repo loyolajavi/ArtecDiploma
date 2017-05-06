@@ -10,13 +10,13 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdSolicitud { get; set; }
+        public Dependencia laDependencia { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public Prioridad UnaPrioridad { get; set; }
-        public Usuario Asignado { get; set; }
         public EstadoSolicitud UnEstado { get; set; }
-
-        public Dependencia laDependencia { get; set; }
+        public Usuario Asignado { get; set; }
+        
         private List<SolicDetalle> _unosDetallesSolicitud = new List<SolicDetalle>();
         public List<SolicDetalle> unosDetallesSolicitud
         {

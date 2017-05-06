@@ -15,5 +15,10 @@ namespace ARTEC.ENTIDADES
         public TipoDependencia unTipoDep { get; set; }
 
 
+        public override string ToString()
+        {
+            return this.NombreDependencia;
+        }
+
     }
 }

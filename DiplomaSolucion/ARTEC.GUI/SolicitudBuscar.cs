@@ -31,6 +31,7 @@ namespace ARTEC.GUI
             unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
             GrillaSolicitudBuscar.DataSource = null;
             GrillaSolicitudBuscar.DataSource = unasSolicitudes;
+            GrillaSolicitudBuscar.Columns["Asignado"].Visible = false;
             
         }
     }

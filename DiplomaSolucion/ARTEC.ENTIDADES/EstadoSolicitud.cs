@@ -12,6 +12,9 @@ namespace ARTEC.ENTIDADES
         public int IdEstadoSolicitud { get; set; }
         public string DescripEstadoSolic { get; set; }
 
-
+        public override string ToString()
+        {
+            return this.DescripEstadoSolic;
+        }
     }
 }

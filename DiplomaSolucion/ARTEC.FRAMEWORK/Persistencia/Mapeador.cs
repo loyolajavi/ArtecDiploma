@@ -35,24 +35,18 @@ namespace ARTEC.FRAMEWORK.Persistencia
         {
             T unaInstancia = new T();
 
-            try
+            foreach (var prop in properties)
             {
-                foreach (var prop in properties)
+                if (prop.CanWrite)
                 {
-                    if (prop.CanWrite)
+                    try
                     {
-                        try
-                        {
-                            prop.SetValue(unaInstancia, row[prop.Name], null);
-                        }
-                        catch (IndexOutOfRangeException es)
-                        {
-                        }
+                        prop.SetValue(unaInstancia, row[prop.Name], null);
+                    }
+                    catch (Exception es)
+                    {
                     }
                 }
-            }
-            catch (Exception es)
-            {
             }
 
             return unaInstancia;
