@@ -29,5 +29,12 @@ namespace ARTEC.BLL
             return GestorSolicitud.SolicitudBuscar(NroSolic);
         }
 
+        ////**********PRUEBA
+        //public Solicitud SolicitudBuscar(int NroSolic)
+        //{
+        //    return GestorSolicitud.SolicitudBuscar(NroSolic);
+        //}
+        ////**********FINPRUEBA***********
+
     }
 }

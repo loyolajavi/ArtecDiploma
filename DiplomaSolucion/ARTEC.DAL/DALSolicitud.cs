@@ -68,50 +68,64 @@ namespace ARTEC.DAL
         public List<Solicitud> SolicitudBuscar(int NroSolic)
         {
             SqlParameter[] parameters = new SqlParameter[]
-			{
+            {
                 new SqlParameter("@NroSolicitud", NroSolic)
-			};
+            };
 
             try
             {
                 //*********SEGUIR MAPEANDO Y FIJARME QUE EL STORE PROCEDURE ESTE COMPLETO
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
                 {
+
+                    ////*****PRUEBA******
+                    //Solicitud unaSolicitud = new Solicitud();
+                    //unaSolicitud = FRAMEWORK.Persistencia.Mapeador.MapearUno<Solicitud>(ds);
+                    //return unaSolicitud;
+                    ////*****FINPRUEBA******
+
+
+
+
+                    //*****ComentadoPorPRUEBA******
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                     unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
 
-                    List<Prioridad> unaListaPrioridades = new List<Prioridad>();
-                    unaListaPrioridades = FRAMEWORK.Persistencia.Mapeador.Mapear<Prioridad>(ds);
-                    foreach (Solicitud laSolicitud in unaListaSolicitudes)
-                    {
-                        foreach (Prioridad laPrioridad in unaListaPrioridades)
-                        {
-                            laSolicitud.UnaPrioridad = laPrioridad;
-                        }
-                    }
+                    //List<Prioridad> unaListaPrioridades = new List<Prioridad>();
+                    //unaListaPrioridades = FRAMEWORK.Persistencia.Mapeador.Mapear<Prioridad>(ds);
+                    //foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    //{
+                    //    foreach (Prioridad laPrioridad in unaListaPrioridades)
+                    //    {
+                    //        laSolicitud.UnaPrioridad = laPrioridad;
+                    //    }
+                    //}
 
-                    List<EstadoSolicitud> unaListaEstadoSolicitud = new List<EstadoSolicitud>();
-                    unaListaEstadoSolicitud = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
-                    foreach (Solicitud laSolicitud in unaListaSolicitudes)
-                    {
-                        foreach (EstadoSolicitud elEstadoSolicitud in unaListaEstadoSolicitud)
-                        {
-                            laSolicitud.UnEstado = elEstadoSolicitud;
-                        }
-                    }
+                    //List<EstadoSolicitud> unaListaEstadoSolicitud = new List<EstadoSolicitud>();
+                    //unaListaEstadoSolicitud = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
+                    //foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    //{
+                    //    foreach (EstadoSolicitud elEstadoSolicitud in unaListaEstadoSolicitud)
+                    //    {
+                    //        laSolicitud.UnEstado = elEstadoSolicitud;
+                    //    }
+                    //}
 
 
-                    List<Dependencia> unaListaDependencias = new List<Dependencia>();
-                    unaListaDependencias = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
-                     foreach (Solicitud laSolicitud in unaListaSolicitudes)
-                    {
-                        foreach (Dependencia unaDependencia in unaListaDependencias)
-                        {
-                            laSolicitud.laDependencia = unaDependencia;
-                        }
-                    }
+                    //List<Dependencia> unaListaDependencias = new List<Dependencia>();
+                    //unaListaDependencias = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
+                    // foreach (Solicitud laSolicitud in unaListaSolicitudes)
+                    //{
+                    //    foreach (Dependencia unaDependencia in unaListaDependencias)
+                    //    {
+                    //        laSolicitud.laDependencia = unaDependencia;
+                    //    }
+                    //}
+
+
 
                     return unaListaSolicitudes;
+                    //*****FINComentadoPorPRUEBA******
                 }
             }
             catch (Exception)
@@ -121,7 +135,75 @@ namespace ARTEC.DAL
 
         }
 
+        //public Solicitud SolicitudBuscar(int NroSolic)
+        //{
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@NroSolicitud", NroSolic)
+        //    };
 
+        //    try
+        //    {
+        //        //*********SEGUIR MAPEANDO Y FIJARME QUE EL STORE PROCEDURE ESTE COMPLETO
+        //        using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
+        //        {
+
+        //            //*****PRUEBA******
+        //            Solicitud unaSolicitud = new Solicitud();
+        //            unaSolicitud = FRAMEWORK.Persistencia.Mapeador.MapearUno<Solicitud>(ds);
+        //            return unaSolicitud;
+        //            //*****FINPRUEBA******
+
+
+
+
+        //            //*****ComentadoPorPRUEBA******
+        //            //List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+        //            //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+
+        //            //List<Prioridad> unaListaPrioridades = new List<Prioridad>();
+        //            //unaListaPrioridades = FRAMEWORK.Persistencia.Mapeador.Mapear<Prioridad>(ds);
+        //            //foreach (Solicitud laSolicitud in unaListaSolicitudes)
+        //            //{
+        //            //    foreach (Prioridad laPrioridad in unaListaPrioridades)
+        //            //    {
+        //            //        laSolicitud.UnaPrioridad = laPrioridad;
+        //            //    }
+        //            //}
+
+        //            //List<EstadoSolicitud> unaListaEstadoSolicitud = new List<EstadoSolicitud>();
+        //            //unaListaEstadoSolicitud = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
+        //            //foreach (Solicitud laSolicitud in unaListaSolicitudes)
+        //            //{
+        //            //    foreach (EstadoSolicitud elEstadoSolicitud in unaListaEstadoSolicitud)
+        //            //    {
+        //            //        laSolicitud.UnEstado = elEstadoSolicitud;
+        //            //    }
+        //            //}
+
+
+        //            //List<Dependencia> unaListaDependencias = new List<Dependencia>();
+        //            //unaListaDependencias = FRAMEWORK.Persistencia.Mapeador.Mapear<Dependencia>(ds);
+        //            // foreach (Solicitud laSolicitud in unaListaSolicitudes)
+        //            //{
+        //            //    foreach (Dependencia unaDependencia in unaListaDependencias)
+        //            //    {
+        //            //        laSolicitud.laDependencia = unaDependencia;
+        //            //    }
+        //            //}
+
+
+
+        //            //return unaListaSolicitudes;
+        //            //*****FINComentadoPorPRUEBA******
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+
+        //}
 
     }
 }
