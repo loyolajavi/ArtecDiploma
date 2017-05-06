@@ -29,15 +29,10 @@ namespace ARTEC.GUI
 
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
-            ////PRUEBA
-            //Solicitud unaSolic = new Solicitud();
-            //unaSolic = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
-            ////FINPRUEBA
-            
             unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
             GrillaSolicitudBuscar.DataSource = null;
-            GrillaSolicitudBuscar.DataSource = unasSolicitudes;//unasSolicitudes
-            //GrillaSolicitudBuscar.Columns["Asignado"].Visible = false;
+            GrillaSolicitudBuscar.DataSource = unasSolicitudes;
+            GrillaSolicitudBuscar.Columns["Asignado"].Visible = false;
             
         }
     }
