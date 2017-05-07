@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
+using System.Diagnostics;
 
 namespace ARTEC.DAL
 {
@@ -77,9 +78,23 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
                 {
 
+                    Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
+                    
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
-                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+                    //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.CargarPropiedad<Solicitud>(ds);
+
+
+
+                    System.Threading.Thread.Sleep(500);
+                    stopwatch.Stop();
+                    System.Windows.Forms.MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " Hola");
+
                     return unaListaSolicitudes;
+
+                    
+                    
+
                 }
             }
             catch (Exception)

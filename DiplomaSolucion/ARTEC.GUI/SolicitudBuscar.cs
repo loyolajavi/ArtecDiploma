@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using System.Diagnostics;
 
 namespace ARTEC.GUI
 {
@@ -33,7 +34,10 @@ namespace ARTEC.GUI
             GrillaSolicitudBuscar.DataSource = null;
             GrillaSolicitudBuscar.DataSource = unasSolicitudes;
             GrillaSolicitudBuscar.Columns["Asignado"].Visible = false;
-            
+
+
+
+
         }
     }
 }

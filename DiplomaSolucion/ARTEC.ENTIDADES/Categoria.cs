@@ -12,7 +12,7 @@ namespace ARTEC.ENTIDADES
 
         public int IdCategoria { get; set; }
         public string DescripCategoria { get; set; }
-        public List<Bien> unosBienes { get; set; }
+        //public List<Bien> unosBienes { get; set; } //***************************PRUEBA POR ERROR EN REFLECTION*********************************
 
         public override String ToString()
         {

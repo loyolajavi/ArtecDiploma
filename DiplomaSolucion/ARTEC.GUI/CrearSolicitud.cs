@@ -57,6 +57,9 @@ namespace ARTEC.GUI
 
                 if (validCantBien.Validate())
                 {
+
+                    //VALIDAR MANUALMENTE QUE SI HAY UN DETALLE DE UN BIEN AGREGADO Y SE AGREGA DE NUEVO, SI ES HARD SUME UNO AL DETALLE EXISTENTE, SI ES SOFT QUE NO AGREGUE EL DETALLE (SI ES EL MISMO USUARIO)
+
                     //Conteo Detalles
                     ContDetalles += 1;
                     unDetalleSolicitud.IdSolicitudDetalle = ContDetalles;

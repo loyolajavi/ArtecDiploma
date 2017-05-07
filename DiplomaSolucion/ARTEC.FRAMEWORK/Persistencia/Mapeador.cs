@@ -10,12 +10,14 @@ namespace ARTEC.FRAMEWORK.Persistencia
 {
     public class Mapeador
     {
-
+        
         public static List<T> Mapear<T>(DataSet unDataSet) where T : new()
         {
             List<T> ListaResultado = Activator.CreateInstance<List<T>>();
-            
-            var Propiedades = typeof(T).GetProperties().ToList();
+
+            //CON ESTA LINEA ANDABA EL MAPEADOR
+            //var Propiedades = typeof(T).GetProperties().ToList();
+            var Propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var row in unDataSet.Tables[0].Rows)
             {
@@ -26,7 +28,11 @@ namespace ARTEC.FRAMEWORK.Persistencia
             return ListaResultado;
         }
 
-       
+
+
+
+
+
 
         public static T MapearUno<T>(DataSet unDataSet) where T : new()
         {
@@ -41,9 +47,14 @@ namespace ARTEC.FRAMEWORK.Persistencia
             return ListaResultado;
         }
 
+
+
         private static T CargarPropiedad<T>(DataRow row, IList<PropertyInfo> properties) where T : new()
         {
-            var unaInstancia = Activator.CreateInstance(typeof(T));
+
+            var Propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            T unaInstancia = Activator.CreateInstance<T>();
 
             foreach (var prop in properties)
             {
@@ -51,36 +62,171 @@ namespace ARTEC.FRAMEWORK.Persistencia
                 {
                     if (typeof(String).IsAssignableFrom(prop.PropertyType))
                     {
-                        if (prop.CanWrite)
+                        //if (prop.CanWrite)
+                        //{
+                        try
                         {
-                            try
-                            {
-                                prop.SetValue(unaInstancia, row[prop.Name].ToString(), null);
-                            }
-                            catch (Exception es)
-                            {
-                            }
+                            prop.SetValue(unaInstancia, row[prop.Name].ToString(), null);
                         }
+                        catch (Exception es)
+                        {
+                        }
+                        //}
                     }
                     else
                     {
-                        if (prop.CanWrite)
+                        //if (prop.CanWrite)
+                        //{
+                        try
                         {
-                            try
+                            if (prop.PropertyType.Name != "List`1")
                             {
                                 prop.SetValue(unaInstancia, CargarPropiedad(prop.PropertyType, row), null);
                             }
-                            catch (Exception es)
-                            {
-                            }
+
                         }
+                        catch (Exception es)
+                        {
+                        }
+                        //}
                     }
                 }
                 else
                 {
-                    if (prop.CanWrite)
+                    //if (prop.CanWrite)
+                    //{
+                    try
+                    {
+                        prop.SetValue(unaInstancia, row[prop.Name], null);
+                    }
+                    catch (Exception es)
+                    {
+                    }
+                    //}
+                }
+
+            }
+            //T result = (T)Convert.ChangeType(unaInstancia, typeof(T));
+            //return result;
+
+            return unaInstancia;
+
+        }
+
+
+
+        //public static List<T> CargarPropiedad<T>(DataSet unDataSet) where T : new()
+        //{
+
+
+        //    List<T> ListaResultado = Activator.CreateInstance<List<T>>();
+
+
+        //    foreach (DataRow row in unDataSet.Tables[0].Rows)
+        //    {
+
+        //        var Propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        //        T unaInstancia = Activator.CreateInstance<T>();
+
+        //        foreach (var prop in Propiedades)
+        //        {
+        //            if (prop.PropertyType.IsClass && !prop.PropertyType.IsPrimitive)
+        //            {
+        //                if (typeof(String).IsAssignableFrom(prop.PropertyType))
+        //                {
+        //                    //if (prop.CanWrite)
+        //                    //{
+        //                    try
+        //                    {
+        //                        prop.SetValue(unaInstancia, row[prop.Name].ToString(), null);
+        //                    }
+        //                    catch (Exception es)
+        //                    {
+        //                    }
+        //                    //}
+        //                }
+        //                else
+        //                {
+        //                    //if (prop.CanWrite)
+        //                    //{
+        //                    try
+        //                    {
+        //                        if (prop.PropertyType.Name != "List`1")
+        //                        {
+        //                            prop.SetValue(unaInstancia, CargarPropiedad(prop.PropertyType, row), null);
+        //                        }
+
+        //                    }
+        //                    catch (Exception es)
+        //                    {
+        //                    }
+        //                    //}
+        //                }
+        //            }
+        //            else
+        //            {
+        //                //if (prop.CanWrite)
+        //                //{
+        //                try
+        //                {
+        //                    prop.SetValue(unaInstancia, row[prop.Name], null);
+        //                }
+        //                catch (Exception es)
+        //                {
+        //                }
+        //                //}
+        //            }
+
+        //        }
+        //        //T result = (T)Convert.ChangeType(unaInstancia, typeof(T));
+        //        //return result;
+
+        //        ListaResultado.Add(unaInstancia);
+        //    }
+
+        //    return ListaResultado;
+
+        //}
+
+
+        //**************************************FALTA HACER EL CARGARPROPIEDADUNO, Y DPS CAMBIARLES EL NOMBRE A MAPEAR Y MAPEARUNO************************************
+        public static List<T> CargarPropiedad<T>(DataSet unDataSet) where T : new()
+        {
+
+
+            List<T> ListaResultado = Activator.CreateInstance<List<T>>();
+
+
+            foreach (DataRow row in unDataSet.Tables[0].Rows)
+            {
+
+                T unaInstancia = Activator.CreateInstance<T>();
+
+                //var Propiedades = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);//ESTABA ESTE CODIGO
+                var Propiedades = unaInstancia.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                
+                foreach (var prop in Propiedades)
+                {
+
+                    Type unTipo = prop.PropertyType;
+
+                    if (unTipo.IsClass && !typeof(String).IsAssignableFrom(unTipo))
                     {
                         try
+                        {
+                            if (unTipo.Name != "List`1")
+                            {
+                                prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row), null);
+                            }
+                        }
+                        catch (Exception es)
+                        {
+                        }
+                    }
+                    else
+                    {
+                         try
                         {
                             prop.SetValue(unaInstancia, row[prop.Name], null);
                         }
@@ -90,10 +236,13 @@ namespace ARTEC.FRAMEWORK.Persistencia
                     }
                 }
 
+                ListaResultado.Add(unaInstancia);
             }
-            T result = (T)Convert.ChangeType(unaInstancia, typeof(T));
-            return result;
+
+            return ListaResultado;
+
         }
+
 
 
         private static object CargarPropiedad(Type valType, DataRow row)
@@ -103,47 +252,29 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             foreach (var prop in properties)
             {
-                if (prop.PropertyType.IsClass && !prop.PropertyType.IsPrimitive)
-                {
-                    if (typeof(String).IsAssignableFrom(prop.PropertyType))
-                    {
-                        if (prop.CanWrite)
-                        {
-                            try
-                            {
-                                prop.SetValue(unaInstancia, row[prop.Name].ToString(), null);
-                            }
-                            catch (Exception es)
-                            {
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (prop.CanWrite)
-                        {
-                            try
-                            {
-                                prop.SetValue(unaInstancia, CargarPropiedad(prop.PropertyType, row), null);
-                            }
-                            catch (Exception es)
-                            {
-                            }
-                        }
-                    }
+                Type unTipo = prop.PropertyType;
 
+                if (unTipo.IsClass && !typeof(String).IsAssignableFrom(unTipo))
+                {
+                    try
+                    {
+                        if (unTipo.Name != "List`1")
+                        {
+                            prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row), null);
+                        }
+                    }
+                    catch (Exception es)
+                    {
+                    }
                 }
                 else
                 {
-                    if (prop.CanWrite)
+                    try
                     {
-                        try
-                        {
-                            prop.SetValue(unaInstancia, row[prop.Name], null);
-                        }
-                        catch (Exception es)
-                        {
-                        }
+                        prop.SetValue(unaInstancia, row[prop.Name], null);
+                    }
+                    catch (Exception es)
+                    {
                     }
                 }
             }
