@@ -71,6 +71,12 @@ namespace ARTEC.GUI
             }
         }
 
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            CrearSolicitud unfrmCrearSolicitud = new CrearSolicitud();
+            unfrmCrearSolicitud.Show();
+        }
+
 
 
 

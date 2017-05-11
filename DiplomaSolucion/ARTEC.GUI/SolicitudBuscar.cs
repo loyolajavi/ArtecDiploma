@@ -33,11 +33,21 @@ namespace ARTEC.GUI
             unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
             GrillaSolicitudBuscar.DataSource = null;
             GrillaSolicitudBuscar.DataSource = unasSolicitudes;
-            GrillaSolicitudBuscar.Columns["Asignado"].Visible = false;
+            GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
 
 
 
 
+        }
+
+        private void GrillaSolicitudBuscar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                //MessageBox.Show(GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value.ToString());
+                frmSolicitudModificar unfrmSolicitudModificar = new frmSolicitudModificar((int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value);
+                unfrmSolicitudModificar.Show();
+            }
         }
     }
 }

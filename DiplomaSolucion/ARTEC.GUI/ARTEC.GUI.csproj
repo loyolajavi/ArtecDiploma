@@ -57,6 +57,18 @@
     <Compile Include="CrearSolicitud.Designer.cs">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCotizaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCotizaciones.Designer.cs">
+      <DependentUpon>frmCotizaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSolicitudModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSolicitudModificar.Designer.cs">
+      <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearSolicitud.resx">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCotizaciones.resx">
+      <DependentUpon>frmCotizaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSolicitudModificar.resx">
+      <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

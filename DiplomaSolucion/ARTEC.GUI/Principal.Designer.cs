@@ -31,6 +31,7 @@ namespace ARTEC.GUI
             this.tabsPrincipal = new System.Windows.Forms.TabControl();
             this.tabSolic = new System.Windows.Forms.TabPage();
             this.tabHomol = new System.Windows.Forms.TabPage();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,15 +66,29 @@ namespace ARTEC.GUI
             this.tabHomol.Text = "tabPage2";
             this.tabHomol.UseVisualStyleBackColor = true;
             // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Location = new System.Drawing.Point(380, 13);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(87, 40);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 1;
+            this.buttonX1.Text = "Crear Solicitud";
+            this.buttonX1.TextColor = System.Drawing.Color.White;
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.Text = "ARTEC";
             this.Load += new System.EventHandler(this.Principal_Load);
@@ -87,6 +102,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabControl tabsPrincipal;
         private System.Windows.Forms.TabPage tabSolic;
         private System.Windows.Forms.TabPage tabHomol;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
 
 
 

@@ -399,6 +399,7 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.Name = "GrillaSolicitudBuscar";
             this.GrillaSolicitudBuscar.Size = new System.Drawing.Size(824, 372);
             this.GrillaSolicitudBuscar.TabIndex = 47;
+            this.GrillaSolicitudBuscar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaSolicitudBuscar_CellDoubleClick);
             // 
             // SolicitudBuscar
             // 
@@ -427,6 +428,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.comboBoxEx1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "SolicitudBuscar";
             this.Text = "MetroForm";
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();

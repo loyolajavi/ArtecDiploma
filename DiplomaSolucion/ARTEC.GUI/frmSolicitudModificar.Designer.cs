@@ -1,6 +1,6 @@
 namespace ARTEC.GUI
 {
-    partial class CrearSolicitud
+    partial class frmSolicitudModificar
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,13 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearSolicitud));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblAgenteResponsable = new DevComponents.DotNetBar.LabelX();
@@ -61,6 +60,10 @@ namespace ARTEC.GUI
             this.txtNombreAdjunto = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnAdjuntar = new DevComponents.DotNetBar.ButtonX();
             this.gboxBienes = new System.Windows.Forms.GroupBox();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.gboxAsociados = new System.Windows.Forms.GroupBox();
             this.grillaAgentesAsociados = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnAsociarAgente = new DevComponents.DotNetBar.ButtonX();
@@ -74,32 +77,10 @@ namespace ARTEC.GUI
             this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBien = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.validDependencia = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.ValidDep2 = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.customValidator1 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.validCantBien = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.validBien = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.customValidator2 = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.errorProvider4 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter4 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.validAgenteAsoc = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.customtxtAgente = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.errorProvider5 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter5 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.validNota = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.customtxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
-            this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customValidtxtCantBien = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -111,12 +92,6 @@ namespace ARTEC.GUI
             this.gboxAsociados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaAgentesAsociados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetalles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider6)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -140,10 +115,10 @@ namespace ARTEC.GUI
             this.panel1.Controls.Add(this.labelX1);
             this.panel1.Controls.Add(this.textBoxX1);
             this.panel1.Controls.Add(this.comboBoxEx4);
-            this.panel1.Location = new System.Drawing.Point(12, 2);
+            this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(957, 659);
-            this.panel1.TabIndex = 3;
+            this.panel1.Size = new System.Drawing.Size(1071, 659);
+            this.panel1.TabIndex = 6;
             // 
             // cboAgenteResp
             // 
@@ -153,7 +128,7 @@ namespace ARTEC.GUI
             this.cboAgenteResp.ForeColor = System.Drawing.Color.Black;
             this.cboAgenteResp.FormattingEnabled = true;
             this.cboAgenteResp.ItemHeight = 16;
-            this.cboAgenteResp.Location = new System.Drawing.Point(350, 50);
+            this.cboAgenteResp.Location = new System.Drawing.Point(350, 45);
             this.cboAgenteResp.Name = "cboAgenteResp";
             this.cboAgenteResp.Size = new System.Drawing.Size(161, 22);
             this.cboAgenteResp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -166,7 +141,7 @@ namespace ARTEC.GUI
             // 
             this.lblAgenteResponsable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblAgenteResponsable.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgenteResponsable.Location = new System.Drawing.Point(350, 31);
+            this.lblAgenteResponsable.Location = new System.Drawing.Point(350, 26);
             this.lblAgenteResponsable.Name = "lblAgenteResponsable";
             this.lblAgenteResponsable.Size = new System.Drawing.Size(91, 17);
             this.lblAgenteResponsable.TabIndex = 23;
@@ -177,20 +152,19 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrearSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnCrearSolicitud.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCrearSolicitud.Location = new System.Drawing.Point(422, 633);
+            this.btnCrearSolicitud.Location = new System.Drawing.Point(425, 633);
             this.btnCrearSolicitud.Name = "btnCrearSolicitud";
             this.btnCrearSolicitud.Size = new System.Drawing.Size(75, 23);
             this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearSolicitud.TabIndex = 22;
-            this.btnCrearSolicitud.Text = "Crear";
-            this.btnCrearSolicitud.Click += new System.EventHandler(this.btnCrearSolicitud_Click);
+            this.btnCrearSolicitud.Text = "Modificar";
             // 
             // gboxNotas
             // 
             this.gboxNotas.Controls.Add(this.btnNotas);
             this.gboxNotas.Controls.Add(this.GrillaNotas);
             this.gboxNotas.Controls.Add(this.txtNota);
-            this.gboxNotas.Location = new System.Drawing.Point(15, 489);
+            this.gboxNotas.Location = new System.Drawing.Point(15, 484);
             this.gboxNotas.Name = "gboxNotas";
             this.gboxNotas.Size = new System.Drawing.Size(928, 131);
             this.gboxNotas.TabIndex = 21;
@@ -207,7 +181,6 @@ namespace ARTEC.GUI
             this.btnNotas.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNotas.TabIndex = 10;
             this.btnNotas.Text = "Agregar";
-            this.btnNotas.Click += new System.EventHandler(this.btnNotas_Click);
             // 
             // GrillaNotas
             // 
@@ -242,7 +215,6 @@ namespace ARTEC.GUI
     "}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
             this.txtNota.Size = new System.Drawing.Size(832, 27);
             this.txtNota.TabIndex = 8;
-            this.validNota.SetValidator1(this.txtNota, this.customtxtNota);
             // 
             // txtFechaFin
             // 
@@ -254,7 +226,7 @@ namespace ARTEC.GUI
             this.txtFechaFin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaFin.ButtonDropDown.Visible = true;
             this.txtFechaFin.IsPopupCalendarOpen = false;
-            this.txtFechaFin.Location = new System.Drawing.Point(864, 50);
+            this.txtFechaFin.Location = new System.Drawing.Point(864, 45);
             // 
             // 
             // 
@@ -296,9 +268,9 @@ namespace ARTEC.GUI
             this.cboAsignado.ForeColor = System.Drawing.Color.Black;
             this.cboAsignado.FormattingEnabled = true;
             this.cboAsignado.ItemHeight = 16;
-            this.cboAsignado.Location = new System.Drawing.Point(83, 444);
+            this.cboAsignado.Location = new System.Drawing.Point(141, 439);
             this.cboAsignado.Name = "cboAsignado";
-            this.cboAsignado.Size = new System.Drawing.Size(116, 22);
+            this.cboAsignado.Size = new System.Drawing.Size(167, 22);
             this.cboAsignado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboAsignado.TabIndex = 19;
             // 
@@ -309,9 +281,9 @@ namespace ARTEC.GUI
             this.cboPrioridad.ForeColor = System.Drawing.Color.Black;
             this.cboPrioridad.FormattingEnabled = true;
             this.cboPrioridad.ItemHeight = 16;
-            this.cboPrioridad.Location = new System.Drawing.Point(83, 415);
+            this.cboPrioridad.Location = new System.Drawing.Point(141, 409);
             this.cboPrioridad.Name = "cboPrioridad";
-            this.cboPrioridad.Size = new System.Drawing.Size(116, 22);
+            this.cboPrioridad.Size = new System.Drawing.Size(167, 22);
             this.cboPrioridad.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboPrioridad.TabIndex = 18;
             // 
@@ -322,9 +294,9 @@ namespace ARTEC.GUI
             this.cboEstadoSolicitud.ForeColor = System.Drawing.Color.Black;
             this.cboEstadoSolicitud.FormattingEnabled = true;
             this.cboEstadoSolicitud.ItemHeight = 16;
-            this.cboEstadoSolicitud.Location = new System.Drawing.Point(83, 387);
+            this.cboEstadoSolicitud.Location = new System.Drawing.Point(141, 382);
             this.cboEstadoSolicitud.Name = "cboEstadoSolicitud";
-            this.cboEstadoSolicitud.Size = new System.Drawing.Size(116, 22);
+            this.cboEstadoSolicitud.Size = new System.Drawing.Size(167, 22);
             this.cboEstadoSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboEstadoSolicitud.TabIndex = 17;
             // 
@@ -334,11 +306,12 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(21, 389);
+            this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
+            this.labelX8.Location = new System.Drawing.Point(21, 384);
             this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(75, 23);
+            this.labelX8.Size = new System.Drawing.Size(121, 23);
             this.labelX8.TabIndex = 14;
-            this.labelX8.Text = "Estado";
+            this.labelX8.Text = "Estado Solicitud";
             // 
             // labelX10
             // 
@@ -346,9 +319,10 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(21, 443);
+            this.labelX10.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
+            this.labelX10.Location = new System.Drawing.Point(21, 438);
             this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(75, 23);
+            this.labelX10.Size = new System.Drawing.Size(87, 23);
             this.labelX10.TabIndex = 16;
             this.labelX10.Text = "Asignado a";
             // 
@@ -358,7 +332,8 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(21, 414);
+            this.labelX9.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
+            this.labelX9.Location = new System.Drawing.Point(21, 409);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(75, 23);
             this.labelX9.TabIndex = 15;
@@ -374,7 +349,7 @@ namespace ARTEC.GUI
             this.txtFechaInicio.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaInicio.ButtonDropDown.Visible = true;
             this.txtFechaInicio.IsPopupCalendarOpen = false;
-            this.txtFechaInicio.Location = new System.Drawing.Point(714, 50);
+            this.txtFechaInicio.Location = new System.Drawing.Point(714, 45);
             // 
             // 
             // 
@@ -415,7 +390,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(803, 50);
+            this.labelX6.Location = new System.Drawing.Point(803, 45);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(65, 22);
             this.labelX6.TabIndex = 10;
@@ -427,7 +402,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(665, 50);
+            this.labelX5.Location = new System.Drawing.Point(665, 45);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(48, 22);
             this.labelX5.TabIndex = 9;
@@ -442,13 +417,10 @@ namespace ARTEC.GUI
             this.pnlAdjuntos.Controls.Add(this.btnSeleccionarArchivo);
             this.pnlAdjuntos.Controls.Add(this.txtNombreAdjunto);
             this.pnlAdjuntos.Controls.Add(this.btnAdjuntar);
-            this.pnlAdjuntos.Location = new System.Drawing.Point(342, 381);
+            this.pnlAdjuntos.Location = new System.Drawing.Point(342, 376);
             this.pnlAdjuntos.Name = "pnlAdjuntos";
             this.pnlAdjuntos.Size = new System.Drawing.Size(601, 104);
             this.pnlAdjuntos.TabIndex = 7;
-            this.pnlAdjuntos.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragDrop);
-            this.pnlAdjuntos.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragEnter);
-            this.pnlAdjuntos.DragLeave += new System.EventHandler(this.pnlAdjuntos_DragLeave);
             // 
             // lstAdjuntos
             // 
@@ -524,6 +496,10 @@ namespace ARTEC.GUI
             // 
             // gboxBienes
             // 
+            this.gboxBienes.Controls.Add(this.buttonX2);
+            this.gboxBienes.Controls.Add(this.buttonX1);
+            this.gboxBienes.Controls.Add(this.labelX3);
+            this.gboxBienes.Controls.Add(this.comboBoxEx1);
             this.gboxBienes.Controls.Add(this.gboxAsociados);
             this.gboxBienes.Controls.Add(this.cboTipoBien);
             this.gboxBienes.Controls.Add(this.txtAgregarDetalle);
@@ -532,12 +508,62 @@ namespace ARTEC.GUI
             this.gboxBienes.Controls.Add(this.lblCantidad);
             this.gboxBienes.Controls.Add(this.txtBien);
             this.gboxBienes.Controls.Add(this.cboBien);
-            this.gboxBienes.Location = new System.Drawing.Point(15, 78);
+            this.gboxBienes.Controls.Add(this.buttonX3);
+            this.gboxBienes.Location = new System.Drawing.Point(15, 73);
             this.gboxBienes.Name = "gboxBienes";
-            this.gboxBienes.Size = new System.Drawing.Size(928, 293);
+            this.gboxBienes.Size = new System.Drawing.Size(1053, 293);
             this.gboxBienes.TabIndex = 2;
             this.gboxBienes.TabStop = false;
             this.gboxBienes.Text = "Agregar Bienes";
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Location = new System.Drawing.Point(246, 21);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(75, 23);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 28;
+            this.buttonX2.Text = "Cancelar";
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Location = new System.Drawing.Point(152, 21);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(75, 23);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 27;
+            this.buttonX1.Text = "Editar";
+            // 
+            // labelX3
+            // 
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX3.Location = new System.Drawing.Point(6, 260);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(52, 17);
+            this.labelX3.TabIndex = 26;
+            this.labelX3.Text = "Estado";
+            // 
+            // comboBoxEx1
+            // 
+            this.comboBoxEx1.DisplayMember = "Text";
+            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxEx1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEx1.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxEx1.FormattingEnabled = true;
+            this.comboBoxEx1.ItemHeight = 16;
+            this.comboBoxEx1.Location = new System.Drawing.Point(58, 258);
+            this.comboBoxEx1.Name = "comboBoxEx1";
+            this.comboBoxEx1.Size = new System.Drawing.Size(108, 22);
+            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboBoxEx1.TabIndex = 26;
             // 
             // gboxAsociados
             // 
@@ -583,7 +609,6 @@ namespace ARTEC.GUI
             this.btnAsociarAgente.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAsociarAgente.TabIndex = 11;
             this.btnAsociarAgente.Text = "Asociar";
-            this.btnAsociarAgente.Click += new System.EventHandler(this.btnAsociarAgente_Click);
             // 
             // txtAgente
             // 
@@ -600,8 +625,6 @@ namespace ARTEC.GUI
             this.txtAgente.PreventEnterBeep = true;
             this.txtAgente.Size = new System.Drawing.Size(173, 22);
             this.txtAgente.TabIndex = 10;
-            this.validAgenteAsoc.SetValidator1(this.txtAgente, this.customtxtAgente);
-            this.txtAgente.TextChanged += new System.EventHandler(this.txtAgente_TextChanged);
             // 
             // labelX2
             // 
@@ -627,7 +650,6 @@ namespace ARTEC.GUI
             this.cboAgentesAsociados.Size = new System.Drawing.Size(173, 22);
             this.cboAgentesAsociados.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboAgentesAsociados.TabIndex = 13;
-            this.cboAgentesAsociados.SelectionChangeCommitted += new System.EventHandler(this.cboAgentesAsociados_SelectionChangeCommitted);
             // 
             // cboTipoBien
             // 
@@ -642,19 +664,17 @@ namespace ARTEC.GUI
             this.cboTipoBien.Size = new System.Drawing.Size(121, 22);
             this.cboTipoBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboTipoBien.TabIndex = 8;
-            this.cboTipoBien.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBien_SelectionChangeCommitted);
             // 
             // txtAgregarDetalle
             // 
             this.txtAgregarDetalle.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.txtAgregarDetalle.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.txtAgregarDetalle.Location = new System.Drawing.Point(102, 255);
+            this.txtAgregarDetalle.Location = new System.Drawing.Point(196, 255);
             this.txtAgregarDetalle.Name = "txtAgregarDetalle";
             this.txtAgregarDetalle.Size = new System.Drawing.Size(97, 29);
             this.txtAgregarDetalle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtAgregarDetalle.TabIndex = 6;
             this.txtAgregarDetalle.Text = "Agregar";
-            this.txtAgregarDetalle.Click += new System.EventHandler(this.txtAgregarDetalle_Click);
             // 
             // grillaDetalles
             // 
@@ -690,9 +710,8 @@ namespace ARTEC.GUI
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grillaDetalles.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.grillaDetalles.Size = new System.Drawing.Size(592, 274);
+            this.grillaDetalles.Size = new System.Drawing.Size(720, 274);
             this.grillaDetalles.TabIndex = 7;
-            this.grillaDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaDetalles_CellClick);
             // 
             // txtCantBien
             // 
@@ -710,7 +729,6 @@ namespace ARTEC.GUI
             this.txtCantBien.Size = new System.Drawing.Size(36, 22);
             this.txtCantBien.TabIndex = 5;
             this.txtCantBien.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.validCantBien.SetValidator1(this.txtCantBien, this.customValidtxtCantBien);
             // 
             // lblCantidad
             // 
@@ -739,8 +757,6 @@ namespace ARTEC.GUI
             this.txtBien.PreventEnterBeep = true;
             this.txtBien.Size = new System.Drawing.Size(221, 22);
             this.txtBien.TabIndex = 3;
-            this.validBien.SetValidator1(this.txtBien, this.customValidator2);
-            this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
             // 
             // cboBien
             // 
@@ -754,7 +770,17 @@ namespace ARTEC.GUI
             this.cboBien.Size = new System.Drawing.Size(221, 22);
             this.cboBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboBien.TabIndex = 10;
-            this.cboBien.SelectionChangeCommitted += new System.EventHandler(this.cboBien_SelectionChangeCommitted);
+            // 
+            // buttonX3
+            // 
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Location = new System.Drawing.Point(204, 255);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(86, 29);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 0;
+            this.buttonX3.Text = "Confirmar";
             // 
             // labelX1
             // 
@@ -763,7 +789,7 @@ namespace ARTEC.GUI
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(21, 31);
+            this.labelX1.Location = new System.Drawing.Point(21, 26);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(91, 17);
             this.labelX1.TabIndex = 0;
@@ -779,14 +805,12 @@ namespace ARTEC.GUI
             this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
             this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(21, 50);
+            this.textBoxX1.Location = new System.Drawing.Point(21, 45);
             this.textBoxX1.Multiline = true;
             this.textBoxX1.Name = "textBoxX1";
             this.textBoxX1.PreventEnterBeep = true;
             this.textBoxX1.Size = new System.Drawing.Size(315, 22);
             this.textBoxX1.TabIndex = 1;
-            this.ValidDep2.SetValidator1(this.textBoxX1, this.customValidator1);
-            this.textBoxX1.TextChanged += new System.EventHandler(this.textBoxX1_TextChanged);
             // 
             // comboBoxEx4
             // 
@@ -796,147 +820,26 @@ namespace ARTEC.GUI
             this.comboBoxEx4.ForeColor = System.Drawing.Color.Black;
             this.comboBoxEx4.FormattingEnabled = true;
             this.comboBoxEx4.ItemHeight = 16;
-            this.comboBoxEx4.Location = new System.Drawing.Point(21, 50);
+            this.comboBoxEx4.Location = new System.Drawing.Point(21, 45);
             this.comboBoxEx4.MaxDropDownItems = 10;
             this.comboBoxEx4.Name = "comboBoxEx4";
             this.comboBoxEx4.Size = new System.Drawing.Size(315, 22);
             this.comboBoxEx4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.comboBoxEx4.TabIndex = 20;
             this.comboBoxEx4.Visible = false;
-            this.comboBoxEx4.SelectionChangeCommitted += new System.EventHandler(this.comboBoxEx4_SelectionChangeCommitted);
             // 
-            // validDependencia
-            // 
-            this.validDependencia.ContainerControl = this;
-            this.validDependencia.ErrorProvider = this.errorProvider1;
-            this.validDependencia.Highlighter = this.highlighter1;
-            this.validDependencia.ValidationType = DevComponents.DotNetBar.Validator.eValidationType.ValidatingEventPerControl;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
-            // ValidDep2
-            // 
-            this.ValidDep2.ContainerControl = this;
-            this.ValidDep2.ErrorProvider = this.errorProvider2;
-            this.ValidDep2.Highlighter = this.highlighter2;
-            // 
-            // customValidator1
-            // 
-            this.customValidator1.ErrorMessage = "Your error message here.";
-            this.customValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidatorDependencia_ValidateValue);
-            // 
-            // errorProvider2
-            // 
-            this.errorProvider2.ContainerControl = this;
-            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
-            // 
-            // highlighter2
-            // 
-            this.highlighter2.ContainerControl = this;
-            // 
-            // validCantBien
-            // 
-            this.validCantBien.ContainerControl = this;
-            this.validCantBien.ErrorProvider = this.errorProvider3;
-            this.validCantBien.Highlighter = this.highlighter3;
-            // 
-            // errorProvider3
-            // 
-            this.errorProvider3.ContainerControl = this;
-            this.errorProvider3.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider3.Icon")));
-            // 
-            // highlighter3
-            // 
-            this.highlighter3.ContainerControl = this;
-            // 
-            // validBien
-            // 
-            this.validBien.ContainerControl = this;
-            this.validBien.ErrorProvider = this.errorProvider4;
-            this.validBien.Highlighter = this.highlighter4;
-            // 
-            // customValidator2
-            // 
-            this.customValidator2.ErrorMessage = "Ingrese un bien";
-            this.customValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidator2.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.customValidatorBien_ValidateValue);
-            // 
-            // errorProvider4
-            // 
-            this.errorProvider4.ContainerControl = this;
-            this.errorProvider4.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider4.Icon")));
-            // 
-            // highlighter4
-            // 
-            this.highlighter4.ContainerControl = this;
-            // 
-            // validAgenteAsoc
-            // 
-            this.validAgenteAsoc.ContainerControl = this;
-            this.validAgenteAsoc.ErrorProvider = this.errorProvider5;
-            this.validAgenteAsoc.Highlighter = this.highlighter5;
-            // 
-            // customtxtAgente
-            // 
-            this.customtxtAgente.ErrorMessage = "Your error message here.";
-            this.customtxtAgente.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customtxtAgente.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidatetxtAgente);
-            // 
-            // errorProvider5
-            // 
-            this.errorProvider5.ContainerControl = this;
-            this.errorProvider5.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider5.Icon")));
-            // 
-            // highlighter5
-            // 
-            this.highlighter5.ContainerControl = this;
-            // 
-            // validNota
-            // 
-            this.validNota.ContainerControl = this;
-            this.validNota.ErrorProvider = this.errorProvider6;
-            this.validNota.Highlighter = this.highlighter6;
-            // 
-            // customtxtNota
-            // 
-            this.customtxtNota.ErrorMessage = "Your error message here.";
-            this.customtxtNota.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customtxtNota.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidtxtNota);
-            // 
-            // errorProvider6
-            // 
-            this.errorProvider6.ContainerControl = this;
-            this.errorProvider6.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider6.Icon")));
-            // 
-            // highlighter6
-            // 
-            this.highlighter6.ContainerControl = this;
-            // 
-            // customValidtxtCantBien
-            // 
-            this.customValidtxtCantBien.ErrorMessage = "Your error message here.";
-            this.customValidtxtCantBien.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customValidtxtCantBien.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidtxtCantBien);
-            // 
-            // CrearSolicitud
+            // frmSolicitudModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 671);
+            this.ClientSize = new System.Drawing.Size(1279, 669);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "CrearSolicitud";
-            this.Text = "Crear Solicitud";
-            this.Load += new System.EventHandler(this.CrearSolicitud_Load);
+            this.ForeColor = System.Drawing.Color.Black;
+            this.Name = "frmSolicitudModificar";
+            this.Text = resources.GetString("$this.Text");
+            this.Load += new System.EventHandler(this.frmSolicitudModificar_Load);
             this.panel1.ResumeLayout(false);
             this.gboxNotas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).EndInit();
@@ -948,12 +851,6 @@ namespace ARTEC.GUI
             this.gboxAsociados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grillaAgentesAsociados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetalles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -961,68 +858,50 @@ namespace ARTEC.GUI
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox gboxBienes;
-        private DevComponents.DotNetBar.Controls.DataGridViewX grillaDetalles;
-        private DevComponents.DotNetBar.ButtonX txtAgregarDetalle;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtCantBien;
-        private DevComponents.DotNetBar.LabelX lblCantidad;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
-        private DevComponents.DotNetBar.LabelX labelX1;
-        private System.Windows.Forms.Panel pnlAdjuntos;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgenteResp;
+        private DevComponents.DotNetBar.LabelX lblAgenteResponsable;
+        private DevComponents.DotNetBar.ButtonX btnCrearSolicitud;
+        private System.Windows.Forms.GroupBox gboxNotas;
+        private DevComponents.DotNetBar.ButtonX btnNotas;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaNotas;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtNota;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaFin;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAsignado;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboPrioridad;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboEstadoSolicitud;
+        private DevComponents.DotNetBar.LabelX labelX8;
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.LabelX labelX9;
-        private DevComponents.DotNetBar.LabelX labelX8;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaFin;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaInicio;
         private DevComponents.DotNetBar.LabelX labelX6;
         private DevComponents.DotNetBar.LabelX labelX5;
-        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtNota;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboTipoBien;
+        private System.Windows.Forms.Panel pnlAdjuntos;
+        private DevComponents.DotNetBar.ListBoxAdv lstAdjuntos;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAdjuntos;
+        private DevComponents.DotNetBar.ButtonX btnSeleccionarArchivo;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNombreAdjunto;
+        private DevComponents.DotNetBar.ButtonX btnAdjuntar;
+        private System.Windows.Forms.GroupBox gboxBienes;
         private System.Windows.Forms.GroupBox gboxAsociados;
+        private DevComponents.DotNetBar.Controls.DataGridViewX grillaAgentesAsociados;
+        private DevComponents.DotNetBar.ButtonX btnAsociarAgente;
         private DevComponents.DotNetBar.Controls.TextBoxX txtAgente;
         private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.ButtonX btnAsociarAgente;
-        private DevComponents.DotNetBar.Controls.DataGridViewX grillaAgentesAsociados;
-        private DevComponents.DotNetBar.ButtonX btnAdjuntar;
-        private System.Windows.Forms.GroupBox gboxNotas;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboBien;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgentesAsociados;
-        private DevComponents.DotNetBar.Validator.SuperValidator validDependencia;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
-        private DevComponents.DotNetBar.Validator.SuperValidator ValidDep2;
-        private System.Windows.Forms.ErrorProvider errorProvider2;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter2;
-        private DevComponents.DotNetBar.Validator.SuperValidator validCantBien;
-        private System.Windows.Forms.ErrorProvider errorProvider3;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter3;
-        private DevComponents.DotNetBar.ButtonX btnCrearSolicitud;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtNombreAdjunto;
-        private DevComponents.DotNetBar.ButtonX btnSeleccionarArchivo;
-        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAdjuntos;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator1;
-        private DevComponents.DotNetBar.Validator.SuperValidator validBien;
-        private System.Windows.Forms.ErrorProvider errorProvider4;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter4;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidator2;
-        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaNotas;
-        private DevComponents.DotNetBar.ButtonX btnNotas;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgenteResp;
-        private DevComponents.DotNetBar.LabelX lblAgenteResponsable;
-        private DevComponents.DotNetBar.ListBoxAdv lstAdjuntos;
-        private DevComponents.DotNetBar.Validator.SuperValidator validAgenteAsoc;
-        private System.Windows.Forms.ErrorProvider errorProvider5;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter5;
-        private DevComponents.DotNetBar.Validator.CustomValidator customtxtAgente;
-        private DevComponents.DotNetBar.Validator.SuperValidator validNota;
-        private System.Windows.Forms.ErrorProvider errorProvider6;
-        private DevComponents.DotNetBar.Validator.Highlighter highlighter6;
-        private DevComponents.DotNetBar.Validator.CustomValidator customtxtNota;
-        private DevComponents.DotNetBar.Validator.CustomValidator customValidtxtCantBien;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboTipoBien;
+        private DevComponents.DotNetBar.ButtonX txtAgregarDetalle;
+        private DevComponents.DotNetBar.Controls.DataGridViewX grillaDetalles;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtCantBien;
+        private DevComponents.DotNetBar.LabelX lblCantidad;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboBien;
+        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
+        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
+        private DevComponents.DotNetBar.ButtonX buttonX2;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX buttonX3;
     }
 }

@@ -552,7 +552,7 @@ namespace ARTEC.GUI
             }
             else
             {
-                if (string.Equals(e.ControlToValidate.Text, unaDep.NombreDependencia))
+                if (unaDep != null && string.Equals(e.ControlToValidate.Text, unaDep.NombreDependencia))
                 {
                     e.IsValid = true;
                 }
@@ -636,7 +636,7 @@ namespace ARTEC.GUI
             }
             else
             {
-                if (string.Equals(e.ControlToValidate.Text, unaCat.DescripCategoria))
+                if (unaCat != null && string.Equals(e.ControlToValidate.Text, unaCat.DescripCategoria))
                 {
                     e.IsValid = true;
                 }
@@ -781,6 +781,18 @@ namespace ARTEC.GUI
         private void EventValidtxtNota(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNota.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void EventValidtxtCantBien(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCantBien.Text))
             {
                 e.IsValid = false;
             }

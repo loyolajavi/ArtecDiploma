@@ -13,6 +13,13 @@ namespace ARTEC.ENTIDADES
         public string NombreUsuario { get; set; }
         public string Pass { get; set; }
 
-
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.NombreUsuario))
+            {
+                return this.NombreUsuario.ToString();
+            }
+            return "";
+        }
     }
 }
