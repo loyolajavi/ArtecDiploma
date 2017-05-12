@@ -17,10 +17,10 @@ namespace ARTEC.GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
-            Application.Run(new CrearSolicitud());
+            //Application.Run(new CrearSolicitud());
             //Application.Run(new frmSolicitudModificar());
 
-            //Application.Run(new Principal());
+            Application.Run(new Principal());
 
         }
     }

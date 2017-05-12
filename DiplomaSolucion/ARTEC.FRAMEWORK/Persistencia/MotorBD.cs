@@ -81,7 +81,63 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
         }
 
+        public static DataTable EjecutarDataTable(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        {
+            DataTable Resultado;
 
+            try
+            {
+                ConexionIniciar();
+                TransaccionIniciar();
+
+                using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
+                {
+                    Resultado = CrearDataTable(Comando);
+                    TransaccionAceptar();
+                    return Resultado;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransaccionCancelar();
+                throw;
+            }
+
+            finally
+            {
+                ConexionFinalizar();
+            }
+
+        }
+
+        public static IDataReader EjecutarDataReader(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        {
+            IDataReader Resultado;
+
+            try
+            {
+                ConexionIniciar();
+                TransaccionIniciar();
+
+                using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
+                {
+                    Resultado = Comando.ExecuteReader();
+                    TransaccionAceptar();
+                    return Resultado;
+                }
+            }
+            catch (Exception ex)
+            {
+                TransaccionCancelar();
+                throw;
+            }
+
+            finally
+            {
+                ConexionFinalizar();
+            }
+
+        }
 
 
         private static SqlCommand CrearComando(SqlConnection Conexion, CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
@@ -119,7 +175,17 @@ namespace ARTEC.FRAMEWORK.Persistencia
             return result;
         }
 
-
+        private static DataTable CrearDataTable(SqlCommand command)
+        {
+            DataTable result;
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+            {
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                result = dataTable;
+            }
+            return result;
+        }
 
 
         private static DataSet CrearDataSet(SqlCommand unComando)

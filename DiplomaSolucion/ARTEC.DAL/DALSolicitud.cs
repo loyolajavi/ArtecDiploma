@@ -75,14 +75,36 @@ namespace ARTEC.DAL
 
             try
             {
+                //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
+                //{
+
+                //    //Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
+                    
+                //    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                //    //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+                //    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+
+
+
+                //    //System.Threading.Thread.Sleep(500);
+                //    //stopwatch.Stop();
+                //    //System.Windows.Forms.MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " Hola");
+
+                //    return unaListaSolicitudes;
+
+                    
+                    
+
+                //}
+
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
                 {
 
                     //Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
-                    
+
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                     //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
-                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds).ToList();
 
 
 
@@ -92,10 +114,11 @@ namespace ARTEC.DAL
 
                     return unaListaSolicitudes;
 
-                    
-                    
+
+
 
                 }
+
             }
             catch (Exception)
             {

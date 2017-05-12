@@ -69,8 +69,9 @@ namespace ARTEC.GUI
             // buttonX1
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.buttonX1.CustomColorName = "Blue";
             this.buttonX1.Location = new System.Drawing.Point(380, 13);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(87, 40);
