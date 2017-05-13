@@ -104,7 +104,7 @@ namespace ARTEC.DAL
 
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                     //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
-                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds).ToList();
+                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
 
 
 

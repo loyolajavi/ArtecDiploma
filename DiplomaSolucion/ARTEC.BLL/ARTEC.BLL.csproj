@@ -46,6 +46,7 @@
     <Compile Include="BLLHardware.cs" />
     <Compile Include="BLLPolitica.cs" />
     <Compile Include="BLLPrioridad.cs" />
+    <Compile Include="BLLSolicDetalle.cs" />
     <Compile Include="BLLSolicitud.cs" />
     <Compile Include="BLLTipoBien.cs" />
     <Compile Include="BLLUsuario.cs" />

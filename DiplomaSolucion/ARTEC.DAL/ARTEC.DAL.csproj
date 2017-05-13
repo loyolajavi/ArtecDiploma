@@ -47,6 +47,7 @@
     <Compile Include="DALHardware.cs" />
     <Compile Include="DALPolitica.cs" />
     <Compile Include="DALPrioridad.cs" />
+    <Compile Include="DALSolicDetalle.cs" />
     <Compile Include="DALSolicitud.cs" />
     <Compile Include="DALTipoBien.cs" />
     <Compile Include="DALTipoDependencia.cs" />

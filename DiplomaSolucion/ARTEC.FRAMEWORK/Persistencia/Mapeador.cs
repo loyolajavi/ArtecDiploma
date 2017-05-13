@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Reflection;
+using System.Collections;
 
 namespace ARTEC.FRAMEWORK.Persistencia
 {
@@ -172,7 +173,7 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             foreach (var row in unDataSet.Tables[0].Rows)
             {
-                T Item = (T)CargarPropiedad(unTipo, (DataRow)row);
+                T Item = (T)CargarPropiedad(unTipo, (DataRow)row, 1);
                 ListaResultado.Add(Item);
             }
 
@@ -193,7 +194,7 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             foreach (var row in unDataSet.Tables[0].Rows)
             {
-                Resultado = (T)CargarPropiedad(unTipo, (DataRow)row);
+                Resultado = (T)CargarPropiedad(unTipo, (DataRow)row, 1);
             }
 
             T result = (T)Convert.ChangeType(Resultado, typeof(T));
@@ -204,22 +205,80 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
 
 
-        private static object CargarPropiedad(Type valType, DataRow row)
+        //private static object CargarPropiedad(Type valType, DataRow row, int Nro)
+        //{
+
+        //    var unaInstancia = Activator.CreateInstance(valType);
+        //    var properties = unaInstancia.GetType().GetProperties();
+
+        //    foreach (var prop in properties)
+        //    {
+        //        Type unTipo = prop.PropertyType;
+        //        //ver si es primitivo, string, decimal, int,etc y si es va el setvalue, else voy por el recursivo
+        //        try
+        //        {
+        //            if (unTipo.IsClass && !typeof(String).IsAssignableFrom(unTipo))
+        //            {
+        //                if (Nro <= 2)
+        //                {
+        //                    if (unTipo.Name != "List`1")
+        //                    {
+        //                        prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row, Nro + 1), null);
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+
+        //                prop.SetValue(unaInstancia, row[prop.Name], null);
+
+        //            }
+        //        }
+        //        catch (Exception es)
+        //        {
+        //        }
+        //    }
+
+        //    //T result = (T)Convert.ChangeType(unaInstancia, typeof(T));
+        //    //return result;
+
+        //    return unaInstancia;
+        //}
+
+
+
+        private static object CargarPropiedad(Type valType, DataRow row, int Nro)
         {
+
             var unaInstancia = Activator.CreateInstance(valType);
             var properties = unaInstancia.GetType().GetProperties();
 
             foreach (var prop in properties)
             {
                 Type unTipo = prop.PropertyType;
-
                 try
                 {
+
+                    //if (unTipo.IsPrimitive || typeof(String).IsAssignableFrom(unTipo) || typeof(DateTime).IsAssignableFrom(unTipo) || typeof(Decimal).IsAssignableFrom(unTipo))
+                    //{
+                    //    prop.SetValue(unaInstancia, row[prop.Name], null);
+                    //}
+                    //else if (!typeof(ICollection).IsAssignableFrom(unTipo) && Nro <=2)
+                    //{
+                    //    if (unTipo.IsClass)
+                    //    {
+                    //        prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row, Nro + 1), null);
+                    //    }
+                    //}
+
                     if (unTipo.IsClass && !typeof(String).IsAssignableFrom(unTipo))
                     {
-                        if (unTipo.Name != "List`1")
+                        if (Nro <= 2)
                         {
-                            prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row), null);
+                            if (unTipo.Name != "List`1")
+                            {
+                                prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row, Nro + 1), null);
+                            }
                         }
                     }
                     else
@@ -239,9 +298,6 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             return unaInstancia;
         }
-
-
-
 
 
 

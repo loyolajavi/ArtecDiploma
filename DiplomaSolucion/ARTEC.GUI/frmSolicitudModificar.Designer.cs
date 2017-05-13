@@ -79,7 +79,7 @@ namespace ARTEC.GUI
             this.cboBien = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
@@ -113,7 +113,7 @@ namespace ARTEC.GUI
             this.panel1.Controls.Add(this.pnlAdjuntos);
             this.panel1.Controls.Add(this.gboxBienes);
             this.panel1.Controls.Add(this.labelX1);
-            this.panel1.Controls.Add(this.textBoxX1);
+            this.panel1.Controls.Add(this.txtDependencia);
             this.panel1.Controls.Add(this.comboBoxEx4);
             this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
@@ -430,7 +430,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -795,22 +794,22 @@ namespace ARTEC.GUI
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "Dependencia";
             // 
-            // textBoxX1
+            // txtDependencia
             // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            this.txtDependencia.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(21, 45);
-            this.textBoxX1.Multiline = true;
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.Size = new System.Drawing.Size(315, 22);
-            this.textBoxX1.TabIndex = 1;
+            this.txtDependencia.Border.Class = "TextBoxBorder";
+            this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDependencia.ForeColor = System.Drawing.Color.Black;
+            this.txtDependencia.Location = new System.Drawing.Point(21, 45);
+            this.txtDependencia.Multiline = true;
+            this.txtDependencia.Name = "txtDependencia";
+            this.txtDependencia.PreventEnterBeep = true;
+            this.txtDependencia.Size = new System.Drawing.Size(315, 22);
+            this.txtDependencia.TabIndex = 1;
             // 
             // comboBoxEx4
             // 
@@ -836,7 +835,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmSolicitudModificar";
             this.Text = resources.GetString("$this.Text");
             this.Load += new System.EventHandler(this.frmSolicitudModificar_Load);
@@ -896,7 +894,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboBien;
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;

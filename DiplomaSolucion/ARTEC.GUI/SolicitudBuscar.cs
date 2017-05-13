@@ -18,6 +18,10 @@ namespace ARTEC.GUI
 {
     public partial class SolicitudBuscar : DevComponents.DotNetBar.Metro.MetroForm
     {
+
+
+        List<Solicitud> unasSolicitudes = new List<Solicitud>();
+
         public SolicitudBuscar()
         {
             InitializeComponent();
@@ -26,7 +30,7 @@ namespace ARTEC.GUI
         private void btnBuscar_Click(object sender, EventArgs e)
         {
 
-            List<Solicitud> unasSolicitudes = new List<Solicitud>();
+            
 
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
@@ -44,8 +48,10 @@ namespace ARTEC.GUI
         {
             if (e.RowIndex > -1 && e.ColumnIndex > -1)
             {
+                
                 //MessageBox.Show(GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value.ToString());
-                frmSolicitudModificar unfrmSolicitudModificar = new frmSolicitudModificar((int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value);
+
+                frmSolicitudModificar unfrmSolicitudModificar = new frmSolicitudModificar((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 unfrmSolicitudModificar.Show();
             }
         }
