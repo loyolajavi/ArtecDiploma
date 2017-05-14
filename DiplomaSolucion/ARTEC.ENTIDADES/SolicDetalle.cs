@@ -20,8 +20,8 @@ namespace ARTEC.ENTIDADES
         }
         public int Cantidad { get; set; }
         
-        private EstadoSolDetalle _unEstado = new EstadoSolDetalle();
-        public EstadoSolDetalle unEstado
+        private EstadoSolicDetalle _unEstado = new EstadoSolicDetalle();
+        public EstadoSolicDetalle unEstado
         {
             get { return _unEstado; }
             set { _unEstado = value; }

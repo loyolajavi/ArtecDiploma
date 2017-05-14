@@ -24,7 +24,8 @@ namespace ARTEC.DAL
                 new SqlParameter("@IdDependencia", laSolicitud.laDependencia.IdDependencia),
                 new SqlParameter("@IdPrioridad", laSolicitud.UnaPrioridad.IdPrioridad),
                 new SqlParameter("@IdEstado", laSolicitud.UnEstado.IdEstadoSolicitud),
-                new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario)
+                new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario),
+                new SqlParameter("@IdAgente", laSolicitud.AgenteResp.IdAgente)
 			};
 
             try
@@ -44,7 +45,7 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdSolicitud", IDDevuelto),
                         new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
                         new SqlParameter("@Cantidad", item.Cantidad),
-                        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolDetalle)
+                        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolicDetalle)
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);

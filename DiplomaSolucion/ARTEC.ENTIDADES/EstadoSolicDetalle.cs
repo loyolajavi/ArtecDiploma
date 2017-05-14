@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class EstadoSolDetalle
+    public class EstadoSolicDetalle
     {
 
-        public int IdEstadoSolDetalle { get; set; }
-        public string DescripSolDetalle { get; set; }
+        public int IdEstadoSolicDetalle { get; set; }
+        public string DescripEstadoSolicDetalle { get; set; }
 
         public enum EnumEstadoSolDetalle
         {
@@ -19,7 +19,7 @@ namespace ARTEC.ENTIDADES
 
         public override string ToString()
         {
-            return this.DescripSolDetalle;
+            return this.DescripEstadoSolicDetalle;
         }
 
 

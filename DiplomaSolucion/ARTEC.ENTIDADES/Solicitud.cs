@@ -16,6 +16,7 @@ namespace ARTEC.ENTIDADES
         public Prioridad UnaPrioridad { get; set; }
         public EstadoSolicitud UnEstado { get; set; }
         public Usuario Asignado { get; set; }
+        public Agente AgenteResp { get; set; }
         
         private List<SolicDetalle> _unosDetallesSolicitud = new List<SolicDetalle>();
         public List<SolicDetalle> unosDetallesSolicitud

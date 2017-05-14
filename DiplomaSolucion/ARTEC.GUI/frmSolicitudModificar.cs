@@ -21,8 +21,13 @@ namespace ARTEC.GUI
         Solicitud unaSolicitud;
         List<Agente> unosAgentesResp;
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
+        List<EstadoSolicDetalle> unosEstadoSolDetalles = new List<EstadoSolicDetalle>();
         List<Prioridad> unasPrioridades = new List<Prioridad>();
         List<Usuario> unosUsuarios = new List<Usuario>();
+        int AuxTipoCategoria = 1;
+        List<TipoBien> unosTipoBien = new List<TipoBien>();
+        TipoBien unTipoBienAux = new TipoBien();
+        BLLTipoBien managerTipoBienAux = new BLLTipoBien();
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -44,9 +49,17 @@ namespace ARTEC.GUI
             cboAgenteResp.DataSource = unosAgentesResp;
             cboAgenteResp.DisplayMember = "ApellidoAgente";
             cboAgenteResp.ValueMember = "IdAgente";
-            //cboAgenteResp.SelectedItem = unaSolicitud; //FALTA APUNTAR AL AGENTE RESPONSABLE DE LA SOLICITUD
+            cboAgenteResp.SelectedValue = unaSolicitud.AgenteResp.IdAgente; //FALTA APUNTAR AL AGENTE RESPONSABLE DE LA SOLICITUD
             txtFechaInicio.Value = unaSolicitud.FechaInicio;
             txtFechaFin.Value = unaSolicitud.FechaFin;
+
+            ///Para poder seleccionar Hard o Soft
+            BLLTipoBien ManagerTipoBien = new BLLTipoBien();
+            unosTipoBien = ManagerTipoBien.TraerTodos();
+            cboTipoBien.DataSource = null;
+            cboTipoBien.DataSource = unosTipoBien;
+            cboTipoBien.DisplayMember = "DescripTipoBien";
+            cboTipoBien.ValueMember = "IdTipoBien";
 
             ///Traer Estados Solicitud
             BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
@@ -55,7 +68,15 @@ namespace ARTEC.GUI
             cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
             cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
             cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
-            cboEstadoSolicitud.SelectedItem = unaSolicitud.UnEstado;
+            cboEstadoSolicitud.SelectedValue = unaSolicitud.UnEstado.IdEstadoSolicitud;
+
+            //Traer EstadosDetalleSolicitud
+            BLLEstadoSolicDetalle ManagerEstadoSolDetalle = new BLLEstadoSolicDetalle();
+            unosEstadoSolDetalles = ManagerEstadoSolDetalle.EstadoSolDetallesTraerTodos();
+            cboEstadoSolDetalle.DataSource = null;
+            cboEstadoSolDetalle.DataSource = unosEstadoSolDetalles;
+            cboEstadoSolDetalle.DisplayMember = "DescripEstadoSolicDetalle";
+            cboEstadoSolDetalle.ValueMember = "IdEstadoSolicDetalle";
 
             ///Traer Prioridad
             BLLPrioridad ManagerPrioridad = new BLLPrioridad();
@@ -64,7 +85,7 @@ namespace ARTEC.GUI
             cboPrioridad.DataSource = unasPrioridades;
             cboPrioridad.DisplayMember = "DescripPrioridad";
             cboPrioridad.ValueMember = "IdPrioridad";
-            cboPrioridad.SelectedItem = unaSolicitud.UnaPrioridad;
+            cboPrioridad.SelectedValue = unaSolicitud.UnaPrioridad.IdPrioridad;
 
             //Traer UsuariosSistema
             BLLUsuario ManagerUsuario = new BLLUsuario();
@@ -73,11 +94,104 @@ namespace ARTEC.GUI
             cboAsignado.DataSource = unosUsuarios;
             cboAsignado.DisplayMember = "NombreUsuario";
             cboAsignado.ValueMember = "IdUsuario";
-            cboAsignado.SelectedItem = unaSolicitud.Asignado;
+            cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
 
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            grillaDetalles.Columns[1].Visible = false;
+
+            //Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
+            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
+            if (unTipoBienAux.IdTipoBien == 1)
+            {
+                //HARDWARE
+                gboxAsociados.Enabled = false;
+                txtCantBien.ReadOnly = false;
+                lblCantidad.Enabled = true;
+                AuxTipoCategoria = 1;//HARDWARE
+                cboTipoBien.SelectedValue = 1;//HARDWARE
+                txtAgente.Clear();
+                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                grillaAgentesAsociados.DataSource = null;
+            }
+            else
+            {
+                gboxAsociados.Enabled = true;
+                txtCantBien.ReadOnly = true;
+                lblCantidad.Enabled = false;
+                AuxTipoCategoria = 2;//SOFTWARE
+                cboTipoBien.SelectedValue = 2;//SOFTWARE
+                txtAgente.Clear();
+                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                grillaAgentesAsociados.DataSource = null;
+                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud[0].unosAgentes;
+                //No mostrar columnas que no necesito de los agentes asociados
+                grillaAgentesAsociados.Columns[0].Visible = false;
+                grillaAgentesAsociados.Columns[3].Visible = false;
+                grillaAgentesAsociados.Columns[4].Visible = false;
+            }
+            cboEstadoSolDetalle.SelectedValue = unaSolicitud.unosDetallesSolicitud[0].unEstado.IdEstadoSolicDetalle;
+
+        }
+
+
+
+        private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+
+            //Para obtener el detalle en donde se hizo click
+            //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
+            int DetalleSeleccionado = e.RowIndex + 1;
+            SolicDetalle unDetSolic = new SolicDetalle();
+
+            unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+
+            txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+            txtCantBien.Text = unDetSolic.Cantidad.ToString();
+
+            cboEstadoSolDetalle.SelectedValue = unDetSolic.unEstado.IdEstadoSolicDetalle;
+
+            //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
+            //unaCat = unDetSolic.unaCategoria;VER**********************************
+            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+
+            if (unTipoBienAux.IdTipoBien == 1)
+            {
+                //HARDWARE
+                gboxAsociados.Enabled = false;
+                txtCantBien.ReadOnly = false;
+                lblCantidad.Enabled = true;
+                AuxTipoCategoria = 1;//HARDWARE
+                cboTipoBien.SelectedValue = 1;//HARDWARE
+                txtAgente.Clear();
+                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                grillaAgentesAsociados.DataSource = null;
+
+            }
+            else
+            {
+                gboxAsociados.Enabled = true;
+                txtCantBien.ReadOnly = true;
+                lblCantidad.Enabled = false;
+                AuxTipoCategoria = 2;//SOFTWARE
+                cboTipoBien.SelectedValue = 2;//SOFTWARE
+                txtAgente.Clear();
+                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                grillaAgentesAsociados.DataSource = null;
+                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
+                //No mostrar columnas que no necesito de los agentes asociados
+                grillaAgentesAsociados.Columns[0].Visible = false;
+                grillaAgentesAsociados.Columns[3].Visible = false;
+                grillaAgentesAsociados.Columns[4].Visible = false;
+            }
+
         }
 
 

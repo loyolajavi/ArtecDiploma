@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALDependencia.cs" />
+    <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />
     <Compile Include="DALHardware.cs" />
     <Compile Include="DALPolitica.cs" />

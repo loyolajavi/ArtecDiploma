@@ -173,7 +173,7 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             foreach (var row in unDataSet.Tables[0].Rows)
             {
-                T Item = (T)CargarPropiedad(unTipo, (DataRow)row, 1);
+                T Item = (T)CargarPropiedad(unTipo, (DataRow)row);
                 ListaResultado.Add(Item);
             }
 
@@ -194,7 +194,7 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
             foreach (var row in unDataSet.Tables[0].Rows)
             {
-                Resultado = (T)CargarPropiedad(unTipo, (DataRow)row, 1);
+                Resultado = (T)CargarPropiedad(unTipo, (DataRow)row);
             }
 
             T result = (T)Convert.ChangeType(Resultado, typeof(T));
@@ -247,7 +247,7 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
 
 
-        private static object CargarPropiedad(Type valType, DataRow row, int Nro)
+        private static object CargarPropiedad(Type valType, DataRow row)
         {
 
             var unaInstancia = Activator.CreateInstance(valType);
@@ -273,13 +273,10 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
                     if (unTipo.IsClass && !typeof(String).IsAssignableFrom(unTipo))
                     {
-                        if (Nro <= 2)
-                        {
                             if (unTipo.Name != "List`1")
                             {
-                                prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row, Nro + 1), null);
+                                prop.SetValue(unaInstancia, CargarPropiedad(unTipo, row), null);
                             }
-                        }
                     }
                     else
                     {

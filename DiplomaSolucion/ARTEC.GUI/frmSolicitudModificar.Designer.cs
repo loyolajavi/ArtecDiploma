@@ -63,7 +63,7 @@ namespace ARTEC.GUI
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboEstadoSolDetalle = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.gboxAsociados = new System.Windows.Forms.GroupBox();
             this.grillaAgentesAsociados = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnAsociarAgente = new DevComponents.DotNetBar.ButtonX();
@@ -307,7 +307,7 @@ namespace ARTEC.GUI
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX8.Location = new System.Drawing.Point(21, 384);
+            this.labelX8.Location = new System.Drawing.Point(21, 382);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(121, 23);
             this.labelX8.TabIndex = 14;
@@ -320,9 +320,9 @@ namespace ARTEC.GUI
             // 
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX10.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX10.Location = new System.Drawing.Point(21, 438);
+            this.labelX10.Location = new System.Drawing.Point(21, 439);
             this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(87, 23);
+            this.labelX10.Size = new System.Drawing.Size(87, 22);
             this.labelX10.TabIndex = 16;
             this.labelX10.Text = "Asignado a";
             // 
@@ -335,7 +335,7 @@ namespace ARTEC.GUI
             this.labelX9.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
             this.labelX9.Location = new System.Drawing.Point(21, 409);
             this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(75, 23);
+            this.labelX9.Size = new System.Drawing.Size(75, 22);
             this.labelX9.TabIndex = 15;
             this.labelX9.Text = "Prioridad";
             // 
@@ -498,7 +498,7 @@ namespace ARTEC.GUI
             this.gboxBienes.Controls.Add(this.buttonX2);
             this.gboxBienes.Controls.Add(this.buttonX1);
             this.gboxBienes.Controls.Add(this.labelX3);
-            this.gboxBienes.Controls.Add(this.comboBoxEx1);
+            this.gboxBienes.Controls.Add(this.cboEstadoSolDetalle);
             this.gboxBienes.Controls.Add(this.gboxAsociados);
             this.gboxBienes.Controls.Add(this.cboTipoBien);
             this.gboxBienes.Controls.Add(this.txtAgregarDetalle);
@@ -550,19 +550,19 @@ namespace ARTEC.GUI
             this.labelX3.TabIndex = 26;
             this.labelX3.Text = "Estado";
             // 
-            // comboBoxEx1
+            // cboEstadoSolDetalle
             // 
-            this.comboBoxEx1.DisplayMember = "Text";
-            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEx1.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx1.FormattingEnabled = true;
-            this.comboBoxEx1.ItemHeight = 16;
-            this.comboBoxEx1.Location = new System.Drawing.Point(58, 258);
-            this.comboBoxEx1.Name = "comboBoxEx1";
-            this.comboBoxEx1.Size = new System.Drawing.Size(108, 22);
-            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx1.TabIndex = 26;
+            this.cboEstadoSolDetalle.DisplayMember = "Text";
+            this.cboEstadoSolDetalle.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboEstadoSolDetalle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoSolDetalle.ForeColor = System.Drawing.Color.Black;
+            this.cboEstadoSolDetalle.FormattingEnabled = true;
+            this.cboEstadoSolDetalle.ItemHeight = 16;
+            this.cboEstadoSolDetalle.Location = new System.Drawing.Point(58, 258);
+            this.cboEstadoSolDetalle.Name = "cboEstadoSolDetalle";
+            this.cboEstadoSolDetalle.Size = new System.Drawing.Size(108, 22);
+            this.cboEstadoSolDetalle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboEstadoSolDetalle.TabIndex = 26;
             // 
             // gboxAsociados
             // 
@@ -711,6 +711,7 @@ namespace ARTEC.GUI
             this.grillaDetalles.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.grillaDetalles.Size = new System.Drawing.Size(720, 274);
             this.grillaDetalles.TabIndex = 7;
+            this.grillaDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaDetalles_CellClick);
             // 
             // txtCantBien
             // 
@@ -897,7 +898,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboEstadoSolDetalle;
         private DevComponents.DotNetBar.ButtonX buttonX2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX buttonX3;

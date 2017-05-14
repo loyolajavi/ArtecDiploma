@@ -15,5 +15,14 @@ namespace ARTEC.ENTIDADES
         public Cargo unCargo { get; set; }
         public Dependencia unaDependencia { get; set; }
 
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.ApellidoAgente))
+            {
+                return this.ApellidoAgente.ToString();
+            }
+            return "";
+        }
+
     }
 }

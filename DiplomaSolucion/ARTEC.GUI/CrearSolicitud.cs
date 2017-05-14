@@ -97,8 +97,8 @@ namespace ARTEC.GUI
                 //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
                 //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
             }
-            unDetSolic.unEstado.IdEstadoSolDetalle = (int)EstadoSolDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
-            unDetSolic.unEstado.DescripSolDetalle = "Pendiente";
+            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
+            unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
             grillaDetalles.DataSource = null;
@@ -659,6 +659,7 @@ namespace ARTEC.GUI
                 unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
                 unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
                 unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+                unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
                 if (unasNotas != null)
                 {
                     unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
