@@ -96,10 +96,17 @@ namespace ARTEC.GUI
             cboAsignado.ValueMember = "IdUsuario";
             cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
 
+            //Agrega boton para Borrar el detalle
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             grillaDetalles.Columns[1].Visible = false;
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "dataGridViewDeleteButton";
+            deleteButton.HeaderText = "Borrar";
+            deleteButton.Text = "Borrar";
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(deleteButton);
 
             //Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
             unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
