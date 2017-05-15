@@ -43,6 +43,7 @@
     <Compile Include="Bien.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Cotizacion.cs" />
     <Compile Include="Dependencia.cs" />
     <Compile Include="Deposito.cs" />
     <Compile Include="Direccion.cs" />

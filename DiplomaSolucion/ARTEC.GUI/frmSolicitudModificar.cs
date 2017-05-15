@@ -102,6 +102,23 @@ namespace ARTEC.GUI
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             grillaDetalles.Columns[1].Visible = false;
 
+            //Agrega el conteo de cotizaciones por detalle
+            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+            ColumnaCotizacionConteo.Name = "txtCotizConteo";
+            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            {
+                item.Cells["txtCotizConteo"].Value = "2";//************************************CONTEO DER COTIZACIONES BUSCAR DESDE LA BD******************************
+                //Pongo una property CantidadCotiz en SolicDetalle?? así solo hago una consulta y recorro todos los detalles y guardo los resultados
+                //Hago una consulta a la bd por cada detalle y cuento sus cotizaciones?
+            }
+
+            //grillaDetalles.Columns["txtCotizConteo"];
+
+            //ManagerSolicDetalle.CotizacionConteo();
+
             //Agrega boton para Borrar el detalle
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "btnDinBorrar";
@@ -170,7 +187,7 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns.Add(deleteButton);
             }
 
-            //hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
+            //si hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
             else
             {
                 //Para obtener el detalle en donde se hizo click
@@ -221,6 +238,6 @@ namespace ARTEC.GUI
         }
 
 
-        
+
     }
 }

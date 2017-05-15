@@ -35,5 +35,13 @@ namespace ARTEC.ENTIDADES
         }
 
 
+        private List<Cotizacion> _unasCotizaciones;
+
+        public List<Cotizacion> unasCotizaciones
+        {
+            get { return _unasCotizaciones; }
+            set { _unasCotizaciones = value; }
+        }
+        
     }
 }
