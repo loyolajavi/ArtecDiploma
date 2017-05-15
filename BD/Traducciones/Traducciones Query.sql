@@ -78,4 +78,5 @@ insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('Men
 insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('Mensaje1', 'The request does not comply with the IT policies ¿Continue?', 2, 2)
 
 
-
+--ModificarSolicitud
+insert into Etiqueta (NombreControl, Texto, IdIdioma, IdFormulario) values ('btnDinBorrar', 'Quitar', 1, 2)

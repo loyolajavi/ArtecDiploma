@@ -96,15 +96,17 @@ namespace ARTEC.GUI
             cboAsignado.ValueMember = "IdUsuario";
             cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
 
-            //Agrega boton para Borrar el detalle
+            //Agrega los detalles
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             grillaDetalles.Columns[1].Visible = false;
+
+            //Agrega boton para Borrar el detalle
             var deleteButton = new DataGridViewButtonColumn();
-            deleteButton.Name = "dataGridViewDeleteButton";
-            deleteButton.HeaderText = "Borrar";
-            deleteButton.Text = "Borrar";
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetalles.Columns.Add(deleteButton);
 
@@ -152,53 +154,70 @@ namespace ARTEC.GUI
                 return;
             }
 
-
-            //Para obtener el detalle en donde se hizo click
-            //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
-            int DetalleSeleccionado = e.RowIndex + 1;
-            SolicDetalle unDetSolic = new SolicDetalle();
-
-            unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
-
-            txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
-            txtCantBien.Text = unDetSolic.Cantidad.ToString();
-
-            cboEstadoSolDetalle.SelectedValue = unDetSolic.unEstado.IdEstadoSolicDetalle;
-
-            //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
-            //unaCat = unDetSolic.unaCategoria;VER**********************************
-            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
-
-            if (unTipoBienAux.IdTipoBien == 1)
+            //Si hizo click en Borrar
+            if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
-                //HARDWARE
-                gboxAsociados.Enabled = false;
-                txtCantBien.ReadOnly = false;
-                lblCantidad.Enabled = true;
-                AuxTipoCategoria = 1;//HARDWARE
-                cboTipoBien.SelectedValue = 1;//HARDWARE
-                txtAgente.Clear();
-                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-                grillaAgentesAsociados.DataSource = null;
-
+                unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+                grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
+                grillaDetalles.DataSource = null;
+                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                grillaDetalles.Columns[1].Visible = false;
+                var deleteButton = new DataGridViewButtonColumn();
+                deleteButton.Name = "btnDinBorrar";
+                deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.UseColumnTextForButtonValue = true;
+                grillaDetalles.Columns.Add(deleteButton);
             }
+
+            //hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
             else
             {
-                gboxAsociados.Enabled = true;
-                txtCantBien.ReadOnly = true;
-                lblCantidad.Enabled = false;
-                AuxTipoCategoria = 2;//SOFTWARE
-                cboTipoBien.SelectedValue = 2;//SOFTWARE
-                txtAgente.Clear();
-                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-                grillaAgentesAsociados.DataSource = null;
-                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
-                //No mostrar columnas que no necesito de los agentes asociados
-                grillaAgentesAsociados.Columns[0].Visible = false;
-                grillaAgentesAsociados.Columns[3].Visible = false;
-                grillaAgentesAsociados.Columns[4].Visible = false;
-            }
+                //Para obtener el detalle en donde se hizo click
+                //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
+                int DetalleSeleccionado = e.RowIndex + 1;
+                SolicDetalle unDetSolic = new SolicDetalle();
 
+                unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+
+                txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+                txtCantBien.Text = unDetSolic.Cantidad.ToString();
+
+                cboEstadoSolDetalle.SelectedValue = unDetSolic.unEstado.IdEstadoSolicDetalle;
+
+                //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
+                //unaCat = unDetSolic.unaCategoria;VER**********************************
+                unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+
+                if (unTipoBienAux.IdTipoBien == 1)
+                {
+                    //HARDWARE
+                    gboxAsociados.Enabled = false;
+                    txtCantBien.ReadOnly = false;
+                    lblCantidad.Enabled = true;
+                    AuxTipoCategoria = 1;//HARDWARE
+                    cboTipoBien.SelectedValue = 1;//HARDWARE
+                    txtAgente.Clear();
+                    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                    grillaAgentesAsociados.DataSource = null;
+                }
+                else
+                {
+                    gboxAsociados.Enabled = true;
+                    txtCantBien.ReadOnly = true;
+                    lblCantidad.Enabled = false;
+                    AuxTipoCategoria = 2;//SOFTWARE
+                    cboTipoBien.SelectedValue = 2;//SOFTWARE
+                    txtAgente.Clear();
+                    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                    grillaAgentesAsociados.DataSource = null;
+                    grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
+                    //No mostrar columnas que no necesito de los agentes asociados
+                    grillaAgentesAsociados.Columns[0].Visible = false;
+                    grillaAgentesAsociados.Columns[3].Visible = false;
+                    grillaAgentesAsociados.Columns[4].Visible = false;
+                }
+            }
         }
 
 
