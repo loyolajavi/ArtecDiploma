@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLCategoria.cs" />
+    <Compile Include="BLLCotizacion.cs" />
     <Compile Include="BLLDependencia.cs" />
     <Compile Include="BLLEstadoSolicDetalle.cs" />
     <Compile Include="BLLEstadoSolicitud.cs" />

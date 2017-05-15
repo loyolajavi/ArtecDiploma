@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DALCategoria.cs" />
+    <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />
     <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />

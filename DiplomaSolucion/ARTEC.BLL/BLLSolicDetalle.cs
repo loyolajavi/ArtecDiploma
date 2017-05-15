@@ -15,7 +15,17 @@ namespace ARTEC.BLL
 
         public List<SolicDetalle> SolicDetallesTraerPorNroSolicitud(int NroSolic)
         {
-            return GestorSolicDetalle.SolicDetallesTraerPorNroSolicitud(NroSolic);
+            List<SolicDetalle> ListaDetalles = new List<SolicDetalle>();
+            ListaDetalles = GestorSolicDetalle.SolicDetallesTraerPorNroSolicitud(NroSolic);
+            //********************ME DEVUELVE IDSOLICITUD = 0**************************VER
+            BLLCotizacion unManagerCotizacion = new BLLCotizacion();
+
+            foreach (SolicDetalle det in ListaDetalles)
+            {
+                det.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(det.IdSolicitudDetalle, NroSolic);
+            }
+
+            return ListaDetalles;
         }
 
     }

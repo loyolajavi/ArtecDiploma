@@ -110,14 +110,9 @@ namespace ARTEC.GUI
             grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
             foreach (DataGridViewRow item in grillaDetalles.Rows)
             {
-                item.Cells["txtCotizConteo"].Value = "2";//************************************CONTEO DER COTIZACIONES BUSCAR DESDE LA BD******************************
-                //Pongo una property CantidadCotiz en SolicDetalle?? así solo hago una consulta y recorro todos los detalles y guardo los resultados
-                //Hago una consulta a la bd por cada detalle y cuento sus cotizaciones?
+                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
             }
 
-            //grillaDetalles.Columns["txtCotizConteo"];
-
-            //ManagerSolicDetalle.CotizacionConteo();
 
             //Agrega boton para Borrar el detalle
             var deleteButton = new DataGridViewButtonColumn();
@@ -162,7 +157,7 @@ namespace ARTEC.GUI
         }
 
 
-
+        //*************FALTA ELIMINAR EL DETALLE DE LA BD SI SE CONFIRMA EL CAMBIO
         private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Si se hizo click en el header, salir
@@ -174,11 +169,26 @@ namespace ARTEC.GUI
             //Si hizo click en Borrar
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
+                //elimino de la memoria el detalle
                 unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+                //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                 grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
+                grillaDetalles.Columns.Remove("txtCotizConteo");
+                //Regenero la grilla
                 grillaDetalles.DataSource = null;
                 grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
                 grillaDetalles.Columns[1].Visible = false;
+                //Vuelve a agregar el conteo de cotizaciones por detalle
+                BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                foreach (DataGridViewRow item in grillaDetalles.Rows)
+                {
+                    item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                }
+                //Vuelve a agregar el botón de borrar al final
                 var deleteButton = new DataGridViewButtonColumn();
                 deleteButton.Name = "btnDinBorrar";
                 deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
@@ -186,9 +196,7 @@ namespace ARTEC.GUI
                 deleteButton.UseColumnTextForButtonValue = true;
                 grillaDetalles.Columns.Add(deleteButton);
             }
-
-            //si hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
-            else
+            else //si hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
             {
                 //Para obtener el detalle en donde se hizo click
                 //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
