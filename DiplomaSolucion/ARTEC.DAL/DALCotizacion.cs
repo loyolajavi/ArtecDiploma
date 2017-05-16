@@ -37,5 +37,50 @@ namespace ARTEC.DAL
 
         }
 
+
+
+        public int CotizacionCrear(Cotizacion laCotizacion)
+        {
+
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@MontoCotizado", laCotizacion.MontoCotizado),
+                new SqlParameter("@FechaCotizacion", laCotizacion.FechaCotizacion),
+                new SqlParameter("@IdProveedor", laCotizacion.unProveedor.IdProveedor)
+			};
+
+            try
+            {
+
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdSolicitudDetalle", laCotizacion.unDetalleAsociado.IdSolicitudDetalle),
+                    new SqlParameter("@IdSolicitud", laCotizacion.unDetalleAsociado.IdSolicitud),
+                    new SqlParameter("@IdCotizacion", IDDevuelto)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IDDevuelto;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
     }
 }

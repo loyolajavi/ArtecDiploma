@@ -18,5 +18,16 @@ namespace ARTEC.BLL
             return GestorCotizacion.CotizacionTraerPorSolicitudYDetalle(NroDetalleSolicitud, NroSolicitud);
         }
 
+
+        public bool CotizacionCrear(Cotizacion laCotizacion)
+        {
+            if (GestorCotizacion.CotizacionCrear(laCotizacion) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

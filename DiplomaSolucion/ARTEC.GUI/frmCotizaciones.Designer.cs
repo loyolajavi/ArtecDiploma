@@ -31,26 +31,26 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.comboBoxEx2 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX4 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
-            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.textBoxX4 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.comboBoxEx2 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
             this.tabProveedor1 = new System.Windows.Forms.TabPage();
-            this.lblProveedor = new DevComponents.DotNetBar.LabelX();
-            this.lblPrecioUn = new DevComponents.DotNetBar.LabelX();
-            this.txtPrecioUn = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
-            this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.lblCantidad = new DevComponents.DotNetBar.LabelX();
-            this.txtCantidad = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.grillaProveedor = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.lblTotal = new DevComponents.DotNetBar.LabelX();
-            this.txtTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtCantidad = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.txtPrecioUn = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblTotal = new DevComponents.DotNetBar.LabelX();
+            this.grillaProveedor = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.lblCantidad = new DevComponents.DotNetBar.LabelX();
+            this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
+            this.lblPrecioUn = new DevComponents.DotNetBar.LabelX();
+            this.lblProveedor = new DevComponents.DotNetBar.LabelX();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
@@ -77,90 +77,16 @@ namespace ARTEC.GUI
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // comboBoxEx2
+            // buttonX2
             // 
-            this.comboBoxEx2.DisplayMember = "Text";
-            this.comboBoxEx2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEx2.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx2.FormattingEnabled = true;
-            this.comboBoxEx2.ItemHeight = 16;
-            this.comboBoxEx2.Location = new System.Drawing.Point(36, 38);
-            this.comboBoxEx2.Name = "comboBoxEx2";
-            this.comboBoxEx2.Size = new System.Drawing.Size(121, 22);
-            this.comboBoxEx2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx2.TabIndex = 54;
-            // 
-            // labelX8
-            // 
-            // 
-            // 
-            // 
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX8.Location = new System.Drawing.Point(99, 15);
-            this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(91, 17);
-            this.labelX8.TabIndex = 47;
-            this.labelX8.Text = "Proveedores";
-            // 
-            // labelX1
-            // 
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(88, 220);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(69, 22);
-            this.labelX1.TabIndex = 49;
-            this.labelX1.Text = "Cantidad";
-            // 
-            // textBoxX4
-            // 
-            this.textBoxX4.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX4.Border.Class = "TextBoxBorder";
-            this.textBoxX4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX4.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX4.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX4.Location = new System.Drawing.Point(158, 220);
-            this.textBoxX4.Name = "textBoxX4";
-            this.textBoxX4.PreventEnterBeep = true;
-            this.textBoxX4.Size = new System.Drawing.Size(36, 22);
-            this.textBoxX4.TabIndex = 48;
-            this.textBoxX4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // buttonX3
-            // 
-            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX3.Location = new System.Drawing.Point(104, 257);
-            this.buttonX3.Name = "buttonX3";
-            this.buttonX3.Size = new System.Drawing.Size(75, 23);
-            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX3.TabIndex = 50;
-            this.buttonX3.Text = "buttonX3";
-            // 
-            // dataGridViewX1
-            // 
-            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(64, 64);
-            this.dataGridViewX1.Name = "dataGridViewX1";
-            this.dataGridViewX1.Size = new System.Drawing.Size(153, 139);
-            this.dataGridViewX1.TabIndex = 51;
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Location = new System.Drawing.Point(163, 38);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(54, 22);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 53;
+            this.buttonX2.Text = "buttonX2";
             // 
             // textBoxX3
             // 
@@ -179,16 +105,90 @@ namespace ARTEC.GUI
             this.textBoxX3.TabIndex = 52;
             this.textBoxX3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // buttonX2
+            // textBoxX4
             // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(163, 38);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(54, 22);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 53;
-            this.buttonX2.Text = "buttonX2";
+            this.textBoxX4.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX4.Border.Class = "TextBoxBorder";
+            this.textBoxX4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX4.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX4.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX4.Location = new System.Drawing.Point(158, 220);
+            this.textBoxX4.Name = "textBoxX4";
+            this.textBoxX4.PreventEnterBeep = true;
+            this.textBoxX4.Size = new System.Drawing.Size(36, 22);
+            this.textBoxX4.TabIndex = 48;
+            this.textBoxX4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // comboBoxEx2
+            // 
+            this.comboBoxEx2.DisplayMember = "Text";
+            this.comboBoxEx2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxEx2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEx2.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxEx2.FormattingEnabled = true;
+            this.comboBoxEx2.ItemHeight = 16;
+            this.comboBoxEx2.Location = new System.Drawing.Point(36, 38);
+            this.comboBoxEx2.Name = "comboBoxEx2";
+            this.comboBoxEx2.Size = new System.Drawing.Size(121, 22);
+            this.comboBoxEx2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboBoxEx2.TabIndex = 54;
+            // 
+            // dataGridViewX1
+            // 
+            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dataGridViewX1.Location = new System.Drawing.Point(64, 64);
+            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.Size = new System.Drawing.Size(153, 139);
+            this.dataGridViewX1.TabIndex = 51;
+            // 
+            // buttonX3
+            // 
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Location = new System.Drawing.Point(104, 257);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(75, 23);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 50;
+            this.buttonX3.Text = "buttonX3";
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX1.Location = new System.Drawing.Point(88, 220);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(69, 22);
+            this.labelX1.TabIndex = 49;
+            this.labelX1.Text = "Cantidad";
+            // 
+            // labelX8
+            // 
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX8.Location = new System.Drawing.Point(99, 15);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(91, 17);
+            this.labelX8.TabIndex = 47;
+            this.labelX8.Text = "Proveedores";
             // 
             // tabProveedor1
             // 
@@ -206,138 +206,27 @@ namespace ARTEC.GUI
             this.tabProveedor1.Location = new System.Drawing.Point(4, 22);
             this.tabProveedor1.Name = "tabProveedor1";
             this.tabProveedor1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProveedor1.Size = new System.Drawing.Size(292, 293);
+            this.tabProveedor1.Size = new System.Drawing.Size(494, 293);
             this.tabProveedor1.TabIndex = 0;
             this.tabProveedor1.Text = "tabPage1";
             this.tabProveedor1.UseVisualStyleBackColor = true;
             // 
-            // lblProveedor
+            // txtProveedor
+            // 
+            this.txtProveedor.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            // 
-            this.lblProveedor.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblProveedor.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProveedor.Location = new System.Drawing.Point(8, 6);
-            this.lblProveedor.Name = "lblProveedor";
-            this.lblProveedor.Size = new System.Drawing.Size(91, 22);
-            this.lblProveedor.TabIndex = 51;
-            this.lblProveedor.Text = "Proveedor";
-            // 
-            // lblPrecioUn
-            // 
-            // 
-            // 
-            // 
-            this.lblPrecioUn.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblPrecioUn.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioUn.Location = new System.Drawing.Point(8, 34);
-            this.lblPrecioUn.Name = "lblPrecioUn";
-            this.lblPrecioUn.Size = new System.Drawing.Size(76, 22);
-            this.lblPrecioUn.TabIndex = 53;
-            this.lblPrecioUn.Text = "Precio Un.";
-            // 
-            // txtPrecioUn
-            // 
-            this.txtPrecioUn.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtPrecioUn.Border.Class = "TextBoxBorder";
-            this.txtPrecioUn.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPrecioUn.DisabledBackColor = System.Drawing.Color.White;
-            this.txtPrecioUn.ForeColor = System.Drawing.Color.Black;
-            this.txtPrecioUn.Location = new System.Drawing.Point(83, 34);
-            this.txtPrecioUn.Name = "txtPrecioUn";
-            this.txtPrecioUn.PreventEnterBeep = true;
-            this.txtPrecioUn.Size = new System.Drawing.Size(121, 22);
-            this.txtPrecioUn.TabIndex = 52;
-            this.txtPrecioUn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregar.Location = new System.Drawing.Point(210, 92);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 22);
-            this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAgregar.TabIndex = 54;
-            this.btnAgregar.Text = "buttonX1";
-            // 
-            // cboProveedor
-            // 
-            this.cboProveedor.DisplayMember = "Text";
-            this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboProveedor.ForeColor = System.Drawing.Color.Black;
-            this.cboProveedor.FormattingEnabled = true;
-            this.cboProveedor.ItemHeight = 16;
-            this.cboProveedor.Location = new System.Drawing.Point(83, 6);
-            this.cboProveedor.Name = "cboProveedor";
-            this.cboProveedor.Size = new System.Drawing.Size(121, 22);
-            this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboProveedor.TabIndex = 50;
-            // 
-            // lblCantidad
-            // 
-            // 
-            // 
-            // 
-            this.lblCantidad.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCantidad.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.Location = new System.Drawing.Point(8, 65);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(69, 22);
-            this.lblCantidad.TabIndex = 55;
-            this.lblCantidad.Text = "Cantidad";
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtCantidad.Border.Class = "TextBoxBorder";
-            this.txtCantidad.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtCantidad.DisabledBackColor = System.Drawing.Color.White;
-            this.txtCantidad.ForeColor = System.Drawing.Color.Black;
-            this.txtCantidad.Location = new System.Drawing.Point(83, 62);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.PreventEnterBeep = true;
-            this.txtCantidad.Size = new System.Drawing.Size(121, 22);
-            this.txtCantidad.TabIndex = 56;
-            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // grillaProveedor
-            // 
-            this.grillaProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaProveedor.DefaultCellStyle = dataGridViewCellStyle2;
-            this.grillaProveedor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaProveedor.Location = new System.Drawing.Point(8, 137);
-            this.grillaProveedor.Name = "grillaProveedor";
-            this.grillaProveedor.Size = new System.Drawing.Size(277, 150);
-            this.grillaProveedor.TabIndex = 57;
-            // 
-            // lblTotal
-            // 
-            // 
-            // 
-            // 
-            this.lblTotal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTotal.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(8, 92);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(69, 22);
-            this.lblTotal.TabIndex = 58;
-            this.lblTotal.Text = "Total";
+            this.txtProveedor.Border.Class = "TextBoxBorder";
+            this.txtProveedor.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtProveedor.DisabledBackColor = System.Drawing.Color.White;
+            this.txtProveedor.ForeColor = System.Drawing.Color.Black;
+            this.txtProveedor.Location = new System.Drawing.Point(83, 6);
+            this.txtProveedor.Name = "txtProveedor";
+            this.txtProveedor.PreventEnterBeep = true;
+            this.txtProveedor.Size = new System.Drawing.Size(121, 22);
+            this.txtProveedor.TabIndex = 60;
+            this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
             // 
             // txtTotal
             // 
@@ -354,24 +243,134 @@ namespace ARTEC.GUI
             this.txtTotal.PreventEnterBeep = true;
             this.txtTotal.Size = new System.Drawing.Size(121, 22);
             this.txtTotal.TabIndex = 59;
-            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtProveedor
+            // txtCantidad
             // 
-            this.txtProveedor.BackColor = System.Drawing.Color.White;
-            // 
+            this.txtCantidad.BackColor = System.Drawing.Color.White;
             // 
             // 
-            this.txtProveedor.Border.Class = "TextBoxBorder";
-            this.txtProveedor.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtProveedor.DisabledBackColor = System.Drawing.Color.White;
-            this.txtProveedor.ForeColor = System.Drawing.Color.Black;
-            this.txtProveedor.Location = new System.Drawing.Point(83, 6);
-            this.txtProveedor.Name = "txtProveedor";
-            this.txtProveedor.PreventEnterBeep = true;
-            this.txtProveedor.Size = new System.Drawing.Size(93, 22);
-            this.txtProveedor.TabIndex = 60;
-            this.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            this.txtCantidad.Border.Class = "TextBoxBorder";
+            this.txtCantidad.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCantidad.DisabledBackColor = System.Drawing.Color.White;
+            this.txtCantidad.ForeColor = System.Drawing.Color.Black;
+            this.txtCantidad.Location = new System.Drawing.Point(83, 62);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.PreventEnterBeep = true;
+            this.txtCantidad.Size = new System.Drawing.Size(121, 22);
+            this.txtCantidad.TabIndex = 56;
+            // 
+            // cboProveedor
+            // 
+            this.cboProveedor.DisplayMember = "Text";
+            this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProveedor.ForeColor = System.Drawing.Color.Black;
+            this.cboProveedor.FormattingEnabled = true;
+            this.cboProveedor.ItemHeight = 16;
+            this.cboProveedor.Location = new System.Drawing.Point(83, 6);
+            this.cboProveedor.Name = "cboProveedor";
+            this.cboProveedor.Size = new System.Drawing.Size(121, 22);
+            this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboProveedor.TabIndex = 50;
+            this.cboProveedor.SelectionChangeCommitted += new System.EventHandler(this.cboProovedor_SelectionChangeCommitted);
+            // 
+            // txtPrecioUn
+            // 
+            this.txtPrecioUn.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtPrecioUn.Border.Class = "TextBoxBorder";
+            this.txtPrecioUn.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPrecioUn.DisabledBackColor = System.Drawing.Color.White;
+            this.txtPrecioUn.ForeColor = System.Drawing.Color.Black;
+            this.txtPrecioUn.Location = new System.Drawing.Point(83, 34);
+            this.txtPrecioUn.Name = "txtPrecioUn";
+            this.txtPrecioUn.PreventEnterBeep = true;
+            this.txtPrecioUn.Size = new System.Drawing.Size(121, 22);
+            this.txtPrecioUn.TabIndex = 52;
+            // 
+            // lblTotal
+            // 
+            // 
+            // 
+            // 
+            this.lblTotal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblTotal.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Location = new System.Drawing.Point(8, 92);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(69, 22);
+            this.lblTotal.TabIndex = 58;
+            this.lblTotal.Text = "Total";
+            // 
+            // grillaProveedor
+            // 
+            this.grillaProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaProveedor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.grillaProveedor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.grillaProveedor.Location = new System.Drawing.Point(8, 137);
+            this.grillaProveedor.Name = "grillaProveedor";
+            this.grillaProveedor.Size = new System.Drawing.Size(480, 150);
+            this.grillaProveedor.TabIndex = 57;
+            // 
+            // lblCantidad
+            // 
+            // 
+            // 
+            // 
+            this.lblCantidad.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCantidad.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.Location = new System.Drawing.Point(8, 65);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(69, 22);
+            this.lblCantidad.TabIndex = 55;
+            this.lblCantidad.Text = "Cantidad";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAgregar.Location = new System.Drawing.Point(210, 92);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 22);
+            this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgregar.TabIndex = 54;
+            this.btnAgregar.Text = "buttonX1";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // lblPrecioUn
+            // 
+            // 
+            // 
+            // 
+            this.lblPrecioUn.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblPrecioUn.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioUn.Location = new System.Drawing.Point(8, 34);
+            this.lblPrecioUn.Name = "lblPrecioUn";
+            this.lblPrecioUn.Size = new System.Drawing.Size(76, 22);
+            this.lblPrecioUn.TabIndex = 53;
+            this.lblPrecioUn.Text = "Precio Un.";
+            // 
+            // lblProveedor
+            // 
+            // 
+            // 
+            // 
+            this.lblProveedor.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblProveedor.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProveedor.Location = new System.Drawing.Point(8, 6);
+            this.lblProveedor.Name = "lblProveedor";
+            this.lblProveedor.Size = new System.Drawing.Size(91, 22);
+            this.lblProveedor.TabIndex = 51;
+            this.lblProveedor.Text = "Proveedor";
             // 
             // tabControl1
             // 
@@ -380,14 +379,14 @@ namespace ARTEC.GUI
             this.tabControl1.Location = new System.Drawing.Point(2, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(300, 319);
+            this.tabControl1.Size = new System.Drawing.Size(502, 319);
             this.tabControl1.TabIndex = 6;
             // 
             // frmCotizaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 328);
+            this.ClientSize = new System.Drawing.Size(575, 328);
             this.Controls.Add(this.tabControl1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

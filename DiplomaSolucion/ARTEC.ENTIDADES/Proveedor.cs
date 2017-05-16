@@ -39,7 +39,16 @@ namespace ARTEC.ENTIDADES
             get { return _unasCategorias; }
             set { _unasCategorias = value; }
         }
-        
+
+
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.AliasProv))
+            {
+                return this.AliasProv.ToString();
+            }
+            return "";
+        }
 
     }
 }

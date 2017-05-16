@@ -14,6 +14,9 @@ namespace ARTEC.ENTIDADES
         public DateTime FechaCotizacion { get; set; }
         public Proveedor unProveedor { get; set; }
 
+        public SolicDetalle unDetalleAsociado { get; set; }
+
+
 
     }
 }
