@@ -113,6 +113,13 @@ namespace ARTEC.GUI
                 item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
             }
 
+            //Agrega boton para la gestión de cotizaciones
+            var botonCotizar = new DataGridViewButtonColumn();
+            botonCotizar.Name = "btnDinCotizar";
+            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(botonCotizar);
 
             //Agrega boton para Borrar el detalle
             var deleteButton = new DataGridViewButtonColumn();
@@ -166,7 +173,7 @@ namespace ARTEC.GUI
                 return;
             }
 
-            //Si hizo click en Borrar
+            //Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
                 //elimino de la memoria el detalle
@@ -174,6 +181,13 @@ namespace ARTEC.GUI
                 //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                 grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
                 grillaDetalles.Columns.Remove("txtCotizConteo");
+                grillaDetalles.Columns.Remove("btnDinCotizar");
+                //Conteo de detalles
+                int NroAux = 0;
+                foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+                {
+                    Det2.IdSolicitudDetalle = NroAux + 1;
+                }
                 //Regenero la grilla
                 grillaDetalles.DataSource = null;
                 grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
@@ -188,6 +202,15 @@ namespace ARTEC.GUI
                 {
                     item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
                 }
+
+                //Vuelve a agregar boton para la gestión de cotizaciones
+                var botonCotizar = new DataGridViewButtonColumn();
+                botonCotizar.Name = "btnDinCotizar";
+                botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                botonCotizar.UseColumnTextForButtonValue = true;
+                grillaDetalles.Columns.Add(botonCotizar);
+
                 //Vuelve a agregar el botón de borrar al final
                 var deleteButton = new DataGridViewButtonColumn();
                 deleteButton.Name = "btnDinBorrar";
@@ -241,6 +264,11 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[0].Visible = false;
                     grillaAgentesAsociados.Columns[3].Visible = false;
                     grillaAgentesAsociados.Columns[4].Visible = false;
+                }
+                if (e.ColumnIndex == grillaDetalles.Columns["btnDinCotizar"].Index)
+                {
+                    frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones);
+                    UnFrmCotizaciones.Show();
                 }
             }
         }
