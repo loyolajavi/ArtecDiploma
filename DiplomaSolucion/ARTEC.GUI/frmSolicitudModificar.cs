@@ -168,7 +168,7 @@ namespace ARTEC.GUI
         private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Si se hizo click en el header, salir
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
                 return;
             }
@@ -176,12 +176,15 @@ namespace ARTEC.GUI
             //Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
-                //elimino de la memoria el detalle
-                unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+
                 //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                 grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
                 grillaDetalles.Columns.Remove("txtCotizConteo");
                 grillaDetalles.Columns.Remove("btnDinCotizar");
+                
+                //elimino de la memoria el detalle
+                unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+
                 //Conteo de detalles
                 int NroAux = 0;
                 foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
