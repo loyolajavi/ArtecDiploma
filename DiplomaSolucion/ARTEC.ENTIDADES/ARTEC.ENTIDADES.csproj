@@ -58,6 +58,8 @@
     <Compile Include="Marca.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="Nota.cs" />
+    <Compile Include="Partida.cs" />
+    <Compile Include="PartidaDetalle.cs" />
     <Compile Include="Politica.cs" />
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
