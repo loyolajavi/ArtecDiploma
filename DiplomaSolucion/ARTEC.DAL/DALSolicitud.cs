@@ -78,57 +78,87 @@ namespace ARTEC.DAL
             {
                 //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
                 //{
-
                 //    //Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
                     
                 //    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                 //    //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
                 //    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
 
-
-
                 //    //System.Threading.Thread.Sleep(500);
                 //    //stopwatch.Stop();
                 //    //System.Windows.Forms.MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " Hola");
-
+                
                 //    return unaListaSolicitudes;
-
-                    
-                    
-
                 //}
 
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitud", parameters))
                 {
-
                     //Stopwatch stopwatch = Stopwatch.StartNew(); //creates and start the instance of Stopwatch
 
                     List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
                     //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
-                    unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
-
-
+                    //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
+                    unaListaSolicitudes = MapearSolicitud(ds);
 
                     //System.Threading.Thread.Sleep(500);
                     //stopwatch.Stop();
                     //System.Windows.Forms.MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " Hola");
 
                     return unaListaSolicitudes;
-
-
-
-
                 }
-
             }
-            catch (Exception)
+            catch (Exception es)
             {
                 throw;
             }
-
         }
 
-       
+        public List<Solicitud> MapearSolicitud(DataSet ds)
+        {
+            List<Solicitud> ResSolicitudes = new List<Solicitud>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Solicitud unaSolic = new Solicitud();
+
+                    unaSolic.IdSolicitud = (int)row["IdSolicitud"];
+                    unaSolic.laDependencia = new Dependencia();
+                    unaSolic.laDependencia.IdDependencia = (int)row["IdDependencia"];
+                    unaSolic.laDependencia.NombreDependencia = row["NombreDependencia"].ToString();
+                    unaSolic.FechaInicio = DateTime.Parse(row["FechaInicio"].ToString());
+                    if (row["FechaFin"].ToString() != "")
+                    {
+                        unaSolic.FechaFin = DateTime.Parse(row["FechaFin"].ToString());
+                    }
+                    unaSolic.UnaPrioridad = new Prioridad();
+                    unaSolic.UnaPrioridad.IdPrioridad = (int)row["IdPrioridad"];
+                    unaSolic.UnaPrioridad.DescripPrioridad = row["DescripPrioridad"].ToString();
+                    unaSolic.UnEstado = new EstadoSolicitud();
+                    unaSolic.UnEstado.IdEstadoSolicitud = (int)row["IdEstadoSolicitud"];
+                    unaSolic.UnEstado.DescripEstadoSolic = row["DescripEstadoSolic"].ToString();
+                    unaSolic.Asignado = new Usuario();
+                    unaSolic.Asignado.IdUsuario = (int)row["IdUsuario"];
+                    unaSolic.Asignado.NombreUsuario = row["NombreUsuario"].ToString();
+                    unaSolic.AgenteResp = new Agente();
+                    unaSolic.AgenteResp.IdAgente = (row["IdAgente"].ToString() != "") ? (int)row["IdAgente"] : (int?)null;
+                    unaSolic.AgenteResp.ApellidoAgente = row["ApellidoAgente"].ToString();
+
+                    ResSolicitudes.Add(unaSolic);
+                }
+                return ResSolicitudes;
+            }
+            catch (Exception es)
+            {
+                
+                throw;
+            }
+        }
+
+
+
+
 
     }
 }

@@ -18,6 +18,10 @@ namespace ARTEC.BLL
             return GestorCotizacion.CotizacionTraerPorSolicitudYDetalle(NroDetalleSolicitud, NroSolicitud);
         }
 
+        public List<Cotizacion> CotizacionTraerPorSolicitud(int NroSolicitud)
+        {
+            return GestorCotizacion.CotizacionTraerPorSolicitud(NroSolicitud);
+        }
 
         public bool CotizacionCrear(Cotizacion laCotizacion)
         {

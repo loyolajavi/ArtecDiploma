@@ -17,6 +17,10 @@ namespace ARTEC.GUI
 {
     public partial class frmCotizaciones : DevComponents.DotNetBar.Metro.MetroForm
     {
+        //Delegado para actualizar DetallesSolicitud en frmSolicitudModificar
+        public delegate void DelegaActualizarSolicDetalles();
+        //Evento que llama al Delegado
+        public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
         List<Cotizacion> unasCotizaciones;
         List<Proveedor> unosProveedores = new List<Proveedor>();
@@ -49,8 +53,6 @@ namespace ARTEC.GUI
                 List<Proveedor> resProv = new List<Proveedor>();
                 resProv = unosProveedores;
                 
-
-
                 List<string> Palabras = new List<string>();
                 Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtProveedor.Text, ' ');
 
@@ -65,7 +67,6 @@ namespace ARTEC.GUI
                 {
                     if (resProv.Count == 1 && string.Equals(resProv.First().AliasProv, txtProveedor.Text))
                     {
-                        
                         cboProveedor.Visible = false;
                         cboProveedor.DroppedDown = false;
                         cboProveedor.DataSource = null;
@@ -116,6 +117,8 @@ namespace ARTEC.GUI
             }
         }
 
+
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Cotizacion unaCotiz = new Cotizacion();
@@ -128,9 +131,16 @@ namespace ARTEC.GUI
 
             if (ManagerCotizacion.CotizacionCrear(unaCotiz))
             {
-                MessageBox.Show("Cotización agregada correctamente");
+                unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
+                grillaProveedor.DataSource = null;
+                grillaProveedor.DataSource = unasCotizaciones;
+                
+                //Actualiza SolicDetalles en frmModificarSolicitud por Evento
+                this.EventoActualizarDetalles();
             }
         }
+
+
 
 
 

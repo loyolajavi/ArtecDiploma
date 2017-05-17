@@ -9,7 +9,7 @@ namespace ARTEC.ENTIDADES
     public class Agente
     {
 
-        public int IdAgente { get; set; }
+        public int? IdAgente { get; set; }
         public string NombreAgente { get; set; }
         public string ApellidoAgente { get; set; }
         public Cargo unCargo { get; set; }

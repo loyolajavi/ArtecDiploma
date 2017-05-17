@@ -39,6 +39,7 @@ namespace ARTEC.GUI
         private void frmSolicitudModificar_Load(object sender, EventArgs e)
         {
             
+
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
             BLLDependencia ManagerDependenciaAg = new BLLDependencia();
 
@@ -268,12 +269,65 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[3].Visible = false;
                     grillaAgentesAsociados.Columns[4].Visible = false;
                 }
+                //Además abre el frmCotizaciones
                 if (e.ColumnIndex == grillaDetalles.Columns["btnDinCotizar"].Index)
                 {
                     frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones);
                     UnFrmCotizaciones.Show();
+                    UnFrmCotizaciones.EventoActualizarDetalles += new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud);
                 }
             }
+        }
+
+        public void ActualizarDetallesSolicitud()
+        {
+            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            grillaDetalles.Columns.Remove("btnDinBorrar");
+            grillaDetalles.Columns.Remove("txtCotizConteo");
+            grillaDetalles.Columns.Remove("btnDinCotizar");
+
+            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+            //Regenero la grilla
+            grillaDetalles.DataSource = null;
+            BLLCotizacion ManagerCoti2 = new BLLCotizacion();
+            List<Cotizacion> unasCotizaciones = new List<Cotizacion>();
+            unasCotizaciones = ManagerCoti2.CotizacionTraerPorSolicitud(unaSolicitud.IdSolicitud);
+
+            foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
+            {
+                det.unasCotizaciones = unasCotizaciones.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
+            }
+
+            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            grillaDetalles.Columns[1].Visible = false;
+
+            //Vuelve a agregar el conteo de cotizaciones por detalle
+            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+            ColumnaCotizacionConteo.Name = "txtCotizConteo";
+            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            {
+                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+            }
+
+            //Vuelve a agregar boton para la gestión de cotizaciones
+            var botonCotizar = new DataGridViewButtonColumn();
+            botonCotizar.Name = "btnDinCotizar";
+            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(botonCotizar);
+
+            //Vuelve a agregar el botón de borrar al final
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(deleteButton);
         }
 
 

@@ -20,11 +20,14 @@ namespace ARTEC.BLL
             //********************ME DEVUELVE IDSOLICITUD = 0**************************VER
             BLLCotizacion unManagerCotizacion = new BLLCotizacion();
 
+
+            List<Cotizacion> unasCotizaciones = new List<Cotizacion>();
+            unasCotizaciones = unManagerCotizacion.CotizacionTraerPorSolicitud(NroSolic);
+
             foreach (SolicDetalle det in ListaDetalles)
             {
-                det.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(det.IdSolicitudDetalle, NroSolic);
+                det.unasCotizaciones = unasCotizaciones.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
             }
-
             return ListaDetalles;
         }
 
