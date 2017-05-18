@@ -99,6 +99,8 @@ namespace ARTEC.DAL
                     //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
                     //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.Mapear<Solicitud>(ds);
                     unaListaSolicitudes = MapearSolicitud(ds);
+                    //unaListaSolicitudes = FRAMEWORK.Persistencia.Mapeador.MapearDataReaderListaObjetos<Solicitud>(ds);
+                    
 
                     //System.Threading.Thread.Sleep(500);
                     //stopwatch.Stop();
