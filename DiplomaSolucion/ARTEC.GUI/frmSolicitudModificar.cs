@@ -330,6 +330,18 @@ namespace ARTEC.GUI
             grillaDetalles.Columns.Add(deleteButton);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            {
+                if (unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count() < 3)
+                {
+                    MessageBox.Show("EL detalle " + unaSolicitud.unosDetallesSolicitud[item.Index].unaCategoria.DescripCategoria + " no tiene 3 cotizaciones");
+                }
+            }
+
+        }
+
 
 
     }
