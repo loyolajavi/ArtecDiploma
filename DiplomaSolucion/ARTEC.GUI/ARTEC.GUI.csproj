@@ -122,6 +122,9 @@
     <EmbeddedResource Include="frmCotizaciones.resx">
       <DependentUpon>frmCotizaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPartidaSolicitar.resx">
+      <DependentUpon>frmPartidaSolicitar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSolicitudModificar.resx">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </EmbeddedResource>

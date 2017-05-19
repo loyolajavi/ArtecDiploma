@@ -77,6 +77,12 @@ namespace ARTEC.GUI
             unfrmCrearSolicitud.Show();
         }
 
+        private void btnSolicitarPartida_Click(object sender, EventArgs e)
+        {
+            frmPartidaSolicitar unfrmPartidaSolicitar = frmPartidaSolicitar.ObtenerInstancia();
+            unfrmPartidaSolicitar.Show();
+        }
+
 
 
 

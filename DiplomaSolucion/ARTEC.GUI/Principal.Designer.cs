@@ -32,6 +32,7 @@ namespace ARTEC.GUI
             this.tabSolic = new System.Windows.Forms.TabPage();
             this.tabHomol = new System.Windows.Forms.TabPage();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,11 +82,25 @@ namespace ARTEC.GUI
             this.buttonX1.TextColor = System.Drawing.Color.White;
             this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
+            // btnSolicitarPartida
+            // 
+            this.btnSolicitarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSolicitarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSolicitarPartida.CustomColorName = "blue";
+            this.btnSolicitarPartida.Location = new System.Drawing.Point(492, 13);
+            this.btnSolicitarPartida.Name = "btnSolicitarPartida";
+            this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
+            this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSolicitarPartida.TabIndex = 2;
+            this.btnSolicitarPartida.Text = "btnSolicitarPartida";
+            this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.btnSolicitarPartida);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
@@ -104,6 +119,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabSolic;
         private System.Windows.Forms.TabPage tabHomol;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
 
 
 

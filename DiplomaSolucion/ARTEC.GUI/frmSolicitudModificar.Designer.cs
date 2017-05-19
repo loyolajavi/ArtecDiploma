@@ -81,7 +81,7 @@ namespace ARTEC.GUI
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSoliitarPartida = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -431,7 +431,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -830,26 +829,25 @@ namespace ARTEC.GUI
             this.comboBoxEx4.TabIndex = 20;
             this.comboBoxEx4.Visible = false;
             // 
-            // button1
+            // btnSoliitarPartida
             // 
-            this.button1.Location = new System.Drawing.Point(1087, 34);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 40);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSoliitarPartida.Location = new System.Drawing.Point(1087, 34);
+            this.btnSoliitarPartida.Name = "btnSoliitarPartida";
+            this.btnSoliitarPartida.Size = new System.Drawing.Size(75, 40);
+            this.btnSoliitarPartida.TabIndex = 7;
+            this.btnSoliitarPartida.Text = "btnSoliitarPartida";
+            this.btnSoliitarPartida.UseVisualStyleBackColor = true;
+            this.btnSoliitarPartida.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmSolicitudModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1279, 669);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSoliitarPartida);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmSolicitudModificar";
             this.Text = resources.GetString("$this.Text");
             this.Load += new System.EventHandler(this.frmSolicitudModificar_Load);
@@ -916,6 +914,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX buttonX2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX buttonX3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSoliitarPartida;
     }
 }

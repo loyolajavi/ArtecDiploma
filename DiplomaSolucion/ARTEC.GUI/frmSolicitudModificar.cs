@@ -332,14 +332,15 @@ namespace ARTEC.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            if (unaSolicitud.unosDetallesSolicitud.Where(x => x.unasCotizaciones.Count() >= 3).Count() == unaSolicitud.unosDetallesSolicitud.Count())
             {
-                if (unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count() < 3)
-                {
-                    MessageBox.Show("EL detalle " + unaSolicitud.unosDetallesSolicitud[item.Index].unaCategoria.DescripCategoria + " no tiene 3 cotizaciones");
-                }
+                frmPartidaSolicitar unFrmPartidaSolicitar = frmPartidaSolicitar.ObtenerInstancia(unaSolicitud);
+                unFrmPartidaSolicitar.Show();
             }
-
+            else
+            {
+                MessageBox.Show("Revise que los detalles posean al menos 3 cotizaciones");
+            }
         }
 
 
