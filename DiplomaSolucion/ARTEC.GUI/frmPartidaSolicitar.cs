@@ -21,11 +21,13 @@ namespace ARTEC.GUI
         private static frmPartidaSolicitar _unFrmPartidaSolicituar;
         public Solicitud unaSolicitud;
 
+        //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
         {
             InitializeComponent();
         }
 
+        //Singleton cuando se ingresa por Principal
         public static frmPartidaSolicitar ObtenerInstancia()
         {
             if (_unFrmPartidaSolicituar == null)
@@ -36,13 +38,14 @@ namespace ARTEC.GUI
             return _unFrmPartidaSolicituar;
         }
 
+        //Constructor cuando se ingresa desde frmModificarSolicitud
         private frmPartidaSolicitar(Solicitud unaSolic)
         {
             InitializeComponent();
             unaSolicitud = unaSolic;
         }
 
-
+        //Singleton cuando se ingresa desde frmModificarSolicitud
         public static frmPartidaSolicitar ObtenerInstancia(Solicitud unaSolic)
         {
             if (_unFrmPartidaSolicituar == null)
@@ -53,19 +56,8 @@ namespace ARTEC.GUI
             return _unFrmPartidaSolicituar;
         }
         
-        //Constructor cuando se ingresa desde frmModificarSolicitud
-        //public frmPartidaSolicitar(Solicitud unaSolic)
-        //{
-        //    InitializeComponent();
-        //    unaSolicitud = unaSolic;
-        //}
-
-        //Constructor cuando se ingresa por Principal
-        //public frmPartidaSolicitar()
-        //{
-        //    InitializeComponent();
-        //}
-
+        
+        
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
             if (unaSolicitud != null)
@@ -77,13 +69,14 @@ namespace ARTEC.GUI
                 txtDependencia.ReadOnly = true;
 
                 grillaSolicitudes.DataSource = null;
-                grillaSolicitudes.DataSource = unaSolicitud;//NO FUNCIONA PORQUE ES UNUNICO OBJETO
+                grillaSolicitudes.DataSource = unaSolicitud;//NO FUNCIONA PORQUE ES UN UNICO OBJETO
 
                 grillaSolicDetalles.DataSource = null;
                 grillaSolicDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             }
         }
 
+        //Pone en null la variable del formulario para que no ocasione error al abrir de nuevo el formulario (porque tiene un singleton)
         private void frmPartidaSolicitar_FormClosing(object sender, FormClosingEventArgs e)
         {
             _unFrmPartidaSolicituar = null;

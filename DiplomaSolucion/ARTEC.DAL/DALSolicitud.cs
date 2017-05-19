@@ -115,7 +115,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public List<Solicitud> MapearSolicitud(DataSet ds)
+        public static List<Solicitud> MapearSolicitud(DataSet ds)
         {
             List<Solicitud> ResSolicitudes = new List<Solicitud>();
 

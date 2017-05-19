@@ -60,6 +60,25 @@ namespace ARTEC.DAL
 
 
 
+          public static Categoria MapearCategoriaUno(DataSet ds)
+        {
+            Categoria ResCategoria = new Categoria();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    ResCategoria.IdCategoria = (int)row["IdCategoria"];
+                    ResCategoria.DescripCategoria = row["DescripCategoria"].ToString();
+                }
+                return ResCategoria;
+            }
+            catch (Exception es)
+            {
+
+                throw;
+            }
+        }
 
 
     }
