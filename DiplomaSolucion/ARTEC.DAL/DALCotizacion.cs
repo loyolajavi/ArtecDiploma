@@ -51,7 +51,8 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorSolicitud", parameters))
                 {
                     List<Cotizacion> unaLista = new List<Cotizacion>();
-                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Cotizacion>(ds);
+                    //unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Cotizacion>(ds);
+                    unaLista = MapearCotizaciones(ds);
                     return unaLista;
                 }
             }
@@ -89,7 +90,7 @@ namespace ARTEC.DAL
 			    };
 
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
-              
+
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return IDDevuelto;
             }
@@ -103,6 +104,46 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+
+
+        public static List<Cotizacion> MapearCotizaciones(DataSet ds)
+        {
+            List<Cotizacion> ResCotizaciones = new List<Cotizacion>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Cotizacion unaCotizacion = new Cotizacion();
+
+                    unaCotizacion.IdCotizacion = (int)row["IdCotizacion"];
+                    if (row["FechaCotizacion"].ToString() != "")
+                    {
+                        unaCotizacion.FechaCotizacion = DateTime.Parse(row["FechaCotizacion"].ToString());
+                    }
+                    unaCotizacion.MontoCotizado = (decimal)row["MontoCotizado"];
+                    //unaCotizacion.unDetalleAsociado = DALSolicDetalle.MapearSolicDetalles
+                    unaCotizacion.unProveedor = new Proveedor();
+                    unaCotizacion.unProveedor.IdProveedor = (int)row["IdProveedor"];
+                    unaCotizacion.unProveedor.AliasProv = row["AliasProv"].ToString();
+                    unaCotizacion.unDetalleAsociado = new SolicDetalle();
+                    unaCotizacion.unDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
+                    unaCotizacion.unDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+
+
+                    ResCotizaciones.Add(unaCotizacion);
+                }
+                return ResCotizaciones;
+            }
+            catch (Exception es)
+            {
+
+                throw;
+            }
+        }
+
+
 
 
 

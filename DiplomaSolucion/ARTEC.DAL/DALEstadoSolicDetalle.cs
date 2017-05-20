@@ -23,5 +23,27 @@ namespace ARTEC.DAL
             }
         }
 
+
+
+        public static EstadoSolicDetalle MapearEstadoUno(DataSet ds)
+        {
+            EstadoSolicDetalle ResEstadoSolicDetalle = new EstadoSolicDetalle();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    ResEstadoSolicDetalle.IdEstadoSolicDetalle = (int)row["IdEstadoSolicDetalle"];
+                    ResEstadoSolicDetalle.DescripEstadoSolicDetalle = row["DescripEstadoSolicDetalle"].ToString();
+                }
+                return ResEstadoSolicDetalle;
+            }
+            catch (Exception es)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

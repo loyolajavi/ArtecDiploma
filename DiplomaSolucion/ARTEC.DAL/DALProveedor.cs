@@ -28,8 +28,75 @@ namespace ARTEC.DAL
             {
                 throw;
             }
-
         }
+
+
+
+        public static Proveedor MapearProveedorUno(DataSet ds)
+        {
+            Proveedor ResProveedor = new Proveedor();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    try
+                    {
+                        ResProveedor.IdProveedor = (int)row["IdProveedor"];
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    try
+                    {
+                        ResProveedor.AliasProv = row["AliasProv"].ToString();
+                    }
+                    catch (Exception es)
+                    {
+                    }
+                    try
+                    {
+                        ResProveedor.ContactoProv = row["ContactoProv"].ToString();
+                    }
+                    catch (Exception es)
+                    {
+                    }
+                    try
+                    {
+                        ResProveedor.MailAlternativoProv = row["MailAlternativoProv"].ToString();
+                    }
+                    catch (Exception es)
+                    {
+                    }
+                    try
+                    {
+                        ResProveedor.MailContactoProv = row["MailContactoProv"].ToString();
+                    }
+                    catch (Exception es)
+                    {
+                    }
+                    try
+                    {
+                        ResProveedor.RazonSocialProv = row["RazonSocialProv"].ToString();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    
+                    
+                    //ResProveedor.unasCategorias;
+                    //ResProveedor.unasDirecciones;
+                    //ResProveedor.unosTelefonos;
+                }
+                return ResProveedor;
+            }
+            catch (Exception es)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

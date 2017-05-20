@@ -25,8 +25,8 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallesTraerPorNroSolicitud", parameters))
                 {
                     List<SolicDetalle> unaListaSolicDetalles = new List<SolicDetalle>();
-                    unaListaSolicDetalles = FRAMEWORK.Persistencia.Mapeador.Mapear<SolicDetalle>(ds);
-                    //unaListaSolicDetalles = MapearSolicDetalles(ds);
+                    //unaListaSolicDetalles = FRAMEWORK.Persistencia.Mapeador.Mapear<SolicDetalle>(ds);
+                    unaListaSolicDetalles = MapearSolicDetalles(ds);
                     return unaListaSolicDetalles;
                 }
             }
@@ -48,43 +48,31 @@ namespace ARTEC.DAL
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     SolicDetalle unDet = new SolicDetalle();
-
                     unDet.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
-                    //unDet.IdSolicitud = (int)row["IdSolicitud"];
-                    //unDet.IdSolicitud = (row["IdSolicitud"].ToString() != "") ? (int)row["IdSolicitud"] : 0;
-                    unDet.unaCategoria = DALCategoria.MapearCategoriaUno(ds);
                     
-                    
-                    //unaSolic.laDependencia = new Dependencia();
-                    //unaSolic.laDependencia.IdDependencia = (int)row["IdDependencia"];
-                    //unaSolic.laDependencia.NombreDependencia = row["NombreDependencia"].ToString();
-                    //unaSolic.FechaInicio = DateTime.Parse(row["FechaInicio"].ToString());
-                    //if (row["FechaFin"].ToString() != "")
+                    //try
                     //{
-                    //    unaSolic.FechaFin = DateTime.Parse(row["FechaFin"].ToString());
+                    //    unDet.IdSolicitud = (int)row["IdSolicitud"];
                     //}
-                    //unaSolic.UnaPrioridad = new Prioridad();
-                    //unaSolic.UnaPrioridad.IdPrioridad = (int)row["IdPrioridad"];
-                    //unaSolic.UnaPrioridad.DescripPrioridad = row["DescripPrioridad"].ToString();
-                    //unaSolic.UnEstado = new EstadoSolicitud();
-                    //unaSolic.UnEstado.IdEstadoSolicitud = (int)row["IdEstadoSolicitud"];
-                    //unaSolic.UnEstado.DescripEstadoSolic = row["DescripEstadoSolic"].ToString();
-                    //unaSolic.Asignado = new Usuario();
-                    //unaSolic.Asignado.IdUsuario = (int)row["IdUsuario"];
-                    //unaSolic.Asignado.NombreUsuario = row["NombreUsuario"].ToString();
-                    //unaSolic.AgenteResp = new Agente();
-                    //unaSolic.AgenteResp.IdAgente = (row["IdAgente"].ToString() != "") ? (int)row["IdAgente"] : (int?)null;
-                    //unaSolic.AgenteResp.ApellidoAgente = row["ApellidoAgente"].ToString();
+                    //catch (Exception es)
+                    //{
+                    //}
+                    
+                    
+                    unDet.unaCategoria = DALCategoria.MapearCategoriaUno(ds);
+                    unDet.Cantidad = (int)row["Cantidad"];
+                    unDet.unEstado = DALEstadoSolicDetalle.MapearEstadoUno(ds);
+                    //unDet.unosAgentes = DALAgente.MapearAgentes(ds);
+                    //unDet.unasCotizaciones = DALCotizacion.MapearCotizaciones(ds);
 
                     ResSolicDetalles.Add(unDet);
                 }
-                return ResSolicDetalles;
+                
             }
             catch (Exception es)
             {
-
-                throw;
             }
+            return ResSolicDetalles;
         }
 
 

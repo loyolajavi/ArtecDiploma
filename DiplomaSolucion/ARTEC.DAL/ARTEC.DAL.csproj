@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALAgente.cs" />
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />
