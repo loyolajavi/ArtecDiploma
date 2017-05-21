@@ -275,62 +275,24 @@ namespace ARTEC.GUI
                     frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones);
                     UnFrmCotizaciones.EventoActualizarDetalles += new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud);
                     UnFrmCotizaciones.Show();
-                    //UnFrmCotizaciones.Invoke(new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud));
                     
                 }
             }
         }
 
-        public void ActualizarDetallesSolicitud()
+        public void ActualizarDetallesSolicitud(List<Cotizacion> unasCotiza)
         {
-            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-            //grillaDetalles.Columns.Remove("btnDinBorrar");
-            //grillaDetalles.Columns.Remove("txtCotizConteo");
-            //grillaDetalles.Columns.Remove("btnDinCotizar");
-
-            //BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-
-            //Regenero la grilla
-            //grillaDetalles.DataSource = null;
-            BLLCotizacion ManagerCoti2 = new BLLCotizacion();
-            List<Cotizacion> unasCotizaciones = new List<Cotizacion>();
-            unasCotizaciones = ManagerCoti2.CotizacionTraerPorSolicitud(unaSolicitud.IdSolicitud);
-
+            //Actualizo las cotizaciones en el objeto instanciado en el frmSolicitudModificar
             foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
             {
-                det.unasCotizaciones = unasCotizaciones.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
+                det.unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
             }
 
-            //grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            //grillaDetalles.Columns[1].Visible = false;
-
-            //Vuelve a agregar el conteo de cotizaciones por detalle
-            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-            //DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
-            //ColumnaCotizacionConteo.Name = "txtCotizConteo";
-            //ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
-            //grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
-            foreach (DataGridViewRow item in grillaDetalles.Rows)
-            {
-                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
-            }
-
-            //Vuelve a agregar boton para la gestión de cotizaciones
-            //var botonCotizar = new DataGridViewButtonColumn();
-            //botonCotizar.Name = "btnDinCotizar";
-            //botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-            //botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-            //botonCotizar.UseColumnTextForButtonValue = true;
-            //grillaDetalles.Columns.Add(botonCotizar);
-
-            //Vuelve a agregar el botón de borrar al final
-            //var deleteButton = new DataGridViewButtonColumn();
-            //deleteButton.Name = "btnDinBorrar";
-            //deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            //deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            //deleteButton.UseColumnTextForButtonValue = true;
-            //grillaDetalles.Columns.Add(deleteButton);
+            //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
+            grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count().ToString();
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {

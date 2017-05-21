@@ -18,7 +18,7 @@ namespace ARTEC.GUI
     public partial class frmCotizaciones : DevComponents.DotNetBar.Metro.MetroForm
     {
         //Delegado para actualizar DetallesSolicitud en frmSolicitudModificar
-        public delegate void DelegaActualizarSolicDetalles();
+        public delegate void DelegaActualizarSolicDetalles(List<Cotizacion> unasCotizaciones);
         //Evento que llama al Delegado
         public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
@@ -128,15 +128,16 @@ namespace ARTEC.GUI
             unaCotiz.unDetalleAsociado = new SolicDetalle();
             unaCotiz.unDetalleAsociado.IdSolicitud = unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
             unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
-
-            if (ManagerCotizacion.CotizacionCrear(unaCotiz))
+            unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
+            if (unaCotiz.IdCotizacion > 0)
             {
-                unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
+                //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
+                unasCotizaciones.Add(unaCotiz);
                 grillaProveedor.DataSource = null;
                 grillaProveedor.DataSource = unasCotizaciones;
                 
                 //Actualiza SolicDetalles en frmModificarSolicitud por Evento
-                this.EventoActualizarDetalles();
+                this.EventoActualizarDetalles(unasCotizaciones);
             }
         }
 

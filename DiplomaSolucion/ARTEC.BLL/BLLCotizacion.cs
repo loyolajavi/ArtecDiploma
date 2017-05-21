@@ -23,14 +23,16 @@ namespace ARTEC.BLL
             return GestorCotizacion.CotizacionTraerPorSolicitud(NroSolicitud);
         }
 
-        public bool CotizacionCrear(Cotizacion laCotizacion)
+        public int CotizacionCrear(Cotizacion laCotizacion)
         {
-            if (GestorCotizacion.CotizacionCrear(laCotizacion) > 0)
+            int IdDevuelto;
+            IdDevuelto = GestorCotizacion.CotizacionCrear(laCotizacion);
+            if (IdDevuelto > 0)
             {
-                return true;
+                return IdDevuelto;
             }
 
-            return false;
+            return 0;
         }
 
     }
