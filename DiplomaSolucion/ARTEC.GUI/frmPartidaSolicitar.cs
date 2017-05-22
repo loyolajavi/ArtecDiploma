@@ -69,10 +69,18 @@ namespace ARTEC.GUI
                 txtDependencia.ReadOnly = true;
 
                 grillaSolicitudes.DataSource = null;
-                grillaSolicitudes.DataSource = unaSolicitud;//NO FUNCIONA PORQUE ES UN UNICO OBJETO
+                List<Solicitud> ListaAUX = new List<Solicitud>();
+                ListaAUX.Add(unaSolicitud);
+                grillaSolicitudes.DataSource = ListaAUX;
 
                 grillaSolicDetalles.DataSource = null;
-                grillaSolicDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                //Agrega Checkbox para seleccionar
+                var CheckBoxColumna = new DataGridViewCheckBoxColumn();
+                CheckBoxColumna.Name = "chkBoxDetalles";
+                CheckBoxColumna.HeaderText = ""; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                grillaSolicDetalles.Columns.Add(CheckBoxColumna);
+                //Carga los detallesSolic que no están finalizados
+                grillaSolicDetalles.DataSource = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
             }
         }
 
@@ -80,6 +88,21 @@ namespace ARTEC.GUI
         private void frmPartidaSolicitar_FormClosing(object sender, FormClosingEventArgs e)
         {
             _unFrmPartidaSolicituar = null;
+        }
+
+        private void grillaSolicDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            else
+            {
+                grillaCotizaciones.DataSource = null;
+                grillaCotizaciones.DataSource = unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones;
+            }
         }
 
 
