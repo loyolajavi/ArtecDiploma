@@ -26,7 +26,8 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorSolicitudYDetalle", parameters))
                 {
                     List<Cotizacion> unaLista = new List<Cotizacion>();
-                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Cotizacion>(ds);
+                    //unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Cotizacion>(ds);
+                    unaLista = MapearCotizaciones(ds);
                     return unaLista;
                 }
             }

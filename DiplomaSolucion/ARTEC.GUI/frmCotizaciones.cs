@@ -122,7 +122,7 @@ namespace ARTEC.GUI
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Cotizacion unaCotiz = new Cotizacion();
-            unaCotiz.MontoCotizado = Int32.Parse(txtPrecioUn.Text);
+            unaCotiz.MontoCotizado = Decimal.Parse(txtPrecioUn.Text);
             unaCotiz.FechaCotizacion = DateTime.Today;
             unaCotiz.unProveedor = ProvSeleccionado;
             unaCotiz.unDetalleAsociado = new SolicDetalle();

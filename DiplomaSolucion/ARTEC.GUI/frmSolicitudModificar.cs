@@ -283,10 +283,12 @@ namespace ARTEC.GUI
         public void ActualizarDetallesSolicitud(List<Cotizacion> unasCotiza)
         {
             //Actualizo las cotizaciones en el objeto instanciado en el frmSolicitudModificar
-            foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
-            {
-                det.unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
-            }
+            //foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
+            //{
+                //det[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
+            //}
+            unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza;
+
 
             //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
             grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count().ToString();
