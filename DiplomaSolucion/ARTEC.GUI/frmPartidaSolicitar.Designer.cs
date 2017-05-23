@@ -180,6 +180,7 @@ namespace ARTEC.GUI
             this.grillaSolicDetalles.Size = new System.Drawing.Size(531, 136);
             this.grillaSolicDetalles.TabIndex = 29;
             this.grillaSolicDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicDetalles_CellClick);
+            this.grillaSolicDetalles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicDetalles_CellContentClick);
             // 
             // lblDetalles
             // 
@@ -243,7 +244,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.comboBoxEx4);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmPartidaSolicitar";
             this.Text = "MetroForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPartidaSolicitar_FormClosing);

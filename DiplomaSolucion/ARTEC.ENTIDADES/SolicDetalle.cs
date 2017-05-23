@@ -42,6 +42,8 @@ namespace ARTEC.ENTIDADES
             get { return _unasCotizaciones; }
             set { _unasCotizaciones = value; }
         }
-        
+
+        public bool Seleccionado { get; set; }
+
     }
 }

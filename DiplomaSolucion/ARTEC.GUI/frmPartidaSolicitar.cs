@@ -20,6 +20,9 @@ namespace ARTEC.GUI
 
         private static frmPartidaSolicitar _unFrmPartidaSolicituar;
         public Solicitud unaSolicitud;
+        Partida nuevaPartida = new Partida();
+        List<SolicDetalle> ListaSolicDet = new List<SolicDetalle>();
+        List<Cotizacion> ListaCotiz = new List<Cotizacion>();
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -43,6 +46,20 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unaSolicitud = unaSolic;
+            //Agrega Checkbox para seleccionar SolicDetalles
+            var CheckBoxColumna = new DataGridViewCheckBoxColumn();
+            CheckBoxColumna.Name = "chkBoxDetalles";
+            CheckBoxColumna.TrueValue = true;
+            CheckBoxColumna.FalseValue = false;
+            CheckBoxColumna.HeaderText = ""; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            grillaSolicDetalles.Columns.Add(CheckBoxColumna);
+            //Agrega Checkbox para seleccionar Cotizaciones
+            DataGridViewCheckBoxColumn chkCotizacion = new DataGridViewCheckBoxColumn();
+            chkCotizacion.Name = "chkBoxCotizacion";
+            chkCotizacion.HeaderText = "";
+            chkCotizacion.TrueValue = true;
+            chkCotizacion.FalseValue = false;
+            grillaCotizaciones.Columns.Add(chkCotizacion);
         }
 
         //Singleton cuando se ingresa desde frmModificarSolicitud
@@ -55,9 +72,9 @@ namespace ARTEC.GUI
 
             return _unFrmPartidaSolicituar;
         }
-        
-        
-        
+
+
+
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
             if (unaSolicitud != null)
@@ -74,15 +91,33 @@ namespace ARTEC.GUI
                 grillaSolicitudes.DataSource = ListaAUX;
 
                 grillaSolicDetalles.DataSource = null;
-                //Agrega Checkbox para seleccionar
-                var CheckBoxColumna = new DataGridViewCheckBoxColumn();
-                CheckBoxColumna.Name = "chkBoxDetalles";
-                CheckBoxColumna.HeaderText = ""; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                grillaSolicDetalles.Columns.Add(CheckBoxColumna);
+
                 //Carga los detallesSolic que no están finalizados
-                grillaSolicDetalles.DataSource = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
+                grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
+
+                //********************************
+                foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
+                {
+                    DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
+                    chkDet.Value = chkDet.TrueValue;
+                }
+                foreach (SolicDetalle unDet in ListaSolicDet)
+                {
+                    unDet.Seleccionado = true;
+                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                    {   
+                        unaCoti.Seleccionada = true;
+                    }
+                }
+                //********************************
+
+
+
+
             }
         }
+
+
 
         //Pone en null la variable del formulario para que no ocasione error al abrir de nuevo el formulario (porque tiene un singleton)
         private void frmPartidaSolicitar_FormClosing(object sender, FormClosingEventArgs e)
@@ -90,7 +125,14 @@ namespace ARTEC.GUI
             _unFrmPartidaSolicituar = null;
         }
 
+
+
         private void grillaSolicDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void grillaSolicDetalles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //Si se hizo click en el header, salir
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
@@ -98,10 +140,42 @@ namespace ARTEC.GUI
                 return;
             }
 
+            
             else
             {
+                if (e.ColumnIndex == 0)
+                {
+                    DataGridView grillaAux = (DataGridView)sender;
+                    grillaAux.EndEdit();
+                    if (grillaAux.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
+                    {
+                        var chkCell = (DataGridViewCheckBoxCell)grillaAux.Rows[e.RowIndex].Cells["chkBoxDetalles"];
+                        if ((bool)chkCell.EditedFormattedValue)//Si se tilda
+                        {
+                            ListaSolicDet[e.RowIndex].Seleccionado = true;
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                            {
+                                Coti.Seleccionada = true;
+                            }
+                        }
+                        else //Si se destilda
+                        {
+                            ListaSolicDet[e.RowIndex].Seleccionado = false;
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                            {
+                                Coti.Seleccionada = false;
+                            }
+                        }
+                    }
+                }
+
                 grillaCotizaciones.DataSource = null;
-                grillaCotizaciones.DataSource = unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones;
+                grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
+                foreach (Cotizacion unaCot in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                {
+                    grillaCotizaciones.Rows[ListaSolicDet[e.RowIndex].unasCotizaciones.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                }
+
             }
         }
 

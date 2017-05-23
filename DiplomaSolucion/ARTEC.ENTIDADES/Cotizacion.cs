@@ -16,7 +16,7 @@ namespace ARTEC.ENTIDADES
 
         public SolicDetalle unDetalleAsociado { get; set; }
 
-
+        public bool Seleccionada { get; set; }
 
     }
 }
