@@ -23,6 +23,7 @@ namespace ARTEC.GUI
         Partida nuevaPartida = new Partida();
         List<SolicDetalle> ListaSolicDet = new List<SolicDetalle>();
         List<Cotizacion> ListaCotiz = new List<Cotizacion>();
+        int PosSolicDet = 0;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -104,9 +105,19 @@ namespace ARTEC.GUI
                 foreach (SolicDetalle unDet in ListaSolicDet)
                 {
                     unDet.Seleccionado = true;
-                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                    int Cont = 1;
+                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
                     {   
-                        unaCoti.Seleccionada = true;
+                        //unaCoti.Seleccionada = true;
+                        if (Cont <= 3)
+                        {
+                            unaCoti.Seleccionada = true;
+                        }
+                        else
+                        {
+                            unaCoti.Seleccionada = false;
+                        }
+                        Cont += 1;
                     }
                 }
                 //********************************
@@ -127,10 +138,10 @@ namespace ARTEC.GUI
 
 
 
-        private void grillaSolicDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
+        //private void grillaSolicDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
 
-        }
+        //}
 
         private void grillaSolicDetalles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -143,19 +154,29 @@ namespace ARTEC.GUI
             
             else
             {
+                DataGridView grillaAux = (DataGridView)sender;
+
                 if (e.ColumnIndex == 0)
                 {
-                    DataGridView grillaAux = (DataGridView)sender;
-                    grillaAux.EndEdit();
+                    //grillaAux.EndEdit();
                     if (grillaAux.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
                     {
                         var chkCell = (DataGridViewCheckBoxCell)grillaAux.Rows[e.RowIndex].Cells["chkBoxDetalles"];
                         if ((bool)chkCell.EditedFormattedValue)//Si se tilda
                         {
                             ListaSolicDet[e.RowIndex].Seleccionado = true;
-                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                            int Cont = 1;
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
                             {
-                                Coti.Seleccionada = true;
+                                if (Cont <= 3)
+                                {
+                                    Coti.Seleccionada = true;
+                                }
+                                else
+                                {
+                                    Coti.Seleccionada = false;
+                                }
+                                Cont += 1;
                             }
                         }
                         else //Si se destilda
@@ -169,13 +190,140 @@ namespace ARTEC.GUI
                     }
                 }
 
+
+                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+                
                 grillaCotizaciones.DataSource = null;
-                grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
-                foreach (Cotizacion unaCot in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                //grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
+                //foreach (Cotizacion unaCot in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                //{
+                //    grillaCotizaciones.Rows[ListaSolicDet[e.RowIndex].unasCotizaciones.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                //    grillaAux.EndEdit();
+                //}
+                grillaCotizaciones.DataSource = ListaCotiz;
+                foreach (Cotizacion unaCot in ListaCotiz)
                 {
-                    grillaCotizaciones.Rows[ListaSolicDet[e.RowIndex].unasCotizaciones.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                    grillaCotizaciones.Rows[ListaCotiz.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                    grillaAux.EndEdit();
+                }
+                PosSolicDet = e.RowIndex;
+
+            }
+        }
+
+        /// <summary>
+        /// Interacción con la grilla de las Cotizaciones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void grillaCotizaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            
+            if (e.ColumnIndex == 0)
+            {
+                DataGridView grillaAuxCot = (DataGridView)sender;
+                grillaAuxCot.EndEdit();
+                if (grillaAuxCot.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
+                {
+                    var chkCell = (DataGridViewCheckBoxCell)grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"];
+                    if ((bool)chkCell.EditedFormattedValue)//Si se tilda
+                    {
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
+                    }
+                    else //Si se destilda
+                    {
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
+                    }
+                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
+                }
+                
+                
+            }
+        }
+
+        private void grillaSolicDetalles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                DataGridView grillaAux = (DataGridView)sender;
+                if (e.ColumnIndex == 0)
+                {
+                    if (grillaAux.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
+                    {
+                        var chkCell = (DataGridViewCheckBoxCell)grillaAux.Rows[e.RowIndex].Cells["chkBoxDetalles"];
+                        if ((bool)chkCell.EditedFormattedValue)//Si se tilda
+                        {
+                            ListaSolicDet[e.RowIndex].Seleccionado = true;
+                            int Cont = 1;
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                            {
+                                if (Cont <= 3)
+                                {
+                                    Coti.Seleccionada = true;
+                                }
+                                else
+                                {
+                                    Coti.Seleccionada = false;
+                                }
+                                Cont += 1;
+                            }
+                        }
+                        else //Si se destilda
+                        {
+                            ListaSolicDet[e.RowIndex].Seleccionado = false;
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                            {
+                                Coti.Seleccionada = false;
+                            }
+                        }
+                    }
                 }
 
+                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+
+                grillaCotizaciones.DataSource = null;
+                //grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
+                //foreach (Cotizacion unaCot in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                //{
+                //    grillaCotizaciones.Rows[ListaSolicDet[e.RowIndex].unasCotizaciones.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                //    grillaAux.EndEdit();
+                //}
+                grillaCotizaciones.DataSource = ListaCotiz;
+                foreach (Cotizacion unaCot in ListaCotiz)
+                {
+                    grillaCotizaciones.Rows[ListaCotiz.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                    grillaAux.EndEdit();
+                }
+                PosSolicDet = e.RowIndex;
+            }
+        }
+
+        //TENGO PROBLEMA DE INDICES, AL MOSTRAR LAS COTIZACIONES SELECCIONADAS ME LAS MUESTRA MAL
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            if (grillaCotizaciones != null)
+            {
+                foreach (Cotizacion CotAux in  ListaSolicDet[0].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                {
+                    if (CotAux.Seleccionada)
+                    {
+                        MessageBox.Show(CotAux.MontoCotizado.ToString());
+                    }
+
+                    
+                    
+                }
+                
             }
         }
 

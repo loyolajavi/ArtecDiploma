@@ -162,6 +162,7 @@ namespace ARTEC.GUI
             this.btnGenerar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGenerar.TabIndex = 28;
             this.btnGenerar.Text = "btnGenerar";
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // grillaSolicDetalles
             // 
@@ -179,8 +180,8 @@ namespace ARTEC.GUI
             this.grillaSolicDetalles.Name = "grillaSolicDetalles";
             this.grillaSolicDetalles.Size = new System.Drawing.Size(531, 136);
             this.grillaSolicDetalles.TabIndex = 29;
-            this.grillaSolicDetalles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicDetalles_CellClick);
             this.grillaSolicDetalles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicDetalles_CellContentClick);
+            this.grillaSolicDetalles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicDetalles_CellDoubleClick);
             // 
             // lblDetalles
             // 
@@ -211,6 +212,7 @@ namespace ARTEC.GUI
             this.grillaCotizaciones.Name = "grillaCotizaciones";
             this.grillaCotizaciones.Size = new System.Drawing.Size(531, 136);
             this.grillaCotizaciones.TabIndex = 31;
+            this.grillaCotizaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizaciones_CellContentClick);
             // 
             // lblCotizaciones
             // 
