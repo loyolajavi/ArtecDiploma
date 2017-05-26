@@ -137,6 +137,7 @@ namespace ARTEC.GUI
             // 
             // grillaSolicitudes
             // 
+            this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -166,6 +167,7 @@ namespace ARTEC.GUI
             // 
             // grillaSolicDetalles
             // 
+            this.grillaSolicDetalles.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -198,6 +200,7 @@ namespace ARTEC.GUI
             // 
             // grillaCotizaciones
             // 
+            this.grillaCotizaciones.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
