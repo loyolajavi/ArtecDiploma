@@ -108,7 +108,6 @@ namespace ARTEC.GUI
                     int Cont = 1;
                     foreach (Cotizacion unaCoti in unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
                     {   
-                        //unaCoti.Seleccionada = true;
                         if (Cont <= 3)
                         {
                             unaCoti.Seleccionada = true;
@@ -182,7 +181,7 @@ namespace ARTEC.GUI
                         else //Si se destilda
                         {
                             ListaSolicDet[e.RowIndex].Seleccionado = false;
-                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
                             {
                                 Coti.Seleccionada = false;
                             }
@@ -227,19 +226,21 @@ namespace ARTEC.GUI
             if (e.ColumnIndex == 0)
             {
                 DataGridView grillaAuxCot = (DataGridView)sender;
-                grillaAuxCot.EndEdit();
+                //grillaAuxCot.EndEdit();
                 if (grillaAuxCot.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
                 {
                     var chkCell = (DataGridViewCheckBoxCell)grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"];
                     if ((bool)chkCell.EditedFormattedValue)//Si se tilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada = true;
                     }
                     else //Si se destilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada = false;
                     }
-                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
+                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada;
+                    grillaAuxCot.EndEdit();
+
                 }
                 
                 
@@ -308,7 +309,6 @@ namespace ARTEC.GUI
             }
         }
 
-        //TENGO PROBLEMA DE INDICES, AL MOSTRAR LAS COTIZACIONES SELECCIONADAS ME LAS MUESTRA MAL
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             if (grillaCotizaciones != null)
@@ -317,7 +317,7 @@ namespace ARTEC.GUI
                 {
                     if (CotAux.Seleccionada)
                     {
-                        MessageBox.Show(CotAux.MontoCotizado.ToString());
+                        MessageBox.Show(CotAux.IdCotizacion.ToString() + ": " + CotAux.MontoCotizado.ToString());
                     }
 
                     
