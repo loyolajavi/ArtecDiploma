@@ -113,6 +113,8 @@ namespace ARTEC.GUI
             grillaDetalles.Columns[4].Width = 80;
             grillaDetalles.Columns[4].HeaderText = "Estado";
             grillaDetalles.Columns[1].Visible = false;
+            grillaDetalles.Columns["Seleccionado"].Visible = false;
+
         }
 
 

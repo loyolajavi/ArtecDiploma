@@ -41,13 +41,9 @@ namespace ARTEC.GUI
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
             this.tabProveedor1 = new System.Windows.Forms.TabPage();
             this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.txtTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.txtCantidad = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.txtPrecioUn = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblTotal = new DevComponents.DotNetBar.LabelX();
             this.grillaProveedor = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.lblPrecioUn = new DevComponents.DotNetBar.LabelX();
             this.lblProveedor = new DevComponents.DotNetBar.LabelX();
@@ -72,7 +68,7 @@ namespace ARTEC.GUI
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(292, 293);
+            this.tabPage2.Size = new System.Drawing.Size(494, 293);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -193,13 +189,9 @@ namespace ARTEC.GUI
             // tabProveedor1
             // 
             this.tabProveedor1.Controls.Add(this.txtProveedor);
-            this.tabProveedor1.Controls.Add(this.txtTotal);
-            this.tabProveedor1.Controls.Add(this.txtCantidad);
             this.tabProveedor1.Controls.Add(this.cboProveedor);
             this.tabProveedor1.Controls.Add(this.txtPrecioUn);
-            this.tabProveedor1.Controls.Add(this.lblTotal);
             this.tabProveedor1.Controls.Add(this.grillaProveedor);
-            this.tabProveedor1.Controls.Add(this.lblCantidad);
             this.tabProveedor1.Controls.Add(this.btnAgregar);
             this.tabProveedor1.Controls.Add(this.lblPrecioUn);
             this.tabProveedor1.Controls.Add(this.lblProveedor);
@@ -227,38 +219,6 @@ namespace ARTEC.GUI
             this.txtProveedor.Size = new System.Drawing.Size(121, 22);
             this.txtProveedor.TabIndex = 60;
             this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtTotal.Border.Class = "TextBoxBorder";
-            this.txtTotal.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtTotal.DisabledBackColor = System.Drawing.Color.White;
-            this.txtTotal.ForeColor = System.Drawing.Color.Black;
-            this.txtTotal.Location = new System.Drawing.Point(83, 90);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.PreventEnterBeep = true;
-            this.txtTotal.Size = new System.Drawing.Size(121, 22);
-            this.txtTotal.TabIndex = 59;
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtCantidad.Border.Class = "TextBoxBorder";
-            this.txtCantidad.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtCantidad.DisabledBackColor = System.Drawing.Color.White;
-            this.txtCantidad.ForeColor = System.Drawing.Color.Black;
-            this.txtCantidad.Location = new System.Drawing.Point(83, 62);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.PreventEnterBeep = true;
-            this.txtCantidad.Size = new System.Drawing.Size(121, 22);
-            this.txtCantidad.TabIndex = 56;
             // 
             // cboProveedor
             // 
@@ -291,19 +251,6 @@ namespace ARTEC.GUI
             this.txtPrecioUn.Size = new System.Drawing.Size(121, 22);
             this.txtPrecioUn.TabIndex = 52;
             // 
-            // lblTotal
-            // 
-            // 
-            // 
-            // 
-            this.lblTotal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTotal.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(8, 92);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(69, 22);
-            this.lblTotal.TabIndex = 58;
-            this.lblTotal.Text = "Total";
-            // 
             // grillaProveedor
             // 
             this.grillaProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -316,29 +263,16 @@ namespace ARTEC.GUI
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grillaProveedor.DefaultCellStyle = dataGridViewCellStyle2;
             this.grillaProveedor.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaProveedor.Location = new System.Drawing.Point(8, 137);
+            this.grillaProveedor.Location = new System.Drawing.Point(6, 102);
             this.grillaProveedor.Name = "grillaProveedor";
-            this.grillaProveedor.Size = new System.Drawing.Size(480, 150);
+            this.grillaProveedor.Size = new System.Drawing.Size(480, 185);
             this.grillaProveedor.TabIndex = 57;
-            // 
-            // lblCantidad
-            // 
-            // 
-            // 
-            // 
-            this.lblCantidad.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCantidad.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.Location = new System.Drawing.Point(8, 65);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(69, 22);
-            this.lblCantidad.TabIndex = 55;
-            this.lblCantidad.Text = "Cantidad";
             // 
             // btnAgregar
             // 
             this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregar.Location = new System.Drawing.Point(210, 92);
+            this.btnAgregar.Location = new System.Drawing.Point(83, 65);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 22);
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -415,13 +349,9 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX labelX8;
         private System.Windows.Forms.TabPage tabProveedor1;
         private DevComponents.DotNetBar.Controls.TextBoxX txtProveedor;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtTotal;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtCantidad;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProveedor;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPrecioUn;
-        private DevComponents.DotNetBar.LabelX lblTotal;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaProveedor;
-        private DevComponents.DotNetBar.LabelX lblCantidad;
         private DevComponents.DotNetBar.ButtonX btnAgregar;
         private DevComponents.DotNetBar.LabelX lblPrecioUn;
         private DevComponents.DotNetBar.LabelX lblProveedor;

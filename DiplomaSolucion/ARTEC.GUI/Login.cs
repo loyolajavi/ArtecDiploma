@@ -117,11 +117,12 @@ namespace ARTEC.GUI
                 //Consulta us y pass coincidentes y loguea al usuario
                 if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
                 {
-                    MessageBox.Show(ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario);
+                    //MessageBox.Show(ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario);
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("El usuario y/o contraseña son incorrectos");
+                    MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje2").Texto);
                 }
 
             }
