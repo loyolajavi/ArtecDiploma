@@ -24,6 +24,7 @@ namespace ARTEC.GUI
         List<SolicDetalle> ListaSolicDet = new List<SolicDetalle>();
         List<Cotizacion> ListaCotiz = new List<Cotizacion>();
         int PosSolicDet = 0;
+        decimal TotalAcumulado = 0;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -78,6 +79,8 @@ namespace ARTEC.GUI
 
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
+            txtMontoTotal.Text = "0";
+
             if (unaSolicitud != null)
             {
 
@@ -95,7 +98,7 @@ namespace ARTEC.GUI
 
                 //Carga los detallesSolic que no están finalizados
                 grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
-
+                
                 //********************************
                 foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
                 {
@@ -106,7 +109,10 @@ namespace ARTEC.GUI
                 {
                     unDet.Seleccionado = true;
                     int Cont = 1;
-                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                    //Ordena las cotizaciones de cada detalle
+                    unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+
+                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
                     {   
                         if (Cont <= 3)
                         {
@@ -118,7 +124,10 @@ namespace ARTEC.GUI
                         }
                         Cont += 1;
                     }
+                    //Suma para obtener el costo total de la partida
+                    TotalAcumulado += unDet.unasCotizaciones[0].MontoCotizado;
                 }
+                txtMontoTotal.Text = TotalAcumulado.ToString();
                 //********************************
 
 
@@ -165,7 +174,7 @@ namespace ARTEC.GUI
                         {
                             ListaSolicDet[e.RowIndex].Seleccionado = true;
                             int Cont = 1;
-                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
                             {
                                 if (Cont <= 3)
                                 {
@@ -181,7 +190,7 @@ namespace ARTEC.GUI
                         else //Si se destilda
                         {
                             ListaSolicDet[e.RowIndex].Seleccionado = false;
-                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
                             {
                                 Coti.Seleccionada = false;
                             }
@@ -190,7 +199,7 @@ namespace ARTEC.GUI
                 }
 
 
-                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones;
                 
                 grillaCotizaciones.DataSource = null;
                 //grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
@@ -232,14 +241,15 @@ namespace ARTEC.GUI
                     var chkCell = (DataGridViewCheckBoxCell)grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"];
                     if ((bool)chkCell.EditedFormattedValue)//Si se tilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada = true;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
                     }
                     else //Si se destilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada = false;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
                     }
-                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList()[e.RowIndex].Seleccionada;
+                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
                     grillaAuxCot.EndEdit();
+                    CalcularMontoTotalPartida();
 
                 }
                 
@@ -266,7 +276,7 @@ namespace ARTEC.GUI
                         {
                             ListaSolicDet[e.RowIndex].Seleccionado = true;
                             int Cont = 1;
-                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                            foreach (Cotizacion Coti in ListaSolicDet[e.RowIndex].unasCotizaciones)
                             {
                                 if (Cont <= 3)
                                 {
@@ -290,7 +300,7 @@ namespace ARTEC.GUI
                     }
                 }
 
-                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+                ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones;
 
                 grillaCotizaciones.DataSource = null;
                 //grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
@@ -309,11 +319,11 @@ namespace ARTEC.GUI
             }
         }
 
-        private void btnGenerar_Click(object sender, EventArgs e)
+        private void btnConfirmar_Click(object sender, EventArgs e)
         {
             if (grillaCotizaciones != null)
             {
-                foreach (Cotizacion CotAux in  ListaSolicDet[0].unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList())
+                foreach (Cotizacion CotAux in  ListaSolicDet[0].unasCotizaciones)
                 {
                     if (CotAux.Seleccionada)
                     {
@@ -327,6 +337,18 @@ namespace ARTEC.GUI
             }
         }
 
+
+
+        private void CalcularMontoTotalPartida()
+        {
+            TotalAcumulado = 0;
+            foreach (SolicDetalle unDet in ListaSolicDet)
+            {
+                //Suma para obtener el costo total de la partida
+                TotalAcumulado += unDet.unasCotizaciones.Where(x => x.Seleccionada == true).OrderBy(y => y.MontoCotizado).FirstOrDefault().MontoCotizado;
+            }
+            txtMontoTotal.Text = TotalAcumulado.ToString();
+        }
 
 
 
