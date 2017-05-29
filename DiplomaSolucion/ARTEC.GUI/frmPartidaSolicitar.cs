@@ -358,6 +358,31 @@ namespace ARTEC.GUI
             txtMontoTotal.Text = TotalAcumulado.ToString();
         }
 
+        private void btnGenerarCaja_Click(object sender, EventArgs e)
+        {
+            //****IR A BUSCAR EL LIMITE A LA BD*************
+            if (decimal.Parse(txtMontoTotal.Text) <= (decimal)2000)
+            {
+                MessageBox.Show("Pedido por Caja generado correctamente");
+            }
+            else
+            {
+                MessageBox.Show("No se puede solicitar dinero por caja si el monto es mayor a $2.000");
+            }
+        }
+
+        private void btnGenerarPartida_Click(object sender, EventArgs e)
+        {
+            if (decimal.Parse(txtMontoTotal.Text) <= (decimal)2000)
+            {
+                MessageBox.Show("Si desea solicitar partida por un monto igual o menor a $2.000 debe ingresar el justificativo");
+            }
+            else
+            {
+                MessageBox.Show("Solicitud de Partida generada correctamente");
+            }
+        }
+
 
 
 
