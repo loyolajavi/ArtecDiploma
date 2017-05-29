@@ -215,9 +215,11 @@ namespace ARTEC.GUI
                     grillaAux.EndEdit();
                 }
                 PosSolicDet = e.RowIndex;
-
+                CalcularMontoTotalPartida();
             }
         }
+
+
 
         /// <summary>
         /// Interacción con la grilla de las Cotizaciones
@@ -250,12 +252,11 @@ namespace ARTEC.GUI
                     grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
                     grillaAuxCot.EndEdit();
                     CalcularMontoTotalPartida();
-
                 }
-                
-                
             }
         }
+
+
 
         private void grillaSolicDetalles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -316,6 +317,7 @@ namespace ARTEC.GUI
                     grillaAux.EndEdit();
                 }
                 PosSolicDet = e.RowIndex;
+                CalcularMontoTotalPartida();
             }
         }
 
@@ -329,8 +331,6 @@ namespace ARTEC.GUI
                     {
                         MessageBox.Show(CotAux.IdCotizacion.ToString() + ": " + CotAux.MontoCotizado.ToString());
                     }
-
-                    
                     
                 }
                 
@@ -342,10 +342,18 @@ namespace ARTEC.GUI
         private void CalcularMontoTotalPartida()
         {
             TotalAcumulado = 0;
-            foreach (SolicDetalle unDet in ListaSolicDet)
+            foreach (SolicDetalle unDet in ListaSolicDet.Where(X => X.Seleccionado == true))
             {
                 //Suma para obtener el costo total de la partida
-                TotalAcumulado += unDet.unasCotizaciones.Where(x => x.Seleccionada == true).OrderBy(y => y.MontoCotizado).FirstOrDefault().MontoCotizado;
+                var unaCotizacionAUX = unDet.unasCotizaciones.FirstOrDefault(x => x.Seleccionada == true);
+                if (unaCotizacionAUX != null)
+                {
+                    TotalAcumulado += unDet.unasCotizaciones.FirstOrDefault(x => x.Seleccionada == true).MontoCotizado;
+                }
+                else
+                {
+                    TotalAcumulado += 0;
+                }
             }
             txtMontoTotal.Text = TotalAcumulado.ToString();
         }
