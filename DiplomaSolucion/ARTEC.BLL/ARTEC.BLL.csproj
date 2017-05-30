@@ -47,6 +47,7 @@
     <Compile Include="BLLEstadoSolicDetalle.cs" />
     <Compile Include="BLLEstadoSolicitud.cs" />
     <Compile Include="BLLHardware.cs" />
+    <Compile Include="BLLPartida.cs" />
     <Compile Include="BLLPolitica.cs" />
     <Compile Include="BLLPrioridad.cs" />
     <Compile Include="BLLProveedor.cs" />

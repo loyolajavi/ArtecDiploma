@@ -25,6 +25,7 @@ namespace ARTEC.GUI
         List<Cotizacion> ListaCotiz = new List<Cotizacion>();
         int PosSolicDet = 0;
         decimal TotalAcumulado = 0;
+        decimal LimitePartida;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -80,6 +81,7 @@ namespace ARTEC.GUI
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
             txtMontoTotal.Text = "0";
+            TraerLimitePartida();
 
             if (unaSolicitud != null)
             {
@@ -358,10 +360,19 @@ namespace ARTEC.GUI
             txtMontoTotal.Text = TotalAcumulado.ToString();
         }
 
+
+
+        private void TraerLimitePartida()
+        {
+            BLLPartida PartidaLim = new BLLPartida();
+            LimitePartida = PartidaLim.TraerLimitePartida();
+        }
+
+
+
         private void btnGenerarCaja_Click(object sender, EventArgs e)
         {
-            //****IR A BUSCAR EL LIMITE A LA BD*************
-            if (decimal.Parse(txtMontoTotal.Text) <= (decimal)2000)
+            if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
             {
                 MessageBox.Show("Pedido por Caja generado correctamente");
             }
@@ -373,12 +384,33 @@ namespace ARTEC.GUI
 
         private void btnGenerarPartida_Click(object sender, EventArgs e)
         {
-            if (decimal.Parse(txtMontoTotal.Text) <= (decimal)2000)
+            BLLPartida PartidaLim = new BLLPartida();
+            int Cont = 1;
+
+            if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
             {
-                MessageBox.Show("Si desea solicitar partida por un monto igual o menor a $2.000 debe ingresar el justificativo");
+                MessageBox.Show("Si desea solicitar una partida por un monto igual o menor a $2.000 debe ingresar el justificativo");
             }
+            //Partida directa
             else
             {
+                nuevaPartida.FechaEnvio = DateTime.Now;
+                nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
+                
+                //*****************SEGUIR CON REGISTRAR LA PARTIDA ESPECIAL EN BLL Y DAL******************//
+                foreach (SolicDetalle unDeta in ListaSolicDet.Where(X => X.Seleccionado == true))
+                {
+                    PartidaDetalle unaPartDetalle = new PartidaDetalle();
+
+                    unaPartDetalle.IdPartidaDetalle = Cont++;
+                    unaPartDetalle.SolicDetalleAsociado = unDeta;
+                    unaPartDetalle.SolicDetalleAsociado.unasCotizaciones = unaPartDetalle.SolicDetalleAsociado.unasCotizaciones.Where(r => r.Seleccionada == true).ToList();
+                    unaPartDetalle.unasCotizaciones = (List<Cotizacion>)unDeta.unasCotizaciones.Where(x => x.Seleccionada == true).ToList();
+
+                    nuevaPartida.unasPartidasDetalles.Add(unaPartDetalle);
+                }
+
+
                 MessageBox.Show("Solicitud de Partida generada correctamente");
             }
         }

@@ -55,6 +55,7 @@
     <Compile Include="IFactoryBien.cs" />
     <Compile Include="InventarioHard.cs" />
     <Compile Include="InventarioSoft.cs" />
+    <Compile Include="Limite.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Modelo.cs" />
     <Compile Include="Nota.cs" />

@@ -63,6 +63,12 @@
     <Compile Include="frmCotizaciones.Designer.cs">
       <DependentUpon>frmCotizaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPartidaAsignar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPartidaAsignar.Designer.cs">
+      <DependentUpon>frmPartidaAsignar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPartidaSolicitar.cs">
       <SubType>Form</SubType>
     </Compile>
