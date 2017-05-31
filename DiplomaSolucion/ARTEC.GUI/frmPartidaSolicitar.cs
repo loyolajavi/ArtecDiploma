@@ -384,7 +384,7 @@ namespace ARTEC.GUI
 
         private void btnGenerarPartida_Click(object sender, EventArgs e)
         {
-            BLLPartida PartidaLim = new BLLPartida();
+            BLLPartida ManagerPartida = new BLLPartida();
             int Cont = 1;
 
             if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
@@ -411,7 +411,8 @@ namespace ARTEC.GUI
                 }
 
 
-                MessageBox.Show("Solicitud de Partida generada correctamente");
+                if (ManagerPartida.PartidaCrear(nuevaPartida))
+                    MessageBox.Show("Solicitud de Partida generada correctamente");
             }
         }
 

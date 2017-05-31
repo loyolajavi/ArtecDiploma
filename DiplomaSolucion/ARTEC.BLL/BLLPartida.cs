@@ -18,5 +18,17 @@ namespace ARTEC.BLL
             return GestorPartida.TraerLimitePartida();
         }
 
+
+
+        public bool PartidaCrear(Partida laPartida)
+        {
+            if (GestorPartida.PartidaCrear(laPartida) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

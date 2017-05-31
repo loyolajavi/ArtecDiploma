@@ -62,6 +62,7 @@ namespace ARTEC.DAL
                     unDet.unaCategoria = DALCategoria.MapearCategoriaUno(ds);
                     unDet.Cantidad = (int)row["Cantidad"];
                     unDet.unEstado = DALEstadoSolicDetalle.MapearEstadoUno(ds);
+                    unDet.IdSolicitud = (int)row["IdSolicitud"];
                     //unDet.unosAgentes = DALAgente.MapearAgentes(ds);
                     //unDet.unasCotizaciones = DALCotizacion.MapearCotizaciones(ds);
 
