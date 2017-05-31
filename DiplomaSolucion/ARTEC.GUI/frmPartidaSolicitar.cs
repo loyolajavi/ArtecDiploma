@@ -12,6 +12,8 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using Novacode;
+using System.Drawing;
 
 namespace ARTEC.GUI
 {
@@ -397,7 +399,6 @@ namespace ARTEC.GUI
                 nuevaPartida.FechaEnvio = DateTime.Now;
                 nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
                 
-                //*****************SEGUIR CON REGISTRAR LA PARTIDA ESPECIAL EN BLL Y DAL******************//
                 foreach (SolicDetalle unDeta in ListaSolicDet.Where(X => X.Seleccionado == true))
                 {
                     PartidaDetalle unaPartDetalle = new PartidaDetalle();
@@ -412,6 +413,16 @@ namespace ARTEC.GUI
 
 
                 if (ManagerPartida.PartidaCrear(nuevaPartida))
+                {
+                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+                    {
+                        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd-MM-yy")));
+                        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
+
+                        // Save this document as the users name followed by .docx
+                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                    }// Release this document from memory
+                }
                     MessageBox.Show("Solicitud de Partida generada correctamente");
             }
         }
