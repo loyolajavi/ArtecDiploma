@@ -40,7 +40,8 @@ namespace ARTEC.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@FechaEnvio", laPartida.FechaEnvio),
-                new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado)
+                new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado),
+                new SqlParameter("@Caja", laPartida.Caja)
                 //new SqlParameter("@MontoOtorgado", laPartida.MontoOtorgado),
                 //new SqlParameter("@FechaAcreditacion", laPartida.FechaAcreditacion),
                 //new SqlParameter("@NroPartida", laPartida.NroPartida)
