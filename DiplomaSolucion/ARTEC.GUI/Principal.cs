@@ -83,6 +83,12 @@ namespace ARTEC.GUI
             unfrmPartidaSolicitar.Show();
         }
 
+        private void btnPartidaAsociar_Click(object sender, EventArgs e)
+        {
+            frmPartidaAsociar unfrmPartidaAsociar = new frmPartidaAsociar();
+            unfrmPartidaAsociar.Show();
+        }
+
 
 
 

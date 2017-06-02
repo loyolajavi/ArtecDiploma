@@ -23,7 +23,7 @@ namespace ARTEC.GUI
 
         private static frmPartidaSolicitar _unFrmPartidaSolicituar;
         public Solicitud unaSolicitud;
-        Partida nuevaPartida = new Partida();
+        Partida nuevaPartida;
         List<SolicDetalle> ListaSolicDet = new List<SolicDetalle>();
         List<Cotizacion> ListaCotiz = new List<Cotizacion>();
         int PosSolicDet = 0;
@@ -103,7 +103,7 @@ namespace ARTEC.GUI
 
                 //Carga los detallesSolic que no están finalizados
                 grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
-                
+
                 //********************************
                 foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
                 {
@@ -118,7 +118,7 @@ namespace ARTEC.GUI
                     unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
 
                     foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
-                    {   
+                    {
                         if (Cont <= 3)
                         {
                             unaCoti.Seleccionada = true;
@@ -164,7 +164,7 @@ namespace ARTEC.GUI
                 return;
             }
 
-            
+
             else
             {
                 DataGridView grillaAux = (DataGridView)sender;
@@ -205,7 +205,7 @@ namespace ARTEC.GUI
 
 
                 ListaCotiz = (List<Cotizacion>)ListaSolicDet[e.RowIndex].unasCotizaciones;
-                
+
                 grillaCotizaciones.DataSource = null;
                 //grillaCotizaciones.DataSource = ListaSolicDet[e.RowIndex].unasCotizaciones;
                 //foreach (Cotizacion unaCot in ListaSolicDet[e.RowIndex].unasCotizaciones)
@@ -238,7 +238,7 @@ namespace ARTEC.GUI
             {
                 return;
             }
-            
+
             if (e.ColumnIndex == 0)
             {
                 DataGridView grillaAuxCot = (DataGridView)sender;
@@ -330,15 +330,15 @@ namespace ARTEC.GUI
         {
             if (grillaCotizaciones != null)
             {
-                foreach (Cotizacion CotAux in  ListaSolicDet[0].unasCotizaciones)
+                foreach (Cotizacion CotAux in ListaSolicDet[0].unasCotizaciones)
                 {
                     if (CotAux.Seleccionada)
                     {
                         MessageBox.Show(CotAux.IdCotizacion.ToString() + ": " + CotAux.MontoCotizado.ToString());
                     }
-                    
+
                 }
-                
+
             }
         }
 
@@ -377,8 +377,8 @@ namespace ARTEC.GUI
         {
             if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
             {
-                GenerarPartidaGlobal(true);
-                MessageBox.Show("Pedido por Caja generado correctamente");
+                if (GenerarPartidaGlobal(true))
+                    MessageBox.Show("Pedido por Caja generado correctamente");
             }
             else
             {
@@ -388,56 +388,18 @@ namespace ARTEC.GUI
 
         private void btnGenerarPartida_Click(object sender, EventArgs e)
         {
-            BLLPartida ManagerPartida = new BLLPartida();
-            int Cont = 1;
-
-            if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
-            {
-                MessageBox.Show("Si desea solicitar una partida por un monto igual o menor a $2.000 debe ingresar el justificativo");
-            }
-            //Partida directa
-            else
-            {
-                //nuevaPartida.FechaEnvio = DateTime.Now;
-                //nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
-                //nuevaPartida.Caja = false;
-                ////*************SEGUIR CON GENERARPARTIDAGLOBAL****************************
-                //foreach (SolicDetalle unDeta in ListaSolicDet.Where(X => X.Seleccionado == true))
-                //{
-                //    PartidaDetalle unaPartDetalle = new PartidaDetalle();
-
-                //    unaPartDetalle.IdPartidaDetalle = Cont++;
-                //    unaPartDetalle.SolicDetalleAsociado = unDeta;
-                //    unaPartDetalle.SolicDetalleAsociado.unasCotizaciones = unaPartDetalle.SolicDetalleAsociado.unasCotizaciones.Where(r => r.Seleccionada == true).ToList();
-                //    unaPartDetalle.unasCotizaciones = (List<Cotizacion>)unDeta.unasCotizaciones.Where(x => x.Seleccionada == true).ToList();
-
-                //    nuevaPartida.unasPartidasDetalles.Add(unaPartDetalle);
-                //}
-
-
-                //if (ManagerPartida.PartidaCrear(nuevaPartida))
-                //{
-                //    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
-                //    {
-                //        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd-MM-yy")));
-                //        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
-
-                //        // Save this document as the users name followed by .docx
-                //        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-                //    }// Release this document from memory
-                //}
-                //    MessageBox.Show("Solicitud de Partida generada correctamente");
-                GenerarPartidaGlobal(false);
+            if (GenerarPartidaGlobal(false))
                 MessageBox.Show("Solicitud de Partida generada correctamente");
-            }
         }
 
 
 
-        private void GenerarPartidaGlobal(bool PorCaja)
+        private bool GenerarPartidaGlobal(bool PorCaja)
         {
             BLLPartida ManagerPartida = new BLLPartida();
+            nuevaPartida = new Partida();
             int Cont = 1;
+            string JustifAUX = null;
 
             nuevaPartida.FechaEnvio = DateTime.Now;
             nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
@@ -455,32 +417,68 @@ namespace ARTEC.GUI
                 nuevaPartida.unasPartidasDetalles.Add(unaPartDetalle);
             }
 
-
+            //Me fijo si es partida y necesita justificativo
+            if (!PorCaja && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
+            {
+                frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
+                if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
+                {
+                    if(!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
+                    {
+                        JustifAUX = unfrmDialogJustificacion.textBox1.Text;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    //Si no ingreso el justificativo salgo de la función sin crear la partida en bd ni el documento
+                    return false;
+                }
+            }
             if (ManagerPartida.PartidaCrear(nuevaPartida))
             {
-                string JustifAUX;
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+                if(ServicioIdioma.unIdiomaActual.IdIdioma == 1)//Español
                 {
-                    doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
-                    CultureInfo ci = new CultureInfo("es-AR");
-                    doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                    if (nuevaPartida.Caja)
+                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
                     {
-                        frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
-                        if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
+                        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
+                        CultureInfo ci = new CultureInfo("es-AR");
+                        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
+                        //Si se escribio una justificación
+                        if (!string.IsNullOrWhiteSpace(JustifAUX))
                         {
-                            JustifAUX = unfrmDialogJustificacion.textBox1.Text;
                             doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
                         }
-                            
+                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                     }
-
-                    // Save this document as the users name followed by .docx
-                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-                }// Release this document from memory
+                }
+                else if (ServicioIdioma.unIdiomaActual.IdIdioma == 2)//Ingles
+                {
+                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                    {
+                        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
+                        CultureInfo ci = new CultureInfo("es-AR");
+                        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
+                        //Si se escribio una justificación
+                        if (!string.IsNullOrWhiteSpace(JustifAUX))
+                        {
+                            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                        }
+                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                    }
+                }
+                
             }
-            
+            else
+            {
+                return false;
+            }
+            return true;
         }
 
 

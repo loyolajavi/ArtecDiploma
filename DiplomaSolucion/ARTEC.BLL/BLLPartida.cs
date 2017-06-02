@@ -30,5 +30,12 @@ namespace ARTEC.BLL
             return false;
         }
 
+
+
+        public Partida PartidaTraerPorNroPart(int NroPart)
+        {
+            return GestorPartida.PartidaTraerPorNroPart(NroPart);
+        }
+
     }
 }

@@ -33,6 +33,7 @@ namespace ARTEC.GUI
             this.tabHomol = new System.Windows.Forms.TabPage();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
+            this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,11 +96,27 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Text = "btnSolicitarPartida";
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
             // 
+            // btnPartidaAsociar
+            // 
+            this.btnPartidaAsociar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPartidaAsociar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPartidaAsociar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnPartidaAsociar.CustomColorName = "Blue";
+            this.btnPartidaAsociar.Location = new System.Drawing.Point(612, 13);
+            this.btnPartidaAsociar.Name = "btnPartidaAsociar";
+            this.btnPartidaAsociar.Size = new System.Drawing.Size(87, 40);
+            this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPartidaAsociar.TabIndex = 3;
+            this.btnPartidaAsociar.Text = "btnPartidaAsociar";
+            this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
+            this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.btnPartidaAsociar);
             this.Controls.Add(this.btnSolicitarPartida);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.tabsPrincipal);
@@ -120,6 +137,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabHomol;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
+        private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;
 
 
 

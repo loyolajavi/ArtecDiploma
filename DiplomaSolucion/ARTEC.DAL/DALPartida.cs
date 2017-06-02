@@ -99,5 +99,67 @@ namespace ARTEC.DAL
         }
 
 
+
+        public Partida PartidaTraerPorNroPart(int NroPart)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", NroPart)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidaTraerPorNroPart", parameters))
+                {
+                    Partida unaPartida = new Partida();
+                    unaPartida = MapearPartidaUno(ds);
+                    return unaPartida;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+
+        public static Partida MapearPartidaUno(DataSet ds)
+        {
+            Partida unaParti = new Partida();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    
+
+                    unaParti.IdPartida = (int)row["IdPartida"];
+                    unaParti.MontoSolicitado = (decimal)row["MontoSolicitado"];
+                    if (row["MontoOtorgado"].ToString() != "")
+                        unaParti.MontoOtorgado = (decimal)row["MontoOtorgado"];
+                    if (row["NroPartida"].ToString() != "")
+                        unaParti.NroPartida = row["NroPartida"].ToString();
+                    unaParti.FechaEnvio = DateTime.Parse(row["FechaEnvio"].ToString());
+                    if (row["FechaAcreditacion"].ToString() != "")
+                        unaParti.FechaAcreditacion = DateTime.Parse(row["FechaAcreditacion"].ToString());
+                    unaParti.Caja = (bool)row["Caja"];
+                }
+                return unaParti;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
+
+
+
+
     }
 }
