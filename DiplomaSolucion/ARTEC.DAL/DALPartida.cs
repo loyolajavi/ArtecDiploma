@@ -127,6 +127,38 @@ namespace ARTEC.DAL
 
 
 
+        public void PartidaAsociar(Partida laPartida)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", laPartida.IdPartida),
+                new SqlParameter("@FechaAcreditacion", laPartida.FechaAcreditacion),
+                new SqlParameter("@MontoOtorgado", laPartida.MontoOtorgado),
+                new SqlParameter("@NroPartida", laPartida.NroPartida)
+            };
+
+            try
+            {
+                //***********************HACER EL STORE PROCEDURE*********************************
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaAsociar", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
+
+
         public static Partida MapearPartidaUno(DataSet ds)
         {
             Partida unaParti = new Partida();

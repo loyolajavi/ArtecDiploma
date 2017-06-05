@@ -37,5 +37,18 @@ namespace ARTEC.BLL
             return GestorPartida.PartidaTraerPorNroPart(NroPart);
         }
 
+
+
+        public void PartidaAsociar(Partida laPartida)
+        {
+            GestorPartida.PartidaAsociar(laPartida);
+        }
+
+
+
+
+
+
+
     }
 }

@@ -21,7 +21,7 @@ namespace ARTEC.DAL
             };
 
             try
-            {//****************HACER STORE****************
+            {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidaDetalleTraerTodosPorNroPart", parameters))
                 {
                     List<PartidaDetalle> unaListaPartidaDetalles = new List<PartidaDetalle>();
@@ -37,7 +37,7 @@ namespace ARTEC.DAL
         }
 
 
-        //****************CAMBIAR POR PARTIDADETALLES EL CODIGO QUE COPIE DE SOLICDETALLES****************
+        
         private List<PartidaDetalle> MapearPartidaDetalles(DataSet ds)
         {
             List<PartidaDetalle> ResPartidaDetalles = new List<PartidaDetalle>();

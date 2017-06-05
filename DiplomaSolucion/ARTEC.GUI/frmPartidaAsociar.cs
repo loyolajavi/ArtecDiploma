@@ -17,6 +17,7 @@ namespace ARTEC.GUI
     {
 
         Partida unaPartida = new Partida();
+        BLLPartida ManagerPartida = new BLLPartida();
         //BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
 
         public frmPartidaAsociar()
@@ -33,11 +34,15 @@ namespace ARTEC.GUI
             if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
             {
                 unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtIdPartida.Text));
-                grillaPartidas.DataSource = null;
-                List<Partida> unasPartidas = new List<Partida>();
-                unasPartidas.Add(unaPartida);
-                grillaPartidas.DataSource = unasPartidas;
+                //grillaPartidas.DataSource = null;
+                //List<Partida> unasPartidas = new List<Partida>();
+                //unasPartidas.Add(unaPartida);
+                //grillaPartidas.DataSource = unasPartidas;
                 //grillaPartidas.Columns[""].Visible = true;
+                txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
+                txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
+                chkCaja.Checked = unaPartida.Caja;
+
                 List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
 
                 grillaDetallesPart.DataSource = null;
@@ -53,6 +58,17 @@ namespace ARTEC.GUI
                 grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
             }
             
+        }
+
+
+
+        private void btnAsociar_Click(object sender, EventArgs e)
+        {
+            unaPartida.FechaAcreditacion = DateTime.Today;
+            unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
+            unaPartida.NroPartida = txtNroPartAsignado.Text;
+
+            ManagerPartida.PartidaAsociar(unaPartida);
         }
 
         //private void grillaPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
