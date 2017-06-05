@@ -113,6 +113,8 @@ namespace ARTEC.DAL
                 {
                     Partida unaPartida = new Partida();
                     unaPartida = MapearPartidaUno(ds);
+                    DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
+                    unaPartida.unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
                     return unaPartida;
                 }
             }

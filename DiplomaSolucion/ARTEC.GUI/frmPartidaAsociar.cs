@@ -9,6 +9,7 @@ using DevComponents.DotNetBar;
 using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
+using ARTEC.ENTIDADES.Helpers;
 
 namespace ARTEC.GUI
 {
@@ -16,16 +17,14 @@ namespace ARTEC.GUI
     {
 
         Partida unaPartida = new Partida();
+        //BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
 
         public frmPartidaAsociar()
         {
             InitializeComponent();
         }
 
-        private void labelX1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -39,8 +38,62 @@ namespace ARTEC.GUI
                 unasPartidas.Add(unaPartida);
                 grillaPartidas.DataSource = unasPartidas;
                 //grillaPartidas.Columns[""].Visible = true;
+                List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+
+                grillaDetallesPart.DataSource = null;
+                foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                {
+                    HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                    unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                    unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                    unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+
+                    ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                }
+                grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
             }
             
         }
+
+        //private void grillaPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    //Si se hizo click en el header, salir
+        //    if (e.RowIndex < 0 || e.ColumnIndex < 0)
+        //    {
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+
+        //        grillaDetallesPart.DataSource = null;
+        //        foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+        //        {
+        //            HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+        //            unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+        //            unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+        //            unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+
+        //            ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+        //        }
+        //        grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
