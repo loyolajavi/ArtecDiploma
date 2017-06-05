@@ -127,7 +127,7 @@ namespace ARTEC.DAL
 
 
 
-        public void PartidaAsociar(Partida laPartida)
+        public bool PartidaAsociar(Partida laPartida)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -139,15 +139,16 @@ namespace ARTEC.DAL
 
             try
             {
-                //***********************HACER EL STORE PROCEDURE*********************************
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaAsociar", parameters);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
                 throw;
             }
             finally

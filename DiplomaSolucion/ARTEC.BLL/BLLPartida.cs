@@ -39,9 +39,11 @@ namespace ARTEC.BLL
 
 
 
-        public void PartidaAsociar(Partida laPartida)
+        public bool PartidaAsociar(Partida laPartida)
         {
-            GestorPartida.PartidaAsociar(laPartida);
+            if (GestorPartida.PartidaAsociar(laPartida))
+                return true;
+            return false;
         }
 
 

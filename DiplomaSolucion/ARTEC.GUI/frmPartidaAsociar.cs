@@ -68,7 +68,8 @@ namespace ARTEC.GUI
             unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
             unaPartida.NroPartida = txtNroPartAsignado.Text;
 
-            ManagerPartida.PartidaAsociar(unaPartida);
+            if(ManagerPartida.PartidaAsociar(unaPartida))
+                MessageBox.Show("Partida Asociada correctamente");
         }
 
         //private void grillaPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
