@@ -34,6 +34,7 @@ namespace ARTEC.GUI
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
+            this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,17 +112,33 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
             this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
             // 
+            // btnBienRegistrar
+            // 
+            this.btnBienRegistrar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBienRegistrar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBienRegistrar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnBienRegistrar.CustomColorName = "Blue";
+            this.btnBienRegistrar.Location = new System.Drawing.Point(729, 13);
+            this.btnBienRegistrar.Name = "btnBienRegistrar";
+            this.btnBienRegistrar.Size = new System.Drawing.Size(87, 40);
+            this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBienRegistrar.TabIndex = 4;
+            this.btnBienRegistrar.Text = "btnBienRegistrar";
+            this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.btnBienRegistrar);
             this.Controls.Add(this.btnPartidaAsociar);
             this.Controls.Add(this.btnSolicitarPartida);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.Text = "ARTEC";
             this.Load += new System.EventHandler(this.Principal_Load);
@@ -138,6 +155,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
         private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;
+        private DevComponents.DotNetBar.ButtonX btnBienRegistrar;
 
 
 
