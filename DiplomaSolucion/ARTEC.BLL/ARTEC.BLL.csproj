@@ -44,9 +44,13 @@
     <Compile Include="BLLCategoria.cs" />
     <Compile Include="BLLCotizacion.cs" />
     <Compile Include="BLLDependencia.cs" />
+    <Compile Include="BLLDeposito.cs" />
+    <Compile Include="BLLEstadoInventario.cs" />
     <Compile Include="BLLEstadoSolicDetalle.cs" />
     <Compile Include="BLLEstadoSolicitud.cs" />
     <Compile Include="BLLHardware.cs" />
+    <Compile Include="BLLMarca.cs" />
+    <Compile Include="BLLModelo.cs" />
     <Compile Include="BLLPartida.cs" />
     <Compile Include="BLLPartidaDetalle.cs" />
     <Compile Include="BLLPolitica.cs" />

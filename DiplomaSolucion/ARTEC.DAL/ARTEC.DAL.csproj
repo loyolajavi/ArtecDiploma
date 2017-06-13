@@ -45,9 +45,13 @@
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />
+    <Compile Include="DALDeposito.cs" />
+    <Compile Include="DALEstadoInventario.cs" />
     <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />
     <Compile Include="DALHardware.cs" />
+    <Compile Include="DALMarca.cs" />
+    <Compile Include="DALModelo.cs" />
     <Compile Include="DALPartida.cs" />
     <Compile Include="DALPartidaDetalle.cs" />
     <Compile Include="DALPolitica.cs" />

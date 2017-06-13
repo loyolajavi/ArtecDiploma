@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public interface Bien
+    public class Bien
     {
 
-        int IdBien { get; set; }
-        string DescripBien { get; set; }
-
-        Categoria unaCategoria { get; set; }
-
-        Marca unaMarca { get; set; }
-        ModeloVersion unModelo { get; set; }
+        public int IdBien { get; set; }
+        public string DescripBien { get; set; }
+        public Categoria unaCategoria { get; set; }
+        public Marca unaMarca { get; set; }
+        public ModeloVersion unModelo { get; set; }
 
 
 

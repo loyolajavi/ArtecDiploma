@@ -52,6 +52,7 @@
     <Compile Include="EstadoSolicitud.cs" />
     <Compile Include="FactoryBien.cs" />
     <Compile Include="Hardware.cs" />
+    <Compile Include="Helpers\HLPBienInventario.cs" />
     <Compile Include="Helpers\HLPPartidaDetalle.cs" />
     <Compile Include="IFactoryBien.cs" />
     <Compile Include="InventarioHard.cs" />

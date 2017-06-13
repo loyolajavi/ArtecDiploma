@@ -9,7 +9,7 @@ namespace ARTEC.ENTIDADES
     public class ModeloVersion
     {
 
-        public int IdModelo { get; set; }
+        public int IdModeloVersion { get; set; }
         public string DescripModeloVersion { get; set; }
 
     }
