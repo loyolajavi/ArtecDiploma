@@ -26,7 +26,7 @@ namespace ARTEC.GUI
         List<Categoria> unasCategorias = new List<Categoria>();
         Categoria unaCat;
         Marca unaMarca;
-        List<HLPBienInventario> unosBienes = new List<HLPBienInventario>();
+        List<HLPBienInventario> unosBieneshlp = new List<HLPBienInventario>();
 
         public frmBienRegistrar()
         {
@@ -227,19 +227,25 @@ namespace ARTEC.GUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            //Creo ManagerBien con Factory
+            IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
+            //ManagerBien.BienCrear()
+            //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
+            IBien unBien = ManagerBien.BienInstanciar();
+            Inventario unHardInven = new Inventario();
+            unBien.unosInventarios.Add(unHardInven);
 
-            
-            HLPBienInventario unBien = new HLPBienInventario();
-            unBien.DescripBien = txtBienCategoria.Text;
-            unBien.DescripEstadoInv = cboEstado.Text;
-            unBien.DescripMarca = cboMarca.Text;
-            unBien.DescripModeloVersion = cboModelo.Text;
-            unBien.NombreDeposito = cboDeposito.Text;
-            unBien.SerieKey = txtSerieKey.Text;
+            HLPBienInventario unBienhlp = new HLPBienInventario();
+            unBienhlp.DescripBien = txtBienCategoria.Text;
+            unBienhlp.DescripEstadoInv = cboEstado.Text;
+            unBienhlp.DescripMarca = cboMarca.Text;
+            unBienhlp.DescripModeloVersion = cboModelo.Text;
+            unBienhlp.NombreDeposito = cboDeposito.Text;
+            unBienhlp.SerieKey = txtSerieKey.Text;
 
             GrillaBienes.DataSource = null;
-            unosBienes.Add(unBien);
-            GrillaBienes.DataSource = unosBienes;
+            unosBieneshlp.Add(unBienhlp);
+            GrillaBienes.DataSource = unosBieneshlp;
 
 
         }

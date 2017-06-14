@@ -50,11 +50,13 @@
     <Compile Include="EstadoInventario.cs" />
     <Compile Include="EstadoSolicDetalle.cs" />
     <Compile Include="EstadoSolicitud.cs" />
+    <Compile Include="IBien.cs" />
+    <Compile Include="Inventario.cs" />
     <Compile Include="FactoryBien.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Helpers\HLPBienInventario.cs" />
     <Compile Include="Helpers\HLPPartidaDetalle.cs" />
-    <Compile Include="IFactoryBien.cs" />
+    <Compile Include="XIFactoryBien.cs" />
     <Compile Include="InventarioHard.cs" />
     <Compile Include="InventarioSoft.cs" />
     <Compile Include="Limite.cs" />

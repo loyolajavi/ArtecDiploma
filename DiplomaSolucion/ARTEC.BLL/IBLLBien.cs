@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ARTEC.ENTIDADES;
+using ARTEC.DAL;
 
-namespace ARTEC.ENTIDADES
+namespace ARTEC.BLL
 {
-    public class Software : Bien
+    public interface IBLLBien
     {
 
-
-        public List<InventarioSoft> unosInventariosSoft { get; set; }
+        IBien BienInstanciar();
 
     }
 }

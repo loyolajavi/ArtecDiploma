@@ -8,20 +8,12 @@ using ARTEC.DAL;
 
 namespace ARTEC.BLL
 {
-    public class BLLHardware : IBLLBien
+    class BLLSoftware : IBLLBien
     {
-
-        DALHardware GestorHardware = new DALHardware();
-
-        public List<Hardware> TraerHardware()
-        {
-            return GestorHardware.TraerHardware();
-        }
-
 
         IBien IBLLBien.BienInstanciar()
         {
-            return new Hardware();
+            return new Software();
         }
     }
 }

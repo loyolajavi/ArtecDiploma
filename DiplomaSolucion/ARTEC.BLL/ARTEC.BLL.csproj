@@ -48,6 +48,7 @@
     <Compile Include="BLLEstadoInventario.cs" />
     <Compile Include="BLLEstadoSolicDetalle.cs" />
     <Compile Include="BLLEstadoSolicitud.cs" />
+    <Compile Include="BLLFactoryBien.cs" />
     <Compile Include="BLLHardware.cs" />
     <Compile Include="BLLMarca.cs" />
     <Compile Include="BLLModelo.cs" />
@@ -56,10 +57,12 @@
     <Compile Include="BLLPolitica.cs" />
     <Compile Include="BLLPrioridad.cs" />
     <Compile Include="BLLProveedor.cs" />
+    <Compile Include="BLLSoftware.cs" />
     <Compile Include="BLLSolicDetalle.cs" />
     <Compile Include="BLLSolicitud.cs" />
     <Compile Include="BLLTipoBien.cs" />
     <Compile Include="BLLUsuario.cs" />
+    <Compile Include="IBLLBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\BLLIdioma.cs" />
   </ItemGroup>

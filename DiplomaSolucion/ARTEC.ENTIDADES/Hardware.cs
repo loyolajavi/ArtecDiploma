@@ -6,72 +6,26 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class Hardware : Bien
+    public class Hardware : IBien
+
     {
 
 
-        public List<InventarioHard> unosInventariosHard { get; set; }
-       
 
-        public int IdBien
+        public int IdBien { get; set; }
+        public string DescripBien { get; set; }
+        public Categoria unaCategoria { get; set; }
+        public Marca unaMarca { get; set; }
+        public ModeloVersion unModelo { get; set; }
+        
+        private List<Inventario>  _unosInventarios = new List<Inventario>();
+
+        public List<Inventario>  unosInventarios
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _unosInventarios; }
+            set { _unosInventarios = value; }
         }
+        
 
-        public string DescripBien
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Categoria unaCategoria
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-
-        public Marca unaMarca
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public ModeloVersion unModelo
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }

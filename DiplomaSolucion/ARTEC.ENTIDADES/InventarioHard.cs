@@ -15,5 +15,7 @@ namespace ARTEC.ENTIDADES
         public EstadoInventario unEstado { get; set; }
         public Deposito unDeposito { get; set; }
 
+
+        
     }
 }

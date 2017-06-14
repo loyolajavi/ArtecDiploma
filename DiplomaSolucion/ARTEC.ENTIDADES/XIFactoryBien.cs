@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public interface IFactoryBien
+    public interface XIFactoryBien
     {
 
         Bien CrearBien();
