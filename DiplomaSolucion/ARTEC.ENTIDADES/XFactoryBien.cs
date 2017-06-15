@@ -8,23 +8,23 @@ using System.Reflection;
 
 namespace ARTEC.ENTIDADES
 {
-    public class FactoryBien
+    public class XFactoryBien
     {
 
 
-        public static IEnumerable<Bien> CrearBienes(int unTipoBien)
-        {
+        //public static IEnumerable<XBien> CrearBienes(int unTipoBien)
+        //{
 
-            if (unTipoBien == 1)
-            {
-                List<Hardware> unosHard = new List<Hardware>();
-                return (IEnumerable<Bien>)unosHard;
-            }
-            else
-            {
-                return new List<Software>();
-            }
-        }
+        //    if (unTipoBien == 1)
+        //    {
+        //        List<Hardware> unosHard = new List<Hardware>();
+        //        return (IEnumerable<XBien>)unosHard;
+        //    }
+        //    else
+        //    {
+        //        return new List<Software>();
+        //    }
+        //}
 
 
 

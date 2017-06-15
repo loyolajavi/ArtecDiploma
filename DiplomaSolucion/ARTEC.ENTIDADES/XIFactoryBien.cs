@@ -9,7 +9,7 @@ namespace ARTEC.ENTIDADES
     public interface XIFactoryBien
     {
 
-        Bien CrearBien();
+        XBien CrearBien();
 
     }
 }

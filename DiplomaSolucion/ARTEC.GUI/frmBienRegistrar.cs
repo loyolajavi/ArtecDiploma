@@ -27,6 +27,7 @@ namespace ARTEC.GUI
         Categoria unaCat;
         Marca unaMarca;
         List<HLPBienInventario> unosBieneshlp = new List<HLPBienInventario>();
+        List<IBien> nuevosBienes = new List<IBien>();
 
         public frmBienRegistrar()
         {
@@ -232,16 +233,25 @@ namespace ARTEC.GUI
             //ManagerBien.BienCrear()
             //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
             IBien unBien = ManagerBien.BienInstanciar();
-            Inventario unHardInven = new Inventario();
-            unBien.unosInventarios.Add(unHardInven);
+            Inventario unInven = new Inventario();
+            //unBien.unosInventarios.Add(unHardInven);
 
             HLPBienInventario unBienhlp = new HLPBienInventario();
             unBienhlp.DescripBien = txtBienCategoria.Text;
+            unBien.unaCategoria = unaCat;
             unBienhlp.DescripEstadoInv = cboEstado.Text;
+            unInven.unEstado =(EstadoInventario)cboEstado.SelectedItem;
             unBienhlp.DescripMarca = cboMarca.Text;
+            unBien.unaMarca = (Marca)cboMarca.SelectedItem;
             unBienhlp.DescripModeloVersion = cboModelo.Text;
+            unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
             unBienhlp.NombreDeposito = cboDeposito.Text;
+            unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
             unBienhlp.SerieKey = txtSerieKey.Text;
+            unInven.SerieKey = txtSerieKey.Text;
+            unBien.unosInventarios.Add(unInven);
+
+            nuevosBienes.Add(unBien);
 
             GrillaBienes.DataSource = null;
             unosBieneshlp.Add(unBienhlp);

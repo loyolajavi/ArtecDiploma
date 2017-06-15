@@ -10,7 +10,7 @@ namespace ARTEC.BLL
 {
     class BLLSoftware : IBLLBien
     {
-
+        //Factory
         IBien IBLLBien.BienInstanciar()
         {
             return new Software();

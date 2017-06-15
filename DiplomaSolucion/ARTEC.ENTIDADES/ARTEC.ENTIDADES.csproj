@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agente.cs" />
-    <Compile Include="Bien.cs" />
+    <Compile Include="XBien.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="Cotizacion.cs" />
@@ -52,13 +52,13 @@
     <Compile Include="EstadoSolicitud.cs" />
     <Compile Include="IBien.cs" />
     <Compile Include="Inventario.cs" />
-    <Compile Include="FactoryBien.cs" />
+    <Compile Include="XFactoryBien.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Helpers\HLPBienInventario.cs" />
     <Compile Include="Helpers\HLPPartidaDetalle.cs" />
     <Compile Include="XIFactoryBien.cs" />
-    <Compile Include="InventarioHard.cs" />
-    <Compile Include="InventarioSoft.cs" />
+    <Compile Include="XInventarioHard.cs" />
+    <Compile Include="XInventarioSoft.cs" />
     <Compile Include="Limite.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Modelo.cs" />

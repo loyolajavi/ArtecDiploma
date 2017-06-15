@@ -6,11 +6,23 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class Software : Bien
+    public class Software : IBien
     {
 
+        public int IdBien { get; set; }
+        public string DescripBien { get; set; }
+        public Categoria unaCategoria { get; set; }
+        public Marca unaMarca { get; set; }
+        public ModeloVersion unModelo { get; set; }
 
-        public List<InventarioSoft> unosInventariosSoft { get; set; }
+        private List<Inventario> _unosInventarios = new List<Inventario>();
+
+        public List<Inventario> unosInventarios
+        {
+            get { return _unosInventarios; }
+            set { _unosInventarios = value; }
+        }
+        
 
     }
 }
