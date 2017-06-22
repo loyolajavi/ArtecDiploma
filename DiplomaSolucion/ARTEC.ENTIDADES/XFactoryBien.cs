@@ -28,17 +28,17 @@ namespace ARTEC.ENTIDADES
 
 
 
-        public static IBien CrearBien(int unTipoBien)
-        {
-            if(unTipoBien == 1)//Hardware
-            {
-                return new Hardware();
-            }
-            else
-            {
-                return new Software();
-            }
-        }
+        //public static IBien CrearBien(int unTipoBien)
+        //{
+        //    if(unTipoBien == 1)//Hardware
+        //    {
+        //        return new Hardware();
+        //    }
+        //    else
+        //    {
+        //        return new Software();
+        //    }
+        //}
 
 
 

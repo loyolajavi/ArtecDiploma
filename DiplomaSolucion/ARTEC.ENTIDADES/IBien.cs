@@ -16,5 +16,16 @@ namespace ARTEC.ENTIDADES
         ModeloVersion unModelo { get; set; }
         List<Inventario> unosInventarios { get; set; }
 
+        //Relacionadas a Software
+        //bool Homologado { get; set; }
+        bool? Homologado
+        {
+            get;
+            set;
+        }
+        
+        TipoLicencia unTipoLicencia { get; set; }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace ARTEC.BLL
     public interface IBLLBien
     {
 
-        IBien BienInstanciar();
+        //IBien BienInstanciar();
 
     }
 }

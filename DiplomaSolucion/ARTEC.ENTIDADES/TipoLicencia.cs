@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    //public interface XIFactoryBien
-    //{
+    public class TipoLicencia
+    {
 
-    //    XBien CrearBien();
+        public int IdTipoLicencia { get; set; }
+        public string DescripTipoLicencia { get; set; }
 
-    //}
+
+    }
 }

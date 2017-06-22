@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public abstract class XBien : IBien
+    public abstract class Bien
     {
 
         public int IdBien { get; set; }

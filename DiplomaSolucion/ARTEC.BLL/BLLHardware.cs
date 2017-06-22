@@ -18,10 +18,10 @@ namespace ARTEC.BLL
             return GestorHardware.TraerHardware();
         }
 
-        //Factory
-        IBien IBLLBien.BienInstanciar()
-        {
-            return new Hardware();
-        }
+        ////Factory
+        //IBien IBLLBien.BienInstanciar()
+        //{
+        //    return new Hardware();
+        //}
     }
 }

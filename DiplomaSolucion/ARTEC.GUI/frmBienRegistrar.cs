@@ -232,26 +232,46 @@ namespace ARTEC.GUI
             IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
             //ManagerBien.BienCrear()
             //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
-            IBien unBien = ManagerBien.BienInstanciar();
             Inventario unInven = new Inventario();
-            //unBien.unosInventarios.Add(unHardInven);
-
             HLPBienInventario unBienhlp = new HLPBienInventario();
-            unBienhlp.DescripBien = txtBienCategoria.Text;
-            unBien.unaCategoria = unaCat;
-            unBienhlp.DescripEstadoInv = cboEstado.Text;
-            unInven.unEstado =(EstadoInventario)cboEstado.SelectedItem;
-            unBienhlp.DescripMarca = cboMarca.Text;
-            unBien.unaMarca = (Marca)cboMarca.SelectedItem;
-            unBienhlp.DescripModeloVersion = cboModelo.Text;
-            unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
-            unBienhlp.NombreDeposito = cboDeposito.Text;
-            unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
-            unBienhlp.SerieKey = txtSerieKey.Text;
-            unInven.SerieKey = txtSerieKey.Text;
-            unBien.unosInventarios.Add(unInven);
+            //Creo un Bien(Hard o Soft según el tipo de ManagerBien instanciado)
+            //IBien unBien = ManagerBien.BienInstanciar();
+            if (ManagerBien.GetType().Name == "BLLHardware")
+            {
+                Hardware unBien = new Hardware();
+                unBienhlp.DescripBien = txtBienCategoria.Text;
+                unBien.unaCategoria = unaCat;
+                unBienhlp.DescripEstadoInv = cboEstado.Text;
+                unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBienhlp.DescripMarca = cboMarca.Text;
+                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
+                unBienhlp.DescripModeloVersion = cboModelo.Text;
+                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
+                unBienhlp.SerieKey = txtSerieKey.Text;
+                unInven.SerieKey = txtSerieKey.Text;
+                unBienhlp.NombreDeposito = cboDeposito.Text;
+                unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
+                unBien.unosInventarios.Add(unInven);
+            }
+            else
+            {
+                Software unBien = new Software();
+                unBienhlp.DescripBien = txtBienCategoria.Text;
+                unBien.unaCategoria = unaCat;
+                unBienhlp.DescripEstadoInv = cboEstado.Text;
+                unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBienhlp.DescripMarca = cboMarca.Text;
+                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
+                unBienhlp.DescripModeloVersion = cboModelo.Text;
+                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
+                unBienhlp.SerieKey = txtSerieKey.Text;
+                unInven.SerieKey = txtSerieKey.Text;
+                //falta homologado y tipolicencia
+                unBien.unosInventarios.Add(unInven);
+            }
 
-            nuevosBienes.Add(unBien);
+           //REVISAR ESTO LISTA DE LOS BIENES
+            //nuevosBienes.Add(unBien);
 
             GrillaBienes.DataSource = null;
             unosBieneshlp.Add(unBienhlp);

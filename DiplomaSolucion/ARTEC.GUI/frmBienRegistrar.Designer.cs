@@ -65,7 +65,6 @@ namespace ARTEC.GUI
             this.dateTimeInput1 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblFinSus = new DevComponents.DotNetBar.LabelX();
             this.lblFecSus = new DevComponents.DotNetBar.LabelX();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.comboBoxEx7 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboBoxEx8 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.textBoxX4 = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -322,8 +321,10 @@ namespace ARTEC.GUI
             // 
             this.pnlBienes.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlBienes.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.pnlBienes.Controls.Add(this.GrillaBienes);
+            this.pnlBienes.Controls.Add(this.btnAgregar);
             this.pnlBienes.Controls.Add(this.pnlHardware);
+            this.pnlBienes.Controls.Add(this.pnlSoftware);
+            this.pnlBienes.Controls.Add(this.GrillaBienes);
             this.pnlBienes.Controls.Add(this.lblBien);
             this.pnlBienes.Controls.Add(this.lblModelo);
             this.pnlBienes.Controls.Add(this.lblMarca);
@@ -331,7 +332,6 @@ namespace ARTEC.GUI
             this.pnlBienes.Controls.Add(this.cboModelo);
             this.pnlBienes.Controls.Add(this.cboMarca);
             this.pnlBienes.Controls.Add(this.cboTipoBien);
-            this.pnlBienes.Controls.Add(this.pnlSoftware);
             this.pnlBienes.Controls.Add(this.txtBienCategoria);
             this.pnlBienes.Controls.Add(this.cboBienCategoria);
             this.pnlBienes.DisabledBackColor = System.Drawing.Color.Empty;
@@ -368,7 +368,6 @@ namespace ARTEC.GUI
             // 
             this.pnlHardware.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlHardware.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.pnlHardware.Controls.Add(this.btnAgregar);
             this.pnlHardware.Controls.Add(this.cboDeposito);
             this.pnlHardware.Controls.Add(this.cboEstado);
             this.pnlHardware.Controls.Add(this.txtSerieKey);
@@ -378,7 +377,7 @@ namespace ARTEC.GUI
             this.pnlHardware.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlHardware.Location = new System.Drawing.Point(3, 128);
             this.pnlHardware.Name = "pnlHardware";
-            this.pnlHardware.Size = new System.Drawing.Size(306, 117);
+            this.pnlHardware.Size = new System.Drawing.Size(306, 88);
             this.pnlHardware.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlHardware.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlHardware.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -391,7 +390,7 @@ namespace ARTEC.GUI
             // 
             this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregar.Location = new System.Drawing.Point(125, 87);
+            this.btnAgregar.Location = new System.Drawing.Point(128, 225);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -581,7 +580,6 @@ namespace ARTEC.GUI
             this.pnlSoftware.Controls.Add(this.dateTimeInput1);
             this.pnlSoftware.Controls.Add(this.lblFinSus);
             this.pnlSoftware.Controls.Add(this.lblFecSus);
-            this.pnlSoftware.Controls.Add(this.buttonX1);
             this.pnlSoftware.Controls.Add(this.comboBoxEx7);
             this.pnlSoftware.Controls.Add(this.comboBoxEx8);
             this.pnlSoftware.Controls.Add(this.textBoxX4);
@@ -589,9 +587,9 @@ namespace ARTEC.GUI
             this.pnlSoftware.Controls.Add(this.lblKey);
             this.pnlSoftware.Controls.Add(this.lblSerial);
             this.pnlSoftware.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlSoftware.Location = new System.Drawing.Point(3, 136);
+            this.pnlSoftware.Location = new System.Drawing.Point(3, 127);
             this.pnlSoftware.Name = "pnlSoftware";
-            this.pnlSoftware.Size = new System.Drawing.Size(453, 117);
+            this.pnlSoftware.Size = new System.Drawing.Size(453, 89);
             this.pnlSoftware.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlSoftware.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlSoftware.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -716,17 +714,6 @@ namespace ARTEC.GUI
             this.lblFecSus.Size = new System.Drawing.Size(91, 17);
             this.lblFecSus.TabIndex = 26;
             this.lblFecSus.Text = "lblFecSus";
-            // 
-            // buttonX1
-            // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(125, 87);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(75, 23);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 25;
-            this.buttonX1.Text = "buttonX1";
             // 
             // comboBoxEx7
             // 
@@ -918,7 +905,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnConfirmar;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaBienes;
         private DevComponents.DotNetBar.PanelEx pnlSoftware;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx7;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx8;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX4;
