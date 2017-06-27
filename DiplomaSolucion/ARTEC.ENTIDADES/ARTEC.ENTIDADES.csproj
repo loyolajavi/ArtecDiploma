@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adquisicion.cs" />
     <Compile Include="Agente.cs" />
     <Compile Include="TipoLicencia.cs" />
     <Compile Include="Bien.cs" />

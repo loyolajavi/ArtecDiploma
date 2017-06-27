@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public class XInventarioHard
+    public class XInventarioHard : Inventario
     {
         public int IdInventario { get; set; }
         public int IdBienEspecif { get; set; }

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALAdquisicion.cs" />
     <Compile Include="DALAgente.cs" />
+    <Compile Include="DALBien.cs" />
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />
@@ -50,6 +52,8 @@
     <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />
     <Compile Include="DALHardware.cs" />
+    <Compile Include="DALInventarioHard.cs" />
+    <Compile Include="DALInventarioSoft.cs" />
     <Compile Include="DALMarca.cs" />
     <Compile Include="DALModelo.cs" />
     <Compile Include="DALPartida.cs" />
@@ -57,6 +61,7 @@
     <Compile Include="DALPolitica.cs" />
     <Compile Include="DALPrioridad.cs" />
     <Compile Include="DALProveedor.cs" />
+    <Compile Include="DALSoftware.cs" />
     <Compile Include="DALSolicDetalle.cs" />
     <Compile Include="DALSolicitud.cs" />
     <Compile Include="DALTipoBien.cs" />

@@ -20,6 +20,7 @@ namespace ARTEC.GUI
     public partial class frmBienRegistrar : DevComponents.DotNetBar.Metro.MetroForm
     {
 
+        Adquisicion unaAdquisicion = new Adquisicion();
         List<TipoBien> unosTipoBien = new List<TipoBien>();
         List<Categoria> unasCategoriasHard;
         List<Categoria> unasCategoriasSoft;
@@ -27,27 +28,17 @@ namespace ARTEC.GUI
         Categoria unaCat;
         Marca unaMarca;
         List<HLPBienInventario> unosBieneshlp = new List<HLPBienInventario>();
-        List<IBien> nuevosBienes = new List<IBien>();
+        List<Bien> nuevosBienes = new List<Bien>();
+        List<Inventario> nuevosInventarios = new List<Inventario>();
+        ModeloVersion unModelo;
+        Bien unBien;
+        Inventario unInven;// = new Inventario();
 
         public frmBienRegistrar()
         {
             InitializeComponent();
         }
 
-        private void stepItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stepItem2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblIdSolicitud_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void txtIdSolicitud_TextChanged(object sender, EventArgs e)
         {
@@ -56,10 +47,18 @@ namespace ARTEC.GUI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            pnlAdquisicion.Visible = false;
-            pnlBienes.Visible = true;
-            this.stepItem1.BackColors = new System.Drawing.Color[] {System.Drawing.Color.Transparent};
-            this.stepItem2.BackColors = new System.Drawing.Color[] {System.Drawing.Color.MediumAquamarine};
+            BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+            unaAdquisicion.NroFactura = txtNroFactura.Text;
+            unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+            //unaAdquisicion.ProveedorAdquisicion = (Proveedor)cboProveedor.SelectedItem;
+            unaAdquisicion.FechaAdq = DateTime.Now;
+            unaAdquisicion.IdTipoAdquisicion = 1;///COMPLETAR
+            //unaAdquisicion.InventariosAsociados = nuevosInventarios;
+            if (unaAdquisicion.BienesInventarioAsociados != null)
+            {
+                //SEGUIR CON LAS DAL INVENTARIO Y STORES
+                ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
+            }
         }
 
         private void frmBienRegistrar_Load(object sender, EventArgs e)
@@ -228,56 +227,106 @@ namespace ARTEC.GUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+
+
+
             //Creo ManagerBien con Factory
-            IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
+            //IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
             //ManagerBien.BienCrear()
             //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
-            Inventario unInven = new Inventario();
+            //Inventario unInven;// = new Inventario();
             HLPBienInventario unBienhlp = new HLPBienInventario();
             //Creo un Bien(Hard o Soft según el tipo de ManagerBien instanciado)
             //IBien unBien = ManagerBien.BienInstanciar();
-            if (ManagerBien.GetType().Name == "BLLHardware")
-            {
-                Hardware unBien = new Hardware();
-                unBienhlp.DescripBien = txtBienCategoria.Text;
-                unBien.unaCategoria = unaCat;
-                unBienhlp.DescripEstadoInv = cboEstado.Text;
-                unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-                unBienhlp.DescripMarca = cboMarca.Text;
-                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
-                unBienhlp.DescripModeloVersion = cboModelo.Text;
-                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
-                unBienhlp.SerieKey = txtSerieKey.Text;
-                unInven.SerieKey = txtSerieKey.Text;
-                unBienhlp.NombreDeposito = cboDeposito.Text;
-                unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
-                unBien.unosInventarios.Add(unInven);
-            }
-            else
-            {
-                Software unBien = new Software();
-                unBienhlp.DescripBien = txtBienCategoria.Text;
-                unBien.unaCategoria = unaCat;
-                unBienhlp.DescripEstadoInv = cboEstado.Text;
-                unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-                unBienhlp.DescripMarca = cboMarca.Text;
-                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
-                unBienhlp.DescripModeloVersion = cboModelo.Text;
-                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
-                unBienhlp.SerieKey = txtSerieKey.Text;
-                unInven.SerieKey = txtSerieKey.Text;
-                //falta homologado y tipolicencia
-                unBien.unosInventarios.Add(unInven);
-            }
+            //if (ManagerBien.GetType().Name == "BLLHardware")
+            //if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            //{
+            //    unBien = new Hardware();
+            //    unInven = new XInventarioHard();
+            //}
+            //else//Software
+            //{
+            //    unBien = new Software();
+            //    unInven = new XInventarioSoft();
+            //}
+            //CONSULTAR EL ID DEL BIEN
+            //unBien.IdBien = ConsultarelIDdelBien();
+            unBienhlp.DescripBien = txtBienCategoria.Text;
+            unBien.unaCategoria = unaCat;
+            unBienhlp.DescripEstadoInv = cboEstado.Text;
+            unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+            unBienhlp.DescripMarca = cboMarca.Text;
+            unBien.unaMarca = (Marca)cboMarca.SelectedItem;
+            unBienhlp.DescripModeloVersion = cboModelo.Text;
+            unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
+            unBienhlp.SerieKey = txtSerieKey.Text;
+            unInven.SerieKey = txtSerieKey.Text;
+            unBienhlp.NombreDeposito = cboDeposito.Text;
+            unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
+            //unBien.unosInventarios.Add(unInven);
+            //falta homologado y tipolicencia
 
-           //REVISAR ESTO LISTA DE LOS BIENES
-            //nuevosBienes.Add(unBien);
+            unBien.unInventarioAlta = unInven;
+
+            unaAdquisicion.BienesInventarioAsociados.Add(unBien);
 
             GrillaBienes.DataSource = null;
             unosBieneshlp.Add(unBienhlp);
             GrillaBienes.DataSource = unosBieneshlp;
 
 
+        }
+
+        private void btnContinuar_Click(object sender, EventArgs e)
+        {
+            pnlAdquisicion.Visible = false;
+            pnlBienes.Visible = true;
+            this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
+            this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
+        }
+
+        private void cboModelo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (cboModelo.SelectedIndex > -1)
+            {
+                ComboBox cbo = (ComboBox)sender;
+                unModelo = new ModeloVersion();
+                unModelo = (ModeloVersion)cbo.SelectedItem;
+
+                BLLModelo ManagerModelo = new BLLModelo();
+                List<ModeloVersion> unosModelos = new List<ModeloVersion>();
+                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unaCat.IdCategoria, (int)cboTipoBien.SelectedValue, unaMarca.IdMarca);
+                cboModelo.DataSource = null;
+                cboModelo.DataSource = unosModelos;
+                cboModelo.DisplayMember = "DescripModeloVersion";
+                cboModelo.ValueMember = "IdModeloVersion";
+
+
+                //Creo ManagerBien con Factory
+                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
+                
+                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                {
+                    unBien = new Hardware();
+                    unInven = new XInventarioHard();
+                }
+                else//Software
+                {
+                    unBien = new Software();
+                    unInven = new XInventarioSoft();
+                }
+
+                unBien.unaCategoria = unaCat;
+                unBien.unaMarca = unaMarca;
+                unBien.unModelo = unModelo;
+
+                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien);
+
+
+                //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+                //ValidDep2.Validate();
+
+            }
         }
 
 

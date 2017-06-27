@@ -23,5 +23,22 @@ namespace ARTEC.BLL
         //{
         //    return new Hardware();
         //}
+
+
+        public void HardwareCrear(Hardware unHardware)
+        {
+
+        }
+
+
+        
+        public int BienTraerIdPorDescripMarcaModelo(Bien unBien)
+        {
+            return GestorHardware.BienTraerIdPorDescripMarcaModelo(unBien);
+        }
+
+
+
+
     }
 }

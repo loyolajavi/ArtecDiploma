@@ -10,10 +10,23 @@ namespace ARTEC.BLL
 {
     class BLLSoftware : IBLLBien
     {
+
+        DALSoftware GestorSoftware = new DALSoftware();
+
         ////Factory
         //IBien IBLLBien.BienInstanciar()
         //{
         //    return new Software();
         //}
+
+
+        public int BienTraerIdPorDescripMarcaModelo(Bien unBien)
+        {
+            return GestorSoftware.BienTraerIdPorDescripMarcaModelo(unBien);
+        }
+
+
+
+
     }
 }

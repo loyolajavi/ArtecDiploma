@@ -11,18 +11,9 @@ using System.Data.SqlClient;
 
 namespace ARTEC.DAL
 {
-    public class DALHardware
+    public class DALSoftware
     {
 
-        public List<Hardware> TraerHardware()
-        {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "HardwareTraerHardware"))
-            {
-                List<Hardware> unosHard = new List<Hardware>();
-                unosHard = FRAMEWORK.Persistencia.Mapeador.Mapear<Hardware>(ds);
-                return unosHard;
-            }
-        }
 
 
 
@@ -32,21 +23,23 @@ namespace ARTEC.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@IdCategoria", unBien.unaCategoria.IdCategoria),
-                new SqlParameter("@IdTipoBien", Bien.elTipoBien.Hardware),
+                new SqlParameter("@IdTipoBien", Bien.elTipoBien.Software),
                 new SqlParameter("@IdMarca", unBien.unaMarca.IdMarca),
                 new SqlParameter("@IdModelo", unBien.unModelo.IdModeloVersion)
 			};
+
 
             try
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                int ResIdBien = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BienTraerIdPorDescripMarcaModelo", parameters);
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BienTraerIdPorDescripMarcaModelo", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return ResIdBien;
-
+                return IDDevuelto;
+                
             }
-            catch (Exception es)
+            catch (Exception)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
@@ -55,6 +48,7 @@ namespace ARTEC.DAL
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
+
         }
 
 
