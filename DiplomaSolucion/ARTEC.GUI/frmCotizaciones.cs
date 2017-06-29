@@ -27,11 +27,13 @@ namespace ARTEC.GUI
         Proveedor ProvSeleccionado;
         BLLProveedor ManagerProveedor = new BLLProveedor();
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
+        SolicDetalle unDetSolic = new SolicDetalle();
 
-        public frmCotizaciones(List<Cotizacion> unasCotiz)
+        public frmCotizaciones(List<Cotizacion> unasCotiz, SolicDetalle unDetSolicP)
         {
             InitializeComponent();
             unasCotizaciones = unasCotiz;
+            unDetSolic = unDetSolicP;
         }
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
@@ -126,8 +128,8 @@ namespace ARTEC.GUI
             unaCotiz.FechaCotizacion = DateTime.Today;
             unaCotiz.unProveedor = ProvSeleccionado;
             unaCotiz.unDetalleAsociado = new SolicDetalle();
-            unaCotiz.unDetalleAsociado.IdSolicitud = unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
-            unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
+            unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
+            unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
             unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
             if (unaCotiz.IdCotizacion > 0)
             {

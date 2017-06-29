@@ -61,6 +61,20 @@ namespace ARTEC.GUI
             }
         }
 
+
+
+        private void btnContinuar_Click(object sender, EventArgs e)
+        {
+            pnlAdquisicion.Visible = false;
+            pnlBienes.Visible = true;
+            this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
+            this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
+            //AGARRAR lblNroPartida y buscar los detalles asociados según el store (el codigo esta en anotaciones para crearlo)
+
+        }
+
+
+
         private void frmBienRegistrar_Load(object sender, EventArgs e)
         {
             ///Para poder seleccionar Hard o Soft
@@ -277,13 +291,7 @@ namespace ARTEC.GUI
 
         }
 
-        private void btnContinuar_Click(object sender, EventArgs e)
-        {
-            pnlAdquisicion.Visible = false;
-            pnlBienes.Visible = true;
-            this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
-            this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
-        }
+
 
         private void cboModelo_SelectionChangeCommitted(object sender, EventArgs e)
         {

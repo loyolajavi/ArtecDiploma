@@ -74,6 +74,8 @@ namespace ARTEC.GUI
             this.txtBienCategoria = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBienCategoria = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             this.pnlAdquisicion.SuspendLayout();
             this.pnlBienes.SuspendLayout();
@@ -295,6 +297,8 @@ namespace ARTEC.GUI
             // 
             this.pnlAdquisicion.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlAdquisicion.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlAdquisicion.Controls.Add(this.txtNroPartida);
+            this.pnlAdquisicion.Controls.Add(this.labelX1);
             this.pnlAdquisicion.Controls.Add(this.lblMontoTotal);
             this.pnlAdquisicion.Controls.Add(this.txtProveedor);
             this.pnlAdquisicion.Controls.Add(this.cboProveedor);
@@ -308,7 +312,7 @@ namespace ARTEC.GUI
             this.pnlAdquisicion.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAdquisicion.Location = new System.Drawing.Point(0, 0);
             this.pnlAdquisicion.Name = "pnlAdquisicion";
-            this.pnlAdquisicion.Size = new System.Drawing.Size(461, 219);
+            this.pnlAdquisicion.Size = new System.Drawing.Size(461, 208);
             this.pnlAdquisicion.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlAdquisicion.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlAdquisicion.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -843,6 +847,36 @@ namespace ARTEC.GUI
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX1.Location = new System.Drawing.Point(12, 163);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(97, 17);
+            this.labelX1.TabIndex = 53;
+            this.labelX1.Text = "lblNroPartida";
+            // 
+            // txtNroPartida
+            // 
+            this.txtNroPartida.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtNroPartida.Border.Class = "TextBoxBorder";
+            this.txtNroPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
+            this.txtNroPartida.Location = new System.Drawing.Point(139, 158);
+            this.txtNroPartida.Multiline = true;
+            this.txtNroPartida.Name = "txtNroPartida";
+            this.txtNroPartida.PreventEnterBeep = true;
+            this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
+            this.txtNroPartida.TabIndex = 54;
+            // 
             // frmBienRegistrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -851,8 +885,8 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.progressSteps1);
             this.Controls.Add(this.btnContinuar);
-            this.Controls.Add(this.pnlBienes);
             this.Controls.Add(this.pnlAdquisicion);
+            this.Controls.Add(this.pnlBienes);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
@@ -918,5 +952,7 @@ namespace ARTEC.GUI
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTimeInput3;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTimeInput1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboBienCategoria;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartida;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

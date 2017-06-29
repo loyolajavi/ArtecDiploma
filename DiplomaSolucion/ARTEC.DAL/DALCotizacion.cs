@@ -57,7 +57,7 @@ namespace ARTEC.DAL
                     return unaLista;
                 }
             }
-            catch (Exception)
+            catch (Exception es)
             {
                 throw;
             }

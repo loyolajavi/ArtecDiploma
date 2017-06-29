@@ -28,7 +28,6 @@ namespace ARTEC.ENTIDADES
         //CON INTERFAZ**************FIN
 
         public bool Homologado { get; set; }
-        public TipoLicencia unTipoLicencia { get; set; }
 
     }
 }
