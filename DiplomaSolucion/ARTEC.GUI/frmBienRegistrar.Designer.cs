@@ -29,6 +29,7 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.progressSteps1 = new DevComponents.DotNetBar.ProgressSteps();
             this.stepItem1 = new DevComponents.DotNetBar.StepItem();
             this.stepItem2 = new DevComponents.DotNetBar.StepItem();
@@ -43,7 +44,10 @@ namespace ARTEC.GUI
             this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.pnlAdquisicion = new DevComponents.DotNetBar.PanelEx();
+            this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.pnlBienes = new DevComponents.DotNetBar.PanelEx();
+            this.GrillaDetallesBienes = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.pnlHardware = new DevComponents.DotNetBar.PanelEx();
             this.cboDeposito = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -74,11 +78,10 @@ namespace ARTEC.GUI
             this.txtBienCategoria = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBienCategoria = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             this.pnlAdquisicion.SuspendLayout();
             this.pnlBienes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).BeginInit();
             this.pnlHardware.SuspendLayout();
             this.pnlSoftware.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput3)).BeginInit();
@@ -97,7 +100,7 @@ namespace ARTEC.GUI
             this.progressSteps1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.stepItem1,
             this.stepItem2});
-            this.progressSteps1.Location = new System.Drawing.Point(0, 465);
+            this.progressSteps1.Location = new System.Drawing.Point(3, 600);
             this.progressSteps1.Name = "progressSteps1";
             this.progressSteps1.Size = new System.Drawing.Size(163, 26);
             this.progressSteps1.TabIndex = 0;
@@ -120,7 +123,7 @@ namespace ARTEC.GUI
             // 
             this.btnContinuar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnContinuar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnContinuar.Location = new System.Drawing.Point(171, 423);
+            this.btnContinuar.Location = new System.Drawing.Point(189, 556);
             this.btnContinuar.Name = "btnContinuar";
             this.btnContinuar.Size = new System.Drawing.Size(96, 23);
             this.btnContinuar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -144,7 +147,6 @@ namespace ARTEC.GUI
             this.txtNroFactura.PreventEnterBeep = true;
             this.txtNroFactura.Size = new System.Drawing.Size(102, 22);
             this.txtNroFactura.TabIndex = 43;
-            this.txtNroFactura.TextChanged += new System.EventHandler(this.txtIdSolicitud_TextChanged);
             // 
             // lblFechaCompra
             // 
@@ -312,7 +314,7 @@ namespace ARTEC.GUI
             this.pnlAdquisicion.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAdquisicion.Location = new System.Drawing.Point(0, 0);
             this.pnlAdquisicion.Name = "pnlAdquisicion";
-            this.pnlAdquisicion.Size = new System.Drawing.Size(461, 208);
+            this.pnlAdquisicion.Size = new System.Drawing.Size(551, 208);
             this.pnlAdquisicion.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlAdquisicion.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlAdquisicion.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -321,10 +323,41 @@ namespace ARTEC.GUI
             this.pnlAdquisicion.Style.GradientAngle = 90;
             this.pnlAdquisicion.TabIndex = 53;
             // 
+            // txtNroPartida
+            // 
+            this.txtNroPartida.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtNroPartida.Border.Class = "TextBoxBorder";
+            this.txtNroPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
+            this.txtNroPartida.Location = new System.Drawing.Point(139, 158);
+            this.txtNroPartida.Multiline = true;
+            this.txtNroPartida.Name = "txtNroPartida";
+            this.txtNroPartida.PreventEnterBeep = true;
+            this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
+            this.txtNroPartida.TabIndex = 54;
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX1.Location = new System.Drawing.Point(12, 163);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(97, 17);
+            this.labelX1.TabIndex = 53;
+            this.labelX1.Text = "lblNroPartida";
+            // 
             // pnlBienes
             // 
             this.pnlBienes.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlBienes.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlBienes.Controls.Add(this.GrillaDetallesBienes);
             this.pnlBienes.Controls.Add(this.btnAgregar);
             this.pnlBienes.Controls.Add(this.pnlHardware);
             this.pnlBienes.Controls.Add(this.pnlSoftware);
@@ -341,7 +374,7 @@ namespace ARTEC.GUI
             this.pnlBienes.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlBienes.Location = new System.Drawing.Point(0, 0);
             this.pnlBienes.Name = "pnlBienes";
-            this.pnlBienes.Size = new System.Drawing.Size(461, 407);
+            this.pnlBienes.Size = new System.Drawing.Size(539, 550);
             this.pnlBienes.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlBienes.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlBienes.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -351,11 +384,29 @@ namespace ARTEC.GUI
             this.pnlBienes.TabIndex = 57;
             this.pnlBienes.Visible = false;
             // 
+            // GrillaDetallesBienes
+            // 
+            this.GrillaDetallesBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle1;
+            this.GrillaDetallesBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaDetallesBienes.Location = new System.Drawing.Point(18, 21);
+            this.GrillaDetallesBienes.Name = "GrillaDetallesBienes";
+            this.GrillaDetallesBienes.Size = new System.Drawing.Size(438, 101);
+            this.GrillaDetallesBienes.TabIndex = 34;
+            this.GrillaDetallesBienes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaDetallesBienes_CellClick);
+            // 
             // btnAgregar
             // 
             this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregar.Location = new System.Drawing.Point(128, 225);
+            this.btnAgregar.Location = new System.Drawing.Point(128, 362);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -374,7 +425,7 @@ namespace ARTEC.GUI
             this.pnlHardware.Controls.Add(this.lblDeposito);
             this.pnlHardware.Controls.Add(this.lblSerie);
             this.pnlHardware.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlHardware.Location = new System.Drawing.Point(3, 128);
+            this.pnlHardware.Location = new System.Drawing.Point(3, 265);
             this.pnlHardware.Name = "pnlHardware";
             this.pnlHardware.Size = new System.Drawing.Size(306, 88);
             this.pnlHardware.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -481,7 +532,7 @@ namespace ARTEC.GUI
             this.pnlSoftware.Controls.Add(this.lblKey);
             this.pnlSoftware.Controls.Add(this.lblSerial);
             this.pnlSoftware.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlSoftware.Location = new System.Drawing.Point(3, 127);
+            this.pnlSoftware.Location = new System.Drawing.Point(3, 264);
             this.pnlSoftware.Name = "pnlSoftware";
             this.pnlSoftware.Size = new System.Drawing.Size(453, 89);
             this.pnlSoftware.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -693,16 +744,16 @@ namespace ARTEC.GUI
             // GrillaBienes
             // 
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.GrillaBienes.Location = new System.Drawing.Point(3, 259);
+            this.GrillaBienes.Location = new System.Drawing.Point(3, 396);
             this.GrillaBienes.Name = "GrillaBienes";
             this.GrillaBienes.Size = new System.Drawing.Size(453, 142);
             this.GrillaBienes.TabIndex = 22;
@@ -714,7 +765,7 @@ namespace ARTEC.GUI
             // 
             this.lblBien.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblBien.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBien.Location = new System.Drawing.Point(18, 46);
+            this.lblBien.Location = new System.Drawing.Point(18, 183);
             this.lblBien.Name = "lblBien";
             this.lblBien.Size = new System.Drawing.Size(91, 17);
             this.lblBien.TabIndex = 17;
@@ -727,7 +778,7 @@ namespace ARTEC.GUI
             // 
             this.lblModelo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblModelo.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelo.Location = new System.Drawing.Point(18, 105);
+            this.lblModelo.Location = new System.Drawing.Point(18, 242);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(91, 17);
             this.lblModelo.TabIndex = 16;
@@ -740,7 +791,7 @@ namespace ARTEC.GUI
             // 
             this.lblMarca.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblMarca.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(18, 77);
+            this.lblMarca.Location = new System.Drawing.Point(18, 214);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(91, 17);
             this.lblMarca.TabIndex = 15;
@@ -753,7 +804,7 @@ namespace ARTEC.GUI
             // 
             this.lblTipoBien.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblTipoBien.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoBien.Location = new System.Drawing.Point(18, 16);
+            this.lblTipoBien.Location = new System.Drawing.Point(18, 153);
             this.lblTipoBien.Name = "lblTipoBien";
             this.lblTipoBien.Size = new System.Drawing.Size(91, 17);
             this.lblTipoBien.TabIndex = 14;
@@ -766,7 +817,7 @@ namespace ARTEC.GUI
             this.cboModelo.ForeColor = System.Drawing.Color.Black;
             this.cboModelo.FormattingEnabled = true;
             this.cboModelo.ItemHeight = 16;
-            this.cboModelo.Location = new System.Drawing.Point(128, 100);
+            this.cboModelo.Location = new System.Drawing.Point(128, 237);
             this.cboModelo.Name = "cboModelo";
             this.cboModelo.Size = new System.Drawing.Size(121, 22);
             this.cboModelo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -780,7 +831,7 @@ namespace ARTEC.GUI
             this.cboMarca.ForeColor = System.Drawing.Color.Black;
             this.cboMarca.FormattingEnabled = true;
             this.cboMarca.ItemHeight = 16;
-            this.cboMarca.Location = new System.Drawing.Point(128, 72);
+            this.cboMarca.Location = new System.Drawing.Point(128, 209);
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(121, 22);
             this.cboMarca.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -794,12 +845,12 @@ namespace ARTEC.GUI
             this.cboTipoBien.ForeColor = System.Drawing.Color.Black;
             this.cboTipoBien.FormattingEnabled = true;
             this.cboTipoBien.ItemHeight = 16;
-            this.cboTipoBien.Location = new System.Drawing.Point(128, 16);
+            this.cboTipoBien.Location = new System.Drawing.Point(128, 153);
             this.cboTipoBien.Name = "cboTipoBien";
             this.cboTipoBien.Size = new System.Drawing.Size(121, 22);
             this.cboTipoBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboTipoBien.TabIndex = 0;
-            this.cboTipoBien.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBien_SelectionChangeCommitted);
+            //this.cboTipoBien.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBien_SelectionChangeCommitted);
             // 
             // txtBienCategoria
             // 
@@ -811,12 +862,12 @@ namespace ARTEC.GUI
             this.txtBienCategoria.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtBienCategoria.DisabledBackColor = System.Drawing.Color.White;
             this.txtBienCategoria.ForeColor = System.Drawing.Color.Black;
-            this.txtBienCategoria.Location = new System.Drawing.Point(128, 44);
+            this.txtBienCategoria.Location = new System.Drawing.Point(128, 181);
             this.txtBienCategoria.Name = "txtBienCategoria";
             this.txtBienCategoria.PreventEnterBeep = true;
             this.txtBienCategoria.Size = new System.Drawing.Size(173, 22);
             this.txtBienCategoria.TabIndex = 11;
-            this.txtBienCategoria.TextChanged += new System.EventHandler(this.txtBienCategoria_TextChanged);
+            //this.txtBienCategoria.TextChanged += new System.EventHandler(this.txtBienCategoria_TextChanged);
             // 
             // cboBienCategoria
             // 
@@ -826,20 +877,20 @@ namespace ARTEC.GUI
             this.cboBienCategoria.ForeColor = System.Drawing.Color.Black;
             this.cboBienCategoria.FormattingEnabled = true;
             this.cboBienCategoria.ItemHeight = 16;
-            this.cboBienCategoria.Location = new System.Drawing.Point(128, 44);
+            this.cboBienCategoria.Location = new System.Drawing.Point(128, 181);
             this.cboBienCategoria.MaxDropDownItems = 10;
             this.cboBienCategoria.Name = "cboBienCategoria";
             this.cboBienCategoria.Size = new System.Drawing.Size(218, 22);
             this.cboBienCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboBienCategoria.TabIndex = 33;
             this.cboBienCategoria.Visible = false;
-            this.cboBienCategoria.SelectionChangeCommitted += new System.EventHandler(this.cboBienCategoria_SelectionChangeCommitted);
+            //this.cboBienCategoria.SelectionChangeCommitted += new System.EventHandler(this.cboBienCategoria_SelectionChangeCommitted);
             // 
             // btnConfirmar
             // 
             this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmar.Location = new System.Drawing.Point(174, 423);
+            this.btnConfirmar.Location = new System.Drawing.Point(192, 556);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
             this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -847,55 +898,25 @@ namespace ARTEC.GUI
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
-            // labelX1
-            // 
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(12, 163);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(97, 17);
-            this.labelX1.TabIndex = 53;
-            this.labelX1.Text = "lblNroPartida";
-            // 
-            // txtNroPartida
-            // 
-            this.txtNroPartida.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtNroPartida.Border.Class = "TextBoxBorder";
-            this.txtNroPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
-            this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
-            this.txtNroPartida.Location = new System.Drawing.Point(139, 158);
-            this.txtNroPartida.Multiline = true;
-            this.txtNroPartida.Name = "txtNroPartida";
-            this.txtNroPartida.PreventEnterBeep = true;
-            this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
-            this.txtNroPartida.TabIndex = 54;
-            // 
             // frmBienRegistrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 490);
+            this.ClientSize = new System.Drawing.Size(551, 628);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.progressSteps1);
             this.Controls.Add(this.btnContinuar);
-            this.Controls.Add(this.pnlAdquisicion);
             this.Controls.Add(this.pnlBienes);
+            this.Controls.Add(this.pnlAdquisicion);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmBienRegistrar";
             this.Text = "frmBienRegistrar";
             this.Load += new System.EventHandler(this.frmBienRegistrar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).EndInit();
             this.pnlAdquisicion.ResumeLayout(false);
             this.pnlBienes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).EndInit();
             this.pnlHardware.ResumeLayout(false);
             this.pnlSoftware.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput3)).EndInit();
@@ -954,5 +975,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboBienCategoria;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartida;
         private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDetallesBienes;
     }
 }

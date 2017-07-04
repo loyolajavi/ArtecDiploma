@@ -10,5 +10,19 @@ namespace ARTEC.BLL
 {
     public class BLLPartidaDetalle
     {
+
+        DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
+
+
+        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida)
+        {
+            return GestorPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(IdPartida);
+        }
+
+
+        public List<ENTIDADES.Helpers.HLPDetallesAdquisicion> InventarioAdquiridoCantPorPartDetalle(int IdPartida)
+        {
+            return GestorPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(IdPartida);
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace ARTEC.GUI
         List<Categoria> unasCategoriasHard;
         List<Categoria> unasCategoriasSoft;
         List<Categoria> unasCategorias = new List<Categoria>();
-        Categoria unaCat;
         Marca unaMarca;
         List<HLPBienInventario> unosBieneshlp = new List<HLPBienInventario>();
         List<Bien> nuevosBienes = new List<Bien>();
@@ -33,6 +32,10 @@ namespace ARTEC.GUI
         ModeloVersion unModelo;
         Bien unBien;
         Inventario unInven;// = new Inventario();
+        List<SolicDetalle> unosDetallesBienes = new List<SolicDetalle>();
+        BLLTipoBien ManagerTipoBien = new BLLTipoBien();
+        SolicDetalle unDetSolic;
+
 
         public frmBienRegistrar()
         {
@@ -40,10 +43,6 @@ namespace ARTEC.GUI
         }
 
 
-        private void txtIdSolicitud_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
@@ -69,8 +68,79 @@ namespace ARTEC.GUI
             pnlBienes.Visible = true;
             this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
             this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
-            //AGARRAR lblNroPartida y buscar los detalles asociados según el store (el codigo esta en anotaciones para crearlo)
+            BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+            
+            unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text));
+            //RETORNA 0;0 en vez de 1;2 como debería, fijarme
 
+            List<HLPDetallesAdquisicion> LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria}).ToList();
+            
+            List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
+            LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
+
+            //FIJARME Q NO PINCHE CUANDO NO HAY NINGUNO COMPRADO
+            for (int i = 0; i < LisAUXCant.Count() ; i++)
+            {
+                LisAUXDetalles[i].Comprado = LisAUXCant[i].Comprado;
+            }
+            
+            
+
+
+            //var listaAUX = unosDetallesBienes.Select(x=>new {x.unaCategoria.DescripCategoria, x.Cantidad, x.unaCategoria.IdCategoria}).ToList();   
+
+            GrillaDetallesBienes.DataSource = null;
+            GrillaDetallesBienes.DataSource = LisAUXDetalles;
+
+            if (LisAUXDetalles != null)
+            {
+                
+                //TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(listaAUX[0].IdCategoria);
+                //cboTipoBien.SelectedItem = unTipoBien;
+                int DetalleSeleccionado = 1;
+                unDetSolic = new SolicDetalle();
+                unDetSolic = unosDetallesBienes.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+
+                TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+                cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;
+
+                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                {
+                    unBien = new Hardware();
+                    unInven = new XInventarioHard();
+                }
+                else//Software
+                {
+                    unBien = new Software();
+                    unInven = new XInventarioSoft();
+                }
+
+                //txtBienCategoria.Text = listaAUX[0].DescripCategoria;
+
+                if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+                {
+                    pnlHardware.Visible = true;
+                    pnlSoftware.Visible = false;
+                }
+                if ((int)cboTipoBien.SelectedValue == 2)//Software
+                {
+                    pnlSoftware.Visible = true;
+                    pnlHardware.Visible = false;
+                }
+
+
+                txtBienCategoria.Text = unDetSolic.unaCategoria.DescripCategoria;
+
+                BLLMarca ManagerMarca = new BLLMarca();
+                List<Marca> unasMarcas = new List<Marca>();
+                unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue);
+                cboMarca.DataSource = null;
+                cboMarca.DataSource = unasMarcas;
+                cboMarca.DisplayMember = "DescripMarca";
+                cboMarca.ValueMember = "IdMarca";
+
+
+            }
         }
 
 
@@ -86,6 +156,7 @@ namespace ARTEC.GUI
             cboTipoBien.ValueMember = "IdTipoBien";
 
             //Traigo categorias para dps filtrar por hard o soft
+            //CREO QUE QUITAR
             BLLCategoria ManagerCategoria = new BLLCategoria();
             unasCategoriasHard = new List<Categoria>();
             unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHard();
@@ -112,109 +183,7 @@ namespace ARTEC.GUI
             cboEstado.ValueMember = "IdEstadoInventario";
         }
 
-        private void cboTipoBien_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
-            {
-                //AuxTipoCategoria = 1;
-                pnlHardware.Visible = true;
-                pnlSoftware.Visible = false;
-                unasCategorias = unasCategoriasHard;
-            }
-            if ((int)cboTipoBien.SelectedValue == 2)//Software
-            {
-                //AuxTipoCategoria = 2;
-                pnlSoftware.Visible = true;
-                pnlHardware.Visible = false;
-                unasCategorias = unasCategoriasSoft;
-            }
-        }
-
-        private void txtBienCategoria_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(txtBienCategoria.Text))
-            {
-                List<Categoria> res = new List<Categoria>();
-                res = (List<Categoria>)unasCategorias;
-                
-                List<string> Palabras = new List<string>();
-                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtBienCategoria.Text, ' ');
-
-                foreach (string unaPalabra in Palabras)
-                {
-                    res = (List<Categoria>)(from d in res
-                                              where d.DescripCategoria.ToLower().Contains(unaPalabra.ToLower())
-                                              select d).ToList();
-                }
-
-                if (res.Count > 0)
-                {
-
-                    //ESTO ERA PARA QUE NO QUEDE FLASHADO EL CBOBOX AL PASAR DE MUCHOS RESULTADOS RESULTADO A UNO SOLO AL ESCRIBIR LA FISCALIA JUSTA A MANO, PERO HACIA QUE NO SE EJECUTE BIEN LO DE CARGAR LOS AGENTES
-                    //if (res.Count == 1 && string.Equals(res.First().NombreDependencia, textBoxX1.Text))
-                    //{
-                    //    //comboBoxEx4.Visible = false;
-                    //    //comboBoxEx4.DroppedDown = false;
-                    //    //comboBoxEx4.DataSource = null;
-
-                    //}
-                    //else
-                    //{
-                    cboBienCategoria.DataSource = null;
-                    cboBienCategoria.DataSource = res;
-                    cboBienCategoria.DisplayMember = "DescripCategoria";
-                    cboBienCategoria.ValueMember = "IdCategoria";
-                    cboBienCategoria.Visible = true;
-                    cboBienCategoria.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
-                    //}
-                }
-                else
-                {
-                    cboBienCategoria.Visible = false;
-                    cboBienCategoria.DroppedDown = false;
-                    cboBienCategoria.DataSource = null;
-                    
-                }
-            }
-            else
-            {
-                cboBienCategoria.Visible = false;
-                cboBienCategoria.DroppedDown = false;
-                cboBienCategoria.DataSource = null;
-                cboMarca.DataSource = null;
-            }
-        }
-
-        private void cboBienCategoria_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(txtBienCategoria.Text))
-            {
-                if (cboBienCategoria.SelectedIndex > -1)
-                {
-                    ComboBox cbo = (ComboBox)sender;
-                    unaCat = new Categoria();
-                    unaCat = (Categoria)cbo.SelectedItem;
-                    this.txtBienCategoria.TextChanged -= new System.EventHandler(this.txtBienCategoria_TextChanged);
-                    txtBienCategoria.Text = cbo.GetItemText(cbo.SelectedItem);
-                    this.txtBienCategoria.TextChanged += new System.EventHandler(this.txtBienCategoria_TextChanged);
-                    txtBienCategoria.SelectionStart = txtBienCategoria.Text.Length + 1;
-
-                    BLLMarca ManagerMarca = new BLLMarca();
-                    List<Marca> unasMarcas = new List<Marca>();
-                    unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unaCat.IdCategoria, (int)cboTipoBien.SelectedValue);
-                    cboMarca.DataSource = null;
-                    cboMarca.DataSource = unasMarcas;
-                    cboMarca.DisplayMember = "DescripMarca";
-                    cboMarca.ValueMember = "IdMarca";
-                    
-
-                    //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
-                    //ValidDep2.Validate();
-
-                }
-            }
-        }
+   
 
         private void cboMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -226,7 +195,7 @@ namespace ARTEC.GUI
 
                 BLLModelo ManagerModelo = new BLLModelo();
                 List<ModeloVersion> unosModelos = new List<ModeloVersion>();
-                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unaCat.IdCategoria, (int)cboTipoBien.SelectedValue, unaMarca.IdMarca);
+                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue, unaMarca.IdMarca);
                 cboModelo.DataSource = null;
                 cboModelo.DataSource = unosModelos;
                 cboModelo.DisplayMember = "DescripModeloVersion";
@@ -250,23 +219,8 @@ namespace ARTEC.GUI
             //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
             //Inventario unInven;// = new Inventario();
             HLPBienInventario unBienhlp = new HLPBienInventario();
-            //Creo un Bien(Hard o Soft según el tipo de ManagerBien instanciado)
-            //IBien unBien = ManagerBien.BienInstanciar();
-            //if (ManagerBien.GetType().Name == "BLLHardware")
-            //if ((int)cboTipoBien.SelectedValue == 1)//Hardware
-            //{
-            //    unBien = new Hardware();
-            //    unInven = new XInventarioHard();
-            //}
-            //else//Software
-            //{
-            //    unBien = new Software();
-            //    unInven = new XInventarioSoft();
-            //}
-            //CONSULTAR EL ID DEL BIEN
-            //unBien.IdBien = ConsultarelIDdelBien();
             unBienhlp.DescripBien = txtBienCategoria.Text;
-            unBien.unaCategoria = unaCat;
+            unBien.unaCategoria = unDetSolic.unaCategoria;
             unBienhlp.DescripEstadoInv = cboEstado.Text;
             unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
             unBienhlp.DescripMarca = cboMarca.Text;
@@ -301,32 +255,23 @@ namespace ARTEC.GUI
                 unModelo = new ModeloVersion();
                 unModelo = (ModeloVersion)cbo.SelectedItem;
 
-                BLLModelo ManagerModelo = new BLLModelo();
-                List<ModeloVersion> unosModelos = new List<ModeloVersion>();
-                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unaCat.IdCategoria, (int)cboTipoBien.SelectedValue, unaMarca.IdMarca);
-                cboModelo.DataSource = null;
-                cboModelo.DataSource = unosModelos;
-                cboModelo.DisplayMember = "DescripModeloVersion";
-                cboModelo.ValueMember = "IdModeloVersion";
-
-
                 //Creo ManagerBien con Factory
                 IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
                 
-                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
-                {
-                    unBien = new Hardware();
-                    unInven = new XInventarioHard();
-                }
-                else//Software
-                {
-                    unBien = new Software();
-                    unInven = new XInventarioSoft();
-                }
+                //if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                //{
+                //    unBien = new Hardware();
+                //    unInven = new XInventarioHard();
+                //}
+                //else//Software
+                //{
+                //    unBien = new Software();
+                //    unInven = new XInventarioSoft();
+                //}
 
-                unBien.unaCategoria = unaCat;
+                unBien.unaCategoria = unDetSolic.unaCategoria;
                 unBien.unaMarca = unaMarca;
-                unBien.unModelo = unModelo;
+                unBien.unModelo = unModelo;//(ModeloVersion)cboModelo.SelectedItem;
 
                 unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien);
 
@@ -336,6 +281,70 @@ namespace ARTEC.GUI
 
             }
         }
+
+
+        private void GrillaDetallesBienes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            cboMarca.DataSource = null;
+            cboModelo.DataSource = null;
+
+            //Para obtener el detalle en donde se hizo click
+            int DetalleSeleccionado = e.RowIndex + 1;
+            unDetSolic = new SolicDetalle();
+
+            unDetSolic = unosDetallesBienes.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+
+            TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+            cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;
+
+
+            if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+            {
+                unBien = new Hardware();
+                unInven = new XInventarioHard();
+            }
+            else//Software
+            {
+                unBien = new Software();
+                unInven = new XInventarioSoft();
+            }
+
+
+            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            {
+                pnlHardware.Visible = true;
+                pnlSoftware.Visible = false;
+                unasCategorias = unasCategoriasHard;
+            }
+            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            {
+                pnlSoftware.Visible = true;
+                pnlHardware.Visible = false;
+                unasCategorias = unasCategoriasSoft;
+            }
+
+            
+            txtBienCategoria.Text = unDetSolic.unaCategoria.DescripCategoria;
+
+            BLLMarca ManagerMarca = new BLLMarca();
+            List<Marca> unasMarcas = new List<Marca>();
+            unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue);
+            cboMarca.DataSource = null;
+            cboMarca.DataSource = unasMarcas;
+            cboMarca.DisplayMember = "DescripMarca";
+            cboMarca.ValueMember = "IdMarca";
+
+
+          
+        }
+
+
 
 
 

@@ -67,6 +67,59 @@ namespace ARTEC.DAL
 
 
 
+        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPartida)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaDetBienesTraerPorIdPartida", parameters))
+                {
+                    List<SolicDetalle> unaLista = new List<SolicDetalle>();
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<SolicDetalle>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+
+        }
+
+
+
+        public List<ENTIDADES.Helpers.HLPDetallesAdquisicion> InventarioAdquiridoCantPorPartDetalle(int IdPartida)
+        {
+
+            SqlParameter[] parameters2 = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida2", IdPartida)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioAdquiridoCantPorPartDetalle", parameters2))
+                {
+                    List<ENTIDADES.Helpers.HLPDetallesAdquisicion> unaLista = new List<ENTIDADES.Helpers.HLPDetallesAdquisicion>();
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<ENTIDADES.Helpers.HLPDetallesAdquisicion>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
 
     }
 }

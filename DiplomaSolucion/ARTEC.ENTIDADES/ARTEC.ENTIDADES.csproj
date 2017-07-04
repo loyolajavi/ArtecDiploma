@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Adquisicion.cs" />
     <Compile Include="Agente.cs" />
+    <Compile Include="Helpers\HLPDetallesAdquisicion.cs" />
     <Compile Include="TipoLicencia.cs" />
     <Compile Include="Bien.cs" />
     <Compile Include="Cargo.cs" />
