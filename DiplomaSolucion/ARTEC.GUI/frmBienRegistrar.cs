@@ -35,6 +35,10 @@ namespace ARTEC.GUI
         List<SolicDetalle> unosDetallesBienes = new List<SolicDetalle>();
         BLLTipoBien ManagerTipoBien = new BLLTipoBien();
         SolicDetalle unDetSolic;
+        List<Proveedor> unosProveedores = new List<Proveedor>();
+        Proveedor ProvSeleccionado;
+        BLLProveedor ManagerProveedor = new BLLProveedor();
+        BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
 
 
         public frmBienRegistrar()
@@ -46,17 +50,21 @@ namespace ARTEC.GUI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
-            unaAdquisicion.NroFactura = txtNroFactura.Text;
-            unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
-            //unaAdquisicion.ProveedorAdquisicion = (Proveedor)cboProveedor.SelectedItem;
-            unaAdquisicion.FechaAdq = DateTime.Now;
-            unaAdquisicion.IdTipoAdquisicion = 1;///COMPLETAR
-            //unaAdquisicion.InventariosAsociados = nuevosInventarios;
-            if (unaAdquisicion.BienesInventarioAsociados != null)
+            if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
             {
-                //SEGUIR CON LAS DAL INVENTARIO Y STORES
+                BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+                unaAdquisicion.NroFactura = txtNroFactura.Text;
+                unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+                unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);
+                unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
+                unaAdquisicion.FechaAdq = DateTime.Now;
+
+                //SEGUIR INVENTARIO SOFT Y STORE
                 ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
+            }
+            else
+            {
+                MessageBox.Show("Faltan cargar los bienes adquiridos");
             }
         }
 
@@ -69,37 +77,27 @@ namespace ARTEC.GUI
             this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
             this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
             BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
-            
-            unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text));
-            //RETORNA 0;0 en vez de 1;2 como debería, fijarme
 
-            List<HLPDetallesAdquisicion> LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria}).ToList();
-            
+            unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text));
+
+            List<HLPDetallesAdquisicion> LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria }).ToList();
+
             List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
             LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
 
             //FIJARME Q NO PINCHE CUANDO NO HAY NINGUNO COMPRADO
-            for (int i = 0; i < LisAUXCant.Count() ; i++)
+            for (int i = 0; i < LisAUXCant.Count(); i++)
             {
                 LisAUXDetalles[i].Comprado = LisAUXCant[i].Comprado;
             }
-            
-            
-
-
-            //var listaAUX = unosDetallesBienes.Select(x=>new {x.unaCategoria.DescripCategoria, x.Cantidad, x.unaCategoria.IdCategoria}).ToList();   
 
             GrillaDetallesBienes.DataSource = null;
             GrillaDetallesBienes.DataSource = LisAUXDetalles;
 
             if (LisAUXDetalles != null)
             {
-                
-                //TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(listaAUX[0].IdCategoria);
-                //cboTipoBien.SelectedItem = unTipoBien;
-                int DetalleSeleccionado = 1;
                 unDetSolic = new SolicDetalle();
-                unDetSolic = unosDetallesBienes.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+                unDetSolic = unosDetallesBienes.FirstOrDefault();
 
                 TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
                 cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;
@@ -109,13 +107,11 @@ namespace ARTEC.GUI
                     unBien = new Hardware();
                     unInven = new XInventarioHard();
                 }
-                else//Software
+                else
                 {
                     unBien = new Software();
                     unInven = new XInventarioSoft();
                 }
-
-                //txtBienCategoria.Text = listaAUX[0].DescripCategoria;
 
                 if ((int)cboTipoBien.SelectedValue == 1)//Hardware
                 {
@@ -147,6 +143,10 @@ namespace ARTEC.GUI
 
         private void frmBienRegistrar_Load(object sender, EventArgs e)
         {
+
+            //Cargar proveedores
+            unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+
             ///Para poder seleccionar Hard o Soft
             BLLTipoBien ManagerTipoBien = new BLLTipoBien();
             unosTipoBien = ManagerTipoBien.TraerTodos();
@@ -183,7 +183,7 @@ namespace ARTEC.GUI
             cboEstado.ValueMember = "IdEstadoInventario";
         }
 
-   
+
 
         private void cboMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -235,6 +235,9 @@ namespace ARTEC.GUI
             //falta homologado y tipolicencia
 
             unBien.unInventarioAlta = unInven;
+            unBien.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle(); 
+            unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
+            unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
 
             unaAdquisicion.BienesInventarioAsociados.Add(unBien);
 
@@ -257,17 +260,6 @@ namespace ARTEC.GUI
 
                 //Creo ManagerBien con Factory
                 IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
-                
-                //if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
-                //{
-                //    unBien = new Hardware();
-                //    unInven = new XInventarioHard();
-                //}
-                //else//Software
-                //{
-                //    unBien = new Software();
-                //    unInven = new XInventarioSoft();
-                //}
 
                 unBien.unaCategoria = unDetSolic.unaCategoria;
                 unBien.unaMarca = unaMarca;
@@ -309,7 +301,7 @@ namespace ARTEC.GUI
                 unBien = new Hardware();
                 unInven = new XInventarioHard();
             }
-            else//Software
+            else
             {
                 unBien = new Software();
                 unInven = new XInventarioSoft();
@@ -329,7 +321,7 @@ namespace ARTEC.GUI
                 unasCategorias = unasCategoriasSoft;
             }
 
-            
+
             txtBienCategoria.Text = unDetSolic.unaCategoria.DescripCategoria;
 
             BLLMarca ManagerMarca = new BLLMarca();
@@ -341,7 +333,78 @@ namespace ARTEC.GUI
             cboMarca.ValueMember = "IdMarca";
 
 
-          
+
+        }
+
+        private void txtProveedor_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtProveedor.Text))
+            {
+
+                List<Proveedor> resProv = new List<Proveedor>();
+                resProv = unosProveedores;
+
+                List<string> Palabras = new List<string>();
+                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtProveedor.Text, ' ');
+
+                foreach (string unaPalabra in Palabras)
+                {
+                    resProv = (List<Proveedor>)(from Prov in resProv
+                                                where Prov.AliasProv.ToLower().Contains(unaPalabra.ToLower())
+                                                select Prov).ToList();
+                }
+
+                if (resProv.Count > 0)
+                {
+                    if (resProv.Count == 1 && string.Equals(resProv.First().AliasProv, txtProveedor.Text))
+                    {
+                        cboProveedor.Visible = false;
+                        cboProveedor.DroppedDown = false;
+                        cboProveedor.DataSource = null;
+                    }
+                    else
+                    {
+                        cboProveedor.DataSource = null;
+                        cboProveedor.DataSource = resProv;
+                        cboProveedor.DisplayMember = "AliasProv";
+                        cboProveedor.ValueMember = "IdProveedor";
+                        cboProveedor.Visible = true;
+                        cboProveedor.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+                else
+                {
+                    cboProveedor.Visible = false;
+                    cboProveedor.DroppedDown = false;
+                    cboProveedor.DataSource = null;
+                }
+            }
+            else
+            {
+                cboProveedor.Visible = false;
+                cboProveedor.DroppedDown = false;
+                cboProveedor.DataSource = null;
+            }
+        }
+
+        private void cboProveedor_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtProveedor.Text))
+            {
+                if (cboProveedor.SelectedIndex > -1)
+                {
+                    ComboBox cbo2 = (ComboBox)sender;
+                    ProvSeleccionado = new Proveedor();
+                    ProvSeleccionado = (Proveedor)cbo2.SelectedItem;
+                    this.txtProveedor.TextChanged -= new System.EventHandler(this.txtProveedor_TextChanged);
+                    txtProveedor.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
+                    txtProveedor.SelectionStart = txtProveedor.Text.Length + 1;
+                    //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
+                    //validBien.Validate();
+                }
+            }
         }
 
 

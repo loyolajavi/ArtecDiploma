@@ -13,10 +13,9 @@ namespace ARTEC.ENTIDADES
         public int IdBienEspecif { get; set; }
         public string SerialMaster { get; set; }
         public string SerieKey { get; set; }
-        //public int PlazoGarantia { get; set; }
         public EstadoInventario unEstado { get; set; }
         public Deposito unDeposito { get; set; }
-
+        public PartidaDetalle PartidaDetalleAsoc { get; set; }
     }
   
 }

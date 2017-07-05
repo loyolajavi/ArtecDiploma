@@ -13,12 +13,10 @@ namespace ARTEC.ENTIDADES
         public DateTime FechaAdq { get; set; }//Fecha en que se dio de alta en sistema la Adquisicion
         public DateTime FechaCompra { get; set; }//Fecha en que se compraron los bienes
         public string NroFactura { get; set; }
-        public string NroExpediente { get; set; }
-        public string NroOrdenCompra { get; set; }
         public string RutaDocumentos { get; set; }
         public decimal MontoCompra { get; set; }
-        public int IdTipoAdquisicion { get; set; }
         public Proveedor ProveedorAdquisicion { get; set; }
+        
         private List<PartidaDetalle> _PartidaDetallesAsociados = new List<PartidaDetalle>();
 
         public List<PartidaDetalle> PartidaDetallesAsociados

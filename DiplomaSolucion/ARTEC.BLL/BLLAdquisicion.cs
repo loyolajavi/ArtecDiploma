@@ -17,21 +17,20 @@ namespace ARTEC.BLL
 
         public void AdquisicionCrear(Adquisicion unaAdquisicion)
         {
-
             try
             {
                 GestorAdquisicion.ComenzarAdquisicion();
                 //MODIFICAR STORE DE ADQUISICIONCREAR PORQUE FALTA IDPARTIDADETALLE Y QUIZAS OTROS MAS
-                GestorAdquisicion.AdquisicionCrear(unaAdquisicion);
+                int IdAdq = GestorAdquisicion.AdquisicionCrear(unaAdquisicion);
                 foreach (Bien unBien in unaAdquisicion.BienesInventarioAsociados)
                 {
                     if (unBien is Hardware)
                     {
-                        ManagerInventarioHard.InventarioHardCrear(unBien as Hardware);
+                        ManagerInventarioHard.InventarioHardCrear(unBien as Hardware, IdAdq);
                     }
                     else
                     {
-                        ManagerInventarioSoft.InventarioSoftCrear(unBien as Software);
+                        ManagerInventarioSoft.InventarioSoftCrear(unBien as Software, IdAdq);
                     }
                 }
                 GestorAdquisicion.ConfirmarAdquisicion();

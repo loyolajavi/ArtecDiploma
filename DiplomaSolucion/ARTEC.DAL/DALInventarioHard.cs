@@ -14,17 +14,37 @@ namespace ARTEC.DAL
     public class DALInventarioHard
     {
 
-        public void InventarioHardCrear(Hardware unBien)
+        public void InventarioHardCrear(Hardware unBien, int IdAdq)
         {
-            SqlParameter[] parameters = new SqlParameter[]
+            SqlParameter[] parametersInvHard = new SqlParameter[]
 			{
                 new SqlParameter("@IdBienEspecif", unBien.IdBien),
                 new SqlParameter("@SerieKey ", unBien.unInventarioAlta.SerieKey),
-                //REVISAR
-                new SqlParameter("@IdAdquisicion ", 1),
+                new SqlParameter("@IdAdquisicion", IdAdq),
                 new SqlParameter("@IdDeposito", unBien.unInventarioAlta.unDeposito.IdDeposito),
-                new SqlParameter("@IdEstadoInventario ", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
+                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
+                new SqlParameter("@IdPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle),
+                new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida)
 			};
+
+            try
+            {
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioHardCrear", parametersInvHard);
+
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            //finally
+            //{
+            //    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
+
 
 
         }

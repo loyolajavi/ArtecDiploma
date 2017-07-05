@@ -13,7 +13,7 @@ namespace ARTEC.DAL
 {
     public class DALInventarioSoft
     {
-        public void InventarioSoftCrear(Software unBien)
+        public void InventarioSoftCrear(Software unBien, int IdPart)
         {
 
         }

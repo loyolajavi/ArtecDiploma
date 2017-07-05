@@ -28,8 +28,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.progressSteps1 = new DevComponents.DotNetBar.ProgressSteps();
             this.stepItem1 = new DevComponents.DotNetBar.StepItem();
             this.stepItem2 = new DevComponents.DotNetBar.StepItem();
@@ -278,6 +278,7 @@ namespace ARTEC.GUI
             this.txtProveedor.PreventEnterBeep = true;
             this.txtProveedor.Size = new System.Drawing.Size(102, 22);
             this.txtProveedor.TabIndex = 51;
+            this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
             // 
             // cboProveedor
             // 
@@ -290,10 +291,10 @@ namespace ARTEC.GUI
             this.cboProveedor.Location = new System.Drawing.Point(139, 123);
             this.cboProveedor.MaxDropDownItems = 10;
             this.cboProveedor.Name = "cboProveedor";
-            this.cboProveedor.Size = new System.Drawing.Size(128, 22);
+            this.cboProveedor.Size = new System.Drawing.Size(102, 22);
             this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboProveedor.TabIndex = 52;
-            this.cboProveedor.Visible = false;
+            this.cboProveedor.SelectionChangeCommitted += new System.EventHandler(this.cboProveedor_SelectionChangeCommitted);
             // 
             // pnlAdquisicion
             // 
@@ -387,14 +388,14 @@ namespace ARTEC.GUI
             // GrillaDetallesBienes
             // 
             this.GrillaDetallesBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle7;
             this.GrillaDetallesBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaDetallesBienes.Location = new System.Drawing.Point(18, 21);
             this.GrillaDetallesBienes.Name = "GrillaDetallesBienes";
@@ -744,14 +745,14 @@ namespace ARTEC.GUI
             // GrillaBienes
             // 
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle8;
             this.GrillaBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBienes.Location = new System.Drawing.Point(3, 396);
             this.GrillaBienes.Name = "GrillaBienes";
@@ -850,7 +851,6 @@ namespace ARTEC.GUI
             this.cboTipoBien.Size = new System.Drawing.Size(121, 22);
             this.cboTipoBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboTipoBien.TabIndex = 0;
-            //this.cboTipoBien.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBien_SelectionChangeCommitted);
             // 
             // txtBienCategoria
             // 
@@ -867,7 +867,6 @@ namespace ARTEC.GUI
             this.txtBienCategoria.PreventEnterBeep = true;
             this.txtBienCategoria.Size = new System.Drawing.Size(173, 22);
             this.txtBienCategoria.TabIndex = 11;
-            //this.txtBienCategoria.TextChanged += new System.EventHandler(this.txtBienCategoria_TextChanged);
             // 
             // cboBienCategoria
             // 
@@ -884,7 +883,6 @@ namespace ARTEC.GUI
             this.cboBienCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboBienCategoria.TabIndex = 33;
             this.cboBienCategoria.Visible = false;
-            //this.cboBienCategoria.SelectionChangeCommitted += new System.EventHandler(this.cboBienCategoria_SelectionChangeCommitted);
             // 
             // btnConfirmar
             // 
@@ -906,10 +904,11 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.progressSteps1);
             this.Controls.Add(this.btnContinuar);
-            this.Controls.Add(this.pnlBienes);
             this.Controls.Add(this.pnlAdquisicion);
+            this.Controls.Add(this.pnlBienes);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmBienRegistrar";
             this.Text = "frmBienRegistrar";
             this.Load += new System.EventHandler(this.frmBienRegistrar_Load);

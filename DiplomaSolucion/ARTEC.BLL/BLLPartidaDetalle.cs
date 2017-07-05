@@ -24,5 +24,10 @@ namespace ARTEC.BLL
         {
             return GestorPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(IdPartida);
         }
+
+        public int PartidaDetallePorIdCategoriaIdPartida(int NroPart, int IdCat)
+        {
+            return GestorPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(NroPart, IdCat);
+        }
     }
 }

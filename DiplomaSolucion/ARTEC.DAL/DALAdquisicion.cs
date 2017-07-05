@@ -15,20 +15,52 @@ namespace ARTEC.DAL
 
         public int AdquisicionCrear(Adquisicion unaAdquisicion)
         {
-            SqlParameter[] parameters = new SqlParameter[]
+            SqlParameter[] parametersAdq = new SqlParameter[]
 			{
                 new SqlParameter("@FechaAdq", unaAdquisicion.FechaAdq),
                 new SqlParameter("@FechaCompra ", unaAdquisicion.FechaCompra),
                 new SqlParameter("@NroFactura", unaAdquisicion.NroFactura),
                 new SqlParameter("@MontoCompra", unaAdquisicion.MontoCompra),
-                new SqlParameter("@IdTipoAdquisicion", unaAdquisicion.IdTipoAdquisicion),
-                //REVISAR LOS DOS
-                new SqlParameter("@IdRendicion", 1),
-                new SqlParameter("@IdProveedor", 1)
+                new SqlParameter("@IdProveedor", unaAdquisicion.ProveedorAdquisicion.IdProveedor)
 			};
 
-            //REVISAR
-            return 11;
+            try
+            {
+                //SAQUE LO DE TRANSACCIOENS PORQUE LO HAGO EN LA BD PARA TODO LO QUE IMPLICA CREAR LA ADQUISICION Y LOS INVENTARIOS
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AdquisicionCrear", parametersAdq);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                //foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
+                //{
+
+                //    SqlParameter[] parametersSolicitudDetalles = new SqlParameter[]
+                //    {
+                //        new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                //        new SqlParameter("@IdSolicitud", IDDevuelto),
+                //        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
+                //        new SqlParameter("@Cantidad", item.Cantidad),
+                //        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolicDetalle)
+                //    };
+
+                //    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);
+                //}
+
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IDDevuelto;
+            }
+            catch (Exception es)
+            {
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            //finally
+            //{
+            //    //FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
+
+
         }
 
         public void ComenzarAdquisicion()
