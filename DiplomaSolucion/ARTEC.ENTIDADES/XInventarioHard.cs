@@ -13,7 +13,7 @@ namespace ARTEC.ENTIDADES
         //public string SerieKey { get; set; }
         //public EstadoInventario unEstado { get; set; }
         //public Deposito unDeposito { get; set; }
-        
+        public Deposito unDeposito { get; set; }
 
 
         

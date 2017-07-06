@@ -26,7 +26,7 @@ namespace ARTEC.ENTIDADES
         //public bool? Homologado { get; set; }
         //public TipoLicencia unTipoLicencia { get; set; }
         //CON INTERFAZ**************FIN
-
+        //public new XInventarioSoft unInventarioAlta { get; set; }
         public bool Homologado { get; set; }
 
     }

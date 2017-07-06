@@ -9,7 +9,7 @@ namespace ARTEC.ENTIDADES
     public class Hardware : Bien //IBien
 
     {
-
+        //public new XInventarioHard unInventarioAlta { get; set; }
 
         //CON INTERFAZ**************
         //public int IdBien { get; set; }

@@ -26,26 +26,11 @@ namespace ARTEC.DAL
 
             try
             {
-                //SAQUE LO DE TRANSACCIOENS PORQUE LO HAGO EN LA BD PARA TODO LO QUE IMPLICA CREAR LA ADQUISICION Y LOS INVENTARIOS
+                //SAQUE LO DE TRANSACCIOENS PORQUE LO HAGO EN LA BLL de Adquisición TODO LO QUE IMPLICA CREAR LA ADQUISICION Y LOS INVENTARIOS
                 //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AdquisicionCrear", parametersAdq);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
-
-                //foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
-                //{
-
-                //    SqlParameter[] parametersSolicitudDetalles = new SqlParameter[]
-                //    {
-                //        new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
-                //        new SqlParameter("@IdSolicitud", IDDevuelto),
-                //        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
-                //        new SqlParameter("@Cantidad", item.Cantidad),
-                //        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolicDetalle)
-                //    };
-
-                //    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);
-                //}
 
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return IDDevuelto;

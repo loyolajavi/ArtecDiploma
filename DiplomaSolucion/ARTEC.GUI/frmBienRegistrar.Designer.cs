@@ -28,8 +28,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.progressSteps1 = new DevComponents.DotNetBar.ProgressSteps();
             this.stepItem1 = new DevComponents.DotNetBar.StepItem();
             this.stepItem2 = new DevComponents.DotNetBar.StepItem();
@@ -57,14 +57,7 @@ namespace ARTEC.GUI
             this.lblDeposito = new DevComponents.DotNetBar.LabelX();
             this.lblSerie = new DevComponents.DotNetBar.LabelX();
             this.pnlSoftware = new DevComponents.DotNetBar.PanelEx();
-            this.dateTimeInput3 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.dateTimeInput1 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.lblFinSus = new DevComponents.DotNetBar.LabelX();
-            this.lblFecSus = new DevComponents.DotNetBar.LabelX();
-            this.comboBoxEx7 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.comboBoxEx8 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.textBoxX4 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblTipoLic = new DevComponents.DotNetBar.LabelX();
+            this.txtSerialMaster = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblKey = new DevComponents.DotNetBar.LabelX();
             this.lblSerial = new DevComponents.DotNetBar.LabelX();
             this.GrillaBienes = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -78,14 +71,13 @@ namespace ARTEC.GUI
             this.txtBienCategoria = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBienCategoria = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             this.pnlAdquisicion.SuspendLayout();
             this.pnlBienes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).BeginInit();
             this.pnlHardware.SuspendLayout();
             this.pnlSoftware.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -358,10 +350,10 @@ namespace ARTEC.GUI
             // 
             this.pnlBienes.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlBienes.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.pnlBienes.Controls.Add(this.pnlSoftware);
             this.pnlBienes.Controls.Add(this.GrillaDetallesBienes);
             this.pnlBienes.Controls.Add(this.btnAgregar);
             this.pnlBienes.Controls.Add(this.pnlHardware);
-            this.pnlBienes.Controls.Add(this.pnlSoftware);
             this.pnlBienes.Controls.Add(this.GrillaBienes);
             this.pnlBienes.Controls.Add(this.lblBien);
             this.pnlBienes.Controls.Add(this.lblModelo);
@@ -388,14 +380,14 @@ namespace ARTEC.GUI
             // GrillaDetallesBienes
             // 
             this.GrillaDetallesBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaDetallesBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaDetallesBienes.Location = new System.Drawing.Point(18, 21);
             this.GrillaDetallesBienes.Name = "GrillaDetallesBienes";
@@ -522,14 +514,8 @@ namespace ARTEC.GUI
             // 
             this.pnlSoftware.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlSoftware.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.pnlSoftware.Controls.Add(this.dateTimeInput3);
-            this.pnlSoftware.Controls.Add(this.dateTimeInput1);
-            this.pnlSoftware.Controls.Add(this.lblFinSus);
-            this.pnlSoftware.Controls.Add(this.lblFecSus);
-            this.pnlSoftware.Controls.Add(this.comboBoxEx7);
-            this.pnlSoftware.Controls.Add(this.comboBoxEx8);
-            this.pnlSoftware.Controls.Add(this.textBoxX4);
-            this.pnlSoftware.Controls.Add(this.lblTipoLic);
+            this.pnlSoftware.Controls.Add(this.textBoxX1);
+            this.pnlSoftware.Controls.Add(this.txtSerialMaster);
             this.pnlSoftware.Controls.Add(this.lblKey);
             this.pnlSoftware.Controls.Add(this.lblSerial);
             this.pnlSoftware.DisabledBackColor = System.Drawing.Color.Empty;
@@ -545,176 +531,21 @@ namespace ARTEC.GUI
             this.pnlSoftware.TabIndex = 29;
             this.pnlSoftware.Visible = false;
             // 
-            // dateTimeInput3
+            // txtSerialMaster
+            // 
+            this.txtSerialMaster.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            // 
-            this.dateTimeInput3.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dateTimeInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput3.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dateTimeInput3.ButtonDropDown.Visible = true;
-            this.dateTimeInput3.IsPopupCalendarOpen = false;
-            this.dateTimeInput3.Location = new System.Drawing.Point(360, 59);
-            // 
-            // 
-            // 
-            // 
-            // 
-            // 
-            this.dateTimeInput3.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput3.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
-            this.dateTimeInput3.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateTimeInput3.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput3.MonthCalendar.DisplayMonth = new System.DateTime(2017, 6, 1, 0, 0, 0, 0);
-            this.dateTimeInput3.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
-            // 
-            // 
-            // 
-            this.dateTimeInput3.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dateTimeInput3.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTimeInput3.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateTimeInput3.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput3.MonthCalendar.TodayButtonVisible = true;
-            this.dateTimeInput3.Name = "dateTimeInput3";
-            this.dateTimeInput3.Size = new System.Drawing.Size(86, 22);
-            this.dateTimeInput3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateTimeInput3.TabIndex = 29;
-            // 
-            // dateTimeInput1
-            // 
-            // 
-            // 
-            // 
-            this.dateTimeInput1.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dateTimeInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput1.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dateTimeInput1.ButtonDropDown.Visible = true;
-            this.dateTimeInput1.IsPopupCalendarOpen = false;
-            this.dateTimeInput1.Location = new System.Drawing.Point(360, 31);
-            // 
-            // 
-            // 
-            // 
-            // 
-            // 
-            this.dateTimeInput1.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput1.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
-            this.dateTimeInput1.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dateTimeInput1.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput1.MonthCalendar.DisplayMonth = new System.DateTime(2017, 6, 1, 0, 0, 0, 0);
-            this.dateTimeInput1.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
-            // 
-            // 
-            // 
-            this.dateTimeInput1.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dateTimeInput1.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dateTimeInput1.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dateTimeInput1.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateTimeInput1.MonthCalendar.TodayButtonVisible = true;
-            this.dateTimeInput1.Name = "dateTimeInput1";
-            this.dateTimeInput1.Size = new System.Drawing.Size(86, 22);
-            this.dateTimeInput1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dateTimeInput1.TabIndex = 28;
-            // 
-            // lblFinSus
-            // 
-            // 
-            // 
-            // 
-            this.lblFinSus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFinSus.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFinSus.Location = new System.Drawing.Point(252, 64);
-            this.lblFinSus.Name = "lblFinSus";
-            this.lblFinSus.Size = new System.Drawing.Size(91, 17);
-            this.lblFinSus.TabIndex = 27;
-            this.lblFinSus.Text = "lblFinSus";
-            // 
-            // lblFecSus
-            // 
-            // 
-            // 
-            // 
-            this.lblFecSus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFecSus.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFecSus.Location = new System.Drawing.Point(252, 36);
-            this.lblFecSus.Name = "lblFecSus";
-            this.lblFecSus.Size = new System.Drawing.Size(91, 17);
-            this.lblFecSus.TabIndex = 26;
-            this.lblFecSus.Text = "lblFecSus";
-            // 
-            // comboBoxEx7
-            // 
-            this.comboBoxEx7.DisplayMember = "Text";
-            this.comboBoxEx7.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx7.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx7.FormattingEnabled = true;
-            this.comboBoxEx7.ItemHeight = 16;
-            this.comboBoxEx7.Location = new System.Drawing.Point(125, 31);
-            this.comboBoxEx7.Name = "comboBoxEx7";
-            this.comboBoxEx7.Size = new System.Drawing.Size(121, 22);
-            this.comboBoxEx7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx7.TabIndex = 22;
-            // 
-            // comboBoxEx8
-            // 
-            this.comboBoxEx8.DisplayMember = "Text";
-            this.comboBoxEx8.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx8.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx8.FormattingEnabled = true;
-            this.comboBoxEx8.ItemHeight = 16;
-            this.comboBoxEx8.Location = new System.Drawing.Point(125, 59);
-            this.comboBoxEx8.Name = "comboBoxEx8";
-            this.comboBoxEx8.Size = new System.Drawing.Size(121, 22);
-            this.comboBoxEx8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx8.TabIndex = 23;
-            // 
-            // textBoxX4
-            // 
-            this.textBoxX4.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.textBoxX4.Border.Class = "TextBoxBorder";
-            this.textBoxX4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX4.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX4.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX4.Location = new System.Drawing.Point(125, 3);
-            this.textBoxX4.Name = "textBoxX4";
-            this.textBoxX4.PreventEnterBeep = true;
-            this.textBoxX4.Size = new System.Drawing.Size(173, 22);
-            this.textBoxX4.TabIndex = 22;
-            // 
-            // lblTipoLic
-            // 
-            // 
-            // 
-            // 
-            this.lblTipoLic.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblTipoLic.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoLic.Location = new System.Drawing.Point(15, 64);
-            this.lblTipoLic.Name = "lblTipoLic";
-            this.lblTipoLic.Size = new System.Drawing.Size(91, 17);
-            this.lblTipoLic.TabIndex = 24;
-            this.lblTipoLic.Text = "lblTipoLic";
+            this.txtSerialMaster.Border.Class = "TextBoxBorder";
+            this.txtSerialMaster.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSerialMaster.DisabledBackColor = System.Drawing.Color.White;
+            this.txtSerialMaster.ForeColor = System.Drawing.Color.Black;
+            this.txtSerialMaster.Location = new System.Drawing.Point(125, 3);
+            this.txtSerialMaster.Name = "txtSerialMaster";
+            this.txtSerialMaster.PreventEnterBeep = true;
+            this.txtSerialMaster.Size = new System.Drawing.Size(173, 22);
+            this.txtSerialMaster.TabIndex = 22;
             // 
             // lblKey
             // 
@@ -745,14 +576,14 @@ namespace ARTEC.GUI
             // GrillaBienes
             // 
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBienes.Location = new System.Drawing.Point(3, 396);
             this.GrillaBienes.Name = "GrillaBienes";
@@ -896,6 +727,22 @@ namespace ARTEC.GUI
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // textBoxX1
+            // 
+            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX1.Location = new System.Drawing.Point(125, 31);
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.PreventEnterBeep = true;
+            this.textBoxX1.Size = new System.Drawing.Size(173, 22);
+            this.textBoxX1.TabIndex = 24;
+            // 
             // frmBienRegistrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -918,8 +765,6 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).EndInit();
             this.pnlHardware.ResumeLayout(false);
             this.pnlSoftware.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).EndInit();
             this.ResumeLayout(false);
 
@@ -961,19 +806,13 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnConfirmar;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaBienes;
         private DevComponents.DotNetBar.PanelEx pnlSoftware;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx7;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx8;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX4;
-        private DevComponents.DotNetBar.LabelX lblTipoLic;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtSerialMaster;
         private DevComponents.DotNetBar.LabelX lblKey;
         private DevComponents.DotNetBar.LabelX lblSerial;
-        private DevComponents.DotNetBar.LabelX lblFinSus;
-        private DevComponents.DotNetBar.LabelX lblFecSus;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTimeInput3;
-        private DevComponents.Editors.DateTimeAdv.DateTimeInput dateTimeInput1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboBienCategoria;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartida;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDetallesBienes;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
     }
 }

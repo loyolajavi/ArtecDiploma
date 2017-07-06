@@ -106,11 +106,13 @@ namespace ARTEC.GUI
                 {
                     unBien = new Hardware();
                     unInven = new XInventarioHard();
+                    unBien.unInventarioAlta = new XInventarioHard();
                 }
                 else
                 {
                     unBien = new Software();
                     unInven = new XInventarioSoft();
+                    unBien.unInventarioAlta = new XInventarioSoft();
                 }
 
                 if ((int)cboTipoBien.SelectedValue == 1)//Hardware
@@ -222,19 +224,26 @@ namespace ARTEC.GUI
             unBienhlp.DescripBien = txtBienCategoria.Text;
             unBien.unaCategoria = unDetSolic.unaCategoria;
             unBienhlp.DescripEstadoInv = cboEstado.Text;
-            unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+            //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+            unBien.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
             unBienhlp.DescripMarca = cboMarca.Text;
             unBien.unaMarca = (Marca)cboMarca.SelectedItem;
             unBienhlp.DescripModeloVersion = cboModelo.Text;
             unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
             unBienhlp.SerieKey = txtSerieKey.Text;
-            unInven.SerieKey = txtSerieKey.Text;
-            unBienhlp.NombreDeposito = cboDeposito.Text;
-            unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
-            //unBien.unosInventarios.Add(unInven);
-            //falta homologado y tipolicencia
-
-            unBien.unInventarioAlta = unInven;
+            //unInven.SerieKey = txtSerieKey.Text;
+            unBien.unInventarioAlta.SerieKey = txtSerieKey.Text;
+            if (unInven is XInventarioHard)
+            {
+                unBienhlp.NombreDeposito = cboDeposito.Text;
+                //unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
+                (unBien.unInventarioAlta as XInventarioHard).unDeposito = (Deposito)cboDeposito.SelectedItem;
+            }
+            if (unInven is XInventarioSoft && txtSerialMaster.Text != "Hola")
+            {
+                
+            }
+            //unBien.unInventarioAlta = unInven;
             unBien.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle(); 
             unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
             unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
@@ -300,11 +309,13 @@ namespace ARTEC.GUI
             {
                 unBien = new Hardware();
                 unInven = new XInventarioHard();
+                unBien.unInventarioAlta = new XInventarioHard();
             }
             else
             {
                 unBien = new Software();
                 unInven = new XInventarioSoft();
+                unBien.unInventarioAlta = new XInventarioSoft();
             }
 
 
