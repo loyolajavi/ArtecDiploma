@@ -33,10 +33,9 @@ namespace ARTEC.DAL
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BienTraerIdPorDescripMarcaModelo", parameters);
-                int IDDevuelto = Decimal.ToInt32(Resultado);
+                int ResIdBien = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BienTraerIdPorDescripMarcaModelo", parameters);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return IDDevuelto;
+                return ResIdBien;
                 
             }
             catch (Exception)

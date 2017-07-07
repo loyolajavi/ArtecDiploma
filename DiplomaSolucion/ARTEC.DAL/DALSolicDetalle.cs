@@ -57,11 +57,15 @@ namespace ARTEC.DAL
                     //catch (Exception es)
                     //{
                     //}
-                    
-                    
-                    unDet.unaCategoria = DALCategoria.MapearCategoriaUno(ds);
+                    unDet.unaCategoria = new Categoria();
+                    unDet.unaCategoria.IdCategoria = (int)row["IdCategoria"];
+                    unDet.unaCategoria.DescripCategoria = row["DescripCategoria"].ToString();
+                    //unDet.unaCategoria = DALCategoria.MapearCategoriaUno(ds);
                     unDet.Cantidad = (int)row["Cantidad"];
-                    unDet.unEstado = DALEstadoSolicDetalle.MapearEstadoUno(ds);
+                    unDet.unEstado = new EstadoSolicDetalle();
+                    unDet.unEstado.IdEstadoSolicDetalle = (int)row["IdEstadoSolicDetalle"];
+                    unDet.unEstado.DescripEstadoSolicDetalle = row["DescripEstadoSolicDetalle"].ToString();
+                    //unDet.unEstado = DALEstadoSolicDetalle.MapearEstadoUno(ds);
                     unDet.IdSolicitud = (int)row["IdSolicitud"];
                     //unDet.unosAgentes = DALAgente.MapearAgentes(ds);
                     //unDet.unasCotizaciones = DALCotizacion.MapearCotizaciones(ds);

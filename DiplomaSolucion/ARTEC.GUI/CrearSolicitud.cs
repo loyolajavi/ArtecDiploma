@@ -97,7 +97,7 @@ namespace ARTEC.GUI
                 //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
                 //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
             }
-            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolDetalle.Pendiente + 1;//GUARDA REVISAR ESTO en soft tmb
+            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;//GUARDA REVISAR ESTO en soft tmb
             unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 

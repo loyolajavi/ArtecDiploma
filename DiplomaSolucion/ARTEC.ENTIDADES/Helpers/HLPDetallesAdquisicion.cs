@@ -12,6 +12,7 @@ namespace ARTEC.ENTIDADES.Helpers
         public int Cantidad { get; set; }
         public int IdCategoria { get; set; }
         public int Comprado { get; set; }
+        public int IdSolicitudDetalle { get; set; }
 
     }
 }

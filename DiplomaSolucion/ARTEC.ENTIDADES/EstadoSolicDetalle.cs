@@ -12,9 +12,9 @@ namespace ARTEC.ENTIDADES
         public int IdEstadoSolicDetalle { get; set; }
         public string DescripEstadoSolicDetalle { get; set; }
 
-        public enum EnumEstadoSolDetalle
+        public enum EnumEstadoSolicDetalle
         {
-            Pendiente, Solucionado, Cerrado
+            Pendiente = 1, Cotizado = 2, Adquirido = 3, Entregado = 4
         }
 
         public override string ToString()
