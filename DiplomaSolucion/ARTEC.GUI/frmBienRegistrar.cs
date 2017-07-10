@@ -347,7 +347,8 @@ namespace ARTEC.GUI
             DetalleSeleccionado = e.RowIndex + 1;
             unDetSolic = new SolicDetalle();
 
-            unDetSolic = unosDetallesBienes.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+            //unDetSolic = unosDetallesBienes.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
+            unDetSolic = unosDetallesBienes[e.RowIndex];
 
             TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
             cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;

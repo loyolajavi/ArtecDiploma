@@ -38,7 +38,7 @@ namespace ARTEC.GUI
 
         private void frmSolicitudModificar_Load(object sender, EventArgs e)
         {
-            
+
 
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
             BLLDependencia ManagerDependenciaAg = new BLLDependencia();
@@ -182,7 +182,7 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
                 grillaDetalles.Columns.Remove("txtCotizConteo");
                 grillaDetalles.Columns.Remove("btnDinCotizar");
-                
+
                 //elimino de la memoria el detalle
                 unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
 
@@ -275,7 +275,7 @@ namespace ARTEC.GUI
                     frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones, unDetSolic);
                     UnFrmCotizaciones.EventoActualizarDetalles += new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud);
                     UnFrmCotizaciones.Show();
-                    
+
                 }
             }
         }
@@ -285,7 +285,7 @@ namespace ARTEC.GUI
             //Actualizo las cotizaciones en el objeto instanciado en el frmSolicitudModificar
             //foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
             //{
-                //det[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
+            //det[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
             //}
             unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza;
 
@@ -307,6 +307,32 @@ namespace ARTEC.GUI
             {
                 MessageBox.Show("Revise que los detalles posean al menos 3 cotizaciones");
             }
+        }
+
+        private void btnBienAsignar_Click(object sender, EventArgs e)
+        {
+
+            Solicitud SolicAsignar = new Solicitud();
+            SolicAsignar.AgenteResp = unaSolicitud.AgenteResp;
+            SolicAsignar.Asignado = unaSolicitud.Asignado;
+            SolicAsignar.FechaFin = unaSolicitud.FechaFin;
+            SolicAsignar.FechaInicio = unaSolicitud.FechaInicio;
+            SolicAsignar.IdSolicitud = unaSolicitud.IdSolicitud;
+            SolicAsignar.laDependencia = unaSolicitud.laDependencia;
+            SolicAsignar.UnaPrioridad = unaSolicitud.UnaPrioridad;
+            SolicAsignar.unasNotas = unaSolicitud.unasNotas;
+            SolicAsignar.UnEstado = unaSolicitud.UnEstado;
+
+            foreach (var unDetSolic in unaSolicitud.unosDetallesSolicitud)
+	        {
+		        if (unDetSolic.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                {
+                    SolicAsignar.unosDetallesSolicitud.Add(unDetSolic); 
+                }
+	        }
+
+            frmBienAsignar unFrmBienAsignar = new frmBienAsignar(SolicAsignar);
+            unFrmBienAsignar.Show();
         }
 
 

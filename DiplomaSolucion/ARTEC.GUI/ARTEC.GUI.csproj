@@ -89,6 +89,12 @@
     <Compile Include="CrearSolicitud.Designer.cs">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBienAsignar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBienAsignar.Designer.cs">
+      <DependentUpon>frmBienAsignar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBienRegistrar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearSolicitud.resx">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBienAsignar.resx">
+      <DependentUpon>frmBienAsignar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBienRegistrar.resx">
       <DependentUpon>frmBienRegistrar.cs</DependentUpon>

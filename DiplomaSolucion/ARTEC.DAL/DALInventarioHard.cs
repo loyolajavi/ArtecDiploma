@@ -19,7 +19,7 @@ namespace ARTEC.DAL
             SqlParameter[] parametersInvHard = new SqlParameter[]
 			{
                 new SqlParameter("@IdBienEspecif", unBien.IdBien),
-                new SqlParameter("@SerieKey ", unBien.unInventarioAlta.SerieKey),
+                new SqlParameter("@SerieKey", unBien.unInventarioAlta.SerieKey),
                 new SqlParameter("@IdAdquisicion", IdAdq),
                 new SqlParameter("@IdDeposito", (unBien.unInventarioAlta as XInventarioHard).unDeposito.IdDeposito),
                 new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
@@ -48,6 +48,40 @@ namespace ARTEC.DAL
 
 
         }
+
+
+
+
+
+        public List<XInventarioHard> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
+        {
+            SqlParameter[] parametersInvHard = new SqlParameter[]
+			{
+                new SqlParameter("@IdSolicitud", unSolicDetalle.IdSolicitud),
+                new SqlParameter("@IdSolicitudDetalle", unSolicDetalle.IdSolicitudDetalle),
+                new SqlParameter("@IdEstadoSolicDetalle", unSolicDetalle.unEstado.IdEstadoSolicDetalle)
+			};
+
+            try
+            {
+
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioHardTraerListosParaAsignar", parametersInvHard))
+                {
+                    List<XInventarioHard> unaLista = new List<XInventarioHard>();
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<XInventarioHard>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+
+
+
+        }
+
 
 
 

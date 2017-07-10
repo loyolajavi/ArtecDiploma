@@ -82,6 +82,7 @@ namespace ARTEC.GUI
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnSoliitarPartida = new System.Windows.Forms.Button();
+            this.btnBienAsignar = new DevComponents.DotNetBar.ButtonX();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -431,6 +432,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -839,11 +841,27 @@ namespace ARTEC.GUI
             this.btnSoliitarPartida.UseVisualStyleBackColor = true;
             this.btnSoliitarPartida.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnBienAsignar
+            // 
+            this.btnBienAsignar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBienAsignar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBienAsignar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnBienAsignar.CustomColorName = "Blue";
+            this.btnBienAsignar.Location = new System.Drawing.Point(1087, 87);
+            this.btnBienAsignar.Name = "btnBienAsignar";
+            this.btnBienAsignar.Size = new System.Drawing.Size(87, 40);
+            this.btnBienAsignar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBienAsignar.TabIndex = 8;
+            this.btnBienAsignar.Text = "btnBienAsignar";
+            this.btnBienAsignar.TextColor = System.Drawing.Color.White;
+            this.btnBienAsignar.Click += new System.EventHandler(this.btnBienAsignar_Click);
+            // 
             // frmSolicitudModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1279, 669);
+            this.Controls.Add(this.btnBienAsignar);
             this.Controls.Add(this.btnSoliitarPartida);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
@@ -915,5 +933,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX buttonX3;
         private System.Windows.Forms.Button btnSoliitarPartida;
+        private DevComponents.DotNetBar.ButtonX btnBienAsignar;
     }
 }

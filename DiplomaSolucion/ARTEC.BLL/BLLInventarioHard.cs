@@ -19,5 +19,11 @@ namespace ARTEC.BLL
             GestorInventarioHard.InventarioHardCrear(unBien, IdPart);
         }
 
+
+        public List<XInventarioHard> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
+        {
+            return GestorInventarioHard.InventarioHardTraerListosParaAsignar(unSolicDetalle);
+        }
+
     }
 }
