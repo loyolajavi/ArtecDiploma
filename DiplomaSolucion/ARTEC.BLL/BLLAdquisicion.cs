@@ -20,7 +20,6 @@ namespace ARTEC.BLL
             try
             {
                 GestorAdquisicion.ComenzarAdquisicion();
-                //MODIFICAR STORE DE ADQUISICIONCREAR PORQUE FALTA IDPARTIDADETALLE Y QUIZAS OTROS MAS
                 int IdAdq = GestorAdquisicion.AdquisicionCrear(unaAdquisicion);
                 foreach (Bien unBien in unaAdquisicion.BienesInventarioAsociados)
                 {

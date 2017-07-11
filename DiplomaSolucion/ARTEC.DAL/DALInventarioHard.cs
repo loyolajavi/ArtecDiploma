@@ -68,7 +68,7 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioHardTraerListosParaAsignar", parametersInvHard))
                 {
                     List<XInventarioHard> unaLista = new List<XInventarioHard>();
-                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<XInventarioHard>(ds);
+                    unaLista = MapearInventarioHard(ds);
                     return unaLista;
                 }
             }
@@ -76,12 +76,32 @@ namespace ARTEC.DAL
             {
                 throw;
             }
-
-
-
-
         }
 
+
+
+        public List<XInventarioHard> MapearInventarioHard(DataSet ds)
+        {
+            List<XInventarioHard> ResInventariosHard = new List<XInventarioHard>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    XInventarioHard unInven = new XInventarioHard();
+
+                    unInven.IdInventario = (int)row["IdInventario"];
+                    unInven.SerieKey = row["SerieKey"].ToString();
+
+                    ResInventariosHard.Add(unInven);
+                }
+                return ResInventariosHard;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
 

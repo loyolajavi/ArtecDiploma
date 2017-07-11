@@ -45,5 +45,15 @@ namespace ARTEC.ENTIDADES
 
         public bool Seleccionado { get; set; }
 
+        //PRUEBA
+        private List<XInventarioHard> _InventariosHard = new List<XInventarioHard>();
+
+        public List<XInventarioHard> InventariosHard
+        {
+            get { return _InventariosHard; }
+            set { _InventariosHard = value; }
+        }
+        
+
     }
 }

@@ -20,6 +20,7 @@ namespace ARTEC.GUI
 
         Solicitud unaSolic = new Solicitud();
         BLLInventarioHard ManagerInventarioHard = new BLLInventarioHard();
+        List<GrillaAsignacion> ListaGrilla = new List<GrillaAsignacion>();
 
         public frmBienAsignar(Solicitud unaSolicAsig)
         {
@@ -33,6 +34,38 @@ namespace ARTEC.GUI
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;
             GrillaDetallesSolic.DataSource = null;
             GrillaDetallesSolic.DataSource = unaSolic.unosDetallesSolicitud;
+
+
+            foreach (var det in unaSolic.unosDetallesSolicitud)
+            {
+                List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
+                LisInvHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
+                det.InventariosHard = LisInvHard;
+            }
+            
+
+            foreach (SolicDetalle item in unaSolic.unosDetallesSolicitud)
+            {
+                GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
+                grillaAsig2.unaCantidad = item.Cantidad.ToString();
+                grillaAsig2.unBien = item.unaCategoria.DescripCategoria;
+                //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
+                //LisInvHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(item);
+                //item.InventariosHard = LisInvHard;
+                grillaAsig2.unaGrilla = item.InventariosHard;
+                ListaGrilla.Add(grillaAsig2);
+
+                //grillaAsig2.Location = new System.Drawing.Point(699, 52);
+                //this.Controls.Add(grillaAsig2);
+            }
+
+
+            foreach (GrillaAsignacion gri in ListaGrilla)
+            {
+                flowInventarios.Controls.Add(gri);
+            }
+
+
         }
 
         private void GrillaDetallesSolic_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -43,13 +76,30 @@ namespace ARTEC.GUI
                 return;
             }
 
-            //if (unaSolic.unosDetallesSolicitud[e.RowIndex].
-            List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
-            LisInvHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(unaSolic.unosDetallesSolicitud[e.RowIndex]);
+            TipoBien unTipoBienAux = new TipoBien();
+            BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolic.unosDetallesSolicitud[e.RowIndex].unaCategoria.IdCategoria);
 
-            GrillaInvDisponibles.DataSource = null;
-            GrillaInvDisponibles.DataSource = LisInvHard;
+            if (unTipoBienAux.IdTipoBien == 1)//Hardware
+            {
+                List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
+                LisInvHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(unaSolic.unosDetallesSolicitud[e.RowIndex]);
+                unaSolic.unosDetallesSolicitud[e.RowIndex].InventariosHard = LisInvHard;
+
+
+                GrillaInvDisponibles.DataSource = null;
+                GrillaInvDisponibles.DataSource = LisInvHard;
+            }
+            else
+            {
+                //List<XInventarioSoft> LisInv = new List<XInventarioSoft>();
+                //LisInvHard = ManagerInventarioSoft.InventarioSoftTraerListosParaAsignar(unaSolic.unosDetallesSolicitud[e.RowIndex]);
+
+                //GrillaInvDisponibles.DataSource = null;
+                //GrillaInvDisponibles.DataSource = LisInvHard;
+            }
         }
+
 
 
 
