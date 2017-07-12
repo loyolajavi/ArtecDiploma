@@ -34,6 +34,7 @@
             this.txtCantidad = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.GrillaInventarios = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.clmAgregar = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInventarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,6 +104,8 @@
             this.GrillaInventarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GrillaInventarios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.GrillaInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrillaInventarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmAgregar});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,6 +120,12 @@
             this.GrillaInventarios.Name = "GrillaInventarios";
             this.GrillaInventarios.Size = new System.Drawing.Size(531, 91);
             this.GrillaInventarios.TabIndex = 52;
+            // 
+            // clmAgregar
+            // 
+            this.clmAgregar.HeaderText = "";
+            this.clmAgregar.Name = "clmAgregar";
+            this.clmAgregar.Text = "Agregar";
             // 
             // GrillaAsignacion
             // 
@@ -143,5 +152,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX txtCantidad;
         private DevComponents.DotNetBar.LabelX lblCantidad;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInventarios;
+        private DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn clmAgregar;
     }
 }

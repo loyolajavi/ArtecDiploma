@@ -53,7 +53,7 @@ namespace ARTEC.DAL
 
 
 
-        public List<XInventarioHard> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
+        public List<Hardware> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
         {
             SqlParameter[] parametersInvHard = new SqlParameter[]
 			{
@@ -67,7 +67,7 @@ namespace ARTEC.DAL
 
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioHardTraerListosParaAsignar", parametersInvHard))
                 {
-                    List<XInventarioHard> unaLista = new List<XInventarioHard>();
+                    List<Hardware> unaLista = new List<Hardware>();
                     unaLista = MapearInventarioHard(ds);
                     return unaLista;
                 }
@@ -80,18 +80,23 @@ namespace ARTEC.DAL
 
 
 
-        public List<XInventarioHard> MapearInventarioHard(DataSet ds)
+        public List<Hardware> MapearInventarioHard(DataSet ds)
         {
-            List<XInventarioHard> ResInventariosHard = new List<XInventarioHard>();
+            List<Hardware> ResInventariosHard = new List<Hardware>();
 
             try
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    XInventarioHard unInven = new XInventarioHard();
+                    Hardware unInven = new Hardware();
 
-                    unInven.IdInventario = (int)row["IdInventario"];
-                    unInven.SerieKey = row["SerieKey"].ToString();
+                    unInven.unInventarioAlta = new XInventarioHard();
+                    unInven.unInventarioAlta.IdInventario = (int)row["IdInventario"];
+                    unInven.unInventarioAlta.SerieKey = row["SerieKey"].ToString();
+                    unInven.unaMarca = new Marca();
+                    unInven.unaMarca.DescripMarca = row["DescripMarca"].ToString();
+                    unInven.unModelo = new ModeloVersion();
+                    unInven.unModelo.DescripModeloVersion = row["DescripModeloVersion"].ToString();
 
                     ResInventariosHard.Add(unInven);
                 }

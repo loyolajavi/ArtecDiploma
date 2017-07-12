@@ -20,7 +20,7 @@ namespace ARTEC.BLL
         }
 
 
-        public List<XInventarioHard> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
+        public List<Hardware> InventarioHardTraerListosParaAsignar(SolicDetalle unSolicDetalle)
         {
             return GestorInventarioHard.InventarioHardTraerListosParaAsignar(unSolicDetalle);
         }

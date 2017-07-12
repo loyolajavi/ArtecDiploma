@@ -53,6 +53,14 @@ namespace ARTEC.ENTIDADES
             get { return _InventariosHard; }
             set { _InventariosHard = value; }
         }
+
+        private List<Hardware> _unosBienes = new List<Hardware>();
+
+        public List<Hardware> unosBienes
+        {
+            get { return _unosBienes; }
+            set { _unosBienes = value; }
+        }
         
 
     }
