@@ -23,6 +23,7 @@ namespace ARTEC.GUI
         BLLInventarioHard ManagerInventarioHard = new BLLInventarioHard();
         List<GrillaAsignacion> ListaGrilla = new List<GrillaAsignacion>();
         List<HLPAsignacion> HLPAsigs = new List<HLPAsignacion>();
+        List<Inventario> InventariosAsignar = new List<Inventario>();
 
         public frmBienAsignar(Solicitud unaSolicAsig)
         {
@@ -32,6 +33,7 @@ namespace ARTEC.GUI
 
         private void frmBienAsignar_Load(object sender, EventArgs e)
         {
+            
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;
             GrillaDetallesSolic.DataSource = null;
@@ -56,6 +58,7 @@ namespace ARTEC.GUI
                 HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
 
                 GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
+                grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
                 grillaAsig2.unaCantidad = det.Cantidad.ToString();
                 grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
                 grillaAsig2.unaGrilla = HLPAsigs;
@@ -70,6 +73,10 @@ namespace ARTEC.GUI
 
 
             }
+
+
+
+            
 
             //ESTA ESTABA ANTES DE USAR EL HLP
             //foreach (SolicDetalle item in unaSolic.unosDetallesSolicitud)
@@ -98,6 +105,24 @@ namespace ARTEC.GUI
 
 
         }
+
+
+
+        protected void ClickEnGrilla_EventoManejado(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            GrillaAsignacion GrillaActual = (GrillaAsignacion)sender;
+            InventariosAsignar.Add(unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes[e.RowIndex].unInventarioAlta);
+
+            GrillaInvConfirmados.DataSource = null;
+            GrillaInvConfirmados.DataSource = InventariosAsignar;
+        }
+
 
         private void bot_Click(object sender, EventArgs e)
         {

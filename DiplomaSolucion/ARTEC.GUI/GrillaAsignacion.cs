@@ -12,7 +12,8 @@ namespace ARTEC.GUI
 {
     public partial class GrillaAsignacion : UserControl
     {
-        
+
+        public event DataGridViewCellEventHandler ClickEnGrilla;
 
         public GrillaAsignacion()
         {
@@ -35,6 +36,12 @@ namespace ARTEC.GUI
         {
             get { return GrillaInventarios.DataSource; }
             set { GrillaInventarios.DataSource = value; }
+        }
+
+        protected void GrillaInventarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.ClickEnGrilla != null)
+                this.ClickEnGrilla(this, e);
         }
 
     }

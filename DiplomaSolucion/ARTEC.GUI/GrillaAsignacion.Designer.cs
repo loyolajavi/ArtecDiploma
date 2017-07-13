@@ -115,17 +115,21 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaInventarios.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.GrillaInventarios.Location = new System.Drawing.Point(0, 28);
             this.GrillaInventarios.Name = "GrillaInventarios";
             this.GrillaInventarios.Size = new System.Drawing.Size(531, 91);
             this.GrillaInventarios.TabIndex = 52;
+            this.GrillaInventarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaInventarios_CellClick);
             // 
             // clmAgregar
             // 
+            this.clmAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Flat;
             this.clmAgregar.HeaderText = "";
             this.clmAgregar.Name = "clmAgregar";
+            this.clmAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2010;
             this.clmAgregar.Text = "Agregar";
+            this.clmAgregar.UseColumnTextForButtonValue = true;
             // 
             // GrillaAsignacion
             // 

@@ -29,9 +29,9 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtNroSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroSolic = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -40,12 +40,12 @@ namespace ARTEC.GUI
             this.gridBien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GrillaInvDisponibles = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.dataGridViewX3 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.GrillaInvConfirmados = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.flowInventarios = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesSolic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInvDisponibles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaInvConfirmados)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNroSolic
@@ -114,14 +114,14 @@ namespace ARTEC.GUI
             this.GrillaDetallesSolic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.gridBien,
             this.gridCant});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaDetallesSolic.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDetallesSolic.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaDetallesSolic.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaDetallesSolic.Location = new System.Drawing.Point(12, 52);
             this.GrillaDetallesSolic.Name = "GrillaDetallesSolic";
@@ -142,36 +142,36 @@ namespace ARTEC.GUI
             // GrillaInvDisponibles
             // 
             this.GrillaInvDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaInvDisponibles.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaInvDisponibles.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaInvDisponibles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInvDisponibles.Location = new System.Drawing.Point(12, 174);
             this.GrillaInvDisponibles.Name = "GrillaInvDisponibles";
             this.GrillaInvDisponibles.Size = new System.Drawing.Size(601, 137);
             this.GrillaInvDisponibles.TabIndex = 51;
             // 
-            // dataGridViewX3
+            // GrillaInvConfirmados
             // 
-            this.dataGridViewX3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX3.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridViewX3.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.dataGridViewX3.Location = new System.Drawing.Point(12, 342);
-            this.dataGridViewX3.Name = "dataGridViewX3";
-            this.dataGridViewX3.Size = new System.Drawing.Size(601, 137);
-            this.dataGridViewX3.TabIndex = 52;
+            this.GrillaInvConfirmados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaInvConfirmados.DefaultCellStyle = dataGridViewCellStyle3;
+            this.GrillaInvConfirmados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaInvConfirmados.Location = new System.Drawing.Point(12, 342);
+            this.GrillaInvConfirmados.Name = "GrillaInvConfirmados";
+            this.GrillaInvConfirmados.Size = new System.Drawing.Size(601, 137);
+            this.GrillaInvConfirmados.TabIndex = 52;
             // 
             // notifyIcon1
             // 
@@ -195,7 +195,7 @@ namespace ARTEC.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 519);
             this.Controls.Add(this.flowInventarios);
-            this.Controls.Add(this.dataGridViewX3);
+            this.Controls.Add(this.GrillaInvConfirmados);
             this.Controls.Add(this.GrillaInvDisponibles);
             this.Controls.Add(this.GrillaDetallesSolic);
             this.Controls.Add(this.txtDependencia);
@@ -210,7 +210,7 @@ namespace ARTEC.GUI
             this.Load += new System.EventHandler(this.frmBienAsignar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesSolic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInvDisponibles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaInvConfirmados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -223,7 +223,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDetallesSolic;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInvDisponibles;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX3;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInvConfirmados;
         private System.Windows.Forms.DataGridViewTextBoxColumn gridBien;
         private System.Windows.Forms.DataGridViewTextBoxColumn gridCant;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
