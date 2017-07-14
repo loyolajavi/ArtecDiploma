@@ -127,7 +127,6 @@ namespace ARTEC.GUI
             this.GrillaDetallesSolic.Name = "GrillaDetallesSolic";
             this.GrillaDetallesSolic.Size = new System.Drawing.Size(601, 92);
             this.GrillaDetallesSolic.TabIndex = 50;
-            this.GrillaDetallesSolic.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaDetallesSolic_CellClick);
             // 
             // gridBien
             // 

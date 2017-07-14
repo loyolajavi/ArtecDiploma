@@ -61,7 +61,7 @@ namespace ARTEC.GUI
                 grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
                 grillaAsig2.unaCantidad = det.Cantidad.ToString();
                 grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
-                grillaAsig2.unaGrilla = HLPAsigs;
+                grillaAsig2.unaGrilla.DataSource = HLPAsigs;
 
                 //Button bot = new Button();
                 //grillaAsig2.Controls.Add(bot);
@@ -117,17 +117,22 @@ namespace ARTEC.GUI
             }
 
             GrillaAsignacion GrillaActual = (GrillaAsignacion)sender;
-            InventariosAsignar.Add(unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes[e.RowIndex].unInventarioAlta);
 
-            GrillaInvConfirmados.DataSource = null;
-            GrillaInvConfirmados.DataSource = InventariosAsignar;
+            if (GrillaActual.unaGrilla.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.LightGray)
+            {
+                Inventario InvAUX = unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes[e.RowIndex].unInventarioAlta;
+                InventariosAsignar.Add(InvAUX);
+
+                GrillaInvConfirmados.DataSource = null;
+                GrillaInvConfirmados.DataSource = InventariosAsignar;
+
+                GrillaActual.unaGrilla.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+            }
+
         }
 
 
-        private void bot_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
 
         private void GrillaDetallesSolic_CellClick(object sender, DataGridViewCellEventArgs e)
         {

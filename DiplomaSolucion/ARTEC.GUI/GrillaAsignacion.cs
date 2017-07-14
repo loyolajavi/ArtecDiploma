@@ -32,10 +32,10 @@ namespace ARTEC.GUI
             set { txtCantidad.Text = value; }
         }
 
-        public object unaGrilla
+        public DevComponents.DotNetBar.Controls.DataGridViewX unaGrilla
         {
-            get { return GrillaInventarios.DataSource; }
-            set { GrillaInventarios.DataSource = value; }
+            get { return GrillaInventarios; }
+            set { GrillaInventarios = value; }
         }
 
         protected void GrillaInventarios_CellClick(object sender, DataGridViewCellEventArgs e)
