@@ -24,6 +24,8 @@ namespace ARTEC.GUI
         List<GrillaAsignacion> ListaGrilla = new List<GrillaAsignacion>();
         List<HLPAsignacion> HLPAsigs = new List<HLPAsignacion>();
         List<Inventario> InventariosAsignar = new List<Inventario>();
+        Asignacion unaAsignacion = new Asignacion();
+        int ConteoDetalles = 0;
 
         public frmBienAsignar(Solicitud unaSolicAsig)
         {
@@ -36,9 +38,7 @@ namespace ARTEC.GUI
             
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;
-            GrillaDetallesSolic.DataSource = null;
-            GrillaDetallesSolic.DataSource = unaSolic.unosDetallesSolicitud;
-
+         
             //ESTA ESTABA ANTES DE USAR EL HLP
             //foreach (var det in unaSolic.unosDetallesSolicitud)
             //{
@@ -123,6 +123,22 @@ namespace ARTEC.GUI
                 Inventario InvAUX = unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes[e.RowIndex].unInventarioAlta;
                 InventariosAsignar.Add(InvAUX);
 
+                //Agregado para Asignacion
+                AsigDetalle unAsigDet = new AsigDetalle();
+                //Conteo Detalles Asig
+                ConteoDetalles += 1;
+                unAsigDet.IdAsigDetalle = ConteoDetalles;
+                
+                unAsigDet.unInventario = InvAUX;
+
+                unAsigDet.SolicDetalleAsoc = unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien);
+
+                unaAsignacion.unosAsigDetalles.Add(unAsigDet);
+                
+               
+
+                //unaAsignacion.unosAsigDetalles//VER DE PONER BIEN EL INVENTARIO Y EL CONTEODETALLES
+
                 GrillaInvConfirmados.DataSource = null;
                 GrillaInvConfirmados.DataSource = InventariosAsignar;
 
@@ -164,6 +180,17 @@ namespace ARTEC.GUI
             //    //GrillaInvDisponibles.DataSource = null;
             //    //GrillaInvDisponibles.DataSource = LisInvHard;
             //}
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+
+            unaAsignacion.Fecha = DateTime.Today;
+            unaAsignacion.unaDependencia = unaSolic.laDependencia;
+
+            BLLAsignacion ManagerAsignacion = new BLLAsignacion();
+            if(ManagerAsignacion.AsignacionCrear(unaAsignacion))
+                MessageBox.Show("Asignacion Creada");
         }
 
 

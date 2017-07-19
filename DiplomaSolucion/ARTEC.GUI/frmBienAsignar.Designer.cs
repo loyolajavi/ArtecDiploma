@@ -29,22 +29,17 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtNroSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroSolic = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
-            this.GrillaDetallesSolic = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.gridBien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GrillaInvDisponibles = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.GrillaInvConfirmados = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.flowInventarios = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesSolic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaInvDisponibles)).BeginInit();
+            this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
+            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInvConfirmados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,53 +103,6 @@ namespace ARTEC.GUI
             this.lblDependencia.TabIndex = 49;
             this.lblDependencia.Text = "lblDependencia";
             // 
-            // GrillaDetallesSolic
-            // 
-            this.GrillaDetallesSolic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GrillaDetallesSolic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.gridBien,
-            this.gridCant});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaDetallesSolic.DefaultCellStyle = dataGridViewCellStyle1;
-            this.GrillaDetallesSolic.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.GrillaDetallesSolic.Location = new System.Drawing.Point(12, 52);
-            this.GrillaDetallesSolic.Name = "GrillaDetallesSolic";
-            this.GrillaDetallesSolic.Size = new System.Drawing.Size(601, 92);
-            this.GrillaDetallesSolic.TabIndex = 50;
-            // 
-            // gridBien
-            // 
-            this.gridBien.HeaderText = "Bien";
-            this.gridBien.Name = "gridBien";
-            // 
-            // gridCant
-            // 
-            this.gridCant.HeaderText = "Cantidad";
-            this.gridCant.Name = "gridCant";
-            // 
-            // GrillaInvDisponibles
-            // 
-            this.GrillaInvDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaInvDisponibles.DefaultCellStyle = dataGridViewCellStyle2;
-            this.GrillaInvDisponibles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.GrillaInvDisponibles.Location = new System.Drawing.Point(12, 174);
-            this.GrillaInvDisponibles.Name = "GrillaInvDisponibles";
-            this.GrillaInvDisponibles.Size = new System.Drawing.Size(601, 137);
-            this.GrillaInvDisponibles.TabIndex = 51;
-            // 
             // GrillaInvConfirmados
             // 
             this.GrillaInvConfirmados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -169,7 +117,7 @@ namespace ARTEC.GUI
             this.GrillaInvConfirmados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInvConfirmados.Location = new System.Drawing.Point(12, 342);
             this.GrillaInvConfirmados.Name = "GrillaInvConfirmados";
-            this.GrillaInvConfirmados.Size = new System.Drawing.Size(601, 137);
+            this.GrillaInvConfirmados.Size = new System.Drawing.Size(599, 137);
             this.GrillaInvConfirmados.TabIndex = 52;
             // 
             // notifyIcon1
@@ -179,36 +127,73 @@ namespace ARTEC.GUI
             // 
             // flowInventarios
             // 
+            this.flowInventarios.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.flowInventarios.AutoScroll = true;
             this.flowInventarios.BackColor = System.Drawing.Color.Transparent;
             this.flowInventarios.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowInventarios.Location = new System.Drawing.Point(661, 52);
+            this.flowInventarios.Location = new System.Drawing.Point(12, 40);
             this.flowInventarios.Name = "flowInventarios";
-            this.flowInventarios.Size = new System.Drawing.Size(533, 427);
+            this.flowInventarios.Size = new System.Drawing.Size(599, 296);
             this.flowInventarios.TabIndex = 53;
             this.flowInventarios.WrapContents = false;
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmar.Location = new System.Drawing.Point(251, 540);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmar.TabIndex = 54;
+            this.btnConfirmar.Text = "btnConfirmar";
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
+            // comboBoxEx1
+            // 
+            this.comboBoxEx1.DisplayMember = "Text";
+            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxEx1.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxEx1.FormattingEnabled = true;
+            this.comboBoxEx1.ItemHeight = 16;
+            this.comboBoxEx1.Location = new System.Drawing.Point(136, 492);
+            this.comboBoxEx1.Name = "comboBoxEx1";
+            this.comboBoxEx1.Size = new System.Drawing.Size(111, 22);
+            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboBoxEx1.TabIndex = 55;
+            // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX1.Location = new System.Drawing.Point(14, 492);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(116, 22);
+            this.labelX1.TabIndex = 56;
+            this.labelX1.Text = "lblModoEntrega";
             // 
             // frmBienAsignar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 519);
+            this.ClientSize = new System.Drawing.Size(623, 567);
+            this.Controls.Add(this.labelX1);
+            this.Controls.Add(this.comboBoxEx1);
+            this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.flowInventarios);
             this.Controls.Add(this.GrillaInvConfirmados);
-            this.Controls.Add(this.GrillaInvDisponibles);
-            this.Controls.Add(this.GrillaDetallesSolic);
             this.Controls.Add(this.txtDependencia);
             this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtNroSolic);
             this.Controls.Add(this.lblNroSolic);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmBienAsignar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmBienAsignar_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesSolic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaInvDisponibles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInvConfirmados)).EndInit();
             this.ResumeLayout(false);
 
@@ -220,12 +205,11 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblNroSolic;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.LabelX lblDependencia;
-        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDetallesSolic;
-        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInvDisponibles;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInvConfirmados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gridBien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gridCant;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.FlowLayoutPanel flowInventarios;
+        private DevComponents.DotNetBar.ButtonX btnConfirmar;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
+        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

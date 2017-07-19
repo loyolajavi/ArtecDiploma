@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BLLAdquisicion.cs" />
     <Compile Include="BLLAgente.cs" />
+    <Compile Include="BLLAsignacion.cs" />
     <Compile Include="BLLBien.cs" />
     <Compile Include="BLLCategoria.cs" />
     <Compile Include="BLLCotizacion.cs" />

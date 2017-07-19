@@ -115,10 +115,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaInventarios.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInventarios.Location = new System.Drawing.Point(0, 28);
             this.GrillaInventarios.Name = "GrillaInventarios";
-            this.GrillaInventarios.Size = new System.Drawing.Size(531, 91);
+            this.GrillaInventarios.Size = new System.Drawing.Size(563, 91);
             this.GrillaInventarios.TabIndex = 52;
             this.GrillaInventarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaInventarios_CellClick);
             // 
@@ -143,7 +143,7 @@
             this.Controls.Add(this.txtBien);
             this.Controls.Add(this.lblBien);
             this.Name = "GrillaAsignacion";
-            this.Size = new System.Drawing.Size(531, 119);
+            this.Size = new System.Drawing.Size(563, 119);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInventarios)).EndInit();
             this.ResumeLayout(false);
 

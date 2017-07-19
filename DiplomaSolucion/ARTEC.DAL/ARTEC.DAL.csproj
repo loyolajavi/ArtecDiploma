@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DALAdquisicion.cs" />
     <Compile Include="DALAgente.cs" />
+    <Compile Include="DALAsignacion.cs" />
     <Compile Include="DALBien.cs" />
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALCotizacion.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />
     <Compile Include="DALHardware.cs" />
+    <Compile Include="DALInventario.cs" />
     <Compile Include="DALInventarioHard.cs" />
     <Compile Include="DALInventarioSoft.cs" />
     <Compile Include="DALMarca.cs" />

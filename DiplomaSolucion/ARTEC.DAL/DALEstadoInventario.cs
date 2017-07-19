@@ -22,5 +22,27 @@ namespace ARTEC.DAL
             }
         }
 
+
+
+        public bool InventarioEstadoUpdate(int IdInv)
+        {
+            SqlParameter[] parametersEstInv = new SqlParameter[]
+			{
+                new SqlParameter("@IdInventario", IdInv)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioEstadoUpdate", parametersEstInv);
+                return true;
+            }
+            catch (Exception es)
+            {
+                return false;
+                throw;
+            }
+
+        }
+
     }
 }

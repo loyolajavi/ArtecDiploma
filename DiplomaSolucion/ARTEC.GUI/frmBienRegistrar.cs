@@ -262,46 +262,50 @@ namespace ARTEC.GUI
             {
                 MessageBox.Show("Ya se compró todo");
             }
-            //Creo ManagerBien con Factory
-            //IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
-            //ManagerBien.BienCrear()
-            //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
-            //Inventario unInven;// = new Inventario();
-            HLPBienInventario unBienhlp = new HLPBienInventario();
-            unBienhlp.DescripBien = txtBienCategoria.Text;
-            unBien.unaCategoria = unDetSolic.unaCategoria;
-            unBienhlp.DescripEstadoInv = cboEstado.Text;
-            //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-            unBien.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-            unBienhlp.DescripMarca = cboMarca.Text;
-            unBien.unaMarca = (Marca)cboMarca.SelectedItem;
-            unBienhlp.DescripModeloVersion = cboModelo.Text;
-            unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
-            unBienhlp.SerieKey = txtSerieKey.Text;
-            //unInven.SerieKey = txtSerieKey.Text;
-            unBien.unInventarioAlta.SerieKey = txtSerieKey.Text;
-            if (unInven is XInventarioHard)
+            else
             {
-                unBienhlp.NombreDeposito = cboDeposito.Text;
-                //unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
-                (unBien.unInventarioAlta as XInventarioHard).unDeposito = (Deposito)cboDeposito.SelectedItem;
+                //Creo ManagerBien con Factory
+                //IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
+                //ManagerBien.BienCrear()
+                //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
+                //Inventario unInven;// = new Inventario();
+                HLPBienInventario unBienhlp = new HLPBienInventario();
+                unBienhlp.DescripBien = txtBienCategoria.Text;
+                unBien.unaCategoria = unDetSolic.unaCategoria;
+                unBienhlp.DescripEstadoInv = cboEstado.Text;
+                //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBien.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBienhlp.DescripMarca = cboMarca.Text;
+                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
+                unBienhlp.DescripModeloVersion = cboModelo.Text;
+                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
+                unBienhlp.SerieKey = txtSerieKey.Text;
+                //unInven.SerieKey = txtSerieKey.Text;
+                unBien.unInventarioAlta.SerieKey = txtSerieKey.Text;
+                if (unInven is XInventarioHard)
+                {
+                    unBienhlp.NombreDeposito = cboDeposito.Text;
+                    //unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
+                    (unBien.unInventarioAlta as XInventarioHard).unDeposito = (Deposito)cboDeposito.SelectedItem;
+                }
+                if (unInven is XInventarioSoft && !string.IsNullOrEmpty(txtSerialMaster.Text))
+                {
+                    //FALTA MOSTRAR EL SERIAL MASTER EN LA GRILLA
+                    (unBien.unInventarioAlta as XInventarioSoft).SerialMaster = txtSerialMaster.Text;
+                }
+                //unBien.unInventarioAlta = unInven;
+                unBien.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle();
+                unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
+                unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
+
+                unaAdquisicion.BienesInventarioAsociados.Add(unBien);
+
+                GrillaBienes.DataSource = null;
+                unosBieneshlp.Add(unBienhlp);
+                GrillaBienes.DataSource = unosBieneshlp;
+
             }
-            if (unInven is XInventarioSoft && !string.IsNullOrEmpty(txtSerialMaster.Text))
-            {
-                //FALTA MOSTRAR EL SERIAL MASTER EN LA GRILLA
-                (unBien.unInventarioAlta as XInventarioSoft).SerialMaster = txtSerialMaster.Text;
-            }
-            //unBien.unInventarioAlta = unInven;
-            unBien.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle(); 
-            unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
-            unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
-
-            unaAdquisicion.BienesInventarioAsociados.Add(unBien);
-
-            GrillaBienes.DataSource = null;
-            unosBieneshlp.Add(unBienhlp);
-            GrillaBienes.DataSource = unosBieneshlp;
-
+            
 
         }
 
@@ -477,6 +481,30 @@ namespace ARTEC.GUI
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
                     //validBien.Validate();
                 }
+            }
+        }
+
+        private void cboModelo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboModelo.SelectedIndex > -1)
+            {
+                ComboBox cbo = (ComboBox)sender;
+                unModelo = new ModeloVersion();
+                unModelo = (ModeloVersion)cbo.SelectedItem;
+
+                //Creo ManagerBien con Factory
+                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
+
+                unBien.unaCategoria = unDetSolic.unaCategoria;
+                unBien.unaMarca = unaMarca;
+                unBien.unModelo = unModelo;//(ModeloVersion)cboModelo.SelectedItem;
+
+                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien);
+
+
+                //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+                //ValidDep2.Validate();
+
             }
         }
 
