@@ -19,7 +19,7 @@ namespace ARTEC.GUI
             //Application.Run(new Login());
             Application.Run(new Principal());
             //Application.Run(new CrearSolicitud());
-            Application.Run(new frmBienRegistrar());
+            //Application.Run(new frmBienRegistrar());
 
             //Application.Run(new Principal());
             //Application.Run(new Backup());

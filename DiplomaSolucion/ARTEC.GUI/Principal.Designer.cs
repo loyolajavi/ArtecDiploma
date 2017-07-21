@@ -125,6 +125,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.TabIndex = 4;
             this.btnBienRegistrar.Text = "btnBienRegistrar";
             this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
+            this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
             // 
             // Principal
             // 
@@ -138,7 +139,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.Text = "ARTEC";
             this.Load += new System.EventHandler(this.Principal_Load);

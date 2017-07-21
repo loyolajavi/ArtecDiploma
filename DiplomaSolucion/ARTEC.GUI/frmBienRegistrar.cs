@@ -31,6 +31,7 @@ namespace ARTEC.GUI
         List<Inventario> nuevosInventarios = new List<Inventario>();
         ModeloVersion unModelo;
         Bien unBien;
+        Bien unBienAUX;
         Inventario unInven;// = new Inventario();
         List<SolicDetalle> unosDetallesBienes = new List<SolicDetalle>();
         BLLTipoBien ManagerTipoBien = new BLLTipoBien();
@@ -79,6 +80,17 @@ namespace ARTEC.GUI
                 }
                 GrillaDetallesBienes.DataSource = null;
                 GrillaDetallesBienes.DataSource = LisAUXDetalles;
+
+                //Coloca en estado Adquirido a un detalle de la solicitud cuando todos los bienes de ese detalle fueron adquiridos
+                foreach (HLPDetallesAdquisicion AuxDet in LisAUXDetalles)
+                {
+                    if (AuxDet.Cantidad == AuxDet.Comprado)
+                    {
+                        BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                        ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido);
+                    }
+                }
+
             }
             else
             {
@@ -99,7 +111,7 @@ namespace ARTEC.GUI
             unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text));
 
             //List<HLPDetallesAdquisicion> LisAUXDetalles 
-            LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
+            LisAUXDetalles = unosDetallesBienes.Where(y=>y.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido).Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
 
             List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
             LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
@@ -264,6 +276,18 @@ namespace ARTEC.GUI
             }
             else
             {
+                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                {
+                    unBienAUX = new Hardware();
+                    unInven = new XInventarioHard();
+                    unBienAUX.unInventarioAlta = new XInventarioHard();
+                }
+                else
+                {
+                    unBienAUX = new Software();
+                    unInven = new XInventarioSoft();
+                    unBienAUX.unInventarioAlta = new XInventarioSoft();
+                }
                 //Creo ManagerBien con Factory
                 //IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)cboTipoBien.SelectedValue);
                 //ManagerBien.BienCrear()
@@ -271,34 +295,40 @@ namespace ARTEC.GUI
                 //Inventario unInven;// = new Inventario();
                 HLPBienInventario unBienhlp = new HLPBienInventario();
                 unBienhlp.DescripBien = txtBienCategoria.Text;
-                unBien.unaCategoria = unDetSolic.unaCategoria;
+                unBienAUX.unaCategoria = unDetSolic.unaCategoria;
                 unBienhlp.DescripEstadoInv = cboEstado.Text;
                 //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-                unBien.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBienAUX.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
                 unBienhlp.DescripMarca = cboMarca.Text;
-                unBien.unaMarca = (Marca)cboMarca.SelectedItem;
+                unBienAUX.unaMarca = (Marca)cboMarca.SelectedItem;
                 unBienhlp.DescripModeloVersion = cboModelo.Text;
-                unBien.unModelo = (ModeloVersion)cboModelo.SelectedItem;
+                unBienAUX.unModelo = (ModeloVersion)cboModelo.SelectedItem;
                 unBienhlp.SerieKey = txtSerieKey.Text;
                 //unInven.SerieKey = txtSerieKey.Text;
-                unBien.unInventarioAlta.SerieKey = txtSerieKey.Text;
+                unBienAUX.unInventarioAlta.SerieKey = txtSerieKey.Text;
                 if (unInven is XInventarioHard)
                 {
                     unBienhlp.NombreDeposito = cboDeposito.Text;
                     //unInven.unDeposito = (Deposito)cboDeposito.SelectedItem;
-                    (unBien.unInventarioAlta as XInventarioHard).unDeposito = (Deposito)cboDeposito.SelectedItem;
+                    (unBienAUX.unInventarioAlta as XInventarioHard).unDeposito = (Deposito)cboDeposito.SelectedItem;
                 }
                 if (unInven is XInventarioSoft && !string.IsNullOrEmpty(txtSerialMaster.Text))
                 {
                     //FALTA MOSTRAR EL SERIAL MASTER EN LA GRILLA
-                    (unBien.unInventarioAlta as XInventarioSoft).SerialMaster = txtSerialMaster.Text;
+                    (unBienAUX.unInventarioAlta as XInventarioSoft).SerialMaster = txtSerialMaster.Text;
                 }
                 //unBien.unInventarioAlta = unInven;
-                unBien.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle();
-                unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
-                unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
+                unBienAUX.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle();
+                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
+                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
 
-                unaAdquisicion.BienesInventarioAsociados.Add(unBien);
+                unBienAUX.unaCategoria = unBien.unaCategoria;
+                unBienAUX.unaMarca = unBien.unaMarca;
+                unBienAUX.unModelo = unBien.unModelo;
+                unBienAUX.IdBien = unBien.IdBien;
+
+
+                unaAdquisicion.BienesInventarioAsociados.Add(unBienAUX);
 
                 GrillaBienes.DataSource = null;
                 unosBieneshlp.Add(unBienhlp);

@@ -13,7 +13,7 @@ namespace ARTEC.DAL
     public class DALInventario
     {
 
-        public static int InventarioEntregadoPorSolicDetalle(int IdSolicitudDetalle, int IdSolicitud)
+        public int InventarioEntregadoPorSolicDetalle(int IdSolicitudDetalle, int IdSolicitud)
         {
             SqlParameter[] parametersInvCantEntregado = new SqlParameter[]
 			{
@@ -21,8 +21,21 @@ namespace ARTEC.DAL
                 new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle)
 			};
 
-            int CantInv = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioEntregadoPorSolicDetalle", parametersInvCantEntregado);
-            return CantInv;
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                int CantInv = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioEntregadoPorSolicDetalle", parametersInvCantEntregado);
+                return CantInv;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
         }
 
 

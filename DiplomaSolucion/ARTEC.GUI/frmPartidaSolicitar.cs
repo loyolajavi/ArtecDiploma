@@ -130,7 +130,7 @@ namespace ARTEC.GUI
                         Cont += 1;
                     }
                     //Suma para obtener el costo total de la partida
-                    TotalAcumulado += unDet.unasCotizaciones[0].MontoCotizado;
+                    TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
                 }
                 txtMontoTotal.Text = TotalAcumulado.ToString();
                 //********************************
@@ -353,7 +353,7 @@ namespace ARTEC.GUI
                 var unaCotizacionAUX = unDet.unasCotizaciones.FirstOrDefault(x => x.Seleccionada == true);
                 if (unaCotizacionAUX != null)
                 {
-                    TotalAcumulado += unDet.unasCotizaciones.FirstOrDefault(x => x.Seleccionada == true).MontoCotizado;
+                    TotalAcumulado += (unDet.unasCotizaciones.FirstOrDefault(x => x.Seleccionada == true).MontoCotizado * unDet.Cantidad);
                 }
                 else
                 {

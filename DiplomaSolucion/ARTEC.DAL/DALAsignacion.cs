@@ -53,11 +53,14 @@ namespace ARTEC.DAL
                         return 0;
                     }
 
-                    if (item.SolicDetalleAsoc.Cantidad == DALInventario.InventarioEntregadoPorSolicDetalle(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud))
-                    {
-                        //ACA HAY QUE COLOCAR AL ESTADO DE SOLICDETALLE EN FINALIZADO
-                        System.Windows.Forms.MessageBox.Show("Test");
-                    }
+                    //PRUEBA DE PONER ESTO EN BLLAsignacion; SI ANDA QUITAR
+                    //DALInventario GestorInventario = new DALInventario();
+                    //if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud))
+                    //{
+                    //    DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
+                    //    //EN ESTE METODO CIERRO LA CONEXION A LA BD Y DPS EN LA SEGUNDA VUELTA DEL FOR EACH PINCHA PORQ ESTA CERRADA LA BD
+                    //    GestorSolicDetalle.SolicDetalleUpdateEstado(item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado);
+                    //}
 
                 }
 

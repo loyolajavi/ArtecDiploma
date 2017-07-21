@@ -31,5 +31,14 @@ namespace ARTEC.BLL
             return ListaDetalles;
         }
 
+
+
+        public void SolicDetalleUpdateEstado(int IdSolic, int IdSolicDetalle, int nuevoEstado)
+        {
+            GestorSolicDetalle.SolicDetalleUpdateEstado(IdSolic, IdSolicDetalle, nuevoEstado);
+        }
+
+
+
     }
 }

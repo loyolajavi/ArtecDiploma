@@ -89,6 +89,12 @@ namespace ARTEC.GUI
             unfrmPartidaAsociar.Show();
         }
 
+        private void btnBienRegistrar_Click(object sender, EventArgs e)
+        {
+            frmBienRegistrar unfrmBienRegistrar = new frmBienRegistrar();
+            unfrmBienRegistrar.Show();
+        }
+
 
 
 

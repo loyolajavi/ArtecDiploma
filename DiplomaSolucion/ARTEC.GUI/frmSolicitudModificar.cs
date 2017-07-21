@@ -325,10 +325,10 @@ namespace ARTEC.GUI
 
             foreach (var unDetSolic in unaSolicitud.unosDetallesSolicitud)
 	        {
-		        if (unDetSolic.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
-                {
+                //if (unDetSolic.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                //{
                     SolicAsignar.unosDetallesSolicitud.Add(unDetSolic); 
-                }
+                //}
 	        }
 
             frmBienAsignar unFrmBienAsignar = new frmBienAsignar(SolicAsignar);
