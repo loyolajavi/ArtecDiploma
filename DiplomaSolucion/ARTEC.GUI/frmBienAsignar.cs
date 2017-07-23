@@ -54,21 +54,23 @@ namespace ARTEC.GUI
                 //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
                 List<Hardware> LisHard = new List<Hardware>();
                 LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
-                det.unosBienes = LisHard;
-                HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
+                if (LisHard.Count() > 0)
+                {
+                    det.unosBienes = LisHard;
+                    HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
 
-                GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
-                grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
-                grillaAsig2.unaCantidad = det.Cantidad.ToString();
-                grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
-                grillaAsig2.unaGrilla.DataSource = HLPAsigs;
+                    GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
+                    grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
+                    grillaAsig2.unaCantidad = det.Cantidad.ToString();
+                    grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
+                    grillaAsig2.unaGrilla.DataSource = HLPAsigs;
 
-                //Button bot = new Button();
-                //grillaAsig2.Controls.Add(bot);
-                //grillaAsig2.Controls["bot"].Click += bot_Click;
+                    //Button bot = new Button();
+                    //grillaAsig2.Controls.Add(bot);
+                    //grillaAsig2.Controls["bot"].Click += bot_Click;
 
-                ListaGrilla.Add(grillaAsig2);
-
+                    ListaGrilla.Add(grillaAsig2);
+                }
 
 
 

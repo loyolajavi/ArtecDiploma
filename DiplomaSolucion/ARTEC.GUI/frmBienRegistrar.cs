@@ -69,7 +69,7 @@ namespace ARTEC.GUI
                 //Todo dentro del negocio o dal
 
 
-                
+
                 List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
                 LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
                 foreach (var item2 in LisAUXDetalles)
@@ -111,33 +111,36 @@ namespace ARTEC.GUI
             unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text));
 
             //List<HLPDetallesAdquisicion> LisAUXDetalles 
-            LisAUXDetalles = unosDetallesBienes.Where(y=>y.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido).Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
+            //LisAUXDetalles = unosDetallesBienes.Where(y => y.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido).Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
+            LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
 
-            List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
-            LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
-
-            //for (int i = 0; i < LisAUXCant.Count(); i++)
-            //{
-            //    LisAUXDetalles[i].Comprado = LisAUXCant[i].Comprado;
-            //}
-
-            //foreach (var item2 in LisAUXDetalles)
-            //{
-            //    item2.Comprado = LisAUXCant[item2.IdSolicitudDetalle - 1].Comprado;
-            //}
-
-            foreach (var item2 in LisAUXDetalles)
+            if (LisAUXDetalles.Count() > 0)
             {
-                item2.Comprado = (from x in LisAUXCant
-                                  where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
-                                  select x.Comprado).FirstOrDefault();
-            }
 
-            GrillaDetallesBienes.DataSource = null;
-            GrillaDetallesBienes.DataSource = LisAUXDetalles;
+                List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
+                LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
 
-            if (LisAUXDetalles != null)
-            {
+                //for (int i = 0; i < LisAUXCant.Count(); i++)
+                //{
+                //    LisAUXDetalles[i].Comprado = LisAUXCant[i].Comprado;
+                //}
+
+                //foreach (var item2 in LisAUXDetalles)
+                //{
+                //    item2.Comprado = LisAUXCant[item2.IdSolicitudDetalle - 1].Comprado;
+                //}
+
+                foreach (var item2 in LisAUXDetalles)
+                {
+                    item2.Comprado = (from x in LisAUXCant
+                                      where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
+                                      select x.Comprado).FirstOrDefault();
+                }
+
+                GrillaDetallesBienes.DataSource = null;
+                GrillaDetallesBienes.DataSource = LisAUXDetalles;
+
+
                 unDetSolic = new SolicDetalle();
                 unDetSolic = unosDetallesBienes.FirstOrDefault();
                 DetalleSeleccionado = unDetSolic.IdSolicitudDetalle;
@@ -167,7 +170,7 @@ namespace ARTEC.GUI
                     cboDeposito.Visible = true;
                     lblSerieKey.Visible = false;
                     lblSerial.Visible = false;
-                    txtSerialMaster.Visible = false; 
+                    txtSerialMaster.Visible = false;
                     //unasCategorias = unasCategoriasHard;//ESTO VA ACA??
                 }
                 if ((int)cboTipoBien.SelectedValue == 2)//Software
@@ -335,7 +338,7 @@ namespace ARTEC.GUI
                 GrillaBienes.DataSource = unosBieneshlp;
 
             }
-            
+
 
         }
 

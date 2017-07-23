@@ -13,7 +13,6 @@ using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using Novacode;
-using System.Drawing;
 using System.Globalization;
 
 namespace ARTEC.GUI
