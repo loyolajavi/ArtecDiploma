@@ -16,6 +16,8 @@ namespace ARTEC.ENTIDADES
         public EstadoInventario unEstado { get; set; }
         //public Deposito unDeposito { get; set; }
         public PartidaDetalle PartidaDetalleAsoc { get; set; }
+
+        public decimal Costo { get; set; }
     }
   
 }

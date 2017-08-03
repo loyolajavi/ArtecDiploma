@@ -62,6 +62,7 @@
     <Compile Include="BLLPolitica.cs" />
     <Compile Include="BLLPrioridad.cs" />
     <Compile Include="BLLProveedor.cs" />
+    <Compile Include="BLLRendicion.cs" />
     <Compile Include="BLLSoftware.cs" />
     <Compile Include="BLLSolicDetalle.cs" />
     <Compile Include="BLLSolicitud.cs" />

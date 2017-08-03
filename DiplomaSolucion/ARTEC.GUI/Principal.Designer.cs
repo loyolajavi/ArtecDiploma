@@ -35,6 +35,7 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
+            this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,11 +128,27 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
             this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
             // 
+            // btnRendicionCrear
+            // 
+            this.btnRendicionCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRendicionCrear.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRendicionCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnRendicionCrear.CustomColorName = "Blue";
+            this.btnRendicionCrear.Location = new System.Drawing.Point(845, 13);
+            this.btnRendicionCrear.Name = "btnRendicionCrear";
+            this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
+            this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRendicionCrear.TabIndex = 5;
+            this.btnRendicionCrear.Text = "btnRendicionCrear";
+            this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
+            this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.btnRendicionCrear);
             this.Controls.Add(this.btnBienRegistrar);
             this.Controls.Add(this.btnPartidaAsociar);
             this.Controls.Add(this.btnSolicitarPartida);
@@ -156,6 +173,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
         private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;
         private DevComponents.DotNetBar.ButtonX btnBienRegistrar;
+        private DevComponents.DotNetBar.ButtonX btnRendicionCrear;
 
 
 

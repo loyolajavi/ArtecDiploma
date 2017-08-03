@@ -95,6 +95,12 @@ namespace ARTEC.GUI
             unfrmBienRegistrar.Show();
         }
 
+        private void btnRendicionCrear_Click(object sender, EventArgs e)
+        {
+            frmRendicionCrear unfrmRendicionCrear = new frmRendicionCrear();
+            unfrmRendicionCrear.Show();
+        }
+
 
 
 

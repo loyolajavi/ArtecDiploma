@@ -125,6 +125,12 @@
     <Compile Include="frmPartidaSolicitar.Designer.cs">
       <DependentUpon>frmPartidaSolicitar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRendicionCrear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRendicionCrear.Designer.cs">
+      <DependentUpon>frmRendicionCrear.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSolicitudModificar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,12 @@
     </Compile>
     <Compile Include="GrillaAsignacion.Designer.cs">
       <DependentUpon>GrillaAsignacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GrillaRendicion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GrillaRendicion.Designer.cs">
+      <DependentUpon>GrillaRendicion.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -199,11 +211,17 @@
     <EmbeddedResource Include="frmPartidaSolicitar.resx">
       <DependentUpon>frmPartidaSolicitar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRendicionCrear.resx">
+      <DependentUpon>frmRendicionCrear.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSolicitudModificar.resx">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GrillaAsignacion.resx">
       <DependentUpon>GrillaAsignacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GrillaRendicion.resx">
+      <DependentUpon>GrillaRendicion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

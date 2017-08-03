@@ -63,6 +63,7 @@
     <Compile Include="DALPolitica.cs" />
     <Compile Include="DALPrioridad.cs" />
     <Compile Include="DALProveedor.cs" />
+    <Compile Include="DALRendicion.cs" />
     <Compile Include="DALSoftware.cs" />
     <Compile Include="DALSolicDetalle.cs" />
     <Compile Include="DALSolicitud.cs" />

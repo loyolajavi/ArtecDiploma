@@ -13,7 +13,10 @@ namespace ARTEC.ENTIDADES
         public string DescripTipoBien { get; set; }
 
         //enum TipoDeBien { Hard, Soft };
-
+        public enum EnumTipoBien
+        {
+            Hard = 1, Soft = 2
+        }
 
     }
 }

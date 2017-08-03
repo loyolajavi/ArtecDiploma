@@ -45,6 +45,8 @@
     <Compile Include="Asignacion.cs" />
     <Compile Include="Helpers\HLPAsignacion.cs" />
     <Compile Include="Helpers\HLPDetallesAdquisicion.cs" />
+    <Compile Include="Helpers\HLPInvRendicion.cs" />
+    <Compile Include="Rendicion.cs" />
     <Compile Include="TipoLicencia.cs" />
     <Compile Include="Bien.cs" />
     <Compile Include="Cargo.cs" />

@@ -16,26 +16,8 @@ namespace ARTEC.ENTIDADES
         public string RutaDocumentos { get; set; }
         public decimal MontoCompra { get; set; }
         public Proveedor ProveedorAdquisicion { get; set; }
-        
-        private List<PartidaDetalle> _PartidaDetallesAsociados = new List<PartidaDetalle>();
-
-        public List<PartidaDetalle> PartidaDetallesAsociados
-        {
-            get { return _PartidaDetallesAsociados; }
-            set { _PartidaDetallesAsociados = value; }
-        }
-
-        private List<Inventario> _InventariosAsociados = new List<Inventario>();
-
-        public List<Inventario> InventariosAsociados
-        {
-            get { return _InventariosAsociados; }
-            set { _InventariosAsociados = value; }
-        }
-
 
         private List<Bien> _BienesInventarioAsociados = new List<Bien>();
-
         public List<Bien> BienesInventarioAsociados
         {
             get { return _BienesInventarioAsociados; }
