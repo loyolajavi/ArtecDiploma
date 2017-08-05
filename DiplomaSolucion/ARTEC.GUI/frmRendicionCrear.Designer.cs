@@ -36,11 +36,10 @@ namespace ARTEC.GUI
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
             this.txtPartRef = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtMontoOtorgado = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblMontoOtorgado = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtMontoEmpleado = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.pnlDetalles = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.btnCrear = new DevComponents.DotNetBar.ButtonX();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.flowInventariosRend = new System.Windows.Forms.FlowLayoutPanel();
@@ -165,22 +164,22 @@ namespace ARTEC.GUI
             this.labelX1.TabIndex = 55;
             this.labelX1.Text = "Partida Referenciada";
             // 
-            // textBoxX2
+            // txtMontoOtorgado
             // 
-            this.textBoxX2.BackColor = System.Drawing.Color.White;
+            this.txtMontoOtorgado.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX2.Border.Class = "TextBoxBorder";
-            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX2.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX2.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX2.Location = new System.Drawing.Point(162, 134);
-            this.textBoxX2.Multiline = true;
-            this.textBoxX2.Name = "textBoxX2";
-            this.textBoxX2.PreventEnterBeep = true;
-            this.textBoxX2.Size = new System.Drawing.Size(85, 22);
-            this.textBoxX2.TabIndex = 56;
+            this.txtMontoOtorgado.Border.Class = "TextBoxBorder";
+            this.txtMontoOtorgado.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMontoOtorgado.DisabledBackColor = System.Drawing.Color.White;
+            this.txtMontoOtorgado.ForeColor = System.Drawing.Color.Black;
+            this.txtMontoOtorgado.Location = new System.Drawing.Point(162, 134);
+            this.txtMontoOtorgado.Multiline = true;
+            this.txtMontoOtorgado.Name = "txtMontoOtorgado";
+            this.txtMontoOtorgado.PreventEnterBeep = true;
+            this.txtMontoOtorgado.Size = new System.Drawing.Size(85, 22);
+            this.txtMontoOtorgado.TabIndex = 56;
             // 
             // lblMontoOtorgado
             // 
@@ -195,22 +194,22 @@ namespace ARTEC.GUI
             this.lblMontoOtorgado.TabIndex = 57;
             this.lblMontoOtorgado.Text = "lblMontoOtorgado";
             // 
-            // textBoxX3
+            // txtMontoEmpleado
             // 
-            this.textBoxX3.BackColor = System.Drawing.Color.White;
+            this.txtMontoEmpleado.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX3.Location = new System.Drawing.Point(162, 162);
-            this.textBoxX3.Multiline = true;
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.PreventEnterBeep = true;
-            this.textBoxX3.Size = new System.Drawing.Size(85, 22);
-            this.textBoxX3.TabIndex = 58;
+            this.txtMontoEmpleado.Border.Class = "TextBoxBorder";
+            this.txtMontoEmpleado.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMontoEmpleado.DisabledBackColor = System.Drawing.Color.White;
+            this.txtMontoEmpleado.ForeColor = System.Drawing.Color.Black;
+            this.txtMontoEmpleado.Location = new System.Drawing.Point(162, 162);
+            this.txtMontoEmpleado.Multiline = true;
+            this.txtMontoEmpleado.Name = "txtMontoEmpleado";
+            this.txtMontoEmpleado.PreventEnterBeep = true;
+            this.txtMontoEmpleado.Size = new System.Drawing.Size(85, 22);
+            this.txtMontoEmpleado.TabIndex = 58;
             // 
             // labelX3
             // 
@@ -225,51 +224,11 @@ namespace ARTEC.GUI
             this.labelX3.TabIndex = 59;
             this.labelX3.Text = "lblMontoEmpleado";
             // 
-            // pnlDetalles
-            // 
-            this.pnlDetalles.BackColor = System.Drawing.Color.White;
-            this.pnlDetalles.CanvasColor = System.Drawing.SystemColors.Control;
-            this.pnlDetalles.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.pnlDetalles.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlDetalles.Location = new System.Drawing.Point(3, 572);
-            this.pnlDetalles.Name = "pnlDetalles";
-            this.pnlDetalles.Size = new System.Drawing.Size(635, 160);
-            // 
-            // 
-            // 
-            this.pnlDetalles.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.pnlDetalles.Style.BackColorGradientAngle = 90;
-            this.pnlDetalles.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.pnlDetalles.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlDetalles.Style.BorderBottomWidth = 1;
-            this.pnlDetalles.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.pnlDetalles.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlDetalles.Style.BorderLeftWidth = 1;
-            this.pnlDetalles.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlDetalles.Style.BorderRightWidth = 1;
-            this.pnlDetalles.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlDetalles.Style.BorderTopWidth = 1;
-            this.pnlDetalles.Style.CornerDiameter = 4;
-            this.pnlDetalles.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.pnlDetalles.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.pnlDetalles.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.pnlDetalles.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.pnlDetalles.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.pnlDetalles.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.pnlDetalles.TabIndex = 64;
-            this.pnlDetalles.Text = "pnlDetalles";
-            // 
             // btnCrear
             // 
             this.btnCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrear.Location = new System.Drawing.Point(283, 738);
+            this.btnCrear.Location = new System.Drawing.Point(275, 567);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -304,14 +263,13 @@ namespace ARTEC.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 773);
+            this.ClientSize = new System.Drawing.Size(640, 597);
             this.Controls.Add(this.flowInventariosRend);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnCrear);
-            this.Controls.Add(this.pnlDetalles);
-            this.Controls.Add(this.textBoxX3);
+            this.Controls.Add(this.txtMontoEmpleado);
             this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.textBoxX2);
+            this.Controls.Add(this.txtMontoOtorgado);
             this.Controls.Add(this.lblMontoOtorgado);
             this.Controls.Add(this.txtPartRef);
             this.Controls.Add(this.labelX1);
@@ -323,7 +281,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroSolic);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmRendicionCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionCrear_Load);
@@ -341,11 +298,10 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblNroPartida;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPartRef;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtMontoOtorgado;
         private DevComponents.DotNetBar.LabelX lblMontoOtorgado;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX3;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtMontoEmpleado;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.Controls.GroupPanel pnlDetalles;
         private DevComponents.DotNetBar.ButtonX btnCrear;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private System.Windows.Forms.FlowLayoutPanel flowInventariosRend;

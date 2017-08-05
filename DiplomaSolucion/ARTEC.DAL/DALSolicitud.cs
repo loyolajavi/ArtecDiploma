@@ -115,6 +115,35 @@ namespace ARTEC.DAL
             }
         }
 
+
+
+
+        public Solicitud SolicitudTraerIdsolNomdepPorIdPartida(int IdPartida)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPartida)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerIdsolNomdepPorIdPartida", parameters))
+                {
+                    Solicitud unaSolic = new Solicitud();
+                    unaSolic = MapearSolicitudIdSolNomDep(ds);
+                    
+                    return unaSolic;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
         public static List<Solicitud> MapearSolicitud(DataSet ds)
         {
             List<Solicitud> ResSolicitudes = new List<Solicitud>();
@@ -159,6 +188,25 @@ namespace ARTEC.DAL
         }
 
 
+
+        public static Solicitud MapearSolicitudIdSolNomDep(DataSet ds)
+        {
+            try
+            {
+                Solicitud unaSolic = new Solicitud();
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    unaSolic.IdSolicitud = (int)row["IdSolicitud"];
+                    unaSolic.laDependencia = new Dependencia();
+                    unaSolic.laDependencia.NombreDependencia = row["NombreDependencia"].ToString();
+                }
+                return unaSolic;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
 

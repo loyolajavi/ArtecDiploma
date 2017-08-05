@@ -22,7 +22,7 @@ namespace ARTEC.GUI
         Rendicion unaRendicion = new Rendicion();
         List<GrillaRendicion> ListaMultiGrillaRendicion = new List<GrillaRendicion>();
         List<HLPInvRendicion> HLPListaInventariosRend = new List<HLPInvRendicion>();
-        
+        Partida unaPartida = new Partida();
 
         public frmRendicionCrear()
         {
@@ -36,8 +36,24 @@ namespace ARTEC.GUI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //Cargar montos partida
+            BLLPartida ManagerPartida = new BLLPartida();
+            unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtNroPart.Text));
+
+            //TraerDatosSolicitud
+            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+            Solicitud DatosSolic;
+            DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
+            txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
+            txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
+
+
+            txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
+            
             BLLRendicion ManagerRendicion = new BLLRendicion();
             unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
+
+            txtMontoEmpleado.Text = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum().ToString();
 
             //Obtengo los nros de factura por distinct
             List<string> ListaNroFacturas = unaRendicion.unasAdquisiciones.Select(x => x.NroFactura).Distinct().ToList();

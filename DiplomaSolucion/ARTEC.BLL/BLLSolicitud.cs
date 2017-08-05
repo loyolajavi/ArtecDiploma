@@ -39,6 +39,16 @@ namespace ARTEC.BLL
             return unaSolic;
         }
 
-        
+     
+   
+        public Solicitud SolicitudTraerIdsolNomdepPorIdPartida(int IdPartida)
+        {
+            return GestorSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(IdPartida);
+        }
+
+
+
+
+
     }
 }
