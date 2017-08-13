@@ -28,13 +28,14 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRendicionCrear));
             this.txtNroSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroSolic = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtNroPart = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
-            this.txtPartRef = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtMontoOtorgado = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblMontoOtorgado = new DevComponents.DotNetBar.LabelX();
@@ -43,6 +44,16 @@ namespace ARTEC.GUI
             this.btnCrear = new DevComponents.DotNetBar.ButtonX();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.flowInventariosRend = new System.Windows.Forms.FlowLayoutPanel();
+            this.validlblNroPartida = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.vldIdPartida = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.vldNroSolic = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.vldTXTDependencia = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.VLDTXTMontoOtorgado = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.vldTXTMontoEmpleado = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.txtPartRef = new DevComponents.DotNetBar.Controls.TextBoxX();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNroSolic
@@ -59,6 +70,7 @@ namespace ARTEC.GUI
             this.txtNroSolic.Multiline = true;
             this.txtNroSolic.Name = "txtNroSolic";
             this.txtNroSolic.PreventEnterBeep = true;
+            this.txtNroSolic.ReadOnly = true;
             this.txtNroSolic.Size = new System.Drawing.Size(85, 22);
             this.txtNroSolic.TabIndex = 48;
             // 
@@ -89,6 +101,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Multiline = true;
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
+            this.txtDependencia.ReadOnly = true;
             this.txtDependencia.Size = new System.Drawing.Size(298, 22);
             this.txtDependencia.TabIndex = 50;
             // 
@@ -121,6 +134,7 @@ namespace ARTEC.GUI
             this.txtNroPart.PreventEnterBeep = true;
             this.txtNroPart.Size = new System.Drawing.Size(85, 22);
             this.txtNroPart.TabIndex = 52;
+            this.validlblNroPartida.SetValidator1(this.txtNroPart, this.vldIdPartida);
             // 
             // lblNroPartida
             // 
@@ -134,22 +148,6 @@ namespace ARTEC.GUI
             this.lblNroPartida.Size = new System.Drawing.Size(97, 22);
             this.lblNroPartida.TabIndex = 53;
             this.lblNroPartida.Text = "lblNroPartida";
-            // 
-            // txtPartRef
-            // 
-            this.txtPartRef.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtPartRef.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPartRef.DisabledBackColor = System.Drawing.Color.White;
-            this.txtPartRef.ForeColor = System.Drawing.Color.Black;
-            this.txtPartRef.Location = new System.Drawing.Point(162, 106);
-            this.txtPartRef.Multiline = true;
-            this.txtPartRef.Name = "txtPartRef";
-            this.txtPartRef.PreventEnterBeep = true;
-            this.txtPartRef.Size = new System.Drawing.Size(85, 22);
-            this.txtPartRef.TabIndex = 54;
             // 
             // labelX1
             // 
@@ -178,6 +176,7 @@ namespace ARTEC.GUI
             this.txtMontoOtorgado.Multiline = true;
             this.txtMontoOtorgado.Name = "txtMontoOtorgado";
             this.txtMontoOtorgado.PreventEnterBeep = true;
+            this.txtMontoOtorgado.ReadOnly = true;
             this.txtMontoOtorgado.Size = new System.Drawing.Size(85, 22);
             this.txtMontoOtorgado.TabIndex = 56;
             // 
@@ -208,6 +207,7 @@ namespace ARTEC.GUI
             this.txtMontoEmpleado.Multiline = true;
             this.txtMontoEmpleado.Name = "txtMontoEmpleado";
             this.txtMontoEmpleado.PreventEnterBeep = true;
+            this.txtMontoEmpleado.ReadOnly = true;
             this.txtMontoEmpleado.Size = new System.Drawing.Size(85, 22);
             this.txtMontoEmpleado.TabIndex = 58;
             // 
@@ -228,12 +228,13 @@ namespace ARTEC.GUI
             // 
             this.btnCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrear.Location = new System.Drawing.Point(275, 567);
+            this.btnCrear.Location = new System.Drawing.Point(275, 564);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 65;
             this.btnCrear.Text = "btnCrear";
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // btnBuscar
             // 
@@ -259,11 +260,71 @@ namespace ARTEC.GUI
             this.flowInventariosRend.TabIndex = 67;
             this.flowInventariosRend.WrapContents = false;
             // 
+            // validlblNroPartida
+            // 
+            this.validlblNroPartida.ContainerControl = this;
+            this.validlblNroPartida.ErrorProvider = this.errorProvider1;
+            this.validlblNroPartida.Highlighter = this.highlighter1;
+            this.validlblNroPartida.CustomValidatorValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventVldLblNroPartida);
+            // 
+            // vldIdPartida
+            // 
+            this.vldIdPartida.ErrorMessage = "Ingrese un Nro de Partida, deben ser sólo números";
+            this.vldIdPartida.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // vldNroSolic
+            // 
+            this.vldNroSolic.ErrorMessage = "Ingrese Nro Solicitud";
+            this.vldNroSolic.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Blue;
+            // 
+            // vldTXTDependencia
+            // 
+            this.vldTXTDependencia.ErrorMessage = "Your error message here.";
+            this.vldTXTDependencia.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // VLDTXTMontoOtorgado
+            // 
+            this.VLDTXTMontoOtorgado.ErrorMessage = "Your error message here.";
+            this.VLDTXTMontoOtorgado.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Orange;
+            // 
+            // vldTXTMontoEmpleado
+            // 
+            this.vldTXTMontoEmpleado.ErrorMessage = "Your error message here.";
+            this.vldTXTMontoEmpleado.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Green;
+            // 
+            // txtPartRef
+            // 
+            this.txtPartRef.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtPartRef.Border.Class = "TextBoxBorder";
+            this.txtPartRef.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPartRef.DisabledBackColor = System.Drawing.Color.White;
+            this.txtPartRef.ForeColor = System.Drawing.Color.Black;
+            this.txtPartRef.Location = new System.Drawing.Point(162, 106);
+            this.txtPartRef.Multiline = true;
+            this.txtPartRef.Name = "txtPartRef";
+            this.txtPartRef.PreventEnterBeep = true;
+            this.txtPartRef.ReadOnly = true;
+            this.txtPartRef.Size = new System.Drawing.Size(85, 22);
+            this.txtPartRef.TabIndex = 68;
+            // 
             // frmRendicionCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 597);
+            this.Controls.Add(this.txtPartRef);
             this.Controls.Add(this.flowInventariosRend);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnCrear);
@@ -271,7 +332,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.txtMontoOtorgado);
             this.Controls.Add(this.lblMontoOtorgado);
-            this.Controls.Add(this.txtPartRef);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.txtNroPart);
             this.Controls.Add(this.lblNroPartida);
@@ -284,6 +344,7 @@ namespace ARTEC.GUI
             this.Name = "frmRendicionCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionCrear_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -297,7 +358,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPart;
         private DevComponents.DotNetBar.LabelX lblNroPartida;
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtPartRef;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoOtorgado;
         private DevComponents.DotNetBar.LabelX lblMontoOtorgado;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoEmpleado;
@@ -305,5 +365,14 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCrear;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private System.Windows.Forms.FlowLayoutPanel flowInventariosRend;
+        private DevComponents.DotNetBar.Validator.SuperValidator validlblNroPartida;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.CustomValidator vldNroSolic;
+        private DevComponents.DotNetBar.Validator.CustomValidator vldTXTMontoEmpleado;
+        private DevComponents.DotNetBar.Validator.CustomValidator VLDTXTMontoOtorgado;
+        private DevComponents.DotNetBar.Validator.CustomValidator vldTXTDependencia;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtPartRef;
+        private DevComponents.DotNetBar.Validator.CustomValidator vldIdPartida;
     }
 }

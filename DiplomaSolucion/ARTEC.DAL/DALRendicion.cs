@@ -38,6 +38,71 @@ namespace ARTEC.DAL
         }
 
 
+
+        public int RendicionTraerIdRendPorIdPartida(int IdPartida)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPartida)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int? Res = (int?)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RendicionTraerIdRendPorIdPartida", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (Res != null)
+                    return (int)Res;
+                return 0;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return -1;
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+        public int RendicionCrear(Rendicion unaRendicion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@FechaRen", unaRendicion.FechaRen),
+                new SqlParameter("@IdPartida", unaRendicion.IdPartida),
+                new SqlParameter("@MontoGasto", unaRendicion.MontoGasto)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RendicionCrear", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IDDevuelto;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return 0;
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
         public static Rendicion MapearRendicion(DataSet ds)
         {
             Rendicion ResRendicion = new Rendicion();

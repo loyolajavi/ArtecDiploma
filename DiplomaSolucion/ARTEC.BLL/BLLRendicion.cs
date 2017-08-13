@@ -18,5 +18,24 @@ namespace ARTEC.BLL
             return GestorRendicion.AdquisicionesConBienesPorIdPartida(NroPartida);
         }
 
+
+        public int RendicionTraerIdRendPorIdPartida(int IdPartida)
+        {
+            return GestorRendicion.RendicionTraerIdRendPorIdPartida(IdPartida);
+        }
+
+
+        public int RendicionCrear(Rendicion unaRendicion)
+        {
+            int IdRendAUX = GestorRendicion.RendicionCrear(unaRendicion);
+            if (IdRendAUX > 0 )
+                return IdRendAUX;
+            return 0;
+            //Retorno el idRendicion para dps usarlo en el nombre del documento a generar
+        }
+
+
+
+
     }
 }

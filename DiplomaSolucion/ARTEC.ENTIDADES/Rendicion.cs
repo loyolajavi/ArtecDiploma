@@ -19,7 +19,11 @@ namespace ARTEC.ENTIDADES
             get { return _unasAdquisiciones; }
             set { _unasAdquisiciones = value; }
         }
-        
+
+        public int IdPartida { get; set; }
+
+        public DateTime FechaRen { get; set; }
+
 
     }
 }

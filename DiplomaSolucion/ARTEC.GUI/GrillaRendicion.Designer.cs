@@ -49,6 +49,7 @@
             this.txtFactura.Multiline = true;
             this.txtFactura.Name = "txtFactura";
             this.txtFactura.PreventEnterBeep = true;
+            this.txtFactura.ReadOnly = true;
             this.txtFactura.Size = new System.Drawing.Size(102, 22);
             this.txtFactura.TabIndex = 50;
             // 
@@ -79,6 +80,7 @@
             this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInventarios.Location = new System.Drawing.Point(3, 31);
             this.GrillaInventarios.Name = "GrillaInventarios";
+            this.GrillaInventarios.ReadOnly = true;
             this.GrillaInventarios.Size = new System.Drawing.Size(500, 150);
             this.GrillaInventarios.TabIndex = 52;
             // 
