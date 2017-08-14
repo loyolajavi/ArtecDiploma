@@ -103,6 +103,36 @@ namespace ARTEC.DAL
 
 
 
+        public void RendicionModificar(Rendicion unaRendicion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdRendicion", unaRendicion.IdRendicion),
+                new SqlParameter("@FechaRen", unaRendicion.FechaRen),
+                new SqlParameter("@IdPartida", unaRendicion.IdPartida),
+                new SqlParameter("@MontoGasto", unaRendicion.MontoGasto)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RendicionModificar", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
         public static Rendicion MapearRendicion(DataSet ds)
         {
             Rendicion ResRendicion = new Rendicion();

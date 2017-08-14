@@ -36,6 +36,13 @@ namespace ARTEC.BLL
 
 
 
+        public void RendicionModificar(Rendicion unaRendicion)
+        {
+            GestorRendicion.RendicionModificar(unaRendicion);
+        }
+
+
+
 
     }
 }
