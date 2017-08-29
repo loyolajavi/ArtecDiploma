@@ -169,12 +169,6 @@
     <Compile Include="ProveedorCrear.Designer.cs">
       <DependentUpon>ProveedorCrear.cs</DependentUpon>
     </Compile>
-    <Compile Include="Prueba.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Prueba.Designer.cs">
-      <DependentUpon>Prueba.cs</DependentUpon>
-    </Compile>
     <Compile Include="SoftHomologadoBuscar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,9 +234,6 @@
     </Compile>
     <EmbeddedResource Include="ProveedorCrear.resx">
       <DependentUpon>ProveedorCrear.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Prueba.resx">
-      <DependentUpon>Prueba.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SoftHomologadoBuscar.resx">
       <DependentUpon>SoftHomologadoBuscar.cs</DependentUpon>

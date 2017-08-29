@@ -93,7 +93,7 @@ namespace ARTEC.DAL
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 return 0;
-                throw;
+                //throw;
             }
             finally
             {

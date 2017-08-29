@@ -51,6 +51,20 @@ namespace ARTEC.GUI
 
             foreach (var det in unaSolic.unosDetallesSolicitud)
             {
+
+                //PRUEBA
+                TipoBien unTipoBienAux = new TipoBien();
+                BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+                unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(det.unaCategoria.IdCategoria);
+
+                if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                {
+
+                }
+                //ENDPRUEBA
+
+
+
                 //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
                 List<Hardware> LisHard = new List<Hardware>();
                 LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);

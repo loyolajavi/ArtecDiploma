@@ -240,7 +240,6 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
             this.txtNroSolicitud.Location = new System.Drawing.Point(104, 7);
-            this.txtNroSolicitud.Multiline = true;
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(315, 22);
@@ -428,7 +427,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.comboBoxEx1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "SolicitudBuscar";
             this.Text = "MetroForm";
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();

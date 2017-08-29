@@ -228,6 +228,7 @@ namespace ARTEC.GUI
             // 
             this.btnCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCrear.Enabled = false;
             this.btnCrear.Location = new System.Drawing.Point(275, 564);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
@@ -341,6 +342,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroSolic);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmRendicionCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionCrear_Load);

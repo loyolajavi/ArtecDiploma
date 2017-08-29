@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblBien = new DevComponents.DotNetBar.LabelX();
             this.txtCantidad = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.GrillaInventarios = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.clmAgregar = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
+            this.cboAgenteSoft = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInventarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,10 +52,9 @@
             this.txtBien.DisabledBackColor = System.Drawing.Color.White;
             this.txtBien.ForeColor = System.Drawing.Color.Black;
             this.txtBien.Location = new System.Drawing.Point(58, 3);
-            this.txtBien.Multiline = true;
             this.txtBien.Name = "txtBien";
             this.txtBien.PreventEnterBeep = true;
-            this.txtBien.Size = new System.Drawing.Size(102, 22);
+            this.txtBien.Size = new System.Drawing.Size(102, 20);
             this.txtBien.TabIndex = 48;
             // 
             // lblBien
@@ -103,21 +105,39 @@
             this.GrillaInventarios.BackgroundColor = System.Drawing.Color.White;
             this.GrillaInventarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GrillaInventarios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.GrillaInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GrillaInventarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmAgregar});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaInventarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.GrillaInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrillaInventarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmAgregar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaInventarios.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.GrillaInventarios.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.GrillaInventarios.EnableHeadersVisualStyles = false;
             this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInventarios.Location = new System.Drawing.Point(0, 28);
             this.GrillaInventarios.Name = "GrillaInventarios";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaInventarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaInventarios.Size = new System.Drawing.Size(563, 91);
             this.GrillaInventarios.TabIndex = 52;
             this.GrillaInventarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaInventarios_CellClick);
@@ -131,12 +151,27 @@
             this.clmAgregar.Text = "Agregar";
             this.clmAgregar.UseColumnTextForButtonValue = true;
             // 
+            // cboAgenteSoft
+            // 
+            this.cboAgenteSoft.DisplayMember = "Text";
+            this.cboAgenteSoft.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboAgenteSoft.ForeColor = System.Drawing.Color.Black;
+            this.cboAgenteSoft.FormattingEnabled = true;
+            this.cboAgenteSoft.ItemHeight = 14;
+            this.cboAgenteSoft.Location = new System.Drawing.Point(369, 3);
+            this.cboAgenteSoft.Name = "cboAgenteSoft";
+            this.cboAgenteSoft.Size = new System.Drawing.Size(121, 20);
+            this.cboAgenteSoft.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboAgenteSoft.TabIndex = 53;
+            this.cboAgenteSoft.Visible = false;
+            // 
             // GrillaAsignacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cboAgenteSoft);
             this.Controls.Add(this.GrillaInventarios);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.lblCantidad);
@@ -157,5 +192,6 @@
         private DevComponents.DotNetBar.LabelX lblCantidad;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaInventarios;
         private DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn clmAgregar;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgenteSoft;
     }
 }

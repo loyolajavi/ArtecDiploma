@@ -277,7 +277,9 @@ namespace ARTEC.GUI
                     ComboBox cbo = (ComboBox)sender;
                     unaDep = new Dependencia();
                     unaDep = (Dependencia)cbo.SelectedItem;
+                    this.textBoxX1.TextChanged -= new System.EventHandler(this.textBoxX1_TextChanged);
                     textBoxX1.Text = cbo.GetItemText(cbo.SelectedItem);
+                    this.textBoxX1.TextChanged += new System.EventHandler(this.textBoxX1_TextChanged);
                     textBoxX1.SelectionStart = textBoxX1.Text.Length + 1;
 
                     //Traer los agentes de la dependencia seleccionada

@@ -44,5 +44,17 @@ namespace ARTEC.GUI
                 this.ClickEnGrilla(this, e);
         }
 
+
+        public DevComponents.DotNetBar.Controls.ComboBoxEx cboAgentes
+        {
+            get { return cboAgenteSoft; }
+            set { cboAgenteSoft = value; }
+        }
+
+
+
+
+
+
     }
 }

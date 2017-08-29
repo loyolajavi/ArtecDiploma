@@ -51,6 +51,8 @@ namespace ARTEC.GUI
 
                 if (unaPartida.IdPartida > 0)
                 {
+                    btnCrear.Enabled = true;
+
                     //TraerDatosSolicitud
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     Solicitud DatosSolic;
