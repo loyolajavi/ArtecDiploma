@@ -210,5 +210,32 @@ namespace ARTEC.DAL
 
 
 
+        public List<Solicitud> SolicitudBuscar(string NombreDep = null, string EstadoSolic = null)
+        {
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(NombreDep))
+                parameters.Add(new SqlParameter("@NombreDep", NombreDep));
+            if (!string.IsNullOrEmpty(EstadoSolic))
+                parameters.Add(new SqlParameter("@EstadoSolic", EstadoSolic));
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudBuscar", parameters.ToArray()))
+                {
+                    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                    unaListaSolicitudes = MapearSolicitud(ds);
+                    return unaListaSolicitudes;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
     }
 }

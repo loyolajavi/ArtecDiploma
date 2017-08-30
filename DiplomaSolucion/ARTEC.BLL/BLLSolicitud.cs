@@ -23,10 +23,14 @@ namespace ARTEC.BLL
             return false;
         }
 
-
-        public List<Solicitud> SolicitudBuscar(int NroSolic)
+        //ANTIGUO
+        //public List<Solicitud> SolicitudBuscar(int NroSolic)
+        //{
+        //    return GestorSolicitud.SolicitudBuscar(NroSolic);
+        //}
+        public List<Solicitud> SolicitudBuscar(string Dep = null, string estado = null)
         {
-            return GestorSolicitud.SolicitudBuscar(NroSolic);
+            return GestorSolicitud.SolicitudBuscar(Dep, estado);
         }
 
 

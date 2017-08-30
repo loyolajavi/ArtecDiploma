@@ -20,22 +20,33 @@ namespace ARTEC.GUI
 
 
         List<Solicitud> unasSolicitudes = new List<Solicitud>();
+        List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
 
         public SolicitudBuscar()
         {
             InitializeComponent();
         }
 
+        //private void btnBuscar_Click(object sender, EventArgs e)
+        //{
+        //    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+        //    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+        //    GrillaSolicitudBuscar.DataSource = null;
+        //    GrillaSolicitudBuscar.DataSource = unasSolicitudes;
+        //    GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
+        //}ANTIGUO
+
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
-            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, cboEstadoSolicitud.SelectedItem.ToString());
             GrillaSolicitudBuscar.DataSource = null;
             GrillaSolicitudBuscar.DataSource = unasSolicitudes;
             GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
         }
-
 
         private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -57,6 +68,19 @@ namespace ARTEC.GUI
                 frmSolicitudModificar unfrmSolicitudModificar = new frmSolicitudModificar((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 unfrmSolicitudModificar.Show();
             }
+        }
+
+        private void SolicitudBuscar_Load(object sender, EventArgs e)
+        {
+            ///Traer Estados Solicitud
+            BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
+            unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+            cboEstadoSolicitud.DataSource = null;
+            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(999, ""));
+            cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
+            cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
+            cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+            
         }
 
 

@@ -9,6 +9,15 @@ namespace ARTEC.ENTIDADES
     public class EstadoSolicitud
     {
 
+        public EstadoSolicitud(int id, string descrip)
+        {
+            IdEstadoSolicitud = id;
+            DescripEstadoSolic = descrip;
+        }
+        public EstadoSolicitud()
+        {
+        }
+
         public int IdEstadoSolicitud { get; set; }
         public string DescripEstadoSolic { get; set; }
 

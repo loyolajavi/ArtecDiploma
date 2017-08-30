@@ -28,9 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.txtFechaFin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtFechaInicio = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
@@ -45,7 +45,7 @@ namespace ARTEC.GUI
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.GrillaSolicitudBuscar = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -67,22 +67,22 @@ namespace ARTEC.GUI
             this.labelX1.TabIndex = 26;
             this.labelX1.Text = "Dependencia";
             // 
-            // textBoxX1
+            // txtBien
             // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            this.txtBien.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(104, 63);
-            this.textBoxX1.Multiline = true;
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.Size = new System.Drawing.Size(315, 22);
-            this.textBoxX1.TabIndex = 27;
+            this.txtBien.Border.Class = "TextBoxBorder";
+            this.txtBien.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtBien.DisabledBackColor = System.Drawing.Color.White;
+            this.txtBien.ForeColor = System.Drawing.Color.Black;
+            this.txtBien.Location = new System.Drawing.Point(104, 63);
+            this.txtBien.Multiline = true;
+            this.txtBien.Name = "txtBien";
+            this.txtBien.PreventEnterBeep = true;
+            this.txtBien.Size = new System.Drawing.Size(315, 22);
+            this.txtBien.TabIndex = 27;
             // 
             // comboBoxEx4
             // 
@@ -337,22 +337,22 @@ namespace ARTEC.GUI
             this.labelX3.TabIndex = 43;
             this.labelX3.Text = "Bien";
             // 
-            // textBoxX3
+            // txtDep
             // 
-            this.textBoxX3.BackColor = System.Drawing.Color.White;
+            this.txtDep.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX3.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX3.Location = new System.Drawing.Point(104, 35);
-            this.textBoxX3.Multiline = true;
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.PreventEnterBeep = true;
-            this.textBoxX3.Size = new System.Drawing.Size(315, 22);
-            this.textBoxX3.TabIndex = 44;
+            this.txtDep.Border.Class = "TextBoxBorder";
+            this.txtDep.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDep.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDep.ForeColor = System.Drawing.Color.Black;
+            this.txtDep.Location = new System.Drawing.Point(104, 35);
+            this.txtDep.Multiline = true;
+            this.txtDep.Name = "txtDep";
+            this.txtDep.PreventEnterBeep = true;
+            this.txtDep.Size = new System.Drawing.Size(315, 22);
+            this.txtDep.TabIndex = 44;
             // 
             // comboBoxEx1
             // 
@@ -386,14 +386,14 @@ namespace ARTEC.GUI
             // 
             this.GrillaSolicitudBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaSolicitudBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaSolicitudBuscar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaSolicitudBuscar.Location = new System.Drawing.Point(7, 131);
             this.GrillaSolicitudBuscar.Name = "GrillaSolicitudBuscar";
@@ -409,7 +409,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.GrillaSolicitudBuscar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.textBoxX3);
+            this.Controls.Add(this.txtDep);
             this.Controls.Add(this.cboAsignado);
             this.Controls.Add(this.cboPrioridad);
             this.Controls.Add(this.cboEstadoSolicitud);
@@ -423,13 +423,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.labelX6);
             this.Controls.Add(this.labelX5);
             this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.textBoxX1);
+            this.Controls.Add(this.txtBien);
             this.Controls.Add(this.comboBoxEx4);
             this.Controls.Add(this.comboBoxEx1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SolicitudBuscar";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.SolicitudBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).EndInit();
@@ -440,7 +441,7 @@ namespace ARTEC.GUI
         #endregion
 
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaFin;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaInicio;
@@ -455,7 +456,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.LabelX labelX9;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX3;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDep;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaSolicitudBuscar;

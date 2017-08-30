@@ -41,6 +41,7 @@ namespace ARTEC.DAL
 				new SqlParameter("@IdDependencia", idDependencia)
 			};
 
+
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesPorIdDependencia", parameters))
             {
                 List<Agente> unaLista = new List<Agente>();
