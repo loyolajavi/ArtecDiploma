@@ -220,6 +220,10 @@ namespace ARTEC.GUI
                     DialogResult resmbox = MessageBox.Show("Si cambia de Fiscalía se eliminarán los detalles", "Confirmar", MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                     {
+                        //Elimino los datos que hayan quedado escritos para agregar detalles
+                        txtAgente.Clear();
+                        txtBien.Clear();
+                        cboTipoBien.Refresh();
                         grillaDetalles.DataSource = null;
                         grillaAgentesAsociados.DataSource = null;
                         unaSolicitud.unosDetallesSolicitud.Clear();
@@ -326,6 +330,13 @@ namespace ARTEC.GUI
                     cboAgenteResp.DataSource = unosAgentesResp;
                     cboAgenteResp.DisplayMember = "ApellidoAgente";
                     cboAgenteResp.ValueMember = "IdAgente";
+                    //Elimino los datos que hayan quedado escritos para agregar detalles
+                    unosAgentesAsociados.Clear();
+                    grillaAgentesAsociados.DataSource = null;
+                    txtAgente.Clear();
+                    txtBien.Clear();
+                    txtCantBien.Clear();
+                    cboTipoBien.Refresh();
                     //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
                     ValidDep2.Validate();
                     txtAgente.Clear();
@@ -573,6 +584,8 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[3].Visible = false;
                     grillaAgentesAsociados.Columns[4].Visible = false;
                 }
+                //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+                validCantBien.Validate();
             }
 
         }
