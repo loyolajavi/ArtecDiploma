@@ -44,10 +44,41 @@ namespace ARTEC.DAL
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesPorIdDependencia", parameters))
             {
                 List<Agente> unaLista = new List<Agente>();
-                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds);
+                //unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds); ANTIGUO
+                unaLista = MapearAgentes(ds);
                 return unaLista;
             }
         }
+
+
+
+        public static List<Agente> MapearAgentes(DataSet ds)
+        {
+            List<Agente> Res = new List<Agente>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Agente unAgente = new Agente();
+
+                    unAgente.IdAgente = (int)row["IdAgente"];
+                    unAgente.NombreAgente = row["NombreAgente"].ToString();
+                    unAgente.ApellidoAgente = row["ApellidoAgente"].ToString();
+
+
+                    Res.Add(unAgente);
+                }
+                return Res;
+            }
+            catch (Exception es)
+            {
+                throw;
+                //MANEJAR EXC
+            }
+        }
+
+
 
         public List<Agente> TraerAgentesResp(int idDependencia)
         {
@@ -60,7 +91,8 @@ namespace ARTEC.DAL
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesResp", parameters))
             {
                 List<Agente> unaLista = new List<Agente>();
-                unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds);
+                //unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Agente>(ds); ANTIGUO
+                unaLista = MapearAgentes(ds);
                 return unaLista;
             }
         }

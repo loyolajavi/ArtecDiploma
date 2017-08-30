@@ -58,28 +58,56 @@ namespace ARTEC.GUI
                 if (validCantBien.Validate())
                 {
 
-                    //VALIDAR MANUALMENTE QUE SI HAY UN DETALLE DE UN BIEN AGREGADO Y SE AGREGA DE NUEVO, SI ES HARD SUME UNO AL DETALLE EXISTENTE, SI ES SOFT QUE NO AGREGUE EL DETALLE (SI ES EL MISMO USUARIO)
-
-                    //Conteo Detalles
-                    ContDetalles += 1;
-                    unDetalleSolicitud.IdSolicitudDetalle = ContDetalles;
-
+                    //VER:FALLA LA VALIDACION DE SI HAY DETALLE DE UN BIEN AGREGADO Y SE AGREGA DE NUEVO PARA SOFT CUANDO YA HAY UN DETALLE, AL AGREGAR OTRO AGENTE Y PONER AGREGAR EN VEZZ DE SUMAR UNO SUMA 2 (SUMA TMB AL QUE YA TIENE ESE SOFT SOLICITADO)
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
-                    BLLPolitica ManagerPolitica = new BLLPolitica();
-                    if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
+
+
+                    //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
+                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
                     {
-                        AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                        if (hhh != null)
+                        {
+                            hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                            grillaDetalles.DataSource = null;
+                            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                            //Formato de la grillaDetalles
+                            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                            grillaDetalles.Columns[0].HeaderText = "#";
+                            grillaDetalles.Columns[2].HeaderText = "Bien";
+                            grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                            grillaDetalles.Columns[4].Width = 80;
+                            grillaDetalles.Columns[4].HeaderText = "Estado";
+                            grillaDetalles.Columns[1].Visible = false;
+                            grillaDetalles.Columns["Seleccionado"].Visible = false;
+                        }
+                        else
+                        { 
+                            AgregarDetalleConfirmado(ref unDetalleSolicitud); 
+                        }
                     }
                     else
                     {
-                        DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                        if (resmbox == DialogResult.Yes)
+                        BLLPolitica ManagerPolitica = new BLLPolitica();
+                        if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
                         {
                             AgregarDetalleConfirmado(ref unDetalleSolicitud);
                         }
                         else
                         {
-                            //FIJARME SI HAY QUE RESETEAR ALGO
+                            DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                            if (resmbox == DialogResult.Yes)
+                            {
+                                AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                            }
+                            else
+                            {
+                                //FIJARME SI HAY QUE RESETEAR ALGO
+                            }
                         }
                     }
                 }
@@ -90,6 +118,10 @@ namespace ARTEC.GUI
 
         private void AgregarDetalleConfirmado(ref SolicDetalle unDetSolic)
         {
+
+            //Conteo Detalles
+            ContDetalles += 1;
+            unDetSolic.IdSolicitudDetalle = ContDetalles;
 
             if (AuxTipoCategoria == 2)//Categoria de Software
             {
@@ -247,13 +279,13 @@ namespace ARTEC.GUI
                 //}
                 //else
                 //{
-                    comboBoxEx4.DataSource = null;
-                    comboBoxEx4.DataSource = res;
-                    comboBoxEx4.DisplayMember = "NombreDependencia";
-                    comboBoxEx4.ValueMember = "IdDependencia";
-                    comboBoxEx4.Visible = true;
-                    comboBoxEx4.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
+                comboBoxEx4.DataSource = null;
+                comboBoxEx4.DataSource = res;
+                comboBoxEx4.DisplayMember = "NombreDependencia";
+                comboBoxEx4.ValueMember = "IdDependencia";
+                comboBoxEx4.Visible = true;
+                comboBoxEx4.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
                 //}
             }
             else
@@ -287,7 +319,7 @@ namespace ARTEC.GUI
                     unosAgentes = new List<Agente>();
                     unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaDep.IdDependencia);
 
-                    
+
                     unosAgentesResp = new List<Agente>();
                     unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaDep.IdDependencia);
                     cboAgenteResp.DataSource = null;
@@ -542,7 +574,7 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[4].Visible = false;
                 }
             }
-           
+
         }
 
 
@@ -565,7 +597,7 @@ namespace ARTEC.GUI
                     e.IsValid = false;
                 }
             }
-            
+
         }
 
 
@@ -587,7 +619,7 @@ namespace ARTEC.GUI
 
             txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
             txtCantBien.Text = unDetSolic.Cantidad.ToString();
-            
+
             //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
             unaCat = unDetSolic.unaCategoria;
             TipoBien unTipoBienAux = new TipoBien();
@@ -678,7 +710,7 @@ namespace ARTEC.GUI
 
             }
 
-            
+
 
         }
 

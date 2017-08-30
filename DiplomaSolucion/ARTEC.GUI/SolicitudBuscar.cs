@@ -28,20 +28,24 @@ namespace ARTEC.GUI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
-            
-
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
             unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
             GrillaSolicitudBuscar.DataSource = null;
             GrillaSolicitudBuscar.DataSource = unasSolicitudes;
             GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
-
-
-
-
         }
+
+
+        private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnBuscar_Click(this, new EventArgs());
+            }
+        }
+
+
 
         private void GrillaSolicitudBuscar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -54,5 +58,13 @@ namespace ARTEC.GUI
                 unfrmSolicitudModificar.Show();
             }
         }
+
+
+
+
+
+
+
+
     }
 }

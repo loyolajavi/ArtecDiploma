@@ -244,6 +244,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(315, 22);
             this.txtNroSolicitud.TabIndex = 36;
+            this.txtNroSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroSolicitud_KeyPress);
             // 
             // cboAsignado
             // 
