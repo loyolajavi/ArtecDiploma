@@ -9,6 +9,17 @@ namespace ARTEC.ENTIDADES
     public class Prioridad
     {
 
+        public Prioridad(int id, string desc)
+        {
+            IdPrioridad = id;
+            DescripPrioridad = desc;
+        }
+
+        public Prioridad()
+        {
+
+        }
+
         public int IdPrioridad { get; set; }
         public string DescripPrioridad { get; set; }
 

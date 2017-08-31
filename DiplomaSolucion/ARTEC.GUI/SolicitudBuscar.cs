@@ -21,32 +21,38 @@ namespace ARTEC.GUI
 
         List<Solicitud> unasSolicitudes = new List<Solicitud>();
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
+        List<Prioridad> unasPrioridades = new List<Prioridad>();
 
         public SolicitudBuscar()
         {
             InitializeComponent();
         }
 
-        //private void btnBuscar_Click(object sender, EventArgs e)
-        //{
-        //    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-
-        //    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
-        //    GrillaSolicitudBuscar.DataSource = null;
-        //    GrillaSolicitudBuscar.DataSource = unasSolicitudes;
-        //    GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
-        //}ANTIGUO
 
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
-            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, cboEstadoSolicitud.SelectedItem.ToString());
-            GrillaSolicitudBuscar.DataSource = null;
-            GrillaSolicitudBuscar.DataSource = unasSolicitudes;
-            GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
+            //VER:PONER ESTE CODIGO Q TIENE LOS ASIGNADOSif (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboAsignado.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0)
+            if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0)
+            {
+                if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                {
+                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                }
+                else
+                {
+                    //VER:AGREGAR LOS DEMAS TXTBOX Y CBOBOX PARA COMPELTAR LA BUSQUEDA DINAMICA MULTIENTRADA
+                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, cboEstadoSolicitud.SelectedItem.ToString());
+                }
+                GrillaSolicitudBuscar.DataSource = null;
+                GrillaSolicitudBuscar.DataSource = unasSolicitudes;
+                GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
+            }
         }
+
+
 
         private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -70,17 +76,28 @@ namespace ARTEC.GUI
             }
         }
 
+
+
         private void SolicitudBuscar_Load(object sender, EventArgs e)
         {
             ///Traer Estados Solicitud
             BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
             unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
             cboEstadoSolicitud.DataSource = null;
-            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(999, ""));
+            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
             cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
             cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
             cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
-            
+
+            ///Traer Prioridad
+            BLLPrioridad ManagerPrioridad = new BLLPrioridad();
+            unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+            cboPrioridad.DataSource = null;
+            unasPrioridades.Insert(0, new Prioridad(-1, ""));
+            cboPrioridad.DataSource = unasPrioridades;
+            cboPrioridad.DisplayMember = "DescripPrioridad";
+            cboPrioridad.ValueMember = "IdPrioridad";
+
         }
 
 
