@@ -32,9 +32,9 @@ namespace ARTEC.BLL
 
 
 
-        public List<Solicitud> SolicitudBuscar(string Dep = null, string estado = null)
+        public List<Solicitud> SolicitudBuscar(string Dep = null, string estado = null, string bien = null, string priori = null, string usasig = null)
         {
-            return GestorSolicitud.SolicitudBuscar(Dep, estado);
+            return GestorSolicitud.SolicitudBuscar(Dep, estado, bien, priori, usasig);
         }
 
 
