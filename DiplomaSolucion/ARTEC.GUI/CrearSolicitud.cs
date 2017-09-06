@@ -70,7 +70,17 @@ namespace ARTEC.GUI
                         var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
                         if (hhh != null)
                         {
-                            hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            {
+                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
+                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
+                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();// += unDetalleSolicitud.Cantidad;
+                            }
+                            else
+                            {
+                                hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                            }
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
                             //Formato de la grillaDetalles
@@ -354,6 +364,9 @@ namespace ARTEC.GUI
         /// <param name="e"></param>
         private void cboTipoBien_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            //Quita los msjs de validación
+            validAgenteAsoc.ClearFailedValidations();
+            
             if ((int)cboTipoBien.SelectedValue == 1)//Hardware
             {
                 gboxAsociados.Enabled = false;
@@ -549,10 +562,10 @@ namespace ARTEC.GUI
             {
                 if (validAgenteAsoc.Validate())
                 {
-                    int CantSuma = 0;
+                    //int CantSuma = 0;
                     if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
                     {
-                        CantSuma = Int32.Parse(txtCantBien.Text);
+                        //CantSuma = Int32.Parse(txtCantBien.Text);
                     }
 
                     if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
@@ -567,15 +580,17 @@ namespace ARTEC.GUI
                         else
                         {
                             unosAgentesAsociados.Add(unAgen);
-                            CantSuma += 1;
-                            txtCantBien.Text = CantSuma.ToString();
+                            //CantSuma += 1;
+                            //txtCantBien.Text = CantSuma.ToString();
+                            txtCantBien.Text = unosAgentesAsociados.Count().ToString();
                         }
                     }
                     else
                     {
                         unosAgentesAsociados.Add(unAgen);
-                        CantSuma += 1;
-                        txtCantBien.Text = CantSuma.ToString();
+                        //CantSuma += 1;
+                        //txtCantBien.Text = CantSuma.ToString();
+                        txtCantBien.Text = unosAgentesAsociados.Count().ToString();
                     }
 
                     grillaAgentesAsociados.DataSource = null;

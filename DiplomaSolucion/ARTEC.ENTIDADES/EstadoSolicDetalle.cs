@@ -14,7 +14,7 @@ namespace ARTEC.ENTIDADES
 
         public enum EnumEstadoSolicDetalle
         {
-            Pendiente = 1, Cotizado = 2, Adquirido = 3, Entregado = 4
+            Pendiente = 1, Cotizado = 2, Adquirido = 3, Entregado = 4, Cancelado = 5
         }
 
         public override string ToString()

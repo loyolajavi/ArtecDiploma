@@ -28,7 +28,15 @@ namespace ARTEC.GUI
         List<TipoBien> unosTipoBien = new List<TipoBien>();
         TipoBien unTipoBienAux = new TipoBien();
         BLLTipoBien managerTipoBienAux = new BLLTipoBien();
-
+        //Estos son para cargar mas detalles
+        SolicDetalle unDetSolic;
+        List<Categoria> unasCategoriasHard;
+        List<Categoria> unasCategoriasSoft;
+        List<Agente> unosAgentesAsociados;
+        Categoria unaCat;
+        List<Agente> unosAgentes;
+        Agente unAgen;
+        //Estos son para cargar mas detallesFIN
 
         public frmSolicitudModificar(Solicitud unaSolic)
         {
@@ -162,6 +170,16 @@ namespace ARTEC.GUI
             }
             cboEstadoSolDetalle.SelectedValue = unaSolicitud.unosDetallesSolicitud[0].unEstado.IdEstadoSolicDetalle;
 
+
+            //Traigo categorias para dps filtrar por hard o soft
+            BLLCategoria ManagerCategoria = new BLLCategoria();
+            unasCategoriasHard = new List<Categoria>();
+            unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHard();
+            unasCategoriasSoft = new List<Categoria>();
+            unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
+
+            unosAgentesAsociados = new List<Agente>();
+
         }
 
 
@@ -228,7 +246,10 @@ namespace ARTEC.GUI
                 //Para obtener el detalle en donde se hizo click
                 //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
                 int DetalleSeleccionado = e.RowIndex + 1;
-                SolicDetalle unDetSolic = new SolicDetalle();
+                unDetSolic = new SolicDetalle();
+                txtBien.ReadOnly = true;
+
+                //VER:Al eliminar un detalle quedan mal enumerados
 
                 unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
 
@@ -334,6 +355,295 @@ namespace ARTEC.GUI
             frmBienAsignar unFrmBienAsignar = new frmBienAsignar(SolicAsignar);
             unFrmBienAsignar.Show();
         }
+
+        private void btnNuevoDetalle_Click(object sender, EventArgs e)
+        {
+            unDetSolic = null;
+            txtBien.ReadOnly = false;
+            gboxAsociados.Enabled = false;
+            txtCantBien.ReadOnly = false;
+            lblCantidad.Enabled = true;
+            cboTipoBien.SelectedIndex = (int)Hardware.elTipoBien.Hardware-1;
+            txtBien.Clear();
+            AuxTipoCategoria = 1;
+            txtCantBien.Clear();
+            txtAgente.Clear();
+            unAgen = null;
+            grillaAgentesAsociados.DataSource = null;
+            cboEstadoSolDetalle.SelectedIndex = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente-1;
+            
+        }
+
+
+        /// <summary>
+        /// Habilitar Controles según Hard/Soft
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void cboTipoBien_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            //Quita los msjs de validación
+            validAgenteAsoc.ClearFailedValidations();
+
+            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            {
+                gboxAsociados.Enabled = false;
+                txtCantBien.ReadOnly = false;
+                lblCantidad.Enabled = true;
+                txtBien.Clear();
+                AuxTipoCategoria = 1;
+                txtCantBien.Clear();
+                txtAgente.Clear();
+                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                grillaAgentesAsociados.DataSource = null;
+            }
+            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            {
+                gboxAsociados.Enabled = true;
+                txtCantBien.ReadOnly = true;
+                lblCantidad.Enabled = false;
+                txtBien.Clear();
+                txtCantBien.Clear();
+                AuxTipoCategoria = 2;
+            }
+        }
+
+
+
+        //Busqueda Dinamica BIENES(CATEGORIAS)
+        private void txtBien_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+
+                List<Categoria> resCat = new List<Categoria>();
+                //Traigo las categorias de Hard
+                if (AuxTipoCategoria == 1)
+                {
+                    resCat = (List<Categoria>)unasCategoriasHard.ToList();
+                }
+                //Traigo las categorias de Soft
+                else
+                {
+                    resCat = (List<Categoria>)unasCategoriasSoft.ToList();
+                }
+
+
+                List<string> Palabras = new List<string>();
+                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtBien.Text, ' ');
+
+                foreach (string unaPalabra in Palabras)
+                {
+                    resCat = (List<Categoria>)(from cat in resCat
+                                               where cat.DescripCategoria.ToLower().Contains(unaPalabra.ToLower())
+                                               select cat).ToList();
+                }
+
+                if (resCat.Count > 0)
+                {
+                    if (resCat.Count == 1 && string.Equals(resCat.First().DescripCategoria, txtBien.Text))
+                    {
+                        cboBien.Visible = false;
+                        cboBien.DroppedDown = false;
+                        cboBien.DataSource = null;
+                    }
+                    else
+                    {
+                        cboBien.DataSource = null;
+                        cboBien.DataSource = resCat;
+                        cboBien.DisplayMember = "DescripCategoria";
+                        cboBien.ValueMember = "IdCategoria";
+                        cboBien.Visible = true;
+                        cboBien.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+                else
+                {
+                    cboBien.Visible = false;
+                    cboBien.DroppedDown = false;
+                    cboBien.DataSource = null;
+                }
+            }
+            else
+            {
+                cboBien.Visible = false;
+                cboBien.DroppedDown = false;
+                cboBien.DataSource = null;
+            }
+        }
+
+
+
+        private void cboBien_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+                if (cboBien.SelectedIndex > -1)
+                {
+                    ComboBox cbo2 = (ComboBox)sender;
+                    unaCat = new Categoria();
+                    unaCat = (Categoria)cbo2.SelectedItem;
+
+                    txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    txtBien.SelectionStart = txtBien.Text.Length + 1;
+                    //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
+                    //validBien.Validate();
+                }
+            }
+        }
+
+
+
+        //Busqueda Dinamica Agentes por Dependencia
+        private void txtAgente_TextChanged(object sender, EventArgs e)
+        {
+            //if (ValidDep2.Validate())
+            //{
+                if (!string.IsNullOrWhiteSpace(txtAgente.Text) & unosAgentes != null)
+                {
+
+                    List<Agente> resAgente = new List<Agente>();
+                    resAgente = (List<Agente>)unosAgentes.ToList();
+                    List<string> Palabras = new List<string>();
+                    Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
+
+                    foreach (string unaPalabra in Palabras)
+                    {
+                        resAgente = (List<Agente>)(from cat in resAgente
+                                                   where cat.ApellidoAgente.ToLower().Contains(unaPalabra.ToLower())
+                                                   select cat).ToList();
+                    }
+
+                    if (resAgente.Count > 0)
+                    {
+                        if (resAgente.Count == 1 && string.Equals(resAgente.First().ApellidoAgente, txtAgente.Text))
+                        {
+                            cboAgentesAsociados.Visible = false;
+                            cboAgentesAsociados.DroppedDown = false;
+                            cboAgentesAsociados.DataSource = null;
+                        }
+                        else
+                        {
+                            cboAgentesAsociados.DataSource = null;
+                            cboAgentesAsociados.DataSource = resAgente;
+                            cboAgentesAsociados.DisplayMember = "ApellidoAgente";
+                            cboAgentesAsociados.ValueMember = "IdAgente";
+                            cboAgentesAsociados.Visible = true;
+                            cboAgentesAsociados.DroppedDown = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                    else
+                    {
+                        cboAgentesAsociados.Visible = false;
+                        cboAgentesAsociados.DroppedDown = false;
+                        cboAgentesAsociados.DataSource = null;
+                        //unAgen = null; // GUARDA
+                    }
+                }
+                else
+                {
+                    cboAgentesAsociados.Visible = false;
+                    cboAgentesAsociados.DroppedDown = false;
+                    cboAgentesAsociados.DataSource = null;
+                }
+            //}
+
+        }
+
+
+
+        //Al seleccionar un AGENTE del combo, guarda el IdAgente, el apellido y cierra el combo
+        private void cboAgentesAsociados_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtAgente.Text))
+            {
+                if (cboAgentesAsociados.SelectedIndex > -1)
+                {
+                    ComboBox cbo3 = (ComboBox)sender;
+                    unAgen = new Agente();
+                    unAgen = (Agente)cbo3.SelectedItem;
+
+                    txtAgente.Text = cbo3.GetItemText(cbo3.SelectedItem);
+                    txtAgente.SelectionStart = txtAgente.Text.Length + 1;
+                }
+            }
+        }
+
+
+
+        //Asociar Agentes al software ingresado
+        private void btnAsociarAgente_Click(object sender, EventArgs e)//VALIDAR QUE NO DEJE AGREGARDETALLE SI NO HAY UN AGENTE ASOCIADO
+        {
+                //if (validAgenteAsoc.Validate())
+                //{
+                    //int CantSuma = 0;
+                    if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
+                    {
+                        //CantSuma = Int32.Parse(txtCantBien.Text);
+                    }
+
+                    if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
+                    //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
+                    {
+
+                        var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
+                        if (resultado.Count() > 0)
+                        {
+                            MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                        }
+                        else
+                        {
+                            unosAgentesAsociados.Add(unAgen);
+                            //CantSuma += 1;
+                            //txtCantBien.Text = CantSuma.ToString();
+                            txtCantBien.Text = unosAgentesAsociados.Count().ToString();
+                        }
+                    }
+                    else
+                    {
+                        unosAgentesAsociados.Add(unAgen);
+                        //CantSuma += 1;
+                        //txtCantBien.Text = CantSuma.ToString();
+                        txtCantBien.Text = unosAgentesAsociados.Count().ToString();
+                    }
+
+                    grillaAgentesAsociados.DataSource = null;
+                    grillaAgentesAsociados.DataSource = unosAgentesAsociados;
+                    grillaAgentesAsociados.Columns[0].Visible = false;
+                    grillaAgentesAsociados.Columns[3].Visible = false;
+                    grillaAgentesAsociados.Columns[4].Visible = false;
+                //}
+                //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+                validCantBien.Validate();
+
+        }
+
+        private void EventValidTxtCantBien(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtCantBien.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
+
+        private void txtAgregarDetalle_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+
+
+
+
+
+
 
 
 

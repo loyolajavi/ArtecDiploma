@@ -25,5 +25,13 @@ namespace ARTEC.ENTIDADES
         {
             return this.DescripEstadoSolic;
         }
+
+
+
+
+
+
+
+
     }
 }
