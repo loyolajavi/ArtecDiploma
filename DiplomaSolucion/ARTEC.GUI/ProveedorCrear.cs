@@ -101,8 +101,9 @@ namespace ARTEC.GUI
                     ComboBox cbo2 = (ComboBox)sender;
                     unaCat = new Categoria();
                     unaCat = (Categoria)cbo2.SelectedItem;
-
+                    this.txtProducto.TextChanged -= new System.EventHandler(this.txtProducto_TextChanged);
                     txtProducto.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    this.txtProducto.TextChanged += new System.EventHandler(this.txtProducto_TextChanged);
                     txtProducto.SelectionStart = txtProducto.Text.Length + 1;
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
                     //validBien.Validate(); //AGREGARLA

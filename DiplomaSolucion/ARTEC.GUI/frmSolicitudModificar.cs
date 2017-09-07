@@ -37,6 +37,7 @@ namespace ARTEC.GUI
         List<Agente> unosAgentes;
         Agente unAgen;
         //Estos son para cargar mas detallesFIN
+        int ContDetalles = 0;
 
         public frmSolicitudModificar(Solicitud unaSolic)
         {
@@ -105,11 +106,26 @@ namespace ARTEC.GUI
             cboAsignado.ValueMember = "IdUsuario";
             cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
 
+            //Traer los agentes de la dependencia seleccionada
+            BLLDependencia managerDependenciaAg = new BLLDependencia();
+            unosAgentes = new List<Agente>();
+            unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaSolicitud.laDependencia.IdDependencia);
+
+
+            unosAgentesResp = new List<Agente>();
+            unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
+            cboAgenteResp.DataSource = null;
+            cboAgenteResp.DataSource = unosAgentesResp;
+            cboAgenteResp.DisplayMember = "ApellidoAgente";
+            cboAgenteResp.ValueMember = "IdAgente";
+
             //Agrega los detalles
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             grillaDetalles.Columns[1].Visible = false;
+            //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
+            ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
 
             //Agrega el conteo de cotizaciones por detalle
             BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
@@ -201,14 +217,17 @@ namespace ARTEC.GUI
                 grillaDetalles.Columns.Remove("txtCotizConteo");
                 grillaDetalles.Columns.Remove("btnDinCotizar");
 
+                //Obtengo el Nro IDDetalle que se borrará
+                int NroDetBorrado = unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle;
+
                 //elimino de la memoria el detalle
                 unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
 
                 //Conteo de detalles
-                int NroAux = 0;
                 foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
                 {
-                    Det2.IdSolicitudDetalle = NroAux + 1;
+                    if (Det2.IdSolicitudDetalle > NroDetBorrado)
+                        Det2.IdSolicitudDetalle--;
                 }
                 //Regenero la grilla
                 grillaDetalles.DataSource = null;
@@ -384,6 +403,8 @@ namespace ARTEC.GUI
         {
             //Quita los msjs de validación
             validAgenteAsoc.ClearFailedValidations();
+            validBien.ClearFailedValidations();
+            validCantBien.ClearFailedValidations();
 
             if ((int)cboTipoBien.SelectedValue == 1)//Hardware
             {
@@ -484,11 +505,12 @@ namespace ARTEC.GUI
                     ComboBox cbo2 = (ComboBox)sender;
                     unaCat = new Categoria();
                     unaCat = (Categoria)cbo2.SelectedItem;
-
+                    this.txtBien.TextChanged -= new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
-                    //validBien.Validate();
+                    validBien.Validate();
                 }
             }
         }
@@ -564,8 +586,9 @@ namespace ARTEC.GUI
                     ComboBox cbo3 = (ComboBox)sender;
                     unAgen = new Agente();
                     unAgen = (Agente)cbo3.SelectedItem;
-
+                    this.txtAgente.TextChanged -= new System.EventHandler(this.txtAgente_TextChanged);
                     txtAgente.Text = cbo3.GetItemText(cbo3.SelectedItem);
+                    this.txtAgente.TextChanged += new System.EventHandler(this.txtAgente_TextChanged);
                     txtAgente.SelectionStart = txtAgente.Text.Length + 1;
                 }
             }
@@ -576,8 +599,8 @@ namespace ARTEC.GUI
         //Asociar Agentes al software ingresado
         private void btnAsociarAgente_Click(object sender, EventArgs e)//VALIDAR QUE NO DEJE AGREGARDETALLE SI NO HAY UN AGENTE ASOCIADO
         {
-                //if (validAgenteAsoc.Validate())
-                //{
+                if (validAgenteAsoc.Validate())
+                {
                     //int CantSuma = 0;
                     if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
                     {
@@ -614,7 +637,7 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[0].Visible = false;
                     grillaAgentesAsociados.Columns[3].Visible = false;
                     grillaAgentesAsociados.Columns[4].Visible = false;
-                //}
+                }
                 //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
                 validCantBien.Validate();
 
@@ -632,10 +655,223 @@ namespace ARTEC.GUI
             }
         }
 
-        private void txtAgregarDetalle_Click(object sender, EventArgs e)
+        private void btnAgregarDetalle_Click(object sender, EventArgs e)
+        {
+            if (validBien.Validate())
+            {
+                SolicDetalle unDetalleSolicitud = new SolicDetalle();
+                unDetalleSolicitud.unaCategoria = unaCat;
+
+                if (validCantBien.Validate())
+                {
+                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+
+                    //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
+                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
+                    {
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                        if (hhh != null)
+                        {
+                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            {
+                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
+                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
+                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();// += unDetalleSolicitud.Cantidad;
+                            }
+                            else
+                            {
+                                hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                            }
+                            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                            grillaDetalles.Columns.Remove("btnDinBorrar");
+                            grillaDetalles.Columns.Remove("txtCotizConteo");
+                            grillaDetalles.Columns.Remove("btnDinCotizar");
+
+                            ////Conteo de detalles ANTIGUO
+                            //int NroAux = 0;
+                            //foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+                            //{
+                            //    Det2.IdSolicitudDetalle = NroAux + 1;
+                            //} ANTIGUOFIN
+
+                            //Regenero la grilla
+                            grillaDetalles.DataSource = null;
+                            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                            grillaDetalles.Columns[1].Visible = false;
+                            //Vuelve a agregar el conteo de cotizaciones por detalle
+                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                            ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                            foreach (DataGridViewRow item in grillaDetalles.Rows)
+                            {
+                                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                            }
+
+                            //Vuelve a agregar boton para la gestión de cotizaciones
+                            var botonCotizar = new DataGridViewButtonColumn();
+                            botonCotizar.Name = "btnDinCotizar";
+                            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                            botonCotizar.UseColumnTextForButtonValue = true;
+                            grillaDetalles.Columns.Add(botonCotizar);
+
+                            //Vuelve a agregar el botón de borrar al final
+                            var deleteButton = new DataGridViewButtonColumn();
+                            deleteButton.Name = "btnDinBorrar";
+                            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.UseColumnTextForButtonValue = true;
+                            grillaDetalles.Columns.Add(deleteButton);
+                        }
+                        else
+                        {
+                            AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        }
+                    }
+                    else
+                    {
+                        BLLPolitica ManagerPolitica = new BLLPolitica();
+                        if (ManagerPolitica.VerificarPolitica(unaSolicitud.laDependencia.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
+                        {
+                            AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        }
+                        else
+                        {
+                            DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                            if (resmbox == DialogResult.Yes)
+                            {
+                                AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                            }
+                            else
+                            {
+                                //FIJARME SI HAY QUE RESETEAR ALGO
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+
+        private void AgregarDetalleConfirmado(ref SolicDetalle unDetSolic)
         {
 
+            //Conteo Detalles
+            ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
+            unDetSolic.IdSolicitudDetalle = ++ContDetalles;
 
+            if (AuxTipoCategoria == 2)//Categoria de Software
+            {
+                unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
+                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
+            }
+            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;//GUARDA REVISAR ESTO en soft tmb
+            unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
+            unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
+
+
+
+
+            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            grillaDetalles.Columns.Remove("btnDinBorrar");
+            grillaDetalles.Columns.Remove("txtCotizConteo");
+            grillaDetalles.Columns.Remove("btnDinCotizar");
+
+            ////Conteo de detalles ANTIGUO
+            //int NroAux = 0;
+            //foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+            //{
+            //    Det2.IdSolicitudDetalle = NroAux + 1;
+            //} ANTIGUOFIN
+
+            //Regenero la grilla
+            grillaDetalles.DataSource = null;
+            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+            grillaDetalles.Columns[1].Visible = false;
+            //Vuelve a agregar el conteo de cotizaciones por detalle
+            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+            ColumnaCotizacionConteo.Name = "txtCotizConteo";
+            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            {
+                if (unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones == null)
+                    unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones = new List<Cotizacion>();
+                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+            }
+
+            //Vuelve a agregar boton para la gestión de cotizaciones
+            var botonCotizar = new DataGridViewButtonColumn();
+            botonCotizar.Name = "btnDinCotizar";
+            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            botonCotizar.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(botonCotizar);
+
+            //Vuelve a agregar el botón de borrar al final
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(deleteButton);
+        }
+
+
+
+
+        private void EventValidTxtBien(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBien.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                if (unaCat != null && string.Equals(e.ControlToValidate.Text, unaCat.DescripCategoria))
+                {
+                    e.IsValid = true;
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
+            }
+        }
+
+        private void EventTxtAgenteAsoc(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtAgente.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                if (unAgen != null)
+                {
+                    if (string.Equals(e.ControlToValidate.Text, unAgen.ApellidoAgente))
+                    {
+                        e.IsValid = true;
+                    }
+                    else
+                    {
+                        e.IsValid = false;
+                    }
+                }
+                else
+                {
+                    e.IsValid = false;
+                }
+            }
         }
 
 

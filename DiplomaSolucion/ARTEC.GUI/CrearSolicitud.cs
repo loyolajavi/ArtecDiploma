@@ -58,9 +58,7 @@ namespace ARTEC.GUI
                 if (validCantBien.Validate())
                 {
 
-                    //VER:FALLA LA VALIDACION DE SI HAY DETALLE DE UN BIEN AGREGADO Y SE AGREGA DE NUEVO PARA SOFT CUANDO YA HAY UN DETALLE, AL AGREGAR OTRO AGENTE Y PONER AGREGAR EN VEZZ DE SUMAR UNO SUMA 2 (SUMA TMB AL QUE YA TIENE ESE SOFT SOLICITADO)
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
-
 
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
                     if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
@@ -466,8 +464,9 @@ namespace ARTEC.GUI
                     ComboBox cbo2 = (ComboBox)sender;
                     unaCat = new Categoria();
                     unaCat = (Categoria)cbo2.SelectedItem;
-
+                    this.txtBien.TextChanged -= new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
                     validBien.Validate();
@@ -546,8 +545,9 @@ namespace ARTEC.GUI
                     ComboBox cbo3 = (ComboBox)sender;
                     unAgen = new Agente();
                     unAgen = (Agente)cbo3.SelectedItem;
-
+                    this.txtAgente.TextChanged -= new System.EventHandler(this.txtAgente_TextChanged);
                     txtAgente.Text = cbo3.GetItemText(cbo3.SelectedItem);
+                    this.txtAgente.TextChanged += new System.EventHandler(this.txtAgente_TextChanged);
                     txtAgente.SelectionStart = txtAgente.Text.Length + 1;
                 }
             }
