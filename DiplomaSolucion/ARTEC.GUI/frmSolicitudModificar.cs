@@ -213,7 +213,7 @@ namespace ARTEC.GUI
                 return;
             }
 
-            //Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
+            //VER:Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
 
@@ -265,25 +265,26 @@ namespace ARTEC.GUI
                 deleteButton.UseColumnTextForButtonValue = true;
                 grillaDetalles.Columns.Add(deleteButton);
             }
-            else //si hizo click en cualquier otro lado, muestra los datos del detalle en el "formulario"
+            else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
             {
+                //Muestro boton modificar y oculto el de crear
+                btnModificar.Visible = true;
+                btnAgregarDetalle.Visible = false;
+                cboTipoBien.Enabled = false;
                 //Para obtener el detalle en donde se hizo click
                 //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
                 int DetalleSeleccionado = e.RowIndex + 1;
                 unDetSolic = new SolicDetalle();
                 txtBien.ReadOnly = true;
 
-                //VER:Al eliminar un detalle quedan mal enumerados
-
                 unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
 
                 txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+                unaCat = unDetSolic.unaCategoria;
                 txtCantBien.Text = unDetSolic.Cantidad.ToString();
 
                 cboEstadoSolDetalle.SelectedValue = unDetSolic.unEstado.IdEstadoSolicDetalle;
 
-                //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
-                //unaCat = unDetSolic.unaCategoria;VER**********************************
                 unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
 
                 if (unTipoBienAux.IdTipoBien == 1)
@@ -320,10 +321,11 @@ namespace ARTEC.GUI
                     frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones, unDetSolic);
                     UnFrmCotizaciones.EventoActualizarDetalles += new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud);
                     UnFrmCotizaciones.Show();
-
                 }
             }
         }
+
+
 
         public void ActualizarDetallesSolicitud(List<Cotizacion> unasCotiza)
         {
@@ -354,6 +356,8 @@ namespace ARTEC.GUI
             }
         }
 
+
+
         private void btnBienAsignar_Click(object sender, EventArgs e)
         {
 
@@ -380,8 +384,14 @@ namespace ARTEC.GUI
             unFrmBienAsignar.Show();
         }
 
+
+
         private void btnNuevoDetalle_Click(object sender, EventArgs e)
         {
+            //Muestro el boton para agregar detalles y oculto el que modifica
+            btnAgregarDetalle.Visible = true;
+            btnModificar.Visible = false;
+            cboTipoBien.Enabled = true;
             unDetSolic = null;
             txtBien.ReadOnly = false;
             gboxAsociados.Enabled = false;
@@ -395,7 +405,6 @@ namespace ARTEC.GUI
             unAgen = null;
             grillaAgentesAsociados.DataSource = null;
             cboEstadoSolDetalle.SelectedIndex = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente-1;
-            
         }
 
 
@@ -964,6 +973,99 @@ namespace ARTEC.GUI
             else
             {
                 e.IsValid = true;
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (validBien.Validate())
+            {
+                SolicDetalle unDetalleSolicitud = new SolicDetalle();
+                unDetalleSolicitud.unaCategoria = unaCat;
+
+                if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
+                {
+                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+
+                    //Verifica si ya hay un detalle para modificarle la cantidad (en Agregar es sumar) y así no haya Bienes repetidos en distintos detalles
+                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
+                    {
+                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                        if (hhh != null)
+                        {
+                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            {
+                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
+                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
+                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();
+                            }
+                            else
+                            {
+                                hhh.Widget.Cantidad = Int32.Parse(txtCantBien.Text);
+                            }
+                            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                            grillaDetalles.Columns.Remove("btnDinBorrar");
+                            grillaDetalles.Columns.Remove("txtCotizConteo");
+                            grillaDetalles.Columns.Remove("btnDinCotizar");
+
+                            //Regenero la grilla
+                            grillaDetalles.DataSource = null;
+                            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                            grillaDetalles.Columns[1].Visible = false;
+                            //Vuelve a agregar el conteo de cotizaciones por detalle
+                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                            ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                            foreach (DataGridViewRow item in grillaDetalles.Rows)
+                            {
+                                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                            }
+
+                            //Vuelve a agregar boton para la gestión de cotizaciones
+                            var botonCotizar = new DataGridViewButtonColumn();
+                            botonCotizar.Name = "btnDinCotizar";
+                            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                            botonCotizar.UseColumnTextForButtonValue = true;
+                            grillaDetalles.Columns.Add(botonCotizar);
+
+                            //Vuelve a agregar el botón de borrar al final
+                            var deleteButton = new DataGridViewButtonColumn();
+                            deleteButton.Name = "btnDinBorrar";
+                            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.UseColumnTextForButtonValue = true;
+                            grillaDetalles.Columns.Add(deleteButton);
+                        }
+                        //else
+                        //{
+                        //    AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        //}
+                    }
+                    //else
+                    //{
+                    //    BLLPolitica ManagerPolitica = new BLLPolitica();
+                    //    if (ManagerPolitica.VerificarPolitica(unaSolicitud.laDependencia.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
+                    //    {
+                    //        AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                    //    }
+                    //    else
+                    //    {
+                    //        DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                    //        if (resmbox == DialogResult.Yes)
+                    //        {
+                    //            AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                    //        }
+                    //        else
+                    //        {
+                    //            //FIJARME SI HAY QUE RESETEAR ALGO
+                    //        }
+                    //    }
+                    //}
+                }
             }
         }
 
