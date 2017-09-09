@@ -111,6 +111,14 @@ namespace ARTEC.GUI
             cboAsignado.ValueMember = "IdUsuario";
         }
 
+        private void txtDep_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnBuscar_Click(this, new EventArgs());
+            }
+        }
+
 
 
 

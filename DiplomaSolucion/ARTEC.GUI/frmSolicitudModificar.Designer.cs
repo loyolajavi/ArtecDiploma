@@ -98,6 +98,7 @@ namespace ARTEC.GUI
             this.errorProvider5 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter5 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.validNota = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customValidTxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.panel1.SuspendLayout();
@@ -205,6 +206,7 @@ namespace ARTEC.GUI
             this.btnNotas.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNotas.TabIndex = 10;
             this.btnNotas.Text = "Agregar";
+            this.btnNotas.Click += new System.EventHandler(this.btnNotas_Click);
             // 
             // GrillaNotas
             // 
@@ -239,6 +241,7 @@ namespace ARTEC.GUI
     "}\r\n\\viewkind4\\uc1\\pard\\f0\\fs17\\par\r\n}\r\n";
             this.txtNota.Size = new System.Drawing.Size(832, 27);
             this.txtNota.TabIndex = 8;
+            this.validNota.SetValidator1(this.txtNota, this.customValidTxtNota);
             // 
             // txtFechaFin
             // 
@@ -445,6 +448,9 @@ namespace ARTEC.GUI
             this.pnlAdjuntos.Name = "pnlAdjuntos";
             this.pnlAdjuntos.Size = new System.Drawing.Size(601, 104);
             this.pnlAdjuntos.TabIndex = 7;
+            this.pnlAdjuntos.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragDrop);
+            this.pnlAdjuntos.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragEnter);
+            this.pnlAdjuntos.DragLeave += new System.EventHandler(this.pnlAdjuntos_DragLeave);
             // 
             // lstAdjuntos
             // 
@@ -884,7 +890,7 @@ namespace ARTEC.GUI
             this.btnSoliitarPartida.TabIndex = 7;
             this.btnSoliitarPartida.Text = "btnSoliitarPartida";
             this.btnSoliitarPartida.UseVisualStyleBackColor = true;
-            this.btnSoliitarPartida.Click += new System.EventHandler(this.button1_Click);
+            this.btnSoliitarPartida.Click += new System.EventHandler(this.btnSoliitarPartida_Click);
             // 
             // btnBienAsignar
             // 
@@ -953,6 +959,12 @@ namespace ARTEC.GUI
             // 
             this.validNota.ErrorProvider = this.errorProvider6;
             this.validNota.Highlighter = this.highlighter6;
+            // 
+            // customValidTxtNota
+            // 
+            this.customValidTxtNota.ErrorMessage = "Your error message here.";
+            this.customValidTxtNota.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customValidTxtNota.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventValidtxtNota);
             // 
             // errorProvider6
             // 
@@ -1058,5 +1070,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.CustomValidator customValidtxtCantBien;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidtxtBien;
         private DevComponents.DotNetBar.Validator.CustomValidator customValidTxtAgenteAsoc;
+        private DevComponents.DotNetBar.Validator.CustomValidator customValidTxtNota;
     }
 }

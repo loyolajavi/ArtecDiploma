@@ -39,6 +39,11 @@ namespace ARTEC.GUI
         //Estos son para cargar mas detallesFIN
         int ContDetalles = 0;
 
+        List<string> unosAdjuntos = new List<string>();
+        List<Nota> unasNotas = new List<Nota>();
+
+
+
         public frmSolicitudModificar(Solicitud unaSolic)
         {
             InitializeComponent();
@@ -336,7 +341,7 @@ namespace ARTEC.GUI
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSoliitarPartida_Click(object sender, EventArgs e)
         {
             if (unaSolicitud.unosDetallesSolicitud.Where(x => x.unasCotizaciones.Count() >= 3).Count() == unaSolicitud.unosDetallesSolicitud.Count())
             {
@@ -405,6 +410,7 @@ namespace ARTEC.GUI
             validAgenteAsoc.ClearFailedValidations();
             validBien.ClearFailedValidations();
             validCantBien.ClearFailedValidations();
+            txtBien.ReadOnly = false;
 
             if ((int)cboTipoBien.SelectedValue == 1)//Hardware
             {
@@ -662,7 +668,7 @@ namespace ARTEC.GUI
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
                 unDetalleSolicitud.unaCategoria = unaCat;
 
-                if (validCantBien.Validate())
+                if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
                 {
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
 
@@ -828,7 +834,6 @@ namespace ARTEC.GUI
 
 
 
-
         private void EventValidTxtBien(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtBien.Text))
@@ -847,6 +852,8 @@ namespace ARTEC.GUI
                 }
             }
         }
+
+
 
         private void EventTxtAgenteAsoc(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
         {
@@ -875,6 +882,90 @@ namespace ARTEC.GUI
         }
 
 
+
+        //Estilo que se aplica cuando se arrastra un archivo a pnlAdjuntos
+        private void pnlAdjuntos_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+            pnlAdjuntos.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+
+        //Copiar el archivo
+        private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
+        {
+            if (unosAdjuntos.Count > 2)
+            {
+                MessageBox.Show("No pueden adjuntarse más de 3 archivos");
+            }
+            else
+            {
+                //Agarro la ruta de los archivos arrastrados
+                string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                foreach (var item in unArchivo)
+                {
+                    //Agarro el nombre del archivo
+                    string NombreArchivo = Path.GetFileName(item);
+                    if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(item))
+                    {
+                        //Copio el archivo
+                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
+                        pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+
+                        //Añado a la grilla el nombre del archivo
+                        unosAdjuntos.Add(NombreArchivo);
+
+                        lstAdjuntos.DataSource = null;
+                        lstAdjuntos.DataSource = unosAdjuntos;
+
+                        //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                    }
+                }
+            }
+        }
+
+
+
+        //Estilo que se aplica cuando se sale de pnladjuntos (en el evento de arrastrar archivos)
+        private void pnlAdjuntos_DragLeave(object sender, EventArgs e)
+        {
+            pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+
+
+        private void btnNotas_Click(object sender, EventArgs e)
+        {
+            if (validNota.Validate())
+            {
+                Nota unaNota = new Nota();
+                unaNota.FechaNota = DateTime.Now;
+                unaNota.DescripNota = txtNota.Text;
+                unasNotas.Add(unaNota);
+                GrillaNotas.DataSource = null;
+                GrillaNotas.DataSource = unasNotas;
+                GrillaNotas.Columns[0].Visible = false;
+            }
+        }
+
+
+
+        private void EventValidtxtNota(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNota.Text))
+            {
+                e.IsValid = false;
+            }
+            else
+            {
+                e.IsValid = true;
+            }
+        }
 
 
 
