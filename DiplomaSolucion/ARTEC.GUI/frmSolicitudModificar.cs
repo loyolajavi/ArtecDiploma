@@ -201,7 +201,29 @@ namespace ARTEC.GUI
 
             unosAgentesAsociados = new List<Agente>();
 
+            grillaDetallesFormatoAplicar();
+
         }
+
+
+
+        public void grillaDetallesFormatoAplicar()
+        {
+            //Formato de la grillaDetalles
+            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].HeaderText = "#";
+            grillaDetalles.Columns["unaCategoria"].HeaderText = "Bien";
+            grillaDetalles.Columns["unEstado"].HeaderText = "Estado";
+            //grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //grillaDetalles.Columns[4].Width = 80;
+            //grillaDetalles.Columns[4].HeaderText = "Estado";
+            grillaDetalles.Columns["Seleccionado"].Visible = false;
+            grillaDetalles.Columns["txtCotizConteo"].HeaderText = "Cotizaciones";
+        }
+
+
 
 
         //*************FALTA ELIMINAR EL DETALLE DE LA BD SI SE CONFIRMA EL CAMBIO
@@ -264,6 +286,8 @@ namespace ARTEC.GUI
                 deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                 deleteButton.UseColumnTextForButtonValue = true;
                 grillaDetalles.Columns.Add(deleteButton);
+
+                grillaDetallesFormatoAplicar();
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
             {
@@ -742,6 +766,8 @@ namespace ARTEC.GUI
                             deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                             deleteButton.UseColumnTextForButtonValue = true;
                             grillaDetalles.Columns.Add(deleteButton);
+
+                            grillaDetallesFormatoAplicar();
                         }
                         else
                         {
@@ -839,6 +865,8 @@ namespace ARTEC.GUI
             deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetalles.Columns.Add(deleteButton);
+
+            grillaDetallesFormatoAplicar();
         }
 
 
@@ -1039,6 +1067,8 @@ namespace ARTEC.GUI
                             deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                             deleteButton.UseColumnTextForButtonValue = true;
                             grillaDetalles.Columns.Add(deleteButton);
+
+                            grillaDetallesFormatoAplicar();
                         }
                         //else
                         //{
