@@ -128,7 +128,7 @@ namespace ARTEC.GUI
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            grillaDetalles.Columns[1].Visible = false;
+            //grillaDetalles.Columns[1].Visible = false;
             //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
 
@@ -214,6 +214,7 @@ namespace ARTEC.GUI
             grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             grillaDetalles.Columns[0].HeaderText = "#";
+            grillaDetalles.Columns[1].Visible = false;
             grillaDetalles.Columns["unaCategoria"].HeaderText = "Bien";
             grillaDetalles.Columns["unEstado"].HeaderText = "Estado";
             //grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -259,7 +260,7 @@ namespace ARTEC.GUI
                 //Regenero la grilla
                 grillaDetalles.DataSource = null;
                 grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                grillaDetalles.Columns[1].Visible = false;
+                //grillaDetalles.Columns[1].Visible = false;
                 //Vuelve a agregar el conteo de cotizaciones por detalle
                 BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                 DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
@@ -739,7 +740,7 @@ namespace ARTEC.GUI
                             //Regenero la grilla
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                            grillaDetalles.Columns[1].Visible = false;
+                            //grillaDetalles.Columns[1].Visible = false;
                             //Vuelve a agregar el conteo de cotizaciones por detalle
                             BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
@@ -836,7 +837,7 @@ namespace ARTEC.GUI
             //Regenero la grilla
             grillaDetalles.DataSource = null;
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            grillaDetalles.Columns[1].Visible = false;
+            //grillaDetalles.Columns[1].Visible = false;
             //Vuelve a agregar el conteo de cotizaciones por detalle
             BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
@@ -1040,7 +1041,7 @@ namespace ARTEC.GUI
                             //Regenero la grilla
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                            grillaDetalles.Columns[1].Visible = false;
+                            //grillaDetalles.Columns[1].Visible = false;
                             //Vuelve a agregar el conteo de cotizaciones por detalle
                             BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
@@ -1097,6 +1098,24 @@ namespace ARTEC.GUI
                     //}
                 }
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            grillaDetalles.Columns.Remove("btnDinBorrar");
+            grillaDetalles.Columns.Remove("txtCotizConteo");
+            grillaDetalles.Columns.Remove("btnDinCotizar");
+            grillaDetalles.DataSource = null;
+            frmSolicitudModificar_Load(this, new EventArgs());
+            txtBien.Clear();
+            txtCantBien.Clear();
+            txtNota.Clear();
+            GrillaNotas.DataSource = null;
+            unosAdjuntos.Clear();
+            unasNotas.Clear();
+            GrillaAdjuntos.DataSource = null;
+
         }
 
 
