@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ARTEC.ENTIDADES
 {
-    public  abstract class Inventario
+    public abstract class Inventario
     {
 
         public int IdInventario { get; set; }
@@ -18,6 +18,11 @@ namespace ARTEC.ENTIDADES
         public PartidaDetalle PartidaDetalleAsoc { get; set; }
 
         public decimal Costo { get; set; }
+
+        public Deposito unDeposito { get; set; }
+        public Adquisicion unaAdquisicion { get; set; }
+        
+        public int TipoBien { get; set; }
     }
   
 }

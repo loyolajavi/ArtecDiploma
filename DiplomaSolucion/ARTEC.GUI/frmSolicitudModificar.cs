@@ -386,27 +386,37 @@ namespace ARTEC.GUI
         private void btnBienAsignar_Click(object sender, EventArgs e)
         {
 
-            Solicitud SolicAsignar = new Solicitud();
-            SolicAsignar.AgenteResp = unaSolicitud.AgenteResp;
-            SolicAsignar.Asignado = unaSolicitud.Asignado;
-            SolicAsignar.FechaFin = unaSolicitud.FechaFin;
-            SolicAsignar.FechaInicio = unaSolicitud.FechaInicio;
-            SolicAsignar.IdSolicitud = unaSolicitud.IdSolicitud;
-            SolicAsignar.laDependencia = unaSolicitud.laDependencia;
-            SolicAsignar.UnaPrioridad = unaSolicitud.UnaPrioridad;
-            SolicAsignar.unasNotas = unaSolicitud.unasNotas;
-            SolicAsignar.UnEstado = unaSolicitud.UnEstado;
+            BLLInventario ManagerInventario = new BLLInventario();
+            if ((ManagerInventario.InventariosTraerListosParaAsignar(unaSolicitud.IdSolicitud)).Count() > 0)
+            {
+                Solicitud SolicAsignar = new Solicitud();
+                SolicAsignar.AgenteResp = unaSolicitud.AgenteResp;
+                SolicAsignar.Asignado = unaSolicitud.Asignado;
+                SolicAsignar.FechaFin = unaSolicitud.FechaFin;
+                SolicAsignar.FechaInicio = unaSolicitud.FechaInicio;
+                SolicAsignar.IdSolicitud = unaSolicitud.IdSolicitud;
+                SolicAsignar.laDependencia = unaSolicitud.laDependencia;
+                SolicAsignar.UnaPrioridad = unaSolicitud.UnaPrioridad;
+                SolicAsignar.unasNotas = unaSolicitud.unasNotas;
+                SolicAsignar.UnEstado = unaSolicitud.UnEstado;
 
-            foreach (var unDetSolic in unaSolicitud.unosDetallesSolicitud)
-	        {
-                //if (unDetSolic.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
-                //{
-                    SolicAsignar.unosDetallesSolicitud.Add(unDetSolic); 
-                //}
-	        }
+                foreach (var unDetSolic in unaSolicitud.unosDetallesSolicitud)
+                {
+                    //if (unDetSolic.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                    //{
+                    SolicAsignar.unosDetallesSolicitud.Add(unDetSolic);
+                    //}
+                }
 
-            frmBienAsignar unFrmBienAsignar = new frmBienAsignar(SolicAsignar);
-            unFrmBienAsignar.Show();
+                frmBienAsignar unFrmBienAsignar = new frmBienAsignar(SolicAsignar);
+                unFrmBienAsignar.Show();
+            }
+            else
+            {
+                //VER: Traduccion
+                MessageBox.Show("No hay bienes listos para ser entregados");
+            }
+            
         }
 
 

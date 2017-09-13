@@ -53,6 +53,7 @@
     <Compile Include="BLLEstadoSolicitud.cs" />
     <Compile Include="BLLFactoryBien.cs" />
     <Compile Include="BLLHardware.cs" />
+    <Compile Include="BLLInventario.cs" />
     <Compile Include="BLLInventarioHard.cs" />
     <Compile Include="BLLInventarioSoft.cs" />
     <Compile Include="BLLMarca.cs" />
