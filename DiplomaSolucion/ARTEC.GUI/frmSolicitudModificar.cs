@@ -340,7 +340,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
+                        grillaAgentesAsociados.DataSource = unosAgentesAsociados = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
                     }
 
                     //No mostrar columnas que no necesito de los agentes asociados VER: GUARDA CON ESTO QUE PUEDE QUE ESTE OCULTANDO COSAS QUE NO QUIERO OCULTAR
@@ -578,8 +578,6 @@ namespace ARTEC.GUI
         //Busqueda Dinamica Agentes por Dependencia
         private void txtAgente_TextChanged(object sender, EventArgs e)
         {
-            //if (ValidDep2.Validate())
-            //{
                 if (!string.IsNullOrWhiteSpace(txtAgente.Text) & unosAgentes != null)
                 {
 
@@ -628,8 +626,6 @@ namespace ARTEC.GUI
                     cboAgentesAsociados.DroppedDown = false;
                     cboAgentesAsociados.DataSource = null;
                 }
-            //}
-
         }
 
 
@@ -659,13 +655,6 @@ namespace ARTEC.GUI
         {
                 if (validAgenteAsoc.Validate())
                 {
-                    //VER: Creo q hay q borrar este if 
-                    //int CantSuma = 0;
-                    if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
-                    {
-                        //CantSuma = Int32.Parse(txtCantBien.Text);
-                    }
-
                     if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
                     {
 
@@ -673,6 +662,7 @@ namespace ARTEC.GUI
                         if (resultado.Count() > 0)
                         {
                             MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                            validCantBien.ClearFailedValidations();
                         }
                         else
                         {
@@ -697,7 +687,7 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[4].Visible = false;
                 }
                 //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
-                validCantBien.Validate();
+                //validCantBien.Validate();
 
         }
 
@@ -836,20 +826,10 @@ namespace ARTEC.GUI
             unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
-
-
-
             //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
             grillaDetalles.Columns.Remove("btnDinBorrar");
             grillaDetalles.Columns.Remove("txtCotizConteo");
             grillaDetalles.Columns.Remove("btnDinCotizar");
-
-            ////Conteo de detalles ANTIGUO
-            //int NroAux = 0;
-            //foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
-            //{
-            //    Det2.IdSolicitudDetalle = NroAux + 1;
-            //} ANTIGUOFIN
 
             //Regenero la grilla
             grillaDetalles.DataSource = null;
@@ -1032,14 +1012,15 @@ namespace ARTEC.GUI
                 {
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
 
-                    //Verifica si ya hay un detalle para modificarle la cantidad (en Agregar es sumar) y así no haya Bienes repetidos en distintos detalles
-                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
+                    //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
+                    if (unaSolicitud.unosDetallesSolicitud.Find(RR => RR.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                     {
                         var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
                         if (hhh != null)
                         {
                             if (AuxTipoCategoria == 2)//Categoria de Software
                             {
+                                //Cargo los agentes que ya había (es diferente de btnAgregarDetalle_Click porque aca esta en memoria ya)
                                 unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
                                 //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
                                 //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
@@ -1086,31 +1067,7 @@ namespace ARTEC.GUI
 
                             grillaDetallesFormatoAplicar();
                         }
-                        //else
-                        //{
-                        //    AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                        //}
                     }
-                    //else
-                    //{
-                    //    BLLPolitica ManagerPolitica = new BLLPolitica();
-                    //    if (ManagerPolitica.VerificarPolitica(unaSolicitud.laDependencia.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
-                    //    {
-                    //        AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                    //    }
-                    //    else
-                    //    {
-                    //        DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                    //        if (resmbox == DialogResult.Yes)
-                    //        {
-                    //            AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                    //        }
-                    //        else
-                    //        {
-                    //            //FIJARME SI HAY QUE RESETEAR ALGO
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }
