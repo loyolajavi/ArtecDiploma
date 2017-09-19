@@ -112,5 +112,32 @@ namespace ARTEC.DAL
 
 
 
+        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicDetalle", IdSolicDetalle),
+                new SqlParameter("@IdSolicitud", IdSolicitud)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallesTraerAgentesAsociados", parameters))
+                {
+                    List<Agente> unaLista = new List<Agente>();
+                    unaLista = DALAgente.MapearAgentes(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception)
+            {
+                //VER:Excepciones
+                throw;
+            }
+
+        }
+
+
+
     }
 }

@@ -36,6 +36,7 @@ namespace ARTEC.DAL
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
 
+                //Guarda los detalles 
                 foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
                 {
 
@@ -49,6 +50,18 @@ namespace ARTEC.DAL
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);
+
+                    //Guarda los Agentes por cada Detalle
+                    foreach (Agente unAgente in item.unosAgentes)
+                    {
+                        SqlParameter[] parametersAgentes = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                            new SqlParameter("@IdSolicitud", IDDevuelto),
+                            new SqlParameter("@IdAgente", unAgente.IdAgente)
+			            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelSolDetalleAgenteAgregar", parametersAgentes);
+                    }
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
@@ -57,6 +70,7 @@ namespace ARTEC.DAL
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //VER:EXCepciones
                 throw;
             }
             finally

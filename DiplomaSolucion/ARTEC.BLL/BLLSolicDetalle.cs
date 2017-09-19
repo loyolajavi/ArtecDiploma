@@ -38,5 +38,15 @@ namespace ARTEC.BLL
 
 
 
+        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud)
+        {
+            return GestorSolicDetalle.SolicDetallesTraerAgentesAsociados(IdSolicDetalle, IdSolicitud);
+        }
+
+
+
+
+
+
     }
 }

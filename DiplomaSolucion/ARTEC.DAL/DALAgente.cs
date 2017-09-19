@@ -23,27 +23,9 @@ namespace ARTEC.DAL
                 {
                     Agente unAgente = new Agente();
 
-                    try
-                    {
-                        unAgente.IdAgente = (int)row["IdAgente"];
-                    }
-                    catch (Exception es)
-                    {
-                    }
-                    try
-                    {
+                       unAgente.IdAgente = (int)row["IdAgente"];
                         unAgente.NombreAgente = row["NombreAgente"].ToString();
-                    }
-                    catch (Exception es)
-                    {
-                    }
-                    try
-                    {
                         unAgente.ApellidoAgente = row["ApellidoAgente"].ToString();
-                    }
-                    catch (Exception es )
-                    {
-                    }
                     
                     //unAgente.unaDependencia = 
                     //unAgente.unCargo = 
@@ -53,7 +35,7 @@ namespace ARTEC.DAL
             }
             catch (Exception es)
             {
-
+                //VER:Excepciones
                 throw;
             }
         }

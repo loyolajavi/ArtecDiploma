@@ -41,7 +41,7 @@ namespace ARTEC.GUI
 
         List<string> unosAdjuntos = new List<string>();
         List<Nota> unasNotas = new List<Nota>();
-
+        BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -133,7 +133,7 @@ namespace ARTEC.GUI
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
 
             //Agrega el conteo de cotizaciones por detalle
-            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+            
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
             ColumnaCotizacionConteo.Name = "txtCotizConteo";
             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -159,36 +159,37 @@ namespace ARTEC.GUI
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetalles.Columns.Add(deleteButton);
 
-            //Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
-            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
-            if (unTipoBienAux.IdTipoBien == 1)
-            {
-                //HARDWARE
-                gboxAsociados.Enabled = false;
-                txtCantBien.ReadOnly = false;
-                lblCantidad.Enabled = true;
-                AuxTipoCategoria = 1;//HARDWARE
-                cboTipoBien.SelectedValue = 1;//HARDWARE
-                txtAgente.Clear();
-                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-                grillaAgentesAsociados.DataSource = null;
-            }
-            else
-            {
-                gboxAsociados.Enabled = true;
-                txtCantBien.ReadOnly = true;
-                lblCantidad.Enabled = false;
-                AuxTipoCategoria = 2;//SOFTWARE
-                cboTipoBien.SelectedValue = 2;//SOFTWARE
-                txtAgente.Clear();
-                //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-                grillaAgentesAsociados.DataSource = null;
-                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud[0].unosAgentes;
-                //No mostrar columnas que no necesito de los agentes asociados
-                grillaAgentesAsociados.Columns[0].Visible = false;
-                grillaAgentesAsociados.Columns[3].Visible = false;
-                grillaAgentesAsociados.Columns[4].Visible = false;
-            }
+            //VER:Comente esto porque no lo supuestamente no lo usaba
+            ////Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
+            //unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
+            //if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+            //{
+            //    //HARDWARE
+            //    gboxAsociados.Enabled = false;
+            //    txtCantBien.ReadOnly = false;
+            //    lblCantidad.Enabled = true;
+            //    AuxTipoCategoria = 1;//HARDWARE
+            //    cboTipoBien.SelectedValue = 1;//HARDWARE
+            //    txtAgente.Clear();
+            //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+            //    grillaAgentesAsociados.DataSource = null;
+            //}
+            //else
+            //{
+            //    gboxAsociados.Enabled = true;
+            //    txtCantBien.ReadOnly = true;
+            //    lblCantidad.Enabled = false;
+            //    AuxTipoCategoria = 2;//SOFTWARE
+            //    cboTipoBien.SelectedValue = 2;//SOFTWARE
+            //    txtAgente.Clear();
+            //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+            //    grillaAgentesAsociados.DataSource = null;
+            //    grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud[0].unosAgentes;//Esta puesto [0] porque si el primer detalle es un soft, ya aparece escrito en el form
+            //    //No mostrar columnas que no necesito de los agentes asociados
+            //    grillaAgentesAsociados.Columns[0].Visible = false;
+            //    grillaAgentesAsociados.Columns[3].Visible = false;
+            //    grillaAgentesAsociados.Columns[4].Visible = false;
+            //}
             cboEstadoSolDetalle.SelectedValue = unaSolicitud.unosDetallesSolicitud[0].unEstado.IdEstadoSolicDetalle;
 
 
@@ -262,7 +263,6 @@ namespace ARTEC.GUI
                 grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
                 //grillaDetalles.Columns[1].Visible = false;
                 //Vuelve a agregar el conteo de cotizaciones por detalle
-                BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                 DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
                 ColumnaCotizacionConteo.Name = "txtCotizConteo";
                 ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -329,13 +329,21 @@ namespace ARTEC.GUI
                     gboxAsociados.Enabled = true;
                     txtCantBien.ReadOnly = true;
                     lblCantidad.Enabled = false;
-                    AuxTipoCategoria = 2;//SOFTWARE
-                    cboTipoBien.SelectedValue = 2;//SOFTWARE
+                    AuxTipoCategoria = (int)TipoBien.EnumTipoBien.Soft;
+                    cboTipoBien.SelectedValue = (int)TipoBien.EnumTipoBien.Soft;
                     txtAgente.Clear();
-                    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                    //VER: unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
                     grillaAgentesAsociados.DataSource = null;
-                    grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
-                    //No mostrar columnas que no necesito de los agentes asociados
+                    if (unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes.Count() > 0)
+                    {
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
+                    }
+                    else
+                    {
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
+                    }
+
+                    //No mostrar columnas que no necesito de los agentes asociados VER: GUARDA CON ESTO QUE PUEDE QUE ESTE OCULTANDO COSAS QUE NO QUIERO OCULTAR
                     grillaAgentesAsociados.Columns[0].Visible = false;
                     grillaAgentesAsociados.Columns[3].Visible = false;
                     grillaAgentesAsociados.Columns[4].Visible = false;
@@ -651,6 +659,7 @@ namespace ARTEC.GUI
         {
                 if (validAgenteAsoc.Validate())
                 {
+                    //VER: Creo q hay q borrar este if 
                     //int CantSuma = 0;
                     if (!string.IsNullOrWhiteSpace(txtCantBien.Text))
                     {
@@ -658,7 +667,6 @@ namespace ARTEC.GUI
                     }
 
                     if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
-                    //TENGO Q PREGUNTAR CUANDO HAGA CLICK EN ASOCIAR O EN ALGUN MOMENTO; SI EL SOFT YA ESTA AGREGADO, TRAER LOS DATOS Y GUARDARLOS EN LAS VARIABLES CORRESPONDIENTES
                     {
 
                         var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
@@ -717,7 +725,7 @@ namespace ARTEC.GUI
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
 
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
-                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
+                    if (unaSolicitud.unosDetallesSolicitud.Find(Z=>Z.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                     {
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
@@ -726,10 +734,17 @@ namespace ARTEC.GUI
                         {
                             if (AuxTipoCategoria == 2)//Categoria de Software
                             {
-                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
                                 //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
                                 //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
-                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();// += unDetalleSolicitud.Cantidad;
+
+                                //Cargo los agentes que ya había
+                                hhh.Widget.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(hhh.Widget.IdSolicitudDetalle, hhh.Widget.IdSolicitud);
+                                //Le Agrego los nuevos agentes
+                                foreach (Agente unAgen in unosAgentesAsociados)
+                                {
+                                    hhh.Widget.unosAgentes.Add(unAgen);    
+                                }
+                                hhh.Widget.Cantidad = hhh.Widget.unosAgentes.Count();
                             }
                             else
                             {
@@ -740,19 +755,11 @@ namespace ARTEC.GUI
                             grillaDetalles.Columns.Remove("txtCotizConteo");
                             grillaDetalles.Columns.Remove("btnDinCotizar");
 
-                            ////Conteo de detalles ANTIGUO
-                            //int NroAux = 0;
-                            //foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
-                            //{
-                            //    Det2.IdSolicitudDetalle = NroAux + 1;
-                            //} ANTIGUOFIN
-
                             //Regenero la grilla
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
                             //grillaDetalles.Columns[1].Visible = false;
                             //Vuelve a agregar el conteo de cotizaciones por detalle
-                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
                             ColumnaCotizacionConteo.Name = "txtCotizConteo";
                             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -849,7 +856,6 @@ namespace ARTEC.GUI
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             //grillaDetalles.Columns[1].Visible = false;
             //Vuelve a agregar el conteo de cotizaciones por detalle
-            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
             ColumnaCotizacionConteo.Name = "txtCotizConteo";
             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -1053,7 +1059,6 @@ namespace ARTEC.GUI
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
                             //grillaDetalles.Columns[1].Visible = false;
                             //Vuelve a agregar el conteo de cotizaciones por detalle
-                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
                             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
                             ColumnaCotizacionConteo.Name = "txtCotizConteo";
                             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
