@@ -1090,6 +1090,34 @@ namespace ARTEC.GUI
 
         }
 
+        private void btnModifSolicitud_Click(object sender, EventArgs e)
+        {
+            unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
+            //***FECHA FIN VER Q SI ESTA ESCRITA
+            unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
+            unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
+            if (cboEstadoSolicitud.SelectedIndex+1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cerrado)
+            {
+                MessageBox.Show("Debe ingresar un motivo y la fecha de finalización será la de hoy");
+                unaSolicitud.FechaFin = DateTime.Today;
+                
+                //VER:AGREGAR LO DEL MOTIVO
+            }
+            unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+            unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
+            if (unasNotas.Count > 0)//PONER COUNT
+            {
+                unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+            }
+
+            //VER:HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
+            //VER:AGREGAR LOS ADJUNTOS
+            //VER:AGREGAR EN EL STORE LAS NOTAS
+            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+            //ManagerSolicitud.SolicitudModificar(unaSolicitud);
+        }
+
+
 
 
 

@@ -27,7 +27,10 @@ namespace ARTEC.ENTIDADES
         }
 
 
-
+        public enum EnumEstadoSolicitud
+        {
+            Pendiente = 1, Finalizado = 2, Cerrado = 3
+        }
 
 
 

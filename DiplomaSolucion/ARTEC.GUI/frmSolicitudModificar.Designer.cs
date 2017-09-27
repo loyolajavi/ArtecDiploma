@@ -37,9 +37,10 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblAgenteResponsable = new DevComponents.DotNetBar.LabelX();
-            this.btnCrearSolicitud = new DevComponents.DotNetBar.ButtonX();
+            this.btnModifSolicitud = new DevComponents.DotNetBar.ButtonX();
             this.gboxNotas = new System.Windows.Forms.GroupBox();
             this.btnNotas = new DevComponents.DotNetBar.ButtonX();
             this.GrillaNotas = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -99,7 +100,6 @@ namespace ARTEC.GUI
             this.customValidTxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -123,7 +123,7 @@ namespace ARTEC.GUI
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.cboAgenteResp);
             this.panel1.Controls.Add(this.lblAgenteResponsable);
-            this.panel1.Controls.Add(this.btnCrearSolicitud);
+            this.panel1.Controls.Add(this.btnModifSolicitud);
             this.panel1.Controls.Add(this.gboxNotas);
             this.panel1.Controls.Add(this.txtFechaFin);
             this.panel1.Controls.Add(this.cboAsignado);
@@ -144,6 +144,19 @@ namespace ARTEC.GUI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1071, 659);
             this.panel1.TabIndex = 6;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCancelar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelar.Location = new System.Drawing.Point(993, 633);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCancelar.TabIndex = 26;
+            this.btnCancelar.Text = "btnCancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // cboAgenteResp
             // 
@@ -172,17 +185,18 @@ namespace ARTEC.GUI
             this.lblAgenteResponsable.TabIndex = 23;
             this.lblAgenteResponsable.Text = "Dependencia";
             // 
-            // btnCrearSolicitud
+            // btnModifSolicitud
             // 
-            this.btnCrearSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCrearSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrearSolicitud.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCrearSolicitud.Location = new System.Drawing.Point(425, 633);
-            this.btnCrearSolicitud.Name = "btnCrearSolicitud";
-            this.btnCrearSolicitud.Size = new System.Drawing.Size(75, 23);
-            this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCrearSolicitud.TabIndex = 22;
-            this.btnCrearSolicitud.Text = "Modificar";
+            this.btnModifSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnModifSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnModifSolicitud.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModifSolicitud.Location = new System.Drawing.Point(425, 633);
+            this.btnModifSolicitud.Name = "btnModifSolicitud";
+            this.btnModifSolicitud.Size = new System.Drawing.Size(75, 23);
+            this.btnModifSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnModifSolicitud.TabIndex = 22;
+            this.btnModifSolicitud.Text = "Modificar";
+            this.btnModifSolicitud.Click += new System.EventHandler(this.btnModifSolicitud_Click);
             // 
             // gboxNotas
             // 
@@ -950,19 +964,6 @@ namespace ARTEC.GUI
             this.errorProvider6.ContainerControl = this;
             this.errorProvider6.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider6.Icon")));
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCancelar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Location = new System.Drawing.Point(993, 633);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCancelar.TabIndex = 26;
-            this.btnCancelar.Text = "btnCancelar";
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // frmSolicitudModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1001,7 +1002,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.Panel panel1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgenteResp;
         private DevComponents.DotNetBar.LabelX lblAgenteResponsable;
-        private DevComponents.DotNetBar.ButtonX btnCrearSolicitud;
+        private DevComponents.DotNetBar.ButtonX btnModifSolicitud;
         private System.Windows.Forms.GroupBox gboxNotas;
         private DevComponents.DotNetBar.ButtonX btnNotas;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaNotas;

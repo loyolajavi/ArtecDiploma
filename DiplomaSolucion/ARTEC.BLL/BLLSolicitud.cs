@@ -57,6 +57,16 @@ namespace ARTEC.BLL
 
 
 
+        public bool SolicitudModificar(Solicitud laSolicitud)
+        {
+            if (GestorSolicitud.SolicitudModificar(laSolicitud))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
 
     }

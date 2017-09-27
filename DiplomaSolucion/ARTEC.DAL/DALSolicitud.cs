@@ -231,5 +231,70 @@ namespace ARTEC.DAL
 
 
 
+        public bool SolicitudModificar(Solicitud laSolicitud)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@FechaInicio", laSolicitud.FechaInicio),
+                new SqlParameter("@IdDependencia", laSolicitud.laDependencia.IdDependencia),
+                new SqlParameter("@IdPrioridad", laSolicitud.UnaPrioridad.IdPrioridad),
+                new SqlParameter("@IdEstado", laSolicitud.UnEstado.IdEstadoSolicitud),
+                new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario),
+                new SqlParameter("@IdAgente", laSolicitud.AgenteResp.IdAgente),
+                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+			};
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudModificar", parameters);
+                
+                //Guarda los detalles 
+                foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
+                {
+                    SqlParameter[] parametersSolicitudDetalles = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                        new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
+                        new SqlParameter("@Cantidad", item.Cantidad),
+                        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolicDetalle)
+			        };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudDetalleModificar", parametersSolicitudDetalles);
+                    
+                    //Guarda los Agentes por cada Detalle
+                    DALTipoBien GestorCategoria = new DALTipoBien();
+                    if (GestorCategoria.TipoBienTraerTipoBienPorIdCategoria(item.unaCategoria.IdCategoria).IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        foreach (Agente unAgente in item.unosAgentes)
+                        {
+                            SqlParameter[] parametersAgentes = new SqlParameter[]
+			                {
+                                new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                                new SqlParameter("@IdAgente", unAgente.IdAgente)
+			                };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteModificar", parametersAgentes);
+                        }
+                    } 
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //VER:EXCepciones
+                return false;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+
     }
 }
