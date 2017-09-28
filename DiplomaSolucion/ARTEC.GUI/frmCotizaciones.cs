@@ -28,6 +28,7 @@ namespace ARTEC.GUI
         BLLProveedor ManagerProveedor = new BLLProveedor();
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
         SolicDetalle unDetSolic = new SolicDetalle();
+        List<Proveedor> ListaProv = new List<Proveedor>();
 
         public frmCotizaciones(List<Cotizacion> unasCotiz, SolicDetalle unDetSolicP)
         {
@@ -146,6 +147,94 @@ namespace ARTEC.GUI
 
 
 
+        private void txtProvSol_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtProvSol.Text))
+            {
+
+                List<Proveedor> resProvSol = new List<Proveedor>();
+                resProvSol = unosProveedores;
+
+                List<string> Palabras = new List<string>();
+                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtProvSol.Text, ' ');
+
+                foreach (string unaPalabra in Palabras)
+                {
+                    resProvSol = (List<Proveedor>)(from Prov in resProvSol
+                                                where Prov.AliasProv.ToLower().Contains(unaPalabra.ToLower())
+                                                select Prov).ToList();
+                }
+
+                if (resProvSol.Count > 0)
+                {
+                    if (resProvSol.Count == 1 && string.Equals(resProvSol.First().AliasProv, txtProvSol.Text))
+                    {
+                        cboProvSol.Visible = false;
+                        cboProvSol.DroppedDown = false;
+                        cboProvSol.DataSource = null;
+                    }
+                    else
+                    {
+                        cboProvSol.DataSource = null;
+                        cboProvSol.DataSource = resProvSol;
+                        cboProvSol.DisplayMember = "AliasProv";
+                        cboProvSol.ValueMember = "IdProveedor";
+                        cboProvSol.Visible = true;
+                        cboProvSol.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+                else
+                {
+                    cboProvSol.Visible = false;
+                    cboProvSol.DroppedDown = false;
+                    cboProvSol.DataSource = null;
+                }
+            }
+            else
+            {
+                cboProvSol.Visible = false;
+                cboProvSol.DroppedDown = false;
+                cboProvSol.DataSource = null;
+            }
+        }
+
+        private void cboProvSol_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtProvSol.Text))
+            {
+                if (cboProvSol.SelectedIndex > -1)
+                {
+                    ComboBox cbo3 = (ComboBox)sender;
+                    ProvSeleccionado = new Proveedor();
+                    ProvSeleccionado = (Proveedor)cbo3.SelectedItem;
+                    this.txtProvSol.TextChanged -= new System.EventHandler(this.txtProvSol_TextChanged);
+                    txtProvSol.Text = cbo3.GetItemText(cbo3.SelectedItem);
+                    this.txtProvSol.TextChanged += new System.EventHandler(this.txtProvSol_TextChanged);
+                    txtProvSol.SelectionStart = txtProvSol.Text.Length + 1;
+                    //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
+                    //validBien.Validate();
+                }
+            }
+        }
+
+        private void btnAgregarProvSol_Click(object sender, EventArgs e)
+        {
+            ListaProv.Add((Proveedor)cboProvSol.SelectedItem);
+            GrillaProvSolic.DataSource = null;
+            GrillaProvSolic.DataSource = ListaProv;
+            txtProvSol.Clear();
+            cboProvSol.Refresh();
+        }
+
+        private void btnSolicitar_Click(object sender, EventArgs e)
+        {
+            foreach (Proveedor unProv in ListaProv)
+            {
+                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", "Juan", "444", "martinez.juan.marcos@gmail.com", unProv.RazonSocialProv, "asdf", "Hola");    
+            }
+            
+        }
 
 
 
