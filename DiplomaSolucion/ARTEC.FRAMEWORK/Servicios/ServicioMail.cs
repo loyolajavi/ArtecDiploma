@@ -5,16 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using System.Security;
+
 
 namespace ARTEC.FRAMEWORK.Servicios
 {
     public class ServicioMail
     {
-        
 
-        //PONER EN BD EL PUERTO; HOST Y MAIL REMITENTE
 
-        public static void EnviarCorreo
+        public static int Puerto { get; set; }
+        public static string Host { get; set; }
+        public static bool ssl { get; set; }
+
+
+        /// <summary>
+        /// Enviars the correo.
+        /// </summary>
+        /// <param name="remitente">The remitente.</param>
+        /// <param name="pass">The pass.</param>
+        /// <param name="nombre">The nombre.</param>
+        /// <param name="telefono">The telefono.</param>
+        /// <param name="destinatario">The destinatario.</param>
+        /// <param name="nombreEmpresa">The nombre empresa.</param>
+        /// <param name="asunto">The asunto.</param>
+        /// <param name="cuerpoCorreo">The cuerpo correo.</param>
+        /// <returns></returns>
+        public static bool EnviarCorreo
             (
                 string remitente,
                 string pass,
@@ -26,32 +43,54 @@ namespace ARTEC.FRAMEWORK.Servicios
                 string cuerpoCorreo
             )
         {
-            string output = null;
             var serverSMTP = new SmtpClient();
-            NetworkCredential credencial = new NetworkCredential(remitente, pass);
+            NetworkCredential credencial = new NetworkCredential();
+            credencial.UserName = remitente;
+            credencial.SecurePassword = SecurizarMailPass(pass);
             serverSMTP.Credentials = credencial;
-            serverSMTP.Port = 587;
-            serverSMTP.Host = "smtp.gmail.com";
+            serverSMTP.Port = Puerto;
+            serverSMTP.Host = Host;
             var correo = new MailMessage();
             correo.From = new MailAddress(remitente, nombreEmpresa);
             correo.To.Add(destinatario);
             correo.Subject = asunto;
             correo.Body = cuerpoCorreo;
-            serverSMTP.EnableSsl = true;
+            serverSMTP.EnableSsl = ssl;
 
             try
             {
                 serverSMTP.Send(correo);
-                correo.Dispose();
-                output = "E-Mail enviado correctamente";
-
+                return true;
             }
             catch (Exception ex)
             {
-                output = "Error enviando el E-Mail, por favor reintente nuevamente";
+                //VER:Excepción log
+                return false;
             }
-            //return true;
+            finally
+            {
+                correo.Dispose();
+            }
         }
+
+
+
+        private static SecureString SecurizarMailPass(string pass)
+        {
+            if (pass == null)
+                throw new ArgumentNullException("password");
+                //VER: Corregir excepción
+            var secPass = new SecureString();
+
+            foreach (char c in pass)
+                secPass.AppendChar(c);
+
+            secPass.MakeReadOnly();
+            return secPass;
+        }
+
+
+
 
     }
 }

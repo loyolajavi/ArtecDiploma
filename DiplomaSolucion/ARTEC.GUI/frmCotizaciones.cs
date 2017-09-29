@@ -229,9 +229,12 @@ namespace ARTEC.GUI
 
         private void btnSolicitar_Click(object sender, EventArgs e)
         {
+
+            BLL.Servicios.BLLServicioMail.CargarMailConfig();
+
             foreach (Proveedor unProv in ListaProv)
             {
-                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", "Juan", "444", "martinez.juan.marcos@gmail.com", unProv.RazonSocialProv, "asdf", "Hola");    
+                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", "Juan", "444", "martinez.juan.marcos@gmail.com", unProv.RazonSocialProv, "asdf", "Hola");
             }
             
         }
