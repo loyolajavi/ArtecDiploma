@@ -15,6 +15,8 @@ namespace ARTEC.FRAMEWORK.Servicios
 
         public static Idioma unIdiomaActual;
         public static List<Etiqueta> _EtiquetasCompartidas;
+        public enum EnumIdioma
+        { Español = 1, English = 2 };
 
         public static List<Idioma> IdiomaTraerTodos()
         {

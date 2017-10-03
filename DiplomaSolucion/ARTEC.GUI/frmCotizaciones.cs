@@ -43,6 +43,17 @@ namespace ARTEC.GUI
             grillaProveedor.DataSource = unasCotizaciones;
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+
+            if (ServicioIdioma.unIdiomaActual.IdIdioma == (int)ServicioIdioma.EnumIdioma.Español)
+            {
+                txtCuerpo.Text = "Prueba";
+                txtAsunto.Text = "Cotización MPF";
+            }
+            else
+            {
+                txtCuerpo.Text = "Test";
+                txtAsunto.Text = "MPF Quote";
+            }
         }
 
 
@@ -234,10 +245,11 @@ namespace ARTEC.GUI
 
             foreach (Proveedor unProv in ListaProv)
             {
-                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo("martinez.juan.marcos@gmail.com", "descargas", "Juan", "444", "martinez.juan.marcos@gmail.com", unProv.RazonSocialProv, "asdf", "Hola");
+                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.RazonSocialProv, txtAsunto.Text, txtCuerpo.Text);
             }
             
         }
+
 
 
 

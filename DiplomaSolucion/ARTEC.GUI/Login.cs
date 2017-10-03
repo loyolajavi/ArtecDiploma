@@ -63,7 +63,7 @@ namespace ARTEC.GUI
             cboIdioma.ValueMember = "IdIdioma";
             cboIdioma.DataSource = unosIdiomas;
 
-            //Obtengo el utilizado la última vez
+            //Obtengo el idioma utilizado la última vez
             ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
             cboIdioma.SelectedItem = ServicioIdioma.unIdiomaActual;
 

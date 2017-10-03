@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.Security;
+using System.Threading;
 
 
 namespace ARTEC.FRAMEWORK.Servicios
@@ -17,26 +18,17 @@ namespace ARTEC.FRAMEWORK.Servicios
         public static int Puerto { get; set; }
         public static string Host { get; set; }
         public static bool ssl { get; set; }
+        public static string remitente { get; set; }
+        public static string remps { get; set; }
 
+        private static bool EnvioExitoso;
 
-        /// <summary>
-        /// Enviars the correo.
-        /// </summary>
-        /// <param name="remitente">The remitente.</param>
-        /// <param name="pass">The pass.</param>
-        /// <param name="nombre">The nombre.</param>
-        /// <param name="telefono">The telefono.</param>
-        /// <param name="destinatario">The destinatario.</param>
-        /// <param name="nombreEmpresa">The nombre empresa.</param>
-        /// <param name="asunto">The asunto.</param>
-        /// <param name="cuerpoCorreo">The cuerpo correo.</param>
-        /// <returns></returns>
         public static bool EnviarCorreo
             (
-                string remitente,
-                string pass,
-                string nombre,
-                string telefono,
+            //string remitente,
+            //string pass,
+            //string nombre,
+            //string telefono,
                 string destinatario,
                 string nombreEmpresa,
                 string asunto,
@@ -46,7 +38,7 @@ namespace ARTEC.FRAMEWORK.Servicios
             var serverSMTP = new SmtpClient();
             NetworkCredential credencial = new NetworkCredential();
             credencial.UserName = remitente;
-            credencial.SecurePassword = SecurizarMailPass(pass);
+            credencial.SecurePassword = SecurizarMailPass(remps);
             serverSMTP.Credentials = credencial;
             serverSMTP.Port = Puerto;
             serverSMTP.Host = Host;
@@ -57,20 +49,29 @@ namespace ARTEC.FRAMEWORK.Servicios
             correo.Body = cuerpoCorreo;
             serverSMTP.EnableSsl = ssl;
 
-            try
-            {
-                serverSMTP.Send(correo);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                //VER:Excepción log
-                return false;
-            }
-            finally
-            {
-                correo.Dispose();
-            }
+            Thread ProcesoMailEnviar = new Thread
+                (delegate()
+                {
+                    try
+                    {
+                        serverSMTP.Send(correo);
+                        EnvioExitoso = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        //VER:Excepción log
+                        EnvioExitoso = false;
+                    }
+                    finally
+                    {
+                        correo.Dispose();
+                    }
+                }
+                );
+
+            ProcesoMailEnviar.Start();
+
+            return EnvioExitoso;
         }
 
 
@@ -79,7 +80,7 @@ namespace ARTEC.FRAMEWORK.Servicios
         {
             if (pass == null)
                 throw new ArgumentNullException("password");
-                //VER: Corregir excepción
+            //VER: Corregir excepción
             var secPass = new SecureString();
 
             foreach (char c in pass)

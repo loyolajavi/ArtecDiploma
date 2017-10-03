@@ -31,13 +31,15 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblCuerpo = new DevComponents.DotNetBar.LabelX();
+            this.lblAsunto = new DevComponents.DotNetBar.LabelX();
+            this.txtAsunto = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtCuerpo = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.btnAgregarProvSol = new DevComponents.DotNetBar.ButtonX();
             this.txtProvSol = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.txtCantSol = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboProvSol = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.GrillaProvSolic = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnSolicitar = new DevComponents.DotNetBar.ButtonX();
-            this.lblCantSol = new DevComponents.DotNetBar.LabelX();
             this.lblProvSol = new DevComponents.DotNetBar.LabelX();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -57,21 +59,79 @@ namespace ARTEC.GUI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lblCuerpo);
+            this.tabPage2.Controls.Add(this.lblAsunto);
+            this.tabPage2.Controls.Add(this.txtAsunto);
+            this.tabPage2.Controls.Add(this.txtCuerpo);
             this.tabPage2.Controls.Add(this.btnAgregarProvSol);
             this.tabPage2.Controls.Add(this.txtProvSol);
-            this.tabPage2.Controls.Add(this.txtCantSol);
             this.tabPage2.Controls.Add(this.cboProvSol);
             this.tabPage2.Controls.Add(this.GrillaProvSolic);
             this.tabPage2.Controls.Add(this.btnSolicitar);
-            this.tabPage2.Controls.Add(this.lblCantSol);
             this.tabPage2.Controls.Add(this.lblProvSol);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(494, 293);
+            this.tabPage2.Size = new System.Drawing.Size(568, 293);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Solicitar Cotizaciones";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lblCuerpo
+            // 
+            // 
+            // 
+            // 
+            this.lblCuerpo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCuerpo.Location = new System.Drawing.Point(267, 92);
+            this.lblCuerpo.Name = "lblCuerpo";
+            this.lblCuerpo.Size = new System.Drawing.Size(56, 22);
+            this.lblCuerpo.TabIndex = 58;
+            this.lblCuerpo.Text = "lblCuerpo";
+            // 
+            // lblAsunto
+            // 
+            // 
+            // 
+            // 
+            this.lblAsunto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblAsunto.Location = new System.Drawing.Point(267, 42);
+            this.lblAsunto.Name = "lblAsunto";
+            this.lblAsunto.Size = new System.Drawing.Size(56, 22);
+            this.lblAsunto.TabIndex = 57;
+            this.lblAsunto.Text = "lblAsunto";
+            // 
+            // txtAsunto
+            // 
+            this.txtAsunto.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAsunto.Border.Class = "TextBoxBorder";
+            this.txtAsunto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAsunto.DisabledBackColor = System.Drawing.Color.White;
+            this.txtAsunto.ForeColor = System.Drawing.Color.Black;
+            this.txtAsunto.Location = new System.Drawing.Point(267, 66);
+            this.txtAsunto.Name = "txtAsunto";
+            this.txtAsunto.PreventEnterBeep = true;
+            this.txtAsunto.Size = new System.Drawing.Size(238, 22);
+            this.txtAsunto.TabIndex = 56;
+            this.txtAsunto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtCuerpo
+            // 
+            // 
+            // 
+            // 
+            this.txtCuerpo.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtCuerpo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCuerpo.Location = new System.Drawing.Point(267, 114);
+            this.txtCuerpo.Name = "txtCuerpo";
+            this.txtCuerpo.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\f0\\fs17 txtCuerpo\\par\r\n}\r\n";
+            this.txtCuerpo.Size = new System.Drawing.Size(295, 137);
+            this.txtCuerpo.TabIndex = 55;
+            this.txtCuerpo.Text = "txtCuerpo";
             // 
             // btnAgregarProvSol
             // 
@@ -103,23 +163,6 @@ namespace ARTEC.GUI
             this.txtProvSol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtProvSol.TextChanged += new System.EventHandler(this.txtProvSol_TextChanged);
             // 
-            // txtCantSol
-            // 
-            this.txtCantSol.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtCantSol.Border.Class = "TextBoxBorder";
-            this.txtCantSol.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtCantSol.DisabledBackColor = System.Drawing.Color.White;
-            this.txtCantSol.ForeColor = System.Drawing.Color.Black;
-            this.txtCantSol.Location = new System.Drawing.Point(158, 220);
-            this.txtCantSol.Name = "txtCantSol";
-            this.txtCantSol.PreventEnterBeep = true;
-            this.txtCantSol.Size = new System.Drawing.Size(36, 22);
-            this.txtCantSol.TabIndex = 48;
-            this.txtCantSol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // cboProvSol
             // 
             this.cboProvSol.DisplayMember = "Text";
@@ -149,33 +192,20 @@ namespace ARTEC.GUI
             this.GrillaProvSolic.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaProvSolic.Location = new System.Drawing.Point(36, 64);
             this.GrillaProvSolic.Name = "GrillaProvSolic";
-            this.GrillaProvSolic.Size = new System.Drawing.Size(225, 139);
+            this.GrillaProvSolic.Size = new System.Drawing.Size(225, 187);
             this.GrillaProvSolic.TabIndex = 51;
             // 
             // btnSolicitar
             // 
             this.btnSolicitar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSolicitar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSolicitar.Location = new System.Drawing.Point(104, 257);
+            this.btnSolicitar.Location = new System.Drawing.Point(229, 264);
             this.btnSolicitar.Name = "btnSolicitar";
             this.btnSolicitar.Size = new System.Drawing.Size(75, 23);
             this.btnSolicitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitar.TabIndex = 50;
             this.btnSolicitar.Text = "btnSolicitar";
             this.btnSolicitar.Click += new System.EventHandler(this.btnSolicitar_Click);
-            // 
-            // lblCantSol
-            // 
-            // 
-            // 
-            // 
-            this.lblCantSol.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCantSol.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantSol.Location = new System.Drawing.Point(88, 220);
-            this.lblCantSol.Name = "lblCantSol";
-            this.lblCantSol.Size = new System.Drawing.Size(69, 22);
-            this.lblCantSol.TabIndex = 49;
-            this.lblCantSol.Text = "Cantidad";
             // 
             // lblProvSol
             // 
@@ -197,7 +227,7 @@ namespace ARTEC.GUI
             this.tabControl1.Location = new System.Drawing.Point(2, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(502, 319);
+            this.tabControl1.Size = new System.Drawing.Size(576, 319);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -212,7 +242,7 @@ namespace ARTEC.GUI
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(494, 293);
+            this.tabPage1.Size = new System.Drawing.Size(568, 293);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Agregar Cotización";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -345,11 +375,9 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabPage2;
         private DevComponents.DotNetBar.ButtonX btnAgregarProvSol;
         private DevComponents.DotNetBar.Controls.TextBoxX txtProvSol;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtCantSol;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProvSol;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaProvSolic;
         private DevComponents.DotNetBar.ButtonX btnSolicitar;
-        private DevComponents.DotNetBar.LabelX lblCantSol;
         private DevComponents.DotNetBar.LabelX lblProvSol;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -360,6 +388,10 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnAgregar;
         private DevComponents.DotNetBar.LabelX lblPrecioUn;
         private DevComponents.DotNetBar.LabelX lblProveedor;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtCuerpo;
+        private DevComponents.DotNetBar.LabelX lblAsunto;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtAsunto;
+        private DevComponents.DotNetBar.LabelX lblCuerpo;
 
     }
 }

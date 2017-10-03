@@ -23,7 +23,9 @@ namespace ARTEC.DAL.Servicios
                     {
                         FRAMEWORK.Servicios.ServicioMail.Puerto = (int)row["Puerto"];
                         FRAMEWORK.Servicios.ServicioMail.Host = row["Host"].ToString();
-                        FRAMEWORK.Servicios.ServicioMail.ssl = (bool)row["ssl"];
+                        FRAMEWORK.Servicios.ServicioMail.ssl = (bool)row["Ssl"];
+                        FRAMEWORK.Servicios.ServicioMail.remitente = row["Remitente"].ToString();
+                        FRAMEWORK.Servicios.ServicioMail.remps = row["Remps"].ToString();
                     }
                 }
             }
