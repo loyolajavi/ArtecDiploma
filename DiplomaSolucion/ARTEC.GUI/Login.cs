@@ -63,17 +63,18 @@ namespace ARTEC.GUI
             cboIdioma.ValueMember = "IdIdioma";
             cboIdioma.DataSource = unosIdiomas;
 
-            //Obtengo el idioma utilizado la última vez
-            ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
-            cboIdioma.SelectedItem = ServicioIdioma.unIdiomaActual;
+            //Obtengo el idioma default
+            ServicioIdioma.unIdiomaDefault = unosIdiomas.Find(x => x.ElIdiomaDefault == true);
+            cboIdioma.SelectedItem = ServicioIdioma.unIdiomaDefault;
 
-            //Traduzco con el IdiomaActual
-            ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);
-
-            //Prueba frmPrueba = new Prueba();
-            //frmPrueba.Show();
-
+            //Dejo constancia del idioma actual en memoria
+            ServicioIdioma.unIdiomaActual = ServicioIdioma.unIdiomaDefault.IdIdioma;
+            
+            //Traduzco con el idioma Default
+            ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaDefault.IdIdioma);
         }
+
+
 
         /// <summary>
         /// Evento para modificar el idioma
@@ -82,23 +83,10 @@ namespace ARTEC.GUI
         /// <param name="e"></param>
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //ESTE CODIGO VA EN LOGIN
-            //******************************************************************************************************************************************************//
-            //ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);//Cambiaba el idioma del propio formulario solamente
-            //******************************************************************************************************************************************************//
-            
-            //ESTE CODIGO VA EN EL MENU PRINCIPAL
-            //******************************************************************************************************************************************************//
-            //Para cambiar el idioma de todos los formularios abiertos
-            ServicioIdioma.CambiarIdioma(this.FindForm(), (Idioma)cboIdioma.SelectedItem);
-            foreach (Control unForm in Application.OpenForms)
-            {
-                ServicioIdioma.Traducir(unForm, ServicioIdioma.unIdiomaActual.IdIdioma);
-            } 
-            //******************************************************************************************************************************************************//
-            
-            
+            ServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
         }
+
+
 
         /// <summary>
         /// Evento para loguear a un usuario

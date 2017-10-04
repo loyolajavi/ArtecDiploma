@@ -39,19 +39,26 @@ namespace ARTEC.GUI
         private void Principal_Load(object sender, EventArgs e)
         {
             //Traigo todos los idiomas
-            unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
+            //unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
 
 
             //Obtengo el utilizado la última vez
-            ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
+            //ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
 
-            //Traduzco con el IdiomaActual
-            //ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaActual.IdIdioma);//SOLO PROPIO FORMULARIO
-            //TODOS LOS FORMULARIOS ABIERTOS
-            foreach (Control unForm in Application.OpenForms)
-            {
-                ServicioIdioma.Traducir(unForm, ServicioIdioma.unIdiomaActual.IdIdioma);
-            }
+            //Traduzco con el IdiomaActual del usuario logueado
+            ServicioIdioma.CambiarIdioma(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            //Traigo todos los idiomas
+            unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
+            cboIdioma.DataSource = null;
+            cboIdioma.DisplayMember = "NombreIdioma";
+            cboIdioma.ValueMember = "IdIdioma";
+            cboIdioma.DataSource = unosIdiomas;
+
+            //Obtengo el idioma actual del usuario para ponerlo en el cboidioma
+            cboIdioma.SelectedValue = ServicioIdioma.unIdiomaActual;
+
+
+            
         }
 
         private void tabsPrincipal_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +106,18 @@ namespace ARTEC.GUI
         {
             frmRendicionCrear unfrmRendicionCrear = new frmRendicionCrear();
             unfrmRendicionCrear.Show();
+        }
+
+        private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (ServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue))
+            {
+                foreach (Control unForm in Application.OpenForms)
+                {
+                    ServicioIdioma.Traducir(unForm, ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                }
+            }
+
         }
 
 

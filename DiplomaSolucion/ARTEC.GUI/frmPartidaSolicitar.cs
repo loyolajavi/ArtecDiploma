@@ -439,7 +439,7 @@ namespace ARTEC.GUI
             }
             if (ManagerPartida.PartidaCrear(nuevaPartida))
             {
-                if(ServicioIdioma.unIdiomaActual.IdIdioma == 1)//Español
+                if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
                 {
                     using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
                     {
@@ -455,7 +455,7 @@ namespace ARTEC.GUI
                         doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                     }
                 }
-                else if (ServicioIdioma.unIdiomaActual.IdIdioma == 2)//Ingles
+                else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
                 {
                     using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
                     {

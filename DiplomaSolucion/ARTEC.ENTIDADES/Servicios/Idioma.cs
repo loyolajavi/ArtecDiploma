@@ -11,7 +11,7 @@ namespace ARTEC.ENTIDADES.Servicios
 
         public int IdIdioma { get; set; }
         public string NombreIdioma { get; set; }
-        public bool IdiomaActual { get; set; }
+        public bool ElIdiomaDefault { get; set; }
         
     }
 }

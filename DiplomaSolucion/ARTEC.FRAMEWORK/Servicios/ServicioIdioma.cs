@@ -10,11 +10,12 @@ using System.Data.SqlClient;
 
 namespace ARTEC.FRAMEWORK.Servicios
 {
-    public class ServicioIdioma
+    public static class ServicioIdioma
     {
 
-        public static Idioma unIdiomaActual;
+        public static Idioma unIdiomaDefault;
         public static List<Etiqueta> _EtiquetasCompartidas;
+        public static int unIdiomaActual;
         public enum EnumIdioma
         { Español = 1, English = 2 };
 
@@ -49,11 +50,16 @@ namespace ARTEC.FRAMEWORK.Servicios
             //Coloco el texto en cada control
             foreach (Control unControl in unosControles)
             {
-                foreach (Etiqueta unaEtiqueta in _EtiquetasCompartidas)
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                 {
-                    if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                    //unControl.Text = _EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
+                    foreach (Etiqueta unaEtiqueta in _EtiquetasCompartidas)
                     {
-                        unControl.Text = unaEtiqueta.Texto;
+                        if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                        {
+                            unControl.Text = unaEtiqueta.Texto;
+                            break;
+                        }
                     }
                 }
             }
@@ -99,42 +105,66 @@ namespace ARTEC.FRAMEWORK.Servicios
 
 
 
-        public static void CambiarIdioma(Control unControlCI, Idioma unIdioma)
+        public static bool CambiarIdioma(Control unControlCI, int unIdioma)
         {
+            bool Cambiar;
 
-            //if (unIdioma.IdIdioma != ServicioIdioma.unIdiomaActual.IdIdioma)
-            //{
-                List<Idioma> unosIdiomas = new List<Idioma>();
-                unosIdiomas = IdiomaTraerTodos();
+            //Si está logueado
+            if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
+            {
+                if (unIdiomaActual == unIdioma)
+                    Cambiar = false;
+                else
+                    Cambiar = true;
+            }
+            else
+            {
+                //Si no está logueado comparo con el idioma default
+                if (unIdiomaActual == unIdioma)
+                    Cambiar = false;
+                else
+                    Cambiar = true;
+            }
+
+
+            if (Cambiar == true)
+            {
+
 
                 _EtiquetasCompartidas = null;
 
-                foreach (var ItemIdioma in unosIdiomas)
-                {
-                    //Cambio el estado de los idiomas
-                    if (ItemIdioma.IdIdioma == unIdioma.IdIdioma)
-                    {
-                        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, true);
-                    }
-                    else
-                    {
-                        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, false);
-                    }
-                }
+                //foreach (var ItemIdioma in unosIdiomas)
+                //{
+                //    //Cambio el estado de los idiomas
+                //    if (ItemIdioma.IdIdioma == unIdioma.IdIdioma)
+                //    {
+                //        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, true);
+                //    }
+                //    else
+                //    {
+                //        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, false);
+                //    }
+                //}
 
-                Traducir(unControlCI, unIdioma.IdIdioma);
+                Traducir(unControlCI, unIdioma);
                 ServicioIdioma.unIdiomaActual = unIdioma;
-                
-            //}
+                if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
+                {
+                    IdiomaUsuarioActualModificar();
+                }
+                return true;
+            }
+            return false;
         }
 
 
-        public static void IdiomaActualizarIdiomaActual(int elIdIdioma, bool Valor)
+
+        public static void IdiomaUsuarioActualModificar()
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@IdIdioma", elIdIdioma),
-                new SqlParameter("@IdiomaActual", Valor)
+                new SqlParameter("@IdiomaUsuarioActual", unIdiomaActual),
+                new SqlParameter("@IdUsuario", ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario)
 			};
 
             try
@@ -142,7 +172,57 @@ namespace ARTEC.FRAMEWORK.Servicios
 
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaActualizarIdiomaActual", parameters);
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaUsuarioActualModificar", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+        public static void IdiomaSetearDefault(Idioma unIdiomaDefault)
+        {
+            List<Idioma> unosIdiomas = new List<Idioma>();
+            unosIdiomas = IdiomaTraerTodos();
+
+            foreach (var ItemIdioma in unosIdiomas)
+            {
+                //Cambio el estado de los idiomas
+                if (ItemIdioma.IdIdioma == unIdiomaDefault.IdIdioma)
+                {
+                    IdiomaActualizarIdiomaDefault(ItemIdioma.IdIdioma, true);
+                }
+                else
+                {
+                    IdiomaActualizarIdiomaDefault(ItemIdioma.IdIdioma, false);
+                }
+            }
+        }
+
+
+
+        public static void IdiomaActualizarIdiomaDefault(int elIdIdioma, bool Valor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdIdioma", elIdIdioma),
+                new SqlParameter("@ElIdiomaDefault", Valor)
+			};
+
+            try
+            {
+
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "IdiomaActualizarIdiomaDefault", parameters);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)

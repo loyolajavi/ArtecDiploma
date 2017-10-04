@@ -163,6 +163,8 @@ namespace ARTEC.GUI
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
+            ServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();

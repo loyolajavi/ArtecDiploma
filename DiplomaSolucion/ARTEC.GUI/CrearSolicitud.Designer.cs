@@ -74,7 +74,7 @@ namespace ARTEC.GUI
             this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBien = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.validDependencia = new DevComponents.DotNetBar.Validator.SuperValidator();
@@ -138,7 +138,7 @@ namespace ARTEC.GUI
             this.panel1.Controls.Add(this.labelX5);
             this.panel1.Controls.Add(this.pnlAdjuntos);
             this.panel1.Controls.Add(this.gboxBienes);
-            this.panel1.Controls.Add(this.labelX1);
+            this.panel1.Controls.Add(this.lblDependencia);
             this.panel1.Controls.Add(this.textBoxX1);
             this.panel1.Controls.Add(this.comboBoxEx4);
             this.panel1.ForeColor = System.Drawing.Color.Black;
@@ -464,6 +464,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -762,18 +763,18 @@ namespace ARTEC.GUI
             this.cboBien.TabIndex = 10;
             this.cboBien.SelectionChangeCommitted += new System.EventHandler(this.cboBien_SelectionChangeCommitted);
             // 
-            // labelX1
+            // lblDependencia
             // 
             // 
             // 
             // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(21, 31);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(91, 17);
-            this.labelX1.TabIndex = 0;
-            this.labelX1.Text = "Dependencia";
+            this.lblDependencia.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDependencia.Location = new System.Drawing.Point(21, 31);
+            this.lblDependencia.Name = "lblDependencia";
+            this.lblDependencia.Size = new System.Drawing.Size(91, 17);
+            this.lblDependencia.TabIndex = 0;
+            this.lblDependencia.Text = "lblDependencia";
             // 
             // textBoxX1
             // 
@@ -973,7 +974,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblCantidad;
         private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
-        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.LabelX lblDependencia;
         private System.Windows.Forms.Panel pnlAdjuntos;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAsignado;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboPrioridad;

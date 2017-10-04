@@ -44,7 +44,7 @@ namespace ARTEC.GUI
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodos();
 
-            if (ServicioIdioma.unIdiomaActual.IdIdioma == (int)ServicioIdioma.EnumIdioma.Español)
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
             {
                 txtCuerpo.Text = "Prueba";
                 txtAsunto.Text = "Cotización MPF";

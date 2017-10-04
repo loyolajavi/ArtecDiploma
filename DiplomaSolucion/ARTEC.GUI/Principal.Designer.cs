@@ -36,6 +36,7 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
+            this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,11 +144,26 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
             this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
             // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DisplayMember = "Text";
+            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
+            this.cboIdioma.FormattingEnabled = true;
+            this.cboIdioma.ItemHeight = 16;
+            this.cboIdioma.Location = new System.Drawing.Point(1230, 53);
+            this.cboIdioma.Name = "cboIdioma";
+            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
+            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboIdioma.TabIndex = 6;
+            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.cboIdioma);
             this.Controls.Add(this.btnRendicionCrear);
             this.Controls.Add(this.btnBienRegistrar);
             this.Controls.Add(this.btnPartidaAsociar);
@@ -156,6 +172,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARTEC";
@@ -175,6 +192,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;
         private DevComponents.DotNetBar.ButtonX btnBienRegistrar;
         private DevComponents.DotNetBar.ButtonX btnRendicionCrear;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
 
 
 
