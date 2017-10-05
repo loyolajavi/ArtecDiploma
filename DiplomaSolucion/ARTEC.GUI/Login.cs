@@ -140,6 +140,22 @@ namespace ARTEC.GUI
             }
         }
 
+        private void txtPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnLogin_Click(this, new EventArgs());
+            }
+        }
+
+        private void txtNombreUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnLogin_Click(this, new EventArgs());
+            }
+        }
+
 
 
 

@@ -48,9 +48,9 @@ namespace ARTEC.GUI
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.vldtxtPass = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.customvldtxtPass1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.customvldtxtPass1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.pnlBotonLogin.SuspendLayout();
             this.pnlPass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -162,7 +162,6 @@ namespace ARTEC.GUI
             this.txtPass.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPass.ForeColor = System.Drawing.Color.Black;
             this.txtPass.Location = new System.Drawing.Point(70, 12);
-            this.txtPass.Multiline = true;
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.PreventEnterBeep = true;
@@ -170,6 +169,7 @@ namespace ARTEC.GUI
             this.txtPass.TabIndex = 17;
             this.vldtxtPass.SetValidator1(this.txtPass, this.customvldtxtPass1);
             this.txtPass.Enter += new System.EventHandler(this.txtPass_Enter);
+            this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPass_KeyPress);
             this.txtPass.Leave += new System.EventHandler(this.txtPass_Leave);
             // 
             // pnlPassI
@@ -229,13 +229,13 @@ namespace ARTEC.GUI
             this.txtNombreUsuario.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombreUsuario.ForeColor = System.Drawing.Color.Black;
             this.txtNombreUsuario.Location = new System.Drawing.Point(70, 12);
-            this.txtNombreUsuario.Multiline = true;
             this.txtNombreUsuario.Name = "txtNombreUsuario";
             this.txtNombreUsuario.PreventEnterBeep = true;
             this.txtNombreUsuario.Size = new System.Drawing.Size(278, 36);
             this.txtNombreUsuario.TabIndex = 18;
             this.vldNombreUs.SetValidator1(this.txtNombreUsuario, this.customvldtxtNombreUsuario);
             this.txtNombreUsuario.Enter += new System.EventHandler(this.txtNombreUsuario_Enter);
+            this.txtNombreUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombreUsuario_KeyPress);
             this.txtNombreUsuario.Leave += new System.EventHandler(this.txtNombreUsuario_Leave);
             // 
             // pnlNombreUsuarioI
@@ -301,6 +301,12 @@ namespace ARTEC.GUI
             this.vldtxtPass.ErrorProvider = this.errorProvider2;
             this.vldtxtPass.Highlighter = this.highlighter2;
             // 
+            // customvldtxtPass1
+            // 
+            this.customvldtxtPass1.ErrorMessage = "Campo Requerido";
+            this.customvldtxtPass1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.customvldtxtPass1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventVldTxtPass1);
+            // 
             // errorProvider2
             // 
             this.errorProvider2.ContainerControl = this;
@@ -309,12 +315,6 @@ namespace ARTEC.GUI
             // highlighter2
             // 
             this.highlighter2.ContainerControl = this;
-            // 
-            // customvldtxtPass1
-            // 
-            this.customvldtxtPass1.ErrorMessage = "Campo Requerido";
-            this.customvldtxtPass1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.customvldtxtPass1.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.EventVldTxtPass1);
             // 
             // Login
             // 
