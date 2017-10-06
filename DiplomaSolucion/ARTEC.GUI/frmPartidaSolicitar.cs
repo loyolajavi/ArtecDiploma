@@ -28,11 +28,26 @@ namespace ARTEC.GUI
         int PosSolicDet = 0;
         decimal TotalAcumulado = 0;
         decimal LimitePartida;
+        List<Solicitud> ListaSolicitudes;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
         {
             InitializeComponent();
+            //Agrega Checkbox para seleccionar SolicDetalles
+            var CheckBoxColumna = new DataGridViewCheckBoxColumn();
+            CheckBoxColumna.Name = "chkBoxDetalles";
+            CheckBoxColumna.TrueValue = true;
+            CheckBoxColumna.FalseValue = false;
+            CheckBoxColumna.HeaderText = ""; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+            grillaSolicDetalles.Columns.Add(CheckBoxColumna);
+            //Agrega Checkbox para seleccionar Cotizaciones
+            DataGridViewCheckBoxColumn chkCotizacion = new DataGridViewCheckBoxColumn();
+            chkCotizacion.Name = "chkBoxCotizacion";
+            chkCotizacion.HeaderText = "";
+            chkCotizacion.TrueValue = true;
+            chkCotizacion.FalseValue = false;
+            grillaCotizaciones.Columns.Add(chkCotizacion);
         }
 
         //Singleton cuando se ingresa por Principal
@@ -89,14 +104,14 @@ namespace ARTEC.GUI
             {
 
                 txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
-                txtDependencia.Text = unaSolicitud.laDependencia.NombreDependencia;
+                txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
                 txtNroSolicitud.ReadOnly = true;
-                txtDependencia.ReadOnly = true;
+                txtDep.ReadOnly = true;
 
                 grillaSolicitudes.DataSource = null;
-                List<Solicitud> ListaAUX = new List<Solicitud>();
-                ListaAUX.Add(unaSolicitud);
-                grillaSolicitudes.DataSource = ListaAUX;
+                ListaSolicitudes = new List<Solicitud>();
+                ListaSolicitudes.Add(unaSolicitud);
+                grillaSolicitudes.DataSource = ListaSolicitudes;
 
                 grillaSolicDetalles.DataSource = null;
 
@@ -133,10 +148,6 @@ namespace ARTEC.GUI
                 }
                 txtMontoTotal.Text = TotalAcumulado.ToString();
                 //********************************
-
-
-
-
             }
         }
 
@@ -478,6 +489,98 @@ namespace ARTEC.GUI
                 return false;
             }
             return true;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+            ListaSolicitudes = new List<Solicitud>();
+
+            if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text))
+            {
+                if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                {
+                    ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                }
+                else
+                {
+                    ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text);
+                }
+                grillaSolicitudes.DataSource = null;
+                grillaSolicitudes.DataSource = ListaSolicitudes;
+                grillaSolicitudes.Columns["Asignado"].Visible = true;
+            }
+            else
+            {
+                grillaSolicitudes.DataSource = null;
+            }
+
+        
+        }
+
+        private void grillaSolicitudes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            int SolicSeleccionada = e.RowIndex;
+
+            unaSolicitud = ListaSolicitudes[SolicSeleccionada];
+            cargarDetallesYCotizaciones();
+
+        }
+
+
+
+        private void cargarDetallesYCotizaciones()
+        {
+            if (unaSolicitud != null)
+            {
+                BLLSolicDetalle ManagerSolicDetalles = new BLLSolicDetalle();
+                unaSolicitud.unosDetallesSolicitud = ManagerSolicDetalles.SolicDetallesTraerPorNroSolicitud(unaSolicitud.IdSolicitud);
+                txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
+                txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
+                txtNroSolicitud.ReadOnly = true;
+                txtDep.ReadOnly = true;
+
+                grillaSolicDetalles.DataSource = null;
+                //Carga los detallesSolic que no están finalizados
+                grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
+
+                //********************************
+                foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
+                {
+                    DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
+                    chkDet.Value = chkDet.TrueValue;
+                }
+                foreach (SolicDetalle unDet in ListaSolicDet)
+                {
+                    unDet.Seleccionado = true;
+                    int Cont = 1;
+                    //Ordena las cotizaciones de cada detalle
+                    unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+
+                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                    {
+                        if (Cont <= 3)
+                        {
+                            unaCoti.Seleccionada = true;
+                        }
+                        else
+                        {
+                            unaCoti.Seleccionada = false;
+                        }
+                        Cont += 1;
+                    }
+                    //Suma para obtener el costo total de la partida
+                    TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
+                }
+                txtMontoTotal.Text = TotalAcumulado.ToString();
+                //********************************
+            }
         }
 
 
