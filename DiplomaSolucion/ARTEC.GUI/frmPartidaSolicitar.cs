@@ -29,6 +29,8 @@ namespace ARTEC.GUI
         decimal TotalAcumulado = 0;
         decimal LimitePartida;
         List<Solicitud> ListaSolicitudes;
+        List<Dependencia> unasDependencias = new List<Dependencia>();
+        static bool EntradaDesdePrincipal = false;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -57,7 +59,7 @@ namespace ARTEC.GUI
             {
                 _unFrmPartidaSolicituar = new frmPartidaSolicitar();
             }
-
+            EntradaDesdePrincipal = true;
             return _unFrmPartidaSolicituar;
         }
 
@@ -89,7 +91,7 @@ namespace ARTEC.GUI
             {
                 _unFrmPartidaSolicituar = new frmPartidaSolicitar(unaSolic);
             }
-
+            EntradaDesdePrincipal = false;
             return _unFrmPartidaSolicituar;
         }
 
@@ -100,13 +102,20 @@ namespace ARTEC.GUI
             txtMontoTotal.Text = "0";
             TraerLimitePartida();
 
+            ///Traigo Dependencias para busqueda dinámica
+            BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
+            unasDependencias = ManagerDependencia.TraerTodos();
+
             if (unaSolicitud != null)
             {
 
                 txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
                 txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
-                txtNroSolicitud.ReadOnly = true;
-                txtDep.ReadOnly = true;
+                if (!EntradaDesdePrincipal)
+                {
+                    txtNroSolicitud.ReadOnly = true;
+                    txtDep.ReadOnly = true;
+                }
 
                 grillaSolicitudes.DataSource = null;
                 ListaSolicitudes = new List<Solicitud>();
@@ -414,7 +423,7 @@ namespace ARTEC.GUI
             nuevaPartida.FechaEnvio = DateTime.Now;
             nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
             nuevaPartida.Caja = (PorCaja) ? true : false;
-            
+
             foreach (SolicDetalle unDeta in ListaSolicDet.Where(X => X.Seleccionado == true))
             {
                 PartidaDetalle unaPartDetalle = new PartidaDetalle();
@@ -433,7 +442,7 @@ namespace ARTEC.GUI
                 frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
                 if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
                 {
-                    if(!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
+                    if (!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
                     {
                         JustifAUX = unfrmDialogJustificacion.textBox1.Text;
                     }
@@ -482,7 +491,7 @@ namespace ARTEC.GUI
                         doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                     }
                 }
-                
+
             }
             else
             {
@@ -515,8 +524,9 @@ namespace ARTEC.GUI
                 grillaSolicitudes.DataSource = null;
             }
 
-        
+
         }
+
 
         private void grillaSolicitudes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -537,51 +547,148 @@ namespace ARTEC.GUI
 
         private void cargarDetallesYCotizaciones()
         {
+
+            grillaSolicDetalles.DataSource = null;
+            grillaCotizaciones.DataSource = null;
+
             if (unaSolicitud != null)
             {
                 BLLSolicDetalle ManagerSolicDetalles = new BLLSolicDetalle();
                 unaSolicitud.unosDetallesSolicitud = ManagerSolicDetalles.SolicDetallesTraerPorNroSolicitud(unaSolicitud.IdSolicitud);
-                txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
-                txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
-                txtNroSolicitud.ReadOnly = true;
-                txtDep.ReadOnly = true;
-
-                grillaSolicDetalles.DataSource = null;
-                //Carga los detallesSolic que no están finalizados
-                grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
-
-                //********************************
-                foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
+                //Me fijo si tiene detalles
+                if (unaSolicitud.unosDetallesSolicitud != null)
                 {
-                    DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
-                    chkDet.Value = chkDet.TrueValue;
-                }
-                foreach (SolicDetalle unDet in ListaSolicDet)
-                {
-                    unDet.Seleccionado = true;
-                    int Cont = 1;
-                    //Ordena las cotizaciones de cada detalle
-                    unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+                    txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
+                    txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
+                    txtNroSolicitud.ReadOnly = true;
+                    txtDep.ReadOnly = true;
 
-                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                    grillaSolicDetalles.DataSource = null;
+                    //Carga los detallesSolic que no están finalizados
+                    grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
+
+                    foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
                     {
-                        if (Cont <= 3)
-                        {
-                            unaCoti.Seleccionada = true;
-                        }
-                        else
-                        {
-                            unaCoti.Seleccionada = false;
-                        }
-                        Cont += 1;
+                        DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
+                        chkDet.Value = chkDet.TrueValue;
                     }
-                    //Suma para obtener el costo total de la partida
-                    TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
+
+                    //Me fijo si tiene cotizaciones
+                    if (ListaSolicDet.Find(R => R.unasCotizaciones != null).unasCotizaciones.Count() > 0)
+                    {
+                        foreach (SolicDetalle unDet in ListaSolicDet)
+                        {
+                            unDet.Seleccionado = true;
+                            int Cont = 1;
+                            //Ordena las cotizaciones de cada detalle
+                            if (unDet.unasCotizaciones != null)
+                            {
+                                unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+
+                                foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                                {
+                                    if (Cont <= 3)
+                                    {
+                                        unaCoti.Seleccionada = true;
+                                    }
+                                    else
+                                    {
+                                        unaCoti.Seleccionada = false;
+                                    }
+                                    Cont += 1;
+                                }
+                                //Suma para obtener el costo total de la partida
+                                TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
+                            }
+
+                        }
+                        txtMontoTotal.Text = TotalAcumulado.ToString();
+                    }
+
                 }
-                txtMontoTotal.Text = TotalAcumulado.ToString();
-                //********************************
+
             }
         }
+
+
+        //Búsqueda dinámica de dependencias
+        private void txtDep_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtDep.Text))
+            {
+                BusquedaDependencias();
+            }
+            else
+            {
+                cboDep.Visible = false;
+                cboDep.DroppedDown = false;
+                cboDep.DataSource = null;
+            }
+        }
+
+
+        private void BusquedaDependencias()
+        {
+            List<Dependencia> res = new List<Dependencia>();
+            res = (List<Dependencia>)unasDependencias.ToList();
+
+            List<string> Palabras = new List<string>();
+            Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtDep.Text, ' ');
+
+            foreach (string unaPalabra in Palabras)
+            {
+                res = (List<Dependencia>)(from d in res
+                                          where d.NombreDependencia.ToLower().Contains(unaPalabra.ToLower())
+                                          select d).ToList();
+            }
+
+            if (res.Count > 0)
+            {
+
+                //ESTO ERA PARA QUE NO QUEDE FLASHADO EL CBOBOX AL PASAR DE MUCHOS RESULTADOS RESULTADO A UNO SOLO AL ESCRIBIR LA FISCALIA JUSTA A MANO, PERO HACIA QUE NO SE EJECUTE BIEN LO DE CARGAR LOS AGENTES
+                if (res.Count == 1 && string.Equals(res.First().NombreDependencia, txtDep.Text))
+                {
+                    cboDep.Visible = false;
+                    cboDep.DroppedDown = false;
+                    cboDep.DataSource = null;
+
+                }
+                else
+                {
+                    cboDep.DataSource = null;
+                    cboDep.DataSource = res;
+                    cboDep.DisplayMember = "NombreDependencia";
+                    cboDep.ValueMember = "IdDependencia";
+                    cboDep.Visible = true;
+                    cboDep.DroppedDown = true;
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+            else
+            {
+                cboDep.Visible = false;
+                cboDep.DroppedDown = false;
+                cboDep.DataSource = null;
+            }
+        }
+
+
+        private void comboBoxEx4_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtDep.Text))
+            {
+                if (cboDep.SelectedIndex > -1)
+                {
+                    ComboBox cbo = (ComboBox)sender;
+                    this.txtDep.TextChanged -= new System.EventHandler(this.txtDep_TextChanged);
+                    txtDep.Text = cbo.GetItemText(cbo.SelectedItem);
+                    this.txtDep.TextChanged += new System.EventHandler(this.txtDep_TextChanged);
+                    txtDep.SelectionStart = txtDep.Text.Length + 1;
+                    cboDep.DataSource = null;
+                }
+            }
+        }
+
 
 
 

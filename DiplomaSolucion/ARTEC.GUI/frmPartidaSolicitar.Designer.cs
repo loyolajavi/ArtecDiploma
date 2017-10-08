@@ -33,7 +33,7 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblIdSolicitud = new DevComponents.DotNetBar.LabelX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
@@ -81,24 +81,26 @@ namespace ARTEC.GUI
             this.txtDep.Multiline = true;
             this.txtDep.Name = "txtDep";
             this.txtDep.PreventEnterBeep = true;
-            this.txtDep.Size = new System.Drawing.Size(284, 22);
+            this.txtDep.Size = new System.Drawing.Size(315, 22);
             this.txtDep.TabIndex = 22;
+            this.txtDep.TextChanged += new System.EventHandler(this.txtDep_TextChanged);
             // 
-            // comboBoxEx4
+            // cboDep
             // 
-            this.comboBoxEx4.DisplayMember = "Text";
-            this.comboBoxEx4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEx4.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx4.FormattingEnabled = true;
-            this.comboBoxEx4.ItemHeight = 16;
-            this.comboBoxEx4.Location = new System.Drawing.Point(135, 26);
-            this.comboBoxEx4.MaxDropDownItems = 10;
-            this.comboBoxEx4.Name = "comboBoxEx4";
-            this.comboBoxEx4.Size = new System.Drawing.Size(315, 22);
-            this.comboBoxEx4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx4.TabIndex = 23;
-            this.comboBoxEx4.Visible = false;
+            this.cboDep.DisplayMember = "Text";
+            this.cboDep.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDep.ForeColor = System.Drawing.Color.Black;
+            this.cboDep.FormattingEnabled = true;
+            this.cboDep.ItemHeight = 16;
+            this.cboDep.Location = new System.Drawing.Point(135, 26);
+            this.cboDep.MaxDropDownItems = 10;
+            this.cboDep.Name = "cboDep";
+            this.cboDep.Size = new System.Drawing.Size(315, 22);
+            this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboDep.TabIndex = 23;
+            this.cboDep.Visible = false;
+            this.cboDep.SelectionChangeCommitted += new System.EventHandler(this.comboBoxEx4_SelectionChangeCommitted);
             // 
             // lblIdSolicitud
             // 
@@ -157,7 +159,7 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicitudes.Location = new System.Drawing.Point(12, 54);
             this.grillaSolicitudes.Name = "grillaSolicitudes";
-            this.grillaSolicitudes.Size = new System.Drawing.Size(531, 78);
+            this.grillaSolicitudes.Size = new System.Drawing.Size(531, 116);
             this.grillaSolicitudes.TabIndex = 27;
             this.grillaSolicitudes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicitudes_CellClick);
             // 
@@ -186,7 +188,7 @@ namespace ARTEC.GUI
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grillaSolicDetalles.DefaultCellStyle = dataGridViewCellStyle2;
             this.grillaSolicDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaSolicDetalles.Location = new System.Drawing.Point(12, 168);
+            this.grillaSolicDetalles.Location = new System.Drawing.Point(12, 206);
             this.grillaSolicDetalles.Name = "grillaSolicDetalles";
             this.grillaSolicDetalles.Size = new System.Drawing.Size(531, 136);
             this.grillaSolicDetalles.TabIndex = 29;
@@ -200,7 +202,7 @@ namespace ARTEC.GUI
             // 
             this.lblDetalles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblDetalles.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalles.Location = new System.Drawing.Point(12, 145);
+            this.lblDetalles.Location = new System.Drawing.Point(12, 183);
             this.lblDetalles.Name = "lblDetalles";
             this.lblDetalles.Size = new System.Drawing.Size(102, 17);
             this.lblDetalles.TabIndex = 30;
@@ -219,7 +221,7 @@ namespace ARTEC.GUI
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle3;
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaCotizaciones.Location = new System.Drawing.Point(12, 342);
+            this.grillaCotizaciones.Location = new System.Drawing.Point(12, 380);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
             this.grillaCotizaciones.Size = new System.Drawing.Size(531, 136);
             this.grillaCotizaciones.TabIndex = 31;
@@ -232,7 +234,7 @@ namespace ARTEC.GUI
             // 
             this.lblCotizaciones.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCotizaciones.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCotizaciones.Location = new System.Drawing.Point(12, 319);
+            this.lblCotizaciones.Location = new System.Drawing.Point(12, 357);
             this.lblCotizaciones.Name = "lblCotizaciones";
             this.lblCotizaciones.Size = new System.Drawing.Size(102, 17);
             this.lblCotizaciones.TabIndex = 32;
@@ -338,7 +340,7 @@ namespace ARTEC.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 629);
+            this.ClientSize = new System.Drawing.Size(804, 523);
             this.Controls.Add(this.pnlResPartida);
             this.Controls.Add(this.lblCotizaciones);
             this.Controls.Add(this.grillaCotizaciones);
@@ -350,9 +352,10 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblIdSolicitud);
             this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtDep);
-            this.Controls.Add(this.comboBoxEx4);
+            this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmPartidaSolicitar";
             this.Text = "MetroForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPartidaSolicitar_FormClosing);
@@ -369,7 +372,7 @@ namespace ARTEC.GUI
 
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDep;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.LabelX lblIdSolicitud;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolicitud;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
