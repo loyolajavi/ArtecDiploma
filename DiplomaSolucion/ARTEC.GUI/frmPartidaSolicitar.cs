@@ -30,7 +30,6 @@ namespace ARTEC.GUI
         decimal LimitePartida;
         List<Solicitud> ListaSolicitudes;
         List<Dependencia> unasDependencias = new List<Dependencia>();
-        static bool EntradaDesdePrincipal = false;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -59,7 +58,6 @@ namespace ARTEC.GUI
             {
                 _unFrmPartidaSolicituar = new frmPartidaSolicitar();
             }
-            EntradaDesdePrincipal = true;
             return _unFrmPartidaSolicituar;
         }
 
@@ -91,7 +89,6 @@ namespace ARTEC.GUI
             {
                 _unFrmPartidaSolicituar = new frmPartidaSolicitar(unaSolic);
             }
-            EntradaDesdePrincipal = false;
             return _unFrmPartidaSolicituar;
         }
 
@@ -111,11 +108,6 @@ namespace ARTEC.GUI
 
                 txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
                 txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
-                if (!EntradaDesdePrincipal)
-                {
-                    txtNroSolicitud.ReadOnly = true;
-                    txtDep.ReadOnly = true;
-                }
 
                 grillaSolicitudes.DataSource = null;
                 ListaSolicitudes = new List<Solicitud>();
@@ -558,53 +550,69 @@ namespace ARTEC.GUI
                 //Me fijo si tiene detalles
                 if (unaSolicitud.unosDetallesSolicitud != null)
                 {
-                    txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
-                    txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
-                    txtNroSolicitud.ReadOnly = true;
-                    txtDep.ReadOnly = true;
+                    ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado).ToList();
 
-                    grillaSolicDetalles.DataSource = null;
-                    //Carga los detallesSolic que no están finalizados
-                    grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
-
-                    foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
+                    if (ListaSolicDet != null && ListaSolicDet.Count() > 0)
                     {
-                        DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
-                        chkDet.Value = chkDet.TrueValue;
-                    }
+                        txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
+                        txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
+                        //txtNroSolicitud.ReadOnly = true;
+                        ////txtDep.ReadOnly = true;
 
-                    //Me fijo si tiene cotizaciones
-                    if (ListaSolicDet.Find(R => R.unasCotizaciones != null).unasCotizaciones.Count() > 0)
-                    {
-                        foreach (SolicDetalle unDet in ListaSolicDet)
+                        grillaSolicDetalles.DataSource = null;
+                        //Carga los detallesSolic que no están finalizados
+                        grillaSolicDetalles.DataSource = ListaSolicDet;
+
+                        foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
                         {
-                            unDet.Seleccionado = true;
-                            int Cont = 1;
-                            //Ordena las cotizaciones de cada detalle
-                            if (unDet.unasCotizaciones != null)
-                            {
-                                unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
-
-                                foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
-                                {
-                                    if (Cont <= 3)
-                                    {
-                                        unaCoti.Seleccionada = true;
-                                    }
-                                    else
-                                    {
-                                        unaCoti.Seleccionada = false;
-                                    }
-                                    Cont += 1;
-                                }
-                                //Suma para obtener el costo total de la partida
-                                TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
-                            }
-
+                            DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
+                            chkDet.Value = chkDet.TrueValue;
                         }
-                        txtMontoTotal.Text = TotalAcumulado.ToString();
-                    }
 
+                        //Me fijo si tiene cotizaciones
+                        if (ListaSolicDet.Find(R => R.unasCotizaciones != null).unasCotizaciones.Count() > 0)
+                        {
+                            foreach (SolicDetalle unDet in ListaSolicDet)
+                            {
+                                unDet.Seleccionado = true;
+                                int Cont = 1;
+                                //Ordena las cotizaciones de cada detalle
+                                if (unDet.unasCotizaciones != null && unDet.unasCotizaciones.Count > 0)
+                                {
+                                    unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
+
+                                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
+                                    {
+                                        if (Cont <= 3)
+                                        {
+                                            unaCoti.Seleccionada = true;
+                                        }
+                                        else
+                                        {
+                                            unaCoti.Seleccionada = false;
+                                        }
+                                        Cont += 1;
+                                    }
+                                    //Suma para obtener el costo total de la partida
+                                    TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
+                                }
+
+                            }
+                            txtMontoTotal.Text = TotalAcumulado.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Por favor primero agregue cotizaciones antes de generar una Partida");//VER:IDIOMA
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
                 }
 
             }

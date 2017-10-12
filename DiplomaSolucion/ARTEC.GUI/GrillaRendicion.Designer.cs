@@ -46,7 +46,7 @@
             this.txtFactura.DisabledBackColor = System.Drawing.Color.White;
             this.txtFactura.ForeColor = System.Drawing.Color.Black;
             this.txtFactura.Location = new System.Drawing.Point(84, 3);
-            this.txtFactura.Multiline = true;
+            this.txtFactura.Multiline = false;
             this.txtFactura.Name = "txtFactura";
             this.txtFactura.PreventEnterBeep = true;
             this.txtFactura.ReadOnly = true;

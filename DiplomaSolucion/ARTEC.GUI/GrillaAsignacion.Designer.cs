@@ -81,7 +81,7 @@
             this.txtCantidad.DisabledBackColor = System.Drawing.Color.White;
             this.txtCantidad.ForeColor = System.Drawing.Color.Black;
             this.txtCantidad.Location = new System.Drawing.Point(260, 3);
-            this.txtCantidad.Multiline = true;
+            this.txtCantidad.Multiline = false;
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.PreventEnterBeep = true;
             this.txtCantidad.Size = new System.Drawing.Size(35, 22);

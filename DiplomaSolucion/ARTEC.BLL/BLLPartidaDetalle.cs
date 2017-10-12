@@ -29,5 +29,14 @@ namespace ARTEC.BLL
         {
             return GestorPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(NroPart, IdCat);
         }
+
+
+        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraer(int IdSolic, int IdSolicDetalle)
+        {
+            return GestorPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(IdSolic, IdSolicDetalle);
+        }
+
+
+
     }
 }

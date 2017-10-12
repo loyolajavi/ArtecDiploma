@@ -78,7 +78,7 @@ namespace ARTEC.GUI
             this.txtDep.DisabledBackColor = System.Drawing.Color.White;
             this.txtDep.ForeColor = System.Drawing.Color.Black;
             this.txtDep.Location = new System.Drawing.Point(135, 26);
-            this.txtDep.Multiline = true;
+            this.txtDep.Multiline = false;
             this.txtDep.Name = "txtDep";
             this.txtDep.PreventEnterBeep = true;
             this.txtDep.Size = new System.Drawing.Size(315, 22);
@@ -126,7 +126,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
             this.txtNroSolicitud.Location = new System.Drawing.Point(12, 26);
-            this.txtNroSolicitud.Multiline = true;
+            this.txtNroSolicitud.Multiline = false;
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);

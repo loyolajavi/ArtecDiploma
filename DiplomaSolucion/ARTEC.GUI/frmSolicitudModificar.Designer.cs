@@ -852,7 +852,7 @@ namespace ARTEC.GUI
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
             this.txtDependencia.Location = new System.Drawing.Point(21, 45);
-            this.txtDependencia.Multiline = true;
+            this.txtDependencia.Multiline = false;
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.ReadOnly = true;

@@ -131,7 +131,7 @@ namespace ARTEC.GUI
             this.txtNroFactura.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroFactura.ForeColor = System.Drawing.Color.Black;
             this.txtNroFactura.Location = new System.Drawing.Point(139, 12);
-            this.txtNroFactura.Multiline = true;
+            this.txtNroFactura.Multiline = false;
             this.txtNroFactura.Name = "txtNroFactura";
             this.txtNroFactura.PreventEnterBeep = true;
             this.txtNroFactura.Size = new System.Drawing.Size(102, 22);
@@ -245,7 +245,7 @@ namespace ARTEC.GUI
             this.txtMontoTotal.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoTotal.ForeColor = System.Drawing.Color.Black;
             this.txtMontoTotal.Location = new System.Drawing.Point(139, 86);
-            this.txtMontoTotal.Multiline = true;
+            this.txtMontoTotal.Multiline = false;
             this.txtMontoTotal.Name = "txtMontoTotal";
             this.txtMontoTotal.PreventEnterBeep = true;
             this.txtMontoTotal.Size = new System.Drawing.Size(102, 22);
@@ -262,7 +262,7 @@ namespace ARTEC.GUI
             this.txtProveedor.DisabledBackColor = System.Drawing.Color.White;
             this.txtProveedor.ForeColor = System.Drawing.Color.Black;
             this.txtProveedor.Location = new System.Drawing.Point(139, 123);
-            this.txtProveedor.Multiline = true;
+            this.txtProveedor.Multiline = false;
             this.txtProveedor.Name = "txtProveedor";
             this.txtProveedor.PreventEnterBeep = true;
             this.txtProveedor.Size = new System.Drawing.Size(102, 22);
@@ -324,7 +324,7 @@ namespace ARTEC.GUI
             this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
             this.txtNroPartida.Location = new System.Drawing.Point(139, 158);
-            this.txtNroPartida.Multiline = true;
+            this.txtNroPartida.Multiline = false;
             this.txtNroPartida.Name = "txtNroPartida";
             this.txtNroPartida.PreventEnterBeep = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);

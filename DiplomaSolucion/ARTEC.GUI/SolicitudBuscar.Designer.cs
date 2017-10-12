@@ -78,7 +78,7 @@ namespace ARTEC.GUI
             this.txtBien.DisabledBackColor = System.Drawing.Color.White;
             this.txtBien.ForeColor = System.Drawing.Color.Black;
             this.txtBien.Location = new System.Drawing.Point(104, 63);
-            this.txtBien.Multiline = true;
+            this.txtBien.Multiline = false;
             this.txtBien.Name = "txtBien";
             this.txtBien.PreventEnterBeep = true;
             this.txtBien.Size = new System.Drawing.Size(315, 22);

@@ -67,6 +67,34 @@ namespace ARTEC.DAL
 
 
 
+        private PartidaDetalle MapearPartidaDetalleUNO(DataSet ds)
+        {
+            PartidaDetalle unDet = new PartidaDetalle();
+            
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    
+                    unDet.IdPartida = (int)row["IdPartida"];
+                    unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
+                    unDet.SolicDetalleAsociado = new SolicDetalle();
+                    unDet.SolicDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+                    unDet.SolicDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
+                    //unDet.SolicDetalleAsociado.unaCategoria.DescripCategoria = row["DescripCategoria"].ToString();
+                    //unDet.SolicDetalleAsociado.Cantidad = (int)row["Cantidad"];
+                }
+
+            }
+            catch (Exception es)
+            {
+                throw; //VER
+            }
+            return unDet;
+        }
+
+
+
         public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida)
         {
 
@@ -153,5 +181,34 @@ namespace ARTEC.DAL
             }
 
         }
+
+
+
+        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraer(int IdSolic, int IdSolicDetalle)
+        {
+
+            SqlParameter[] parametersPartDet = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicitud", IdSolic),
+                new SqlParameter("@IdSolicDetalle", IdSolicDetalle)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallePartidaDetalleAsociacionTraer", parametersPartDet))
+                {
+                    PartidaDetalle unaPartidaDetalle = new PartidaDetalle();
+                    unaPartidaDetalle = MapearPartidaDetalleUNO(ds);
+                    return unaPartidaDetalle;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
     }
 }

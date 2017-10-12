@@ -79,7 +79,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtIdPartida.ForeColor = System.Drawing.Color.Black;
             this.txtIdPartida.Location = new System.Drawing.Point(13, 89);
-            this.txtIdPartida.Multiline = true;
+            this.txtIdPartida.Multiline = false;
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
@@ -122,7 +122,7 @@ namespace ARTEC.GUI
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
             this.txtDependencia.Location = new System.Drawing.Point(135, 35);
-            this.txtDependencia.Multiline = true;
+            this.txtDependencia.Multiline = false;
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(284, 22);
@@ -172,7 +172,7 @@ namespace ARTEC.GUI
             this.txtNroPartAsignado.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPartAsignado.ForeColor = System.Drawing.Color.Black;
             this.txtNroPartAsignado.Location = new System.Drawing.Point(12, 453);
-            this.txtNroPartAsignado.Multiline = true;
+            this.txtNroPartAsignado.Multiline = false;
             this.txtNroPartAsignado.Name = "txtNroPartAsignado";
             this.txtNroPartAsignado.PreventEnterBeep = true;
             this.txtNroPartAsignado.Size = new System.Drawing.Size(102, 22);
@@ -202,7 +202,7 @@ namespace ARTEC.GUI
             this.txtMontoOtorgado.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoOtorgado.ForeColor = System.Drawing.Color.Black;
             this.txtMontoOtorgado.Location = new System.Drawing.Point(166, 453);
-            this.txtMontoOtorgado.Multiline = true;
+            this.txtMontoOtorgado.Multiline = false;
             this.txtMontoOtorgado.Name = "txtMontoOtorgado";
             this.txtMontoOtorgado.PreventEnterBeep = true;
             this.txtMontoOtorgado.Size = new System.Drawing.Size(102, 22);
@@ -244,7 +244,7 @@ namespace ARTEC.GUI
             this.txtIdSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtIdSolicitud.ForeColor = System.Drawing.Color.Black;
             this.txtIdSolicitud.Location = new System.Drawing.Point(12, 35);
-            this.txtIdSolicitud.Multiline = true;
+            this.txtIdSolicitud.Multiline = false;
             this.txtIdSolicitud.Name = "txtIdSolicitud";
             this.txtIdSolicitud.PreventEnterBeep = true;
             this.txtIdSolicitud.Size = new System.Drawing.Size(102, 22);
@@ -274,7 +274,7 @@ namespace ARTEC.GUI
             this.txtFechaEnvio.DisabledBackColor = System.Drawing.Color.White;
             this.txtFechaEnvio.ForeColor = System.Drawing.Color.Black;
             this.txtFechaEnvio.Location = new System.Drawing.Point(11, 46);
-            this.txtFechaEnvio.Multiline = true;
+            this.txtFechaEnvio.Multiline = false;
             this.txtFechaEnvio.Name = "txtFechaEnvio";
             this.txtFechaEnvio.PreventEnterBeep = true;
             this.txtFechaEnvio.Size = new System.Drawing.Size(102, 22);
@@ -332,7 +332,7 @@ namespace ARTEC.GUI
             this.txtMontoSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoSolic.ForeColor = System.Drawing.Color.Black;
             this.txtMontoSolic.Location = new System.Drawing.Point(137, 46);
-            this.txtMontoSolic.Multiline = true;
+            this.txtMontoSolic.Multiline = false;
             this.txtMontoSolic.Name = "txtMontoSolic";
             this.txtMontoSolic.PreventEnterBeep = true;
             this.txtMontoSolic.Size = new System.Drawing.Size(102, 22);

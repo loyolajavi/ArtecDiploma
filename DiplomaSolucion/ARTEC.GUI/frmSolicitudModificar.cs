@@ -240,55 +240,65 @@ namespace ARTEC.GUI
             //VER:Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
-
-                //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-                grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
-                grillaDetalles.Columns.Remove("txtCotizConteo");
-                grillaDetalles.Columns.Remove("btnDinCotizar");
-
-                //Obtengo el Nro IDDetalle que se borrará
-                int NroDetBorrado = unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle;
-
-                //elimino de la memoria el detalle
-                unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
-
-                //Conteo de detalles
-                foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+                PartidaDetalle unaPartDet = new PartidaDetalle();
+                //Compruebo que no tenga partidas asociadas
+                BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle);
+                if (unaPartDet.IdPartida == 0)
                 {
-                    if (Det2.IdSolicitudDetalle > NroDetBorrado)
-                        Det2.IdSolicitudDetalle--;
+                    //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                    grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
+                    grillaDetalles.Columns.Remove("txtCotizConteo");
+                    grillaDetalles.Columns.Remove("btnDinCotizar");
+
+                    //Obtengo el Nro IDDetalle que se borrará
+                    int NroDetBorrado = unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle;
+
+                    //elimino de la memoria el detalle
+                    unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+
+                    //Conteo de detalles
+                    foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+                    {
+                        if (Det2.IdSolicitudDetalle > NroDetBorrado)
+                            Det2.IdSolicitudDetalle--;
+                    }
+                    //Regenero la grilla
+                    grillaDetalles.DataSource = null;
+                    grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                    //grillaDetalles.Columns[1].Visible = false;
+                    //Vuelve a agregar el conteo de cotizaciones por detalle
+                    DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                    ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                    ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                    grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                    foreach (DataGridViewRow item in grillaDetalles.Rows)
+                    {
+                        item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                    }
+
+                    //Vuelve a agregar boton para la gestión de cotizaciones
+                    var botonCotizar = new DataGridViewButtonColumn();
+                    botonCotizar.Name = "btnDinCotizar";
+                    botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                    botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                    botonCotizar.UseColumnTextForButtonValue = true;
+                    grillaDetalles.Columns.Add(botonCotizar);
+
+                    //Vuelve a agregar el botón de borrar al final
+                    var deleteButton = new DataGridViewButtonColumn();
+                    deleteButton.Name = "btnDinBorrar";
+                    deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.UseColumnTextForButtonValue = true;
+                    grillaDetalles.Columns.Add(deleteButton);
+
+                    grillaDetallesFormatoAplicar();
                 }
-                //Regenero la grilla
-                grillaDetalles.DataSource = null;
-                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                //grillaDetalles.Columns[1].Visible = false;
-                //Vuelve a agregar el conteo de cotizaciones por detalle
-                DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
-                ColumnaCotizacionConteo.Name = "txtCotizConteo";
-                ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
-                grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
-                foreach (DataGridViewRow item in grillaDetalles.Rows)
+                else
                 {
-                    item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida);
                 }
-
-                //Vuelve a agregar boton para la gestión de cotizaciones
-                var botonCotizar = new DataGridViewButtonColumn();
-                botonCotizar.Name = "btnDinCotizar";
-                botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                botonCotizar.UseColumnTextForButtonValue = true;
-                grillaDetalles.Columns.Add(botonCotizar);
-
-                //Vuelve a agregar el botón de borrar al final
-                var deleteButton = new DataGridViewButtonColumn();
-                deleteButton.Name = "btnDinBorrar";
-                deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                deleteButton.UseColumnTextForButtonValue = true;
-                grillaDetalles.Columns.Add(deleteButton);
-
-                grillaDetallesFormatoAplicar();
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
             {
@@ -372,6 +382,20 @@ namespace ARTEC.GUI
 
             //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
             grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count().ToString();
+            //if (unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count() > 2)
+            if (unaSolicitud.unosDetallesSolicitud.Where(X=>X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unasCotizaciones.Count() > 2)
+            {
+                //Actualizo el estado en la bd
+                ManagerSolicDetalle.SolicDetalleUpdateEstado(unaSolicitud.IdSolicitud, unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado);
+                //Actualizo el estado en el objeto en memoria
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
+                //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
+                EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
+                EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
+                EstadoAUX.DescripEstadoSolicDetalle = "Cotizado";
+                grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["unEstado"].Value = EstadoAUX;
+            }
         }
 
 

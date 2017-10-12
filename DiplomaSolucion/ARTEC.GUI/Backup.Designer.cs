@@ -114,7 +114,7 @@ namespace ARTEC.GUI
             this.txtObservaciones.DisabledBackColor = System.Drawing.Color.White;
             this.txtObservaciones.ForeColor = System.Drawing.Color.Black;
             this.txtObservaciones.Location = new System.Drawing.Point(90, 91);
-            this.txtObservaciones.Multiline = true;
+            this.txtObservaciones.Multiline = false;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.PreventEnterBeep = true;
             this.txtObservaciones.Size = new System.Drawing.Size(316, 50);

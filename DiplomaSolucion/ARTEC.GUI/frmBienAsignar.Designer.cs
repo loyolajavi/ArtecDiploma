@@ -54,7 +54,7 @@ namespace ARTEC.GUI
             this.txtNroSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolic.ForeColor = System.Drawing.Color.Black;
             this.txtNroSolic.Location = new System.Drawing.Point(100, 12);
-            this.txtNroSolic.Multiline = true;
+            this.txtNroSolic.Multiline = false;
             this.txtNroSolic.Name = "txtNroSolic";
             this.txtNroSolic.PreventEnterBeep = true;
             this.txtNroSolic.Size = new System.Drawing.Size(102, 22);
@@ -84,7 +84,7 @@ namespace ARTEC.GUI
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
             this.txtDependencia.Location = new System.Drawing.Point(332, 12);
-            this.txtDependencia.Multiline = true;
+            this.txtDependencia.Multiline = false;
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(281, 22);
