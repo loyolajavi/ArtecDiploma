@@ -143,9 +143,9 @@ namespace ARTEC.GUI
             unaCotiz.unDetalleAsociado = new SolicDetalle();
             unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
             unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
-            unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
-            if (unaCotiz.IdCotizacion > 0)
-            {
+            //unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
+            //if (unaCotiz.IdCotizacion > 0)
+            //{
                 //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
                 unasCotizaciones.Add(unaCotiz);
                 grillaProveedor.DataSource = null;
@@ -153,7 +153,7 @@ namespace ARTEC.GUI
                 
                 //Actualiza SolicDetalles en frmModificarSolicitud por Evento
                 this.EventoActualizarDetalles(unasCotizaciones);
-            }
+            //}
         }
 
 

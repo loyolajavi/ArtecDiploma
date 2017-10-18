@@ -19,6 +19,7 @@ namespace ARTEC.GUI
     {
 
         Solicitud unaSolicitud;
+        Solicitud unaSolicitudSinModif;
         List<Agente> unosAgentesResp;
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
         List<EstadoSolicDetalle> unosEstadoSolDetalles = new List<EstadoSolicDetalle>();
@@ -42,6 +43,7 @@ namespace ARTEC.GUI
         List<string> unosAdjuntos = new List<string>();
         List<Nota> unasNotas = new List<Nota>();
         BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+        bool flagDetEliminado = false;
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -133,7 +135,7 @@ namespace ARTEC.GUI
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
 
             //Agrega el conteo de cotizaciones por detalle
-            
+
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
             ColumnaCotizacionConteo.Name = "txtCotizConteo";
             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -223,6 +225,7 @@ namespace ARTEC.GUI
             //grillaDetalles.Columns[4].HeaderText = "Estado";
             grillaDetalles.Columns["Seleccionado"].Visible = false;
             grillaDetalles.Columns["txtCotizConteo"].HeaderText = "Cotizaciones";
+            grillaDetalles.Columns["UIDSolicDetalle"].Visible = false;
         }
 
 
@@ -240,6 +243,9 @@ namespace ARTEC.GUI
             //VER:Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
+                //Pongo el flag en true para dps regenerar los detalles en la BD
+                flagDetEliminado = true;
+
                 PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
                 BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
@@ -383,10 +389,10 @@ namespace ARTEC.GUI
             //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
             grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count().ToString();
             //if (unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count() > 2)
-            if (unaSolicitud.unosDetallesSolicitud.Where(X=>X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unasCotizaciones.Count() > 2)
+            if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unasCotizaciones.Count() > 2)
             {
                 //Actualizo el estado en la bd
-                ManagerSolicDetalle.SolicDetalleUpdateEstado(unaSolicitud.IdSolicitud, unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado);
+                //ManagerSolicDetalle.SolicDetalleUpdateEstado(unaSolicitud.IdSolicitud, unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado);
                 //Actualizo el estado en el objeto en memoria
                 unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
                 unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
@@ -448,7 +454,7 @@ namespace ARTEC.GUI
                 //VER: Traduccion
                 MessageBox.Show("No hay bienes listos para ser entregados");
             }
-            
+
         }
 
 
@@ -464,14 +470,14 @@ namespace ARTEC.GUI
             gboxAsociados.Enabled = false;
             txtCantBien.ReadOnly = false;
             lblCantidad.Enabled = true;
-            cboTipoBien.SelectedIndex = (int)Hardware.elTipoBien.Hardware-1;
+            cboTipoBien.SelectedIndex = (int)Hardware.elTipoBien.Hardware - 1;
             txtBien.Clear();
             AuxTipoCategoria = 1;
             txtCantBien.Clear();
             txtAgente.Clear();
             unAgen = null;
             grillaAgentesAsociados.DataSource = null;
-            cboEstadoSolDetalle.SelectedIndex = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente-1;
+            cboEstadoSolDetalle.SelectedIndex = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente - 1;
         }
 
 
@@ -602,46 +608,38 @@ namespace ARTEC.GUI
         //Busqueda Dinamica Agentes por Dependencia
         private void txtAgente_TextChanged(object sender, EventArgs e)
         {
-                if (!string.IsNullOrWhiteSpace(txtAgente.Text) & unosAgentes != null)
+            if (!string.IsNullOrWhiteSpace(txtAgente.Text) & unosAgentes != null)
+            {
+
+                List<Agente> resAgente = new List<Agente>();
+                resAgente = (List<Agente>)unosAgentes.ToList();
+                List<string> Palabras = new List<string>();
+                Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
+
+                foreach (string unaPalabra in Palabras)
                 {
+                    resAgente = (List<Agente>)(from cat in resAgente
+                                               where cat.ApellidoAgente.ToLower().Contains(unaPalabra.ToLower())
+                                               select cat).ToList();
+                }
 
-                    List<Agente> resAgente = new List<Agente>();
-                    resAgente = (List<Agente>)unosAgentes.ToList();
-                    List<string> Palabras = new List<string>();
-                    Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtAgente.Text, ' ');
-
-                    foreach (string unaPalabra in Palabras)
-                    {
-                        resAgente = (List<Agente>)(from cat in resAgente
-                                                   where cat.ApellidoAgente.ToLower().Contains(unaPalabra.ToLower())
-                                                   select cat).ToList();
-                    }
-
-                    if (resAgente.Count > 0)
-                    {
-                        if (resAgente.Count == 1 && string.Equals(resAgente.First().ApellidoAgente, txtAgente.Text))
-                        {
-                            cboAgentesAsociados.Visible = false;
-                            cboAgentesAsociados.DroppedDown = false;
-                            cboAgentesAsociados.DataSource = null;
-                        }
-                        else
-                        {
-                            cboAgentesAsociados.DataSource = null;
-                            cboAgentesAsociados.DataSource = resAgente;
-                            cboAgentesAsociados.DisplayMember = "ApellidoAgente";
-                            cboAgentesAsociados.ValueMember = "IdAgente";
-                            cboAgentesAsociados.Visible = true;
-                            cboAgentesAsociados.DroppedDown = true;
-                            Cursor.Current = Cursors.Default;
-                        }
-                    }
-                    else
+                if (resAgente.Count > 0)
+                {
+                    if (resAgente.Count == 1 && string.Equals(resAgente.First().ApellidoAgente, txtAgente.Text))
                     {
                         cboAgentesAsociados.Visible = false;
                         cboAgentesAsociados.DroppedDown = false;
                         cboAgentesAsociados.DataSource = null;
-                        //unAgen = null; // GUARDA
+                    }
+                    else
+                    {
+                        cboAgentesAsociados.DataSource = null;
+                        cboAgentesAsociados.DataSource = resAgente;
+                        cboAgentesAsociados.DisplayMember = "ApellidoAgente";
+                        cboAgentesAsociados.ValueMember = "IdAgente";
+                        cboAgentesAsociados.Visible = true;
+                        cboAgentesAsociados.DroppedDown = true;
+                        Cursor.Current = Cursors.Default;
                     }
                 }
                 else
@@ -649,7 +647,15 @@ namespace ARTEC.GUI
                     cboAgentesAsociados.Visible = false;
                     cboAgentesAsociados.DroppedDown = false;
                     cboAgentesAsociados.DataSource = null;
+                    //unAgen = null; // GUARDA
                 }
+            }
+            else
+            {
+                cboAgentesAsociados.Visible = false;
+                cboAgentesAsociados.DroppedDown = false;
+                cboAgentesAsociados.DataSource = null;
+            }
         }
 
 
@@ -677,24 +683,16 @@ namespace ARTEC.GUI
         //Asociar Agentes al software ingresado
         private void btnAsociarAgente_Click(object sender, EventArgs e)//VALIDAR QUE NO DEJE AGREGARDETALLE SI NO HAY UN AGENTE ASOCIADO
         {
-                if (validAgenteAsoc.Validate())
+            if (validAgenteAsoc.Validate())
+            {
+                if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
                 {
-                    if (unosAgentesAsociados.Count > 0) //QUEDA CARGADO unosAgentesAsociados aun dps de cargar un hardware y volver a cargar un software GUARDA, 
-                    {
 
-                        var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
-                        if (resultado.Count() > 0)
-                        {
-                            MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
-                            validCantBien.ClearFailedValidations();
-                        }
-                        else
-                        {
-                            unosAgentesAsociados.Add(unAgen);
-                            //CantSuma += 1;
-                            //txtCantBien.Text = CantSuma.ToString();
-                            txtCantBien.Text = unosAgentesAsociados.Count().ToString();
-                        }
+                    var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
+                    if (resultado.Count() > 0)
+                    {
+                        MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                        validCantBien.ClearFailedValidations();
                     }
                     else
                     {
@@ -703,15 +701,23 @@ namespace ARTEC.GUI
                         //txtCantBien.Text = CantSuma.ToString();
                         txtCantBien.Text = unosAgentesAsociados.Count().ToString();
                     }
-
-                    grillaAgentesAsociados.DataSource = null;
-                    grillaAgentesAsociados.DataSource = unosAgentesAsociados;
-                    grillaAgentesAsociados.Columns[0].Visible = false;
-                    grillaAgentesAsociados.Columns[3].Visible = false;
-                    grillaAgentesAsociados.Columns[4].Visible = false;
                 }
-                //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
-                //validCantBien.Validate();
+                else
+                {
+                    unosAgentesAsociados.Add(unAgen);
+                    //CantSuma += 1;
+                    //txtCantBien.Text = CantSuma.ToString();
+                    txtCantBien.Text = unosAgentesAsociados.Count().ToString();
+                }
+
+                grillaAgentesAsociados.DataSource = null;
+                grillaAgentesAsociados.DataSource = unosAgentesAsociados;
+                grillaAgentesAsociados.Columns[0].Visible = false;
+                grillaAgentesAsociados.Columns[3].Visible = false;
+                grillaAgentesAsociados.Columns[4].Visible = false;
+            }
+            //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
+            //validCantBien.Validate();
 
         }
 
@@ -739,7 +745,7 @@ namespace ARTEC.GUI
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
 
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
-                    if (unaSolicitud.unosDetallesSolicitud.Find(Z=>Z.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
+                    if (unaSolicitud.unosDetallesSolicitud.Find(Z => Z.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                     {
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
@@ -756,7 +762,7 @@ namespace ARTEC.GUI
                                 //Le Agrego los nuevos agentes
                                 foreach (Agente unAgen in unosAgentesAsociados)
                                 {
-                                    hhh.Widget.unosAgentes.Add(unAgen);    
+                                    hhh.Widget.unosAgentes.Add(unAgen);
                                 }
                                 hhh.Widget.Cantidad = hhh.Widget.unosAgentes.Count();
                             }
@@ -1111,6 +1117,7 @@ namespace ARTEC.GUI
             unosAdjuntos.Clear();
             unasNotas.Clear();
             GrillaAdjuntos.DataSource = null;
+            flagDetEliminado = false;
 
         }
 
@@ -1120,11 +1127,11 @@ namespace ARTEC.GUI
             //***FECHA FIN VER Q SI ESTA ESCRITA
             unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
             unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
-            if (cboEstadoSolicitud.SelectedIndex+1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cerrado)
+            if (cboEstadoSolicitud.SelectedIndex + 1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cerrado)
             {
                 MessageBox.Show("Debe ingresar un motivo y la fecha de finalización será la de hoy");
                 unaSolicitud.FechaFin = DateTime.Today;
-                
+
                 //VER:AGREGAR LO DEL MOTIVO
             }
             unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
@@ -1138,7 +1145,18 @@ namespace ARTEC.GUI
             //VER:AGREGAR LOS ADJUNTOS
             //VER:AGREGAR EN EL STORE LAS NOTAS
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            //ManagerSolicitud.SolicitudModificar(unaSolicitud);
+            
+            //if (flagDetEliminado)
+            //{
+                //Regenerar detalles en BD
+                //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
+                ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
+            //}
+            //else
+            //{
+            //     ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
+            //    //Modificar datos detalles
+            //}
         }
 
 

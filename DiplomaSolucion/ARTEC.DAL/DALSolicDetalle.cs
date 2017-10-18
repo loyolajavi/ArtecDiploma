@@ -69,6 +69,7 @@ namespace ARTEC.DAL
                     unDet.IdSolicitud = (int)row["IdSolicitud"];
                     //unDet.unosAgentes = DALAgente.MapearAgentes(ds);
                     //unDet.unasCotizaciones = DALCotizacion.MapearCotizaciones(ds);
+                    unDet.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
 
                     ResSolicDetalles.Add(unDet);
                 }
@@ -94,13 +95,13 @@ namespace ARTEC.DAL
             try
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parameters);
-                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionAceptar();
             }
             catch (Exception es)
             {
-                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionCancelar();
                 throw;
             }
             finally
@@ -136,6 +137,36 @@ namespace ARTEC.DAL
             }
 
         }
+
+
+        public bool SolicDetalleDeletePorSolicitud(int IdSolic)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicitud", IdSolic)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleDeletePorSolicitud", parameters);
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionCancelar();
+                return false; //VER:Msj
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
 
 
 

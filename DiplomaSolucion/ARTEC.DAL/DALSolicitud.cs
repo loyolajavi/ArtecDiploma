@@ -295,6 +295,112 @@ namespace ARTEC.DAL
 
 
 
+        public bool SolicitudModificarConDetallesEliminados(Solicitud laSolicitud)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@FechaInicio", laSolicitud.FechaInicio),
+                new SqlParameter("@IdDependencia", laSolicitud.laDependencia.IdDependencia),
+                new SqlParameter("@IdPrioridad", laSolicitud.UnaPrioridad.IdPrioridad),
+                new SqlParameter("@IdEstado", laSolicitud.UnEstado.IdEstadoSolicitud),
+                new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario),
+                new SqlParameter("@IdAgente", laSolicitud.AgenteResp.IdAgente),
+                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+			};
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudModificar", parameters);
+
+                //Limpia los detalles en la BD
+                //DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
+                //GestorSolicDetalle.SolicDetalleDeletePorSolicitud(laSolicitud.IdSolicitud);
+                SqlParameter[] parametersDetalles = new SqlParameter[]
+                {
+                    new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+                };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleDeletePorSolicitud", parametersDetalles);
+
+                //Regenera los detalles en la BD
+                foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
+                {
+                    SqlParameter[] parametersSolicitudDetalles = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                        new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria),
+                        new SqlParameter("@Cantidad", item.Cantidad),
+                        new SqlParameter("@IdEstadoSolDetalle", item.unEstado.IdEstadoSolicDetalle)
+			        };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudDetalleCrear", parametersSolicitudDetalles);
+
+                    //Guarda Las cotizaciones
+                    foreach (Cotizacion unaCotiza in item.unasCotizaciones)
+                    {
+                        SqlParameter[] parametersCotizaciones = new SqlParameter[]
+			            {
+                            new SqlParameter("@MontoCotizado", unaCotiza.MontoCotizado),
+                            new SqlParameter("@FechaCotizacion", unaCotiza.FechaCotizacion),
+                            new SqlParameter("@IdProveedor", unaCotiza.unProveedor.IdProveedor)
+			            };
+
+                        var ResCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotizaciones);
+                        int IDDevCotiz = Decimal.ToInt32(ResCotiz);
+
+                        //Tabla de relacion
+                        SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                            new SqlParameter("@IdSolicitud", item.IdSolicitud),
+                            new SqlParameter("@IdCotizacion", IDDevCotiz)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
+                    }
+
+
+                    //Guarda los Agentes por cada Detalle
+                    DALTipoBien GestorCategoria = new DALTipoBien();
+                    //PRUEBA FUNCIONA
+                    SqlParameter[] parametersTipoBien = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria)
+			        };
+                    int IdTipoBienAUX = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBien);
+                    //ENDPRUEBA
+                    //if (GestorCategoria.TipoBienTraerTipoBienPorIdCategoria(item.unaCategoria.IdCategoria).IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    if (IdTipoBienAUX == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        foreach (Agente unAgente in item.unosAgentes)
+                        {
+                            SqlParameter[] parametersAgentes = new SqlParameter[]
+			                {
+                                new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
+                                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                                new SqlParameter("@IdAgente", unAgente.IdAgente)
+			                };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteModificar", parametersAgentes);
+                        }
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //VER:EXCepciones
+                return false;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
 
     }
 }

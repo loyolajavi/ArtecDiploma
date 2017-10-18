@@ -44,6 +44,12 @@ namespace ARTEC.BLL
         }
 
 
+        public bool SolicDetalleDeletePorSolicitud(int IdSolicitud)
+        {
+            if (GestorSolicDetalle.SolicDetalleDeletePorSolicitud(IdSolicitud))
+                return true;
+            return false;
+        }
 
 
 

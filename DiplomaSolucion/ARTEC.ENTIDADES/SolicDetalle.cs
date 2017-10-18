@@ -61,7 +61,11 @@ namespace ARTEC.ENTIDADES
             get { return _unosBienes; }
             set { _unosBienes = value; }
         }
-        
+
+
+        public int UIDSolicDetalle { get; set; }
+
+
 
     }
 }
