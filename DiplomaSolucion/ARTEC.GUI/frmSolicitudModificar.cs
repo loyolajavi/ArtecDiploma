@@ -134,8 +134,18 @@ namespace ARTEC.GUI
             //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
 
-            //Agrega el conteo de cotizaciones por detalle
+            //Agrega los agentes al detalle si es un software
+            foreach (SolicDetalle unDetSolicAUX in unaSolicitud.unosDetallesSolicitud)
+            {
+                TipoBien unTipoBienLocal;
+                unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolicAUX.unaCategoria.IdCategoria);
+                if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                {
+                    unDetSolicAUX.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(unDetSolicAUX.IdSolicitudDetalle, unaSolicitud.IdSolicitud);
+                }
+            }
 
+            //Agrega el conteo de cotizaciones por detalle
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
             ColumnaCotizacionConteo.Name = "txtCotizConteo";
             ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
@@ -300,6 +310,13 @@ namespace ARTEC.GUI
                     grillaDetalles.Columns.Add(deleteButton);
 
                     grillaDetallesFormatoAplicar();
+
+                    //Limpio el formulario en donde aparecen los datos de carga de soft y hard
+                    grillaAgentesAsociados.DataSource = null;
+                    txtAgente.Clear();
+                    cboEstadoSolDetalle.SelectedValue = 0;
+                    txtBien.Clear();
+                    txtCantBien.Clear();
                 }
                 else
                 {
@@ -356,7 +373,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        grillaAgentesAsociados.DataSource = unosAgentesAsociados = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
                     }
 
                     //No mostrar columnas que no necesito de los agentes asociados VER: GUARDA CON ESTO QUE PUEDE QUE ESTE OCULTANDO COSAS QUE NO QUIERO OCULTAR
@@ -461,6 +478,7 @@ namespace ARTEC.GUI
 
         private void btnNuevoDetalle_Click(object sender, EventArgs e)
         {
+            validCantBien.ClearFailedValidations();
             //Muestro el boton para agregar detalles y oculto el que modifica
             btnAgregarDetalle.Visible = true;
             btnModificar.Visible = false;
@@ -597,6 +615,15 @@ namespace ARTEC.GUI
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
                     this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
+                    TipoBien unTipoBienLocal;
+                    unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaCat.IdCategoria);
+                    if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        SolicDetalle unSDetLocal;
+                        unSDetLocal = unaSolicitud.unosDetallesSolicitud.Find(X => X.unaCategoria.IdCategoria == unaCat.IdCategoria);
+                        if (unSDetLocal != null)
+                            unosAgentesAsociados = unSDetLocal.unosAgentes;
+                    }
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
                     validBien.Validate();
                 }
@@ -752,13 +779,11 @@ namespace ARTEC.GUI
                         var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
                         if (hhh != null)
                         {
-                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            if (AuxTipoCategoria == 2)//Tipo Software
                             {
                                 //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
                                 //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
 
-                                //Cargo los agentes que ya había
-                                hhh.Widget.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(hhh.Widget.IdSolicitudDetalle, hhh.Widget.IdSolicitud);
                                 //Le Agrego los nuevos agentes
                                 foreach (Agente unAgen in unosAgentesAsociados)
                                 {

@@ -323,6 +323,20 @@ namespace ARTEC.DAL
 
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleDeletePorSolicitud", parametersDetalles);
 
+                //Limpia la relacion entre SolDet y Cotiz, y además el mismo store elimina las cotizaciones
+                SqlParameter[] parametersSolDetCotiz = new SqlParameter[]
+                {
+                    new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+                };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelCotSolDetalleDeletePorIdSolicitud", parametersSolDetCotiz);
+
+                //Limpia la relacion entre SolDet y Agente (por detalles de software)
+                SqlParameter[] parametersSolDetAgenteRel = new SqlParameter[]
+                {
+                    new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+                };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteEliminar", parametersSolDetAgenteRel);
+
                 //Regenera los detalles en la BD
                 foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
                 {
@@ -353,7 +367,7 @@ namespace ARTEC.DAL
                         SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
 			            {
                             new SqlParameter("@IdSolicitudDetalle", item.IdSolicitudDetalle),
-                            new SqlParameter("@IdSolicitud", item.IdSolicitud),
+                            new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
                             new SqlParameter("@IdCotizacion", IDDevCotiz)
 			            };
 
@@ -363,14 +377,11 @@ namespace ARTEC.DAL
 
                     //Guarda los Agentes por cada Detalle
                     DALTipoBien GestorCategoria = new DALTipoBien();
-                    //PRUEBA FUNCIONA
                     SqlParameter[] parametersTipoBien = new SqlParameter[]
 			        {
                         new SqlParameter("@IdCategoria", item.unaCategoria.IdCategoria)
 			        };
                     int IdTipoBienAUX = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBien);
-                    //ENDPRUEBA
-                    //if (GestorCategoria.TipoBienTraerTipoBienPorIdCategoria(item.unaCategoria.IdCategoria).IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
                     if (IdTipoBienAUX == (int)TipoBien.EnumTipoBien.Soft)
                     {
                         foreach (Agente unAgente in item.unosAgentes)
@@ -381,7 +392,7 @@ namespace ARTEC.DAL
                                 new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
                                 new SqlParameter("@IdAgente", unAgente.IdAgente)
 			                };
-                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteModificar", parametersAgentes);
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteAgregar", parametersAgentes);
                         }
                     }
                 }
