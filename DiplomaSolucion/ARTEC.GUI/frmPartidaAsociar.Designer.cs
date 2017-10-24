@@ -30,30 +30,34 @@ namespace ARTEC.GUI
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.txtIdPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdPartida = new DevComponents.DotNetBar.LabelX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cboDependencia = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.grillaDetallesPart = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.txtNroPartAsignado = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroPartAsignada = new DevComponents.DotNetBar.LabelX();
             this.txtMontoOtorgado = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblMontoAcreditado = new DevComponents.DotNetBar.LabelX();
             this.btnAsociar = new DevComponents.DotNetBar.ButtonX();
-            this.txtIdSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdSolicitud = new DevComponents.DotNetBar.LabelX();
             this.txtFechaEnvio = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFechaEnvio = new DevComponents.DotNetBar.LabelX();
             this.gboxDetallesPartida = new System.Windows.Forms.GroupBox();
+            this.chkCaja = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.lblMontoSolic = new DevComponents.DotNetBar.LabelX();
             this.txtMontoSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.chkCaja = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.grillaSolicitudes = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.GrillaPartidas = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.lblGrillaPartidas = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             this.gboxDetallesPartida.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicitudes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
@@ -79,7 +83,6 @@ namespace ARTEC.GUI
             this.txtIdPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtIdPartida.ForeColor = System.Drawing.Color.Black;
             this.txtIdPartida.Location = new System.Drawing.Point(13, 89);
-            this.txtIdPartida.Multiline = false;
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
@@ -122,30 +125,32 @@ namespace ARTEC.GUI
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
             this.txtDependencia.Location = new System.Drawing.Point(135, 35);
-            this.txtDependencia.Multiline = false;
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(284, 22);
             this.txtDependencia.TabIndex = 28;
+            this.txtDependencia.TextChanged += new System.EventHandler(this.txtDependencia_TextChanged);
             // 
-            // cboDependencia
+            // cboDep
             // 
-            this.cboDependencia.DisplayMember = "Text";
-            this.cboDependencia.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboDependencia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDependencia.ForeColor = System.Drawing.Color.Black;
-            this.cboDependencia.FormattingEnabled = true;
-            this.cboDependencia.ItemHeight = 16;
-            this.cboDependencia.Location = new System.Drawing.Point(135, 35);
-            this.cboDependencia.MaxDropDownItems = 10;
-            this.cboDependencia.Name = "cboDependencia";
-            this.cboDependencia.Size = new System.Drawing.Size(315, 22);
-            this.cboDependencia.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboDependencia.TabIndex = 29;
-            this.cboDependencia.Visible = false;
+            this.cboDep.DisplayMember = "Text";
+            this.cboDep.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDep.ForeColor = System.Drawing.Color.Black;
+            this.cboDep.FormattingEnabled = true;
+            this.cboDep.ItemHeight = 16;
+            this.cboDep.Location = new System.Drawing.Point(135, 35);
+            this.cboDep.MaxDropDownItems = 10;
+            this.cboDep.Name = "cboDep";
+            this.cboDep.Size = new System.Drawing.Size(315, 22);
+            this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboDep.TabIndex = 29;
+            this.cboDep.Visible = false;
+            this.cboDep.SelectionChangeCommitted += new System.EventHandler(this.cboDep_SelectionChangeCommitted);
             // 
             // grillaDetallesPart
             // 
+            this.grillaDetallesPart.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetallesPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -171,8 +176,7 @@ namespace ARTEC.GUI
             this.txtNroPartAsignado.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroPartAsignado.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPartAsignado.ForeColor = System.Drawing.Color.Black;
-            this.txtNroPartAsignado.Location = new System.Drawing.Point(12, 453);
-            this.txtNroPartAsignado.Multiline = false;
+            this.txtNroPartAsignado.Location = new System.Drawing.Point(12, 564);
             this.txtNroPartAsignado.Name = "txtNroPartAsignado";
             this.txtNroPartAsignado.PreventEnterBeep = true;
             this.txtNroPartAsignado.Size = new System.Drawing.Size(102, 22);
@@ -185,7 +189,7 @@ namespace ARTEC.GUI
             // 
             this.lblNroPartAsignada.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblNroPartAsignada.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNroPartAsignada.Location = new System.Drawing.Point(12, 430);
+            this.lblNroPartAsignada.Location = new System.Drawing.Point(12, 541);
             this.lblNroPartAsignada.Name = "lblNroPartAsignada";
             this.lblNroPartAsignada.Size = new System.Drawing.Size(141, 17);
             this.lblNroPartAsignada.TabIndex = 35;
@@ -201,8 +205,7 @@ namespace ARTEC.GUI
             this.txtMontoOtorgado.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMontoOtorgado.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoOtorgado.ForeColor = System.Drawing.Color.Black;
-            this.txtMontoOtorgado.Location = new System.Drawing.Point(166, 453);
-            this.txtMontoOtorgado.Multiline = false;
+            this.txtMontoOtorgado.Location = new System.Drawing.Point(166, 564);
             this.txtMontoOtorgado.Name = "txtMontoOtorgado";
             this.txtMontoOtorgado.PreventEnterBeep = true;
             this.txtMontoOtorgado.Size = new System.Drawing.Size(102, 22);
@@ -215,7 +218,7 @@ namespace ARTEC.GUI
             // 
             this.lblMontoAcreditado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblMontoAcreditado.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoAcreditado.Location = new System.Drawing.Point(166, 430);
+            this.lblMontoAcreditado.Location = new System.Drawing.Point(166, 541);
             this.lblMontoAcreditado.Name = "lblMontoAcreditado";
             this.lblMontoAcreditado.Size = new System.Drawing.Size(143, 17);
             this.lblMontoAcreditado.TabIndex = 37;
@@ -225,7 +228,7 @@ namespace ARTEC.GUI
             // 
             this.btnAsociar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAsociar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAsociar.Location = new System.Drawing.Point(319, 453);
+            this.btnAsociar.Location = new System.Drawing.Point(319, 564);
             this.btnAsociar.Name = "btnAsociar";
             this.btnAsociar.Size = new System.Drawing.Size(75, 23);
             this.btnAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -233,22 +236,21 @@ namespace ARTEC.GUI
             this.btnAsociar.Text = "btnAsociar";
             this.btnAsociar.Click += new System.EventHandler(this.btnAsociar_Click);
             // 
-            // txtIdSolicitud
+            // txtNroSolicitud
             // 
-            this.txtIdSolicitud.BackColor = System.Drawing.Color.White;
+            this.txtNroSolicitud.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.txtIdSolicitud.Border.Class = "TextBoxBorder";
-            this.txtIdSolicitud.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtIdSolicitud.DisabledBackColor = System.Drawing.Color.White;
-            this.txtIdSolicitud.ForeColor = System.Drawing.Color.Black;
-            this.txtIdSolicitud.Location = new System.Drawing.Point(12, 35);
-            this.txtIdSolicitud.Multiline = false;
-            this.txtIdSolicitud.Name = "txtIdSolicitud";
-            this.txtIdSolicitud.PreventEnterBeep = true;
-            this.txtIdSolicitud.Size = new System.Drawing.Size(102, 22);
-            this.txtIdSolicitud.TabIndex = 41;
+            this.txtNroSolicitud.Border.Class = "TextBoxBorder";
+            this.txtNroSolicitud.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
+            this.txtNroSolicitud.Location = new System.Drawing.Point(12, 35);
+            this.txtNroSolicitud.Name = "txtNroSolicitud";
+            this.txtNroSolicitud.PreventEnterBeep = true;
+            this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
+            this.txtNroSolicitud.TabIndex = 41;
             // 
             // lblIdSolicitud
             // 
@@ -274,7 +276,6 @@ namespace ARTEC.GUI
             this.txtFechaEnvio.DisabledBackColor = System.Drawing.Color.White;
             this.txtFechaEnvio.ForeColor = System.Drawing.Color.Black;
             this.txtFechaEnvio.Location = new System.Drawing.Point(11, 46);
-            this.txtFechaEnvio.Multiline = false;
             this.txtFechaEnvio.Name = "txtFechaEnvio";
             this.txtFechaEnvio.PreventEnterBeep = true;
             this.txtFechaEnvio.Size = new System.Drawing.Size(102, 22);
@@ -301,12 +302,25 @@ namespace ARTEC.GUI
             this.gboxDetallesPartida.Controls.Add(this.lblFechaEnvio);
             this.gboxDetallesPartida.Controls.Add(this.txtFechaEnvio);
             this.gboxDetallesPartida.Controls.Add(this.grillaDetallesPart);
-            this.gboxDetallesPartida.Location = new System.Drawing.Point(2, 228);
+            this.gboxDetallesPartida.Location = new System.Drawing.Point(2, 339);
             this.gboxDetallesPartida.Name = "gboxDetallesPartida";
             this.gboxDetallesPartida.Size = new System.Drawing.Size(448, 193);
             this.gboxDetallesPartida.TabIndex = 44;
             this.gboxDetallesPartida.TabStop = false;
             this.gboxDetallesPartida.Text = "groupBox1";
+            // 
+            // chkCaja
+            // 
+            // 
+            // 
+            // 
+            this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkCaja.Location = new System.Drawing.Point(261, 46);
+            this.chkCaja.Name = "chkCaja";
+            this.chkCaja.Size = new System.Drawing.Size(86, 22);
+            this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkCaja.TabIndex = 47;
+            this.chkCaja.Text = "chkCaja";
             // 
             // lblMontoSolic
             // 
@@ -332,27 +346,14 @@ namespace ARTEC.GUI
             this.txtMontoSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoSolic.ForeColor = System.Drawing.Color.Black;
             this.txtMontoSolic.Location = new System.Drawing.Point(137, 46);
-            this.txtMontoSolic.Multiline = false;
             this.txtMontoSolic.Name = "txtMontoSolic";
             this.txtMontoSolic.PreventEnterBeep = true;
             this.txtMontoSolic.Size = new System.Drawing.Size(102, 22);
             this.txtMontoSolic.TabIndex = 45;
             // 
-            // chkCaja
-            // 
-            // 
-            // 
-            // 
-            this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkCaja.Location = new System.Drawing.Point(261, 46);
-            this.chkCaja.Name = "chkCaja";
-            this.chkCaja.Size = new System.Drawing.Size(86, 22);
-            this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkCaja.TabIndex = 47;
-            this.chkCaja.Text = "chkCaja";
-            // 
             // grillaSolicitudes
             // 
+            this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -367,15 +368,50 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.Name = "grillaSolicitudes";
             this.grillaSolicitudes.Size = new System.Drawing.Size(438, 81);
             this.grillaSolicitudes.TabIndex = 45;
+            this.grillaSolicitudes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicitudes_CellClick);
+            // 
+            // GrillaPartidas
+            // 
+            this.GrillaPartidas.BackgroundColor = System.Drawing.Color.White;
+            this.GrillaPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaPartidas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.GrillaPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaPartidas.Location = new System.Drawing.Point(13, 242);
+            this.GrillaPartidas.Name = "GrillaPartidas";
+            this.GrillaPartidas.Size = new System.Drawing.Size(438, 81);
+            this.GrillaPartidas.TabIndex = 46;
+            this.GrillaPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaPartidas_CellClick);
+            // 
+            // lblGrillaPartidas
+            // 
+            // 
+            // 
+            // 
+            this.lblGrillaPartidas.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblGrillaPartidas.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrillaPartidas.Location = new System.Drawing.Point(13, 219);
+            this.lblGrillaPartidas.Name = "lblGrillaPartidas";
+            this.lblGrillaPartidas.Size = new System.Drawing.Size(102, 17);
+            this.lblGrillaPartidas.TabIndex = 48;
+            this.lblGrillaPartidas.Text = "lblGrillaPartidas";
             // 
             // frmPartidaAsociar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 491);
+            this.ClientSize = new System.Drawing.Size(463, 591);
+            this.Controls.Add(this.lblGrillaPartidas);
+            this.Controls.Add(this.GrillaPartidas);
             this.Controls.Add(this.grillaSolicitudes);
             this.Controls.Add(this.gboxDetallesPartida);
-            this.Controls.Add(this.txtIdSolicitud);
+            this.Controls.Add(this.txtNroSolicitud);
             this.Controls.Add(this.lblIdSolicitud);
             this.Controls.Add(this.btnAsociar);
             this.Controls.Add(this.txtMontoOtorgado);
@@ -387,14 +423,16 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblIdPartida);
             this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtDependencia);
-            this.Controls.Add(this.cboDependencia);
+            this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPartidaAsociar";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.frmPartidaAsociar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).EndInit();
             this.gboxDetallesPartida.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicitudes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -406,14 +444,14 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblIdPartida;
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDependencia;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaDetallesPart;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartAsignado;
         private DevComponents.DotNetBar.LabelX lblNroPartAsignada;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoOtorgado;
         private DevComponents.DotNetBar.LabelX lblMontoAcreditado;
         private DevComponents.DotNetBar.ButtonX btnAsociar;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtIdSolicitud;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolicitud;
         private DevComponents.DotNetBar.LabelX lblIdSolicitud;
         private DevComponents.DotNetBar.Controls.TextBoxX txtFechaEnvio;
         private DevComponents.DotNetBar.LabelX lblFechaEnvio;
@@ -422,5 +460,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblMontoSolic;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoSolic;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaSolicitudes;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaPartidas;
+        private DevComponents.DotNetBar.LabelX lblGrillaPartidas;
     }
 }

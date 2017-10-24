@@ -100,7 +100,7 @@ namespace ARTEC.DAL
 
 
 
-        public Partida PartidaTraerPorNroPart(int NroPart)
+        public List<Partida> PartidaTraerPorNroPart(int NroPart)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -111,10 +111,10 @@ namespace ARTEC.DAL
             {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidaTraerPorNroPart", parameters))
                 {
-                    Partida unaPartida = new Partida();
-                    unaPartida = MapearPartidaUno(ds);
+                    List<Partida> unaPartida = new List<Partida>();
+                    unaPartida = MapearPartidas(ds);
                     DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
-                    unaPartida.unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
+                    unaPartida[0].unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
                     return unaPartida;
                 }
             }
@@ -190,8 +190,61 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Partida> PartidasBuscarPorIdSolicitud(int NroPart)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicitud", NroPart)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidasBuscarPorIdSolicitud", parameters))
+                {
+                    List<Partida> ListaPartidas = new List<Partida>();
+                    ListaPartidas = MapearPartidas(ds);
+                    return ListaPartidas;
+                    ;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
 
 
+
+        public List<Partida> MapearPartidas(DataSet ds)
+        {
+            List<Partida> LisResPartidas = new List<Partida>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Partida unaParti = new Partida();
+
+                    unaParti.IdPartida = (int)row["IdPartida"];
+                    unaParti.MontoSolicitado = (decimal)row["MontoSolicitado"];
+                    if (row["MontoOtorgado"].ToString() != "")
+                        unaParti.MontoOtorgado = (decimal)row["MontoOtorgado"];
+                    if (row["NroPartida"].ToString() != "")
+                        unaParti.NroPartida = row["NroPartida"].ToString();
+                    unaParti.FechaEnvio = DateTime.Parse(row["FechaEnvio"].ToString());
+                    if (row["FechaAcreditacion"].ToString() != "")
+                        unaParti.FechaAcreditacion = DateTime.Parse(row["FechaAcreditacion"].ToString());
+                    unaParti.Caja = (bool)row["Caja"];
+                    LisResPartidas.Add(unaParti);
+                }
+                return LisResPartidas;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
 

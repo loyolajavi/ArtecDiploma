@@ -47,7 +47,7 @@ namespace ARTEC.GUI
 
                 //Cargar montos partida
                 BLLPartida ManagerPartida = new BLLPartida();
-                unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtNroPart.Text));
+                unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtNroPart.Text)).FirstOrDefault();
 
                 if (unaPartida.IdPartida > 0)
                 {

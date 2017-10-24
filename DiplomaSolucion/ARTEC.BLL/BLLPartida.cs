@@ -32,7 +32,7 @@ namespace ARTEC.BLL
 
 
 
-        public Partida PartidaTraerPorNroPart(int NroPart)
+        public List<Partida> PartidaTraerPorNroPart(int NroPart)
         {
             return GestorPartida.PartidaTraerPorNroPart(NroPart);
         }
@@ -47,7 +47,10 @@ namespace ARTEC.BLL
         }
 
 
-
+        public List<Partida> PartidasBuscarPorIdSolicitud(int NroPart)
+        {
+            return GestorPartida.PartidasBuscarPorIdSolicitud(NroPart);
+        }
 
 
 
