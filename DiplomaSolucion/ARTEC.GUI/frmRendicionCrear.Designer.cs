@@ -32,7 +32,6 @@ namespace ARTEC.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRendicionCrear));
             this.txtNroSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroSolic = new DevComponents.DotNetBar.LabelX();
-            this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtNroPart = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
@@ -53,6 +52,7 @@ namespace ARTEC.GUI
             this.VLDTXTMontoOtorgado = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.vldTXTMontoEmpleado = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.txtPartRef = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +67,6 @@ namespace ARTEC.GUI
             this.txtNroSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolic.ForeColor = System.Drawing.Color.Black;
             this.txtNroSolic.Location = new System.Drawing.Point(106, 55);
-            this.txtNroSolic.Multiline = false;
             this.txtNroSolic.Name = "txtNroSolic";
             this.txtNroSolic.PreventEnterBeep = true;
             this.txtNroSolic.ReadOnly = true;
@@ -86,24 +85,6 @@ namespace ARTEC.GUI
             this.lblNroSolic.Size = new System.Drawing.Size(97, 22);
             this.lblNroSolic.TabIndex = 49;
             this.lblNroSolic.Text = "lblNroSolic";
-            // 
-            // txtDependencia
-            // 
-            this.txtDependencia.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtDependencia.Border.Class = "TextBoxBorder";
-            this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
-            this.txtDependencia.ForeColor = System.Drawing.Color.Black;
-            this.txtDependencia.Location = new System.Drawing.Point(330, 55);
-            this.txtDependencia.Multiline = false;
-            this.txtDependencia.Name = "txtDependencia";
-            this.txtDependencia.PreventEnterBeep = true;
-            this.txtDependencia.ReadOnly = true;
-            this.txtDependencia.Size = new System.Drawing.Size(298, 22);
-            this.txtDependencia.TabIndex = 50;
             // 
             // lblDependencia
             // 
@@ -129,7 +110,6 @@ namespace ARTEC.GUI
             this.txtNroPart.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPart.ForeColor = System.Drawing.Color.Black;
             this.txtNroPart.Location = new System.Drawing.Point(106, 12);
-            this.txtNroPart.Multiline = false;
             this.txtNroPart.Name = "txtNroPart";
             this.txtNroPart.PreventEnterBeep = true;
             this.txtNroPart.Size = new System.Drawing.Size(85, 22);
@@ -173,7 +153,6 @@ namespace ARTEC.GUI
             this.txtMontoOtorgado.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoOtorgado.ForeColor = System.Drawing.Color.Black;
             this.txtMontoOtorgado.Location = new System.Drawing.Point(162, 134);
-            this.txtMontoOtorgado.Multiline = false;
             this.txtMontoOtorgado.Name = "txtMontoOtorgado";
             this.txtMontoOtorgado.PreventEnterBeep = true;
             this.txtMontoOtorgado.ReadOnly = true;
@@ -204,7 +183,6 @@ namespace ARTEC.GUI
             this.txtMontoEmpleado.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoEmpleado.ForeColor = System.Drawing.Color.Black;
             this.txtMontoEmpleado.Location = new System.Drawing.Point(162, 162);
-            this.txtMontoEmpleado.Multiline = false;
             this.txtMontoEmpleado.Name = "txtMontoEmpleado";
             this.txtMontoEmpleado.PreventEnterBeep = true;
             this.txtMontoEmpleado.ReadOnly = true;
@@ -313,12 +291,28 @@ namespace ARTEC.GUI
             this.txtPartRef.DisabledBackColor = System.Drawing.Color.White;
             this.txtPartRef.ForeColor = System.Drawing.Color.Black;
             this.txtPartRef.Location = new System.Drawing.Point(162, 106);
-            this.txtPartRef.Multiline = false;
             this.txtPartRef.Name = "txtPartRef";
             this.txtPartRef.PreventEnterBeep = true;
             this.txtPartRef.ReadOnly = true;
             this.txtPartRef.Size = new System.Drawing.Size(85, 22);
             this.txtPartRef.TabIndex = 68;
+            // 
+            // txtDependencia
+            // 
+            this.txtDependencia.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtDependencia.Border.Class = "TextBoxBorder";
+            this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDependencia.ForeColor = System.Drawing.Color.Black;
+            this.txtDependencia.Location = new System.Drawing.Point(330, 55);
+            this.txtDependencia.Name = "txtDependencia";
+            this.txtDependencia.PreventEnterBeep = true;
+            this.txtDependencia.ReadOnly = true;
+            this.txtDependencia.Size = new System.Drawing.Size(298, 22);
+            this.txtDependencia.TabIndex = 50;
             // 
             // frmRendicionCrear
             // 
@@ -342,7 +336,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroSolic);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmRendicionCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionCrear_Load);
@@ -355,7 +348,6 @@ namespace ARTEC.GUI
 
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolic;
         private DevComponents.DotNetBar.LabelX lblNroSolic;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPart;
         private DevComponents.DotNetBar.LabelX lblNroPartida;
@@ -376,5 +368,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.CustomValidator vldTXTDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPartRef;
         private DevComponents.DotNetBar.Validator.CustomValidator vldIdPartida;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
     }
 }

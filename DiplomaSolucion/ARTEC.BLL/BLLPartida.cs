@@ -53,6 +53,11 @@ namespace ARTEC.BLL
         }
 
 
+        public int? RelPDetAdqPartidaTieneAdq(int IdPart)
+        {
+            return GestorPartida.RelPDetAdqPartidaTieneAdq(IdPart);
+        }
+
 
 
     }

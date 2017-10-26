@@ -114,7 +114,8 @@ namespace ARTEC.DAL
                     List<Partida> unaPartida = new List<Partida>();
                     unaPartida = MapearPartidas(ds);
                     DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
-                    unaPartida[0].unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
+                    if (unaPartida.Count() > 0)
+                        unaPartida[0].unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
                     return unaPartida;
                 }
             }
@@ -245,6 +246,34 @@ namespace ARTEC.DAL
                 throw;
             }
         }
+
+
+        public int? RelPDetAdqPartidaTieneAdq(int IdPart)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPart)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int? Res = (int?)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPDetAdqPartidaTieneAdq", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return Res;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
 
 
 

@@ -49,56 +49,83 @@ namespace ARTEC.GUI
                 BLLPartida ManagerPartida = new BLLPartida();
                 unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtNroPart.Text)).FirstOrDefault();
 
-                if (unaPartida.IdPartida > 0)
+                if (unaPartida != null && unaPartida.IdPartida > 0)
                 {
-                    btnCrear.Enabled = true;
-
-                    //TraerDatosSolicitud
-                    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                    Solicitud DatosSolic;
-                    DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
-                    txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
-                    txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
-                    txtPartRef.Text = unaPartida.NroPartida;
-
-
-                    txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
-
-
-                    unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
-                    unaRendicion.IdPartida = Int32.Parse(txtNroPart.Text);
-                    unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
-                    txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
-                    //Obtengo los nros de factura por distinct
-                    List<string> ListaNroFacturas = unaRendicion.unasAdquisiciones.Select(x => x.NroFactura).Distinct().ToList();
-
-
-                    foreach (string fact in ListaNroFacturas)
+                    if (!string.IsNullOrEmpty(unaPartida.NroPartida))
                     {
-                        GrillaRendicion MultiGrillaRendicion = new GrillaRendicion();
-                        MultiGrillaRendicion.unaFactura = fact;
+                        int? RelLocal = ManagerPartida.RelPDetAdqPartidaTieneAdq(unaPartida.IdPartida);
+                        if (RelLocal != null && unaPartida.IdPartida == RelLocal)
+                        {
+                            btnCrear.Enabled = true;
 
-                        //guardo los inventarios si son de la fact
-                        HLPListaInventariosRend = unaRendicion.unasAdquisiciones.Where(z => z.NroFactura == fact)
-                                                                            .Select(y => new HLPInvRendicion() { DescripCategoria = y.BienesInventarioAsociados[0].unaCategoria.DescripCategoria, SerieKey = y.BienesInventarioAsociados[0].unInventarioAlta.SerieKey, Costo = y.BienesInventarioAsociados[0].unInventarioAlta.Costo }).ToList();
-                        MultiGrillaRendicion.unaGrillaInv.DataSource = HLPListaInventariosRend;
+                            //TraerDatosSolicitud
+                            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                            Solicitud DatosSolic;
+                            DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
+                            txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
+                            txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
+                            txtPartRef.Text = unaPartida.NroPartida;
 
-                        ListaMultiGrillaRendicion.Add(MultiGrillaRendicion);
+
+                            txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
+
+
+                            unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
+                            unaRendicion.IdPartida = Int32.Parse(txtNroPart.Text);
+                            unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
+                            txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
+                            //Obtengo los nros de factura por distinct
+                            List<string> ListaNroFacturas = unaRendicion.unasAdquisiciones.Select(x => x.NroFactura).Distinct().ToList();
+
+
+                            foreach (string fact in ListaNroFacturas)
+                            {
+                                GrillaRendicion MultiGrillaRendicion = new GrillaRendicion();
+                                MultiGrillaRendicion.unaFactura = fact;
+
+                                //guardo los inventarios si son de la fact
+                                HLPListaInventariosRend = unaRendicion.unasAdquisiciones.Where(z => z.NroFactura == fact)
+                                                                                    .Select(y => new HLPInvRendicion() { DescripCategoria = y.BienesInventarioAsociados[0].unaCategoria.DescripCategoria, SerieKey = y.BienesInventarioAsociados[0].unInventarioAlta.SerieKey, Costo = y.BienesInventarioAsociados[0].unInventarioAlta.Costo }).ToList();
+                                MultiGrillaRendicion.unaGrillaInv.DataSource = HLPListaInventariosRend;
+
+                                ListaMultiGrillaRendicion.Add(MultiGrillaRendicion);
+                            }
+
+                            //Para colocar las "grillas" (control users) en el flow
+                            foreach (GrillaRendicion gri in ListaMultiGrillaRendicion)
+                            {
+                                flowInventariosRend.Controls.Add(gri);
+                            }
+                        }
+                        else
+                        {
+                            LimpiarFormularioRendicion();
+                            MessageBox.Show("La partida no tiene detalles pendientes de rendición");
+                        }
                     }
-
-                    //Para colocar las "grillas" (control users) en el flow
-                    foreach (GrillaRendicion gri in ListaMultiGrillaRendicion)
+                    else
                     {
-                        flowInventariosRend.Controls.Add(gri);
+                        LimpiarFormularioRendicion();
+                        MessageBox.Show("La partida ingresada no fue acreditada aún");
                     }
                 }
                 else
                 {
+                    LimpiarFormularioRendicion();
                     MessageBox.Show("No se encontró la partida ingresada");
                 }
             }
         }
 
+
+        private void LimpiarFormularioRendicion()
+        {
+            txtNroSolic.Clear();
+            txtDependencia.Clear();
+            txtPartRef.Clear();
+            txtMontoEmpleado.Clear();
+            txtMontoOtorgado.Clear();
+        }
 
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -106,30 +133,30 @@ namespace ARTEC.GUI
             int IdRendRes = 0;
             if (validlblNroPartida.Validate())
             {
-                    unaRendicion.FechaRen = DateTime.Today;
-                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
-                    if (IdRendRes == 0)
+                unaRendicion.FechaRen = DateTime.Today;
+                IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                if (IdRendRes == 0)
+                {
+                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion);
+                    if (IdRendRes > 0)
+                        DocumentoRendicionCrear(IdRendRes);
+                    //Quizas esto lo maneje desde las excepciones mas q aca
+                    MessageBox.Show("No se pudo crear la Rendicion correctamente");
+                }
+                else
+                {
+                    //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
+                    //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString() + ". Desea actualizarla?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
                     {
-                        IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion);
-                        if (IdRendRes > 0)
-                            DocumentoRendicionCrear(IdRendRes);
-                        //Quizas esto lo maneje desde las excepciones mas q aca
-                        MessageBox.Show("No se pudo crear la Rendicion correctamente");
+                        unaRendicion.IdRendicion = IdRendRes;
+                        ManagerRendicion.RendicionModificar(unaRendicion);
+                        DocumentoRendicionCrear(IdRendRes);
                     }
-                    else
-                    {
-                        //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
-                        //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                        DialogResult resmbox = MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString() + ". Desea actualizarla?", "Advertencia", MessageBoxButtons.YesNo);
-                        if (resmbox == DialogResult.Yes)
-                        {
-                            unaRendicion.IdRendicion = IdRendRes;
-                            ManagerRendicion.RendicionModificar(unaRendicion);
-                            DocumentoRendicionCrear(IdRendRes);
-                        }
-                    }
+                }
             }
-       }
+        }
 
 
 

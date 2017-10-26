@@ -127,7 +127,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Location = new System.Drawing.Point(135, 35);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
-            this.txtDependencia.Size = new System.Drawing.Size(284, 22);
+            this.txtDependencia.Size = new System.Drawing.Size(315, 22);
             this.txtDependencia.TabIndex = 28;
             this.txtDependencia.TextChanged += new System.EventHandler(this.txtDependencia_TextChanged);
             // 
