@@ -97,8 +97,11 @@ namespace ARTEC.DAL
                     uno.PartidaDetalleAsoc = new PartidaDetalle();
                     uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
                     uno.PartidaDetalleAsoc.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
-                    uno.unDeposito = new Deposito();
-                    uno.unDeposito.IdDeposito = (int)row["IdDeposito"];
+                    if (uno.TipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    {
+                        (uno as XInventarioHard).unDeposito = new Deposito();
+                        (uno as XInventarioHard).unDeposito.IdDeposito = (int)row["IdDeposito"];
+                    }
                     uno.unaAdquisicion = new Adquisicion();
                     uno.unaAdquisicion.IdAdquisicion = (int)row["IdAdquisicion"];
                     
@@ -113,6 +116,32 @@ namespace ARTEC.DAL
             }
             return ResInventarios;
         }
+
+
+        //NO LO USO BORRAR DPS DDEL 27/10/2017
+        //public List<Inventario> InventariosTraerListosParaAsignarPorSolicDetalle(int IdSolicitud, int IdSolDetalle)
+        //{
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@IdSolicitud", IdSolicitud),
+        //        new SqlParameter("@IdSolicDetalle", IdSolDetalle),
+        //    };
+
+        //    try
+        //    {
+        //        using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventariosTraerListosParaAsignarPorSolicDetalle", parameters))
+        //        {
+        //            List<Inventario> unaLista = new List<Inventario>();
+        //            unaLista = MapearInventario(ds);
+        //            return unaLista;
+        //        }
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        //VER:
+        //        throw;
+        //    }
+        //}
 
 
 

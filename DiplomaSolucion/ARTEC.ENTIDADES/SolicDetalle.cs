@@ -54,18 +54,19 @@ namespace ARTEC.ENTIDADES
             set { _InventariosHard = value; }
         }
 
-        private List<Hardware> _unosBienes = new List<Hardware>();
+        //private List<Hardware> _unosBienes = new List<Hardware>();
 
-        public List<Hardware> unosBienes
-        {
-            get { return _unosBienes; }
-            set { _unosBienes = value; }
-        }
+        public IEnumerable<Bien> unosBienes;
+        //{
+            //get { return _unosBienes; }
+            //set { _unosBienes = value; }
+        //}
 
 
         public int UIDSolicDetalle { get; set; }
 
 
+        public Bien unBienAsignar { get; set; }
 
     }
 }

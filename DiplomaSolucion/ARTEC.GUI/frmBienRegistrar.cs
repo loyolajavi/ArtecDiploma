@@ -28,7 +28,6 @@ namespace ARTEC.GUI
         Marca unaMarca;
         List<HLPBienInventario> unosBieneshlp = new List<HLPBienInventario>();
         List<Bien> nuevosBienes = new List<Bien>();
-        List<Inventario> nuevosInventarios = new List<Inventario>();
         ModeloVersion unModelo;
         Bien unBien;
         Bien unBienAUX;

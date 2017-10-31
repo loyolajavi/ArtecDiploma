@@ -24,6 +24,8 @@ namespace ARTEC.GUI
         List<GrillaAsignacion> ListaGrilla = new List<GrillaAsignacion>();
         List<HLPAsignacion> HLPAsigs = new List<HLPAsignacion>();
         List<Inventario> InventariosAsignar = new List<Inventario>();
+        BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+        
         Asignacion unaAsignacion = new Asignacion();
         int ConteoDetalles = 0;
 
@@ -52,26 +54,24 @@ namespace ARTEC.GUI
             foreach (var det in unaSolic.unosDetallesSolicitud)
             {
 
-                //PRUEBA
-                TipoBien unTipoBienAux = new TipoBien();
-                BLLTipoBien managerTipoBienAux = new BLLTipoBien();
-                unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(det.unaCategoria.IdCategoria);
-
-                if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                //PRU2610
+                BLLInventario ManagerInventario = new BLLInventario();
+                IEnumerable<Bien> BienInvListosAsignar;
+                BienInvListosAsignar = ManagerInventario.InventariosTraerListosParaAsignarPorSolicDetalle(det, det.unaCategoria.IdCategoria);
+                if (BienInvListosAsignar != null && BienInvListosAsignar.Count() > 0)
                 {
+                    TipoBien unTipoBienAux = new TipoBien();
+                    unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(det.unaCategoria.IdCategoria);
 
-                }
-                //ENDPRUEBA
-
-
-
-                //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
-                List<Hardware> LisHard = new List<Hardware>();
-                LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
-                if (LisHard.Count() > 0)
-                {
-                    det.unosBienes = LisHard;
-                    HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
+                    if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    {
+                        det.unosBienes = BienInvListosAsignar as List<Hardware>;
+                    }
+                    else
+                    {
+                        det.unosBienes = BienInvListosAsignar as List<Software>;
+                    }
+                    HLPAsigs = BienInvListosAsignar.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey}).ToList();
 
                     GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
                     grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
@@ -79,12 +79,32 @@ namespace ARTEC.GUI
                     grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
                     grillaAsig2.unaGrilla.DataSource = HLPAsigs;
 
-                    //Button bot = new Button();
-                    //grillaAsig2.Controls.Add(bot);
-                    //grillaAsig2.Controls["bot"].Click += bot_Click;
-
                     ListaGrilla.Add(grillaAsig2);
                 }
+                //ENDPRU2610 SI ESTO FUNCIONA QUITAR -BO1-
+
+                //BO1
+                ////List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
+                //List<Hardware> LisHard = new List<Hardware>();
+                //LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
+                //if (LisHard.Count() > 0)
+                //{
+                //    det.unosBienes = LisHard;
+                //    HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
+
+                //    GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
+                //    grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
+                //    grillaAsig2.unaCantidad = det.Cantidad.ToString();
+                //    grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
+                //    grillaAsig2.unaGrilla.DataSource = HLPAsigs;
+
+                //    //Button bot = new Button();
+                //    //grillaAsig2.Controls.Add(bot);
+                //    //grillaAsig2.Controls["bot"].Click += bot_Click;
+
+                //    ListaGrilla.Add(grillaAsig2);
+                //}
+                //END BO1
 
 
 
@@ -136,7 +156,13 @@ namespace ARTEC.GUI
 
             if (GrillaActual.unaGrilla.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.LightGray)
             {
-                Inventario InvAUX = unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes[e.RowIndex].unInventarioAlta;
+                Inventario InvAUX;
+                TipoBien unTipoBienLocal = new TipoBien();
+                unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria((unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unaCategoria.IdCategoria));
+                if(unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    InvAUX = (unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes as List<Hardware>)[e.RowIndex].unInventarioAlta;
+                else
+                    InvAUX = (unaSolic.unosDetallesSolicitud.FirstOrDefault(x => x.unaCategoria.DescripCategoria == GrillaActual.unBien).unosBienes as List<Software>)[e.RowIndex].unInventarioAlta;
                 InventariosAsignar.Add(InvAUX);
 
                 //Agregado para Asignacion

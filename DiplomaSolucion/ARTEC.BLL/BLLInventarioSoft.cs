@@ -20,6 +20,10 @@ namespace ARTEC.BLL
         }
 
 
+        public List<Software> InventarioSoftTraerListosParaAsignar(SolicDetalle unSolicDetalle)
+        {
+            return GestorInventarioSoft.InventarioSoftTraerListosParaAsignar(unSolicDetalle);
+        }
 
 
     }

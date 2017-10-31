@@ -19,10 +19,12 @@ namespace ARTEC.ENTIDADES
 
         public decimal Costo { get; set; }
 
-        public Deposito unDeposito { get; set; }
+        //public Deposito unDeposito { get; set; }
         public Adquisicion unaAdquisicion { get; set; }
         
         public int TipoBien { get; set; }
+
+        public Bien deBien { get; set; }
     }
   
 }
