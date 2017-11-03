@@ -114,41 +114,9 @@ namespace ARTEC.GUI
                 ListaSolicitudes.Add(unaSolicitud);
                 grillaSolicitudes.DataSource = ListaSolicitudes;
 
-                grillaSolicDetalles.DataSource = null;
+                if (!cargarDetallesYCotizaciones())
+                    this.Close();
 
-                //Carga los detallesSolic que no están finalizados
-                grillaSolicDetalles.DataSource = ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle != 2).ToList();//Distinto de Finalizado
-
-                //********************************
-                foreach (DataGridViewRow row in grillaSolicDetalles.Rows)
-                {
-                    DataGridViewCheckBoxCell chkDet = (DataGridViewCheckBoxCell)row.Cells[0];
-                    chkDet.Value = chkDet.TrueValue;
-                }
-                foreach (SolicDetalle unDet in ListaSolicDet)
-                {
-                    unDet.Seleccionado = true;
-                    int Cont = 1;
-                    //Ordena las cotizaciones de cada detalle
-                    unDet.unasCotizaciones = unDet.unasCotizaciones.OrderBy(y => y.MontoCotizado).ToList();
-
-                    foreach (Cotizacion unaCoti in unDet.unasCotizaciones)
-                    {
-                        if (Cont <= 3)
-                        {
-                            unaCoti.Seleccionada = true;
-                        }
-                        else
-                        {
-                            unaCoti.Seleccionada = false;
-                        }
-                        Cont += 1;
-                    }
-                    //Suma para obtener el costo total de la partida
-                    TotalAcumulado += (unDet.unasCotizaciones[0].MontoCotizado * unDet.Cantidad);
-                }
-                txtMontoTotal.Text = TotalAcumulado.ToString();
-                //********************************
             }
         }
 
@@ -537,7 +505,7 @@ namespace ARTEC.GUI
 
 
 
-        private void cargarDetallesYCotizaciones()
+        private bool cargarDetallesYCotizaciones()
         {
 
             grillaSolicDetalles.DataSource = null;
@@ -603,19 +571,23 @@ namespace ARTEC.GUI
                         else
                         {
                             MessageBox.Show("Por favor primero agregue cotizaciones antes de generar una Partida");//VER:IDIOMA
+                            return false;
                         }
                     }
                     else
                     {
                         MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
+                        return false;
                     }
                 }
                 else
                 {
                     MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
+                    return false;
                 }
-
+                return true;
             }
+            return false;
         }
 
 
