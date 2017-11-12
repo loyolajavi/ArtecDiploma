@@ -30,6 +30,9 @@ namespace ARTEC.GUI
         decimal LimitePartida;
         List<Solicitud> ListaSolicitudes;
         List<Dependencia> unasDependencias = new List<Dependencia>();
+        BLLPartida ManagerPartida = new BLLPartida();
+        Partida PartidaAsociada = new Partida();
+        DialogResult resmbox = DialogResult.No;
 
         //Constructor cuando se ingresa por Principal
         private frmPartidaSolicitar()
@@ -96,6 +99,7 @@ namespace ARTEC.GUI
 
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
+            
             txtMontoTotal.Text = "0";
             TraerLimitePartida();
 
@@ -105,7 +109,13 @@ namespace ARTEC.GUI
 
             if (unaSolicitud != null)
             {
-
+                if (BuscarPartidaAsociada())
+                {
+                    resmbox = MessageBox.Show("Ya existe una Partida, desea modificarla?", "Advertencia", MessageBoxButtons.YesNo);
+                }
+                    
+                    
+                
                 txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
                 txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
 
@@ -375,7 +385,7 @@ namespace ARTEC.GUI
 
         private bool GenerarPartidaGlobal(bool PorCaja)
         {
-            BLLPartida ManagerPartida = new BLLPartida();
+            
             nuevaPartida = new Partida();
             int Cont = 1;
             string JustifAUX = null;
@@ -499,6 +509,8 @@ namespace ARTEC.GUI
             int SolicSeleccionada = e.RowIndex;
 
             unaSolicitud = ListaSolicitudes[SolicSeleccionada];
+            if (BuscarPartidaAsociada())
+                MessageBox.Show("Existe una partida");
             cargarDetallesYCotizaciones();
 
         }
@@ -671,6 +683,13 @@ namespace ARTEC.GUI
 
 
 
+        private bool BuscarPartidaAsociada()
+        {
+            PartidaAsociada = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolicitud.IdSolicitud).FirstOrDefault();
+            if (PartidaAsociada != null && PartidaAsociada.IdPartida > 0)
+                return true;
+            return false;
+        }
 
 
 

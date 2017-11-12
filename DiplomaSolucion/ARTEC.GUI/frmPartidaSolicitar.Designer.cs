@@ -38,7 +38,6 @@ namespace ARTEC.GUI
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.grillaSolicitudes = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
             this.grillaSolicDetalles = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.lblDetalles = new DevComponents.DotNetBar.LabelX();
             this.grillaCotizaciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -78,7 +77,6 @@ namespace ARTEC.GUI
             this.txtDep.DisabledBackColor = System.Drawing.Color.White;
             this.txtDep.ForeColor = System.Drawing.Color.Black;
             this.txtDep.Location = new System.Drawing.Point(135, 26);
-            this.txtDep.Multiline = false;
             this.txtDep.Name = "txtDep";
             this.txtDep.PreventEnterBeep = true;
             this.txtDep.Size = new System.Drawing.Size(315, 22);
@@ -126,7 +124,6 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
             this.txtNroSolicitud.Location = new System.Drawing.Point(12, 26);
-            this.txtNroSolicitud.Multiline = false;
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
@@ -162,18 +159,6 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.Size = new System.Drawing.Size(531, 116);
             this.grillaSolicitudes.TabIndex = 27;
             this.grillaSolicitudes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicitudes_CellClick);
-            // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmar.Location = new System.Drawing.Point(123, 31);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnConfirmar.TabIndex = 28;
-            this.btnConfirmar.Text = "btnConfirmar";
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // grillaSolicDetalles
             // 
@@ -298,7 +283,6 @@ namespace ARTEC.GUI
             this.pnlResPartida.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.pnlResPartida.Controls.Add(this.txtMontoTotal);
             this.pnlResPartida.Controls.Add(this.lblMontoTotal);
-            this.pnlResPartida.Controls.Add(this.btnConfirmar);
             this.pnlResPartida.Controls.Add(this.btnGenerarCaja);
             this.pnlResPartida.Controls.Add(this.btnGenerarPartida);
             this.pnlResPartida.DisabledBackColor = System.Drawing.Color.Empty;
@@ -355,7 +339,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmPartidaSolicitar";
             this.Text = "MetroForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPartidaSolicitar_FormClosing);
@@ -377,7 +360,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolicitud;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaSolicitudes;
-        private DevComponents.DotNetBar.ButtonX btnConfirmar;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaSolicDetalles;
         private DevComponents.DotNetBar.LabelX lblDetalles;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaCotizaciones;
