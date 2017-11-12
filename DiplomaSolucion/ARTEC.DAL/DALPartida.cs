@@ -82,6 +82,15 @@ namespace ARTEC.DAL
                         
                     }
 
+                    SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
+                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.EnPartida)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
+
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();

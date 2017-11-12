@@ -37,6 +37,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.tabPartidas = new System.Windows.Forms.TabPage();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@ namespace ARTEC.GUI
             // 
             this.tabsPrincipal.Controls.Add(this.tabSolic);
             this.tabsPrincipal.Controls.Add(this.tabHomol);
+            this.tabsPrincipal.Controls.Add(this.tabPartidas);
             this.tabsPrincipal.Location = new System.Drawing.Point(12, 59);
             this.tabsPrincipal.Name = "tabsPrincipal";
             this.tabsPrincipal.SelectedIndex = 0;
@@ -158,6 +160,16 @@ namespace ARTEC.GUI
             this.cboIdioma.TabIndex = 6;
             this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
+            // tabPartidas
+            // 
+            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
+            this.tabPartidas.Name = "tabPartidas";
+            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
+            this.tabPartidas.TabIndex = 2;
+            this.tabPartidas.Text = "tabPartidas";
+            this.tabPartidas.UseVisualStyleBackColor = true;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,7 +184,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARTEC";
@@ -193,6 +204,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnBienRegistrar;
         private DevComponents.DotNetBar.ButtonX btnRendicionCrear;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
+        private System.Windows.Forms.TabPage tabPartidas;
 
 
 

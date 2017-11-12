@@ -119,6 +119,12 @@
     <Compile Include="frmPartidaAsociar.Designer.cs">
       <DependentUpon>frmPartidaAsociar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPartidaBuscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPartidaBuscar.Designer.cs">
+      <DependentUpon>frmPartidaBuscar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPartidaSolicitar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartidaAsociar.resx">
       <DependentUpon>frmPartidaAsociar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPartidaBuscar.resx">
+      <DependentUpon>frmPartidaBuscar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartidaSolicitar.resx">
       <DependentUpon>frmPartidaSolicitar.cs</DependentUpon>

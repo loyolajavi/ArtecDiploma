@@ -75,6 +75,14 @@ namespace ARTEC.GUI
                     frmSoftHom.Dock = DockStyle.Fill;
                     tabHomol.Controls.Add(frmSoftHom);
                     break;
+                case 2:
+                    frmPartidaBuscar unFrmPartidaBuscar = frmPartidaBuscar.ObtenerInstancia();
+                    unFrmPartidaBuscar.TopLevel = false;
+                    unFrmPartidaBuscar.FormBorderStyle = FormBorderStyle.None;
+                    unFrmPartidaBuscar.Visible = true;
+                    unFrmPartidaBuscar.Dock = DockStyle.Fill;
+                    tabPartidas.Controls.Add(unFrmPartidaBuscar);
+                    break;
             }
         }
 
