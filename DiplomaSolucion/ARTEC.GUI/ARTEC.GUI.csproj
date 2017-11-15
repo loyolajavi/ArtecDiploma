@@ -125,6 +125,12 @@
     <Compile Include="frmPartidaBuscar.Designer.cs">
       <DependentUpon>frmPartidaBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPartidaModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPartidaModificar.Designer.cs">
+      <DependentUpon>frmPartidaModificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPartidaSolicitar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartidaBuscar.resx">
       <DependentUpon>frmPartidaBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPartidaModificar.resx">
+      <DependentUpon>frmPartidaModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartidaSolicitar.resx">
       <DependentUpon>frmPartidaSolicitar.cs</DependentUpon>

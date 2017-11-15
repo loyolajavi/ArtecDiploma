@@ -145,6 +145,67 @@ namespace ARTEC.DAL
         }
 
 
+        public static List<Cotizacion> MapearCotizacionesConIdPartida(DataSet ds)
+        {
+            List<Cotizacion> ResCotizaciones = new List<Cotizacion>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Cotizacion unaCotizacion = new Cotizacion();
+
+                    unaCotizacion.IdCotizacion = (int)row["IdCotizacion"];
+                    if (row["FechaCotizacion"].ToString() != "")
+                    {
+                        unaCotizacion.FechaCotizacion = DateTime.Parse(row["FechaCotizacion"].ToString());
+                    }
+                    unaCotizacion.MontoCotizado = (decimal)row["MontoCotizado"];
+                    //unaCotizacion.unDetalleAsociado = DALSolicDetalle.MapearSolicDetalles
+                    unaCotizacion.unProveedor = new Proveedor();
+                    unaCotizacion.unProveedor.IdProveedor = (int)row["IdProveedor"];
+                    unaCotizacion.unProveedor.AliasProv = row["AliasProv"].ToString();
+                    unaCotizacion.unaPartidaDetalleIDs = new PartidaDetalle();
+                    unaCotizacion.unaPartidaDetalleIDs.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
+                    unaCotizacion.unaPartidaDetalleIDs.IdPartida = (int)row["IdPartida"];
+
+
+                    ResCotizaciones.Add(unaCotizacion);
+                }
+                return ResCotizaciones;
+            }
+            catch (Exception es)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<Cotizacion> CotizacionTraerPorIdPartidaDetalle(int IdPartidaDetalle, int IdPartida)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartidaDetalle", IdPartidaDetalle),
+                new SqlParameter("@IdPartida", IdPartida)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorIdPartidaDetalle", parameters))
+                {
+                    List<Cotizacion> unaLista = new List<Cotizacion>();
+                    unaLista = MapearCotizacionesConIdPartida(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
 
 
 

@@ -100,6 +100,10 @@ namespace ARTEC.GUI
                             else
                                 MessageBox.Show("La Solicitud no posee Partidas solicitadas");
                         }
+                        else
+                        {
+                            MessageBox.Show("La dependencia no posee solicitudes ni partidas");
+                        }
                     }
                 }
             }
@@ -180,6 +184,22 @@ namespace ARTEC.GUI
                     txtDependencia.SelectionStart = txtDependencia.Text.Length + 1;
                     cboDep.DataSource = null;
                 }
+            }
+        }
+
+        private void GrillaPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                frmPartidaModificar unfrmPartidaModificar = new frmPartidaModificar((int)GrillaPartidas.Rows[e.RowIndex].Cells["IdPartida"].Value);
+                    //((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
+                unfrmPartidaModificar.Show();
+
             }
         }
 

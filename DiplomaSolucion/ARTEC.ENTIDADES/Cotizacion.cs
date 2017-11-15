@@ -18,5 +18,7 @@ namespace ARTEC.ENTIDADES
 
         public bool Seleccionada { get; set; }
 
+        public PartidaDetalle unaPartidaDetalleIDs { get; set; }
+
     }
 }
