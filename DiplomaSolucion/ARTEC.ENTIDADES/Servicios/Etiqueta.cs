@@ -12,7 +12,7 @@ namespace ARTEC.ENTIDADES.Servicios
         public string NombreControl { get; set; }
         public string Texto { get; set; }
         public int IdIdioma { get; set; }
-        public int IdFormulario { get; set; }
+        //public int IdFormulario { get; set; }
 
 
 

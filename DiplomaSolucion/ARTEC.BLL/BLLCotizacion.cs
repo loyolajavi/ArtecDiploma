@@ -42,7 +42,10 @@ namespace ARTEC.BLL
         }
 
 
-
+        public bool CotizacionAsociarConPartidaDetalle(int IdCotizacion, int IdPartDetalle, int IdPartida)
+        {
+            return GestorCotizacion.CotizacionAsociarConPartidaDetalle(IdCotizacion, IdPartDetalle, IdPartida);
+        }
 
     }
 }

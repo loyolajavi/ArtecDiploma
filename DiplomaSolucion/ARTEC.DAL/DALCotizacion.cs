@@ -207,6 +207,40 @@ namespace ARTEC.DAL
         }
 
 
+        public bool CotizacionAsociarConPartidaDetalle(int IdCotizacion, int IdPartDetalle, int IdPartida)
+        {
+            try
+            {
+
+                SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdCotizacion", IdCotizacion),
+                    new SqlParameter("@IdPartida", IdPartida),
+                    new SqlParameter("@IdPartidaDetalle", IdPartDetalle)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotizSolicDetalle);
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
+                throw;
+                
+                
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
 
 
     }

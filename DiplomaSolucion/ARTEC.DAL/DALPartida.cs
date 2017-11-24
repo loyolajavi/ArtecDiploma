@@ -349,6 +349,37 @@ namespace ARTEC.DAL
 
 
 
+        public bool PartidaModifMontoSolic(int IdPartida, decimal MontoSolic)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPartida),
+                new SqlParameter("@MontoSolicitado", MontoSolic)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModifMontoSolic", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
+
+
 
     }
 }

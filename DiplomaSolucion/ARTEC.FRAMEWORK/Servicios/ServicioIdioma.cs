@@ -78,7 +78,9 @@ namespace ARTEC.FRAMEWORK.Servicios
             {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EtiquetasTraerTodosPorIdioma", parameters))
                 {
-                    _EtiquetasCompartidas = FRAMEWORK.Persistencia.Mapeador.Mapear<Etiqueta>(ds);
+                    //_EtiquetasCompartidas = FRAMEWORK.Persistencia.Mapeador.Mapear<Etiqueta>(ds);
+                    _EtiquetasCompartidas = MapearIdiomaEtiquetas(ds);
+                    
                 }
             }
             catch (Exception es)
@@ -244,6 +246,34 @@ namespace ARTEC.FRAMEWORK.Servicios
             MensajeRetorno = _EtiquetasCompartidas.Find(x => x.NombreControl == EtiquetaMensaje);
             return MensajeRetorno;
         }
+
+
+        private static List<Etiqueta> MapearIdiomaEtiquetas(DataSet ds)
+        {
+            List<Etiqueta> ResEtiquetas = new List<Etiqueta>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Etiqueta unaEtiqueta = new Etiqueta();
+
+                    unaEtiqueta.NombreControl = row["NombreControl"].ToString();
+                    unaEtiqueta.Texto = row["Texto"].ToString();
+
+                    ResEtiquetas.Add(unaEtiqueta);
+                }
+                return ResEtiquetas;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
 
 
     }

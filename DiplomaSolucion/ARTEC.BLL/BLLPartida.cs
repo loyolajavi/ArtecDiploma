@@ -58,7 +58,12 @@ namespace ARTEC.BLL
             return GestorPartida.RelPDetAdqPartidaTieneAdq(IdPart);
         }
 
-
+        public bool PartidaModifMontoSolic(int IdPartida, decimal MontoSolic)
+        {
+            if (GestorPartida.PartidaModifMontoSolic(IdPartida, MontoSolic))
+                return true;
+            return false;
+        }
 
     }
 }

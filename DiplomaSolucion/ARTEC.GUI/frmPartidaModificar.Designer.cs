@@ -28,8 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -53,9 +54,11 @@ namespace ARTEC.GUI
             this.lblMontoTotal = new DevComponents.DotNetBar.LabelX();
             this.btnGenerarCaja = new DevComponents.DotNetBar.ButtonX();
             this.btnGenerarPartida = new DevComponents.DotNetBar.ButtonX();
+            this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
             this.pnlResPartida.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaCotizAntiguas)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNroPartida
@@ -68,7 +71,7 @@ namespace ARTEC.GUI
             this.txtNroPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
-            this.txtNroPartida.Location = new System.Drawing.Point(115, 88);
+            this.txtNroPartida.Location = new System.Drawing.Point(115, 96);
             this.txtNroPartida.Name = "txtNroPartida";
             this.txtNroPartida.PreventEnterBeep = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
@@ -81,7 +84,7 @@ namespace ARTEC.GUI
             // 
             this.lblNroPartida.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblNroPartida.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNroPartida.Location = new System.Drawing.Point(8, 93);
+            this.lblNroPartida.Location = new System.Drawing.Point(8, 101);
             this.lblNroPartida.Name = "lblNroPartida";
             this.lblNroPartida.Size = new System.Drawing.Size(91, 17);
             this.lblNroPartida.TabIndex = 69;
@@ -97,7 +100,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
-            this.txtNroSolicitud.Location = new System.Drawing.Point(115, 32);
+            this.txtNroSolicitud.Location = new System.Drawing.Point(115, 40);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
@@ -110,7 +113,7 @@ namespace ARTEC.GUI
             // 
             this.lblIdSolicitud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblIdSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdSolicitud.Location = new System.Drawing.Point(8, 37);
+            this.lblIdSolicitud.Location = new System.Drawing.Point(8, 45);
             this.lblIdSolicitud.Name = "lblIdSolicitud";
             this.lblIdSolicitud.Size = new System.Drawing.Size(102, 17);
             this.lblIdSolicitud.TabIndex = 67;
@@ -126,7 +129,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtIdPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtIdPartida.ForeColor = System.Drawing.Color.Black;
-            this.txtIdPartida.Location = new System.Drawing.Point(115, 4);
+            this.txtIdPartida.Location = new System.Drawing.Point(115, 12);
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
@@ -139,7 +142,7 @@ namespace ARTEC.GUI
             // 
             this.lblIdPartida.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblIdPartida.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIdPartida.Location = new System.Drawing.Point(8, 9);
+            this.lblIdPartida.Location = new System.Drawing.Point(8, 17);
             this.lblIdPartida.Name = "lblIdPartida";
             this.lblIdPartida.Size = new System.Drawing.Size(102, 17);
             this.lblIdPartida.TabIndex = 65;
@@ -152,7 +155,7 @@ namespace ARTEC.GUI
             // 
             this.lblDependencia.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDependencia.Location = new System.Drawing.Point(8, 65);
+            this.lblDependencia.Location = new System.Drawing.Point(8, 73);
             this.lblDependencia.Name = "lblDependencia";
             this.lblDependencia.Size = new System.Drawing.Size(91, 17);
             this.lblDependencia.TabIndex = 62;
@@ -168,7 +171,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
-            this.txtDependencia.Location = new System.Drawing.Point(115, 60);
+            this.txtDependencia.Location = new System.Drawing.Point(115, 68);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(315, 22);
@@ -182,7 +185,7 @@ namespace ARTEC.GUI
             this.cboDep.ForeColor = System.Drawing.Color.Black;
             this.cboDep.FormattingEnabled = true;
             this.cboDep.ItemHeight = 16;
-            this.cboDep.Location = new System.Drawing.Point(115, 60);
+            this.cboDep.Location = new System.Drawing.Point(115, 68);
             this.cboDep.MaxDropDownItems = 10;
             this.cboDep.Name = "cboDep";
             this.cboDep.Size = new System.Drawing.Size(315, 22);
@@ -196,7 +199,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkCaja.Location = new System.Drawing.Point(258, 149);
+            this.chkCaja.Location = new System.Drawing.Point(258, 157);
             this.chkCaja.Name = "chkCaja";
             this.chkCaja.Size = new System.Drawing.Size(86, 22);
             this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -210,7 +213,7 @@ namespace ARTEC.GUI
             // 
             this.lblMontoSolic.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblMontoSolic.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMontoSolic.Location = new System.Drawing.Point(134, 126);
+            this.lblMontoSolic.Location = new System.Drawing.Point(134, 134);
             this.lblMontoSolic.Name = "lblMontoSolic";
             this.lblMontoSolic.Size = new System.Drawing.Size(102, 17);
             this.lblMontoSolic.TabIndex = 73;
@@ -226,7 +229,7 @@ namespace ARTEC.GUI
             this.txtMontoSolic.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMontoSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtMontoSolic.ForeColor = System.Drawing.Color.Black;
-            this.txtMontoSolic.Location = new System.Drawing.Point(134, 149);
+            this.txtMontoSolic.Location = new System.Drawing.Point(134, 157);
             this.txtMontoSolic.Name = "txtMontoSolic";
             this.txtMontoSolic.PreventEnterBeep = true;
             this.txtMontoSolic.Size = new System.Drawing.Size(102, 22);
@@ -239,7 +242,7 @@ namespace ARTEC.GUI
             // 
             this.lblFechaEnvio.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblFechaEnvio.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaEnvio.Location = new System.Drawing.Point(8, 126);
+            this.lblFechaEnvio.Location = new System.Drawing.Point(8, 134);
             this.lblFechaEnvio.Name = "lblFechaEnvio";
             this.lblFechaEnvio.Size = new System.Drawing.Size(102, 17);
             this.lblFechaEnvio.TabIndex = 71;
@@ -255,7 +258,7 @@ namespace ARTEC.GUI
             this.txtFechaEnvio.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtFechaEnvio.DisabledBackColor = System.Drawing.Color.White;
             this.txtFechaEnvio.ForeColor = System.Drawing.Color.Black;
-            this.txtFechaEnvio.Location = new System.Drawing.Point(8, 149);
+            this.txtFechaEnvio.Location = new System.Drawing.Point(8, 157);
             this.txtFechaEnvio.Name = "txtFechaEnvio";
             this.txtFechaEnvio.PreventEnterBeep = true;
             this.txtFechaEnvio.Size = new System.Drawing.Size(102, 22);
@@ -265,18 +268,18 @@ namespace ARTEC.GUI
             // 
             this.grillaDetallesPart.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetallesPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle7;
             this.grillaDetallesPart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaDetallesPart.Location = new System.Drawing.Point(4, 200);
+            this.grillaDetallesPart.Location = new System.Drawing.Point(469, 33);
             this.grillaDetallesPart.Name = "grillaDetallesPart";
-            this.grillaDetallesPart.Size = new System.Drawing.Size(426, 93);
+            this.grillaDetallesPart.Size = new System.Drawing.Size(476, 124);
             this.grillaDetallesPart.TabIndex = 76;
             this.grillaDetallesPart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaDetallesPart_CellClick);
             // 
@@ -287,7 +290,7 @@ namespace ARTEC.GUI
             // 
             this.lblDetalles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblDetalles.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDetalles.Location = new System.Drawing.Point(4, 177);
+            this.lblDetalles.Location = new System.Drawing.Point(469, 10);
             this.lblDetalles.Name = "lblDetalles";
             this.lblDetalles.Size = new System.Drawing.Size(102, 17);
             this.lblDetalles.TabIndex = 77;
@@ -300,7 +303,7 @@ namespace ARTEC.GUI
             // 
             this.lblCotizaciones.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCotizaciones.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCotizaciones.Location = new System.Drawing.Point(4, 299);
+            this.lblCotizaciones.Location = new System.Drawing.Point(469, 163);
             this.lblCotizaciones.Name = "lblCotizaciones";
             this.lblCotizaciones.Size = new System.Drawing.Size(102, 17);
             this.lblCotizaciones.TabIndex = 79;
@@ -310,18 +313,18 @@ namespace ARTEC.GUI
             // 
             this.grillaCotizaciones.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle8;
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaCotizaciones.Location = new System.Drawing.Point(4, 322);
+            this.grillaCotizaciones.Location = new System.Drawing.Point(469, 186);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
-            this.grillaCotizaciones.Size = new System.Drawing.Size(531, 136);
+            this.grillaCotizaciones.Size = new System.Drawing.Size(476, 136);
             this.grillaCotizaciones.TabIndex = 78;
             // 
             // pnlResPartida
@@ -333,7 +336,7 @@ namespace ARTEC.GUI
             this.pnlResPartida.Controls.Add(this.btnGenerarCaja);
             this.pnlResPartida.Controls.Add(this.btnGenerarPartida);
             this.pnlResPartida.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlResPartida.Location = new System.Drawing.Point(465, 32);
+            this.pnlResPartida.Location = new System.Drawing.Point(115, 223);
             this.pnlResPartida.Name = "pnlResPartida";
             this.pnlResPartida.Size = new System.Drawing.Size(211, 137);
             // 
@@ -417,11 +420,32 @@ namespace ARTEC.GUI
             this.btnGenerarPartida.TabIndex = 34;
             this.btnGenerarPartida.Text = "btnGenerarPartida";
             // 
+            // GrillaCotizAntiguas
+            // 
+            this.GrillaCotizAntiguas.BackgroundColor = System.Drawing.Color.White;
+            this.GrillaCotizAntiguas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaCotizAntiguas.DefaultCellStyle = dataGridViewCellStyle9;
+            this.GrillaCotizAntiguas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaCotizAntiguas.Location = new System.Drawing.Point(469, 328);
+            this.GrillaCotizAntiguas.Name = "GrillaCotizAntiguas";
+            this.GrillaCotizAntiguas.Size = new System.Drawing.Size(476, 136);
+            this.GrillaCotizAntiguas.TabIndex = 81;
+            this.GrillaCotizAntiguas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaCotizAntiguas_CellClick);
+            // 
             // frmPartidaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 490);
+            this.ClientSize = new System.Drawing.Size(962, 521);
+            this.ControlBox = false;
+            this.Controls.Add(this.GrillaCotizAntiguas);
             this.Controls.Add(this.pnlResPartida);
             this.Controls.Add(this.lblCotizaciones);
             this.Controls.Add(this.grillaCotizaciones);
@@ -443,12 +467,17 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPartidaModificar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmPartidaModificar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).EndInit();
             this.pnlResPartida.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaCotizAntiguas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -478,5 +507,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblMontoTotal;
         private DevComponents.DotNetBar.ButtonX btnGenerarCaja;
         private DevComponents.DotNetBar.ButtonX btnGenerarPartida;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
     }
 }
