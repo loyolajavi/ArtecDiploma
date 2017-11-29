@@ -28,9 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -55,6 +55,7 @@ namespace ARTEC.GUI
             this.btnGenerarCaja = new DevComponents.DotNetBar.ButtonX();
             this.btnGenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnGenerarDocumento = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
             this.pnlResPartida.SuspendLayout();
@@ -268,14 +269,14 @@ namespace ARTEC.GUI
             // 
             this.grillaDetallesPart.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetallesPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle4;
             this.grillaDetallesPart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaDetallesPart.Location = new System.Drawing.Point(469, 33);
             this.grillaDetallesPart.Name = "grillaDetallesPart";
@@ -313,14 +314,14 @@ namespace ARTEC.GUI
             // 
             this.grillaCotizaciones.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle5;
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizaciones.Location = new System.Drawing.Point(469, 186);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
@@ -424,14 +425,14 @@ namespace ARTEC.GUI
             // 
             this.GrillaCotizAntiguas.BackgroundColor = System.Drawing.Color.White;
             this.GrillaCotizAntiguas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaCotizAntiguas.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaCotizAntiguas.DefaultCellStyle = dataGridViewCellStyle6;
             this.GrillaCotizAntiguas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaCotizAntiguas.Location = new System.Drawing.Point(469, 328);
             this.GrillaCotizAntiguas.Name = "GrillaCotizAntiguas";
@@ -439,12 +440,25 @@ namespace ARTEC.GUI
             this.GrillaCotizAntiguas.TabIndex = 81;
             this.GrillaCotizAntiguas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaCotizAntiguas_CellClick);
             // 
+            // btnGenerarDocumento
+            // 
+            this.btnGenerarDocumento.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGenerarDocumento.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGenerarDocumento.Location = new System.Drawing.Point(146, 388);
+            this.btnGenerarDocumento.Name = "btnGenerarDocumento";
+            this.btnGenerarDocumento.Size = new System.Drawing.Size(123, 37);
+            this.btnGenerarDocumento.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGenerarDocumento.TabIndex = 82;
+            this.btnGenerarDocumento.Text = "btnGenerarDocumento";
+            this.btnGenerarDocumento.Click += new System.EventHandler(this.btnGenerarDocumento_Click);
+            // 
             // frmPartidaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.btnGenerarDocumento);
             this.Controls.Add(this.GrillaCotizAntiguas);
             this.Controls.Add(this.pnlResPartida);
             this.Controls.Add(this.lblCotizaciones);
@@ -467,6 +481,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -508,5 +523,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnGenerarCaja;
         private DevComponents.DotNetBar.ButtonX btnGenerarPartida;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
+        private DevComponents.DotNetBar.ButtonX btnGenerarDocumento;
     }
 }

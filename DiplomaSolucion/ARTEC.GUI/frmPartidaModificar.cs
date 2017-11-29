@@ -12,6 +12,8 @@ using System.Linq;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.ENTIDADES.Helpers;
+using Novacode;
+using System.Globalization;
 
 namespace ARTEC.GUI
 {
@@ -48,17 +50,25 @@ namespace ARTEC.GUI
                 foreach (PartidaDetalle pdet in unaPartida.unasPartidasDetalles)
                 {
                     pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorIdPartidaDetalle(pdet.IdPartidaDetalle, pdet.IdPartida);
-                    
                 }
-                
+
+                //Traigo la dependencia asociada
+                BLLDependencia ManagerDependencia = new BLLDependencia();
+                List<Dependencia> ListaDep = ManagerDependencia.DependenciaTraerNombrePorIDSolicitud(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud);
+                if (ListaDep != null)
+                    txtDependencia.Text = ListaDep.First().NombreDependencia;
+
+
+
             }
 
-           
+
 
             txtIdPartida.Text = unaPartida.IdPartida.ToString();
             txtNroPartida.Text = !string.IsNullOrEmpty(unaPartida.NroPartida) ? unaPartida.NroPartida : "";
             txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
             txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
+            txtNroPartida.Text = unaPartida.NroPartida.ToString();
             chkCaja.Checked = unaPartida.Caja;
 
             List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
@@ -106,7 +116,7 @@ namespace ARTEC.GUI
 
                 //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
                 List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud);
-                ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l=> p.IdCotizacion == l.IdCotizacion))
+                ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
                            .ToList();
                 GrillaCotizAntiguas.DataSource = null;
                 GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
@@ -120,7 +130,7 @@ namespace ARTEC.GUI
 
         private void GrillaCotizAntiguas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-             //Si se hizo click en el header, salir
+            //Si se hizo click en el header, salir
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
                 return;
@@ -146,7 +156,7 @@ namespace ARTEC.GUI
                 {
                     MessageBox.Show("Error al asociar la cotización");
                 }
-                
+
             }
 
         }
@@ -160,7 +170,7 @@ namespace ARTEC.GUI
                 Cotizacion unaCotizacionAUX = unDet.unasCotizaciones.OrderBy(x => x.MontoCotizado).Take(1).FirstOrDefault();
                 if (unaCotizacionAUX != null)
                 {
-                    
+
                     TotalAcumulado += unaCotizacionAUX.MontoCotizado * unDet.SolicDetalleAsociado.Cantidad;
                 }
                 else
@@ -181,6 +191,43 @@ namespace ARTEC.GUI
             GrillaCotizAntiguas.Columns["unDetalleAsociado"].Visible = false;
             GrillaCotizAntiguas.Columns["Seleccionada"].Visible = false;
             GrillaCotizAntiguas.Columns["unaPartidaDetalleIDs"].Visible = false;
+        }
+
+        private void btnGenerarDocumento_Click(object sender, EventArgs e)
+        {
+            //if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+            //{
+            //    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+            //    {
+            //        doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+            //        doc.AddCustomProperty(new CustomProperty("PDependencia", ));
+            //        CultureInfo ci = new CultureInfo("es-AR");
+            //        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+            //        //Si se escribio una justificación
+            //        if (!string.IsNullOrWhiteSpace(JustifAUX))
+            //        {
+            //            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+            //        }
+            //        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+            //    }
+            //}
+            //else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
+            //{
+            //    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+            //    {
+            //        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+            //        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
+            //        CultureInfo ci = new CultureInfo("es-AR");
+            //        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
+            //        //Si se escribio una justificación
+            //        if (!string.IsNullOrWhiteSpace(JustifAUX))
+            //        {
+            //            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+            //        }
+            //        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+            //    }
+            //}
+            //}
         }
 
 

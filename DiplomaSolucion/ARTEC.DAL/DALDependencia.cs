@@ -99,5 +99,97 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Dependencia> DependenciaTraerNombrePorIDSolicitud(int IdSolicitud)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdSolicitud", IdSolicitud)
+			};
+
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerNombrePorIDSolicitud", parameters))
+            {
+                List<Dependencia> unaDep = MapeadorPunteroDependencia(ds);
+                if (unaDep.Count > 0)
+                    return unaDep;
+                else 
+                    unaDep = null;
+                return unaDep;
+            }
+        }
+
+
+        private List<Dependencia> MapeadorPunteroDependencia(DataSet ds)
+        {
+
+            List<Dependencia> LisLocalDep = new List<Dependencia>();
+
+            //switch (ds.Tables[0].Rows[0].ItemArray.Count())
+            //{
+            //    case 1:
+            //        LisLocalDep = MapearDependenciaNombre(ds);
+            //        break;
+            //    case 2:
+            //        System.Windows.Forms.MessageBox.Show("Hay dos");
+            //        break;
+            //    case 3:
+            //        System.Windows.Forms.MessageBox.Show("Hay tres");
+            //        break;
+            //}
+            //return LisLocalDep;
+            try
+            {
+
+
+                switch (ds.Tables[0].Rows[0].ItemArray.Count())
+                {
+                    case 1:
+                        return MapearDependenciaNombre(ds);
+                    case 2:
+                        System.Windows.Forms.MessageBox.Show("Hay dos");
+                        break;
+                    case 3:
+                        System.Windows.Forms.MessageBox.Show("Hay tres");
+                        break;
+                }
+                return new List<Dependencia>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+        private List<Dependencia> MapearDependenciaNombre(DataSet ds)
+        {
+            List<Dependencia> ListaDependencia = new List<Dependencia>();
+
+            try
+            {
+                Dependencia unaDep = new Dependencia();
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    unaDep.NombreDependencia = row["NombreDependencia"].ToString();
+                    //foreach (DataColumn item in row.Table.Columns)
+                    //{
+                    //    System.Windows.Forms.MessageBox.Show(item.ColumnName);
+                    //}
+                    ListaDependencia.Add(unaDep);
+                }
+                return ListaDependencia;
+            }
+            catch (Exception es)
+            {
+                throw;
+                //MANEJAR EXC
+            }
+        }
+
+
+
     }
 }
