@@ -28,7 +28,7 @@ namespace ARTEC.GUI
         int IndiceDetalleSeleccionado;
         List<Cotizacion> ListaLocalCotiz;
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
-
+        Dependencia DepAsoc;
         public frmPartidaModificar(int NroPartidaArg)
         {
             InitializeComponent();
@@ -55,8 +55,11 @@ namespace ARTEC.GUI
                 //Traigo la dependencia asociada
                 BLLDependencia ManagerDependencia = new BLLDependencia();
                 List<Dependencia> ListaDep = ManagerDependencia.DependenciaTraerNombrePorIDSolicitud(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud);
-                if (ListaDep != null)
-                    txtDependencia.Text = ListaDep.First().NombreDependencia;
+                if (ListaDep != null){
+                    DepAsoc = ListaDep.First();
+                    txtDependencia.Text = DepAsoc.NombreDependencia;
+                }
+                    
 
 
 
@@ -68,7 +71,7 @@ namespace ARTEC.GUI
             txtNroPartida.Text = !string.IsNullOrEmpty(unaPartida.NroPartida) ? unaPartida.NroPartida : "";
             txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
             txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-            txtNroPartida.Text = unaPartida.NroPartida.ToString();
+            txtNroSolicitud.Text = unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud.ToString();
             chkCaja.Checked = unaPartida.Caja;
 
             List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
@@ -122,11 +125,9 @@ namespace ARTEC.GUI
                 GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
 
                 FormatearGrillaCotiz();
-
-                //PosSolicDet = e.RowIndex;
-                //CalcularMontoTotalPartida();
             }
         }
+
 
         private void GrillaCotizAntiguas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -193,41 +194,42 @@ namespace ARTEC.GUI
             GrillaCotizAntiguas.Columns["unaPartidaDetalleIDs"].Visible = false;
         }
 
+        //Genera el documento con la partida modificada
         private void btnGenerarDocumento_Click(object sender, EventArgs e)
         {
-            //if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
-            //{
-            //    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
-            //    {
-            //        doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-            //        doc.AddCustomProperty(new CustomProperty("PDependencia", ));
-            //        CultureInfo ci = new CultureInfo("es-AR");
-            //        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
-            //        //Si se escribio una justificación
-            //        if (!string.IsNullOrWhiteSpace(JustifAUX))
-            //        {
-            //            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-            //        }
-            //        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-            //    }
-            //}
-            //else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
-            //{
-            //    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
-            //    {
-            //        doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-            //        doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
-            //        CultureInfo ci = new CultureInfo("es-AR");
-            //        doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-            //        //Si se escribio una justificación
-            //        if (!string.IsNullOrWhiteSpace(JustifAUX))
-            //        {
-            //            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-            //        }
-            //        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-            //    }
-            //}
-            //}
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+            {
+                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta
+                {
+                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                    CultureInfo ci = new CultureInfo("es-AR");
+                    doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                    ////Si se escribio una justificación
+                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
+                    //{
+                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                    //}
+                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                }
+            }
+            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
+            {
+                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                {
+                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                    CultureInfo ci = new CultureInfo("en-US");
+                    doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                    //Si se escribio una justificación
+                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
+                    //{
+                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                    //}
+                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                }
+            }
+            
         }
 
 

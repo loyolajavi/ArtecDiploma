@@ -156,7 +156,7 @@ namespace ARTEC.DAL
             }
             catch (Exception)
             {
-
+                //VER: AGREGAR MANEJO
                 throw;
             }
 
