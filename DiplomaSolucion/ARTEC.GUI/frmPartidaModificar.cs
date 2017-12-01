@@ -49,7 +49,7 @@ namespace ARTEC.GUI
             {
                 foreach (PartidaDetalle pdet in unaPartida.unasPartidasDetalles)
                 {
-                    pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorIdPartidaDetalle(pdet.IdPartidaDetalle, pdet.IdPartida);
+                    pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.IdPartida);
                 }
 
                 //Traigo la dependencia asociada

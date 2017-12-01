@@ -47,6 +47,7 @@ namespace ARTEC.DAL
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     PartidaDetalle unDet = new PartidaDetalle();
+                    unDet.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
                     unDet.IdPartida = (int)row["IdPartida"];
                     unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unDet.SolicDetalleAsociado = new SolicDetalle();

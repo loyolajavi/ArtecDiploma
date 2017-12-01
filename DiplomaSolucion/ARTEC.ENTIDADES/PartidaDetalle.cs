@@ -9,6 +9,7 @@ namespace ARTEC.ENTIDADES
     public class PartidaDetalle
     {
 
+        public int UIDPartidaDetalle { get; set; }
         public int IdPartidaDetalle { get; set; }
         public int IdPartida { get; set; }
         public SolicDetalle SolicDetalleAsociado { get; set; }

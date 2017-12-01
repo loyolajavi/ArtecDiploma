@@ -168,6 +168,7 @@ namespace ARTEC.DAL
                     unaCotizacion.unaPartidaDetalleIDs = new PartidaDetalle();
                     unaCotizacion.unaPartidaDetalleIDs.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unaCotizacion.unaPartidaDetalleIDs.IdPartida = (int)row["IdPartida"];
+                    unaCotizacion.unaPartidaDetalleIDs.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
 
 
                     ResCotizaciones.Add(unaCotizacion);
@@ -182,17 +183,17 @@ namespace ARTEC.DAL
         }
 
 
-        public List<Cotizacion> CotizacionTraerPorIdPartidaDetalle(int IdPartidaDetalle, int IdPartida)
+        public List<Cotizacion> CotizacionTraerPorUIDPartidaDetalle(int UIDPartidaDetalle, int IdPartida)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@IdPartidaDetalle", IdPartidaDetalle),
+                new SqlParameter("@UIDPartidaDetalle", UIDPartidaDetalle),
                 new SqlParameter("@IdPartida", IdPartida)
             };
 
             try
             {
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorIdPartidaDetalle", parameters))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorUIDPartidaDetalle", parameters))
                 {
                     List<Cotizacion> unaLista = new List<Cotizacion>();
                     unaLista = MapearCotizacionesConIdPartida(ds);

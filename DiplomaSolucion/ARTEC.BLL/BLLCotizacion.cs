@@ -36,9 +36,9 @@ namespace ARTEC.BLL
         }
 
 
-        public List<Cotizacion> CotizacionTraerPorIdPartidaDetalle(int IdPartidaDetalle, int IdPartida)
+        public List<Cotizacion> CotizacionTraerPorUIDPartidaDetalle(int UIDPartidaDetalle, int IdPartida)
         {
-            return GestorCotizacion.CotizacionTraerPorIdPartidaDetalle(IdPartidaDetalle, IdPartida);
+            return GestorCotizacion.CotizacionTraerPorUIDPartidaDetalle(UIDPartidaDetalle, IdPartida);
         }
 
 

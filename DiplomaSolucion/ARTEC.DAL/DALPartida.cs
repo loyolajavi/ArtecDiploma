@@ -55,6 +55,7 @@ namespace ARTEC.DAL
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
 
+                //Guardar los Detalles de la Partida
                 foreach (PartidaDetalle item in laPartida.unasPartidasDetalles)
                 {
 
@@ -62,26 +63,28 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle),
                         new SqlParameter("@IdPartida", IDDevuelto),
-                        //*********************GUARDA CON IDSOLICITUD****************************//
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle)
 			        };
 
-                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
+                    var ResultadoUIDPDet = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
+                    int IDDevueltoUIDPDet = Decimal.ToInt32(ResultadoUIDPDet);
 
+                    //Guardar las cotizaciones asociadas a cada PartidaDetalle
                     foreach (Cotizacion cotiz in item.unasCotizaciones)
                     {
                         SqlParameter[] parametersRelCotizPartidaDetalle = new SqlParameter[]
 			            {
                             new SqlParameter("@IdCotizacion", cotiz.IdCotizacion),
                             new SqlParameter("@IdPartida", IDDevuelto),
-                            new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle)
+                            new SqlParameter("@UIDPartidaDetalle", IDDevueltoUIDPDet)
 			            };
 
                         FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotizPartidaDetalle);
                         
                     }
 
+                    //Modifica el estado de los detalles de Solicitud
                     SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
 			        {
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
