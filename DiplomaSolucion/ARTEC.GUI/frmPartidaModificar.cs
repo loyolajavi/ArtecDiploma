@@ -29,6 +29,8 @@ namespace ARTEC.GUI
         List<Cotizacion> ListaLocalCotiz;
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
         Dependencia DepAsoc;
+        List<PartidaDetalle> PDetallesBorrar = new List<PartidaDetalle>();
+
         public frmPartidaModificar(int NroPartidaArg)
         {
             InitializeComponent();
@@ -105,26 +107,67 @@ namespace ARTEC.GUI
             }
             else
             {
-                IndiceDetalleSeleccionado = e.RowIndex;
-                DataGridView grillaAux = (DataGridView)sender;
-                ListaLocalCotiz = (List<Cotizacion>)unaPartida.unasPartidasDetalles[e.RowIndex].unasCotizaciones;
+                //Si hizo click en Borrar
+                if (e.ColumnIndex == grillaDetallesPart.Columns["btnDinBorrar"].Index)
+                { 
+                    //VER: COMPROBAR QUE LA PARTIDA NO ESTE ASOCIADA A UNA DE CONTRATACIONES
+                    //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                    grillaDetallesPart.Columns.RemoveAt(e.ColumnIndex);
 
-                grillaCotizaciones.DataSource = null;
-                grillaCotizaciones.DataSource = ListaLocalCotiz;
-                //foreach (Cotizacion unaCot in ListaLocalCotiz)
-                //{
-                //    grillaCotizaciones.Rows[ListaLocalCotiz.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
-                //    grillaAux.EndEdit();
-                //}
+                    //Guardo en una lista los detalles a eliminar
+                    PDetallesBorrar.Add(unaPartida.unasPartidasDetalles[e.RowIndex]);
 
-                //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
-                List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud);
-                ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
-                           .ToList();
-                GrillaCotizAntiguas.DataSource = null;
-                GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
+                    //elimino de la memoria el detalle
+                    unaPartida.unasPartidasDetalles.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    grillaDetallesPart.DataSource = null;
+                    List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+                    foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                    {
+                        HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                        unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                        unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                        unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
 
-                FormatearGrillaCotiz();
+                        ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                    }
+                    grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+                    //Agrega boton para Borrar el detallePartida
+                    var deleteButton = new DataGridViewButtonColumn();
+                    deleteButton.Name = "btnDinBorrar";
+                    deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.UseColumnTextForButtonValue = true;
+                    grillaDetallesPart.Columns.Add(deleteButton);
+
+                    grillaCotizaciones.DataSource = null;
+                    CalcularMontoTotalPartida();
+                }
+                else
+                {
+                    IndiceDetalleSeleccionado = e.RowIndex;
+                    DataGridView grillaAux = (DataGridView)sender;
+                    ListaLocalCotiz = (List<Cotizacion>)unaPartida.unasPartidasDetalles[e.RowIndex].unasCotizaciones;
+
+                    grillaCotizaciones.DataSource = null;
+                    grillaCotizaciones.DataSource = ListaLocalCotiz;
+                    //foreach (Cotizacion unaCot in ListaLocalCotiz)
+                    //{
+                    //    grillaCotizaciones.Rows[ListaLocalCotiz.FindIndex(x => x.IdCotizacion == unaCot.IdCotizacion)].Cells["chkBoxCotizacion"].Value = unaCot.Seleccionada;
+                    //    grillaAux.EndEdit();
+                    //}
+
+                    //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
+                    List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud);
+                    ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
+                               .ToList();
+                    GrillaCotizAntiguas.DataSource = null;
+                    GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
+
+                    FormatearGrillaCotiz();
+                }
+
+                
             }
         }
 
@@ -139,7 +182,7 @@ namespace ARTEC.GUI
             else
             {
                 //Guardo en BD la asociacion de la cotiz con el partDet
-                if (ManagerCotizacion.CotizacionAsociarConPartidaDetalle(ListaResCotizLoc[e.RowIndex].IdCotizacion, unaPartida.unasPartidasDetalles[IndiceDetalleSeleccionado].IdPartidaDetalle, unaPartida.IdPartida))
+                if (ManagerCotizacion.CotizacionAsociarConPartidaDetalle(ListaResCotizLoc[e.RowIndex].IdCotizacion, unaPartida.unasPartidasDetalles[IndiceDetalleSeleccionado].UIDPartidaDetalle, unaPartida.IdPartida))
                 {
                     //Actualizo las grillas
                     ListaLocalCotiz.Add(ListaResCotizLoc[e.RowIndex]);
@@ -230,6 +273,20 @@ namespace ARTEC.GUI
                 }
             }
             
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            grillaDetallesPart.Columns.Remove("btnDinBorrar");
+            grillaCotizaciones.DataSource = null;
+            GrillaCotizAntiguas.DataSource = null;
+            grillaDetallesPart.DataSource = null;
+            frmPartidaModificar_Load(this, new EventArgs());
+            //Actualizo campos
+            CalcularMontoTotalPartida();
+
+
         }
 
 

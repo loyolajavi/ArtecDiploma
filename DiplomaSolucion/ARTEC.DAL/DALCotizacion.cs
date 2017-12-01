@@ -208,7 +208,7 @@ namespace ARTEC.DAL
         }
 
 
-        public bool CotizacionAsociarConPartidaDetalle(int IdCotizacion, int IdPartDetalle, int IdPartida)
+        public bool CotizacionAsociarConPartidaDetalle(int IdCotizacion, int UIDPartDetalle, int IdPartida)
         {
             try
             {
@@ -217,7 +217,7 @@ namespace ARTEC.DAL
 			    {
                     new SqlParameter("@IdCotizacion", IdCotizacion),
                     new SqlParameter("@IdPartida", IdPartida),
-                    new SqlParameter("@IdPartidaDetalle", IdPartDetalle)
+                    new SqlParameter("@UIDPartidaDetalle", UIDPartDetalle)
 			    };
 
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();

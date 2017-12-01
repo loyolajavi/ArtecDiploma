@@ -56,6 +56,7 @@ namespace ARTEC.GUI
             this.btnGenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnGenerarDocumento = new DevComponents.DotNetBar.ButtonX();
+            this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
             this.pnlResPartida.SuspendLayout();
@@ -452,12 +453,25 @@ namespace ARTEC.GUI
             this.btnGenerarDocumento.Text = "btnGenerarDocumento";
             this.btnGenerarDocumento.Click += new System.EventHandler(this.btnGenerarDocumento_Click);
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCancelar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCancelar.Location = new System.Drawing.Point(883, 494);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(78, 27);
+            this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCancelar.TabIndex = 83;
+            this.btnCancelar.Text = "btnCancelar";
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // frmPartidaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGenerarDocumento);
             this.Controls.Add(this.GrillaCotizAntiguas);
             this.Controls.Add(this.pnlResPartida);
@@ -481,7 +495,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -524,5 +537,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnGenerarPartida;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
         private DevComponents.DotNetBar.ButtonX btnGenerarDocumento;
+        private DevComponents.DotNetBar.ButtonX btnCancelar;
     }
 }
