@@ -240,6 +240,13 @@ namespace ARTEC.GUI
         //Genera el documento con la partida modificada
         private void btnGenerarDocumento_Click(object sender, EventArgs e)
         {
+            if (PDetallesBorrar != null && PDetallesBorrar.Count() > 0)
+            {
+                ManagerPartida.PartidaModifDetalles(PDetallesBorrar);
+
+                //NO OLVIDAR VOLVER PARA ATRAS EL ESTADO DE LA SOLICDETALLE Y REVISAR SI HAY ALGO MAS
+            }//PONER ESTE IF MAS ABAJO
+
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
             {
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta

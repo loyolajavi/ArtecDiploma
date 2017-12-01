@@ -65,5 +65,16 @@ namespace ARTEC.BLL
             return false;
         }
 
+        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar)
+        {
+            if (GestorPartida.PartidaModifDetalles(PDetallesBorrar))
+                return true;
+            return false;
+        }
+
+
+
+
+
     }
 }

@@ -81,7 +81,7 @@ namespace ARTEC.DAL
 			            };
 
                         FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotizPartidaDetalle);
-                        
+
                     }
 
                     //Modifica el estado de los detalles de Solicitud
@@ -181,7 +181,7 @@ namespace ARTEC.DAL
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    
+
 
                     unaParti.IdPartida = (int)row["IdPartida"];
                     unaParti.MontoSolicitado = (decimal)row["MontoSolicitado"];
@@ -381,6 +381,40 @@ namespace ARTEC.DAL
 
         }
 
+        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                foreach (PartidaDetalle pdet in PDetallesBorrar)
+                {
+                    foreach (Cotizacion unaCoti in pdet.unasCotizaciones)
+                    {
+                        parameters.Add(new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion));
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModifDetalles", parameters.ToArray());
+                        parameters.Clear();
+                    }
+
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
 
 
 
