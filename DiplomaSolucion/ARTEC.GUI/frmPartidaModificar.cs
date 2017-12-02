@@ -141,6 +141,7 @@ namespace ARTEC.GUI
                     grillaDetallesPart.Columns.Add(deleteButton);
 
                     grillaCotizaciones.DataSource = null;
+                    GrillaCotizAntiguas.DataSource = null;
                     CalcularMontoTotalPartida();
                 }
                 else
@@ -244,7 +245,7 @@ namespace ARTEC.GUI
             {
                 ManagerPartida.PartidaModifDetalles(PDetallesBorrar);
 
-                //NO OLVIDAR VOLVER PARA ATRAS EL ESTADO DE LA SOLICDETALLE Y REVISAR SI HAY ALGO MAS
+                //VER: NO OLVIDAR VOLVER PARA ATRAS EL ESTADO DE LA SOLICDETALLE Y REVISAR SI HAY ALGO MAS
             }//PONER ESTE IF MAS ABAJO
 
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
@@ -290,10 +291,18 @@ namespace ARTEC.GUI
             GrillaCotizAntiguas.DataSource = null;
             grillaDetallesPart.DataSource = null;
             frmPartidaModificar_Load(this, new EventArgs());
+            //Limpio los pdetalles a borrar
+            PDetallesBorrar.Clear();
             //Actualizo campos
             CalcularMontoTotalPartida();
 
 
+        }
+
+        private void lblVolver_Click(object sender, EventArgs e)
+        {
+            btnCancelar_Click(this, new EventArgs());
+            this.Close();
         }
 
 

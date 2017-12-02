@@ -398,6 +398,15 @@ namespace ARTEC.DAL
                         parameters.Clear();
                     }
 
+                    SqlParameter[] parametersPartDet = new SqlParameter[]
+                    {
+                        new SqlParameter("@IdPartida", pdet.IdPartida),
+                        new SqlParameter("@UIDPartidaDetalle", pdet.UIDPartidaDetalle),
+                        new SqlParameter("@IdPartidaDetalle", pdet.IdPartidaDetalle)
+                    };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModEliminarDetalle", parametersPartDet);
+
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();

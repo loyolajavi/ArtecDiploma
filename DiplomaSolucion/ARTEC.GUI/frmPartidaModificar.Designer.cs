@@ -57,6 +57,7 @@ namespace ARTEC.GUI
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnGenerarDocumento = new DevComponents.DotNetBar.ButtonX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
+            this.lblVolver = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
             this.pnlResPartida.SuspendLayout();
@@ -465,12 +466,27 @@ namespace ARTEC.GUI
             this.btnCancelar.Text = "btnCancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // lblVolver
+            // 
+            // 
+            // 
+            // 
+            this.lblVolver.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblVolver.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVolver.Location = new System.Drawing.Point(1, 500);
+            this.lblVolver.Name = "lblVolver";
+            this.lblVolver.Size = new System.Drawing.Size(63, 23);
+            this.lblVolver.TabIndex = 84;
+            this.lblVolver.Text = "lblVolver";
+            this.lblVolver.Click += new System.EventHandler(this.lblVolver_Click);
+            // 
             // frmPartidaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 521);
             this.ControlBox = false;
+            this.Controls.Add(this.lblVolver);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGenerarDocumento);
             this.Controls.Add(this.GrillaCotizAntiguas);
@@ -538,5 +554,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
         private DevComponents.DotNetBar.ButtonX btnGenerarDocumento;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
+        private DevComponents.DotNetBar.LabelX lblVolver;
     }
 }
