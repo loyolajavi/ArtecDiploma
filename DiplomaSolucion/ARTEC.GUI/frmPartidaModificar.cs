@@ -245,7 +245,7 @@ namespace ARTEC.GUI
             {
                 ManagerPartida.PartidaModifDetalles(PDetallesBorrar);
 
-                //VER: NO OLVIDAR VOLVER PARA ATRAS EL ESTADO DE LA SOLICDETALLE Y REVISAR SI HAY ALGO MAS
+                //VER: NO OLVIDAR VOLVER PARA ATRAS EL ESTADO DE LA SOLICDETALLE Y REVISAR SI HAY ALGO MAS, MODIFICAR QUE en al crear partida en solimdificar te deje crearla con uno solo seleccionado de todos los q hay (si tiene cotizaciones suficientes)
             }//PONER ESTE IF MAS ABAJO
 
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)

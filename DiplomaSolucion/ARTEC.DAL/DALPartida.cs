@@ -215,7 +215,10 @@ namespace ARTEC.DAL
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidasBuscarPorIdSolicitud", parameters))
                 {
                     List<Partida> ListaPartidas = new List<Partida>();
-                    ListaPartidas = MapearPartidas(ds);
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        ListaPartidas = MapearPartidas(ds);
+                    }
                     return ListaPartidas;
                 }
             }
@@ -398,6 +401,7 @@ namespace ARTEC.DAL
                         parameters.Clear();
                     }
 
+                    //Elimina los detalles que fueron quitados de la partida
                     SqlParameter[] parametersPartDet = new SqlParameter[]
                     {
                         new SqlParameter("@IdPartida", pdet.IdPartida),
@@ -406,6 +410,16 @@ namespace ARTEC.DAL
                     };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModEliminarDetalle", parametersPartDet);
+
+                    //Modifica el estado de los detalles de Solicitud
+                    SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicDetalle", pdet.SolicDetalleAsociado.IdSolicitudDetalle),
+                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
 
                 }
 

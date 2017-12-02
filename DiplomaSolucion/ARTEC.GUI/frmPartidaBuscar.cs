@@ -76,10 +76,15 @@ namespace ARTEC.GUI
                     if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
                     {
                         unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(Int32.Parse(txtNroSolicitud.Text));
-                        if (unaListaPartidas.Count() > 0)
+                        if (unaListaPartidas.Count() > 0){
+                            GrillaPartidas.DataSource = null;
                             GrillaPartidas.DataSource = unaListaPartidas;
+                        }
                         else
+                        {
                             MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                        }
+                            
                         txtDependencia.Clear();
                     }
                     //Si se ingresó dependencia
@@ -96,9 +101,14 @@ namespace ARTEC.GUI
                                 unaListaPartidas.AddRange(LisPartidasLocal);
                             }
                             if (unaListaPartidas.Count() > 0)
+                            {
+                                GrillaPartidas.DataSource = null;
                                 GrillaPartidas.DataSource = unaListaPartidas;
+                            }
                             else
+                            {
                                 MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                            }
                         }
                         else
                         {
