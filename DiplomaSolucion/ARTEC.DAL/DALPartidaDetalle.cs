@@ -152,7 +152,7 @@ namespace ARTEC.DAL
 
 
 
-        public int PartidaDetallePorIdCategoriaIdPartida(int NroPart, int IdCat)
+        public int PartidaDetalleUIDPorIdCategoriaIdPartida(int NroPart, int IdCat)
         {
 
             SqlParameter[] parametersPartDet = new SqlParameter[]
@@ -166,7 +166,7 @@ namespace ARTEC.DAL
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                int Resultado = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetallePorIdCategoriaIdPartida", parametersPartDet);
+                int Resultado = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleUIDPorIdCategoriaIdPartida", parametersPartDet);
                 //int IDDevuelto = Decimal.ToInt32(Resultado);
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();

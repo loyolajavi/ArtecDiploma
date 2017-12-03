@@ -14,9 +14,9 @@ namespace ARTEC.BLL
         DALInventarioSoft GestorInventarioSoft = new DALInventarioSoft();
 
 
-        public void InventarioSoftCrear(Software unBien, int IdPart)
+        public void InventarioSoftCrear(Software unBien, int IdAdq)
         {
-            GestorInventarioSoft.InventarioSoftCrear(unBien, IdPart);
+            GestorInventarioSoft.InventarioSoftCrear(unBien, IdAdq);
         }
 
 

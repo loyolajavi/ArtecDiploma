@@ -63,12 +63,6 @@ namespace ARTEC.GUI
 
                 ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
 
-                //FALTA QUE Ponga en estado "Compradas" las cosas de un SolicDetalle
-                //Para hacerlo se puede consultar de nuevo la cantidad comprada y comparar con la cantidad solicitada
-                //Todo dentro del negocio o dal
-
-
-
                 List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
                 LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
                 foreach (var item2 in LisAUXDetalles)
@@ -321,7 +315,7 @@ namespace ARTEC.GUI
                 }
                 //unBien.unInventarioAlta = unInven;
                 unBienAUX.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle();
-                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.IdPartidaDetalle = ManagerPartidaDetalle.PartidaDetallePorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
+                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
                 unBienAUX.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
 
                 unBienAUX.unaCategoria = unBien.unaCategoria;

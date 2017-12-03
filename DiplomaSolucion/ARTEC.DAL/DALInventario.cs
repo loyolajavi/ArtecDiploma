@@ -96,7 +96,7 @@ namespace ARTEC.DAL
                     uno.SerieKey = row["SerieKey"].ToString();
                     uno.PartidaDetalleAsoc = new PartidaDetalle();
                     uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
-                    uno.PartidaDetalleAsoc.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
+                    uno.PartidaDetalleAsoc.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
                     if (uno.TipoBien == (int)TipoBien.EnumTipoBien.Hard)
                     {
                         (uno as XInventarioHard).unDeposito = new Deposito();

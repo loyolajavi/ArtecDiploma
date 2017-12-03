@@ -14,9 +14,9 @@ namespace ARTEC.BLL
         DALInventarioHard GestorInventarioHard = new DALInventarioHard();
 
 
-        public void InventarioHardCrear(Hardware unBien, int IdPart)
+        public void InventarioHardCrear(Hardware unBien, int IdAdq)
         {
-            GestorInventarioHard.InventarioHardCrear(unBien, IdPart);
+            GestorInventarioHard.InventarioHardCrear(unBien, IdAdq);
         }
 
 
