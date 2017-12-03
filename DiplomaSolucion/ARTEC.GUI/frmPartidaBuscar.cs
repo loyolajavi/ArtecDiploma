@@ -76,15 +76,17 @@ namespace ARTEC.GUI
                     if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
                     {
                         unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(Int32.Parse(txtNroSolicitud.Text));
-                        if (unaListaPartidas.Count() > 0){
+                        if (unaListaPartidas.Count() > 0)
+                        {
                             GrillaPartidas.DataSource = null;
                             GrillaPartidas.DataSource = unaListaPartidas;
                         }
                         else
                         {
+                            GrillaPartidas.DataSource = null;
                             MessageBox.Show("La Solicitud no posee Partidas solicitadas");
                         }
-                            
+
                         txtDependencia.Clear();
                     }
                     //Si se ingresó dependencia
@@ -98,7 +100,8 @@ namespace ARTEC.GUI
                             {
                                 List<Partida> LisPartidasLocal = new List<Partida>();
                                 LisPartidasLocal = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolic.IdSolicitud);
-                                unaListaPartidas.AddRange(LisPartidasLocal);
+                                if (LisPartidasLocal.Count() > 0)
+                                    unaListaPartidas.AddRange(LisPartidasLocal);
                             }
                             if (unaListaPartidas.Count() > 0)
                             {
@@ -107,17 +110,19 @@ namespace ARTEC.GUI
                             }
                             else
                             {
+                                GrillaPartidas.DataSource = null;
                                 MessageBox.Show("La Solicitud no posee Partidas solicitadas");
                             }
                         }
                         else
                         {
+                            GrillaPartidas.DataSource = null;
                             MessageBox.Show("La dependencia no posee solicitudes ni partidas");
                         }
                     }
                 }
             }
-            
+
         }
 
 
@@ -207,7 +212,7 @@ namespace ARTEC.GUI
             else
             {
                 frmPartidaModificar unfrmPartidaModificar = new frmPartidaModificar((int)GrillaPartidas.Rows[e.RowIndex].Cells["IdPartida"].Value);
-                    //((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
+                //((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 unfrmPartidaModificar.Show();
 
             }

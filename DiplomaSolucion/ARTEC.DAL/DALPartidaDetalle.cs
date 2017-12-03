@@ -96,12 +96,13 @@ namespace ARTEC.DAL
 
 
 
-        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida)
+        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle estadoSolic)
         {
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@IdPartida", IdPartida)
+                new SqlParameter("@IdPartida", IdPartida),
+                new SqlParameter("@IdEstadoSolic", estadoSolic)
             };
 
             try

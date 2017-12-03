@@ -14,9 +14,9 @@ namespace ARTEC.BLL
         DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
 
 
-        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida)
+        public List<SolicDetalle> CategoriaDetBienesTraerPorIdPartida(int IdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle estadoSolic)
         {
-            return GestorPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(IdPartida);
+            return GestorPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(IdPartida, estadoSolic);
         }
 
 
