@@ -58,7 +58,7 @@ namespace ARTEC.DAL
             try
             {
 
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventariosTraerListosParaAsignarPorSolicDetalle", parametersInvSoft))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioHardTraerListosParaAsignar", parametersInvSoft))
                 {
                     List<Software> unaLista = new List<Software>();
                     unaLista = MapearInventariosSoft(ds);
