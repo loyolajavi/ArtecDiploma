@@ -19,18 +19,29 @@ namespace ARTEC.DAL
 			{
                 new SqlParameter("@IdBienEspecif", unBien.IdBien),
                 new SqlParameter("@SerieKey ", unBien.unInventarioAlta.SerieKey),
-                new SqlParameter("@IdAdquisicion", IdAdq),
                 new SqlParameter("@SerialMaster", (unBien.unInventarioAlta as XInventarioSoft).SerialMaster),
-                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
-                new SqlParameter("@UIDPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle),
-                new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida)
+                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario)
 			};
+
+            
 
             try
             {
                 //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioSoftCrear", parametersInvSoft);
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioSoftCrear", parametersInvSoft);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                //Guarda asociación en tabla RelPdetAdq entre Inventario, PartidaDetalle y Adquisicion
+                SqlParameter[] parametersRelPdetAdqenSoft = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdInventario", IDDevuelto),
+                    new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida),
+                    new SqlParameter("@UIDPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle),
+                    new SqlParameter("@IdAdquisicion", IdAdq)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPDetAdqCrear", parametersRelPdetAdqenSoft);
 
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }

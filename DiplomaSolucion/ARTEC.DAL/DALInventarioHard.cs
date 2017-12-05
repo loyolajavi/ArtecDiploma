@@ -20,18 +20,30 @@ namespace ARTEC.DAL
 			{
                 new SqlParameter("@IdBienEspecif", unBien.IdBien),
                 new SqlParameter("@SerieKey", unBien.unInventarioAlta.SerieKey),
-                new SqlParameter("@IdAdquisicion", IdAdq),
                 new SqlParameter("@IdDeposito", (unBien.unInventarioAlta as XInventarioHard).unDeposito.IdDeposito),
-                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
-                new SqlParameter("@UIDPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle),
-                new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida)
+                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario)
 			};
+
+
 
             try
             {
                 //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioHardCrear", parametersInvHard);
+                //Guarda Inventario
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioHardCrear", parametersInvHard);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+                //Guarda asociación en tabla RelPdetAdq entre Inventario, PartidaDetalle y Adquisicion
+                SqlParameter[] parametersRelPdetAdq = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdInventario", IDDevuelto),
+                    new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida),
+                    new SqlParameter("@UIDPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle),
+                    new SqlParameter("@IdAdquisicion", IdAdq)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPDetAdqCrear", parametersRelPdetAdq);
 
                 //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
