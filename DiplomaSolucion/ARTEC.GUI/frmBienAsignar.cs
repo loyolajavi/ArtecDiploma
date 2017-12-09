@@ -43,7 +43,7 @@ namespace ARTEC.GUI
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;
          
-            //ESTA ESTABA ANTES DE USAR EL HLP
+            //ESTA ESTABA ANTES DE USAR EL HLP YA SE PUDE BORRAR
             //foreach (var det in unaSolic.unosDetallesSolicitud)
             //{
             //    //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
@@ -83,7 +83,7 @@ namespace ARTEC.GUI
 
                     ListaGrilla.Add(grillaAsig2);
                 }
-                //ENDPRU2610 SI ESTO FUNCIONA QUITAR -BO1-
+                //ENDPRU2610 SI ESTO FUNCIONA QUITAR -BO1- FUNCIONO
 
                 //BO1
                 ////List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
@@ -116,7 +116,7 @@ namespace ARTEC.GUI
 
             
 
-            //ESTA ESTABA ANTES DE USAR EL HLP
+            //ESTA ESTABA ANTES DE USAR EL HLP YA SE PUEDE BORRAR
             //foreach (SolicDetalle item in unaSolic.unosDetallesSolicitud)
             //{
             //    GrillaAsignacion grillaAsig2 = new GrillaAsignacion();

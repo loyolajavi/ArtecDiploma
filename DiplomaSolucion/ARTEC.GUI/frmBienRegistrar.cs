@@ -322,6 +322,7 @@ namespace ARTEC.GUI
                 unBienAUX.unaMarca = unBien.unaMarca;
                 unBienAUX.unModelo = unBien.unModelo;
                 unBienAUX.IdBien = unBien.IdBien;
+                unBienAUX.unInventarioAlta.Costo = Int32.Parse(txtCosto.Text);
 
 
                 unaAdquisicion.BienesInventarioAsociados.Add(unBienAUX);

@@ -141,7 +141,7 @@ namespace ARTEC.GUI
                     if (IdRendRes > 0)
                         DocumentoRendicionCrear(IdRendRes);
                     //Quizas esto lo maneje desde las excepciones mas q aca
-                    MessageBox.Show("No se pudo crear la Rendicion correctamente");
+                    //MessageBox.Show("No se pudo crear la Rendicion correctamente");
                 }
                 else
                 {

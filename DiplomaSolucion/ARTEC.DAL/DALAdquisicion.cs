@@ -18,7 +18,7 @@ namespace ARTEC.DAL
             SqlParameter[] parametersAdq = new SqlParameter[]
 			{
                 new SqlParameter("@FechaAdq", unaAdquisicion.FechaAdq),
-                new SqlParameter("@FechaCompra ", unaAdquisicion.FechaCompra),
+                new SqlParameter("@FechaCompra", unaAdquisicion.FechaCompra),
                 new SqlParameter("@NroFactura", unaAdquisicion.NroFactura),
                 new SqlParameter("@MontoCompra", unaAdquisicion.MontoCompra),
                 new SqlParameter("@IdProveedor", unaAdquisicion.ProveedorAdquisicion.IdProveedor)

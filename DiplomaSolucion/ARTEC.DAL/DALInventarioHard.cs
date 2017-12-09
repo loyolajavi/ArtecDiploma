@@ -21,7 +21,8 @@ namespace ARTEC.DAL
                 new SqlParameter("@IdBienEspecif", unBien.IdBien),
                 new SqlParameter("@SerieKey", unBien.unInventarioAlta.SerieKey),
                 new SqlParameter("@IdDeposito", (unBien.unInventarioAlta as XInventarioHard).unDeposito.IdDeposito),
-                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario)
+                new SqlParameter("@IdEstadoInventario", unBien.unInventarioAlta.unEstado.IdEstadoInventario),
+                new SqlParameter("@Costo", unBien.unInventarioAlta.Costo)
 			};
 
 
