@@ -43,20 +43,9 @@ namespace ARTEC.GUI
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;
          
-            //ESTA ESTABA ANTES DE USAR EL HLP YA SE PUDE BORRAR
-            //foreach (var det in unaSolic.unosDetallesSolicitud)
-            //{
-            //    //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
-            //    List<Hardware> LisHard = new List<Hardware>();
-            //    LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
-            //    det.unosBienes = LisHard;
-            //    HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey}).ToList();
-            //}
-
             foreach (var det in unaSolic.unosDetallesSolicitud)
             {
 
-                //PRU2610
                 BLLInventario ManagerInventario = new BLLInventario();
                 IEnumerable<Bien> BienInvListosAsignar;
                 BienInvListosAsignar = ManagerInventario.InventariosTraerListosParaAsignarPorSolicDetalle(det, det.unaCategoria.IdCategoria);
@@ -83,58 +72,9 @@ namespace ARTEC.GUI
 
                     ListaGrilla.Add(grillaAsig2);
                 }
-                //ENDPRU2610 SI ESTO FUNCIONA QUITAR -BO1- FUNCIONO
-
-                //BO1
-                ////List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
-                //List<Hardware> LisHard = new List<Hardware>();
-                //LisHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(det);
-                //if (LisHard.Count() > 0)
-                //{
-                //    det.unosBienes = LisHard;
-                //    HLPAsigs = LisHard.Select(x => new HLPAsignacion() { IdInventario = x.unInventarioAlta.IdInventario, Marca = x.unaMarca.DescripMarca, Modelo = x.unModelo.DescripModeloVersion, Serie = x.unInventarioAlta.SerieKey }).ToList();
-
-                //    GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
-                //    grillaAsig2.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
-                //    grillaAsig2.unaCantidad = det.Cantidad.ToString();
-                //    grillaAsig2.unBien = det.unaCategoria.DescripCategoria;
-                //    grillaAsig2.unaGrilla.DataSource = HLPAsigs;
-
-                //    //Button bot = new Button();
-                //    //grillaAsig2.Controls.Add(bot);
-                //    //grillaAsig2.Controls["bot"].Click += bot_Click;
-
-                //    ListaGrilla.Add(grillaAsig2);
-                //}
-                //END BO1
-
 
 
             }
-
-
-
-            
-
-            //ESTA ESTABA ANTES DE USAR EL HLP YA SE PUEDE BORRAR
-            //foreach (SolicDetalle item in unaSolic.unosDetallesSolicitud)
-            //{
-            //    GrillaAsignacion grillaAsig2 = new GrillaAsignacion();
-            //    grillaAsig2.unaCantidad = item.Cantidad.ToString();
-            //    grillaAsig2.unBien = item.unaCategoria.DescripCategoria;
-            //    //List<XInventarioHard> LisInvHard = new List<XInventarioHard>();
-            //    //LisInvHard = ManagerInventarioHard.InventarioHardTraerListosParaAsignar(item);
-            //    //item.InventariosHard = LisInvHard;
-            //    grillaAsig2.unaGrilla = item.InventariosHard;
-            //    ListaGrilla.Add(grillaAsig2);
-
-            //    //grillaAsig2.Location = new System.Drawing.Point(699, 52);
-            //    //this.Controls.Add(grillaAsig2);
-            //}
-
-
-
-
 
             foreach (GrillaAsignacion gri in ListaGrilla)
             {

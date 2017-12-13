@@ -109,13 +109,6 @@ namespace ARTEC.GUI
 
             if (unaSolicitud != null)
             {
-                if (BuscarPartidaAsociada())
-                {
-                    resmbox = MessageBox.Show("Ya existe una Partida, desea modificarla?", "Advertencia", MessageBoxButtons.YesNo);
-                }
-                    
-                    
-                
                 txtNroSolicitud.Text = unaSolicitud.IdSolicitud.ToString();
                 txtDep.Text = unaSolicitud.laDependencia.NombreDependencia;
 

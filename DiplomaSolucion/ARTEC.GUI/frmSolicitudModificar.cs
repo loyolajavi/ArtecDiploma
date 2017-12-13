@@ -425,10 +425,22 @@ namespace ARTEC.GUI
 
         private void btnSoliitarPartida_Click(object sender, EventArgs e)
         {
-            if (unaSolicitud.unosDetallesSolicitud.Where(x => x.unasCotizaciones.Count() >= 3).Count() == unaSolicitud.unosDetallesSolicitud.Count())
+            //if (unaSolicitud.unosDetallesSolicitud.Where(x => x.unasCotizaciones.Count() >= 3).Count() == unaSolicitud.unosDetallesSolicitud.Count())
+            List<SolicDetalle> ListaDetSolicLocal = new List<SolicDetalle>();
+            ListaDetSolicLocal = unaSolicitud.unosDetallesSolicitud.Where(x => x.unasCotizaciones.Count() >= 3).ToList();
+            if (ListaDetSolicLocal.Count() > 0)
             {
-                frmPartidaSolicitar unFrmPartidaSolicitar = frmPartidaSolicitar.ObtenerInstancia(unaSolicitud);
-                unFrmPartidaSolicitar.Show();
+                SolicDetalle unDetSolicLocal;
+                unDetSolicLocal = ListaDetSolicLocal.FirstOrDefault(t => t.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado);
+                if (unDetSolicLocal != null)
+                {
+                    frmPartidaSolicitar unFrmPartidaSolicitar = frmPartidaSolicitar.ObtenerInstancia(unaSolicitud);
+                    unFrmPartidaSolicitar.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado");
+                }
             }
             else
             {
@@ -1170,12 +1182,12 @@ namespace ARTEC.GUI
             //VER:AGREGAR LOS ADJUNTOS
             //VER:AGREGAR EN EL STORE LAS NOTAS
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            
+
             //if (flagDetEliminado)
             //{
-                //Regenerar detalles en BD
-                //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
-                ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
+            //Regenerar detalles en BD
+            //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
+            ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
             //}
             //else
             //{
