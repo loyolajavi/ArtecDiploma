@@ -89,7 +89,7 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
-                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
+                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida)
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);

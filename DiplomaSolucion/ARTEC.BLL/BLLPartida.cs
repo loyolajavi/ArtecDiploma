@@ -42,7 +42,12 @@ namespace ARTEC.BLL
         public bool PartidaAsociar(Partida laPartida)
         {
             if (GestorPartida.PartidaAsociar(laPartida))
+            {
+                BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                ManagerSolicDetalle.SolicDetalleUpdateEstado(laPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud, laPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
                 return true;
+            }
+                
             return false;
         }
 
