@@ -164,7 +164,7 @@ namespace ARTEC.GUI
         {
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
             {
-                //FALTA CREAR PLANTILLA
+                //VER: FALTA CREAR PLANTILLA
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion.docx"))
                 {
 
@@ -178,6 +178,20 @@ namespace ARTEC.GUI
                     //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
                     //}
                     doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "PruebaRendicion1"));
+                }
+                if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
+                {
+                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\RetribucionCajaChica.docx"))
+                    {
+
+                        doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        CultureInfo ci = new CultureInfo("es-AR");
+                        doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
+                        decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
+                        doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
+                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Retribucion1"));
+                    }
                 }
             }
             else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
@@ -194,6 +208,20 @@ namespace ARTEC.GUI
                     //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
                     //}
                     doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "PruebaRendicion English"));
+                }
+                if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
+                {
+                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\RetribucionCajaChica.docx"))
+                    {
+
+                        doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        CultureInfo ci = new CultureInfo("es-AR");
+                        doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
+                        decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
+                        doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
+                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Retribucion1"));
+                    }
                 }
             }
         }
