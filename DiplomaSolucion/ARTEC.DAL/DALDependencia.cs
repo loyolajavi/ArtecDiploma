@@ -191,5 +191,38 @@ namespace ARTEC.DAL
 
 
 
+
+        public List<TipoDependencia> TipoDepTraerTodos()
+        {
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoDepTraerTodos"))
+            {
+                List<TipoDependencia> unaLista = new List<TipoDependencia>();
+                unaLista = MapearTipoDep(ds);
+                return unaLista;
+            }
+        }
+
+        private List<TipoDependencia> MapearTipoDep(DataSet ds)
+        {
+            List<TipoDependencia> Res = new List<TipoDependencia>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    TipoDependencia unTipoDep = new TipoDependencia();
+
+                    unTipoDep.IdTipoDependencia = (int)row["IdTipoDependencia"];
+                    unTipoDep.DescripTipoDependencia = row["DescripTipoDependencia"].ToString();
+                    Res.Add(unTipoDep);
+                }
+                return Res;
+            }
+            catch (Exception es)
+            {
+                throw;
+                //MANEJAR EXC
+            }
+        }
     }
 }

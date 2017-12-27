@@ -18,7 +18,7 @@ namespace ARTEC.GUI
     public partial class SolicitudBuscar : DevComponents.DotNetBar.Metro.MetroForm
     {
 
-
+        private static SolicitudBuscar _unSolicitudBuscarInst;
         List<Solicitud> unasSolicitudes = new List<Solicitud>();
         List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
         List<Prioridad> unasPrioridades = new List<Prioridad>();
@@ -28,6 +28,17 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
         }
+
+        public static SolicitudBuscar ObtenerInstancia()
+        {
+            if (_unSolicitudBuscarInst == null)
+            {
+                _unSolicitudBuscarInst = new SolicitudBuscar();
+            }
+
+            return _unSolicitudBuscarInst;
+        }
+
 
 
 

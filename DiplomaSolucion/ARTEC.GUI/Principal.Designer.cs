@@ -31,13 +31,14 @@ namespace ARTEC.GUI
             this.tabsPrincipal = new System.Windows.Forms.TabControl();
             this.tabSolic = new System.Windows.Forms.TabPage();
             this.tabHomol = new System.Windows.Forms.TabPage();
+            this.tabPartidas = new System.Windows.Forms.TabPage();
+            this.tabDependencia = new System.Windows.Forms.TabPage();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.tabPartidas = new System.Windows.Forms.TabPage();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@ namespace ARTEC.GUI
             this.tabsPrincipal.Controls.Add(this.tabSolic);
             this.tabsPrincipal.Controls.Add(this.tabHomol);
             this.tabsPrincipal.Controls.Add(this.tabPartidas);
+            this.tabsPrincipal.Controls.Add(this.tabDependencia);
             this.tabsPrincipal.Location = new System.Drawing.Point(12, 59);
             this.tabsPrincipal.Name = "tabsPrincipal";
             this.tabsPrincipal.SelectedIndex = 0;
@@ -72,6 +74,26 @@ namespace ARTEC.GUI
             this.tabHomol.TabIndex = 1;
             this.tabHomol.Text = "tabPage2";
             this.tabHomol.UseVisualStyleBackColor = true;
+            // 
+            // tabPartidas
+            // 
+            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
+            this.tabPartidas.Name = "tabPartidas";
+            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
+            this.tabPartidas.TabIndex = 2;
+            this.tabPartidas.Text = "tabPartidas";
+            this.tabPartidas.UseVisualStyleBackColor = true;
+            // 
+            // tabDependencia
+            // 
+            this.tabDependencia.Location = new System.Drawing.Point(4, 22);
+            this.tabDependencia.Name = "tabDependencia";
+            this.tabDependencia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDependencia.Size = new System.Drawing.Size(1335, 635);
+            this.tabDependencia.TabIndex = 3;
+            this.tabDependencia.Text = "tabDependencia";
+            this.tabDependencia.UseVisualStyleBackColor = true;
             // 
             // buttonX1
             // 
@@ -160,16 +182,6 @@ namespace ARTEC.GUI
             this.cboIdioma.TabIndex = 6;
             this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
-            // tabPartidas
-            // 
-            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
-            this.tabPartidas.Name = "tabPartidas";
-            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
-            this.tabPartidas.TabIndex = 2;
-            this.tabPartidas.Text = "tabPartidas";
-            this.tabPartidas.UseVisualStyleBackColor = true;
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +217,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnRendicionCrear;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
         private System.Windows.Forms.TabPage tabPartidas;
+        private System.Windows.Forms.TabPage tabDependencia;
 
 
 

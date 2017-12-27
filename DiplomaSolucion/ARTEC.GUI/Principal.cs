@@ -83,6 +83,15 @@ namespace ARTEC.GUI
                     unFrmPartidaBuscar.Dock = DockStyle.Fill;
                     tabPartidas.Controls.Add(unFrmPartidaBuscar);
                     break;
+                case 3:
+                    frmDependenciaBuscar unFrmDependenciaBuscar = frmDependenciaBuscar.ObtenerInstancia();
+                    unFrmDependenciaBuscar.TopLevel = false;
+                    unFrmDependenciaBuscar.FormBorderStyle = FormBorderStyle.None;
+                    unFrmDependenciaBuscar.Visible = true;
+                    unFrmDependenciaBuscar.Dock = DockStyle.Fill;
+                    tabDependencia.Controls.Add(unFrmDependenciaBuscar);
+                    break;
+
             }
         }
 

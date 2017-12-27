@@ -43,5 +43,10 @@ namespace ARTEC.BLL
             return GestorDependencia.DependenciaTraerNombrePorIDSolicitud(IdSolicitud);
         }
 
+
+        public List<TipoDependencia> TipoDepTraerTodos()
+        {
+            return GestorDependencia.TipoDepTraerTodos();
+        }
     }
 }

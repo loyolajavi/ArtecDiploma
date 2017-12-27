@@ -10,7 +10,7 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdTipoDependencia { get; set; }
-        //public string DescripTipoDependencia { get; set; }
+        public string DescripTipoDependencia { get; set; }
 
 
     }

@@ -18,5 +18,10 @@ namespace ARTEC.BLL
         //    return GestorAgente.AgenteTraerTodos();
         //}
 
+
+        public List<Agente> AgentesTraerTodos()
+        {
+            return GestorAgente.AgentesTraerTodos();
+        }
     }
 }

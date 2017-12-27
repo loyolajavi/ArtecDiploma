@@ -40,5 +40,15 @@ namespace ARTEC.DAL
             }
         }
 
+
+        public List<Agente> AgentesTraerTodos()
+        {
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "AgentesTraerTodos"))
+            {
+                List<Agente> unaLista = new List<Agente>();
+                unaLista = MapearAgentes(ds);
+                return unaLista;
+            }
+        }
     }
 }

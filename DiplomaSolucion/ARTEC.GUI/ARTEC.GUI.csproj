@@ -110,6 +110,18 @@
     <Compile Include="frmCotizaciones.Designer.cs">
       <DependentUpon>frmCotizaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDependenciaBuscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDependenciaBuscar.Designer.cs">
+      <DependentUpon>frmDependenciaBuscar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDependenciaModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDependenciaModificar.Designer.cs">
+      <DependentUpon>frmDependenciaModificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDialogJustificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +222,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCotizaciones.resx">
       <DependentUpon>frmCotizaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDependenciaBuscar.resx">
+      <DependentUpon>frmDependenciaBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDependenciaModificar.resx">
+      <DependentUpon>frmDependenciaModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDialogJustificacion.resx">
       <DependentUpon>frmDialogJustificacion.cs</DependentUpon>
