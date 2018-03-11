@@ -44,6 +44,7 @@
     <Compile Include="BLLAgente.cs" />
     <Compile Include="BLLAsignacion.cs" />
     <Compile Include="BLLBien.cs" />
+    <Compile Include="BLLCargo.cs" />
     <Compile Include="BLLCategoria.cs" />
     <Compile Include="BLLCotizacion.cs" />
     <Compile Include="BLLDependencia.cs" />

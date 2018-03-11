@@ -28,41 +28,23 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.GrillaAgentes = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAgentes = new DevComponents.DotNetBar.LabelX();
             this.lblTipoDep = new DevComponents.DotNetBar.LabelX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
-            this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
+            this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboTipoDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnAgregarAgente = new DevComponents.DotNetBar.ButtonX();
             this.txtAgente = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
-            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboCargo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblCargo = new DevComponents.DotNetBar.LabelX();
             this.cboAgentes = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
+            this.GrillaAgentesLista = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).BeginInit();
             this.SuspendLayout();
-            // 
-            // GrillaAgentes
-            // 
-            this.GrillaAgentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle5;
-            this.GrillaAgentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.GrillaAgentes.Location = new System.Drawing.Point(12, 157);
-            this.GrillaAgentes.Name = "GrillaAgentes";
-            this.GrillaAgentes.Size = new System.Drawing.Size(422, 150);
-            this.GrillaAgentes.TabIndex = 65;
             // 
             // lblAgentes
             // 
@@ -103,16 +85,17 @@ namespace ARTEC.GUI
             this.lblDependencia.TabIndex = 60;
             this.lblDependencia.Text = "lblDependencia";
             // 
-            // btnConfirmar
+            // btnModificar
             // 
-            this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmar.Location = new System.Drawing.Point(198, 320);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnConfirmar.TabIndex = 59;
-            this.btnConfirmar.Text = "btnConfirmar";
+            this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnModificar.Location = new System.Drawing.Point(198, 320);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnModificar.TabIndex = 59;
+            this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // txtDependencia
             // 
@@ -166,6 +149,7 @@ namespace ARTEC.GUI
             this.btnAgregarAgente.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregarAgente.TabIndex = 71;
             this.btnAgregarAgente.Text = "btnAgregarAgente";
+            this.btnAgregarAgente.Click += new System.EventHandler(this.btnAgregarAgente_Click);
             // 
             // txtAgente
             // 
@@ -196,30 +180,18 @@ namespace ARTEC.GUI
             this.labelX2.TabIndex = 70;
             this.labelX2.Text = "Agente";
             // 
-            // btnCancelar
+            // cboCargo
             // 
-            this.btnCancelar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCancelar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Location = new System.Drawing.Point(368, 332);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCancelar.TabIndex = 72;
-            this.btnCancelar.Text = "btnCancelar";
-            // 
-            // comboBoxEx1
-            // 
-            this.comboBoxEx1.DisplayMember = "Text";
-            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx1.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx1.FormattingEnabled = true;
-            this.comboBoxEx1.ItemHeight = 16;
-            this.comboBoxEx1.Location = new System.Drawing.Point(64, 128);
-            this.comboBoxEx1.Name = "comboBoxEx1";
-            this.comboBoxEx1.Size = new System.Drawing.Size(128, 22);
-            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx1.TabIndex = 74;
+            this.cboCargo.DisplayMember = "Text";
+            this.cboCargo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboCargo.ForeColor = System.Drawing.Color.Black;
+            this.cboCargo.FormattingEnabled = true;
+            this.cboCargo.ItemHeight = 16;
+            this.cboCargo.Location = new System.Drawing.Point(64, 128);
+            this.cboCargo.Name = "cboCargo";
+            this.cboCargo.Size = new System.Drawing.Size(128, 22);
+            this.cboCargo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboCargo.TabIndex = 74;
             // 
             // lblCargo
             // 
@@ -247,52 +219,68 @@ namespace ARTEC.GUI
             this.cboAgentes.TabIndex = 76;
             this.cboAgentes.SelectionChangeCommitted += new System.EventHandler(this.cboAgentes_SelectionChangeCommitted);
             // 
+            // GrillaAgentesLista
+            // 
+            this.GrillaAgentesLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle1;
+            this.GrillaAgentesLista.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaAgentesLista.Location = new System.Drawing.Point(12, 156);
+            this.GrillaAgentesLista.Name = "GrillaAgentesLista";
+            this.GrillaAgentesLista.Size = new System.Drawing.Size(431, 150);
+            this.GrillaAgentesLista.TabIndex = 77;
+            // 
             // frmDependenciaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 379);
+            this.Controls.Add(this.GrillaAgentesLista);
             this.Controls.Add(this.lblCargo);
-            this.Controls.Add(this.comboBoxEx1);
-            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.cboCargo);
             this.Controls.Add(this.btnAgregarAgente);
             this.Controls.Add(this.txtAgente);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.cboTipoDep);
-            this.Controls.Add(this.GrillaAgentes);
             this.Controls.Add(this.lblAgentes);
             this.Controls.Add(this.lblTipoDep);
             this.Controls.Add(this.lblDependencia);
-            this.Controls.Add(this.btnConfirmar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.txtDependencia);
             this.Controls.Add(this.cboDep);
             this.Controls.Add(this.cboAgentes);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmDependenciaModificar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmDependenciaModificar_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAgentes;
         private DevComponents.DotNetBar.LabelX lblAgentes;
         private DevComponents.DotNetBar.LabelX lblTipoDep;
         private DevComponents.DotNetBar.LabelX lblDependencia;
-        private DevComponents.DotNetBar.ButtonX btnConfirmar;
+        private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboTipoDep;
         private DevComponents.DotNetBar.ButtonX btnAgregarAgente;
         private DevComponents.DotNetBar.Controls.TextBoxX txtAgente;
         private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.ButtonX btnCancelar;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboCargo;
         private DevComponents.DotNetBar.LabelX lblCargo;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgentes;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAgentesLista;
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="DALAgente.cs" />
     <Compile Include="DALAsignacion.cs" />
     <Compile Include="DALBien.cs" />
+    <Compile Include="DALCargo.cs" />
     <Compile Include="DALCategoria.cs" />
     <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />

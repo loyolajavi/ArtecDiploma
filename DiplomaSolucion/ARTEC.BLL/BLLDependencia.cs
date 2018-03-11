@@ -48,5 +48,10 @@ namespace ARTEC.BLL
         {
             return GestorDependencia.TipoDepTraerTodos();
         }
+
+        public void DependenciaModifTipoDep(int IdDep, TipoDependencia TipoDep)
+        {
+            GestorDependencia.DependenciaModifTipoDep(IdDep, TipoDep);
+        }
     }
 }

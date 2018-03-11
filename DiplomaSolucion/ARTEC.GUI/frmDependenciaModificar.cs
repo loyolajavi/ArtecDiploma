@@ -22,11 +22,14 @@ namespace ARTEC.GUI
         List<Agente> unosAgentes;
         Agente unAgenSelect;
         List<Cargo> unosCargos = new List<Cargo>();
+        List<Agente> AgentesLista = new List<Agente>();
+        List<Agente> AgentesNuevos = new List<Agente>();
 
         public frmDependenciaModificar(Dependencia unaDep)
         {
             InitializeComponent();
             DepModif = unaDep;
+
         }
 
         private void frmDependenciaModificar_Load(object sender, EventArgs e)
@@ -40,13 +43,20 @@ namespace ARTEC.GUI
             cboTipoDep.ValueMember = "IdTipoDependencia";
             cboTipoDep.SelectedValue = DepModif.unTipoDep.IdTipoDependencia;
             //Coloco los agentes
-            GrillaAgentes.DataSource = null;
-            GrillaAgentes.DataSource = DepModif.unosAgentes;
+            GrillaAgentesLista.DataSource = null;
+            GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
             //Traer todos los agentes (para agregar)
             BLLAgente ManagerAgente = new BLLAgente();
             unosAgentes = new List<Agente>();
             unosAgentes = ManagerAgente.AgentesTraerTodos();
             //Traigo los cargos
+            BLLCargo ManagerCargo = new BLLCargo();
+            unosCargos = new List<Cargo>();
+            unosCargos = ManagerCargo.CargosTraerTodos();
+            cboCargo.DataSource = null;
+            cboCargo.DataSource = unosCargos;
+            cboCargo.DisplayMember = "DescripCargo";
+            cboCargo.ValueMember = "IdCargo";
             
         }
 
@@ -108,7 +118,7 @@ namespace ARTEC.GUI
 
 
 
-        //Al seleccionar un AGENTE del combo, guarda el IdAgente, el apellido y cierra el combo
+        
         private void cboAgentes_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(txtAgente.Text))
@@ -124,6 +134,33 @@ namespace ARTEC.GUI
                 }
             }
         }
+
+        private void btnAgregarAgente_Click(object sender, EventArgs e)
+        {
+            unAgenSelect.unCargo = cboCargo.SelectedItem as Cargo;
+            unAgenSelect.unaDependencia = new Dependencia();
+            unAgenSelect.unaDependencia = DepModif;
+            AgentesLista.Add(unAgenSelect);
+            AgentesNuevos.Add(unAgenSelect);
+
+            GrillaAgentesLista.DataSource = null;
+            GrillaAgentesLista.DataSource = AgentesLista;
+
+            
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (DepModif.unTipoDep != (TipoDependencia)cboTipoDep.SelectedItem)
+                ManagerDependencia.DependenciaModifTipoDep(DepModif.IdDependencia, (TipoDependencia)cboTipoDep.SelectedItem);
+
+        }
+
+
+
+
+
+
 
     }
 }

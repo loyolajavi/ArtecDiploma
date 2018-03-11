@@ -12,5 +12,10 @@ namespace ARTEC.ENTIDADES
         public int IdCargo { get; set; }
         public string DescripCargo { get; set; }
 
+        public override string ToString()
+        {
+            return this.DescripCargo;
+        }
+
     }
 }

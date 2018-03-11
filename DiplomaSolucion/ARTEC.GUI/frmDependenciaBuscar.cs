@@ -139,12 +139,21 @@ namespace ARTEC.GUI
         private void btnModificar_Click(object sender, EventArgs e)
         {
             frmDependenciaModificar unfrmDependenciaModificar = new frmDependenciaModificar(DepSeleccionada);
-            unfrmDependenciaModificar.Show();
+            unfrmDependenciaModificar.FormClosing += unfrmDependenciaModificar_FormClosing; //CON ESTO hago que al cerrar el formulario del showdialog (frmdependenciamodificar), 
+            //voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
             txtDependencia.Clear();
             DepSeleccionada = null;
             txtTipoDep.Clear();
-            GrillaAgentes.DataSource = null;
+            this.GrillaAgentes.DataSource = null;
+            unfrmDependenciaModificar.ShowDialog();
+            
 
+
+        }
+
+        void unfrmDependenciaModificar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frmDependenciaBuscar_Load(this, new EventArgs());
         }
 
 

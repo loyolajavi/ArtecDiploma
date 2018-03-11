@@ -224,5 +224,41 @@ namespace ARTEC.DAL
                 //MANEJAR EXC
             }
         }
+
+
+
+        public void DependenciaModifTipoDep(int IdDep, TipoDependencia TipoDep)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdDependencia", IdDep),
+                new SqlParameter("@IdTipoDependencia", TipoDep.IdTipoDependencia)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaModifTipoDep", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }    
+        }
+
+
+
+
+
+
+
+
     }
 }
