@@ -66,6 +66,9 @@ namespace ARTEC.DAL
                     unAgente.IdAgente = (int)row["IdAgente"];
                     unAgente.NombreAgente = row["NombreAgente"].ToString();
                     unAgente.ApellidoAgente = row["ApellidoAgente"].ToString();
+                    unAgente.unCargo = new Cargo();
+                    unAgente.unCargo.IdCargo = (int)row["IdCargo"];
+                    unAgente.unCargo.DescripCargo = row["DescripCargo"].ToString();
 
 
                     Res.Add(unAgente);
@@ -112,7 +115,7 @@ namespace ARTEC.DAL
                 List<Dependencia> unaDep = MapeadorPunteroDependencia(ds);
                 if (unaDep.Count > 0)
                     return unaDep;
-                else 
+                else
                     unaDep = null;
                 return unaDep;
             }
@@ -250,12 +253,37 @@ namespace ARTEC.DAL
             finally
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }    
+            }
         }
 
-
-
-
+        public void DependenciaAgenteAgregar(List<Agente> AgentesNuevos, int IdDep)
+        {
+            foreach (Agente unAgente in AgentesNuevos)
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdAgente", unAgente.IdAgente),
+                    new SqlParameter("@IdCargo", unAgente.unCargo.IdCargo),
+                    new SqlParameter("@IdDependencia", IdDep)
+			    };
+                try
+                {
+                    FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaAgenteAgregar", parameters);
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                }
+                catch (Exception es)
+                {
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                    throw;
+                }
+                finally
+                {
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                }
+            }
+        }
 
 
 

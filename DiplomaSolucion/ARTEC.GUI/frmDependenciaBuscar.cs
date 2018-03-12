@@ -130,6 +130,12 @@ namespace ARTEC.GUI
                         GrillaAgentes.DataSource = null;
                         DepSeleccionada.unosAgentes = ManagerDependencia.TraerAgentesDependencia(DepSeleccionada.IdDependencia);
                         GrillaAgentes.DataSource = DepSeleccionada.unosAgentes;
+                        GrillaAgentes.Columns["IdAgente"].Visible = false;
+                        GrillaAgentes.Columns["NombreAgente"].HeaderText = "Nombre";
+                        GrillaAgentes.Columns["ApellidoAgente"].HeaderText = "Apellido";
+                        GrillaAgentes.Columns["unCargo"].HeaderText = "Cargo";
+                        GrillaAgentes.Columns["unaDependencia"].Visible = false;
+
                     }
                     
                 }
@@ -139,8 +145,9 @@ namespace ARTEC.GUI
         private void btnModificar_Click(object sender, EventArgs e)
         {
             frmDependenciaModificar unfrmDependenciaModificar = new frmDependenciaModificar(DepSeleccionada);
-            unfrmDependenciaModificar.FormClosing += unfrmDependenciaModificar_FormClosing; //CON ESTO hago que al cerrar el formulario del showdialog (frmdependenciamodificar), 
+            //CON ESTO hago que al cerrar el formulario del showdialog (frmdependenciamodificar), 
             //voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
+            unfrmDependenciaModificar.FormClosing += unfrmDependenciaModificar_FormClosing; 
             txtDependencia.Clear();
             DepSeleccionada = null;
             txtTipoDep.Clear();

@@ -45,6 +45,8 @@ namespace ARTEC.GUI
             //Coloco los agentes
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
+            FormatearGrillaAgentes();
+
             //Traer todos los agentes (para agregar)
             BLLAgente ManagerAgente = new BLLAgente();
             unosAgentes = new List<Agente>();
@@ -137,6 +139,10 @@ namespace ARTEC.GUI
 
         private void btnAgregarAgente_Click(object sender, EventArgs e)
         {
+            //Para prevenir que se agregue un agente que ya está en la dependencia
+            if (AgentesLista.Exists(x => x.IdAgente == unAgenSelect.IdAgente))
+                return;
+
             unAgenSelect.unCargo = cboCargo.SelectedItem as Cargo;
             unAgenSelect.unaDependencia = new Dependencia();
             unAgenSelect.unaDependencia = DepModif;
@@ -145,6 +151,7 @@ namespace ARTEC.GUI
 
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista;
+            FormatearGrillaAgentes();
 
             
         }
@@ -154,8 +161,22 @@ namespace ARTEC.GUI
             if (DepModif.unTipoDep != (TipoDependencia)cboTipoDep.SelectedItem)
                 ManagerDependencia.DependenciaModifTipoDep(DepModif.IdDependencia, (TipoDependencia)cboTipoDep.SelectedItem);
 
+            if (AgentesNuevos != null)
+            {
+                ManagerDependencia.DependenciaAgenteAgregar(AgentesNuevos, DepModif.IdDependencia);
+            }
+
         }
 
+
+        private void FormatearGrillaAgentes()
+        {
+            GrillaAgentesLista.Columns["IdAgente"].Visible = false;
+            GrillaAgentesLista.Columns["NombreAgente"].HeaderText = "Nombre";
+            GrillaAgentesLista.Columns["ApellidoAgente"].HeaderText = "Apellido";
+            GrillaAgentesLista.Columns["unCargo"].HeaderText = "Cargo";
+            GrillaAgentesLista.Columns["unaDependencia"].Visible = false;
+        }
 
 
 
