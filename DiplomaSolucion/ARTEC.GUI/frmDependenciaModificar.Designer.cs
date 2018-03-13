@@ -43,6 +43,7 @@ namespace ARTEC.GUI
             this.lblCargo = new DevComponents.DotNetBar.LabelX();
             this.cboAgentes = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.GrillaAgentesLista = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnCandado = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,11 +107,12 @@ namespace ARTEC.GUI
             this.txtDependencia.Border.Class = "TextBoxBorder";
             this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDependencia.Enabled = false;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
             this.txtDependencia.Location = new System.Drawing.Point(109, 7);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
-            this.txtDependencia.Size = new System.Drawing.Size(315, 22);
+            this.txtDependencia.Size = new System.Drawing.Size(285, 22);
             this.txtDependencia.TabIndex = 61;
             // 
             // cboDep
@@ -122,7 +124,7 @@ namespace ARTEC.GUI
             this.cboDep.ItemHeight = 16;
             this.cboDep.Location = new System.Drawing.Point(109, 7);
             this.cboDep.Name = "cboDep";
-            this.cboDep.Size = new System.Drawing.Size(315, 22);
+            this.cboDep.Size = new System.Drawing.Size(285, 22);
             this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboDep.TabIndex = 66;
             // 
@@ -236,11 +238,25 @@ namespace ARTEC.GUI
             this.GrillaAgentesLista.Size = new System.Drawing.Size(431, 150);
             this.GrillaAgentesLista.TabIndex = 77;
             // 
+            // btnCandado
+            // 
+            this.btnCandado.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCandado.BackColor = System.Drawing.Color.Transparent;
+            this.btnCandado.ColorTable = DevComponents.DotNetBar.eButtonColor.Flat;
+            this.btnCandado.Image = global::ARTEC.GUI.Properties.Resources.CandadoDesb;
+            this.btnCandado.Location = new System.Drawing.Point(395, 3);
+            this.btnCandado.Name = "btnCandado";
+            this.btnCandado.Size = new System.Drawing.Size(31, 31);
+            this.btnCandado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCandado.TabIndex = 78;
+            this.btnCandado.Click += new System.EventHandler(this.btnCandado_Click);
+            // 
             // frmDependenciaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 379);
+            this.Controls.Add(this.btnCandado);
             this.Controls.Add(this.GrillaAgentesLista);
             this.Controls.Add(this.lblCargo);
             this.Controls.Add(this.cboCargo);
@@ -257,7 +273,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboAgentes);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmDependenciaModificar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmDependenciaModificar_Load);
@@ -282,5 +297,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblCargo;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboAgentes;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAgentesLista;
+        private DevComponents.DotNetBar.ButtonX btnCandado;
     }
 }

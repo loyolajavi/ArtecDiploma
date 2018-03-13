@@ -9,6 +9,7 @@ using DevComponents.DotNetBar;
 using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
+using ARTEC.FRAMEWORK.Servicios;
 
 
 namespace ARTEC.GUI
@@ -45,6 +46,8 @@ namespace ARTEC.GUI
             //Coloco los agentes
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
+
+            AgregarBotonEliminar();
             FormatearGrillaAgentes();
 
             //Traer todos los agentes (para agregar)
@@ -141,7 +144,11 @@ namespace ARTEC.GUI
         {
             //Para prevenir que se agregue un agente que ya está en la dependencia
             if (AgentesLista.Exists(x => x.IdAgente == unAgenSelect.IdAgente))
+            {
+                MessageBox.Show("Atención: El agente ya se encuentra en la dependencia");
                 return;
+            }
+                
 
             unAgenSelect.unCargo = cboCargo.SelectedItem as Cargo;
             unAgenSelect.unaDependencia = new Dependencia();
@@ -151,6 +158,7 @@ namespace ARTEC.GUI
 
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista;
+            AgregarBotonEliminar();
             FormatearGrillaAgentes();
 
             
@@ -158,12 +166,16 @@ namespace ARTEC.GUI
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (DepModif.unTipoDep != (TipoDependencia)cboTipoDep.SelectedItem)
+            if (txtDependencia.Enabled)
+                ManagerDependencia.DependenciaModifNombre(txtDependencia.Text, DepModif.IdDependencia);
+
+            if (DepModif.unTipoDep.IdTipoDependencia != (cboTipoDep.SelectedItem as TipoDependencia).IdTipoDependencia)
                 ManagerDependencia.DependenciaModifTipoDep(DepModif.IdDependencia, (TipoDependencia)cboTipoDep.SelectedItem);
 
-            if (AgentesNuevos != null)
+            if (AgentesNuevos != null && AgentesNuevos.Count > 0)
             {
                 ManagerDependencia.DependenciaAgenteAgregar(AgentesNuevos, DepModif.IdDependencia);
+                AgentesNuevos.Clear();
             }
 
         }
@@ -176,6 +188,35 @@ namespace ARTEC.GUI
             GrillaAgentesLista.Columns["ApellidoAgente"].HeaderText = "Apellido";
             GrillaAgentesLista.Columns["unCargo"].HeaderText = "Cargo";
             GrillaAgentesLista.Columns["unaDependencia"].Visible = false;
+        }
+
+        private void btnCandado_Click(object sender, EventArgs e)
+        {
+            if (!txtDependencia.Enabled)
+            {
+                txtDependencia.Enabled = true;
+                btnCandado.Image = ARTEC.GUI.Properties.Resources.CandadoBloc;
+            }
+            else
+            {
+                txtDependencia.Enabled = false;
+                btnCandado.Image = ARTEC.GUI.Properties.Resources.CandadoDesb;
+                txtDependencia.Text = DepModif.NombreDependencia;
+            }
+        }
+
+        private void AgregarBotonEliminar()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaAgentesLista.Columns.Contains("btnDinBorrar"))
+                GrillaAgentesLista.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar el agente
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaAgentesLista.Columns.Add(deleteButton);
         }
 
 

@@ -58,13 +58,11 @@ namespace ARTEC.BLL
         {
             GestorDependencia.DependenciaAgenteAgregar(AgentesNuevos, IdDep);
         }
+        
 
-
-
-
-
-
-
-
+        public void DependenciaModifNombre(string NombreDep, int IdDep)
+        {
+            GestorDependencia.DependenciaModifNombre(NombreDep, IdDep);
+        }
     }
 }

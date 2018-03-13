@@ -270,6 +270,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ProveedorCrear.resx">
       <DependentUpon>ProveedorCrear.cs</DependentUpon>
@@ -328,7 +329,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Imagenes\CandadoDesb.png" />
+    <None Include="Imagenes\CandadoBloc.png" />
     <Content Include="Imagenes\LoginUs.png" />
+    <Content Include="Imagenes\unlock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
