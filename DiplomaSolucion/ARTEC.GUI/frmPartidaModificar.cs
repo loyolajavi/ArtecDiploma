@@ -107,43 +107,43 @@ namespace ARTEC.GUI
             }
             else
             {
-                //Si hizo click en Borrar
-                if (e.ColumnIndex == grillaDetallesPart.Columns["btnDinBorrar"].Index)
-                { 
-                    //VER: COMPROBAR QUE LA PARTIDA NO ESTE ASOCIADA A UNA DE CONTRATACIONES
-                    //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-                    grillaDetallesPart.Columns.RemoveAt(e.ColumnIndex);
+                    //Si hizo click en Borrar
+                    if (e.ColumnIndex == grillaDetallesPart.Columns["btnDinBorrar"].Index)
+                    { 
+                        //VER: COMPROBAR QUE LA PARTIDA NO ESTE ASOCIADA A UNA DE CONTRATACIONES
+                        //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                        grillaDetallesPart.Columns.RemoveAt(e.ColumnIndex);
 
-                    //Guardo en una lista los detalles a eliminar
-                    PDetallesBorrar.Add(unaPartida.unasPartidasDetalles[e.RowIndex]);
+                        //Guardo en una lista los detalles a eliminar
+                        PDetallesBorrar.Add(unaPartida.unasPartidasDetalles[e.RowIndex]);
 
-                    //elimino de la memoria el detalle
-                    unaPartida.unasPartidasDetalles.RemoveAt(e.RowIndex);
-                    //Regenero la grilla
-                    grillaDetallesPart.DataSource = null;
-                    List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
-                    foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
-                    {
-                        HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
-                        unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
-                        unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
-                        unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+                        //elimino de la memoria el detalle
+                        unaPartida.unasPartidasDetalles.RemoveAt(e.RowIndex);
+                        //Regenero la grilla
+                        grillaDetallesPart.DataSource = null;
+                        List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+                        foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                        {
+                            HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                            unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                            unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                            unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
 
-                        ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                            ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                        }
+                        grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+                        //Agrega boton para Borrar el detallePartida
+                        var deleteButton = new DataGridViewButtonColumn();
+                        deleteButton.Name = "btnDinBorrar";
+                        deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                        deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                        deleteButton.UseColumnTextForButtonValue = true;
+                        grillaDetallesPart.Columns.Add(deleteButton);
+
+                        grillaCotizaciones.DataSource = null;
+                        GrillaCotizAntiguas.DataSource = null;
+                        CalcularMontoTotalPartida();
                     }
-                    grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
-                    //Agrega boton para Borrar el detallePartida
-                    var deleteButton = new DataGridViewButtonColumn();
-                    deleteButton.Name = "btnDinBorrar";
-                    deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    deleteButton.UseColumnTextForButtonValue = true;
-                    grillaDetallesPart.Columns.Add(deleteButton);
-
-                    grillaCotizaciones.DataSource = null;
-                    GrillaCotizAntiguas.DataSource = null;
-                    CalcularMontoTotalPartida();
-                }
                 else
                 {
                     IndiceDetalleSeleccionado = e.RowIndex;

@@ -25,12 +25,14 @@ namespace ARTEC.GUI
         List<Cargo> unosCargos = new List<Cargo>();
         List<Agente> AgentesLista = new List<Agente>();
         List<Agente> AgentesNuevos = new List<Agente>();
+        List<int> AgentesAQuitar = new List<int>();
+        List<int> AgentesAQuitarIndex = new List<int>();
+        List<Agente> AgentesListaBKP = new List<Agente>();
 
         public frmDependenciaModificar(Dependencia unaDep)
         {
             InitializeComponent();
             DepModif = unaDep;
-
         }
 
         private void frmDependenciaModificar_Load(object sender, EventArgs e)
@@ -46,8 +48,10 @@ namespace ARTEC.GUI
             //Coloco los agentes
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
+            //Resguardo
+            AgentesListaBKP = AgentesLista.Where(X=>X.IdAgente > 0).ToList() as List<Agente>;
 
-            AgregarBotonEliminar();
+            //AgregarBotonEliminar();
             FormatearGrillaAgentes();
 
             //Traer todos los agentes (para agregar)
@@ -158,7 +162,7 @@ namespace ARTEC.GUI
 
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista;
-            AgregarBotonEliminar();
+            //AgregarBotonEliminar();
             FormatearGrillaAgentes();
 
             
@@ -183,11 +187,29 @@ namespace ARTEC.GUI
 
         private void FormatearGrillaAgentes()
         {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaAgentesLista.Columns.Contains("btnDinBorrar"))
+                GrillaAgentesLista.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar el agente
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaAgentesLista.Columns.Add(deleteButton);
+
+            //Formato
             GrillaAgentesLista.Columns["IdAgente"].Visible = false;
             GrillaAgentesLista.Columns["NombreAgente"].HeaderText = "Nombre";
             GrillaAgentesLista.Columns["ApellidoAgente"].HeaderText = "Apellido";
             GrillaAgentesLista.Columns["unCargo"].HeaderText = "Cargo";
             GrillaAgentesLista.Columns["unaDependencia"].Visible = false;
+            
+            //Para grisear los que se quitarán de la BD
+            foreach (int indice in AgentesAQuitarIndex)
+            {
+                GrillaAgentesLista.Rows[indice].DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
+            }
         }
 
         private void btnCandado_Click(object sender, EventArgs e)
@@ -217,6 +239,93 @@ namespace ARTEC.GUI
             deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             GrillaAgentesLista.Columns.Add(deleteButton);
+        }
+
+        private void GrillaAgentesLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == GrillaAgentesLista.Columns["btnDinBorrar"].Index)
+                {
+                    //Si se quiere quitar un agente q esta en memoria y no en bd
+                    Agente unAg = new Agente();
+                    if ((unAg = AgentesNuevos.SingleOrDefault(X => X.IdAgente == (int)GrillaAgentesLista.Rows[e.RowIndex].Cells["IdAgente"].Value)) != null)
+                    {
+                        //Lo elimino de la memoria solamente
+                        AgentesNuevos.Remove(unAg);
+                        AgentesLista.Remove(unAg);
+                        //Regenero la grilla de agentes
+                        GrillaAgentesLista.DataSource = null;
+                        GrillaAgentesLista.DataSource = AgentesLista;
+                        //AgregarBotonEliminar();
+                        FormatearGrillaAgentes();
+                    }
+                    //Si es un agente que esta en BD y se lo quiere quitar de la dependencia
+                    else
+                    {
+                        //Guardo en una lista de int los que se van a eliminar
+                        AgentesAQuitar.Add((int)GrillaAgentesLista.Rows[e.RowIndex].Cells["IdAgente"].Value);
+                        //Agarro los indices para grisear los q se borrarán en BD
+                        AgentesAQuitarIndex.Add(GrillaAgentesLista.Rows[e.RowIndex].Index);
+
+                        //Regenero la grilla de agentes
+                        GrillaAgentesLista.DataSource = null;
+                        GrillaAgentesLista.DataSource = AgentesLista;
+                        //AgregarBotonEliminar();
+                        FormatearGrillaAgentes();
+                        
+                        
+                    }
+                    
+                    
+                    
+                    //PDetallesBorrar.Add(unaPartida.unasPartidasDetalles[e.RowIndex]);
+
+                    ////elimino de la memoria el detalle
+                    //unaPartida.unasPartidasDetalles.RemoveAt(e.RowIndex);
+                    ////Regenero la grilla
+                    //grillaDetallesPart.DataSource = null;
+                    //List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+                    //foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                    //{
+                    //    HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                    //    unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                    //    unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                    //    unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+
+                    //    ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                    //}
+                    //grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+                    ////Agrega boton para Borrar el detallePartida
+                    //var deleteButton = new DataGridViewButtonColumn();
+                    //deleteButton.Name = "btnDinBorrar";
+                    //deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    //deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    //deleteButton.UseColumnTextForButtonValue = true;
+                    //grillaDetallesPart.Columns.Add(deleteButton);
+
+                    //grillaCotizaciones.DataSource = null;
+                    //GrillaCotizAntiguas.DataSource = null;
+                    //CalcularMontoTotalPartida();
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            AgentesAQuitar.Clear();
+            AgentesAQuitarIndex.Clear();
+            AgentesLista.Clear();
+            //Resguardo, lo levanto
+            DepModif.unosAgentes = AgentesListaBKP.ToList();
+            frmDependenciaModificar_Load(sender, new EventArgs());
+            
         }
 
 

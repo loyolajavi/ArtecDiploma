@@ -19,6 +19,5 @@ namespace ARTEC.ENTIDADES
         {
             return this.NombreDependencia;
         }
-
     }
 }
