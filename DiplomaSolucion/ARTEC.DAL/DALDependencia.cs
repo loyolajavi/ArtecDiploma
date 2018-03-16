@@ -311,5 +311,33 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+        public void DependenciaAgentesQuitarLista(List<int> AgentesAQuitar, int IdDep)
+        {
+            foreach (int unAgenteID in AgentesAQuitar)
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdAgente", unAgenteID),
+                    new SqlParameter("@IdDependencia", IdDep)
+			    };
+                try
+                {
+                    FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaAgentesQuitarLista", parameters);
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                }
+                catch (Exception es)
+                {
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                    throw;
+                }
+                finally
+                {
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                }
+            }
+        }
     }
 }

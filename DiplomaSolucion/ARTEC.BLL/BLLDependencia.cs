@@ -64,5 +64,10 @@ namespace ARTEC.BLL
         {
             GestorDependencia.DependenciaModifNombre(NombreDep, IdDep);
         }
+
+        public void DependenciaAgentesQuitarLista(List<int> AgentesAQuitar, int IdDep)
+        {
+            GestorDependencia.DependenciaAgentesQuitarLista(AgentesAQuitar, IdDep);
+        }
     }
 }

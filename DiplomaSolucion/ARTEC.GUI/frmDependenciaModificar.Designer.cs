@@ -28,7 +28,7 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAgentes = new DevComponents.DotNetBar.LabelX();
             this.lblTipoDep = new DevComponents.DotNetBar.LabelX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
@@ -225,14 +225,14 @@ namespace ARTEC.GUI
             // GrillaAgentesLista
             // 
             this.GrillaAgentesLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaAgentesLista.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentesLista.Location = new System.Drawing.Point(12, 156);
             this.GrillaAgentesLista.Name = "GrillaAgentesLista";
@@ -290,6 +290,7 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmDependenciaModificar";
             this.Text = "MetroForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDependenciaModificar_FormClosing);
             this.Load += new System.EventHandler(this.frmDependenciaModificar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).EndInit();
             this.ResumeLayout(false);

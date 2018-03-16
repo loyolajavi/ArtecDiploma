@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.FRAMEWORK.Servicios;
+using System.Reflection;
 
 
 namespace ARTEC.GUI
@@ -28,6 +29,7 @@ namespace ARTEC.GUI
         List<int> AgentesAQuitar = new List<int>();
         List<int> AgentesAQuitarIndex = new List<int>();
         List<Agente> AgentesListaBKP = new List<Agente>();
+        bool Modificacion = false;
 
         public frmDependenciaModificar(Dependencia unaDep)
         {
@@ -162,7 +164,6 @@ namespace ARTEC.GUI
 
             GrillaAgentesLista.DataSource = null;
             GrillaAgentesLista.DataSource = AgentesLista;
-            //AgregarBotonEliminar();
             FormatearGrillaAgentes();
 
             
@@ -174,13 +175,41 @@ namespace ARTEC.GUI
                 ManagerDependencia.DependenciaModifNombre(txtDependencia.Text, DepModif.IdDependencia);
 
             if (DepModif.unTipoDep.IdTipoDependencia != (cboTipoDep.SelectedItem as TipoDependencia).IdTipoDependencia)
+            {
                 ManagerDependencia.DependenciaModifTipoDep(DepModif.IdDependencia, (TipoDependencia)cboTipoDep.SelectedItem);
+                DepModif.unTipoDep = (TipoDependencia)cboTipoDep.SelectedItem;
+            }
+                
+                
 
             if (AgentesNuevos != null && AgentesNuevos.Count > 0)
             {
                 ManagerDependencia.DependenciaAgenteAgregar(AgentesNuevos, DepModif.IdDependencia);
                 AgentesNuevos.Clear();
             }
+
+            if (AgentesAQuitar != null && AgentesAQuitar.Count > 0)
+            {
+                ManagerDependencia.DependenciaAgentesQuitarLista(AgentesAQuitar, DepModif.IdDependencia);
+
+                //Regenero la lista de agentes para regenerar la grilla
+                foreach (int unAgID in AgentesAQuitar)
+                {
+                    AgentesLista.RemoveAll(X => X.IdAgente == unAgID);                    
+                }
+
+                //Limpio los agentesquitar
+                AgentesAQuitar.Clear();
+                AgentesAQuitarIndex.Clear();
+            }
+
+            //Regenero la grilla
+            GrillaAgentesLista.DataSource = null;
+            //AgentesLista = ManagerDependencia.TraerAgentesDependencia(DepModif.IdDependencia);
+            GrillaAgentesLista.DataSource = AgentesLista;
+            FormatearGrillaAgentes();
+
+            Modificacion = true;
 
         }
 
@@ -227,19 +256,7 @@ namespace ARTEC.GUI
             }
         }
 
-        private void AgregarBotonEliminar()
-        {
-            //Elimina el boton si ya estaba agregado
-            if (GrillaAgentesLista.Columns.Contains("btnDinBorrar"))
-                GrillaAgentesLista.Columns.Remove("btnDinBorrar");
-            //Agrega boton para Borrar el agente
-            var deleteButton = new DataGridViewButtonColumn();
-            deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.UseColumnTextForButtonValue = true;
-            GrillaAgentesLista.Columns.Add(deleteButton);
-        }
+       
 
         private void GrillaAgentesLista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -277,7 +294,6 @@ namespace ARTEC.GUI
                         //Regenero la grilla de agentes
                         GrillaAgentesLista.DataSource = null;
                         GrillaAgentesLista.DataSource = AgentesLista;
-                        //AgregarBotonEliminar();
                         FormatearGrillaAgentes();
                         
                         
@@ -285,34 +301,7 @@ namespace ARTEC.GUI
                     
                     
                     
-                    //PDetallesBorrar.Add(unaPartida.unasPartidasDetalles[e.RowIndex]);
-
-                    ////elimino de la memoria el detalle
-                    //unaPartida.unasPartidasDetalles.RemoveAt(e.RowIndex);
-                    ////Regenero la grilla
-                    //grillaDetallesPart.DataSource = null;
-                    //List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
-                    //foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
-                    //{
-                    //    HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
-                    //    unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
-                    //    unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
-                    //    unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
-
-                    //    ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
-                    //}
-                    //grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
-                    ////Agrega boton para Borrar el detallePartida
-                    //var deleteButton = new DataGridViewButtonColumn();
-                    //deleteButton.Name = "btnDinBorrar";
-                    //deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    //deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    //deleteButton.UseColumnTextForButtonValue = true;
-                    //grillaDetallesPart.Columns.Add(deleteButton);
-
-                    //grillaCotizaciones.DataSource = null;
-                    //GrillaCotizAntiguas.DataSource = null;
-                    //CalcularMontoTotalPartida();
+                  
                 }
             }
         }
@@ -322,10 +311,30 @@ namespace ARTEC.GUI
             AgentesAQuitar.Clear();
             AgentesAQuitarIndex.Clear();
             AgentesLista.Clear();
+            AgentesNuevos.Clear();
             //Resguardo, lo levanto
             DepModif.unosAgentes = AgentesListaBKP.ToList();
             frmDependenciaModificar_Load(sender, new EventArgs());
+            txtDependencia.Enabled = false;
+            btnCandado.Image = ARTEC.GUI.Properties.Resources.CandadoDesb;
+            txtAgente.Clear();
+            unAgenSelect = null;
             
+        }
+
+
+        private void frmDependenciaModificar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (txtDependencia.Enabled || DepModif.unTipoDep.IdTipoDependencia != (cboTipoDep.SelectedItem as TipoDependencia).IdTipoDependencia
+            || AgentesNuevos != null && AgentesNuevos.Count > 0)
+            {
+                //VER: Grabar Msj en BD y utilizar servicioidioma.mostrarmensaje("").texto
+                DialogResult resmbox = MessageBox.Show("Hay cambios no persistidos ¿Desea salir sin guardar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                e.Cancel = (resmbox == DialogResult.No);
+            }
+                
+            
+
         }
 
 
