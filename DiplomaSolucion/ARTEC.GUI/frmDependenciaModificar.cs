@@ -325,19 +325,29 @@ namespace ARTEC.GUI
 
         private void frmDependenciaModificar_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //Para verificar si hay filas de la grilla por eliminar
+            bool flagColorGris = false;
+            foreach (int indice in AgentesAQuitarIndex)
+            {
+                if (GrillaAgentesLista.Rows[indice].DefaultCellStyle.BackColor == System.Drawing.Color.Gray)
+                {
+                    flagColorGris = true;
+                    break;
+                }
+            }
+
+            //Si hay cambios no persistidos consulta si desea salir sin guardar
             if (txtDependencia.Enabled || DepModif.unTipoDep.IdTipoDependencia != (cboTipoDep.SelectedItem as TipoDependencia).IdTipoDependencia
-            || AgentesNuevos != null && AgentesNuevos.Count > 0)
+            || flagColorGris || AgentesNuevos != null && AgentesNuevos.Count > 0)
             {
                 //VER: Grabar Msj en BD y utilizar servicioidioma.mostrarmensaje("").texto
                 DialogResult resmbox = MessageBox.Show("Hay cambios no persistidos ¿Desea salir sin guardar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 e.Cancel = (resmbox == DialogResult.No);
             }
-                
+        }
             
 
-        }
-
-
+        
 
 
 

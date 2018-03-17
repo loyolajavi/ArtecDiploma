@@ -44,6 +44,8 @@ namespace ARTEC.GUI
         List<Nota> unasNotas = new List<Nota>();
         BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
         bool flagDetEliminado = false;
+        bool flagRespInhabilitado;
+        BLLDependencia ManagerDependenciaAg = new BLLDependencia();
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -57,16 +59,25 @@ namespace ARTEC.GUI
 
 
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            BLLDependencia ManagerDependenciaAg = new BLLDependencia();
+            
 
             txtDependencia.Text = unaSolicitud.laDependencia.NombreDependencia;
             unosAgentesResp = new List<Agente>();
             unosAgentesResp = ManagerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
+            //Si el responsable de la solicitud ya no es parte de la dependencia
+            if (!unosAgentesResp.Exists(X=>X.IdAgente == unaSolicitud.AgenteResp.IdAgente))
+            {
+                unosAgentesResp.Add(unaSolicitud.AgenteResp);
+                flagRespInhabilitado = true;
+            }
             cboAgenteResp.DataSource = null;
             cboAgenteResp.DataSource = unosAgentesResp;
             cboAgenteResp.DisplayMember = "ApellidoAgente";
             cboAgenteResp.ValueMember = "IdAgente";
-            cboAgenteResp.SelectedValue = unaSolicitud.AgenteResp.IdAgente; //FALTA APUNTAR AL AGENTE RESPONSABLE DE LA SOLICITUD
+            cboAgenteResp.SelectedValue = unaSolicitud.AgenteResp.IdAgente;
+            if (flagRespInhabilitado)
+                lblDesvinculado.Visible = true;
+
             txtFechaInicio.Value = unaSolicitud.FechaInicio;
             txtFechaFin.Value = unaSolicitud.FechaFin;
 
@@ -118,13 +129,13 @@ namespace ARTEC.GUI
             unosAgentes = new List<Agente>();
             unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaSolicitud.laDependencia.IdDependencia);
 
-
-            unosAgentesResp = new List<Agente>();
-            unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
-            cboAgenteResp.DataSource = null;
-            cboAgenteResp.DataSource = unosAgentesResp;
-            cboAgenteResp.DisplayMember = "ApellidoAgente";
-            cboAgenteResp.ValueMember = "IdAgente";
+            //ESTE CODIGO ESTABA DUPLICADO, REVISAR QUE SE CARGUE EL AGENTE RESPONSABLE CORRECTAMETNE Y ELIMINAR ESTE CODIGO
+            //unosAgentesResp = new List<Agente>();
+            //unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
+            //cboAgenteResp.DataSource = null;
+            //cboAgenteResp.DataSource = unosAgentesResp;
+            //cboAgenteResp.DisplayMember = "ApellidoAgente";
+            //cboAgenteResp.ValueMember = "IdAgente";
 
             //Agrega los detalles
             grillaDetalles.DataSource = null;
@@ -1194,6 +1205,25 @@ namespace ARTEC.GUI
             //     ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
             //    //Modificar datos detalles
             //}
+        }
+
+        //Para comprobar si el responsable fue desvinculado y dar aviso de ello
+        private void cboAgenteResp_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            List<Agente> unosAgentesResp2 = new List<Agente>();
+            unosAgentesResp2 = ManagerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
+            if (unosAgentesResp2.Count < unosAgentesResp.Count)
+            {
+                if ((cboAgenteResp.SelectedItem as Agente).IdAgente == unaSolicitud.AgenteResp.IdAgente)
+                {
+                    lblDesvinculado.Visible = true;
+                }
+                else
+                {
+                    lblDesvinculado.Visible = false;
+                }
+            }
+            
         }
 
 
