@@ -50,5 +50,46 @@ namespace ARTEC.DAL
                 return unaLista;
             }
         }
+
+        public int AgenteCrear(Agente NuevoAgente, int IdDep)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@NombreAgente", NuevoAgente.NombreAgente),
+                new SqlParameter("@ApellidoAgente", NuevoAgente.ApellidoAgente)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AgenteCrear", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+
+
+                    SqlParameter[] parametersRelDepAgenteCargo = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdAgente", IDDevuelto),
+                        new SqlParameter("@IdDependencia", IdDep),
+                        new SqlParameter("@IdCargo", NuevoAgente.unCargo.IdCargo)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelDepAgenteCargoCrear", parametersRelDepAgenteCargo);
+                
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IDDevuelto;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //VER: Guardar en bitacora de eventos
+                return 0;
+            }
+            finally
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

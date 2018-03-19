@@ -28,7 +28,7 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblAgentes = new DevComponents.DotNetBar.LabelX();
             this.lblTipoDep = new DevComponents.DotNetBar.LabelX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
@@ -45,6 +45,7 @@ namespace ARTEC.GUI
             this.GrillaAgentesLista = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnCandado = new DevComponents.DotNetBar.ButtonX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
+            this.btnNuevoAgente = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -224,19 +225,26 @@ namespace ARTEC.GUI
             // 
             // GrillaAgentesLista
             // 
+            this.GrillaAgentesLista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GrillaAgentesLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaAgentesLista.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.GrillaAgentesLista.Location = new System.Drawing.Point(12, 156);
+            this.GrillaAgentesLista.Location = new System.Drawing.Point(2, 156);
             this.GrillaAgentesLista.Name = "GrillaAgentesLista";
-            this.GrillaAgentesLista.Size = new System.Drawing.Size(431, 150);
+            this.GrillaAgentesLista.ReadOnly = true;
+            this.GrillaAgentesLista.SelectAllSignVisible = false;
+            this.GrillaAgentesLista.ShowCellErrors = false;
+            this.GrillaAgentesLista.ShowCellToolTips = false;
+            this.GrillaAgentesLista.ShowEditingIcon = false;
+            this.GrillaAgentesLista.ShowRowErrors = false;
+            this.GrillaAgentesLista.Size = new System.Drawing.Size(439, 150);
             this.GrillaAgentesLista.TabIndex = 77;
             this.GrillaAgentesLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaAgentesLista_CellClick);
             // 
@@ -265,11 +273,24 @@ namespace ARTEC.GUI
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnNuevoAgente
+            // 
+            this.btnNuevoAgente.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNuevoAgente.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnNuevoAgente.Location = new System.Drawing.Point(366, 100);
+            this.btnNuevoAgente.Name = "btnNuevoAgente";
+            this.btnNuevoAgente.Size = new System.Drawing.Size(75, 34);
+            this.btnNuevoAgente.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnNuevoAgente.TabIndex = 84;
+            this.btnNuevoAgente.Text = "Crear Nuevo Agente";
+            this.btnNuevoAgente.Click += new System.EventHandler(this.btnNuevoAgente_Click);
+            // 
             // frmDependenciaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 379);
+            this.Controls.Add(this.btnNuevoAgente);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnCandado);
             this.Controls.Add(this.GrillaAgentesLista);
@@ -315,5 +336,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAgentesLista;
         private DevComponents.DotNetBar.ButtonX btnCandado;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
+        private DevComponents.DotNetBar.ButtonX btnNuevoAgente;
     }
 }

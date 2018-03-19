@@ -23,5 +23,13 @@ namespace ARTEC.BLL
         {
             return GestorAgente.AgentesTraerTodos();
         }
+
+        public int AgenteCrear(Agente NuevoAgente, int IdDep)
+        {
+            int IdAgenteNuevo = GestorAgente.AgenteCrear(NuevoAgente, IdDep);
+            if (IdAgenteNuevo > 0)
+                return IdAgenteNuevo;
+            return 0;
+        }
     }
 }
