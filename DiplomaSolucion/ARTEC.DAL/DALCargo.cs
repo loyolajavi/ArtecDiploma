@@ -16,12 +16,36 @@ namespace ARTEC.DAL
 
         public List<Cargo> CargosTraerTodos()
         {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CargosTraerTodos"))
+            //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CargosTraerTodos"))
+            //{
+            //    List<Cargo> unaLista = new List<Cargo>();
+            //    unaLista = MapearCargos(ds);
+            //    return unaLista;
+            //}
+
+            SqlParameter[] parameters = new SqlParameter[]
             {
-                List<Cargo> unaLista = new List<Cargo>();
-                unaLista = MapearCargos(ds);
-                return unaLista;
+                new SqlParameter("@IdIdioma", FRAMEWORK.Servicios.ServicioIdioma.unIdiomaActual)
+            };
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CargosTraerTodosPorIdioma", parameters))
+                {
+                    List<Cargo> unaLista = new List<Cargo>();
+                    unaLista = MapearCargos(ds);
+                    return unaLista;
+                }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            finally
+            {
+
+            }
+
         }
 
         private List<Cargo> MapearCargos(DataSet ds)

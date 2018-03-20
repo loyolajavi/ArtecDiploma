@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using System.Data;
 using System.Data.SqlClient;
@@ -52,17 +53,40 @@ namespace ARTEC.FRAMEWORK.Servicios
             {
                 if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                 {
-                    //unControl.Text = _EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
-                    foreach (Etiqueta unaEtiqueta in _EtiquetasCompartidas)
-                    {
-                        if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                    //if (unControl.Name.StartsWith("cboCargo")) IF PARA IDIOMA CBOBOX
+                    //{
+                    //    CambiarIdiomaCboBox(unControl);
+                    //}
+                    //else
+                    //{
+                        //unControl.Text = _EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
+                        foreach (Etiqueta unaEtiqueta in _EtiquetasCompartidas)
                         {
-                            unControl.Text = unaEtiqueta.Texto;
-                            break;
+                            if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                            {
+                                unControl.Text = unaEtiqueta.Texto;
+                                break;
+                            }
                         }
-                    }
+                    //}
+                    
                 }
             }
+        }
+
+        private static void CambiarIdiomaCboBox(Control unControl)
+        {
+            ComboBox Hola = (unControl as ComboBox);
+
+            //if(Hola.Name == "cboIdioma")
+            //PASAR EL IDIOMA A BLL Y DAL Y SEGUIR CON ESTO DE ABAJO; YA QUE ASI VOY A TENER ACCESO A LAS DAL
+            //List<Cargo> unosCargos = new List<Cargo>();
+            //unosCargos = ServicioIdioma.IdiomaTraerTodos();
+            //Hola.DataSource = null;
+            //Hola.DisplayMember = "NombreIdioma";
+            //Hola.ValueMember = "IdIdioma";
+            //Hola.DataSource = unosIdiomas;
+
         }
 
 
