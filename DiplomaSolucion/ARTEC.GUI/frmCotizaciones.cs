@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -44,7 +45,7 @@ namespace ARTEC.GUI
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodos();
 
-            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
                 txtCuerpo.Text = "Prueba";
                 txtAsunto.Text = "Cotización MPF";

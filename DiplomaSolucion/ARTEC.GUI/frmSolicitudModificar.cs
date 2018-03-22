@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -177,8 +178,8 @@ namespace ARTEC.GUI
             //Agrega boton para Borrar el detalle
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetalles.Columns.Add(deleteButton);
 
@@ -315,8 +316,8 @@ namespace ARTEC.GUI
                     //Vuelve a agregar el botón de borrar al final
                     var deleteButton = new DataGridViewButtonColumn();
                     deleteButton.Name = "btnDinBorrar";
-                    deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                     deleteButton.UseColumnTextForButtonValue = true;
                     grillaDetalles.Columns.Add(deleteButton);
 
@@ -848,8 +849,8 @@ namespace ARTEC.GUI
                             //Vuelve a agregar el botón de borrar al final
                             var deleteButton = new DataGridViewButtonColumn();
                             deleteButton.Name = "btnDinBorrar";
-                            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                             deleteButton.UseColumnTextForButtonValue = true;
                             grillaDetalles.Columns.Add(deleteButton);
 
@@ -869,7 +870,7 @@ namespace ARTEC.GUI
                         }
                         else
                         {
-                            DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
                             if (resmbox == DialogResult.Yes)
                             {
                                 AgregarDetalleConfirmado(ref unDetalleSolicitud);
@@ -936,8 +937,8 @@ namespace ARTEC.GUI
             //Vuelve a agregar el botón de borrar al final
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetalles.Columns.Add(deleteButton);
 
@@ -1138,8 +1139,8 @@ namespace ARTEC.GUI
                             //Vuelve a agregar el botón de borrar al final
                             var deleteButton = new DataGridViewButtonColumn();
                             deleteButton.Name = "btnDinBorrar";
-                            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                             deleteButton.UseColumnTextForButtonValue = true;
                             grillaDetalles.Columns.Add(deleteButton);
 

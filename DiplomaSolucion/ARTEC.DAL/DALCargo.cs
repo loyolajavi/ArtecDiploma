@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
+using ARTEC.ENTIDADES.Servicios;
 
 
 namespace ARTEC.DAL
@@ -25,7 +26,7 @@ namespace ARTEC.DAL
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@IdIdioma", FRAMEWORK.Servicios.ServicioIdioma.unIdiomaActual)
+                new SqlParameter("@IdIdioma", Idioma.unIdiomaActual)
             };
             try
             {

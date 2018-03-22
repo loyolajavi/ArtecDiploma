@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -126,7 +127,7 @@ namespace ARTEC.GUI
 
         private void Backup_Load(object sender, EventArgs e)
         {
-            ServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
         }
 
 

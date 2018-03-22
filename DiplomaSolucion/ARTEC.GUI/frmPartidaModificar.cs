@@ -14,6 +14,8 @@ using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.ENTIDADES.Helpers;
 using Novacode;
 using System.Globalization;
+using ARTEC.ENTIDADES.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -92,8 +94,8 @@ namespace ARTEC.GUI
             //Agrega boton para Borrar el detallePartida
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             grillaDetallesPart.Columns.Add(deleteButton);
         }
@@ -135,8 +137,8 @@ namespace ARTEC.GUI
                         //Agrega boton para Borrar el detallePartida
                         var deleteButton = new DataGridViewButtonColumn();
                         deleteButton.Name = "btnDinBorrar";
-                        deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                        deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                        deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                        deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
                         deleteButton.UseColumnTextForButtonValue = true;
                         grillaDetallesPart.Columns.Add(deleteButton);
 
@@ -247,7 +249,7 @@ namespace ARTEC.GUI
 
             }
 
-            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta
                 {
@@ -263,7 +265,7 @@ namespace ARTEC.GUI
                     doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                 }
             }
-            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
+            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
             {
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
                 {

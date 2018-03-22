@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 
 namespace ARTEC.GUI
@@ -107,7 +108,7 @@ namespace ARTEC.GUI
                         }
                         else
                         {
-                            DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
                             if (resmbox == DialogResult.Yes)
                             {
                                 AgregarDetalleConfirmado(ref unDetalleSolicitud);
@@ -163,7 +164,7 @@ namespace ARTEC.GUI
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
-            ServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();

@@ -74,6 +74,7 @@
     <Compile Include="IDALBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\DALIdioma.cs" />
+    <Compile Include="Servicios\DALServicioIdioma.cs" />
     <Compile Include="Servicios\DALServicioMail.cs" />
   </ItemGroup>
   <ItemGroup>

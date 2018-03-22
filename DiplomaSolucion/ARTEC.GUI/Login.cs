@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -57,21 +58,21 @@ namespace ARTEC.GUI
         private void Login_Load(object sender, EventArgs e)
         {
             //Traigo todos los idiomas
-            unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
+            unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
             cboIdioma.DataSource = null;
             cboIdioma.DisplayMember = "NombreIdioma";
             cboIdioma.ValueMember = "IdIdioma";
             cboIdioma.DataSource = unosIdiomas;
 
             //Obtengo el idioma default
-            ServicioIdioma.unIdiomaDefault = unosIdiomas.Find(x => x.ElIdiomaDefault == true);
-            cboIdioma.SelectedItem = ServicioIdioma.unIdiomaDefault;
+            Idioma.unIdiomaDefault = unosIdiomas.Find(x => x.ElIdiomaDefault == true);
+            cboIdioma.SelectedItem = Idioma.unIdiomaDefault;
 
             //Dejo constancia del idioma actual en memoria
-            ServicioIdioma.unIdiomaActual = ServicioIdioma.unIdiomaDefault.IdIdioma;
+            Idioma.unIdiomaActual = Idioma.unIdiomaDefault.IdIdioma;
             
             //Traduzco con el idioma Default
-            ServicioIdioma.Traducir(this.FindForm(), ServicioIdioma.unIdiomaDefault.IdIdioma);
+            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaDefault.IdIdioma);
         }
 
 
@@ -83,7 +84,7 @@ namespace ARTEC.GUI
         /// <param name="e"></param>
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
+            BLLServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
         }
 
 
@@ -110,7 +111,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
                 }
 
             }

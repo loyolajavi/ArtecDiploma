@@ -11,6 +11,7 @@ using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.FRAMEWORK.Servicios;
 using System.Reflection;
+using ARTEC.BLL.Servicios;
 
 
 namespace ARTEC.GUI
@@ -223,8 +224,8 @@ namespace ARTEC.GUI
             //Agrega boton para Borrar el agente
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = ServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
             GrillaAgentesLista.Columns.Add(deleteButton);
 

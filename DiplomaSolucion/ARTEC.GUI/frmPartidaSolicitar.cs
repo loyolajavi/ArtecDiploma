@@ -14,6 +14,7 @@ using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using Novacode;
 using System.Globalization;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -422,7 +423,7 @@ namespace ARTEC.GUI
             }
             if (ManagerPartida.PartidaCrear(nuevaPartida))
             {
-                if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+                if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                 {
                     using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
                     {
@@ -438,7 +439,7 @@ namespace ARTEC.GUI
                         doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                     }
                 }
-                else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
+                else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                 {
                     using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
                     {

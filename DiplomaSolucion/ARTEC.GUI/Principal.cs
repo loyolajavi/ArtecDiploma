@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -46,16 +47,16 @@ namespace ARTEC.GUI
             //ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
 
             //Traduzco con el IdiomaActual del usuario logueado
-            ServicioIdioma.CambiarIdioma(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.CambiarIdioma(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             //Traigo todos los idiomas
-            unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
+            unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
             cboIdioma.DataSource = null;
             cboIdioma.DisplayMember = "NombreIdioma";
             cboIdioma.ValueMember = "IdIdioma";
             cboIdioma.DataSource = unosIdiomas;
 
             //Obtengo el idioma actual del usuario para ponerlo en el cboidioma
-            cboIdioma.SelectedValue = ServicioIdioma.unIdiomaActual;
+            cboIdioma.SelectedValue = Idioma.unIdiomaActual;
 
 
             
@@ -127,11 +128,11 @@ namespace ARTEC.GUI
 
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (ServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue))
+            if (BLLServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue))
             {
                 foreach (Control unForm in Application.OpenForms)
                 {
-                    ServicioIdioma.Traducir(unForm, ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                    BLLServicioIdioma.Traducir(unForm, ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
                 }
             }
 

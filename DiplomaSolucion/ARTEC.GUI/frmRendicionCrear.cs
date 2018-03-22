@@ -15,6 +15,7 @@ using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using Novacode;
 using System.Globalization;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -162,7 +163,7 @@ namespace ARTEC.GUI
 
         private void DocumentoRendicionCrear(int NroRendicion)
         {
-            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.Español)
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
                 //VER: FALTA CREAR PLANTILLA
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion.docx"))
@@ -194,7 +195,7 @@ namespace ARTEC.GUI
                     }
                 }
             }
-            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)ServicioIdioma.EnumIdioma.English)
+            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
             {
                 using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion English.docx"))
                 {

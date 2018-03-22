@@ -12,6 +12,7 @@ using ARTEC.ENTIDADES;
 using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -30,7 +31,7 @@ namespace ARTEC.GUI
 
         private void ProveedorCrear_Load(object sender, EventArgs e)
         {
-            ServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             
             BLLCategoria ManagerCategoria = new BLLCategoria();
             unasCategorias = ManagerCategoria.CategoriaTraerTodos();
