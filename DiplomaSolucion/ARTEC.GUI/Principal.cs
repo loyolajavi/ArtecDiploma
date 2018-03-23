@@ -47,6 +47,7 @@ namespace ARTEC.GUI
             //ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
 
             //Traduzco con el IdiomaActual del usuario logueado
+            Idioma.CboBoxHabilitado = true;
             BLLServicioIdioma.CambiarIdioma(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             //Traigo todos los idiomas
             unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();

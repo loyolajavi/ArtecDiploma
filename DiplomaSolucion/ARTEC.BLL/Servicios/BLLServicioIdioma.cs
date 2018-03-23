@@ -36,12 +36,12 @@ namespace ARTEC.BLL.Servicios
             {
                 if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                 {
-                    //if (unControl.Name.StartsWith("cboCargo"))
-                    //{
-                    //    CambiarIdiomaCboBox(unControl);
-                    //}
-                    //else
-                    //{
+                    if (Idioma.CboBoxHabilitado && unControl.Name.StartsWith("cboEstadoSolicitud"))
+                    {
+                        CambiarIdiomaCboBox(unControl);
+                    }
+                    else
+                    {
                     //unControl.Text = Idioma._EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
                     foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
                     {
@@ -51,7 +51,7 @@ namespace ARTEC.BLL.Servicios
                             break;
                         }
                     }
-                    //}
+                    }
 
                 }
             }
@@ -115,8 +115,9 @@ namespace ARTEC.BLL.Servicios
                 //    }
                 //}
 
-                Traducir(unControlCI, unIdioma);
                 Idioma.unIdiomaActual = unIdioma;
+                Traducir(unControlCI, unIdioma);
+                
                 if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
                 {
                     DALServicioIdioma.IdiomaUsuarioActualModificar();
@@ -136,22 +137,22 @@ namespace ARTEC.BLL.Servicios
         }
 
 
-        //private static void CambiarIdiomaCboBox(Control unControl)
-        //{
-        //    ComboBox Hola = (unControl as ComboBox);
+        private static void CambiarIdiomaCboBox(Control unControl)
+        {
+            ComboBox Hola = (unControl as ComboBox);
 
-        //    //if (Hola.Name == "cboIdioma")
-        //    //{
+            //if (Hola.Name == "cboIdioma")
+            //{
 
-        //    //}
-        //    BLLCargo ManagerCargo = new BLLCargo();
-        //    List<Cargo> unosCargos = new List<Cargo>();
-        //    unosCargos = ManagerCargo.CargosTraerTodos();
-        //    Hola.DataSource = null;
-        //    Hola.DataSource = unosCargos;
-        //    Hola.DisplayMember = "DescripCargo";
-        //    Hola.ValueMember = "IdCargo";
-        //}
+            //}
+            BLLEstadoSolicitud ManagerEstadoSolic = new BLLEstadoSolicitud();
+            List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
+            unosEstadoSolicitud = ManagerEstadoSolic.EstadoSolicitudTraerTodos();
+            Hola.DataSource = null;
+            Hola.DataSource = unosEstadoSolicitud;
+            Hola.DisplayMember = "DescripEstadoSolic";
+            Hola.ValueMember = "IdEstadoSolicitud";
+        }
 
 
         //YA NO UTILIZADA 21/03/2018

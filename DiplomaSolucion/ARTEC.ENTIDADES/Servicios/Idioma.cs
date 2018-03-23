@@ -18,6 +18,6 @@ namespace ARTEC.ENTIDADES.Servicios
         public static int unIdiomaActual;
         public enum EnumIdioma
         { Español = 1, English = 2 };
-        
+        public static bool CboBoxHabilitado = false;
     }
 }
