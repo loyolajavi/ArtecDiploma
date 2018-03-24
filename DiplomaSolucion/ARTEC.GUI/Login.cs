@@ -72,7 +72,7 @@ namespace ARTEC.GUI
             Idioma.unIdiomaActual = Idioma.unIdiomaDefault.IdIdioma;
             
             //Traduzco con el idioma Default
-            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaDefault.IdIdioma);
+            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
         }
 
 

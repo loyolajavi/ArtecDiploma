@@ -47,8 +47,9 @@ namespace ARTEC.GUI
             //ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
 
             //Traduzco con el IdiomaActual del usuario logueado
-            Idioma.CboBoxHabilitado = true;
-            BLLServicioIdioma.CambiarIdioma(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            Idioma.unIdiomaActual = ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual;
+            Idioma._EtiquetasCompartidas = null;
+            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
             //Traigo todos los idiomas
             unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
             cboIdioma.DataSource = null;
@@ -133,7 +134,7 @@ namespace ARTEC.GUI
             {
                 foreach (Control unForm in Application.OpenForms)
                 {
-                    BLLServicioIdioma.Traducir(unForm, ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                    BLLServicioIdioma.Traducir(unForm, Idioma.unIdiomaActual);
                 }
             }
 

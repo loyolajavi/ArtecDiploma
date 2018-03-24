@@ -36,7 +36,7 @@ namespace ARTEC.BLL.Servicios
             {
                 if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                 {
-                    if (Idioma.CboBoxHabilitado && unControl.Name.StartsWith("cboEstadoSolicitud"))
+                    if (unControl.Name.StartsWith("cboEstadoSolicitud"))
                     {
                         CambiarIdiomaCboBox(unControl);
                     }
@@ -88,7 +88,7 @@ namespace ARTEC.BLL.Servicios
             }
             else
             {
-                //Si no está logueado comparo con el idioma default
+                //Si no está logueado comparo con el idioma default, (unIdiomaActual tiene el valor de default)
                 if (Idioma.unIdiomaActual == unIdioma)
                     Cambiar = false;
                 else
@@ -114,10 +114,10 @@ namespace ARTEC.BLL.Servicios
                 //        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, false);
                 //    }
                 //}
-
                 Idioma.unIdiomaActual = unIdioma;
-                Traducir(unControlCI, unIdioma);
+                Traducir(unControlCI, Idioma.unIdiomaActual);
                 
+
                 if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
                 {
                     DALServicioIdioma.IdiomaUsuarioActualModificar();
