@@ -36,7 +36,7 @@ namespace ARTEC.BLL.Servicios
             {
                 if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                 {
-                    if (unControl.Name.StartsWith("cboEstadoSolicitud"))
+                    if (unControl.Name.StartsWith("cbo"))
                     {
                         CambiarIdiomaCboBox(unControl);
                     }
@@ -122,21 +122,46 @@ namespace ARTEC.BLL.Servicios
 
         private static void CambiarIdiomaCboBox(Control unControl)
         {
-            ComboBox Hola = (unControl as ComboBox);
+            ComboBox unCboBox = (unControl as ComboBox);
 
-            //if (Hola.Name == "cboIdioma")
-            //{
+            if (unCboBox.Name == "cboEstadoSolicitud")
+            {
+                CambiarIdiomacboEstadoSolicitud(unCboBox);
+            }
+            else if (unCboBox.Name == "cboPrioridad")
+            {
+                CambiarIdiomacboPrioridad(unCboBox);
+            }
+           
+        }
 
-            //}
+        private static void CambiarIdiomacboEstadoSolicitud(ComboBox elCboBox)
+        {
             BLLEstadoSolicitud ManagerEstadoSolic = new BLLEstadoSolicitud();
             List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
             unosEstadoSolicitud = ManagerEstadoSolic.EstadoSolicitudTraerTodos();
-            Hola.DataSource = null;
-            Hola.DataSource = unosEstadoSolicitud;
-            Hola.DisplayMember = "DescripEstadoSolic";
-            Hola.ValueMember = "IdEstadoSolicitud";
+            elCboBox.DataSource = null;
+            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
+            elCboBox.DataSource = unosEstadoSolicitud;
+            elCboBox.DisplayMember = "DescripEstadoSolic";
+            elCboBox.ValueMember = "IdEstadoSolicitud";
         }
 
+        private static void CambiarIdiomacboPrioridad(ComboBox elCboBox)
+        {
+            BLLPrioridad ManagerPrioridad = new BLLPrioridad();
+            List<Prioridad> unasPrioridades = new List<Prioridad>();
+            unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+            elCboBox.DataSource = null;
+            unasPrioridades.Insert(0, new Prioridad(-1, ""));
+            elCboBox.DataSource = unasPrioridades;
+            elCboBox.DisplayMember = "DescripPrioridad";
+            elCboBox.ValueMember = "IdPrioridad";
+        }
+
+
+        
+        
 
         //YA NO UTILIZADA 21/03/2018
         //public static void IdiomaSetearDefault(Idioma unIdiomaDefault)
