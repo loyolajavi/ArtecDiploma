@@ -54,7 +54,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, cboEstadoSolicitud.SelectedItem.ToString(), txtBien.Text, cboPrioridad.SelectedItem.ToString(), cboAsignado.SelectedItem.ToString());
+                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue);
                 }
                 GrillaSolicitudBuscar.DataSource = null;
                 GrillaSolicitudBuscar.DataSource = unasSolicitudes;

@@ -39,13 +39,6 @@ namespace ARTEC.GUI
 
         private void Principal_Load(object sender, EventArgs e)
         {
-            //Traigo todos los idiomas
-            //unosIdiomas = ServicioIdioma.IdiomaTraerTodos();
-
-
-            //Obtengo el utilizado la última vez
-            //ServicioIdioma.unIdiomaActual = unosIdiomas.Find(x => x.IdiomaActual == true);
-
             //Traduzco con el IdiomaActual del usuario logueado
             Idioma.unIdiomaActual = ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual;
             Idioma._EtiquetasCompartidas = null;
@@ -59,9 +52,6 @@ namespace ARTEC.GUI
 
             //Obtengo el idioma actual del usuario para ponerlo en el cboidioma
             cboIdioma.SelectedValue = Idioma.unIdiomaActual;
-
-
-            
         }
 
         private void tabsPrincipal_SelectedIndexChanged(object sender, EventArgs e)

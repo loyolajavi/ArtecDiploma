@@ -98,26 +98,9 @@ namespace ARTEC.BLL.Servicios
 
             if (Cambiar == true)
             {
-
-
                 Idioma._EtiquetasCompartidas = null;
-
-                //foreach (var ItemIdioma in unosIdiomas)
-                //{
-                //    //Cambio el estado de los idiomas
-                //    if (ItemIdioma.IdIdioma == unIdioma.IdIdioma)
-                //    {
-                //        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, true);
-                //    }
-                //    else
-                //    {
-                //        IdiomaActualizarIdiomaActual(ItemIdioma.IdIdioma, false);
-                //    }
-                //}
                 Idioma.unIdiomaActual = unIdioma;
                 Traducir(unControlCI, Idioma.unIdiomaActual);
-                
-
                 if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
                 {
                     DALServicioIdioma.IdiomaUsuarioActualModificar();

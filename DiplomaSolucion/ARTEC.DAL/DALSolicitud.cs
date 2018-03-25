@@ -198,20 +198,20 @@ namespace ARTEC.DAL
 
 
 
-        public List<Solicitud> SolicitudBuscar(string NombreDep = null, string EstadoSolic = null, string bien = null, string priori = null, string usasig = null)
+        public List<Solicitud> SolicitudBuscar(string NombreDep = null, int? EstadoSolic = null, string bien = null, int? priori = null, int? usasig = null)
         {
 
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             if (!string.IsNullOrEmpty(NombreDep))
                 parameters.Add(new SqlParameter("@NombreDep", NombreDep));
-            if (!string.IsNullOrEmpty(EstadoSolic))
+            if (EstadoSolic != null)
                 parameters.Add(new SqlParameter("@EstadoSolic", EstadoSolic));
             if (!string.IsNullOrEmpty(bien))
                 parameters.Add(new SqlParameter("@bien", bien));
-            if (!string.IsNullOrEmpty(priori))
+            if (priori != null)
                 parameters.Add(new SqlParameter("@priori", priori));
-            if (!string.IsNullOrEmpty(usasig))
+            if (usasig != null)
                 parameters.Add(new SqlParameter("@usasig", usasig));
 
             try
