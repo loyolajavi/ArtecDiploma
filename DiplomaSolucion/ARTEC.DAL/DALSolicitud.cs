@@ -213,6 +213,7 @@ namespace ARTEC.DAL
                 parameters.Add(new SqlParameter("@priori", priori));
             if (usasig != null)
                 parameters.Add(new SqlParameter("@usasig", usasig));
+            parameters.Add(new SqlParameter("@ididioma", ENTIDADES.Servicios.Idioma.unIdiomaActual));
 
             try
             {

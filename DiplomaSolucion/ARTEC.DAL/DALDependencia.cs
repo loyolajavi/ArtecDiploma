@@ -91,7 +91,9 @@ namespace ARTEC.DAL
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdDependencia", idDependencia)
+				new SqlParameter("@IdDependencia", idDependencia),
+                new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
+
 			};
 
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaTraerAgentesResp", parameters))

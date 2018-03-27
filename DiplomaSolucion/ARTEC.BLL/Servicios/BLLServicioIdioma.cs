@@ -140,11 +140,13 @@ namespace ARTEC.BLL.Servicios
             BLLEstadoSolicitud ManagerEstadoSolic = new BLLEstadoSolicitud();
             List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
             unosEstadoSolicitud = ManagerEstadoSolic.EstadoSolicitudTraerTodos();
+            int seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
             elCboBox.DataSource = unosEstadoSolicitud;
             elCboBox.DisplayMember = "DescripEstadoSolic";
             elCboBox.ValueMember = "IdEstadoSolicitud";
+            elCboBox.SelectedValue = seleccionado;
         }
 
         private static void CambiarIdiomacboPrioridad(ComboBox elCboBox)
@@ -152,11 +154,13 @@ namespace ARTEC.BLL.Servicios
             BLLPrioridad ManagerPrioridad = new BLLPrioridad();
             List<Prioridad> unasPrioridades = new List<Prioridad>();
             unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+            int seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             unasPrioridades.Insert(0, new Prioridad(-1, ""));
             elCboBox.DataSource = unasPrioridades;
             elCboBox.DisplayMember = "DescripPrioridad";
             elCboBox.ValueMember = "IdPrioridad";
+            elCboBox.SelectedIndex = seleccionado;
         }
 
 
