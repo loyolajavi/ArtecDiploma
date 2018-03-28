@@ -31,10 +31,9 @@ namespace ARTEC.GUI
 
         private void ProveedorCrear_Load(object sender, EventArgs e)
         {
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
-            
             BLLCategoria ManagerCategoria = new BLLCategoria();
             unasCategorias = ManagerCategoria.CategoriaTraerTodos();
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
         }
 
 

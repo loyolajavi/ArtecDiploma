@@ -164,7 +164,7 @@ namespace ARTEC.GUI
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            
 
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
@@ -216,6 +216,7 @@ namespace ARTEC.GUI
             //Cargar fecha Inicio
             txtFechaInicio.Text = DateTime.Today.ToString("d");
 
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
         }
 
 

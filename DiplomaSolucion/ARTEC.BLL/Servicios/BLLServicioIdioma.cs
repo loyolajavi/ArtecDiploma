@@ -22,38 +22,49 @@ namespace ARTEC.BLL.Servicios
 
         public static void Traducir(Control unForm, int elIdioma)
         {
-            //Obtengo las etiquetas de la BD una única vez para todos los formularios y las pongo en la static variable de Etiquetas (si cambio de idioma voy a la bd de nuevo)
-            if (Idioma._EtiquetasCompartidas == null)
+            try
             {
-                DALServicioIdioma.EtiquetasTraerTodosPorIdioma(elIdioma);
-            }
 
-            //Obtengo todos los controles del formulario
-            IEnumerable<Control> unosControles = ObtenerControles(unForm);
 
-            //Coloco el texto en cada control
-            foreach (Control unControl in unosControles)
-            {
-                if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
+
+                //Obtengo las etiquetas de la BD una única vez para todos los formularios y las pongo en la static variable de Etiquetas (si cambio de idioma voy a la bd de nuevo)
+                if (Idioma._EtiquetasCompartidas == null)
                 {
-                    if (unControl.Name.StartsWith("cbo"))
-                    {
-                        CambiarIdiomaCboBox(unControl);
-                    }
-                    else
-                    {
-                    //unControl.Text = Idioma._EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
-                    foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
-                    {
-                        if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
-                        {
-                            unControl.Text = unaEtiqueta.Texto;
-                            break;
-                        }
-                    }
-                    }
-
+                    DALServicioIdioma.EtiquetasTraerTodosPorIdioma(elIdioma);
                 }
+
+                //Obtengo todos los controles del formulario
+                IEnumerable<Control> unosControles = ObtenerControles(unForm);
+
+                //Coloco el texto en cada control
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
+                    {
+                        if (unControl.Name.StartsWith("cbo"))
+                        {
+                            CambiarIdiomaCboBox(unControl);
+                        }
+                        else
+                        {
+                            //unControl.Text = Idioma._EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
+                            foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
+                            {
+                                if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                                {
+                                    unControl.Text = unaEtiqueta.Texto;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+
+                throw;
             }
         }
 

@@ -85,7 +85,8 @@ namespace ARTEC.DAL
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@NroSolicitud", NroSolic)
+                new SqlParameter("@NroSolicitud", NroSolic),
+                new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
             };
 
             try

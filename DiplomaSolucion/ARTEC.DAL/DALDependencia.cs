@@ -201,7 +201,13 @@ namespace ARTEC.DAL
 
         public List<TipoDependencia> TipoDepTraerTodos()
         {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoDepTraerTodos"))
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+				new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
+			};
+
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "TipoDepTraerTodos", parameters))
             {
                 List<TipoDependencia> unaLista = new List<TipoDependencia>();
                 unaLista = MapearTipoDep(ds);
