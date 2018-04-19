@@ -15,7 +15,12 @@ namespace ARTEC.DAL
 
         public List<EstadoSolicDetalle> EstadoSolDetallesTraerTodos()
         {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolDetallesTraerTodos"))
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
+            };
+
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolDetallesTraerTodos", parameters))
             {
                 List<EstadoSolicDetalle> unaLista = new List<EstadoSolicDetalle>();
                 unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicDetalle>(ds);

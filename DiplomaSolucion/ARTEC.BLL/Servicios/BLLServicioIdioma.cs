@@ -143,6 +143,15 @@ namespace ARTEC.BLL.Servicios
             {
                 CambiarIdiomacboPrioridad(unCboBox);
             }
+            else if (unCboBox.Name == "cboEstadoInv")
+            {
+                CambiarIdiomacboEstadoInv(unCboBox);
+            }
+            else if (unCboBox.Name == "cboEstadoSolDetalle")
+            {
+                CambiarIdiomacboEstadoSolDetalle(unCboBox);
+            }
+            
            
         }
 
@@ -174,9 +183,33 @@ namespace ARTEC.BLL.Servicios
             elCboBox.SelectedIndex = seleccionado;
         }
 
+        private static void CambiarIdiomacboEstadoInv(ComboBox elCboBox)
+        {
+            BLLEstadoInventario ManagerEstadoInventario = new BLLEstadoInventario();
+            List<EstadoInventario> unosEstInven = new List<EstadoInventario>();
+            unosEstInven = ManagerEstadoInventario.EstadoInvTraerTodos();
+            int seleccionado = (int)elCboBox.SelectedValue;
+            elCboBox.DataSource = null;
+            //unosEstInven.Insert(0, new EstadoInventario(-1, ""));
+            elCboBox.DataSource = unosEstInven;
+            elCboBox.DisplayMember = "DescripEstadoInv";
+            elCboBox.ValueMember = "IdEstadoInventario";
+            elCboBox.SelectedValue = seleccionado;
+        }
 
-        
-        
+        private static void CambiarIdiomacboEstadoSolDetalle(ComboBox elCboBox)
+        {
+            BLLEstadoSolicDetalle ManagerEstadoSolicDetalle = new BLLEstadoSolicDetalle();
+            List<EstadoSolicDetalle> unosEstSolicDetalle = new List<EstadoSolicDetalle>();
+            unosEstSolicDetalle = ManagerEstadoSolicDetalle.EstadoSolDetallesTraerTodos();
+            int seleccionado = (int)elCboBox.SelectedValue;
+            elCboBox.DataSource = null;
+            //unosEstInven.Insert(0, new EstadoInventario(-1, "")); //QUEDA COMENTADO PARA QUE NO TENGA UN VALOR NULL 
+            elCboBox.DataSource = unosEstSolicDetalle;
+            elCboBox.DisplayMember = "DescripEstadoSolicDetalle";
+            elCboBox.ValueMember = "IdEstadoSolicDetalle";
+            elCboBox.SelectedValue = seleccionado;
+        }
 
         //YA NO UTILIZADA 21/03/2018
         //public static void IdiomaSetearDefault(Idioma unIdiomaDefault)

@@ -16,13 +16,11 @@ namespace ARTEC.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
-            Application.Run(new Principal());
-            //Application.Run(new CrearSolicitud());
-            //Application.Run(new frmBienRegistrar());
 
-            //Application.Run(new Principal());
-            //Application.Run(new Backup());
+            //Creo el form del login y pregunto si el resultado de DialogResult es OK (que lo coloco en ese estado si el login fue correcto) para que se cierre el form del login y se abra el principal al loguearse
+            Login unFrmLogin = new Login();
+            if (unFrmLogin.ShowDialog() == DialogResult.OK)
+                Application.Run(new Principal());
 
         }
     }

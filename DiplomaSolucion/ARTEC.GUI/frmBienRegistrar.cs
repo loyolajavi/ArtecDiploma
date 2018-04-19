@@ -231,11 +231,11 @@ namespace ARTEC.GUI
             //Traer EstadosInventario
             BLLEstadoInventario ManagerEstadoInventario = new BLLEstadoInventario();
             List<EstadoInventario> unosEstadoInventario = new List<EstadoInventario>();
-            cboEstado.DataSource = null;
+            cboEstadoInv.DataSource = null;
             unosEstadoInventario = ManagerEstadoInventario.EstadoInvTraerTodos();
-            cboEstado.DataSource = unosEstadoInventario;
-            cboEstado.DisplayMember = "DescripEstadoInv";
-            cboEstado.ValueMember = "IdEstadoInventario";
+            cboEstadoInv.DataSource = unosEstadoInventario;
+            cboEstadoInv.DisplayMember = "DescripEstadoInv";
+            cboEstadoInv.ValueMember = "IdEstadoInventario";
         }
 
 
@@ -292,9 +292,9 @@ namespace ARTEC.GUI
                 HLPBienInventario unBienhlp = new HLPBienInventario();
                 unBienhlp.DescripBien = txtBienCategoria.Text;
                 unBienAUX.unaCategoria = unDetSolic.unaCategoria;
-                unBienhlp.DescripEstadoInv = cboEstado.Text;
+                unBienhlp.DescripEstadoInv = cboEstadoInv.Text;
                 //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
-                unBienAUX.unInventarioAlta.unEstado = (EstadoInventario)cboEstado.SelectedItem;
+                unBienAUX.unInventarioAlta.unEstado = (EstadoInventario)cboEstadoInv.SelectedItem;
                 unBienhlp.DescripMarca = cboMarca.Text;
                 unBienAUX.unaMarca = (Marca)cboMarca.SelectedItem;
                 unBienhlp.DescripModeloVersion = cboModelo.Text;

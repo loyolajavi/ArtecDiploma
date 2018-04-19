@@ -14,7 +14,12 @@ namespace ARTEC.DAL
     {
         public List<EstadoInventario> EstadoInvTraerTodos()
         {
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoInvTraerTodos"))
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
+			};
+
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoInvTraerTodos", parameters))
             {
                 List<EstadoInventario> unaLista = new List<EstadoInventario>();
                 unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoInventario>(ds);
