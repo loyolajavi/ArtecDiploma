@@ -104,14 +104,22 @@ namespace ARTEC.GUI
                 //MessageBox.Show(pas);
 
                 //Consulta us y pass coincidentes y loguea al usuario
-                if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
+                try
                 {
-                    this.Close();
-                    DialogResult = DialogResult.OK;
+                    if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
+                    {
+                        this.Close();
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                    }
                 }
-                else
+                catch (Exception es)
                 {
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                    string IdError = ServicioLog.CrearLog(es, System.Diagnostics.EventLogEntryType.Error, "Sin_Usuario");
+                    MessageBox.Show("Ocurrio un error en el logueo, por favor informe del error Nro " + IdError + " en el Log de Eventos");
                 }
 
             }

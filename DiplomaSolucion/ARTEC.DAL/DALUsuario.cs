@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.DAL
 {
@@ -54,6 +55,14 @@ namespace ARTEC.DAL
             }
             catch (Exception es)
             {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                {
+                    //System.Windows.Forms.MessageBox.Show("Log de excepción en BD");
+                    //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                    throw;
+                }
+                else
+                    //System.Windows.Forms.MessageBox.Show(es.StackTrace);
                 throw;
             }
             return false;

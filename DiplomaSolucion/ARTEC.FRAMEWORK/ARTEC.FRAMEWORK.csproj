@@ -51,6 +51,7 @@
     <Compile Include="Servicios\ManejoArchivos.cs" />
     <Compile Include="Servicios\ServicioBackup.cs" />
     <Compile Include="Servicios\ServicioIdioma.cs" />
+    <Compile Include="Servicios\ServicioLog.cs" />
     <Compile Include="Servicios\ServicioLogin.cs" />
     <Compile Include="Servicios\ServicioMail.cs" />
     <Compile Include="Servicios\ServicioSecurizacion.cs" />

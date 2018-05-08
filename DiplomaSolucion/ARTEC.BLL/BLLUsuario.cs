@@ -21,10 +21,20 @@ namespace ARTEC.BLL
 
         public bool UsuarioTraerPorLogin(string NomUs, string PassHash)
         {
-            if (GestorUsuario.UsuarioTraerPorLogin(NomUs, PassHash))
+            try
             {
-                return true;
+                if (GestorUsuario.UsuarioTraerPorLogin(NomUs, PassHash))
+                {
+                    return true;
+                    
+                }
             }
+            catch (Exception es)
+            {
+                //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                throw;
+            }
+            
             return false;
             
         }

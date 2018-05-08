@@ -240,6 +240,13 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
 
 
+        public static bool ConexionGetEstado()
+        {
+            if (Conexion != null && Conexion.State == ConnectionState.Open)
+                return true;
+            return false;
+        }
+
 
     }
 }
