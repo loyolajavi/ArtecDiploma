@@ -38,7 +38,8 @@ namespace ARTEC.FRAMEWORK.Servicios
             }
             finally
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
 
             return true;
@@ -70,7 +71,8 @@ namespace ARTEC.FRAMEWORK.Servicios
             }
             finally
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
 
             return true;

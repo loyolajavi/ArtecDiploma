@@ -101,7 +101,8 @@ namespace ARTEC.DAL.Servicios
             }
             finally
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
 
@@ -129,7 +130,8 @@ namespace ARTEC.DAL.Servicios
             }
             finally
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
 

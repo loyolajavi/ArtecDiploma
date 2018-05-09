@@ -10,38 +10,47 @@ namespace ARTEC.FRAMEWORK.Servicios
     public static class ServicioLog
     {
 
-        public static string CrearLog(Exception exc, EventLogEntryType tipo_entrada, string usuario)
+        public static string CrearLog(Exception exc, string usuario)
         {
+            System.Diagnostics.EventLogEntryType tipo_entrada = EventLogEntryType.Error;
             EventLog Elog = new EventLog();
             string NombreCarpeta = "ArtecLogs";
             string NombreAplicacion = "Artec1";
-            try
-            {
+            //try
+            //{
+
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                {
+                    
+                }
+
+
                 if (!EventLog.SourceExists(NombreAplicacion))
                     EventLog.CreateEventSource(NombreAplicacion, NombreCarpeta);
                 Elog.Source = NombreAplicacion;
-                try
-                {
-                    if (Elog.Log != NombreCarpeta)
-                        throw new Exception();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("El Source está siendo usado por otra aplicación (Modifique este campo)", ex);
-                }
+                //try
+                //{
+                //    if (Elog.Log != NombreCarpeta)
+                //        throw new Exception();
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw new Exception("El Source está siendo usado por otra aplicación (Modifique este campo)", ex);
+                //}
 
                 Elog.WriteEntry("Usuario: " + usuario + " - " + ObtenerMsjExcepciones(exc), tipo_entrada, 1);
-                return ObtenerUltimoIdLog(NombreCarpeta);
-            }
-            catch (Exception ErrorEscribirLog)
-            {
-                throw new Exception("Error al guardar un evento en el log, intente nuevamente", ErrorEscribirLog);
-            }
-            finally
-            {
                 Elog.Close();
                 Elog.Dispose();
-            }
+                return ObtenerUltimoIdLog(NombreCarpeta);
+            //}
+            //catch (Exception ErrorEscribirLog)
+            //{
+            //    throw new Exception("Error al guardar un evento en el log, intente nuevamente", ErrorEscribirLog);
+            //}
+            //finally
+            //{
+
+            //}
         }
 
 
@@ -51,10 +60,12 @@ namespace ARTEC.FRAMEWORK.Servicios
             Exception elError = unaEx;
             while (elError != null)
             {
-                LaCadena = LaCadena + Environment.NewLine + elError.Message;
+                StackTrace trace = new StackTrace(elError, true);
+                string NomArchivo = trace.GetFrame(0).GetFileName();
+                int NroLinea = trace.GetFrame(0).GetFileLineNumber();
+                LaCadena = LaCadena + Environment.NewLine + elError.Message + Environment.NewLine + "Archivo: " + NomArchivo + Environment.NewLine + "Linea: " + NroLinea + Environment.NewLine + elError.StackTrace.ToString();
                 elError = elError.InnerException;
             }
-
             return LaCadena;
         }
 

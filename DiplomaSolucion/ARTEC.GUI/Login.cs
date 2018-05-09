@@ -118,7 +118,7 @@ namespace ARTEC.GUI
                 }
                 catch (Exception es)
                 {
-                    string IdError = ServicioLog.CrearLog(es, System.Diagnostics.EventLogEntryType.Error, "Sin_Usuario");
+                    string IdError = ServicioLog.CrearLog(es, "Sin_Usuario");
                     MessageBox.Show("Ocurrio un error en el logueo, por favor informe del error Nro " + IdError + " en el Log de Eventos");
                 }
 

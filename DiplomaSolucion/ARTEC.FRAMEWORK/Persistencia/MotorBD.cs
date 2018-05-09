@@ -25,31 +25,67 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
         public static void ConexionIniciar()
         {
-            Conexion = new SqlConnection(_connectionStringName);
-            if (Conexion != null && Conexion.State == ConnectionState.Closed)
+            try
             {
-                Conexion.Open();
+                Conexion = new SqlConnection(_connectionStringName);
+                if (Conexion != null && Conexion.State == ConnectionState.Closed)
+                {
+                    Conexion.Open();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public static void TransaccionIniciar()
         {
-            Transaccion = Conexion.BeginTransaction();
+            try
+            {
+                Transaccion = Conexion.BeginTransaction();
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public static void TransaccionAceptar()
         {
-            Transaccion.Commit();
+            try
+            {
+                Transaccion.Commit();
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public static void ConexionFinalizar()
         {
-            Conexion.Close();
+            try
+            {
+                Conexion.Close();
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public static void TransaccionCancelar()
         {
-            Transaccion.Rollback();
+            try
+            {
+                Transaccion.Rollback();
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public static DataSet EjecutarDataSet(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
@@ -68,15 +104,17 @@ namespace ARTEC.FRAMEWORK.Persistencia
                     return Resultado;
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex2)
             {
-                TransaccionCancelar();
+                if (ConexionGetEstado())
+                    TransaccionCancelar();
                 throw;
             }
 
             finally
             {
-                ConexionFinalizar();
+                if (ConexionGetEstado())
+                    ConexionFinalizar();
             }
 
         }
@@ -99,13 +137,15 @@ namespace ARTEC.FRAMEWORK.Persistencia
             }
             catch (Exception ex)
             {
-                TransaccionCancelar();
+                if (ConexionGetEstado())
+                    TransaccionCancelar();
                 throw;
             }
 
             finally
             {
-                ConexionFinalizar();
+                if (ConexionGetEstado())
+                    ConexionFinalizar();
             }
 
         }
@@ -128,13 +168,15 @@ namespace ARTEC.FRAMEWORK.Persistencia
             }
             catch (Exception ex)
             {
-                TransaccionCancelar();
+                if(ConexionGetEstado())
+                    TransaccionCancelar();
                 throw;
             }
 
             finally
             {
-                ConexionFinalizar();
+                if (ConexionGetEstado())
+                    ConexionFinalizar();
             }
 
         }

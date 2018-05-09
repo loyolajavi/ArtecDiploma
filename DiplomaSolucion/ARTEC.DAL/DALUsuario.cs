@@ -55,15 +55,9 @@ namespace ARTEC.DAL
             }
             catch (Exception es)
             {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                {
                     //System.Windows.Forms.MessageBox.Show("Log de excepción en BD");
                     //System.Windows.Forms.MessageBox.Show(es.StackTrace);
                     throw;
-                }
-                else
-                    //System.Windows.Forms.MessageBox.Show(es.StackTrace);
-                throw;
             }
             return false;
 

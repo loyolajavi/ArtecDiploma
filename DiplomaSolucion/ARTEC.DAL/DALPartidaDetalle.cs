@@ -179,7 +179,8 @@ namespace ARTEC.DAL
             }
             finally
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
 
         }
