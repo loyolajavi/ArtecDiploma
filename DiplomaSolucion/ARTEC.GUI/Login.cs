@@ -57,22 +57,31 @@ namespace ARTEC.GUI
 
         private void Login_Load(object sender, EventArgs e)
         {
-            //Traigo todos los idiomas
-            unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
-            cboIdioma.DataSource = null;
-            cboIdioma.DisplayMember = "NombreIdioma";
-            cboIdioma.ValueMember = "IdIdioma";
-            cboIdioma.DataSource = unosIdiomas;
+            try
+            {
+                //Traigo todos los idiomas
+                unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
+                cboIdioma.DataSource = null;
+                cboIdioma.DisplayMember = "NombreIdioma";
+                cboIdioma.ValueMember = "IdIdioma";
+                cboIdioma.DataSource = unosIdiomas;
 
-            //Obtengo el idioma default
-            Idioma.unIdiomaDefault = unosIdiomas.Find(x => x.ElIdiomaDefault == true);
-            cboIdioma.SelectedItem = Idioma.unIdiomaDefault;
+                //Obtengo el idioma default
+                Idioma.unIdiomaDefault = unosIdiomas.Find(x => x.ElIdiomaDefault == true);
+                cboIdioma.SelectedItem = Idioma.unIdiomaDefault;
 
-            //Dejo constancia del idioma actual en memoria
-            Idioma.unIdiomaActual = Idioma.unIdiomaDefault.IdIdioma;
-            
-            //Traduzco con el idioma Default
-            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+                //Dejo constancia del idioma actual en memoria
+                Idioma.unIdiomaActual = Idioma.unIdiomaDefault.IdIdioma;
+
+                //Traduzco con el idioma Default
+                BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "Login_Load");
+                MessageBox.Show("Ocurrio un error al iniciar el sistema, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                this.Close();
+            }
         }
 
 
@@ -109,16 +118,18 @@ namespace ARTEC.GUI
                     if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
                     {
                         this.Close();
+                        ServicioLog.CrearLog("Login", "Ingreso Correcto");
                         DialogResult = DialogResult.OK;
                     }
                     else
                     {
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                        ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
                     }
                 }
                 catch (Exception es)
                 {
-                    string IdError = ServicioLog.CrearLog(es, "Sin_Usuario");
+                    string IdError = ServicioLog.CrearLog(es, "btnLogin_Click");
                     MessageBox.Show("Ocurrio un error en el logueo, por favor informe del error Nro " + IdError + " en el Log de Eventos");
                 }
 

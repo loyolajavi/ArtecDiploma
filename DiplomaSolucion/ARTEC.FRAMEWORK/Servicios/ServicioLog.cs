@@ -4,24 +4,68 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace ARTEC.FRAMEWORK.Servicios
 {
     public static class ServicioLog
     {
 
-        public static string CrearLog(Exception exc, string usuario)
+        public enum TipoLog
+        {
+            Accion = 1, Error = 2
+        }
+
+
+        public static string CrearLog(Exception exc, string AccionExcepcion) //Bitacora Errores
         {
             System.Diagnostics.EventLogEntryType tipo_entrada = EventLogEntryType.Error;
             EventLog Elog = new EventLog();
             string NombreCarpeta = "ArtecLogs";
             string NombreAplicacion = "Artec1";
+            string NombreUsuario = null;
             //try
             //{
 
+            string MsjExcepciones = ObtenerMsjExcepciones(exc);
+
                 if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
                 {
-                    
+                    if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
+                    {
+                        GrabarLogBD(ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario, DateTime.Now, "Error", AccionExcepcion, MsjExcepciones);
+                        NombreUsuario = ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario;
+                    }
+                    else
+                    {
+                        GrabarLogBD(0, "SIN_USUARIO", DateTime.Now, "Error", AccionExcepcion, MsjExcepciones);
+                        NombreUsuario = "SIN_USUARIO";
+                    }
+                        
+                }
+                else
+                {
+                    try 
+	                {
+                        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+                        if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
+                        {
+                            GrabarLogBD(ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario, DateTime.Now, "Error", AccionExcepcion, MsjExcepciones);
+                            NombreUsuario = ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario;
+                        }
+                        else
+                        {
+                            GrabarLogBD(0, "SIN_USUARIO", DateTime.Now, "Error", AccionExcepcion, MsjExcepciones);
+                            NombreUsuario = "SIN_USUARIO";
+                        }
+	                }
+	                catch (Exception)
+	                {
+                        System.Windows.Forms.MessageBox.Show("Error crítico y general de conexión a la base de datos");
+	                }
                 }
 
 
@@ -38,7 +82,7 @@ namespace ARTEC.FRAMEWORK.Servicios
                 //    throw new Exception("El Source está siendo usado por otra aplicación (Modifique este campo)", ex);
                 //}
 
-                Elog.WriteEntry("Usuario: " + usuario + " - " + ObtenerMsjExcepciones(exc), tipo_entrada, 1);
+                Elog.WriteEntry("Usuario: " + NombreUsuario + " - " + MsjExcepciones, tipo_entrada, 1);
                 Elog.Close();
                 Elog.Dispose();
                 return ObtenerUltimoIdLog(NombreCarpeta);
@@ -51,6 +95,37 @@ namespace ARTEC.FRAMEWORK.Servicios
             //{
 
             //}
+        }
+
+
+        public static string CrearLog(string Accion, string Mensaje)//Bitacora Eventos
+        {
+            System.Diagnostics.EventLogEntryType tipo_entrada = EventLogEntryType.Error;
+            EventLog Elog = new EventLog();
+            string NombreCarpeta = "ArtecLogs";
+            string NombreAplicacion = "Artec1";
+            string NombreUsuario = "SIN_USUARIO";
+
+            if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null && ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario != null)
+            {
+                GrabarLogBD(ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario, DateTime.Now, "Evento", Accion, Mensaje);
+                NombreUsuario = ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario;
+            }
+            else
+            {
+                GrabarLogBD(0, "SIN_USUARIO", DateTime.Now, "Evento", Accion, Mensaje);
+                NombreUsuario = "SIN_USUARIO";
+            }
+
+
+            if (!EventLog.SourceExists(NombreAplicacion))
+                EventLog.CreateEventSource(NombreAplicacion, NombreCarpeta);
+            Elog.Source = NombreAplicacion;
+            Elog.WriteEntry("Usuario: " + NombreUsuario, tipo_entrada, 1);
+            Elog.Close();
+            Elog.Dispose();
+            return ObtenerUltimoIdLog(NombreCarpeta);
+            
         }
 
 
@@ -85,6 +160,45 @@ namespace ARTEC.FRAMEWORK.Servicios
                 throw new Exception("Hubo un error al leer, compruebe que escribió correctamente la carpeta", ErrorLeerLog);
             }
         }
+
+
+
+
+        private static void GrabarLogBD(int idusuario, string NombreUs, DateTime fecha, string tipo, string accionrealizada, string msj)
+        {
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdUsuario", idusuario),
+                    new SqlParameter("@NombreUsuario", NombreUs),
+                    new SqlParameter("@Fecha", fecha),
+                    new SqlParameter("@TipoLog", tipo),
+                    new SqlParameter("@Accion", accionrealizada),
+                    new SqlParameter("@Mensaje", msj)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BitacoraLogCrear", parameters);
+                int IDDevuelto = Decimal.ToInt32(Resultado);
+                         
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //return IDDevuelto;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
 
 
     }
