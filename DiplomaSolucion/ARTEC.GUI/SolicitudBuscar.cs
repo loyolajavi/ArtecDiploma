@@ -44,26 +44,40 @@ namespace ARTEC.GUI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            if (!vldNroSolic.Validate())
+                return;
+            
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
-            if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboAsignado.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0)
+            try
             {
-                if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboAsignado.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0 && !txtNroSolicitud.Text.Contains("%") & !txtDep.Text.Contains("%") & !txtBien.Text.Contains("%") & !txtNroSolicitud.Text.Contains("_") & !txtDep.Text.Contains("_") & !txtBien.Text.Contains("_"))
                 {
-                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                    if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                    {
+                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                    }
+                    else
+                    {
+                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaFin.Value);
+                    }
+                    GrillaSolicitudBuscar.DataSource = null;
+                    GrillaSolicitudBuscar.DataSource = unasSolicitudes;
+                    GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
                 }
                 else
                 {
-                    unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaFin.Value);
+                    GrillaSolicitudBuscar.DataSource = null;
                 }
-                GrillaSolicitudBuscar.DataSource = null;
-                GrillaSolicitudBuscar.DataSource = unasSolicitudes;
-                GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
             }
-            else
+            catch (Exception es)
             {
-                GrillaSolicitudBuscar.DataSource = null;
+                string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click");
+                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                return;
             }
+
+            
         }
 
 
@@ -94,32 +108,41 @@ namespace ARTEC.GUI
 
         private void SolicitudBuscar_Load(object sender, EventArgs e)
         {
-            ///Traer Estados Solicitud
-            BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
-            unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
-            cboEstadoSolicitud.DataSource = null;
-            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
-            cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
-            cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
-            cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+            try
+            {
+                ///Traer Estados Solicitud
+                BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
+                unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+                cboEstadoSolicitud.DataSource = null;
+                unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
+                cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
+                cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
+                cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
 
-            ///Traer Prioridad
-            BLLPrioridad ManagerPrioridad = new BLLPrioridad();
-            unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
-            cboPrioridad.DataSource = null;
-            unasPrioridades.Insert(0, new Prioridad(-1, ""));
-            cboPrioridad.DataSource = unasPrioridades;
-            cboPrioridad.DisplayMember = "DescripPrioridad";
-            cboPrioridad.ValueMember = "IdPrioridad";
+                ///Traer Prioridad
+                BLLPrioridad ManagerPrioridad = new BLLPrioridad();
+                unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+                cboPrioridad.DataSource = null;
+                unasPrioridades.Insert(0, new Prioridad(-1, ""));
+                cboPrioridad.DataSource = unasPrioridades;
+                cboPrioridad.DisplayMember = "DescripPrioridad";
+                cboPrioridad.ValueMember = "IdPrioridad";
 
-            //Traer UsuariosSistema
-            BLLUsuario ManagerUsuario = new BLLUsuario();
-            unosUsuarios = ManagerUsuario.UsuarioTraerTodos();
-            cboAsignado.DataSource = null;
-            unosUsuarios.Insert(0, new Usuario(-1, "", ""));
-            cboAsignado.DataSource = unosUsuarios;
-            cboAsignado.DisplayMember = "NombreUsuario";
-            cboAsignado.ValueMember = "IdUsuario";
+                //Traer UsuariosSistema
+                BLLUsuario ManagerUsuario = new BLLUsuario();
+                unosUsuarios = ManagerUsuario.UsuarioTraerTodos();
+                cboAsignado.DataSource = null;
+                unosUsuarios.Insert(0, new Usuario(-1, "", ""));
+                cboAsignado.DataSource = unosUsuarios;
+                cboAsignado.DisplayMember = "NombreUsuario";
+                cboAsignado.ValueMember = "IdUsuario";
+            }
+            catch (Exception es1)
+            {
+                string IdError = ServicioLog.CrearLog(es1, "SolicitudBuscar_Load");
+                MessageBox.Show("Error al cargar la pantalla de búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
         }
 
         private void txtDep_KeyPress(object sender, KeyPressEventArgs e)
@@ -129,6 +152,17 @@ namespace ARTEC.GUI
                 btnBuscar_Click(this, new EventArgs());
             }
         }
+
+        private void vld1NroSolic_ValidateValue(object sender, DevComponents.DotNetBar.Validator.ValidateValueEventArgs e)
+        {
+            int elOut;
+            if (Int32.TryParse(txtNroSolicitud.Text, out elOut) | string.IsNullOrEmpty(txtNroSolicitud.Text))
+                e.IsValid = true;
+            else
+                e.IsValid = false;
+
+        }
+
 
 
 

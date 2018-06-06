@@ -28,7 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolicitudBuscar));
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -49,9 +51,14 @@ namespace ARTEC.GUI
             this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.GrillaSolicitudBuscar = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.vldNroSolic = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.vld1NroSolic = new DevComponents.DotNetBar.Validator.CustomValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelX1
@@ -78,7 +85,6 @@ namespace ARTEC.GUI
             this.txtBien.DisabledBackColor = System.Drawing.Color.White;
             this.txtBien.ForeColor = System.Drawing.Color.Black;
             this.txtBien.Location = new System.Drawing.Point(104, 63);
-            this.txtBien.Multiline = false;
             this.txtBien.Name = "txtBien";
             this.txtBien.PreventEnterBeep = true;
             this.txtBien.Size = new System.Drawing.Size(315, 22);
@@ -244,6 +250,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(315, 22);
             this.txtNroSolicitud.TabIndex = 36;
+            this.vldNroSolic.SetValidator1(this.txtNroSolicitud, this.vld1NroSolic);
             this.txtNroSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroSolicitud_KeyPress);
             // 
             // cboAsignado
@@ -391,14 +398,14 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.AllowUserToDeleteRows = false;
             this.GrillaSolicitudBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaSolicitudBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaSolicitudBuscar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaSolicitudBuscar.Location = new System.Drawing.Point(7, 131);
             this.GrillaSolicitudBuscar.Name = "GrillaSolicitudBuscar";
@@ -406,6 +413,27 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.Size = new System.Drawing.Size(824, 372);
             this.GrillaSolicitudBuscar.TabIndex = 47;
             this.GrillaSolicitudBuscar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaSolicitudBuscar_CellDoubleClick);
+            // 
+            // vldNroSolic
+            // 
+            this.vldNroSolic.ContainerControl = this;
+            this.vldNroSolic.ErrorProvider = this.errorProvider1;
+            this.vldNroSolic.Highlighter = this.highlighter1;
+            // 
+            // vld1NroSolic
+            // 
+            this.vld1NroSolic.ErrorMessage = "Solo se aceptan números";
+            this.vld1NroSolic.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.vld1NroSolic.ValidateValue += new DevComponents.DotNetBar.Validator.ValidateValueEventHandler(this.vld1NroSolic_ValidateValue);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
             // 
             // SolicitudBuscar
             // 
@@ -440,6 +468,7 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -466,5 +495,9 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaSolicitudBuscar;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldNroSolic;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.CustomValidator vld1NroSolic;
     }
 }
