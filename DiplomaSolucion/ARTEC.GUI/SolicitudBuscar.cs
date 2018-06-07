@@ -48,10 +48,12 @@ namespace ARTEC.GUI
                 return;
             
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+            txtResBusqueda.Visible = false;
+            GrillaSolicitudBuscar.Visible = true;
 
             try
             {
-                if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboAsignado.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0 && !txtNroSolicitud.Text.Contains("%") & !txtDep.Text.Contains("%") & !txtBien.Text.Contains("%") & !txtNroSolicitud.Text.Contains("_") & !txtDep.Text.Contains("_") & !txtBien.Text.Contains("_"))
+                if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtBien.Text) | !string.IsNullOrEmpty(txtFechaFin.Text) | !string.IsNullOrEmpty(txtFechaFin2.Text) | !string.IsNullOrEmpty(txtFechaInicio.Text) | !string.IsNullOrEmpty(txtFechaInicio2.Text) | (int)cboEstadoSolicitud.SelectedValue >= 0 | (int)cboAsignado.SelectedValue >= 0 | (int)cboPrioridad.SelectedValue >= 0 && !txtNroSolicitud.Text.Contains("%") & !txtDep.Text.Contains("%") & !txtBien.Text.Contains("%") & !txtNroSolicitud.Text.Contains("_") & !txtDep.Text.Contains("_") & !txtBien.Text.Contains("_"))
                 {
                     if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
                     {
@@ -59,15 +61,23 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaFin.Value);
+                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaInicio2.Value, (DateTime?)txtFechaFin.Value, (DateTime?)txtFechaFin2.Value);
                     }
                     GrillaSolicitudBuscar.DataSource = null;
                     GrillaSolicitudBuscar.DataSource = unasSolicitudes;
                     GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
+                    if (unasSolicitudes.Count == 0)
+                    {
+                        GrillaSolicitudBuscar.Visible = false;
+                        txtResBusqueda.Visible = true;
+                    }
+                        
                 }
                 else
                 {
                     GrillaSolicitudBuscar.DataSource = null;
+                    GrillaSolicitudBuscar.Visible = false;
+                    txtResBusqueda.Visible = true;
                 }
             }
             catch (Exception es)

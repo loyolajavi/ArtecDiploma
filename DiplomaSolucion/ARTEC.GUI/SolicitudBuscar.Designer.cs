@@ -55,10 +55,15 @@ namespace ARTEC.GUI
             this.vld1NroSolic = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.txtFechaInicio2 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.txtFechaFin2 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin2)).BeginInit();
             this.SuspendLayout();
             // 
             // labelX1
@@ -116,7 +121,7 @@ namespace ARTEC.GUI
             this.txtFechaFin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaFin.ButtonDropDown.Visible = true;
             this.txtFechaFin.IsPopupCalendarOpen = false;
-            this.txtFechaFin.Location = new System.Drawing.Point(752, 35);
+            this.txtFechaFin.Location = new System.Drawing.Point(664, 63);
             // 
             // 
             // 
@@ -161,7 +166,7 @@ namespace ARTEC.GUI
             this.txtFechaInicio.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaInicio.ButtonDropDown.Visible = true;
             this.txtFechaInicio.IsPopupCalendarOpen = false;
-            this.txtFechaInicio.Location = new System.Drawing.Point(752, 7);
+            this.txtFechaInicio.Location = new System.Drawing.Point(664, 21);
             // 
             // 
             // 
@@ -203,9 +208,9 @@ namespace ARTEC.GUI
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX6.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX6.Location = new System.Drawing.Point(664, 35);
+            this.labelX6.Location = new System.Drawing.Point(664, 44);
             this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(91, 22);
+            this.labelX6.Size = new System.Drawing.Size(91, 21);
             this.labelX6.TabIndex = 32;
             this.labelX6.Text = "Finalización";
             // 
@@ -216,7 +221,7 @@ namespace ARTEC.GUI
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX5.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX5.Location = new System.Drawing.Point(664, 7);
+            this.labelX5.Location = new System.Drawing.Point(664, 1);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(69, 22);
             this.labelX5.TabIndex = 31;
@@ -397,6 +402,7 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.AllowUserToAddRows = false;
             this.GrillaSolicitudBuscar.AllowUserToDeleteRows = false;
             this.GrillaSolicitudBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.GrillaSolicitudBuscar.BackgroundColor = System.Drawing.Color.White;
             this.GrillaSolicitudBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -435,11 +441,123 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
+            // txtResBusqueda
+            // 
+            // 
+            // 
+            // 
+            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusqueda.Location = new System.Drawing.Point(7, 131);
+            this.txtResBusqueda.Name = "txtResBusqueda";
+            this.txtResBusqueda.ReadOnly = true;
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4" +
+    "\\uc1\\pard\\lang11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusqueda.Size = new System.Drawing.Size(824, 372);
+            this.txtResBusqueda.TabIndex = 48;
+            this.txtResBusqueda.Text = "No hay resultados";
+            this.txtResBusqueda.Visible = false;
+            // 
+            // txtFechaInicio2
+            // 
+            // 
+            // 
+            // 
+            this.txtFechaInicio2.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtFechaInicio2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaInicio2.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.txtFechaInicio2.ButtonDropDown.Visible = true;
+            this.txtFechaInicio2.IsPopupCalendarOpen = false;
+            this.txtFechaInicio2.Location = new System.Drawing.Point(761, 21);
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.txtFechaInicio2.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaInicio2.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
+            this.txtFechaInicio2.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.txtFechaInicio2.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaInicio2.MonthCalendar.DisplayMonth = new System.DateTime(2017, 3, 1, 0, 0, 0, 0);
+            this.txtFechaInicio2.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
+            // 
+            // 
+            // 
+            this.txtFechaInicio2.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.txtFechaInicio2.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFechaInicio2.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.txtFechaInicio2.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaInicio2.MonthCalendar.TodayButtonVisible = true;
+            this.txtFechaInicio2.Name = "txtFechaInicio2";
+            this.txtFechaInicio2.Size = new System.Drawing.Size(79, 22);
+            this.txtFechaInicio2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.txtFechaInicio2.TabIndex = 49;
+            // 
+            // txtFechaFin2
+            // 
+            // 
+            // 
+            // 
+            this.txtFechaFin2.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtFechaFin2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaFin2.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.txtFechaFin2.ButtonDropDown.Visible = true;
+            this.txtFechaFin2.IsPopupCalendarOpen = false;
+            this.txtFechaFin2.Location = new System.Drawing.Point(761, 63);
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.txtFechaFin2.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaFin2.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
+            this.txtFechaFin2.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.txtFechaFin2.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaFin2.MonthCalendar.DisplayMonth = new System.DateTime(2017, 3, 1, 0, 0, 0, 0);
+            this.txtFechaFin2.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
+            // 
+            // 
+            // 
+            this.txtFechaFin2.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.txtFechaFin2.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFechaFin2.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.txtFechaFin2.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFechaFin2.MonthCalendar.TodayButtonVisible = true;
+            this.txtFechaFin2.Name = "txtFechaFin2";
+            this.txtFechaFin2.Size = new System.Drawing.Size(79, 22);
+            this.txtFechaFin2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.txtFechaFin2.TabIndex = 50;
+            // 
             // SolicitudBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 565);
+            this.Controls.Add(this.txtFechaFin2);
+            this.Controls.Add(this.txtFechaInicio2);
+            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.GrillaSolicitudBuscar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.labelX3);
@@ -462,6 +580,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.comboBoxEx1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "SolicitudBuscar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.SolicitudBuscar_Load);
@@ -469,6 +588,8 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -499,5 +620,8 @@ namespace ARTEC.GUI
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
         private DevComponents.DotNetBar.Validator.CustomValidator vld1NroSolic;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaFin2;
+        private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaInicio2;
     }
 }

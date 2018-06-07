@@ -200,7 +200,7 @@ namespace ARTEC.DAL
 
 
 
-        public List<Solicitud> SolicitudBuscar(string NombreDep = null, int? EstadoSolic = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaFin = null)
+        public List<Solicitud> SolicitudBuscar(string NombreDep = null, int? EstadoSolic = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
         {
 
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -218,8 +218,12 @@ namespace ARTEC.DAL
             parameters.Add(new SqlParameter("@ididioma", ENTIDADES.Servicios.Idioma.unIdiomaActual));
             if (fechaInicio != DateTime.MinValue)
                 parameters.Add(new SqlParameter("@fechaInicio", fechaInicio));
+            if (fechaInicio2 != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaInicio2", fechaInicio2));
             if (fechaFin != DateTime.MinValue)
                 parameters.Add(new SqlParameter("@fechaFin", fechaFin));
+            if (fechaFin2 != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaFin2", fechaFin2));
 
             try
             {
