@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.DAL
 {
@@ -61,6 +62,100 @@ namespace ARTEC.DAL
             }
             return false;
 
+        }
+
+
+
+        public List<IFamPat> UsuarioTraerPermisos(int IdUsuario)
+        {
+
+            List<IFamPat> unosPermisos = new List<IFamPat>();
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario)
+			};
+            SqlParameter[] parameters2 = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario)
+			};
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerFamilias", parameters))
+                {
+                    IFamPat SubPermiso;
+                    List<IFamPat> unasFamilias = new List<IFamPat>();
+                    unasFamilias = MapearFamilias(ds);
+
+                    //foreach (IFamPat unaFamilia in unasFamilias)
+                    //{
+                    //    //SubPermiso = FamiliaTraerSubPermisos(unaFamilia.IdIFamPat);
+                    //    unosPermisos.Add(SubPermiso);
+                    //}
+
+
+                    if (unasFamilias != null && unasFamilias.Count() > 0)
+                        unosPermisos.AddRange(unasFamilias);
+                }
+
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerPatentes", parameters2))
+                {
+                    List<IFamPat> unasPatentes = new List<IFamPat>();
+                    unasPatentes = MapearPatentes(ds);
+                    if (unosPermisos != null && unosPermisos.Count() > 0)
+                        unosPermisos.AddRange(unasPatentes);
+                }
+
+                return unosPermisos;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public static List<IFamPat> MapearFamilias(DataSet ds)
+        {
+            List<IFamPat> ResElementosFamPat = new List<IFamPat>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    IFamPat unaFamilia = new Familia();
+                    unaFamilia.IdIFamPat = (int)row["IdFamilia"];
+                    unaFamilia.NombreIFamPat = row["NombreFamilia"].ToString();
+                    ResElementosFamPat.Add(unaFamilia);
+                }
+                return ResElementosFamPat;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public static List<IFamPat> MapearPatentes(DataSet ds)
+        {
+            List<IFamPat> ResElementosFamPat = new List<IFamPat>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    IFamPat unaPatente = new Patente();
+                    unaPatente.IdIFamPat = (int)row["IdPatente"];
+                    unaPatente.NombreIFamPat = row["NombrePatente"].ToString();
+                    ResElementosFamPat.Add(unaPatente);
+                }
+                return ResElementosFamPat;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
 

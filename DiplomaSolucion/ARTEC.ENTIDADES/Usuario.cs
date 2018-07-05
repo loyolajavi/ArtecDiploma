@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.ENTIDADES
 {
@@ -22,6 +23,19 @@ namespace ARTEC.ENTIDADES
         public string NombreUsuario { get; set; }
         public string Pass { get; set; }
         public int IdiomaUsuarioActual { get; set; }
+
+
+        private List<IFamPat> _Permisos = new List<IFamPat>();
+
+        public List<IFamPat> Permisos
+        {
+            get { return _Permisos; }
+            set { _Permisos = value; }
+        }
+        
+        
+
+
 
         public override string ToString()
         {

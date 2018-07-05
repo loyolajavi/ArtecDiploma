@@ -104,6 +104,12 @@
     <Compile Include="frmBienAsignar.Designer.cs">
       <DependentUpon>frmBienAsignar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBienesCat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBienesCat.Designer.cs">
+      <DependentUpon>frmBienesCat.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBienRegistrar.cs">
       <SubType>Form</SubType>
     </Compile>

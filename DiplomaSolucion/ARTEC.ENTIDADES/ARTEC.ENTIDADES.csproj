@@ -47,6 +47,9 @@
     <Compile Include="Helpers\HLPDetallesAdquisicion.cs" />
     <Compile Include="Helpers\HLPInvRendicion.cs" />
     <Compile Include="Rendicion.cs" />
+    <Compile Include="Servicios\Familia.cs" />
+    <Compile Include="Servicios\IFamPat.cs" />
+    <Compile Include="Servicios\Patente.cs" />
     <Compile Include="TipoLicencia.cs" />
     <Compile Include="Bien.cs" />
     <Compile Include="Cargo.cs" />
@@ -60,11 +63,9 @@
     <Compile Include="EstadoSolicitud.cs" />
     <Compile Include="IBien.cs" />
     <Compile Include="Inventario.cs" />
-    <Compile Include="XFactoryBien.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="Helpers\HLPBienInventario.cs" />
     <Compile Include="Helpers\HLPPartidaDetalle.cs" />
-    <Compile Include="XIFactoryBien.cs" />
     <Compile Include="XInventarioHard.cs" />
     <Compile Include="XInventarioSoft.cs" />
     <Compile Include="Limite.cs" />

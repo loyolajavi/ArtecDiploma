@@ -39,6 +39,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnBienes = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@ namespace ARTEC.GUI
             this.tabSolic.Padding = new System.Windows.Forms.Padding(3);
             this.tabSolic.Size = new System.Drawing.Size(1335, 635);
             this.tabSolic.TabIndex = 0;
-            this.tabSolic.Text = "tabPage1";
+            this.tabSolic.Text = "Solicitudes";
             this.tabSolic.UseVisualStyleBackColor = true;
             // 
             // tabHomol
@@ -182,11 +183,27 @@ namespace ARTEC.GUI
             this.cboIdioma.TabIndex = 6;
             this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
+            // btnBienes
+            // 
+            this.btnBienes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBienes.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBienes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnBienes.CustomColorName = "Blue";
+            this.btnBienes.Location = new System.Drawing.Point(977, 13);
+            this.btnBienes.Name = "btnBienes";
+            this.btnBienes.Size = new System.Drawing.Size(108, 40);
+            this.btnBienes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBienes.TabIndex = 7;
+            this.btnBienes.Text = "btnBienes";
+            this.btnBienes.TextColor = System.Drawing.Color.White;
+            this.btnBienes.Click += new System.EventHandler(this.btnBienesCat_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.btnBienes);
             this.Controls.Add(this.cboIdioma);
             this.Controls.Add(this.btnRendicionCrear);
             this.Controls.Add(this.btnBienRegistrar);
@@ -196,6 +213,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.tabsPrincipal);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARTEC";
@@ -218,6 +236,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
         private System.Windows.Forms.TabPage tabPartidas;
         private System.Windows.Forms.TabPage tabDependencia;
+        private DevComponents.DotNetBar.ButtonX btnBienes;
 
 
 
