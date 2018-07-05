@@ -51,9 +51,10 @@ namespace ARTEC.BLL
 
             try
             {
-                //return GestorUsuario.UsuarioTraerPermisos(IdUsuario);
                 List<IFamPat> unasFamilias;
+                //Primero traigo los permisos directos que tiene usuario (Familias y Patentes)
                 unasFamilias = GestorUsuario.UsuarioTraerPermisos(IdUsuario);
+                //Segundo veo si aquellos permisos (1), tienen subpermisos (Familias y/o Patentes) y los agrego. La variable unasFamilias se modifica en las funciones de la BLL y DAL directamente.
                 ManagerFamilia.FamiliaTraerSubPermisos(unasFamilias);
                 return unasFamilias;
 

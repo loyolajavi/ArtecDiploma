@@ -19,10 +19,9 @@ namespace ARTEC.BLL.Servicios
 
             try
             {
-
+                //Por cada familia/patente reviso si tiene subpermisos para agregarselos
                 foreach (IFamPat unaFamilia in unasFamilias)
                 {
-                    //List<IFamPat> FamiliasHijas = GestorFamilia.FamiliaTraerFamiliasHijas(unaFamilia);
                     GestorFamilia.FamiliaTraerFamiliasHijas(unaFamilia);
                 }
 

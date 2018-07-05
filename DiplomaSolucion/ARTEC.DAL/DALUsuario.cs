@@ -82,23 +82,16 @@ namespace ARTEC.DAL
 
             try
             {
+                //Traigo las familias
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerFamilias", parameters))
                 {
-                    IFamPat SubPermiso;
                     List<IFamPat> unasFamilias = new List<IFamPat>();
                     unasFamilias = MapearFamilias(ds);
-
-                    //foreach (IFamPat unaFamilia in unasFamilias)
-                    //{
-                    //    //SubPermiso = FamiliaTraerSubPermisos(unaFamilia.IdIFamPat);
-                    //    unosPermisos.Add(SubPermiso);
-                    //}
-
 
                     if (unasFamilias != null && unasFamilias.Count() > 0)
                         unosPermisos.AddRange(unasFamilias);
                 }
-
+                //Traigo las patentes
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerPatentes", parameters2))
                 {
                     List<IFamPat> unasPatentes = new List<IFamPat>();

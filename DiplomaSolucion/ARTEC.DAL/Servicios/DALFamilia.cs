@@ -29,6 +29,7 @@ namespace ARTEC.DAL.Servicios
 
             try
             {
+                //Busco las familias que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerFamiliasHijas", parameters))
                 {
                     List<IFamPat> unasFamiliasHijas = new List<IFamPat>();
@@ -39,7 +40,7 @@ namespace ARTEC.DAL.Servicios
                         unaFamilia.Agregar(FamiliaHija);
                     }
                 }
-
+                //IDEM anterior pero con patentes.. Busco las patentes que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerPatentes", parameters2))
                 {
                     List<IFamPat> unasPatentes = new List<IFamPat>();

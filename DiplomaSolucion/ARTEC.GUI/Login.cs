@@ -109,9 +109,6 @@ namespace ARTEC.GUI
             {
                 BLLUsuario unManagerUsuario = new BLLUsuario();
 
-                //string pas = ServicioSecurizacion.AplicarHash("1234");
-                //MessageBox.Show(pas);
-
                 //Consulta us y pass coincidentes y loguea al usuario
                 try
                 {
