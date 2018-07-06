@@ -138,6 +138,25 @@ namespace ARTEC.GUI
         }
 
 
+        private void btnAvanzadas_Click_1(object sender, EventArgs e)
+        {
+            panelEx1.Visible = true;
+            panelEx1.BringToFront();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panelEx1.Visible = false;
+            panelEx1.SendToBack();
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            frmUsuariosGestion unFrmUsuariosGestion = new frmUsuariosGestion();
+            unFrmUsuariosGestion.Show();
+        }
+
+
 
 
     }

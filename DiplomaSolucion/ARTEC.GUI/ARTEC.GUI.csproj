@@ -176,6 +176,12 @@
     <Compile Include="frmSolicitudModificar.Designer.cs">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUsuariosGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuariosGestion.Designer.cs">
+      <DependentUpon>frmUsuariosGestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="GrillaAsignacion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSolicitudModificar.resx">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuariosGestion.resx">
+      <DependentUpon>frmUsuariosGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GrillaAsignacion.resx">
       <DependentUpon>GrillaAsignacion.cs</DependentUpon>
