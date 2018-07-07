@@ -29,26 +29,29 @@ namespace ARTEC.DAL.Servicios
 
             try
             {
-                //Busco las familias que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerFamiliasHijas", parameters))
+                if (unaFamilia.GetType().Name == "Familia")
                 {
-                    List<IFamPat> unasFamiliasHijas = new List<IFamPat>();
-                    unasFamiliasHijas = DALUsuario.MapearFamilias(ds);
-
-                    foreach (IFamPat FamiliaHija in unasFamiliasHijas)
+                    //Busco las familias que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
+                    using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerFamiliasHijas", parameters))
                     {
-                        unaFamilia.Agregar(FamiliaHija);
+                        List<IFamPat> unasFamiliasHijas = new List<IFamPat>();
+                        unasFamiliasHijas = DALUsuario.MapearFamilias(ds);
+
+                        foreach (IFamPat FamiliaHija in unasFamiliasHijas)
+                        {
+                            unaFamilia.Agregar(FamiliaHija);
+                        }
                     }
-                }
-                //IDEM anterior pero con patentes.. Busco las patentes que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerPatentes", parameters2))
-                {
-                    List<IFamPat> unasPatentes = new List<IFamPat>();
-                    unasPatentes = DALUsuario.MapearPatentes(ds);
-
-                    foreach (IFamPat unaPatente in unasPatentes)
+                    //IDEM anterior pero con patentes.. Busco las patentes que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada
+                    using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaTraerPatentes", parameters2))
                     {
-                        unaFamilia.Agregar(unaPatente);
+                        List<IFamPat> unasPatentes = new List<IFamPat>();
+                        unasPatentes = DALUsuario.MapearPatentes(ds);
+
+                        foreach (IFamPat unaPatente in unasPatentes)
+                        {
+                            unaFamilia.Agregar(unaPatente);
+                        }
                     }
                 }
             }

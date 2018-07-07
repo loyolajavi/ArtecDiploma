@@ -36,7 +36,10 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
-                return GestorFamilia.PermisosTraerTodos();
+                List<IFamPat> unasFamilias;
+                unasFamilias = GestorFamilia.PermisosTraerTodos();
+                FamiliaTraerSubPermisos(unasFamilias);
+                return unasFamilias;
             }
             catch (Exception es)
             {
