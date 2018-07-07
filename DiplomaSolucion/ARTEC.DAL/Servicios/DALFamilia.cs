@@ -51,18 +51,47 @@ namespace ARTEC.DAL.Servicios
                         unaFamilia.Agregar(unaPatente);
                     }
                 }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
+        public List<IFamPat> PermisosTraerTodos()
+        {
 
-                  
+            List<IFamPat> unosPermisos = new List<IFamPat>();
+
+            try
+            {
+                  //Traigo las familias
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliasTraerTodas"))
+                {
+                    List<IFamPat> unasFamilias = new List<IFamPat>();
+                    unasFamilias = DALUsuario.MapearFamilias(ds);
+
+                    if (unasFamilias != null && unasFamilias.Count() > 0)
+                        unosPermisos.AddRange(unasFamilias);
+
+                    //VER: FALTA TRAER LOS SUBPERMISOS DE LAS FAMILIAS
+                }
+                //Traigo las patentes
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PatentesTraerTodas"))
+                {
+                    List<IFamPat> unasPatentes = new List<IFamPat>();
+                    unasPatentes = DALUsuario.MapearPatentes(ds);
+                    if (unosPermisos != null && unosPermisos.Count() > 0)
+                        unosPermisos.AddRange(unasPatentes);
+                }
+                return unosPermisos;
 
             }
             catch (Exception es)
             {
                 throw;
             }
-
-
         }
 
 

@@ -11,12 +11,10 @@ namespace ARTEC.BLL.Servicios
 {
     public class BLLFamilia
     {
+        DALFamilia GestorFamilia = new DALFamilia();
 
         public void FamiliaTraerSubPermisos(List<IFamPat> unasFamilias)
         {
-
-            DALFamilia GestorFamilia = new DALFamilia();
-
             try
             {
                 //Por cada familia/patente reviso si tiene subpermisos para agregarselos
@@ -30,6 +28,19 @@ namespace ARTEC.BLL.Servicios
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "FamiliaTraerSubPermisos");
+                throw;
+            }
+        }
+
+        public List<IFamPat> PermisosTraerTodos()
+        {
+            try
+            {
+                return GestorFamilia.PermisosTraerTodos();
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "PermisosTraerTodos");
                 throw;
             }
         }
