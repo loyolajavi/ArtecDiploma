@@ -24,6 +24,8 @@ namespace ARTEC.ENTIDADES
         public string Pass { get; set; }
         public int IdiomaUsuarioActual { get; set; }
 
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
 
         private List<IFamPat> _Permisos = new List<IFamPat>();
 

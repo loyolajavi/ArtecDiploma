@@ -83,6 +83,38 @@ namespace ARTEC.BLL
         //}
 
 
+        public bool UsuarioVerificarNomUs(string NomUs)
+        {
+            try
+            {
+                if (GestorUsuario.UsuarioVerificarNomUs(NomUs))
+                    return true;
+            }
+            catch (Exception es)
+            {
+                //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                throw;
+            }
+
+            return false;
+
+        }
+
+
+        public Usuario UsuarioTraerDatosPorNomUs(string NomUs)
+        {
+            try
+            {
+                return GestorUsuario.UsuarioTraerDatosPorNomUs(NomUs);
+            }
+            catch (Exception es)
+            {
+                //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                throw;
+            }
+
+
+        }
 
 
     }

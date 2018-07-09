@@ -1,6 +1,6 @@
 namespace ARTEC.GUI
 {
-    partial class frmUsuariosGestion
+    partial class frmUsuariosCrear
     {
         /// <summary>
         /// Required designer variable.
@@ -40,11 +40,11 @@ namespace ARTEC.GUI
             this.lblMail = new DevComponents.DotNetBar.LabelX();
             this.txtMail = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.pnlPermisos = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.treeDisponibles = new System.Windows.Forms.TreeView();
-            this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
-            this.btnQuitar = new DevComponents.DotNetBar.ButtonX();
-            this.lblDisponibles = new DevComponents.DotNetBar.LabelX();
             this.lblAsignados = new DevComponents.DotNetBar.LabelX();
+            this.lblDisponibles = new DevComponents.DotNetBar.LabelX();
+            this.btnQuitar = new DevComponents.DotNetBar.ButtonX();
+            this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
+            this.treeDisponibles = new System.Windows.Forms.TreeView();
             this.btnCrearUsuario = new DevComponents.DotNetBar.ButtonX();
             this.pnlPermisos.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +79,6 @@ namespace ARTEC.GUI
             this.txtNomUs.Border.Class = "TextBoxBorder";
             this.txtNomUs.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNomUs.DisabledBackColor = System.Drawing.Color.White;
-            this.txtNomUs.Enabled = false;
             this.txtNomUs.ForeColor = System.Drawing.Color.Black;
             this.txtNomUs.Location = new System.Drawing.Point(109, 7);
             this.txtNomUs.Name = "txtNomUs";
@@ -109,7 +108,6 @@ namespace ARTEC.GUI
             this.txtPass.Border.Class = "TextBoxBorder";
             this.txtPass.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtPass.DisabledBackColor = System.Drawing.Color.White;
-            this.txtPass.Enabled = false;
             this.txtPass.ForeColor = System.Drawing.Color.Black;
             this.txtPass.Location = new System.Drawing.Point(109, 41);
             this.txtPass.Name = "txtPass";
@@ -139,7 +137,6 @@ namespace ARTEC.GUI
             this.txtNombre.Border.Class = "TextBoxBorder";
             this.txtNombre.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNombre.DisabledBackColor = System.Drawing.Color.White;
-            this.txtNombre.Enabled = false;
             this.txtNombre.ForeColor = System.Drawing.Color.Black;
             this.txtNombre.Location = new System.Drawing.Point(109, 75);
             this.txtNombre.Name = "txtNombre";
@@ -169,7 +166,6 @@ namespace ARTEC.GUI
             this.txtApellido.Border.Class = "TextBoxBorder";
             this.txtApellido.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtApellido.DisabledBackColor = System.Drawing.Color.White;
-            this.txtApellido.Enabled = false;
             this.txtApellido.ForeColor = System.Drawing.Color.Black;
             this.txtApellido.Location = new System.Drawing.Point(109, 109);
             this.txtApellido.Name = "txtApellido";
@@ -199,7 +195,6 @@ namespace ARTEC.GUI
             this.txtMail.Border.Class = "TextBoxBorder";
             this.txtMail.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMail.DisabledBackColor = System.Drawing.Color.White;
-            this.txtMail.Enabled = false;
             this.txtMail.ForeColor = System.Drawing.Color.Black;
             this.txtMail.Location = new System.Drawing.Point(109, 143);
             this.txtMail.Name = "txtMail";
@@ -253,34 +248,17 @@ namespace ARTEC.GUI
             this.pnlPermisos.TabIndex = 72;
             this.pnlPermisos.Text = "pnlPermisos";
             // 
-            // treeDisponibles
+            // lblAsignados
             // 
-            this.treeDisponibles.Location = new System.Drawing.Point(15, 32);
-            this.treeDisponibles.Name = "treeDisponibles";
-            this.treeDisponibles.Size = new System.Drawing.Size(209, 190);
-            this.treeDisponibles.TabIndex = 2;
             // 
-            // btnAgregar
             // 
-            this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregar.Location = new System.Drawing.Point(230, 100);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAgregar.TabIndex = 3;
-            this.btnAgregar.Text = "btnAgregar";
             // 
-            // btnQuitar
-            // 
-            this.btnQuitar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnQuitar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnQuitar.Location = new System.Drawing.Point(566, 100);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnQuitar.TabIndex = 4;
-            this.btnQuitar.Text = "btnQuitar";
+            this.lblAsignados.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblAsignados.Location = new System.Drawing.Point(420, 3);
+            this.lblAsignados.Name = "lblAsignados";
+            this.lblAsignados.Size = new System.Drawing.Size(75, 23);
+            this.lblAsignados.TabIndex = 6;
+            this.lblAsignados.Text = "lblAsignados";
             // 
             // lblDisponibles
             // 
@@ -294,17 +272,34 @@ namespace ARTEC.GUI
             this.lblDisponibles.TabIndex = 5;
             this.lblDisponibles.Text = "lblDisponibles";
             // 
-            // lblAsignados
+            // btnQuitar
             // 
+            this.btnQuitar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnQuitar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnQuitar.Location = new System.Drawing.Point(566, 100);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnQuitar.TabIndex = 4;
+            this.btnQuitar.Text = "btnQuitar";
             // 
+            // btnAgregar
             // 
+            this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAgregar.Location = new System.Drawing.Point(230, 100);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.Text = "btnAgregar";
             // 
-            this.lblAsignados.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblAsignados.Location = new System.Drawing.Point(420, 3);
-            this.lblAsignados.Name = "lblAsignados";
-            this.lblAsignados.Size = new System.Drawing.Size(75, 23);
-            this.lblAsignados.TabIndex = 6;
-            this.lblAsignados.Text = "lblAsignados";
+            // treeDisponibles
+            // 
+            this.treeDisponibles.Location = new System.Drawing.Point(15, 32);
+            this.treeDisponibles.Name = "treeDisponibles";
+            this.treeDisponibles.Size = new System.Drawing.Size(209, 190);
+            this.treeDisponibles.TabIndex = 2;
             // 
             // btnCrearUsuario
             // 
@@ -339,7 +334,7 @@ namespace ARTEC.GUI
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmUsuariosGestion";
             this.Text = "MetroForm";
-            this.Load += new System.EventHandler(this.frmUsuariosGestion_Load);
+            this.Load += new System.EventHandler(this.frmUsuariosCrear_Load);
             this.pnlPermisos.ResumeLayout(false);
             this.ResumeLayout(false);
 

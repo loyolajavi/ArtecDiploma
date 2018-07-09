@@ -14,17 +14,17 @@ using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
-    public partial class frmUsuariosGestion : DevComponents.DotNetBar.Metro.MetroForm
+    public partial class frmUsuariosCrear : DevComponents.DotNetBar.Metro.MetroForm
     {
 
         BLLFamilia ManagerFamilia = new BLLFamilia();
 
-        public frmUsuariosGestion()
+        public frmUsuariosCrear()
         {
             InitializeComponent();
         }
 
-        private void frmUsuariosGestion_Load(object sender, EventArgs e)
+        private void frmUsuariosCrear_Load(object sender, EventArgs e)
         {
             try
             {

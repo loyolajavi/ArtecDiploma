@@ -152,5 +152,63 @@ namespace ARTEC.DAL
         }
 
 
+        public bool UsuarioVerificarNomUs(string NomUs)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Us", NomUs)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string NomUsRes = (string) FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioVerificarNomUs", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (!string.IsNullOrEmpty(NomUsRes))
+                    return true;
+            }
+            catch (Exception es)
+            {
+                //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                throw;
+            }
+            return false;
+
+        }
+
+
+        public Usuario UsuarioTraerDatosPorNomUs(string NomUs)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@Us", NomUs)
+			};
+
+            Usuario elUsuario = new Usuario();
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerDatosPorNomUs", parameters))
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        elUsuario = FRAMEWORK.Persistencia.Mapeador.MapearUno<Usuario>(ds);
+                        return elUsuario;
+                    }
+                    return elUsuario;
+                }
+            }
+            catch (Exception es)
+            {
+                //System.Windows.Forms.MessageBox.Show(es.StackTrace);
+                throw;
+            }
+
+        }
+
+
     }
 }

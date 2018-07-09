@@ -152,7 +152,7 @@ namespace ARTEC.GUI
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            frmUsuariosGestion unFrmUsuariosGestion = new frmUsuariosGestion();
+            frmUsuariosModificar unFrmUsuariosGestion = new frmUsuariosModificar();
             unFrmUsuariosGestion.Show();
         }
 

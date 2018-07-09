@@ -176,11 +176,17 @@
     <Compile Include="frmSolicitudModificar.Designer.cs">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmUsuariosGestion.cs">
+    <Compile Include="frmUsuariosCrear.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUsuariosGestion.Designer.cs">
-      <DependentUpon>frmUsuariosGestion.cs</DependentUpon>
+    <Compile Include="frmUsuariosCrear.Designer.cs">
+      <DependentUpon>frmUsuariosCrear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuariosModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuariosModificar.Designer.cs">
+      <DependentUpon>frmUsuariosModificar.cs</DependentUpon>
     </Compile>
     <Compile Include="GrillaAsignacion.cs">
       <SubType>UserControl</SubType>
@@ -271,8 +277,11 @@
     <EmbeddedResource Include="frmSolicitudModificar.resx">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUsuariosGestion.resx">
-      <DependentUpon>frmUsuariosGestion.cs</DependentUpon>
+    <EmbeddedResource Include="frmUsuariosCrear.resx">
+      <DependentUpon>frmUsuariosCrear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuariosModificar.resx">
+      <DependentUpon>frmUsuariosModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GrillaAsignacion.resx">
       <DependentUpon>GrillaAsignacion.cs</DependentUpon>
