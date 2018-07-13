@@ -20,6 +20,13 @@ namespace ARTEC.GUI
     {
 
         BLLFamilia ManagerFamilia = new BLLFamilia();
+        List<IFamPat> LisAuxAsig;
+        List<IFamPat> LisAuxDisp;
+        //List<IFamPat> PerAgregados = new List<IFamPat>();
+        //List<IFamPat> PerQuitados = new List<IFamPat>();
+        List<IFamPat> LisAuxAsigBKP = new List<IFamPat>();
+        BLLUsuario ManagerUsuario = new BLLUsuario();
+        Usuario unUsuario;
 
         public frmUsuariosModificar()
         {
@@ -91,7 +98,6 @@ namespace ARTEC.GUI
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BLLUsuario ManagerUsuario = new BLLUsuario();
-            Usuario unUsuario;
 
             try
             {
@@ -105,9 +111,10 @@ namespace ARTEC.GUI
                     txtMail.Text = unUsuario.Mail;
                     txtNomUsBuscar.Clear();
 
-                    List<IFamPat> LisAuxAsig = new List<IFamPat>();
+                    LisAuxAsig = new List<IFamPat>();
                     LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
-                    List<IFamPat> LisAuxDisp = new List<IFamPat>();
+                    LisAuxAsigBKP = LisAuxAsig.ToList();
+                    LisAuxDisp = new List<IFamPat>();
                     LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
 
                     FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
@@ -151,6 +158,7 @@ namespace ARTEC.GUI
             }
         }
 
+
         public void FiltrarSubpermisos(Familia fam, ref List<IFamPat> disp)
         {
             disp = disp.Where(d => !fam.ElementosFamPat.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
@@ -159,6 +167,64 @@ namespace ARTEC.GUI
                 if (item.CantHijos > 0)
                     FiltrarSubpermisos(item as Familia, ref disp);
 	        } 
+        }
+
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if(treeDisponibles.SelectedNode.Parent != null)
+                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
+            else
+            {
+                LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
+                //PerAgregados.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
+                //LisAuxDisp.RemoveAt(treeDisponibles.SelectedNode.Index);
+
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig); 
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados); 
+            }
+        }
+
+
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (treeAsignados.SelectedNode.Parent != null)
+                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
+            else
+            {
+                //LisAuxDisp.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
+                //PerQuitados.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
+                LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);
+
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig); 
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados);
+            }
+
+        }
+
+        private void btnModifUsuario_Click(object sender, EventArgs e)
+        {
+            List<IFamPat> PerQuitar = new List<IFamPat>();
+            List<IFamPat> PerAgregar = new List<IFamPat>();
+            
+            try
+            {
+                PerQuitar = LisAuxAsigBKP.Where(d => !LisAuxAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+                PerAgregar = LisAuxAsig.Where(d => !LisAuxAsigBKP.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+                if(ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))
+                    MessageBox.Show("Modificación realizada");
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+
         }
 
 

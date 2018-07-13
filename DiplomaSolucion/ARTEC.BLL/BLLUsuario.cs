@@ -117,5 +117,22 @@ namespace ARTEC.BLL
         }
 
 
+
+        public bool UsuarioModificarPermisos(List<IFamPat> PerAgregar, List<IFamPat> PerQuitar, int IdUsuario)
+        {
+            try
+            {
+                if (PerAgregar.Count > 0)
+                    GestorUsuario.UsuarioAgregarPermisos(PerAgregar, IdUsuario);
+                if (PerQuitar.Count > 0)
+                    GestorUsuario.UsuarioQuitarPermisos(PerQuitar, IdUsuario);
+                return true;//REVISAR TRUE T FALSE
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+        }
     }
 }

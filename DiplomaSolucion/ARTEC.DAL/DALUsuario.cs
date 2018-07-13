@@ -210,5 +210,141 @@ namespace ARTEC.DAL
         }
 
 
+
+        public bool UsuarioAgregarPermisos(List<IFamPat> PerAgregar, int IdUsuario)
+        {
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+                foreach (IFamPat unPermiso in PerAgregar)
+                {
+                    if (unPermiso.CantHijos > 0)
+                        UsuarioAgregarFamilia(unPermiso as Familia, IdUsuario);
+                    else
+                        UsuarioAgregarPatente(unPermiso as Patente, IdUsuario);
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public void UsuarioAgregarFamilia(Familia unaFamilia, int IdUsuario)
+        {
+            try
+            {
+                SqlParameter[] parametersFam = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", unaFamilia.IdIFamPat),
+                    new SqlParameter("@IdUsuario", IdUsuario)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioAgregarFamilia", parametersFam);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public void UsuarioAgregarPatente(Patente unaPatente, int IdUsuario)
+        {
+            try
+            {
+                SqlParameter[] parametersPat = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdPatente", unaPatente.IdIFamPat),
+                    new SqlParameter("@IdUsuario", IdUsuario)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioAgregarPatente", parametersPat);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool UsuarioQuitarPermisos(List<IFamPat> PerQuitar, int IdUsuario)
+        {
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+                foreach (IFamPat unPermiso in PerQuitar)
+                {
+                    if (unPermiso.CantHijos > 0)
+                        UsuarioQuitarFamilia(unPermiso as Familia, IdUsuario);
+                    else
+                        UsuarioQuitarPatente(unPermiso as Patente, IdUsuario);
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public void UsuarioQuitarFamilia(Familia unaFamilia, int IdUsuario)
+        {
+            try
+            {
+                SqlParameter[] parametersFam = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", unaFamilia.IdIFamPat),
+                    new SqlParameter("@IdUsuario", IdUsuario)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioQuitarFamilia", parametersFam);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public void UsuarioQuitarPatente(Patente unaPatente, int IdUsuario)
+        {
+            try
+            {
+                SqlParameter[] parametersPat = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdPatente", unaPatente.IdIFamPat),
+                    new SqlParameter("@IdUsuario", IdUsuario)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioQuitarPatente", parametersPat);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

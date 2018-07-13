@@ -66,7 +66,7 @@ namespace ARTEC.GUI
             // 
             // 
             // 
-            this.lblNomUs.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblNomUsBuscar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblNomUsBuscar.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomUsBuscar.Location = new System.Drawing.Point(9, 9);
             this.lblNomUsBuscar.Name = "lblNomUsBuscar";
@@ -80,14 +80,13 @@ namespace ARTEC.GUI
             // 
             // 
             // 
-            this.txtNomUs.Border.Class = "TextBoxBorder";
-            this.txtNomUs.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNomUsBuscar.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNomUsBuscar.DisabledBackColor = System.Drawing.Color.White;
             this.txtNomUsBuscar.ForeColor = System.Drawing.Color.Black;
             this.txtNomUsBuscar.Location = new System.Drawing.Point(106, 7);
             this.txtNomUsBuscar.Name = "txtNomUsBuscar";
             this.txtNomUsBuscar.PreventEnterBeep = true;
-            this.txtNomUsBuscar.Size = new System.Drawing.Size(285, 22);
+            this.txtNomUsBuscar.Size = new System.Drawing.Size(285, 16);
             this.txtNomUsBuscar.TabIndex = 0;
             // 
             // lblPass
@@ -286,6 +285,7 @@ namespace ARTEC.GUI
             this.btnQuitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuitar.TabIndex = 4;
             this.btnQuitar.Text = "btnQuitar";
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // btnAgregar
             // 
@@ -297,6 +297,7 @@ namespace ARTEC.GUI
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "btnAgregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // treeDisponibles
             // 
@@ -315,6 +316,7 @@ namespace ARTEC.GUI
             this.btnModifUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModifUsuario.TabIndex = 73;
             this.btnModifUsuario.Text = "btnModifUsuario";
+            this.btnModifUsuario.Click += new System.EventHandler(this.btnModifUsuario_Click);
             // 
             // pnlBuscar
             // 
@@ -396,7 +398,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmUsuariosModificar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmUsuariosGestion_Load);
