@@ -40,6 +40,7 @@ namespace ARTEC.DAL.Servicios
                         foreach (IFamPat FamiliaHija in unasFamiliasHijas)
                         {
                             unaFamilia.Agregar(FamiliaHija);
+                            FamiliaTraerFamiliasHijas(FamiliaHija);
                         }
                     }
                     //IDEM anterior pero con patentes.. Busco las patentes que contenga la FAMILIA en revisión y llamo a Agregar de la Entidad Familia y queda guardado en el argumento, por lo que no tengo q retornar nada

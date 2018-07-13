@@ -12,6 +12,7 @@ using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL;
 using ARTEC.BLL.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
+using System.Linq;
 
 namespace ARTEC.GUI
 {
@@ -27,78 +28,65 @@ namespace ARTEC.GUI
 
         private void frmUsuariosGestion_Load(object sender, EventArgs e)
         {
-            try
-            {
-                ListarPermisosDisponibles(ManagerFamilia.PermisosTraerTodos());
-                ListarPermisosAsignados(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos);
-            }
-            catch (Exception es)
-            {
-                string IdError = ServicioLog.CrearLog(es, "frmUsuariosGestion_Load");
-                MessageBox.Show("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro " + IdError + " del Log de Eventos");
-                this.Close();
-            }
+            //try
+            //{
+            //    ListarPermisosDisponibles(ManagerFamilia.PermisosTraerTodos());
+            //    ListarPermisosAsignados(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos);
+            //}
+            //catch (Exception es)
+            //{
+            //    string IdError = ServicioLog.CrearLog(es, "frmUsuariosGestion_Load");
+            //    MessageBox.Show("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            //    this.Close();
+            //}
             
         }
 
-
-
-        public void ListarPermisosAsignados(List<IFamPat> PermisosVer)
+      
+        public void ListarPermisos(List<IFamPat> PermisosVer, TreeView treePermisos)
         {
-            treeAsignados.Nodes.Clear();
-            foreach (IFamPat unPermiso in PermisosVer)
+            treePermisos.Nodes.Clear();
+            foreach (IFamPat item in PermisosVer)
             {
-                TreeNode NodoAsignados = new TreeNode(unPermiso.GetType().Name.ToString() + ": " + unPermiso.NombreIFamPat);
-
-                if (unPermiso.CantHijos > 0)
-                {
-                    TreeNode[] array = new TreeNode[(unPermiso as Familia).CantHijos];
-                    for (int i = 0; i < (unPermiso as Familia).CantHijos; i++)
-                    {
-                        TreeNode unNodeAsig = new TreeNode((unPermiso as Familia).ElementosFamPat[i].GetType().Name.ToString() + ": " + (unPermiso as Familia).ElementosFamPat[i].NombreIFamPat);
-                        NodoAsignados.Nodes.Add(unNodeAsig);
-                    }
-                }
-                treeAsignados.Nodes.Add(NodoAsignados);
+                TreeNode Padre = new TreeNode();
+                Padre.Text = item.GetType().Name.ToString() + ": " + item.NombreIFamPat;
+                Padre.Expand();
+                treePermisos.Nodes.Add(Padre);
+                if (item.CantHijos > 0)
+                    ListarYAgregarSubPermisos((item as Familia).ElementosFamPat, Padre);
             }
-
             //Para quitarlo de disponibles al asignar un permiso
             //treeView1.Nodes.RemoveAt(1);
 
             //Utilizar la indexación para agregar un objeto de tipo permiso en PermisosVer a los permisos asignados del usuario
-
         }
 
-        public void ListarPermisosDisponibles(List<IFamPat> PermisosVer)
+
+        public void ListarYAgregarSubPermisos(List<IFamPat> PermisosVer, TreeNode elNodo = null)
         {
-            treeDisponibles.Nodes.Clear();
-            foreach (IFamPat unPermiso in PermisosVer)
+            int I = 0;
+
+            do
             {
-                TreeNode treeNode = new TreeNode(unPermiso.GetType().Name.ToString() + ": " + unPermiso.NombreIFamPat);
-
-                if (unPermiso.CantHijos > 0)
+                TreeNode NodoHijo = null;
+                if (elNodo == null)
                 {
-                    TreeNode[] array = new TreeNode[(unPermiso as Familia).CantHijos];
-                    for (int i = 0; i < (unPermiso as Familia).CantHijos; i++)
-                    {
-                        TreeNode unNode = new TreeNode((unPermiso as Familia).ElementosFamPat[i].GetType().Name.ToString() + ": " + (unPermiso as Familia).ElementosFamPat[i].NombreIFamPat);
-                        treeNode.Nodes.Add(unNode);
-                    }
+                    elNodo = new TreeNode();
+                    elNodo.Text = PermisosVer[I].GetType().Name.ToString() + ": " + PermisosVer[I].NombreIFamPat;
                 }
-                treeDisponibles.Nodes.Add(treeNode);
-            }
-
-            //Para quitarlo de disponibles al asignar un permiso
-            //treeView1.Nodes.RemoveAt(1);
-
-            //Utilizar la indexación para agregar un objeto de tipo permiso en PermisosVer a los permisos asignados del usuario
-
+                else
+                {
+                    NodoHijo = new TreeNode(PermisosVer[I].GetType().Name.ToString() + ": " + PermisosVer[I].NombreIFamPat);
+                    NodoHijo.Collapse();
+                    elNodo.Nodes.Add(NodoHijo);
+                }
+                if (PermisosVer[I].CantHijos > 0)
+                    ListarYAgregarSubPermisos((PermisosVer[I] as Familia).ElementosFamPat, NodoHijo);
+                I++;
+            } while (I < PermisosVer.Count);
         }
 
-        private void treePermisos_AfterSelect(object sender, TreeViewEventArgs e)
-        {
 
-        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -107,13 +95,40 @@ namespace ARTEC.GUI
 
             try
             {
-                if (ManagerUsuario.UsuarioVerificarNomUs(txtNomUs.Text.ToLower()))
+                if (!string.IsNullOrEmpty(txtNomUsBuscar.Text) && !string.IsNullOrWhiteSpace(txtNomUsBuscar.Text) && ManagerUsuario.UsuarioVerificarNomUs(txtNomUsBuscar.Text.ToLower()))
                 {
-                    unUsuario = ManagerUsuario.UsuarioTraerDatosPorNomUs(txtNomUs.Text.ToLower());
+                    unUsuario = ManagerUsuario.UsuarioTraerDatosPorNomUs(txtNomUsBuscar.Text.ToLower());
+                    txtNomUs.Text = unUsuario.NombreUsuario;
+                    txtPass.Text = "******";
                     txtNombre.Text = unUsuario.Nombre;
                     txtApellido.Text = unUsuario.Apellido;
-                    ListarPermisosAsignados(ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario));
+                    txtMail.Text = unUsuario.Mail;
+                    txtNomUsBuscar.Clear();
+
+                    List<IFamPat> LisAuxAsig = new List<IFamPat>();
+                    LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
+                    List<IFamPat> LisAuxDisp = new List<IFamPat>();
+                    LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+
+                    FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+
+                    ListarPermisos(LisAuxDisp, treeDisponibles); 
+                    ListarPermisos(LisAuxAsig, treeAsignados); 
                 }
+                else
+                {
+                    MessageBox.Show("El nombre de usuario ingresado no existe");
+                    txtNomUs.Clear();
+                    txtPass.Clear();
+                    txtNombre.Clear();
+                    txtApellido.Clear();
+                    txtMail.Clear();
+                    txtNomUsBuscar.Clear();
+                    unUsuario = null;
+                    treeAsignados.Nodes.Clear();
+                    treeDisponibles.Nodes.Clear();
+                }
+                    
                     
             }
             catch (Exception es)
@@ -124,6 +139,27 @@ namespace ARTEC.GUI
             
         }
 
+
+        public void FiltrarDisponibles(ref List<IFamPat> PerDisp, List<IFamPat> PerAsig)
+        {
+            PerDisp = PerDisp.Where(d => !PerAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+
+            foreach (IFamPat item in PerAsig)
+            {
+                if(item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref PerDisp);
+            }
+        }
+
+        public void FiltrarSubpermisos(Familia fam, ref List<IFamPat> disp)
+        {
+            disp = disp.Where(d => !fam.ElementosFamPat.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+            foreach (IFamPat item in fam.ElementosFamPat)
+	        {
+                if (item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref disp);
+	        } 
+        }
 
 
     }
