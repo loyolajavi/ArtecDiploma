@@ -101,6 +101,8 @@ namespace ARTEC.GUI
 
             try
             {
+                vldNomUs.ClearFailedValidations();
+
                 if (!string.IsNullOrEmpty(txtNomUsBuscar.Text) && !string.IsNullOrWhiteSpace(txtNomUsBuscar.Text) && ManagerUsuario.UsuarioVerificarNomUs(txtNomUsBuscar.Text.ToLower()))
                 {
                     unUsuario = ManagerUsuario.UsuarioTraerDatosPorNomUs(txtNomUsBuscar.Text.ToLower());
@@ -211,20 +213,68 @@ namespace ARTEC.GUI
         {
             List<IFamPat> PerQuitar = new List<IFamPat>();
             List<IFamPat> PerAgregar = new List<IFamPat>();
-            
-            try
-            {
-                PerQuitar = LisAuxAsigBKP.Where(d => !LisAuxAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
-                PerAgregar = LisAuxAsig.Where(d => !LisAuxAsigBKP.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
-                if(ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))
-                    MessageBox.Show("Modificación realizada");
-            }
-            catch (Exception es)
-            {
-                throw;
-            }
-            
 
+            if (!vldNomUs.Validate())
+                return;
+
+                try
+                {
+                    //Verificar que quede al menos un permiso asignado
+                    if (LisAuxAsig.Count == 0)
+                    {
+                        MessageBox.Show("Por favor revisar que el usuario posea al menos un permiso asignado");
+                        return;
+                    }
+                    //NombreUsuario
+                    if (unUsuario.NombreUsuario != txtNomUs.Text)
+                    {
+                        DialogResult resmbox = MessageBox.Show("¿Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema?", "Advertencia", MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                        {
+                            //Verificar que no existe el nombre de usuario ingresado
+                            if (!ManagerUsuario.UsuarioVerificarNomUs(txtNomUs.Text))
+                                //Modificar NomUs
+                                ManagerUsuario.UsuarioModificarNomUs(unUsuario.IdUsuario, txtNomUs.Text);
+                            else
+                            {
+                                MessageBox.Show("Ya existe el nombre de usuario ingresado, por favor modifíquelo");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+
+                    if (txtPass.Text != "******")
+                    {
+                        DialogResult resmbox = MessageBox.Show("¿Está seguro que desea modificar la contraseña del Usuario?", "Advertencia", MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                            ManagerUsuario.UsuarioModificarPass(unUsuario.IdUsuario, ServicioSecurizacion.AplicarHash(txtPass.Text));
+                        else
+                            return;
+                    }
+
+                    //Datos basicos
+                    if (unUsuario.Nombre != txtNombre.Text)
+                        ManagerUsuario.UsuarioModificarNombre(unUsuario.IdUsuario, txtNombre.Text);
+                    if (unUsuario.Apellido != txtApellido.Text)
+                        ManagerUsuario.UsuarioModificarApellido(unUsuario.IdUsuario, txtApellido.Text);
+                    if (unUsuario.Mail != txtMail.Text)
+                        ManagerUsuario.UsuarioModificarMail(unUsuario.IdUsuario, txtMail.Text);
+
+                    //Permisos
+                    PerQuitar = LisAuxAsigBKP.Where(d => !LisAuxAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+                    PerAgregar = LisAuxAsig.Where(d => !LisAuxAsigBKP.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+                    if (ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))
+                        MessageBox.Show("Modificación realizada");
+                }
+                catch (Exception es)
+                {
+                    string IdError = ServicioLog.CrearLog(es, "btnModifUsuario_Click");
+                    MessageBox.Show("Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                }
         }
 
 

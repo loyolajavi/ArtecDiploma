@@ -28,6 +28,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsuariosModificar));
             this.treeAsignados = new System.Windows.Forms.TreeView();
             this.lblNomUsBuscar = new DevComponents.DotNetBar.LabelX();
             this.txtNomUsBuscar = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -50,8 +52,17 @@ namespace ARTEC.GUI
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblNomUs = new DevComponents.DotNetBar.LabelX();
             this.txtNomUs = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.vldNomUs = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre de Usuario");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese una contraseña");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Mail");
             this.pnlPermisos.SuspendLayout();
             this.pnlBuscar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // treeAsignados
@@ -80,13 +91,23 @@ namespace ARTEC.GUI
             // 
             // 
             // 
+            this.txtNomUsBuscar.Border.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Double;
+            this.txtNomUsBuscar.Border.BorderBottomWidth = 2;
+            this.txtNomUsBuscar.Border.BorderColor = System.Drawing.Color.Black;
+            this.txtNomUsBuscar.Border.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Double;
+            this.txtNomUsBuscar.Border.BorderLeftWidth = 2;
+            this.txtNomUsBuscar.Border.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Double;
+            this.txtNomUsBuscar.Border.BorderRightWidth = 2;
+            this.txtNomUsBuscar.Border.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Double;
+            this.txtNomUsBuscar.Border.BorderTopWidth = 2;
             this.txtNomUsBuscar.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNomUsBuscar.DisabledBackColor = System.Drawing.Color.White;
             this.txtNomUsBuscar.ForeColor = System.Drawing.Color.Black;
             this.txtNomUsBuscar.Location = new System.Drawing.Point(106, 7);
+            this.txtNomUsBuscar.Multiline = true;
             this.txtNomUsBuscar.Name = "txtNomUsBuscar";
             this.txtNomUsBuscar.PreventEnterBeep = true;
-            this.txtNomUsBuscar.Size = new System.Drawing.Size(285, 16);
+            this.txtNomUsBuscar.Size = new System.Drawing.Size(285, 20);
             this.txtNomUsBuscar.TabIndex = 0;
             // 
             // lblPass
@@ -117,6 +138,7 @@ namespace ARTEC.GUI
             this.txtPass.PreventEnterBeep = true;
             this.txtPass.Size = new System.Drawing.Size(285, 22);
             this.txtPass.TabIndex = 1;
+            this.vldNomUs.SetValidator1(this.txtPass, this.requiredFieldValidator2);
             // 
             // lblNombre
             // 
@@ -146,6 +168,7 @@ namespace ARTEC.GUI
             this.txtNombre.PreventEnterBeep = true;
             this.txtNombre.Size = new System.Drawing.Size(285, 22);
             this.txtNombre.TabIndex = 2;
+            this.vldNomUs.SetValidator1(this.txtNombre, this.requiredFieldValidator3);
             // 
             // lblApellido
             // 
@@ -175,6 +198,7 @@ namespace ARTEC.GUI
             this.txtApellido.PreventEnterBeep = true;
             this.txtApellido.Size = new System.Drawing.Size(285, 22);
             this.txtApellido.TabIndex = 3;
+            this.vldNomUs.SetValidator1(this.txtApellido, this.requiredFieldValidator4);
             // 
             // lblMail
             // 
@@ -204,6 +228,7 @@ namespace ARTEC.GUI
             this.txtMail.PreventEnterBeep = true;
             this.txtMail.Size = new System.Drawing.Size(285, 22);
             this.txtMail.TabIndex = 4;
+            this.vldNomUs.SetValidator1(this.txtMail, this.requiredFieldValidator5);
             // 
             // pnlPermisos
             // 
@@ -377,6 +402,47 @@ namespace ARTEC.GUI
             this.txtNomUs.PreventEnterBeep = true;
             this.txtNomUs.Size = new System.Drawing.Size(285, 22);
             this.txtNomUs.TabIndex = 78;
+            this.vldNomUs.SetValidator1(this.txtNomUs, this.requiredFieldValidator1);
+            // 
+            // vldNomUs
+            // 
+            this.vldNomUs.ContainerControl = this.btnModifUsuario;
+            this.vldNomUs.ErrorProvider = this.errorProvider1;
+            this.vldNomUs.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre de Usuario";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese una contraseña";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Ingrese un Nombre";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Ingrese un Apellido";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator5
+            // 
+            this.requiredFieldValidator5.ErrorMessage = "Ingrese un Mail";
+            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmUsuariosModificar
             // 
@@ -398,11 +464,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmUsuariosModificar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmUsuariosGestion_Load);
             this.pnlPermisos.ResumeLayout(false);
             this.pnlBuscar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -431,5 +499,13 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.LabelX lblNomUs;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNomUs;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldNomUs;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
     }
 }

@@ -346,5 +346,148 @@ namespace ARTEC.DAL
         }
 
 
+
+        public void UsuarioModificarNomUs(int IdUsuario, string NomUs)
+        {
+
+            SqlParameter[] parametersNomUs = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@NomUs", NomUs)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarNomUs", parametersNomUs);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public void UsuarioModificarNombre(int IdUsuario, string Nombre)
+        {
+            SqlParameter[] parametersNombre = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@Nombre", Nombre)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarNombre", parametersNombre);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public void UsuarioModificarApellido(int IdUsuario, string Apellido)
+        {
+            SqlParameter[] parametersApellido = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@Apellido", Apellido)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarApellido", parametersApellido);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public void UsuarioModificarMail(int IdUsuario, string Mail)
+        {
+            SqlParameter[] parametersMail = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@Mail", Mail)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarMail", parametersMail);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+
+
+        public void UsuarioModificarPass(int IdUsuario, string Pass)
+        {
+            SqlParameter[] parametersPass = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@Pass", Pass)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarPass", parametersPass);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

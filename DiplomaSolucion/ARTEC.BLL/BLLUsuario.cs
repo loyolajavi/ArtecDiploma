@@ -126,13 +126,38 @@ namespace ARTEC.BLL
                     GestorUsuario.UsuarioAgregarPermisos(PerAgregar, IdUsuario);
                 if (PerQuitar.Count > 0)
                     GestorUsuario.UsuarioQuitarPermisos(PerQuitar, IdUsuario);
-                return true;//REVISAR TRUE T FALSE
+                return true;
             }
             catch (Exception es)
             {
                 throw;
             }
             
+        }
+
+        public void UsuarioModificarNomUs(int IdUsuario, string NomUs)
+        {
+            GestorUsuario.UsuarioModificarNomUs(IdUsuario, NomUs);
+        }
+
+        public void UsuarioModificarNombre(int IdUsuario, string Nombre)
+        {
+            GestorUsuario.UsuarioModificarNombre(IdUsuario, Nombre);
+        }
+
+        public void UsuarioModificarApellido(int IdUsuario, string Apellido)
+        {
+            GestorUsuario.UsuarioModificarApellido(IdUsuario, Apellido);
+        }
+
+        public void UsuarioModificarMail(int IdUsuario, string Mail)
+        {
+            GestorUsuario.UsuarioModificarMail(IdUsuario, Mail);
+        }
+
+        public void UsuarioModificarPass(int IdUsuario, string Pass)
+        {
+            GestorUsuario.UsuarioModificarPass(IdUsuario, Pass);
         }
     }
 }
