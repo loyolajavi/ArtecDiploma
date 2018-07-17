@@ -156,6 +156,12 @@ namespace ARTEC.GUI
             unFrmUsuariosGestion.Show();
         }
 
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            Backup unFrmBackup = new Backup();
+            unFrmBackup.Show();
+        }
+
 
 
 

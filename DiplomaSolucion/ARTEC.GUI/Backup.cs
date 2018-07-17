@@ -43,34 +43,53 @@ namespace ARTEC.GUI
 
         private void btnRespaldar_Click(object sender, EventArgs e)
         {
-            if (vldRespaldo.Validate())
+            try
             {
-                if (ServicioBackup.Respaldar(txtNombreRespaldar.Text, txtDestino.Text, txtObservaciones.Text))
+                if (vldRespaldo.Validate())
                 {
-                    MessageBox.Show("Backup realizado correctamente");
-                }
-                else
-                {
-                    MessageBox.Show("No pudo realizarse el Backup");
+                    if (ServicioBackup.Respaldar(txtNombreRespaldar.Text, txtDestino.Text, txtObservaciones.Text))
+                    {
+                        MessageBox.Show("Backup realizado correctamente");
+                        ServicioLog.CrearLog("Realizar backup", "Backup realizado correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No pudo realizarse el Backup");
+                    }
                 }
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "btnRespaldar_Click");
+                MessageBox.Show("Ocurrio un error al intentar respaldar la base de datos, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+           
             
         }
 
 
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
-            if (vldRestaurar.Validate())
+            try
             {
-                if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
+                if (vldRestaurar.Validate())
                 {
-                    MessageBox.Show("Se restauró la base de datos correctamente");
-                }
-                else
-                {
-                    MessageBox.Show("No pudo restaurarse la base de datos");
+                    if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
+                    {
+                        MessageBox.Show("Se restauró la base de datos correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No pudo restaurarse la base de datos");
+                    }
                 }
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "btnRestaurar_Click");
+                MessageBox.Show("Ocurrio un error al intentar restaurar la base de datos, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
         }
 
 

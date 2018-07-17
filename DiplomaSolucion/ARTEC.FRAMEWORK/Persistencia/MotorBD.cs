@@ -40,6 +40,25 @@ namespace ARTEC.FRAMEWORK.Persistencia
             
         }
 
+        public static void ConexionIniciarParaRestauracion()
+        {
+            try
+            {
+                string connectionStringNameRest = System.Configuration.ConfigurationManager.ConnectionStrings["Restaurar"].ConnectionString;
+                Conexion = new SqlConnection(connectionStringNameRest);
+                if (Conexion != null && Conexion.State == ConnectionState.Closed)
+                {
+                    Conexion.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+
         public static void TransaccionIniciar()
         {
             try
