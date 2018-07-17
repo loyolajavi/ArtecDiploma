@@ -265,13 +265,13 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
 
 
-        public static void EjecutarNonQuery(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        public static int EjecutarNonQuery(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
         {
             try
             {
                 using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
                 {
-                    Comando.ExecuteNonQuery();
+                    return Comando.ExecuteNonQuery();
                 }
             }
             catch (Exception es)

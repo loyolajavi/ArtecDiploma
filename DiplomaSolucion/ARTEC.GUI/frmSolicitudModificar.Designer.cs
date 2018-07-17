@@ -37,6 +37,7 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDesvinculado = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblAgenteResponsable = new DevComponents.DotNetBar.LabelX();
@@ -100,7 +101,7 @@ namespace ARTEC.GUI
             this.customValidTxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.lblDesvinculado = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.lblInactivo = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -121,6 +122,7 @@ namespace ARTEC.GUI
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.lblInactivo);
             this.panel1.Controls.Add(this.lblDesvinculado);
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.cboAgenteResp);
@@ -146,6 +148,19 @@ namespace ARTEC.GUI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1071, 659);
             this.panel1.TabIndex = 6;
+            // 
+            // lblDesvinculado
+            // 
+            // 
+            // 
+            // 
+            this.lblDesvinculado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDesvinculado.Location = new System.Drawing.Point(517, 45);
+            this.lblDesvinculado.Name = "lblDesvinculado";
+            this.lblDesvinculado.Size = new System.Drawing.Size(108, 22);
+            this.lblDesvinculado.TabIndex = 27;
+            this.lblDesvinculado.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Desvinculado</font></font></b>";
+            this.lblDesvinculado.Visible = false;
             // 
             // btnCancelar
             // 
@@ -317,6 +332,7 @@ namespace ARTEC.GUI
             this.cboAsignado.Size = new System.Drawing.Size(167, 22);
             this.cboAsignado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboAsignado.TabIndex = 19;
+            this.cboAsignado.SelectionChangeCommitted += new System.EventHandler(this.cboAsignado_SelectionChangeCommitted);
             // 
             // cboPrioridad
             // 
@@ -477,6 +493,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -965,18 +982,18 @@ namespace ARTEC.GUI
             this.errorProvider6.ContainerControl = this;
             this.errorProvider6.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider6.Icon")));
             // 
-            // lblDesvinculado
+            // lblInactivo
             // 
             // 
             // 
             // 
-            this.lblDesvinculado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDesvinculado.Location = new System.Drawing.Point(517, 45);
-            this.lblDesvinculado.Name = "lblDesvinculado";
-            this.lblDesvinculado.Size = new System.Drawing.Size(108, 22);
-            this.lblDesvinculado.TabIndex = 27;
-            this.lblDesvinculado.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Desvinculado</font></font></b>";
-            this.lblDesvinculado.Visible = false;
+            this.lblInactivo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblInactivo.Location = new System.Drawing.Point(141, 462);
+            this.lblInactivo.Name = "lblInactivo";
+            this.lblInactivo.Size = new System.Drawing.Size(108, 22);
+            this.lblInactivo.TabIndex = 28;
+            this.lblInactivo.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblInactivo.Visible = false;
             // 
             // frmSolicitudModificar
             // 
@@ -1078,5 +1095,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.CustomValidator customValidTxtNota;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblDesvinculado;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel lblInactivo;
     }
 }

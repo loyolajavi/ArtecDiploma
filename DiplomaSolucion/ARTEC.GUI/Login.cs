@@ -116,7 +116,6 @@ namespace ARTEC.GUI
                     {
                         this.Close();
                         ServicioLog.CrearLog("Login", "Ingreso Correcto");
-                        //Obtener Permisos
                         DialogResult = DialogResult.OK;
                     }
                     else

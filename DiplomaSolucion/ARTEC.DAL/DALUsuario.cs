@@ -536,5 +536,86 @@ namespace ARTEC.DAL
 
 
 
+
+        public bool UsuarioEliminar(int IdUsuario)
+        {
+            SqlParameter[] parametersUsEliminar = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioEliminar", parametersUsEliminar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public bool UsuarioReactivar(int IdUsuario)
+        {
+            SqlParameter[] parametersUsReactivar = new SqlParameter[]
+			{
+                new SqlParameter("@IdUsuario", IdUsuario)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioReactivar", parametersUsReactivar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public List<Usuario> UsuarioTraerTodosActivos()
+        {
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerTodosActivos"))
+                {
+                    List<Usuario> unaLista = new List<Usuario>();
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Usuario>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+
+
     }
 }

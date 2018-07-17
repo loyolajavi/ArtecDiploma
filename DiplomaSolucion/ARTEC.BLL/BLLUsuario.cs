@@ -21,10 +21,21 @@ namespace ARTEC.BLL
         }
 
 
+        public List<Usuario> UsuarioTraerTodosActivos()
+        {
+            return GestorUsuario.UsuarioTraerTodosActivos();
+        }
+
+
         public bool UsuarioTraerPorLogin(string NomUs, string PassHash)
         {
             try
             {
+                if (GestorUsuario.UsuarioTraerDatosPorNomUs(NomUs).Activo == 0)
+                {
+                    return false;
+                }
+
                 if (GestorUsuario.UsuarioTraerPorLogin(NomUs, PassHash))
                 {
                     //Obtener permisos (Para Autorizacion)
@@ -201,6 +212,34 @@ namespace ARTEC.BLL
             try
             {
                 if (GestorUsuario.UsuarioCrear(unUsuario))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool UsuarioEliminar(int IdUsuario)
+        {
+            try
+            {
+                if (GestorUsuario.UsuarioEliminar(IdUsuario))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool UsuarioReactivar(int IdUsuario)
+        {
+            try
+            {
+                if (GestorUsuario.UsuarioReactivar(IdUsuario))
                     return true;
                 return false;
             }

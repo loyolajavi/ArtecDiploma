@@ -47,6 +47,8 @@ namespace ARTEC.GUI
         bool flagDetEliminado = false;
         bool flagRespInhabilitado;
         BLLDependencia ManagerDependenciaAg = new BLLDependencia();
+        bool flagUsuarioInactivo;
+        BLLUsuario ManagerUsuario = new BLLUsuario();
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -117,13 +119,20 @@ namespace ARTEC.GUI
             cboPrioridad.SelectedValue = unaSolicitud.UnaPrioridad.IdPrioridad;
 
             //Traer UsuariosSistema
-            BLLUsuario ManagerUsuario = new BLLUsuario();
-            unosUsuarios = ManagerUsuario.UsuarioTraerTodos();
+            unosUsuarios = ManagerUsuario.UsuarioTraerTodosActivos();
+            //Si el usuario asignado a la solicitud está dado de baja
+            if (!unosUsuarios.Exists(x => x.IdUsuario == unaSolicitud.Asignado.IdUsuario))
+            {
+                unosUsuarios.Add(unaSolicitud.Asignado);
+                flagUsuarioInactivo = true;
+            }
             cboAsignado.DataSource = null;
             cboAsignado.DataSource = unosUsuarios;
             cboAsignado.DisplayMember = "NombreUsuario";
             cboAsignado.ValueMember = "IdUsuario";
             cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
+            if (flagUsuarioInactivo)
+                lblInactivo.Visible = true;
 
             //Traer los agentes de la dependencia seleccionada
             BLLDependencia managerDependenciaAg = new BLLDependencia();
@@ -1222,6 +1231,24 @@ namespace ARTEC.GUI
                 else
                 {
                     lblDesvinculado.Visible = false;
+                }
+            }
+            
+        }
+
+        private void cboAsignado_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            List<Usuario> unosUsuarios2 = new List<Usuario>();
+            unosUsuarios2 = ManagerUsuario.UsuarioTraerTodosActivos();
+            if (unosUsuarios2.Count < unosUsuarios.Count)
+            {
+                if ((cboAsignado.SelectedItem as Usuario).IdUsuario == unaSolicitud.Asignado.IdUsuario)
+                {
+                    lblInactivo.Visible = true;
+                }
+                else
+                {
+                    lblInactivo.Visible = false;
                 }
             }
             

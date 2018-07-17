@@ -207,7 +207,7 @@ namespace ARTEC.GUI
 
             //Traer UsuariosSistema
             BLLUsuario ManagerUsuario = new BLLUsuario();
-            unosUsuarios = ManagerUsuario.UsuarioTraerTodos();
+            unosUsuarios = ManagerUsuario.UsuarioTraerTodosActivos();
             cboAsignado.DataSource = null;
             cboAsignado.DataSource = unosUsuarios;
             cboAsignado.DisplayMember = "NombreUsuario";

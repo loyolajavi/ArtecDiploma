@@ -62,6 +62,8 @@ namespace ARTEC.GUI
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.btnCrearUsuario = new DevComponents.DotNetBar.ButtonX();
             this.btnEliminarUsuario = new DevComponents.DotNetBar.ButtonX();
+            this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.btnReactivarUs = new DevComponents.DotNetBar.ButtonX();
             this.pnlPermisos.SuspendLayout();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -109,7 +111,7 @@ namespace ARTEC.GUI
             this.txtNomUsBuscar.Multiline = true;
             this.txtNomUsBuscar.Name = "txtNomUsBuscar";
             this.txtNomUsBuscar.PreventEnterBeep = true;
-            this.txtNomUsBuscar.Size = new System.Drawing.Size(285, 20);
+            this.txtNomUsBuscar.Size = new System.Drawing.Size(227, 20);
             this.txtNomUsBuscar.TabIndex = 0;
             // 
             // lblPass
@@ -138,7 +140,7 @@ namespace ARTEC.GUI
             this.txtPass.Location = new System.Drawing.Point(109, 91);
             this.txtPass.Name = "txtPass";
             this.txtPass.PreventEnterBeep = true;
-            this.txtPass.Size = new System.Drawing.Size(285, 22);
+            this.txtPass.Size = new System.Drawing.Size(227, 22);
             this.txtPass.TabIndex = 1;
             this.vldNomUs.SetValidator1(this.txtPass, this.requiredFieldValidator2);
             // 
@@ -168,7 +170,7 @@ namespace ARTEC.GUI
             this.txtNombre.Location = new System.Drawing.Point(109, 125);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PreventEnterBeep = true;
-            this.txtNombre.Size = new System.Drawing.Size(285, 22);
+            this.txtNombre.Size = new System.Drawing.Size(227, 22);
             this.txtNombre.TabIndex = 2;
             this.vldNomUs.SetValidator1(this.txtNombre, this.requiredFieldValidator3);
             // 
@@ -198,7 +200,7 @@ namespace ARTEC.GUI
             this.txtApellido.Location = new System.Drawing.Point(109, 159);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.PreventEnterBeep = true;
-            this.txtApellido.Size = new System.Drawing.Size(285, 22);
+            this.txtApellido.Size = new System.Drawing.Size(227, 22);
             this.txtApellido.TabIndex = 3;
             this.vldNomUs.SetValidator1(this.txtApellido, this.requiredFieldValidator4);
             // 
@@ -228,7 +230,7 @@ namespace ARTEC.GUI
             this.txtMail.Location = new System.Drawing.Point(109, 193);
             this.txtMail.Name = "txtMail";
             this.txtMail.PreventEnterBeep = true;
-            this.txtMail.Size = new System.Drawing.Size(285, 22);
+            this.txtMail.Size = new System.Drawing.Size(227, 22);
             this.txtMail.TabIndex = 4;
             this.vldNomUs.SetValidator1(this.txtMail, this.requiredFieldValidator5);
             // 
@@ -355,7 +357,7 @@ namespace ARTEC.GUI
             this.pnlBuscar.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlBuscar.Location = new System.Drawing.Point(3, 3);
             this.pnlBuscar.Name = "pnlBuscar";
-            this.pnlBuscar.Size = new System.Drawing.Size(498, 35);
+            this.pnlBuscar.Size = new System.Drawing.Size(422, 35);
             this.pnlBuscar.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlBuscar.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.pnlBuscar.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -368,7 +370,7 @@ namespace ARTEC.GUI
             // 
             this.btnBuscar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnBuscar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBuscar.Location = new System.Drawing.Point(406, 6);
+            this.btnBuscar.Location = new System.Drawing.Point(339, 6);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -402,7 +404,7 @@ namespace ARTEC.GUI
             this.txtNomUs.Location = new System.Drawing.Point(109, 56);
             this.txtNomUs.Name = "txtNomUs";
             this.txtNomUs.PreventEnterBeep = true;
-            this.txtNomUs.Size = new System.Drawing.Size(285, 22);
+            this.txtNomUs.Size = new System.Drawing.Size(227, 22);
             this.txtNomUs.TabIndex = 78;
             this.vldNomUs.SetValidator1(this.txtNomUs, this.requiredFieldValidator1);
             // 
@@ -450,9 +452,9 @@ namespace ARTEC.GUI
             // 
             this.btnCrearUsuario.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrearUsuario.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrearUsuario.Location = new System.Drawing.Point(577, 12);
+            this.btnCrearUsuario.Location = new System.Drawing.Point(499, 3);
             this.btnCrearUsuario.Name = "btnCrearUsuario";
-            this.btnCrearUsuario.Size = new System.Drawing.Size(87, 30);
+            this.btnCrearUsuario.Size = new System.Drawing.Size(87, 35);
             this.btnCrearUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearUsuario.TabIndex = 83;
             this.btnCrearUsuario.Text = "btnCrearUsuario";
@@ -462,18 +464,48 @@ namespace ARTEC.GUI
             // 
             this.btnEliminarUsuario.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnEliminarUsuario.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEliminarUsuario.Location = new System.Drawing.Point(577, 48);
+            this.btnEliminarUsuario.Location = new System.Drawing.Point(499, 96);
             this.btnEliminarUsuario.Name = "btnEliminarUsuario";
             this.btnEliminarUsuario.Size = new System.Drawing.Size(87, 30);
             this.btnEliminarUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminarUsuario.TabIndex = 84;
             this.btnEliminarUsuario.Text = "btnEliminarUsuario";
+            this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
+            // 
+            // lblBaja
+            // 
+            // 
+            // 
+            // 
+            this.lblBaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblBaja.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaja.Location = new System.Drawing.Point(342, 56);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(108, 22);
+            this.lblBaja.TabIndex = 89;
+            this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblBaja.Visible = false;
+            // 
+            // btnReactivarUs
+            // 
+            this.btnReactivarUs.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReactivarUs.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReactivarUs.Enabled = false;
+            this.btnReactivarUs.Location = new System.Drawing.Point(499, 49);
+            this.btnReactivarUs.Name = "btnReactivarUs";
+            this.btnReactivarUs.Size = new System.Drawing.Size(87, 35);
+            this.btnReactivarUs.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReactivarUs.TabIndex = 90;
+            this.btnReactivarUs.Text = "btnReactivarUs";
+            this.btnReactivarUs.Click += new System.EventHandler(this.btnReactivarUs_Click);
             // 
             // frmUsuariosModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 552);
+            this.Controls.Add(this.btnReactivarUs);
+            this.Controls.Add(this.lblBaja);
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.lblNomUs);
@@ -536,5 +568,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
         private DevComponents.DotNetBar.ButtonX btnEliminarUsuario;
         private DevComponents.DotNetBar.ButtonX btnCrearUsuario;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
+        private DevComponents.DotNetBar.ButtonX btnReactivarUs;
     }
 }

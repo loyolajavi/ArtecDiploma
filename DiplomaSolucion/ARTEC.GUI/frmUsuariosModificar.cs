@@ -109,6 +109,35 @@ namespace ARTEC.GUI
                     txtMail.Text = unUsuario.Mail;
                     txtNomUsBuscar.Clear();
 
+                    if (unUsuario.Activo == 0)
+                    {
+                        lblBaja.Visible = true;
+                        btnReactivarUs.Enabled = true;
+                        btnEliminarUsuario.Enabled = false;
+                        btnModifUsuario.Enabled = false;
+                        btnAgregar.Enabled = false;
+                        btnQuitar.Enabled = false;
+                        txtNomUs.Enabled = false;
+                        txtPass.Enabled = false;
+                        txtNombre.Enabled = false;
+                        txtApellido.Enabled = false;
+                        txtMail.Enabled = false;
+                    }
+                    else
+                    {
+                        lblBaja.Visible = false;
+                        btnReactivarUs.Enabled = false;
+                        btnEliminarUsuario.Enabled = true;
+                        btnModifUsuario.Enabled = true;
+                        btnAgregar.Enabled = true;
+                        btnQuitar.Enabled = true;
+                        txtNomUs.Enabled = true;
+                        txtPass.Enabled = true;
+                        txtNombre.Enabled = true;
+                        txtApellido.Enabled = true;
+                        txtMail.Enabled = true;
+                    }
+
                     LisAuxAsig = new List<IFamPat>();
                     LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
                     LisAuxAsigBKP = LisAuxAsig.ToList();
@@ -277,6 +306,74 @@ namespace ARTEC.GUI
         {
             frmUsuariosCrear unFrmUsuariosCrear = new frmUsuariosCrear();
             unFrmUsuariosCrear.ShowDialog();
+        }
+
+        private void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (unUsuario != null && !string.IsNullOrWhiteSpace(unUsuario.NombreUsuario) && unUsuario.IdUsuario > 0)
+                {
+                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja el Usuario: " + unUsuario.NombreUsuario + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                        if(ManagerUsuario.UsuarioEliminar(unUsuario.IdUsuario))
+                        {
+                            lblBaja.Visible = true;
+                            btnReactivarUs.Enabled = true;
+                            btnEliminarUsuario.Enabled = false;
+                            btnModifUsuario.Enabled = false;
+                            btnAgregar.Enabled = false;
+                            btnQuitar.Enabled = false;
+                            txtNomUs.Enabled = false;
+                            txtPass.Enabled = false;
+                            txtNombre.Enabled = false;
+                            txtApellido.Enabled = false;
+                            txtMail.Enabled = false;
+                            MessageBox.Show("Usuario: " + unUsuario.NombreUsuario + " dado de baja correctamente");
+                        }
+                    else
+                        return;
+                }
+                else
+                    MessageBox.Show("Para dar de baja un usuario primero debe buscarlo");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "btnEliminarUsuario_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar el usuario: " + unUsuario.NombreUsuario + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+        }
+
+        private void btnReactivarUs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (unUsuario != null && !string.IsNullOrWhiteSpace(unUsuario.NombreUsuario) && unUsuario.IdUsuario > 0)
+                {
+                    if (ManagerUsuario.UsuarioReactivar(unUsuario.IdUsuario))
+                    {
+                        lblBaja.Visible = false;
+                        btnReactivarUs.Enabled = false;
+                        btnEliminarUsuario.Enabled = true;
+                        btnModifUsuario.Enabled = true;
+                        btnAgregar.Enabled = true;
+                        btnQuitar.Enabled = true;
+                        txtNomUs.Enabled = true;
+                        txtPass.Enabled = true;
+                        txtNombre.Enabled = true;
+                        txtApellido.Enabled = true;
+                        txtMail.Enabled = true;
+                        MessageBox.Show("Usuario: " + unUsuario.NombreUsuario + " reactivado correctamente");
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "btnReactivarUs_Click");
+                MessageBox.Show("Ocurrio un error al intentar reactivar el usuario: " + unUsuario.NombreUsuario + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
         }
 
 
