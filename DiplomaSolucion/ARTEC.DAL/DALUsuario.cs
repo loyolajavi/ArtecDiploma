@@ -489,5 +489,52 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+
+        public bool UsuarioCrear(Usuario unUsuario)
+        {
+            SqlParameter[] parametersUsCrear = new SqlParameter[]
+			{
+                new SqlParameter("@NomUs", unUsuario.NombreUsuario),
+                new SqlParameter("@Pass", unUsuario.Pass),
+                new SqlParameter("@Nombre", unUsuario.Nombre),
+                new SqlParameter("@Apellido", unUsuario.Apellido),
+                new SqlParameter("@Mail", unUsuario.Mail),
+                new SqlParameter("@Idioma", unUsuario.IdiomaUsuarioActual)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioCrear", parametersUsCrear);
+                int IdUsuarioRes = Decimal.ToInt32(Resultado);
+
+                foreach (IFamPat unPermiso in unUsuario.Permisos)
+                {
+                    if (unPermiso.CantHijos > 0)
+                        UsuarioAgregarFamilia(unPermiso as Familia, IdUsuarioRes);
+                    else
+                        UsuarioAgregarPatente(unPermiso as Patente, IdUsuarioRes);
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+
     }
 }

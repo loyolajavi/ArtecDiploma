@@ -137,27 +137,77 @@ namespace ARTEC.BLL
 
         public void UsuarioModificarNomUs(int IdUsuario, string NomUs)
         {
-            GestorUsuario.UsuarioModificarNomUs(IdUsuario, NomUs);
+            try
+            {
+                GestorUsuario.UsuarioModificarNomUs(IdUsuario, NomUs);
+            }
+            catch (Exception es)
+            {
+                
+                throw;
+            }
         }
 
         public void UsuarioModificarNombre(int IdUsuario, string Nombre)
         {
-            GestorUsuario.UsuarioModificarNombre(IdUsuario, Nombre);
+            try
+            {
+                GestorUsuario.UsuarioModificarNombre(IdUsuario, Nombre);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public void UsuarioModificarApellido(int IdUsuario, string Apellido)
         {
-            GestorUsuario.UsuarioModificarApellido(IdUsuario, Apellido);
+            try
+            {
+                GestorUsuario.UsuarioModificarApellido(IdUsuario, Apellido);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public void UsuarioModificarMail(int IdUsuario, string Mail)
         {
-            GestorUsuario.UsuarioModificarMail(IdUsuario, Mail);
+            try
+            {
+                GestorUsuario.UsuarioModificarMail(IdUsuario, Mail);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
         public void UsuarioModificarPass(int IdUsuario, string Pass)
         {
-            GestorUsuario.UsuarioModificarPass(IdUsuario, Pass);
+            try
+            {
+                GestorUsuario.UsuarioModificarPass(IdUsuario, Pass);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool UsuarioCrear(Usuario unUsuario)
+        {
+            try
+            {
+                if (GestorUsuario.UsuarioCrear(unUsuario))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
     }
 }

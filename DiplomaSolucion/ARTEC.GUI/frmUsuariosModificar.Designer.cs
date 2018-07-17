@@ -53,13 +53,15 @@ namespace ARTEC.GUI
             this.lblNomUs = new DevComponents.DotNetBar.LabelX();
             this.txtNomUs = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.vldNomUs = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre de Usuario");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese una contraseña");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
             this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Mail");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre de Usuario");
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.btnCrearUsuario = new DevComponents.DotNetBar.ButtonX();
+            this.btnEliminarUsuario = new DevComponents.DotNetBar.ButtonX();
             this.pnlPermisos.SuspendLayout();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -410,20 +412,6 @@ namespace ARTEC.GUI
             this.vldNomUs.ErrorProvider = this.errorProvider1;
             this.vldNomUs.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre de Usuario";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // requiredFieldValidator2
             // 
             this.requiredFieldValidator2.ErrorMessage = "Ingrese una contraseña";
@@ -444,11 +432,50 @@ namespace ARTEC.GUI
             this.requiredFieldValidator5.ErrorMessage = "Ingrese un Mail";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre de Usuario";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // btnCrearUsuario
+            // 
+            this.btnCrearUsuario.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCrearUsuario.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCrearUsuario.Location = new System.Drawing.Point(577, 12);
+            this.btnCrearUsuario.Name = "btnCrearUsuario";
+            this.btnCrearUsuario.Size = new System.Drawing.Size(87, 30);
+            this.btnCrearUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCrearUsuario.TabIndex = 83;
+            this.btnCrearUsuario.Text = "btnCrearUsuario";
+            this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
+            // 
+            // btnEliminarUsuario
+            // 
+            this.btnEliminarUsuario.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEliminarUsuario.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEliminarUsuario.Location = new System.Drawing.Point(577, 48);
+            this.btnEliminarUsuario.Name = "btnEliminarUsuario";
+            this.btnEliminarUsuario.Size = new System.Drawing.Size(87, 30);
+            this.btnEliminarUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEliminarUsuario.TabIndex = 84;
+            this.btnEliminarUsuario.Text = "btnEliminarUsuario";
+            // 
             // frmUsuariosModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 552);
+            this.Controls.Add(this.btnEliminarUsuario);
+            this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.lblNomUs);
             this.Controls.Add(this.txtNomUs);
             this.Controls.Add(this.btnModifUsuario);
@@ -507,5 +534,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.ButtonX btnEliminarUsuario;
+        private DevComponents.DotNetBar.ButtonX btnCrearUsuario;
     }
 }

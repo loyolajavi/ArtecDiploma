@@ -62,10 +62,6 @@ namespace ARTEC.GUI
                 if (item.CantHijos > 0)
                     ListarYAgregarSubPermisos((item as Familia).ElementosFamPat, Padre);
             }
-            //Para quitarlo de disponibles al asignar un permiso
-            //treeView1.Nodes.RemoveAt(1);
-
-            //Utilizar la indexación para agregar un objeto de tipo permiso en PermisosVer a los permisos asignados del usuario
         }
 
 
@@ -174,7 +170,7 @@ namespace ARTEC.GUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(treeDisponibles.SelectedNode.Parent != null)
+            if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
                 MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
             else
             {
@@ -193,7 +189,7 @@ namespace ARTEC.GUI
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (treeAsignados.SelectedNode.Parent != null)
+            if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
                 MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
             else
             {
@@ -275,6 +271,12 @@ namespace ARTEC.GUI
                     string IdError = ServicioLog.CrearLog(es, "btnModifUsuario_Click");
                     MessageBox.Show("Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro " + IdError + " del Log de Eventos");
                 }
+        }
+
+        private void btnCrearUsuario_Click(object sender, EventArgs e)
+        {
+            frmUsuariosCrear unFrmUsuariosCrear = new frmUsuariosCrear();
+            unFrmUsuariosCrear.ShowDialog();
         }
 
 

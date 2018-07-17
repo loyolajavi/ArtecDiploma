@@ -28,6 +28,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsuariosCrear));
             this.treeAsignados = new System.Windows.Forms.TreeView();
             this.lblNomUs = new DevComponents.DotNetBar.LabelX();
             this.txtNomUs = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -46,7 +48,21 @@ namespace ARTEC.GUI
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.treeDisponibles = new System.Windows.Forms.TreeView();
             this.btnCrearUsuario = new DevComponents.DotNetBar.ButtonX();
+            this.vldfrmUsuarioCrear = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre de Usuario");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese una contraseña");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
+            this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Mail");
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator4 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator5 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.pnlPermisos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // treeAsignados
@@ -55,7 +71,6 @@ namespace ARTEC.GUI
             this.treeAsignados.Name = "treeAsignados";
             this.treeAsignados.Size = new System.Drawing.Size(209, 190);
             this.treeAsignados.TabIndex = 1;
-            this.treeAsignados.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePermisos_AfterSelect);
             // 
             // lblNomUs
             // 
@@ -85,6 +100,8 @@ namespace ARTEC.GUI
             this.txtNomUs.PreventEnterBeep = true;
             this.txtNomUs.Size = new System.Drawing.Size(285, 22);
             this.txtNomUs.TabIndex = 63;
+            this.vldfrmUsuarioCrear.SetValidator1(this.txtNomUs, this.requiredFieldValidator1);
+            this.vldfrmUsuarioCrear.SetValidator2(this.txtNomUs, this.regularExpressionValidator1);
             // 
             // lblPass
             // 
@@ -114,6 +131,8 @@ namespace ARTEC.GUI
             this.txtPass.PreventEnterBeep = true;
             this.txtPass.Size = new System.Drawing.Size(285, 22);
             this.txtPass.TabIndex = 65;
+            this.vldfrmUsuarioCrear.SetValidator1(this.txtPass, this.requiredFieldValidator2);
+            this.vldfrmUsuarioCrear.SetValidator2(this.txtPass, this.regularExpressionValidator2);
             // 
             // lblNombre
             // 
@@ -143,6 +162,8 @@ namespace ARTEC.GUI
             this.txtNombre.PreventEnterBeep = true;
             this.txtNombre.Size = new System.Drawing.Size(285, 22);
             this.txtNombre.TabIndex = 67;
+            this.vldfrmUsuarioCrear.SetValidator1(this.txtNombre, this.requiredFieldValidator3);
+            this.vldfrmUsuarioCrear.SetValidator2(this.txtNombre, this.regularExpressionValidator3);
             // 
             // lblApellido
             // 
@@ -172,6 +193,8 @@ namespace ARTEC.GUI
             this.txtApellido.PreventEnterBeep = true;
             this.txtApellido.Size = new System.Drawing.Size(285, 22);
             this.txtApellido.TabIndex = 69;
+            this.vldfrmUsuarioCrear.SetValidator1(this.txtApellido, this.requiredFieldValidator4);
+            this.vldfrmUsuarioCrear.SetValidator2(this.txtApellido, this.regularExpressionValidator4);
             // 
             // lblMail
             // 
@@ -201,6 +224,8 @@ namespace ARTEC.GUI
             this.txtMail.PreventEnterBeep = true;
             this.txtMail.Size = new System.Drawing.Size(285, 22);
             this.txtMail.TabIndex = 71;
+            this.vldfrmUsuarioCrear.SetValidator1(this.txtMail, this.requiredFieldValidator5);
+            this.vldfrmUsuarioCrear.SetValidator2(this.txtMail, this.regularExpressionValidator5);
             // 
             // pnlPermisos
             // 
@@ -282,6 +307,7 @@ namespace ARTEC.GUI
             this.btnQuitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuitar.TabIndex = 4;
             this.btnQuitar.Text = "btnQuitar";
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // btnAgregar
             // 
@@ -293,6 +319,7 @@ namespace ARTEC.GUI
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "btnAgregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // treeDisponibles
             // 
@@ -311,8 +338,80 @@ namespace ARTEC.GUI
             this.btnCrearUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearUsuario.TabIndex = 73;
             this.btnCrearUsuario.Text = "btnCrearUsuario";
+            this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
-            // frmUsuariosGestion
+            // vldfrmUsuarioCrear
+            // 
+            this.vldfrmUsuarioCrear.ContainerControl = this.btnCrearUsuario;
+            this.vldfrmUsuarioCrear.ErrorProvider = this.errorProvider1;
+            this.vldfrmUsuarioCrear.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre de Usuario";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese una contraseña";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Ingrese un Nombre";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Ingrese un Apellido";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator5
+            // 
+            this.requiredFieldValidator5.ErrorMessage = "Ingrese un Mail";
+            this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Deben ser únicamente letras";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[a-zA-Z]+$";
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.ErrorMessage = "La contraseña debe contener mínimo 6 caracteres minúsculas, mayúsculas y números";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$";
+            // 
+            // regularExpressionValidator3
+            // 
+            this.regularExpressionValidator3.ErrorMessage = "Deben ser letras únicamente";
+            this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator3.ValidationExpression = "^[a-zA-Z]+$";
+            // 
+            // regularExpressionValidator4
+            // 
+            this.regularExpressionValidator4.ErrorMessage = "Deben ser letras únicamente";
+            this.regularExpressionValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator4.ValidationExpression = "^[a-zA-Z]+$";
+            // 
+            // regularExpressionValidator5
+            // 
+            this.regularExpressionValidator5.ErrorMessage = "El formato debe ser ejemplo@dominio.com.ar";
+            this.regularExpressionValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator5.ValidationExpression = "^([\\w\\d\\-\\.]+)@{1}(([\\w\\d\\-]{1,67})|([\\w\\d\\-]+\\.[\\w\\d\\-]{1,67}))\\.(([a-zA-Z\\d]{2," +
+    "4})(\\.[a-zA-Z\\d]{2})?)$";
+            // 
+            // frmUsuariosCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -331,11 +430,11 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtNomUs);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "frmUsuariosGestion";
+            this.Name = "frmUsuariosCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmUsuariosCrear_Load);
             this.pnlPermisos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -360,5 +459,18 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblAsignados;
         private DevComponents.DotNetBar.LabelX lblDisponibles;
         private DevComponents.DotNetBar.ButtonX btnCrearUsuario;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldfrmUsuarioCrear;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator5;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator4;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator3;
     }
 }
