@@ -112,7 +112,7 @@ namespace ARTEC.GUI
                 //Consulta us y pass coincidentes y loguea al usuario
                 try
                 {
-                    if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.AplicarHash(txtPass.Text)))
+                    if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
                     {
                         this.Close();
                         ServicioLog.CrearLog("Login", "Ingreso Correcto");

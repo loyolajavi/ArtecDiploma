@@ -77,6 +77,7 @@ namespace ARTEC.GUI
                     if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
                     {
                         MessageBox.Show("Se restauró la base de datos correctamente");
+                        ServicioLog.CrearLog("Restaurar BD", "Restauración realizada correctamente");
                     }
                     else
                     {

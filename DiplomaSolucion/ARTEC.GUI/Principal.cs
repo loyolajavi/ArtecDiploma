@@ -162,6 +162,12 @@ namespace ARTEC.GUI
             unFrmBackup.Show();
         }
 
+        private void btnBitacora_Click(object sender, EventArgs e)
+        {
+            frmBitacora unFrmBitacora = new frmBitacora();
+            unFrmBitacora.Show();
+        }
+
 
 
 

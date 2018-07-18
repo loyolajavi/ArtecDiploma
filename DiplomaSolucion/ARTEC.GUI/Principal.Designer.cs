@@ -240,6 +240,7 @@ namespace ARTEC.GUI
             this.btnBitacora.TabIndex = 11;
             this.btnBitacora.Text = "btnBitacora";
             this.btnBitacora.TextColor = System.Drawing.Color.White;
+            this.btnBitacora.Click += new System.EventHandler(this.btnBitacora_Click);
             // 
             // btnBackup
             // 

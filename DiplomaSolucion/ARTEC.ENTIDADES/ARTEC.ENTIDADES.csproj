@@ -47,6 +47,7 @@
     <Compile Include="Helpers\HLPDetallesAdquisicion.cs" />
     <Compile Include="Helpers\HLPInvRendicion.cs" />
     <Compile Include="Rendicion.cs" />
+    <Compile Include="Servicios\Bitacora.cs" />
     <Compile Include="Servicios\Familia.cs" />
     <Compile Include="Servicios\IFamPat.cs" />
     <Compile Include="Servicios\Patente.cs" />
