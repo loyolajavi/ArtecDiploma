@@ -12,16 +12,18 @@ namespace ARTEC.DAL.Servicios
 {
     public class DALBitacora
     {
-        public List<Bitacora> BitacoraVerLogs(string unTipoLog)
+        public List<Bitacora> BitacoraVerLogs(string unTipoLog, DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
 
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-                new SqlParameter("@TipoLog", unTipoLog)
-			};
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@TipoLog", unTipoLog));
+            if (fechaInicio != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaInicio", fechaInicio));
+            if (fechaFin != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaFin", fechaFin));
 
 
-            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "BitacoraVerLogs", parameters))
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "BitacoraVerLogs", parameters.ToArray()))
             {
                 List<Bitacora> unaLista = new List<Bitacora>();
                 unaLista = MapearBitacoraLogs(ds);

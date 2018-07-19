@@ -15,11 +15,11 @@ namespace ARTEC.BLL.Servicios
 
         DALBitacora GestorBitacora = new DALBitacora();
 
-        public List<Bitacora> BitacoraVerLogs(string unTipoLog)
+        public List<Bitacora> BitacoraVerLogs(string unTipoLog, DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
             try
             {
-                return GestorBitacora.BitacoraVerLogs(unTipoLog);
+                return GestorBitacora.BitacoraVerLogs(unTipoLog, fechaInicio, fechaFin);
             }
             catch (Exception es)
             {

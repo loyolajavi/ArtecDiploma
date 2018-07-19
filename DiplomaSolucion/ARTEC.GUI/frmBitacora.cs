@@ -34,8 +34,6 @@ namespace ARTEC.GUI
                 TiposLogs.Add("Error");
                 cboTipoLog.DataSource = null;
                 cboTipoLog.DataSource = TiposLogs;
-                //cboTipoLog.Items.Add("Evento");
-                //cboTipoLog.Items.Add("Error");
             }
             catch (Exception es)
             {
@@ -48,9 +46,24 @@ namespace ARTEC.GUI
         {
             try
             {
-                unosLogs = ManagerBitacora.BitacoraVerLogs(cboTipoLog.Text);
+                txtResBusqueda.Visible = false;
+                GrillaBuscar.Visible = true;
+
+                unosLogs = ManagerBitacora.BitacoraVerLogs(cboTipoLog.Text, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaFin.Value);
                 GrillaBuscar.DataSource = null;
                 GrillaBuscar.DataSource = unosLogs;
+                if (unosLogs.Count == 0)
+                {
+                    txtResBusqueda.Visible = true;
+                    GrillaBuscar.Visible = false;
+                }
+                else
+                {
+                    txtResBusqueda.Visible = false;
+                    GrillaBuscar.Visible = true;
+                }
+
+                    
             }
             catch (Exception es)
             {
