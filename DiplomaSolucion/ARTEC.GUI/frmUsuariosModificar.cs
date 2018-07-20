@@ -238,12 +238,21 @@ namespace ARTEC.GUI
         {
             List<IFamPat> PerQuitar = new List<IFamPat>();
             List<IFamPat> PerAgregar = new List<IFamPat>();
+            Usuario UsModif = new Usuario();
 
             if (!vldNomUs.Validate())
                 return;
 
                 try
                 {
+                    if (unUsuario != null && unUsuario.IdUsuario > 0)
+                        UsModif.IdUsuario = unUsuario.IdUsuario;
+                    else
+                    {
+                        MessageBox.Show("Busque un usuario a modificar por favor");
+                        return;
+                    }
+                        
                     //Verificar que quede al menos un permiso asignado
                     if (LisAuxAsig.Count == 0)
                     {
@@ -259,7 +268,8 @@ namespace ARTEC.GUI
                             //Verificar que no existe el nombre de usuario ingresado
                             if (!ManagerUsuario.UsuarioVerificarNomUs(txtNomUs.Text))
                                 //Modificar NomUs
-                                ManagerUsuario.UsuarioModificarNomUs(unUsuario.IdUsuario, txtNomUs.Text);
+                                //ManagerUsuario.UsuarioModificarNomUs(unUsuario.IdUsuario, txtNomUs.Text);VER: QUITAR
+                                UsModif.NombreUsuario = txtNomUs.Text;
                             else
                             {
                                 MessageBox.Show("Ya existe el nombre de usuario ingresado, por favor modifíquelo");
@@ -276,24 +286,31 @@ namespace ARTEC.GUI
                     {
                         DialogResult resmbox = MessageBox.Show("¿Está seguro que desea modificar la contraseña del Usuario?", "Advertencia", MessageBoxButtons.YesNo);
                         if (resmbox == DialogResult.Yes)
-                            ManagerUsuario.UsuarioModificarPass(unUsuario.IdUsuario, ServicioSecurizacion.AplicarHash(txtPass.Text));
+                            //ManagerUsuario.UsuarioModificarPass(unUsuario.IdUsuario, ServicioSecurizacion.AplicarHash(txtPass.Text));VER: QUITAR
+                            UsModif.Pass = ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text));
                         else
                             return;
                     }
 
                     //Datos basicos
                     if (unUsuario.Nombre != txtNombre.Text)
-                        ManagerUsuario.UsuarioModificarNombre(unUsuario.IdUsuario, txtNombre.Text);
+                        //ManagerUsuario.UsuarioModificarNombre(unUsuario.IdUsuario, txtNombre.Text);VER: QUITAR
+                        UsModif.Nombre = txtNombre.Text;
                     if (unUsuario.Apellido != txtApellido.Text)
-                        ManagerUsuario.UsuarioModificarApellido(unUsuario.IdUsuario, txtApellido.Text);
+                        //ManagerUsuario.UsuarioModificarApellido(unUsuario.IdUsuario, txtApellido.Text);VER: QUITAR
+                        UsModif.Apellido = txtApellido.Text;
                     if (unUsuario.Mail != txtMail.Text)
-                        ManagerUsuario.UsuarioModificarMail(unUsuario.IdUsuario, txtMail.Text);
+                        //ManagerUsuario.UsuarioModificarMail(unUsuario.IdUsuario, txtMail.Text);VER: QUITAR
+                        UsModif.Mail = txtMail.Text;
 
                     //Permisos
                     PerQuitar = LisAuxAsigBKP.Where(d => !LisAuxAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
                     PerAgregar = LisAuxAsig.Where(d => !LisAuxAsigBKP.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
-                    if (ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))
+                    //if (ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))VER: QUITAR
+                    //MessageBox.Show("Modificación realizada");VER: QUITAR
+                    if (ManagerUsuario.UsuarioModificar(UsModif, PerAgregar, PerQuitar, unUsuario))
                         MessageBox.Show("Modificación realizada");
+
                 }
                 catch (Exception es)
                 {

@@ -26,6 +26,7 @@ namespace ARTEC.DAL.Servicios
                         FRAMEWORK.Servicios.ServicioMail.ssl = (bool)row["Ssl"];
                         FRAMEWORK.Servicios.ServicioMail.remitente = row["Remitente"].ToString();
                         FRAMEWORK.Servicios.ServicioMail.remps = row["Remps"].ToString();
+                        FRAMEWORK.Servicios.ServicioMail.remps = FRAMEWORK.Servicios.ServicioSecurizacion.Desencriptar(FRAMEWORK.Servicios.ServicioMail.remps);
                     }
                 }
             }

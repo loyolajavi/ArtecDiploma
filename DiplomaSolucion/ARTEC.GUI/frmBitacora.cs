@@ -10,6 +10,7 @@ using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL;
 using ARTEC.BLL.Servicios;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -37,8 +38,8 @@ namespace ARTEC.GUI
             }
             catch (Exception es)
             {
-                MessageBox.Show("Error");
-                throw;
+                string IdError = ServicioLog.CrearLog(es, "frmBitacora_Load");
+                MessageBox.Show("Ocurrio un error al cargar la bitácora, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 
@@ -67,8 +68,8 @@ namespace ARTEC.GUI
             }
             catch (Exception es)
             {
-                MessageBox.Show("Error2");
-                throw;
+                string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click - Bitacora");
+                MessageBox.Show("Ocurrio un error al buscar en la bitácora, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
             
         }

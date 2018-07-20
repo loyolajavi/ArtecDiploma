@@ -73,6 +73,7 @@
     <Compile Include="IBLLBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\BLLBitacora.cs" />
+    <Compile Include="Servicios\BLLDV.cs" />
     <Compile Include="Servicios\BLLFamilia.cs" />
     <Compile Include="Servicios\BLLIdioma.cs" />
     <Compile Include="Servicios\BLLServicioIdioma.cs" />

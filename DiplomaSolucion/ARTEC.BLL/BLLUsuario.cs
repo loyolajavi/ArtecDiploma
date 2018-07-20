@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
 
@@ -14,6 +15,7 @@ namespace ARTEC.BLL
     {
 
         DALUsuario GestorUsuario = new DALUsuario();
+        BLLDV ManagerDV = new BLLDV();
 
         public List<Usuario> UsuarioTraerTodos()
         {
@@ -248,5 +250,88 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+
+
+        public bool UsuarioModificar(Usuario UsModif, List<IFamPat> PerAgregar, List<IFamPat> PerQuitar, Usuario unUsuarioDVH)
+        {
+
+            int flag = 0;
+
+            try
+            {
+                //NombreUsuario
+                if (UsModif.NombreUsuario != null && !string.IsNullOrEmpty(UsModif.NombreUsuario))
+                {
+                    UsuarioModificarNomUs(UsModif.IdUsuario, UsModif.NombreUsuario);
+                    unUsuarioDVH.NombreUsuario = UsModif.NombreUsuario;
+                    flag = 1;
+                }
+                    
+                //Pass
+                if (UsModif.Pass != null && !string.IsNullOrEmpty(UsModif.Pass))
+                {
+                    UsuarioModificarPass(UsModif.IdUsuario, UsModif.Pass);
+                    unUsuarioDVH.Pass = UsModif.Pass;
+                    flag = 1;
+                }
+                    
+                //Nombre
+                if (UsModif.Nombre != null && !string.IsNullOrEmpty(UsModif.Nombre))
+                {
+                    UsuarioModificarNombre(UsModif.IdUsuario, UsModif.Nombre);
+                    unUsuarioDVH.Nombre = UsModif.Nombre;
+                    flag = 1;
+                }
+                    
+                //Apellido
+                if (UsModif.Apellido != null && !string.IsNullOrEmpty(UsModif.Apellido))
+                {
+                    UsuarioModificarApellido(UsModif.IdUsuario, UsModif.Apellido);
+                    unUsuarioDVH.Apellido = UsModif.Apellido;
+                    flag = 1;
+                }
+                    
+                //Mail
+                if (UsModif.Mail != null && !string.IsNullOrEmpty(UsModif.Mail))
+                {
+                    UsuarioModificarMail(UsModif.IdUsuario, UsModif.Mail);
+                    unUsuarioDVH.Mail = UsModif.Mail;
+                    flag = 1;
+                }
+                    
+                //Permisos
+                if (PerAgregar.Count > 0)
+                {
+                    GestorUsuario.UsuarioAgregarPermisos(PerAgregar, UsModif.IdUsuario);
+                    flag = 1;
+                }
+                if (PerQuitar.Count > 0)
+                {
+                    GestorUsuario.UsuarioQuitarPermisos(PerQuitar, UsModif.IdUsuario);
+                    flag = 1;
+                }
+                
+                //DVH
+                if (flag == 1)
+                {
+                    if(ManagerDV.DVActualizarDVH(unUsuarioDVH))
+                        return true;
+                }
+             
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+
+
+        }
+
+
+
+
     }
 }

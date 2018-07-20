@@ -615,6 +615,37 @@ namespace ARTEC.DAL
         }
 
 
+        public bool UsuarioActualizarDVH(int IdUsuario, long Acum)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("IdUsuario", IdUsuario),
+                new SqlParameter("ValorAcum", Acum)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioActualizarDVH", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
 
 
     }
