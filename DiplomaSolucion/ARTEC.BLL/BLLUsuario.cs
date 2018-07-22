@@ -15,7 +15,6 @@ namespace ARTEC.BLL
     {
 
         DALUsuario GestorUsuario = new DALUsuario();
-        BLLDV ManagerDV = new BLLDV();
 
         public List<Usuario> UsuarioTraerTodos()
         {
@@ -213,8 +212,9 @@ namespace ARTEC.BLL
         {
             try
             {
+                unUsuario.Activo = 1;
                 if (GestorUsuario.UsuarioCrear(unUsuario))
-                    return true;
+                        return true;
                 return false;
             }
             catch (Exception es)
@@ -223,12 +223,18 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool UsuarioEliminar(int IdUsuario)
+        public bool UsuarioEliminar(Usuario unUsuario)
         {
             try
             {
-                if (GestorUsuario.UsuarioEliminar(IdUsuario))
-                    return true;
+                unUsuario.Activo = 0;
+                long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(unUsuario);
+                if (ResAcum > 0)
+                {
+                    unUsuario.DVH = ResAcum;
+                    if (GestorUsuario.UsuarioEliminar(unUsuario.IdUsuario, unUsuario.DVH))
+                        return true;
+                }
                 return false;
             }
             catch (Exception es)
@@ -237,12 +243,18 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool UsuarioReactivar(int IdUsuario)
+        public bool UsuarioReactivar(Usuario unUsuario)
         {
             try
             {
-                if (GestorUsuario.UsuarioReactivar(IdUsuario))
-                    return true;
+                unUsuario.Activo = 1;
+                 long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(unUsuario);
+                 if (ResAcum > 0)
+                 {
+                     unUsuario.DVH = ResAcum;
+                     if (GestorUsuario.UsuarioReactivar(unUsuario.IdUsuario, unUsuario.DVH))
+                         return true;
+                 }
                 return false;
             }
             catch (Exception es)
@@ -260,6 +272,9 @@ namespace ARTEC.BLL
 
             try
             {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
                 //NombreUsuario
                 if (UsModif.NombreUsuario != null && !string.IsNullOrEmpty(UsModif.NombreUsuario))
                 {
@@ -315,17 +330,29 @@ namespace ARTEC.BLL
                 //DVH
                 if (flag == 1)
                 {
-                    if(ManagerDV.DVActualizarDVH(unUsuarioDVH))
-                        return true;
+                    long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(unUsuarioDVH);
+                    if (ResAcum > 0)
+                    {
+                        unUsuarioDVH.DVH = ResAcum;
+                        if (FRAMEWORK.Servicios.ServicioDV.DVActualizarDVH(unUsuarioDVH.IdUsuario, unUsuarioDVH.DVH, unUsuarioDVH.GetType().Name, "IdUsuario"))
+                        {
+                            FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                            return true;
+                        }
+                    }
                 }
-             
                 return false;
             }
             catch (Exception es)
             {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
 
 
         }

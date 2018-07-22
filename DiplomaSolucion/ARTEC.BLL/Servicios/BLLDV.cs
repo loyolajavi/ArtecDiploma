@@ -13,7 +13,8 @@ namespace ARTEC.BLL.Servicios
 {
     public class BLLDV
     {
-        
+
+        DALDV GestorDV = new DALDV();
 
         public bool DVActualizarDVH(object unObjeto)
         {
@@ -27,7 +28,6 @@ namespace ARTEC.BLL.Servicios
                 if (TipoObj == "Usuario")
                 {
                     Usuario unUsuario = unObjeto as Usuario;
-                    DALUsuario GestorUsuario = new DALUsuario();
                     ClaveStr = unUsuario.IdUsuario.ToString() + unUsuario.NombreUsuario + unUsuario.Pass + unUsuario.IdiomaUsuarioActual.ToString() +
                                unUsuario.Nombre + unUsuario.Apellido + unUsuario.Mail + unUsuario.Activo.ToString();
                     ClaveHash = ServicioSecurizacion.AplicarHash(ClaveStr);
@@ -39,7 +39,7 @@ namespace ARTEC.BLL.Servicios
                         Acum += (long)letra;
                     }
 
-                    if (GestorUsuario.UsuarioActualizarDVH(unUsuario.IdUsuario, Acum))
+                    if (GestorDV.DVActualizarDVH(unUsuario.IdUsuario, Acum, unUsuario.GetType().Name, "IdUsuario"))
                         return true;
                 }
                 return false;

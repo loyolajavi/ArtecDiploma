@@ -309,7 +309,12 @@ namespace ARTEC.GUI
                     //if (ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUsuario.IdUsuario))VER: QUITAR
                     //MessageBox.Show("Modificación realizada");VER: QUITAR
                     if (ManagerUsuario.UsuarioModificar(UsModif, PerAgregar, PerQuitar, unUsuario))
+                    {
+                        LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
+                        LisAuxAsigBKP = LisAuxAsig.ToList();
                         MessageBox.Show("Modificación realizada");
+                    }
+                        
 
                 }
                 catch (Exception es)
@@ -333,7 +338,7 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja el Usuario: " + unUsuario.NombreUsuario + "?", "Advertencia", MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if(ManagerUsuario.UsuarioEliminar(unUsuario.IdUsuario))
+                        if(ManagerUsuario.UsuarioEliminar(unUsuario))
                         {
                             lblBaja.Visible = true;
                             btnReactivarUs.Enabled = true;
@@ -368,7 +373,7 @@ namespace ARTEC.GUI
             {
                 if (unUsuario != null && !string.IsNullOrWhiteSpace(unUsuario.NombreUsuario) && unUsuario.IdUsuario > 0)
                 {
-                    if (ManagerUsuario.UsuarioReactivar(unUsuario.IdUsuario))
+                    if (ManagerUsuario.UsuarioReactivar(unUsuario))
                     {
                         lblBaja.Visible = false;
                         btnReactivarUs.Enabled = false;

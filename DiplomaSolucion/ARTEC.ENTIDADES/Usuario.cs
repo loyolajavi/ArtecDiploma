@@ -30,6 +30,8 @@ namespace ARTEC.ENTIDADES
         public string Mail { get; set; }
 
         public int Activo { get; set; }
+
+        public long DVH { get; set; }
         
         private List<IFamPat> _Permisos = new List<IFamPat>();
 

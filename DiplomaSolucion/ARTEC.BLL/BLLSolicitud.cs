@@ -15,12 +15,20 @@ namespace ARTEC.BLL
 
         public bool SolicitudCrear(Solicitud laSolicitud)
         {
-            if (GestorSolicitud.SolicitudCrear(laSolicitud) > 0)
+            try
             {
-                return true;
-            }
+                if (GestorSolicitud.SolicitudCrear(laSolicitud) > 0)
+                {
+                    return true;
+                }
 
-            return false;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
 
 

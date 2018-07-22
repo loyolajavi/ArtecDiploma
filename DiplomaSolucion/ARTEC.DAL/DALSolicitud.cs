@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
 using System.Diagnostics;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.DAL
 {
@@ -35,6 +36,7 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
+                laSolicitud.IdSolicitud = IDDevuelto;
 
                 //Guarda los detalles 
                 foreach (SolicDetalle item in laSolicitud.unosDetallesSolicitud)
@@ -64,13 +66,21 @@ namespace ARTEC.DAL
                     }
                 }
 
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return IDDevuelto;
+                long ResAcum = ServicioDV.DVCalcularDVH(laSolicitud);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(laSolicitud.IdSolicitud, ResAcum, laSolicitud.GetType().Name, "IdSolicitud"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return IDDevuelto;
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return 0;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                //VER:EXCepciones
                 throw;
             }
             finally

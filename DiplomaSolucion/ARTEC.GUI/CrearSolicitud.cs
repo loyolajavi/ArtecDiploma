@@ -718,32 +718,37 @@ namespace ARTEC.GUI
         private void btnCrearSolicitud_Click(object sender, EventArgs e)
         {
 
-            if (ValidDep2.Validate())
+            try
             {
-
-                unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-                //***FECHA FIN VER Q SI ESTA ESCRITA
-                unaSolicitud.laDependencia = unaDep;
-                unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
-                unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
-                unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
-                unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
-                if (unasNotas != null)
+                if (ValidDep2.Validate())
                 {
-                    unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+
+                    unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
+                    //***FECHA FIN VER Q SI ESTA ESCRITA
+                    unaSolicitud.laDependencia = unaDep;
+                    unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
+                    unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
+                    unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+                    unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
+                    if (unasNotas != null)
+                    {
+                        unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                    }
+
+                    //***HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
+                    //***AGREGAR LOS ADJUNTOS
+                    //***AGREGAR EN EL STORE LAS NOTAS
+                    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                    if (ManagerSolicitud.SolicitudCrear(unaSolicitud))
+                        MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
+
                 }
-
-                //***HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
-                //***AGREGAR LOS ADJUNTOS
-                //***AGREGAR EN EL STORE LAS NOTAS
-                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                ManagerSolicitud.SolicitudCrear(unaSolicitud);
-
-
             }
-
-
-
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "btnCrearSolicitud_Click");
+                MessageBox.Show("Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
         }
 
 

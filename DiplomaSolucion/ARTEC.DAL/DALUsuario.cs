@@ -215,8 +215,8 @@ namespace ARTEC.DAL
         {
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
 
                 foreach (IFamPat unPermiso in PerAgregar)
                 {
@@ -226,19 +226,19 @@ namespace ARTEC.DAL
                         UsuarioAgregarPatente(unPermiso as Patente, IdUsuario);
                 }
 
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -282,8 +282,8 @@ namespace ARTEC.DAL
         {
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
 
                 foreach (IFamPat unPermiso in PerQuitar)
                 {
@@ -293,19 +293,19 @@ namespace ARTEC.DAL
                         UsuarioQuitarPatente(unPermiso as Patente, IdUsuario);
                 }
 
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -358,21 +358,21 @@ namespace ARTEC.DAL
 
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarNomUs", parametersNomUs);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -386,21 +386,21 @@ namespace ARTEC.DAL
 
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarNombre", parametersNombre);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -414,21 +414,21 @@ namespace ARTEC.DAL
 
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarApellido", parametersApellido);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -442,21 +442,21 @@ namespace ARTEC.DAL
 
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarMail", parametersMail);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -473,21 +473,21 @@ namespace ARTEC.DAL
 
             try
             {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioModificarPass", parametersPass);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
             }
             catch (Exception es)
             {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
             }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+            //finally
+            //{
+            //    if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+            //        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            //}
         }
 
 
@@ -500,7 +500,8 @@ namespace ARTEC.DAL
                 new SqlParameter("@Nombre", unUsuario.Nombre),
                 new SqlParameter("@Apellido", unUsuario.Apellido),
                 new SqlParameter("@Mail", unUsuario.Mail),
-                new SqlParameter("@Idioma", unUsuario.IdiomaUsuarioActual)
+                new SqlParameter("@Idioma", unUsuario.IdiomaUsuarioActual),
+                new SqlParameter("@Activo", unUsuario.Activo)
 			};
 
             try
@@ -509,6 +510,7 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "UsuarioCrear", parametersUsCrear);
                 int IdUsuarioRes = Decimal.ToInt32(Resultado);
+                unUsuario.IdUsuario = IdUsuarioRes;
 
                 foreach (IFamPat unPermiso in unUsuario.Permisos)
                 {
@@ -518,8 +520,17 @@ namespace ARTEC.DAL
                         UsuarioAgregarPatente(unPermiso as Patente, IdUsuarioRes);
                 }
 
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
+                long ResAcum = ServicioDV.DVCalcularDVH(unUsuario);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
             }
             catch (Exception es)
             {
@@ -537,11 +548,12 @@ namespace ARTEC.DAL
 
 
 
-        public bool UsuarioEliminar(int IdUsuario)
+        public bool UsuarioEliminar(int IdUsuario, long unDVH)
         {
             SqlParameter[] parametersUsEliminar = new SqlParameter[]
 			{
-                new SqlParameter("@IdUsuario", IdUsuario)
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@DVH", unDVH)
 			};
 
             try
@@ -566,11 +578,12 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool UsuarioReactivar(int IdUsuario)
+        public bool UsuarioReactivar(int IdUsuario, long unDVH)
         {
             SqlParameter[] parametersUsReactivar = new SqlParameter[]
 			{
-                new SqlParameter("@IdUsuario", IdUsuario)
+                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@DVH", unDVH)
 			};
 
             try
@@ -615,36 +628,37 @@ namespace ARTEC.DAL
         }
 
 
-        public bool UsuarioActualizarDVH(int IdUsuario, long Acum)
-        {
+        //public bool UsuarioActualizarDVH(int IdUsuario, long Acum)
+        //{
 
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("IdUsuario", IdUsuario),
-                new SqlParameter("ValorAcum", Acum)
-            };
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("IdUsuario", IdUsuario),
+        //        new SqlParameter("ValorAcum", Acum),
+        //        new SqlParameter("NombreTabla", "Usuario")
+        //    };
 
-            try
-            {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioActualizarDVH", parameters);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
-            }
-            catch (Exception es)
-            {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                throw;
-            }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
-        }
+        //    try
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+        //        int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioActualizarDVH", parameters);
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+        //        if (FilasAfectadas > 0)
+        //            return true;
+        //        return false;
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+        //    }
+        //}
 
 
 

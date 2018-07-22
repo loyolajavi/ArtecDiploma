@@ -50,6 +50,7 @@
     <Compile Include="Servicios\ManejaCadenas.cs" />
     <Compile Include="Servicios\ManejoArchivos.cs" />
     <Compile Include="Servicios\ServicioBackup.cs" />
+    <Compile Include="Servicios\ServicioDV.cs" />
     <Compile Include="Servicios\ServicioIdioma.cs" />
     <Compile Include="Servicios\ServicioLog.cs" />
     <Compile Include="Servicios\ServicioLogin.cs" />

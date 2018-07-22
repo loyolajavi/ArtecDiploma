@@ -59,7 +59,7 @@ namespace ARTEC.GUI
                     //Crear el Usuario
                     unUsuario = new Usuario();
                     unUsuario.NombreUsuario = txtNomUs.Text;
-                    unUsuario.Pass = ServicioSecurizacion.AplicarHash(txtPass.Text);
+                    unUsuario.Pass = ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text));
                     unUsuario.Nombre = txtNombre.Text;
                     unUsuario.Apellido = txtApellido.Text;
                     unUsuario.Mail = txtMail.Text;
