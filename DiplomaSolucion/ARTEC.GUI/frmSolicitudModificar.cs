@@ -82,7 +82,8 @@ namespace ARTEC.GUI
                 lblDesvinculado.Visible = true;
 
             txtFechaInicio.Value = unaSolicitud.FechaInicio;
-            txtFechaFin.Value = unaSolicitud.FechaFin;
+            if(unaSolicitud.FechaFin != null && unaSolicitud.FechaFin != DateTime.MinValue)
+                txtFechaFin.Value = (DateTime)unaSolicitud.FechaFin;
 
             ///Para poder seleccionar Hard o Soft
             BLLTipoBien ManagerTipoBien = new BLLTipoBien();
@@ -1181,40 +1182,88 @@ namespace ARTEC.GUI
 
         private void btnModifSolicitud_Click(object sender, EventArgs e)
         {
-            unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-            //***FECHA FIN VER Q SI ESTA ESCRITA
-            unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
-            unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
-            if (cboEstadoSolicitud.SelectedIndex + 1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cerrado)
+            try
             {
-                MessageBox.Show("Debe ingresar un motivo y la fecha de finalización será la de hoy");
-                unaSolicitud.FechaFin = DateTime.Today;
+                unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
+                //***FECHA FIN VER Q SI ESTA ESCRITA
+                unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
+                unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
+                if (cboEstadoSolicitud.SelectedIndex + 1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+                {
+                    //MessageBox.Show("Debe ingresar un motivo y la fecha de finalización será la de hoy");
+                     
+                    //Compruebo que no tenga partidas asociadas
+                    List<PartidaDetalle> LisPartDet = new List<PartidaDetalle>();
+                    BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+                    foreach (SolicDetalle unSolicDet in unaSolicitud.unosDetallesSolicitud)
+                    {
+                        PartidaDetalle unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unSolicDet.IdSolicitudDetalle);
+                        if (unaPartDet.IdPartida > 0)
+                            LisPartDet.Add(unaPartDet);
+                    }
+                    //Si no tiene partidas asociadas se puede cancelar
+                    if (LisPartDet.Count() == 0)
+                    {
+                        frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
+                        if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
+                        {
+                            if (!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
+                            {
+                                Nota unaNota = new Nota();
+                                unaNota.FechaNota = DateTime.Today;
+                                unaNota.DescripNota = unfrmDialogJustificacion.textBox1.Text;
+                                unaSolicitud.unasNotas.Add(unaNota);
+                                unaSolicitud.FechaFin = DateTime.Today;
+                                //Coloca todos los detalles en Cancelado
+                                foreach (SolicDetalle unSolicDet in unaSolicitud.unosDetallesSolicitud)
+                                {
+                                    unSolicDet.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado;
+                                }
+                            }
+                            else
+                                return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La solicitud tiene Partidas asociadas, primero debe cancelar las mismas");
+                        return;
+                    }
+                }
+                unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
+                unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
+                if (unasNotas.Count > 0)//PONER COUNT
+                {
+                    unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                }
 
-                //VER:AGREGAR LO DEL MOTIVO
+                //VER:HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
+                //VER:AGREGAR LOS ADJUNTOS
+                //VER:AGREGAR EN EL STORE LAS NOTAS
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+                //if (flagDetEliminado)
+                //{
+                //Regenerar detalles en BD
+                //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
+                if (unaSolicitud.FechaFin == DateTime.MinValue)
+                    unaSolicitud.FechaFin = null;
+                if (ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud))
+                    MessageBox.Show("Modificación realizada correctamente");
+                //}
+                //else
+                //{
+                //     ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
+                //    //Modificar datos detalles
+                //}
             }
-            unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
-            unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
-            if (unasNotas.Count > 0)//PONER COUNT
+            catch (Exception es)
             {
-                unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                string IdError = ServicioLog.CrearLog(es, "btnModifSolicitud_Click");
+                MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
 
-            //VER:HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
-            //VER:AGREGAR LOS ADJUNTOS
-            //VER:AGREGAR EN EL STORE LAS NOTAS
-            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-
-            //if (flagDetEliminado)
-            //{
-            //Regenerar detalles en BD
-            //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
-            ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
-            //}
-            //else
-            //{
-            //     ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
-            //    //Modificar datos detalles
-            //}
+           
         }
 
         //Para comprobar si el responsable fue desvinculado y dar aviso de ello

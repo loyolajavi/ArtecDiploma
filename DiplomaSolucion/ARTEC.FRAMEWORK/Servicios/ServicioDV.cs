@@ -70,21 +70,104 @@ namespace ARTEC.FRAMEWORK.Servicios
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NombreTabla", NomTabla),
-                new SqlParameter("IdFila", IdFila),
-                new SqlParameter("ValorAcum", Acum),
-                new SqlParameter("NomColumna", NomColumnaWhere)
+                new SqlParameter("@IdFila", IdFila),
+                new SqlParameter("@ValorAcum", Acum),
+                new SqlParameter("@NomColumna", NomColumnaWhere)
             };
 
             try
             {
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DVActualizarDVH", parameters);
                 if (FilasAfectadas > 0)
-                    return true;
+                {
+                    if(DVActualizarDVV(NomTabla))
+                        return true;
+                }
                 return false;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+        }
+
+
+        public static bool DVActualizarDVV(string NomTabla)
+        {
+            List<long> unaListaDVH = new List<long>();
+
+
+            try
+            {
+                unaListaDVH = DVCalcularDVV(NomTabla);
+                if (unaListaDVH.Count() == 0)
+                    return false;
+                long Acum = 0;
+                foreach (long unDVH in unaListaDVH)
+                {
+                    Acum += unDVH;
+                }
+
+                SqlParameter[] parametersDVV = new SqlParameter[]
+                {
+                    new SqlParameter("@NombreTabla", NomTabla),
+                    new SqlParameter("@ValorAcum", Acum)
+                };
+
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DVActualizarDVV", parametersDVV);
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public static List<long> DVCalcularDVV(string NomTabla)
+        {
+            
+            SqlParameter[] parametersSumaDVH = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", NomTabla)
+            };
+
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSetPrueba(CommandType.StoredProcedure, "DVTraerDVHSuma", parametersSumaDVH))
+                {
+                    List<long> unaListaDVH = new List<long>();
+                    unaListaDVH = MapearDVHs(ds);
+                    return unaListaDVH;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public static List<long> MapearDVHs(DataSet ds)
+        {
+            List<long> resDVHs = new List<long>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    long unDVH = new long();
+                    unDVH = (long)row["DVH"];
+                    resDVHs.Add(unDVH);
+                }
+                return resDVHs;
+            }
+            catch (Exception es)
+            {
                 throw;
             }
         }

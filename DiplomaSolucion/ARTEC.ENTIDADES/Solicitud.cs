@@ -12,7 +12,7 @@ namespace ARTEC.ENTIDADES
         public int IdSolicitud { get; set; }
         public Dependencia laDependencia { get; set; }
         public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
+        public DateTime? FechaFin { get; set; }
         public Prioridad UnaPrioridad { get; set; }
         public EstadoSolicitud UnEstado { get; set; }
         public Usuario Asignado { get; set; }

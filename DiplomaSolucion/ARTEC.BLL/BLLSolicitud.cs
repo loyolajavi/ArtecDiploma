@@ -76,9 +76,18 @@ namespace ARTEC.BLL
 
         public bool SolicitudModificarConDetallesEliminados(Solicitud laSolicitud)
         {
-            if (GestorSolicitud.SolicitudModificarConDetallesEliminados(laSolicitud))
-                return true;
-            return false;
+            try
+            {
+                if (GestorSolicitud.SolicitudModificarConDetallesEliminados(laSolicitud))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+            
         }
 
 

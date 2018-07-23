@@ -138,6 +138,24 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
         }
 
+        public static DataSet EjecutarDataSetPrueba(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
+        {
+            DataSet Resultado;
+
+            try
+            {
+                using (Comando = CrearComando(Conexion, ComandoTipo, ComandoString, Parametros))
+                {
+                    Resultado = CrearDataSet(Comando);
+                    return Resultado;
+                }
+            }
+            catch (Exception ex2)
+            {
+                throw;
+            }
+        }
+
         public static DataTable EjecutarDataTable(CommandType ComandoTipo, string ComandoString, params SqlParameter[] Parametros)
         {
             DataTable Resultado;

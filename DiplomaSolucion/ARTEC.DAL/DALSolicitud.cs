@@ -327,7 +327,9 @@ namespace ARTEC.DAL
                 new SqlParameter("@IdEstado", laSolicitud.UnEstado.IdEstadoSolicitud),
                 new SqlParameter("@IdUsuario", laSolicitud.Asignado.IdUsuario),
                 new SqlParameter("@IdAgente", laSolicitud.AgenteResp.IdAgente),
-                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                new SqlParameter("@FechaFin", laSolicitud.FechaFin)
+
 			};
             try
             {
@@ -418,14 +420,23 @@ namespace ARTEC.DAL
                         }
                     }
                 }
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
+
+                long ResAcum = ServicioDV.DVCalcularDVH(laSolicitud);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(laSolicitud.IdSolicitud, ResAcum, laSolicitud.GetType().Name, "IdSolicitud"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                return false;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                //VER:EXCepciones
-                return false;
+                throw;
             }
             finally
             {
