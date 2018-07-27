@@ -11,6 +11,7 @@ using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.BLL.Servicios;
+using System.Linq;
 
 namespace ARTEC.GUI
 {
@@ -75,6 +76,13 @@ namespace ARTEC.GUI
 
                 //Traduzco con el idioma Default
                 BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+
+                //Verifica Integridad Base Datos
+                List<bool> IntegridadDVV = ARTEC.FRAMEWORK.Servicios.ServicioDV.DVVerificarIntegridadBD();
+                if(!IntegridadDVV.Any(x => x.Equals(false)))
+                    MessageBox.Show("Integridad OK");
+                else
+                    MessageBox.Show("Debe restaurar la BD");
             }
             catch (Exception es)
             {
