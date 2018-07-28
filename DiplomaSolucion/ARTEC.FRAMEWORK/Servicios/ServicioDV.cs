@@ -313,6 +313,7 @@ namespace ARTEC.FRAMEWORK.Servicios
                     unaSolic.Asignado.IdUsuario = (int)row["IdUsuario"];
                     unaSolic.AgenteResp = new Agente();
                     unaSolic.AgenteResp.IdAgente = (row["IdAgente"].ToString() != "") ? (int)row["IdAgente"] : (int?)null;
+                    unaSolic.DVH = (long)row["DVH"];
 
                     ResLisSolicitudes.Add(unaSolic);
                 }
@@ -339,13 +340,172 @@ namespace ARTEC.FRAMEWORK.Servicios
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 string ResDVV = FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "DVTraerDVV", parametersTraerDVV).ToString();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return ResDVV;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
+
+        public static void DVRecomponer()
+        {
+            string resultadoBuilder;
+            string ClaveHashDVV;
+            List<bool> ValoresTrue = new List<bool>();
+
+            try
+            {
+                //Usuario
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerTodosDatosCompletos"))
+                {
+                    List<Usuario> unaListaUsuarios = new List<Usuario>();
+                    unaListaUsuarios = MapearUsuarios(ds);
+                    List<long> LisDVHs = new List<long>();
+
+                    foreach (Usuario unUs in unaListaUsuarios)
+                    {
+
+                        LisDVHs.Add(DVCalcularDVH(unUs));
+                    }
+
+                    for (int I = 0; I < unaListaUsuarios.Count(); I++)
+                    {
+                        if (unaListaUsuarios[I].DVH != LisDVHs[I])
+                        {
+                            System.Windows.Forms.MessageBox.Show("En BD: " + unaListaUsuarios[I].DVH.ToString() + " - Calculado: " + LisDVHs[I]);
+                            DVRecomponerDVH(unaListaUsuarios[I].IdUsuario, LisDVHs[I], "Usuario", "IdUsuario");
+                        }
+                    }
+
+                    StringBuilder builder = new StringBuilder();
+                    foreach (long unDVH in LisDVHs)
+                    {
+                        builder.Append(unDVH).Append(";");
+                    }
+
+                    resultadoBuilder = builder.ToString();
+                    ClaveHashDVV = ServicioSecurizacion.AplicarHash(resultadoBuilder);
+                    DVRecomponerDVV("Usuario", ClaveHashDVV);
+                }
+                //Solicitud
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerDatosDVV"))
+                {
+                    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                    unaListaSolicitudes = MapearSolicitudes(ds);
+                    List<long> LisDVHs = new List<long>();
+
+                    foreach (Solicitud unaSolic in unaListaSolicitudes)
+                    {
+
+                        LisDVHs.Add(DVCalcularDVH(unaSolic));
+                    }
+
+                    for (int I = 0; I < unaListaSolicitudes.Count(); I++)
+                    {
+                        if (unaListaSolicitudes[I].DVH != LisDVHs[I])
+                        {
+                            System.Windows.Forms.MessageBox.Show("En BD: " + unaListaSolicitudes[I].DVH.ToString() + " - Calculado: " + LisDVHs[I]);
+                            DVRecomponerDVH(unaListaSolicitudes[I].IdSolicitud, LisDVHs[I], "Solicitud", "IdSolicitud");
+                        }
+                    }
+
+                    StringBuilder builder = new StringBuilder();
+                    foreach (long unDVH in LisDVHs)
+                    {
+                        builder.Append(unDVH).Append(";");
+                    }
+
+                    resultadoBuilder = builder.ToString();
+                    ClaveHashDVV = ServicioSecurizacion.AplicarHash(resultadoBuilder);
+
+                    DVRecomponerDVV("Solicitud", ClaveHashDVV);
+                }
             }
             catch (Exception es)
             {
                 throw;
             }
+        }
 
+
+        public static bool DVRecomponerDVH(int IdFila, long Acum, string NomTabla, string NomColumnaWhere)
+        {
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", NomTabla),
+                new SqlParameter("@IdFila", IdFila),
+                new SqlParameter("@ValorAcum", Acum),
+                new SqlParameter("@NomColumna", NomColumnaWhere)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DVActualizarDVH", parameters);
+                if (FilasAfectadas > 0)
+                {
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public static bool DVRecomponerDVV(string NomTabla, string ClaveDVV)
+        {
+            List<long> unaListaDVH = new List<long>();
+
+            SqlParameter[] parametersDVV = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", NomTabla),
+                new SqlParameter("@ClaveDVV", ClaveDVV)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DVActualizarDVV", parametersDVV);
+                if (FilasAfectadas > 0)
+                {
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
         }
 
 

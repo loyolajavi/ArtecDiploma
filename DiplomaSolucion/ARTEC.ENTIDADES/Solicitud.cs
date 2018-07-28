@@ -32,7 +32,9 @@ namespace ARTEC.ENTIDADES
             get { return _unasNotas; }
             set { _unasNotas = value; }
         }
-        
+
+        public long DVH { get; set; }
+
 
     }
 }

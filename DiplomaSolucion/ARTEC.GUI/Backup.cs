@@ -76,8 +76,12 @@ namespace ARTEC.GUI
                 {
                     if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
                     {
-                        MessageBox.Show("Se restauró la base de datos correctamente");
+                        MessageBox.Show("Se restauró la base de datos correctamente, por favor inicie nuevamente la aplicación");
                         ServicioLog.CrearLog("Restaurar BD", "Restauración realizada correctamente");
+                        //Para que no aparezca el login al sistema si no se restauró la BD
+                        DialogResult = DialogResult.OK;
+                        //Para salir del sistema en forma limpia posteriormente a la restauración
+                        Application.Exit();
                     }
                     else
                     {

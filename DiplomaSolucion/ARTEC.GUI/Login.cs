@@ -19,6 +19,7 @@ namespace ARTEC.GUI
     {
 
         List<Idioma> unosIdiomas = new List<Idioma>();
+        bool FlagSinIntegridad = false;
         
 
 
@@ -79,10 +80,26 @@ namespace ARTEC.GUI
 
                 //Verifica Integridad Base Datos
                 List<bool> IntegridadDVV = ARTEC.FRAMEWORK.Servicios.ServicioDV.DVVerificarIntegridadBD();
-                if(!IntegridadDVV.Any(x => x.Equals(false)))
-                    MessageBox.Show("Integridad OK");
-                else
-                    MessageBox.Show("Debe restaurar la BD");
+                if (IntegridadDVV.Any(x => x.Equals(false)))
+                {
+                    //VER:Que pida login y que solo lo pueda hacer un usuario con permisos de Administrador
+                    FlagSinIntegridad = true;
+                    MessageBox.Show("Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo");
+                    //DialogResult resmbox = MessageBox.Show("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores", "Advertencia", MessageBoxButtons.YesNo);
+                    //if (resmbox == DialogResult.Yes)
+                    //{
+                    //    Backup unFrmBackup = new Backup();
+                    //    //Solo permite loguearse al sistema si se restaura la BD
+                    //    if (unFrmBackup.ShowDialog() != DialogResult.OK)
+                    //        this.Close();
+                    //}
+                    //else
+                    //{
+                    //    //VER: Abrir ventana Regenerar DV
+                    //}
+                    
+                }
+                    
             }
             catch (Exception es)
             {
@@ -120,17 +137,54 @@ namespace ARTEC.GUI
                 //Consulta us y pass coincidentes y loguea al usuario
                 try
                 {
-                    if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
+                    if (FlagSinIntegridad == false)
                     {
-                        this.Close();
-                        ServicioLog.CrearLog("Login", "Ingreso Correcto");
-                        DialogResult = DialogResult.OK;
+                        if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
+                        {
+                            this.Close();
+                            ServicioLog.CrearLog("Login", "Ingreso Correcto");
+                            DialogResult = DialogResult.OK;
+                        }
+                        else
+                        {
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                            ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
-                        ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
+                        if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
+                        {
+                            if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos.Exists(x => x.NombreIFamPat == "ABM Partida"))
+                            {
+                                this.Close();
+                                ServicioLog.CrearLog("Login", "Ingreso Correcto");
+                                DialogResult resmbox = MessageBox.Show("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores", "Advertencia", MessageBoxButtons.YesNo);
+                                if (resmbox == DialogResult.Yes)
+                                {
+                                    //Backup unFrmBackup = new Backup();
+                                    ////Solo permite loguearse al sistema si se restaura la BD
+                                    //if (unFrmBackup.ShowDialog() != DialogResult.OK)
+                                    //    this.Close();
+                                    DialogResult = DialogResult.Yes;
+                                }
+                                else
+                                {
+                                    DialogResult = DialogResult.No;
+                                    //VER: Abrir ventana Regenerar DV
+                                }
+                            }
+                            else
+                                MessageBox.Show("Solo un usuario con permisos ABM Partida puede loguearse si la BD tiene inconsistencias");
+                        }
+                        else
+                        {
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
+                            ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
+                        }
+                        
                     }
+                    
                 }
                 catch (Exception es)
                 {
