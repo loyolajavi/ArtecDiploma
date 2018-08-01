@@ -369,7 +369,7 @@ namespace ARTEC.GUI
             //Quita los msjs de validación
             validAgenteAsoc.ClearFailedValidations();
             
-            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)//Hardware
             {
                 gboxAsociados.Enabled = false;
                 txtCantBien.ReadOnly = false;
@@ -381,7 +381,7 @@ namespace ARTEC.GUI
                 unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
                 grillaAgentesAsociados.DataSource = null;
             }
-            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Soft)//Software
             {
                 gboxAsociados.Enabled = true;
                 txtCantBien.ReadOnly = true;
