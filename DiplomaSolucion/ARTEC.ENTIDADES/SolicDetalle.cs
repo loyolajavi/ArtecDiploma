@@ -36,7 +36,6 @@ namespace ARTEC.ENTIDADES
 
 
         private List<Cotizacion> _unasCotizaciones;
-
         public List<Cotizacion> unasCotizaciones
         {
             get { return _unasCotizaciones; }
@@ -45,28 +44,18 @@ namespace ARTEC.ENTIDADES
 
         public bool Seleccionado { get; set; }
 
-        //PRUEBA
-        private List<XInventarioHard> _InventariosHard = new List<XInventarioHard>();
-
-        public List<XInventarioHard> InventariosHard
-        {
-            get { return _InventariosHard; }
-            set { _InventariosHard = value; }
-        }
-
-        //private List<Hardware> _unosBienes = new List<Hardware>();
-
         public IEnumerable<Bien> unosBienes;
-        //{
-            //get { return _unosBienes; }
-            //set { _unosBienes = value; }
-        //}
-
 
         public int UIDSolicDetalle { get; set; }
 
 
-        public Bien unBienAsignar { get; set; }
+        //private List<XInventarioHard> _InventariosHard = new List<XInventarioHard>();
+
+        //public List<XInventarioHard> InventariosHard
+        //{
+        //    get { return _InventariosHard; }
+        //    set { _InventariosHard = value; }
+        //}
 
     }
 }
