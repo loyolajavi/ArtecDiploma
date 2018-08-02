@@ -17,10 +17,7 @@ namespace ARTEC.ENTIDADES
         public ModeloVersion unModelo { get; set; }
         public IList<Inventario> unosInventarios { get; set; }
         public Inventario unInventarioAlta { get; set; }
-        public enum elTipoBien
-        {
-            Hardware = 1, Software = 2
-        }
+        
 
 
 

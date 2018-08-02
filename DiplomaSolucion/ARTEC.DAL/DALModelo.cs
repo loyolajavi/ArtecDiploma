@@ -12,12 +12,11 @@ namespace ARTEC.DAL
 {
     public class DALModelo
     {
-        public List<ModeloVersion> ModeloTraerPorMarcaCategoria(int IdCat, int TipoBien, int laMarca)
+        public List<ModeloVersion> ModeloTraerPorMarcaCategoria(int IdCat, int laMarca)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@IdCategoria", IdCat),
-                new SqlParameter("@IdTipoBien", TipoBien),
                 new SqlParameter("@IdMarca", laMarca)
 			};
 

@@ -141,7 +141,7 @@ namespace ARTEC.GUI
                 TipoBien unTipoBien = ManagerTipoBien.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
                 cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;
 
-                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
                 {
                     unBien = new Hardware();
                     unInven = new XInventarioHard();
@@ -184,7 +184,7 @@ namespace ARTEC.GUI
 
                 BLLMarca ManagerMarca = new BLLMarca();
                 List<Marca> unasMarcas = new List<Marca>();
-                unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue);
+                unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
                 cboMarca.DataSource = null;
                 cboMarca.DataSource = unasMarcas;
                 cboMarca.DisplayMember = "DescripMarca";
@@ -250,7 +250,7 @@ namespace ARTEC.GUI
 
                 BLLModelo ManagerModelo = new BLLModelo();
                 List<ModeloVersion> unosModelos = new List<ModeloVersion>();
-                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue, unaMarca.IdMarca);
+                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, unaMarca.IdMarca);
                 cboModelo.DataSource = null;
                 cboModelo.DataSource = unosModelos;
                 cboModelo.DisplayMember = "DescripModeloVersion";
@@ -272,7 +272,7 @@ namespace ARTEC.GUI
             }
             else
             {
-                if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+                if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
                 {
                     unBienAUX = new Hardware();
                     unInven = new XInventarioHard();
@@ -385,7 +385,7 @@ namespace ARTEC.GUI
             cboTipoBien.SelectedValue = unTipoBien.IdTipoBien;
 
 
-            if ((int)cboTipoBien.SelectedValue == (int)Bien.elTipoBien.Hardware)
+            if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
             {
                 unBien = new Hardware();
                 unInven = new XInventarioHard();
@@ -430,7 +430,7 @@ namespace ARTEC.GUI
 
             BLLMarca ManagerMarca = new BLLMarca();
             List<Marca> unasMarcas = new List<Marca>();
-            unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria, (int)cboTipoBien.SelectedValue);
+            unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
             cboMarca.DataSource = null;
             cboMarca.DataSource = unasMarcas;
             cboMarca.DisplayMember = "DescripMarca";

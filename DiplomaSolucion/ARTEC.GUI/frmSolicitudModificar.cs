@@ -522,7 +522,7 @@ namespace ARTEC.GUI
             gboxAsociados.Enabled = false;
             txtCantBien.ReadOnly = false;
             lblCantidad.Enabled = true;
-            cboTipoBien.SelectedIndex = (int)Hardware.elTipoBien.Hardware - 1;
+            cboTipoBien.SelectedIndex = (int)TipoBien.EnumTipoBien.Hard - 1;
             txtBien.Clear();
             AuxTipoCategoria = 1;
             txtCantBien.Clear();

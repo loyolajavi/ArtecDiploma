@@ -658,7 +658,7 @@ namespace ARTEC.GUI
             BLLTipoBien managerTipoBienAux = new BLLTipoBien();
             unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
 
-            if (unTipoBienAux.IdTipoBien == 1)
+            if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
             {
                 //HARDWARE
                 gboxAsociados.Enabled = false;

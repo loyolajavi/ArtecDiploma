@@ -13,9 +13,9 @@ namespace ARTEC.BLL
 
         DALMarca GestorMarca = new DALMarca();
 
-        public List<Marca> MarcaTraerPorIdCategoria(int IdCat, int TipoBien)
+        public List<Marca> MarcaTraerPorIdCategoria(int IdCat)
         {
-            return GestorMarca.MarcaTraerPorIdCategoria(IdCat, TipoBien);
+            return GestorMarca.MarcaTraerPorIdCategoria(IdCat);
         }
     }
 }

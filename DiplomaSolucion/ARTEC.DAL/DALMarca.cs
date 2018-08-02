@@ -13,12 +13,11 @@ namespace ARTEC.DAL
     public class DALMarca
     {
 
-        public List<Marca> MarcaTraerPorIdCategoria(int IdCat, int TipoBien)
+        public List<Marca> MarcaTraerPorIdCategoria(int IdCat)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
-				new SqlParameter("@IdCategoria", IdCat),
-                new SqlParameter("@IdTipoBien", TipoBien)
+				new SqlParameter("@IdCategoria", IdCat)
 			};
 
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "MarcaTraerPorIdCategoria", parameters))

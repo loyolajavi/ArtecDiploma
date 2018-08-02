@@ -8,17 +8,17 @@ using ARTEC.DAL;
 
 namespace ARTEC.BLL
 {
-    public class BLLBien
-    {
+    //public class BLLBien
+    //{
 
-        DALBien GestorBien = new DALBien();
+    //    DALBien GestorBien = new DALBien();
 
-        public int BienTraerIdPorDescripMarcaModelo(Bien unBien, int Tipo)
-        {
-            return GestorBien.BienTraerIdPorDescripMarcaModelo(unBien, Tipo);
-        }
+    //    public int BienTraerIdPorDescripMarcaModelo(Bien unBien, int Tipo)
+    //    {
+    //        return GestorBien.BienTraerIdPorDescripMarcaModelo(unBien, Tipo);
+    //    }
 
 
 
-    }
+    //}
 }

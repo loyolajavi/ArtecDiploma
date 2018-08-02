@@ -32,7 +32,6 @@ namespace ARTEC.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@IdCategoria", unBien.unaCategoria.IdCategoria),
-                new SqlParameter("@IdTipoBien", Bien.elTipoBien.Hardware),
                 new SqlParameter("@IdMarca", unBien.unaMarca.IdMarca),
                 new SqlParameter("@IdModelo", unBien.unModelo.IdModeloVersion)
 			};

@@ -13,9 +13,9 @@ namespace ARTEC.BLL
 
         DALModelo GestorModelo = new DALModelo();
 
-        public List<ModeloVersion> ModeloTraerPorMarcaCategoria(int Cat, int TipoBien, int laMarca)
+        public List<ModeloVersion> ModeloTraerPorMarcaCategoria(int Cat, int laMarca)
         {
-            return GestorModelo.ModeloTraerPorMarcaCategoria(Cat, TipoBien, laMarca);
+            return GestorModelo.ModeloTraerPorMarcaCategoria(Cat, laMarca);
         }
 
 
