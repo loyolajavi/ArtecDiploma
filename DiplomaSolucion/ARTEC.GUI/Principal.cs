@@ -133,7 +133,7 @@ namespace ARTEC.GUI
 
         private void btnBienesCat_Click(object sender, EventArgs e)
         {
-            frmBienesCat unfrmBienesCat = new frmBienesCat();
+            frmCategoriaGestion unfrmBienesCat = new frmCategoriaGestion();
             unfrmBienesCat.Show();
         }
 

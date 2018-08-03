@@ -290,7 +290,7 @@ namespace ARTEC.GUI
                 //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
                 //Inventario unInven;// = new Inventario();
                 HLPBienInventario unBienhlp = new HLPBienInventario();
-                unBienhlp.DescripBien = txtBienCategoria.Text;
+                //unBienhlp.DescripBien = txtBienCategoria.Text;
                 unBienAUX.unaCategoria = unDetSolic.unaCategoria;
                 unBienhlp.DescripEstadoInv = cboEstadoInv.Text;
                 //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;

@@ -104,11 +104,11 @@
     <Compile Include="frmBienAsignar.Designer.cs">
       <DependentUpon>frmBienAsignar.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmBienesCat.cs">
+    <Compile Include="frmCategoriaGestion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBienesCat.Designer.cs">
-      <DependentUpon>frmBienesCat.cs</DependentUpon>
+    <Compile Include="frmCategoriaGestion.Designer.cs">
+      <DependentUpon>frmCategoriaGestion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBienRegistrar.cs">
       <SubType>Form</SubType>
@@ -261,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBitacora.resx">
       <DependentUpon>frmBitacora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCategoriaGestion.resx">
+      <DependentUpon>frmCategoriaGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCotizaciones.resx">
       <DependentUpon>frmCotizaciones.cs</DependentUpon>

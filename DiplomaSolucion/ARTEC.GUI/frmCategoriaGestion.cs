@@ -9,11 +9,13 @@ using DevComponents.DotNetBar;
 
 namespace ARTEC.GUI
 {
-    public partial class frmBienesCat : DevComponents.DotNetBar.Metro.MetroForm
+    public partial class frmCategoriaGestion : DevComponents.DotNetBar.Metro.MetroForm
     {
-        public frmBienesCat()
+        public frmCategoriaGestion()
         {
             InitializeComponent();
         }
+
+        
     }
 }
