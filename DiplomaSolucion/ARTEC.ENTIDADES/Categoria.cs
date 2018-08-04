@@ -16,7 +16,18 @@ namespace ARTEC.ENTIDADES
         public override String ToString()
         {
             return this.DescripCategoria;
-        } 
+        }
+
+        public TipoBien unTipoBien { get; set; }
+
+        private List<Proveedor> _LosProveedores = new List<Proveedor>();
+
+        public List<Proveedor> LosProveedores
+        {
+            get { return _LosProveedores; }
+            set { _LosProveedores = value; }
+        }
+        
 
     }
 }

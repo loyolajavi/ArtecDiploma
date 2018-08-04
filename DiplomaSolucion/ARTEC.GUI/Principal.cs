@@ -168,6 +168,12 @@ namespace ARTEC.GUI
             unFrmBitacora.Show();
         }
 
+        private void btnCategorias_Click(object sender, EventArgs e)
+        {
+            frmCategoriaGestion unFrmCategoriaGestion = new frmCategoriaGestion();
+            unFrmCategoriaGestion.Show();
+        }
+
 
 
 

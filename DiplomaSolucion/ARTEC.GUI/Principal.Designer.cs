@@ -46,6 +46,7 @@ namespace ARTEC.GUI
             this.btnUsuarios = new DevComponents.DotNetBar.ButtonX();
             this.btnVolver = new DevComponents.DotNetBar.ButtonX();
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
+            this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -109,7 +110,7 @@ namespace ARTEC.GUI
             this.buttonX1.BackColor = System.Drawing.SystemColors.HotTrack;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.buttonX1.CustomColorName = "Blue";
-            this.buttonX1.Location = new System.Drawing.Point(380, 13);
+            this.buttonX1.Location = new System.Drawing.Point(216, 13);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(87, 40);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -123,7 +124,7 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSolicitarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnSolicitarPartida.CustomColorName = "blue";
-            this.btnSolicitarPartida.Location = new System.Drawing.Point(492, 13);
+            this.btnSolicitarPartida.Location = new System.Drawing.Point(328, 13);
             this.btnSolicitarPartida.Name = "btnSolicitarPartida";
             this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
             this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -137,7 +138,7 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnPartidaAsociar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnPartidaAsociar.CustomColorName = "Blue";
-            this.btnPartidaAsociar.Location = new System.Drawing.Point(612, 13);
+            this.btnPartidaAsociar.Location = new System.Drawing.Point(448, 13);
             this.btnPartidaAsociar.Name = "btnPartidaAsociar";
             this.btnPartidaAsociar.Size = new System.Drawing.Size(87, 40);
             this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -152,7 +153,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnBienRegistrar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnBienRegistrar.CustomColorName = "Blue";
-            this.btnBienRegistrar.Location = new System.Drawing.Point(729, 13);
+            this.btnBienRegistrar.Location = new System.Drawing.Point(565, 13);
             this.btnBienRegistrar.Name = "btnBienRegistrar";
             this.btnBienRegistrar.Size = new System.Drawing.Size(87, 40);
             this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -167,7 +168,7 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnRendicionCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnRendicionCrear.CustomColorName = "Blue";
-            this.btnRendicionCrear.Location = new System.Drawing.Point(845, 13);
+            this.btnRendicionCrear.Location = new System.Drawing.Point(681, 13);
             this.btnRendicionCrear.Name = "btnRendicionCrear";
             this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
             this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -196,7 +197,7 @@ namespace ARTEC.GUI
             this.btnBienes.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnBienes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnBienes.CustomColorName = "Blue";
-            this.btnBienes.Location = new System.Drawing.Point(977, 13);
+            this.btnBienes.Location = new System.Drawing.Point(813, 13);
             this.btnBienes.Name = "btnBienes";
             this.btnBienes.Size = new System.Drawing.Size(108, 40);
             this.btnBienes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -290,7 +291,7 @@ namespace ARTEC.GUI
             this.btnAvanzadas.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnAvanzadas.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnAvanzadas.CustomColorName = "Blue";
-            this.btnAvanzadas.Location = new System.Drawing.Point(1111, 13);
+            this.btnAvanzadas.Location = new System.Drawing.Point(1069, 13);
             this.btnAvanzadas.Name = "btnAvanzadas";
             this.btnAvanzadas.Size = new System.Drawing.Size(108, 40);
             this.btnAvanzadas.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -299,14 +300,30 @@ namespace ARTEC.GUI
             this.btnAvanzadas.TextColor = System.Drawing.Color.White;
             this.btnAvanzadas.Click += new System.EventHandler(this.btnAvanzadas_Click_1);
             // 
+            // btnCategorias
+            // 
+            this.btnCategorias.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCategorias.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCategorias.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnCategorias.CustomColorName = "Blue";
+            this.btnCategorias.Location = new System.Drawing.Point(941, 13);
+            this.btnCategorias.Name = "btnCategorias";
+            this.btnCategorias.Size = new System.Drawing.Size(108, 40);
+            this.btnCategorias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCategorias.TabIndex = 9;
+            this.btnCategorias.Text = "btnCategorias";
+            this.btnCategorias.TextColor = System.Drawing.Color.White;
+            this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
-            this.Controls.Add(this.panelEx1);
+            this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.btnBienes);
             this.Controls.Add(this.cboIdioma);
+            this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.btnRendicionCrear);
             this.Controls.Add(this.btnBienRegistrar);
             this.Controls.Add(this.btnPartidaAsociar);
@@ -346,6 +363,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnBitacora;
         private DevComponents.DotNetBar.ButtonX btnBackup;
         private DevComponents.DotNetBar.ButtonX btnUsuarios;
+        private DevComponents.DotNetBar.ButtonX btnCategorias;
 
 
 

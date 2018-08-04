@@ -29,6 +29,58 @@ namespace ARTEC.BLL
         }
 
 
+        public bool CategoriaCrear(Categoria nuevaCategoria)
+        {
+            try
+            {
+                if (GestorCategoria.CategoriaCrear(nuevaCategoria))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+        }
 
+        public Categoria CategoriaBuscar(string NomCategoria)
+        {
+            try
+            {
+                return GestorCategoria.CategoriaBuscar(NomCategoria);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+        }
+
+        public List<Proveedor> CategoriaTraerProveedores(int IdCategoria)
+        {
+            try
+            {
+                return GestorCategoria.CategoriaTraerProveedores(IdCategoria);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool CategoriaModificar(Categoria unaCategoria, List<Proveedor> ProvQuitarMod, List<Proveedor> ProvAgregarMod)
+        {
+            try
+            {
+                if(GestorCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

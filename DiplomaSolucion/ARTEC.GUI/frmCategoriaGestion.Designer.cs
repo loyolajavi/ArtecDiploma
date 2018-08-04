@@ -28,7 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoriaGestion));
             this.pnlBuscar = new DevComponents.DotNetBar.PanelEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblCategoriaBuscar = new DevComponents.DotNetBar.LabelX();
@@ -44,8 +46,14 @@ namespace ARTEC.GUI
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
             this.btnLimpiar = new DevComponents.DotNetBar.ButtonX();
+            this.vldfrmCategoriaGestion = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese el nombre de la Categoría");
+            this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProveedores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBuscar
@@ -77,6 +85,7 @@ namespace ARTEC.GUI
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 78;
             this.btnBuscar.Text = "btnBuscar";
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblCategoriaBuscar
             // 
@@ -144,6 +153,7 @@ namespace ARTEC.GUI
             this.txtCategoria.PreventEnterBeep = true;
             this.txtCategoria.Size = new System.Drawing.Size(227, 22);
             this.txtCategoria.TabIndex = 80;
+            this.vldfrmCategoriaGestion.SetValidator1(this.txtCategoria, this.requiredFieldValidator1);
             // 
             // lblTipo
             // 
@@ -229,22 +239,26 @@ namespace ARTEC.GUI
             this.btnCrearCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearCategoria.TabIndex = 90;
             this.btnCrearCategoria.Text = "btnCrear";
+            this.btnCrearCategoria.Click += new System.EventHandler(this.btnCrearCategoria_Click);
             // 
             // btnModificar
             // 
             this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnModificar.Enabled = false;
             this.btnModificar.Location = new System.Drawing.Point(202, 387);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(87, 35);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 91;
             this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnEliminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEliminar.Enabled = false;
             this.btnEliminar.Location = new System.Drawing.Point(304, 387);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 35);
@@ -262,12 +276,46 @@ namespace ARTEC.GUI
             this.btnLimpiar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnLimpiar.TabIndex = 93;
             this.btnLimpiar.Text = "btnLimpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // vldfrmCategoriaGestion
+            // 
+            this.vldfrmCategoriaGestion.ContainerControl = this.btnCrearCategoria;
+            this.vldfrmCategoriaGestion.ErrorProvider = this.errorProvider1;
+            this.vldfrmCategoriaGestion.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese el nombre de la Categoría";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAgregar.Location = new System.Drawing.Point(245, 136);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 22);
+            this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgregar.TabIndex = 97;
+            this.btnAgregar.Text = "btnAgregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // frmCategoriaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 437);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -282,10 +330,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmCategoriaGestion";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.frmCategoriaGestion_Load);
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProveedores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -307,5 +358,10 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.ButtonX btnEliminar;
         private DevComponents.DotNetBar.ButtonX btnLimpiar;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldfrmCategoriaGestion;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.ButtonX btnAgregar;
     }
 }
