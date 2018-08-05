@@ -38,6 +38,7 @@ namespace ARTEC.GUI
             this.GrillaAgentes = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
+            this.btnCrear = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,11 +168,24 @@ namespace ARTEC.GUI
             this.btnEliminar.TabIndex = 58;
             this.btnEliminar.Text = "btnEliminar";
             // 
+            // btnCrear
+            // 
+            this.btnCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnCrear.Location = new System.Drawing.Point(44, 285);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(75, 23);
+            this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCrear.TabIndex = 59;
+            this.btnCrear.Text = "btnCrear";
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
+            // 
             // frmDependenciaBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 315);
+            this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.GrillaAgentes);
             this.Controls.Add(this.lblAgentes);
@@ -202,5 +216,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaAgentes;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.ButtonX btnEliminar;
+        private DevComponents.DotNetBar.ButtonX btnCrear;
     }
 }

@@ -69,5 +69,31 @@ namespace ARTEC.BLL
         {
             GestorDependencia.DependenciaAgentesQuitarLista(AgentesAQuitar, IdDep);
         }
+
+        public Dependencia DependenciaBuscar(string NomDependencia)
+        {
+            try
+            {
+                return GestorDependencia.DependenciaBuscar(NomDependencia);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool DependenciaCrear(Dependencia nuevaDependencia)
+        {
+            try
+            {
+                if (GestorDependencia.DependenciaCrear(nuevaDependencia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

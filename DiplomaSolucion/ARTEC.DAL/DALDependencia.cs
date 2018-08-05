@@ -353,5 +353,73 @@ namespace ARTEC.DAL
                 }
             }
         }
+
+        public Dependencia DependenciaBuscar(string NomDependencia)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NomDependencia", NomDependencia)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "DependenciaBuscar", parameters))
+                {
+                    Dependencia unaDep = new Dependencia();
+                    unaDep = FRAMEWORK.Persistencia.Mapeador.MapearUno<Dependencia>(ds);
+                    return unaDep;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool DependenciaCrear(Dependencia nuevaDependencia)
+        {
+            SqlParameter[] parametersDepCrear = new SqlParameter[]
+			{
+                new SqlParameter("@NombreDependencia", nuevaDependencia.NombreDependencia),
+                new SqlParameter("@IdTipoDependencia", nuevaDependencia.unTipoDep.IdTipoDependencia)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "DependenciaCrear", parametersDepCrear);
+                int IdDepRes = Decimal.ToInt32(Resultado);
+                nuevaDependencia.IdDependencia = IdDepRes;
+
+                if (nuevaDependencia.unosAgentes != null && nuevaDependencia.unosAgentes.Count > 0)
+                {
+                    foreach (Agente unAgente in nuevaDependencia.unosAgentes)
+                    {
+                        SqlParameter[] parametersAgente = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdAgente", unAgente.IdAgente),
+                            new SqlParameter("@IdCargo", unAgente.unCargo.IdCargo),
+                            new SqlParameter("@IdDependencia", nuevaDependencia.IdDependencia)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaAgenteAgregar", parametersAgente);
+                    }
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

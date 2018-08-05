@@ -158,9 +158,22 @@ namespace ARTEC.GUI
 
         }
 
-        void unfrmDependenciaModificar_FormClosing(object sender, FormClosingEventArgs e)
+        void unfrmDependenciaModificar_FormClosing(object sender, FormClosingEventArgs e)//El nombre de esta función no tiene que ver con el evento FormClosing de frmDependenciaModificar_FormClosing, le puse mal el nombre simplemente
         {
             frmDependenciaBuscar_Load(this, new EventArgs());
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            frmDependenciaCrear unFrmDependenciaCrear = new frmDependenciaCrear();
+            //CON ESTO hago que al cerrar el formulario del showdialog (unFrmDependenciaCrear), 
+            //voy a la funcion unFrmDependenciaCrear_FormClosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
+            unFrmDependenciaCrear.FormClosing += unfrmDependenciaModificar_FormClosing;
+            txtDependencia.Clear();
+            DepSeleccionada = null;
+            txtTipoDep.Clear();
+            this.GrillaAgentes.DataSource = null;
+            unFrmDependenciaCrear.ShowDialog();
         }
 
 
