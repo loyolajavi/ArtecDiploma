@@ -63,15 +63,30 @@ namespace ARTEC.GUI
                     cboTipo.SelectedValue = unaCategoria.unTipoBien.IdTipoBien;
                     txtCategoriaBuscar.Clear();
 
-                    //VER: Agregar este codigo al programar Eliminar Categoria
-                    //if (unaCategoria.Activo == 0)
-                    //{
-
-                    //}
-                    //else
-                    //{
-
-                    //}
+                    if (unaCategoria.Activo == 0)
+                    {
+                        lblBaja.Visible = true;
+                        btnReactivar.Enabled = true;
+                        btnModificar.Enabled = false;
+                        btnEliminar.Enabled = false;
+                        btnAgregar.Enabled = false;
+                        txtCategoria.Enabled = false;
+                        cboProveedor.Enabled = false;
+                        cboTipo.Enabled = false;
+                        GrillaProveedores.Enabled = false;
+                    }
+                    else
+                    {
+                        lblBaja.Visible = false;
+                        btnReactivar.Enabled = false;
+                        btnModificar.Enabled = true;
+                        btnEliminar.Enabled = true;
+                        btnAgregar.Enabled = true;
+                        txtCategoria.Enabled = true;
+                        cboProveedor.Enabled = true;
+                        cboTipo.Enabled = true;
+                        GrillaProveedores.Enabled = true;
+                    }
 
                     ProvsAgregar.Clear();
                     ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
@@ -80,8 +95,6 @@ namespace ARTEC.GUI
                     GrillaProveedores.DataSource = null;
                     GrillaProveedores.DataSource = ProvsAgregar;
                     btnCrearCategoria.Enabled = false;
-                    btnModificar.Enabled = true;
-                    btnEliminar.Enabled = true;
                 }
                 else
                 {
@@ -151,6 +164,13 @@ namespace ARTEC.GUI
             btnCrearCategoria.Enabled = true;
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
+            lblBaja.Visible = false;
+            btnReactivar.Enabled = false;
+            btnAgregar.Enabled = true;
+            txtCategoria.Enabled = true;
+            cboProveedor.Enabled = true;
+            cboTipo.Enabled = true;
+            GrillaProveedores.Enabled = true;
             txtCategoria.Clear();
             txtCategoriaBuscar.Clear();
             cboTipo.Refresh();
@@ -169,25 +189,99 @@ namespace ARTEC.GUI
             if (!vldfrmCategoriaGestion.Validate())
                 return;
 
-            //Verificar que no existe una categoria con el nombre ingresado en la modificacion
-            Categoria CatAux = ManagerCategoria.CategoriaBuscar(txtCategoria.Text);
-            if (CatAux != null && CatAux.IdCategoria > 0)
+            try
             {
-                MessageBox.Show("La Categoría ingresada ya existe");
-                return;
+                //Verificar que no existe una categoria con el nombre ingresado en la modificacion
+                Categoria CatAux = null;
+                if(unaCategoria.DescripCategoria != txtCategoria.Text)
+                    CatAux = ManagerCategoria.CategoriaBuscar(txtCategoria.Text);
+                if (CatAux != null && CatAux.IdCategoria > 0)
+                {
+                    MessageBox.Show("La Categoría ingresada ya existe");
+                    return;
+                }
+
+                unaCategoria.DescripCategoria = txtCategoria.Text;
+                unaCategoria.unTipoBien = cboTipo.SelectedItem as TipoBien;
+
+                ProvQuitarMod = ProvsAgregarBKP.Where(d => !ProvsAgregar.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
+                ProvAgregarMod = ProvsAgregar.Where(d => !ProvsAgregarBKP.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
+
+                if (ManagerCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
+                {
+                    ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
+                    ProvsAgregarBKP = ProvsAgregar.ToList();
+                    MessageBox.Show("Modificación realizada");
+                }
             }
-
-            unaCategoria.DescripCategoria = txtCategoria.Text;
-            unaCategoria.unTipoBien = cboTipo.SelectedItem as TipoBien;
-
-            ProvQuitarMod = ProvsAgregarBKP.Where(d => !ProvsAgregar.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
-            ProvAgregarMod = ProvsAgregar.Where(d => !ProvsAgregarBKP.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
-
-            if (ManagerCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
+            catch (Exception es)
             {
-                ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
-                ProvsAgregarBKP = ProvsAgregar.ToList();
-                MessageBox.Show("Modificación realizada");
+                string IdError = ServicioLog.CrearLog(es, "btnModificar_Click");
+                MessageBox.Show("Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                 if (unaCategoria != null && !string.IsNullOrWhiteSpace(txtCategoria.Text) && unaCategoria.IdCategoria > 0)
+                {
+                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Categoria: " + unaCategoria.DescripCategoria + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                        if(ManagerCategoria.CategoriaEliminar(unaCategoria))
+                        {
+                            lblBaja.Visible = true;
+                            btnReactivar.Enabled = true;
+                            btnEliminar.Enabled = false;
+                            btnModificar.Enabled = false;
+                            btnCrearCategoria.Enabled = false;
+                            btnAgregar.Enabled = false;
+                            txtCategoria.Enabled = false;
+                            cboProveedor.Enabled = false;
+                            cboTipo.Enabled = false;
+                            GrillaProveedores.Enabled = false;
+                            MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " dada de baja correctamente");
+                        }
+                    else
+                        return;
+                }
+                else
+                    MessageBox.Show("Para dar de baja una Categoría primero debe buscarla");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmCategoriaGestion - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnReactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (unaCategoria != null && !string.IsNullOrWhiteSpace(txtCategoria.Text) && unaCategoria.IdCategoria > 0)
+                {
+                    if (ManagerCategoria.CategoriaReactivar(unaCategoria))
+                    {
+                        lblBaja.Visible = false;
+                        btnReactivar.Enabled = false;
+                        btnModificar.Enabled = true;
+                        btnEliminar.Enabled = true;
+                        btnAgregar.Enabled = true;
+                        txtCategoria.Enabled = true;
+                        cboProveedor.Enabled = true;
+                        cboTipo.Enabled = true;
+                        GrillaProveedores.Enabled = true;
+                        MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " reactivada correctamente");
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmCategoriaGestion - btnReactivar_Click");
+                MessageBox.Show("Ocurrio un error al intentar reactivar la Categoría: " + unaCategoria.DescripCategoria + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 

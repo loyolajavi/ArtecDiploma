@@ -47,10 +47,12 @@ namespace ARTEC.GUI
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
             this.btnLimpiar = new DevComponents.DotNetBar.ButtonX();
             this.vldfrmCategoriaGestion = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese el nombre de la Categoría");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese el nombre de la Categoría");
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
+            this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -233,7 +235,7 @@ namespace ARTEC.GUI
             // 
             this.btnCrearCategoria.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrearCategoria.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrearCategoria.Location = new System.Drawing.Point(98, 387);
+            this.btnCrearCategoria.Location = new System.Drawing.Point(25, 390);
             this.btnCrearCategoria.Name = "btnCrearCategoria";
             this.btnCrearCategoria.Size = new System.Drawing.Size(87, 35);
             this.btnCrearCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -246,7 +248,7 @@ namespace ARTEC.GUI
             this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(202, 387);
+            this.btnModificar.Location = new System.Drawing.Point(129, 390);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(87, 35);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -259,12 +261,13 @@ namespace ARTEC.GUI
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnEliminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(304, 387);
+            this.btnEliminar.Location = new System.Drawing.Point(231, 390);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 35);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 92;
             this.btnEliminar.Text = "btnEliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
             // 
@@ -284,6 +287,11 @@ namespace ARTEC.GUI
             this.vldfrmCategoriaGestion.ErrorProvider = this.errorProvider1;
             this.vldfrmCategoriaGestion.Highlighter = this.highlighter1;
             // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese el nombre de la Categoría";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -292,11 +300,6 @@ namespace ARTEC.GUI
             // highlighter1
             // 
             this.highlighter1.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Ingrese el nombre de la Categoría";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // btnAgregar
             // 
@@ -310,11 +313,40 @@ namespace ARTEC.GUI
             this.btnAgregar.Text = "btnAgregar";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // lblBaja
+            // 
+            // 
+            // 
+            // 
+            this.lblBaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblBaja.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaja.Location = new System.Drawing.Point(4, 67);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(108, 22);
+            this.lblBaja.TabIndex = 101;
+            this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblBaja.Visible = false;
+            // 
+            // btnReactivar
+            // 
+            this.btnReactivar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReactivar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReactivar.Enabled = false;
+            this.btnReactivar.Location = new System.Drawing.Point(333, 390);
+            this.btnReactivar.Name = "btnReactivar";
+            this.btnReactivar.Size = new System.Drawing.Size(87, 35);
+            this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReactivar.TabIndex = 102;
+            this.btnReactivar.Text = "btnReactivar";
+            this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
+            // 
             // frmCategoriaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 437);
+            this.Controls.Add(this.btnReactivar);
+            this.Controls.Add(this.lblBaja);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnEliminar);
@@ -363,5 +395,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.ButtonX btnAgregar;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
+        private DevComponents.DotNetBar.ButtonX btnReactivar;
     }
 }

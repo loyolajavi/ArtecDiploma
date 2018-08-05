@@ -23,11 +23,25 @@ namespace ARTEC.BLL
             return GestorCategoria.CategoriaTraerTodosSoft();
         }
 
+        public List<Categoria> CategoriaTraerTodosHardActivos()
+        {
+            return GestorCategoria.CategoriaTraerTodosHardActivos();
+        }
+
+        public List<Categoria> CategoriaTraerTodosSoftActivos()
+        {
+            return GestorCategoria.CategoriaTraerTodosSoftActivos();
+        }
+
         public List<Categoria> CategoriaTraerTodos()
         {
             return GestorCategoria.CategoriaTraerTodos();
         }
 
+        public List<Categoria> CategoriaTraerTodosActivos()
+        {
+            return GestorCategoria.CategoriaTraerTodosActivos();
+        }
 
         public bool CategoriaCrear(Categoria nuevaCategoria)
         {
@@ -74,6 +88,36 @@ namespace ARTEC.BLL
             try
             {
                 if(GestorCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool CategoriaEliminar(Categoria unaCategoria)
+        {
+            try
+            {
+                unaCategoria.Activo = 0;
+                if (GestorCategoria.CategoriaEliminar(unaCategoria.IdCategoria))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool CategoriaReactivar(Categoria unaCategoria)
+        {
+            try
+            {
+                unaCategoria.Activo = 1;
+                if (GestorCategoria.CategoriaReactivar(unaCategoria.IdCategoria))
                     return true;
                 return false;
             }

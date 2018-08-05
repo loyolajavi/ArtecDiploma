@@ -27,7 +27,9 @@ namespace ARTEC.ENTIDADES
             get { return _LosProveedores; }
             set { _LosProveedores = value; }
         }
-        
+
+        public int Activo { get; set; }
+
 
     }
 }

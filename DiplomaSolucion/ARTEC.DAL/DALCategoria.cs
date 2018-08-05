@@ -48,9 +48,49 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Categoria> CategoriaTraerTodosHardActivos()
+        {
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosHardActivos"))
+                {
+                    List<Categoria> unasCategorias = new List<Categoria>();
+                    unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
+                    return unasCategorias;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
+        public List<Categoria> CategoriaTraerTodosSoftActivos()
+        {
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosSoftActivos"))
+            {
+                List<Categoria> unasCategorias = new List<Categoria>();
+                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
+                return unasCategorias;
+            }
+        }
+
+
         public List<Categoria> CategoriaTraerTodos()
         {
             using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodos"))
+            {
+                List<Categoria> unasCategorias = new List<Categoria>();
+                unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
+                return unasCategorias;
+            }
+        }
+
+        public List<Categoria> CategoriaTraerTodosActivos()
+        {
+            using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CategoriaTraerTodosActivos"))
             {
                 List<Categoria> unasCategorias = new List<Categoria>();
                 unasCategorias = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
@@ -218,6 +258,64 @@ namespace ARTEC.DAL
                   }
                   FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                   return true;
+              }
+              catch (Exception es)
+              {
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                  throw;
+              }
+              finally
+              {
+                  if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                      FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+              }
+          }
+
+          public bool CategoriaEliminar(int IdCategoria)
+          {
+              SqlParameter[] parametersCatEliminar = new SqlParameter[]
+			{
+                new SqlParameter("@IdCategoria", IdCategoria)
+			};
+
+              try
+              {
+                  FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                  int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaEliminar", parametersCatEliminar);
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                  if (FilasAfectadas > 0)
+                      return true;
+                  return false;
+              }
+              catch (Exception es)
+              {
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                  throw;
+              }
+              finally
+              {
+                  if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                      FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+              }
+          }
+
+          public bool CategoriaReactivar(int IdCategoria)
+          {
+              SqlParameter[] parametersCatReactivar = new SqlParameter[]
+			  {
+                new SqlParameter("@IdCategoria", IdCategoria)
+			  };
+
+              try
+              {
+                  FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                  int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaReactivar", parametersCatReactivar);
+                  FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                  if (FilasAfectadas > 0)
+                      return true;
+                  return false;
               }
               catch (Exception es)
               {

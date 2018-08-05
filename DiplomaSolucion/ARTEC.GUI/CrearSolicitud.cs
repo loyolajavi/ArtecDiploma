@@ -181,9 +181,9 @@ namespace ARTEC.GUI
             //Traigo categorias para dps filtrar por hard o soft
             BLLCategoria ManagerCategoria = new BLLCategoria();
             unasCategoriasHard = new List<Categoria>();
-            unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHard();
+            unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHardActivos();
             unasCategoriasSoft = new List<Categoria>();
-            unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoft();
+            unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoftActivos();
 
             unosAgentesAsociados = new List<Agente>();
 
