@@ -93,7 +93,7 @@ namespace ARTEC.GUI
             }
             catch (Exception es)
             {
-                string IdError = ServicioLog.CrearLog(es, "frmDependenciaCrear - btnCrear_Click");
+                string IdError = ServicioLog.CrearLog(es, "frmDependenciaCrear - btnDependenciaCrear_Click");
                 MessageBox.Show("Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }

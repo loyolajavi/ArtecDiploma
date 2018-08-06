@@ -95,5 +95,35 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool DependenciaEliminar(Dependencia unaDependencia)
+        {
+            try
+            {
+                unaDependencia.Activo = 0;
+                if (GestorDependencia.DependenciaEliminar(unaDependencia.IdDependencia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool DependenciaReactivar(Dependencia unaDependencia)
+        {
+            try
+            {
+                unaDependencia.Activo = 1;
+                if (GestorDependencia.DependenciaReactivar(unaDependencia.IdDependencia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

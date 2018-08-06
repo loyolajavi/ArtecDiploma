@@ -421,5 +421,63 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+        public bool DependenciaEliminar(int IdDependencia)
+        {
+            SqlParameter[] parametersDepEliminar = new SqlParameter[]
+			{
+                new SqlParameter("@IdDependencia", IdDependencia)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaEliminar", parametersDepEliminar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public bool DependenciaReactivar(int IdDependencia)
+        {
+            SqlParameter[] parametersDepReactivar = new SqlParameter[]
+			  {
+                new SqlParameter("@IdDependencia", IdDependencia)
+			  };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaReactivar", parametersDepReactivar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

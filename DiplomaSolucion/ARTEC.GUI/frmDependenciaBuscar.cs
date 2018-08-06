@@ -9,6 +9,7 @@ using DevComponents.DotNetBar;
 using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -39,6 +40,10 @@ namespace ARTEC.GUI
         {
             ///Traigo Dependencias para busqueda dinámica
             unasDependencias = ManagerDependencia.TraerTodos();
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnReactivar.Enabled = false;
+            lblBaja.Visible = false;
         }
 
 
@@ -135,6 +140,21 @@ namespace ARTEC.GUI
                         GrillaAgentes.Columns["ApellidoAgente"].HeaderText = "Apellido";
                         GrillaAgentes.Columns["unCargo"].HeaderText = "Cargo";
                         GrillaAgentes.Columns["unaDependencia"].Visible = false;
+                        //Si no está activa
+                        if (DepSeleccionada.Activo == 0)
+                        {
+                            lblBaja.Visible = true;
+                            btnModificar.Enabled = false;
+                            btnEliminar.Enabled = false;
+                            btnReactivar.Enabled = true;
+                        }
+                        else
+                        {
+                            lblBaja.Visible = false;
+                            btnModificar.Enabled = true;
+                            btnEliminar.Enabled = true;
+                            btnReactivar.Enabled = false;
+                        }
 
                     }
                     
@@ -174,6 +194,58 @@ namespace ARTEC.GUI
             txtTipoDep.Clear();
             this.GrillaAgentes.DataSource = null;
             unFrmDependenciaCrear.ShowDialog();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DepSeleccionada != null && !string.IsNullOrWhiteSpace(txtDependencia.Text) && DepSeleccionada.IdDependencia > 0)
+                {
+                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Dependencia: " + DepSeleccionada.NombreDependencia + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                        if (ManagerDependencia.DependenciaEliminar(DepSeleccionada))
+                        {
+                            lblBaja.Visible = true;
+                            btnModificar.Enabled = false;
+                            btnEliminar.Enabled = false;
+                            btnReactivar.Enabled = true;
+                            MessageBox.Show("Dependencia: " + DepSeleccionada.NombreDependencia + " dada de baja correctamente");
+                        }
+                        else
+                            return;
+                }
+                else
+                    MessageBox.Show("Para dar de baja una Categoría primero debe buscarla");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnReactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DepSeleccionada != null && !string.IsNullOrWhiteSpace(txtDependencia.Text) && DepSeleccionada.IdDependencia > 0)
+                {
+                    if (ManagerDependencia.DependenciaReactivar(DepSeleccionada))
+                    {
+                        lblBaja.Visible = false;
+                        btnModificar.Enabled = true;
+                        btnEliminar.Enabled = true;
+                        btnReactivar.Enabled = false;
+                        MessageBox.Show("Categoría: " + DepSeleccionada.NombreDependencia + " reactivada correctamente");
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnReactivar_Click");
+                MessageBox.Show("Ocurrio un error al intentar reactivar la Dependencia: " + DepSeleccionada.NombreDependencia + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
         }
 
 

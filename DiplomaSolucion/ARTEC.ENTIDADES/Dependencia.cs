@@ -14,6 +14,7 @@ namespace ARTEC.ENTIDADES
         public List<Agente> unosAgentes { get; set; }
         public TipoDependencia unTipoDep { get; set; }
 
+        public int Activo { get; set; }
 
         public override string ToString()
         {

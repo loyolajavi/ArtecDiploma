@@ -28,7 +28,7 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -39,6 +39,8 @@ namespace ARTEC.GUI
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
             this.btnCrear = new DevComponents.DotNetBar.ButtonX();
+            this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
+            this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +48,7 @@ namespace ARTEC.GUI
             // 
             this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnModificar.Location = new System.Drawing.Point(195, 285);
+            this.btnModificar.Location = new System.Drawing.Point(146, 285);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -129,14 +131,14 @@ namespace ARTEC.GUI
             // GrillaAgentes
             // 
             this.GrillaAgentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle5;
             this.GrillaAgentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentes.Location = new System.Drawing.Point(12, 113);
             this.GrillaAgentes.Name = "GrillaAgentes";
@@ -161,12 +163,13 @@ namespace ARTEC.GUI
             // 
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnEliminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEliminar.Location = new System.Drawing.Point(359, 285);
+            this.btnEliminar.Location = new System.Drawing.Point(241, 285);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 58;
             this.btnEliminar.Text = "btnEliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnCrear
             // 
@@ -180,11 +183,40 @@ namespace ARTEC.GUI
             this.btnCrear.Text = "btnCrear";
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
+            // btnReactivar
+            // 
+            this.btnReactivar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReactivar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReactivar.Enabled = false;
+            this.btnReactivar.Location = new System.Drawing.Point(337, 285);
+            this.btnReactivar.Name = "btnReactivar";
+            this.btnReactivar.Size = new System.Drawing.Size(75, 23);
+            this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReactivar.TabIndex = 60;
+            this.btnReactivar.Text = "btnReactivar";
+            this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
+            // 
+            // lblBaja
+            // 
+            // 
+            // 
+            // 
+            this.lblBaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblBaja.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaja.Location = new System.Drawing.Point(-1, 17);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(108, 22);
+            this.lblBaja.TabIndex = 102;
+            this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblBaja.Visible = false;
+            // 
             // frmDependenciaBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 315);
+            this.Controls.Add(this.lblBaja);
+            this.Controls.Add(this.btnReactivar);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.GrillaAgentes);
@@ -217,5 +249,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.ButtonX btnEliminar;
         private DevComponents.DotNetBar.ButtonX btnCrear;
+        private DevComponents.DotNetBar.ButtonX btnReactivar;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
     }
 }
