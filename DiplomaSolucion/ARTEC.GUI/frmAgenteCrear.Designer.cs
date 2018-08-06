@@ -28,15 +28,23 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAgenteCrear));
             this.lblNombre = new DevComponents.DotNetBar.LabelX();
             this.lblApellido = new DevComponents.DotNetBar.LabelX();
-            this.lblCargo = new DevComponents.DotNetBar.LabelX();
             this.cboCargo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnCrearAgente = new DevComponents.DotNetBar.ButtonX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtNombre = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtApellido = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.vldFrmAgenteCrear = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.lblCargo = new DevComponents.DotNetBar.LabelX();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -44,7 +52,7 @@ namespace ARTEC.GUI
             // 
             // 
             // 
-            this.lblDependencia.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblNombre.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblNombre.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.Location = new System.Drawing.Point(25, 12);
             this.lblNombre.Name = "lblNombre";
@@ -64,18 +72,6 @@ namespace ARTEC.GUI
             this.lblApellido.Size = new System.Drawing.Size(91, 17);
             this.lblApellido.TabIndex = 64;
             this.lblApellido.Text = "lblApellido";
-            // 
-            // lblCargo
-            // 
-            // 
-            // 
-            // 
-            this.lblCargo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCargo.Location = new System.Drawing.Point(25, 79);
-            this.lblCargo.Name = "lblCargo";
-            this.lblCargo.Size = new System.Drawing.Size(46, 23);
-            this.lblCargo.TabIndex = 77;
-            this.lblCargo.Text = "lblCargo";
             // 
             // cboCargo
             // 
@@ -148,6 +144,7 @@ namespace ARTEC.GUI
             this.txtNombre.PreventEnterBeep = true;
             this.txtNombre.Size = new System.Drawing.Size(289, 22);
             this.txtNombre.TabIndex = 81;
+            this.vldFrmAgenteCrear.SetValidator1(this.txtNombre, this.requiredFieldValidator1);
             // 
             // txtApellido
             // 
@@ -164,18 +161,57 @@ namespace ARTEC.GUI
             this.txtApellido.PreventEnterBeep = true;
             this.txtApellido.Size = new System.Drawing.Size(289, 22);
             this.txtApellido.TabIndex = 82;
+            this.vldFrmAgenteCrear.SetValidator1(this.txtApellido, this.requiredFieldValidator2);
+            // 
+            // vldFrmAgenteCrear
+            // 
+            this.vldFrmAgenteCrear.ContainerControl = this.btnCrearAgente;
+            this.vldFrmAgenteCrear.ErrorProvider = this.errorProvider1;
+            this.vldFrmAgenteCrear.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // lblCargo
+            // 
+            // 
+            // 
+            // 
+            this.lblCargo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblCargo.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCargo.Location = new System.Drawing.Point(25, 84);
+            this.lblCargo.Name = "lblCargo";
+            this.lblCargo.Size = new System.Drawing.Size(91, 17);
+            this.lblCargo.TabIndex = 83;
+            this.lblCargo.Text = "lblCargo";
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese un Apellido";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmAgenteCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 190);
+            this.Controls.Add(this.lblCargo);
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtDependencia);
             this.Controls.Add(this.btnCrearAgente);
-            this.Controls.Add(this.lblCargo);
             this.Controls.Add(this.cboCargo);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
@@ -184,6 +220,7 @@ namespace ARTEC.GUI
             this.Name = "frmAgenteCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmAgenteCrear_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -192,12 +229,17 @@ namespace ARTEC.GUI
 
         private DevComponents.DotNetBar.LabelX lblNombre;
         private DevComponents.DotNetBar.LabelX lblApellido;
-        private DevComponents.DotNetBar.LabelX lblCargo;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboCargo;
         private DevComponents.DotNetBar.ButtonX btnCrearAgente;
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNombre;
         private DevComponents.DotNetBar.Controls.TextBoxX txtApellido;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmAgenteCrear;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.LabelX lblCargo;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

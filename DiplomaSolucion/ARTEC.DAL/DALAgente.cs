@@ -83,8 +83,7 @@ namespace ARTEC.DAL
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                //VER: Guardar en bitacora de eventos
-                return 0;
+                throw;
             }
             finally
             {

@@ -28,7 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDependenciaModificar));
             this.lblAgentes = new DevComponents.DotNetBar.LabelX();
             this.lblTipoDep = new DevComponents.DotNetBar.LabelX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
@@ -46,7 +48,13 @@ namespace ARTEC.GUI
             this.btnCandado = new DevComponents.DotNetBar.ButtonX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.btnNuevoAgente = new DevComponents.DotNetBar.ButtonX();
+            this.vldFrmDependenciaModificar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese una Dependencia");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Agente");
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAgentes
@@ -116,6 +124,7 @@ namespace ARTEC.GUI
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(285, 22);
             this.txtDependencia.TabIndex = 61;
+            this.vldFrmDependenciaModificar.SetValidator1(this.txtDependencia, this.requiredFieldValidator1);
             // 
             // cboDep
             // 
@@ -170,6 +179,7 @@ namespace ARTEC.GUI
             this.txtAgente.PreventEnterBeep = true;
             this.txtAgente.Size = new System.Drawing.Size(194, 22);
             this.txtAgente.TabIndex = 69;
+            this.vldFrmDependenciaModificar.SetValidator1(this.txtAgente, this.requiredFieldValidator2);
             this.txtAgente.TextChanged += new System.EventHandler(this.txtAgente_TextChanged);
             // 
             // labelX2
@@ -227,14 +237,14 @@ namespace ARTEC.GUI
             // 
             this.GrillaAgentesLista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GrillaAgentesLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentesLista.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaAgentesLista.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentesLista.Location = new System.Drawing.Point(2, 156);
             this.GrillaAgentesLista.Name = "GrillaAgentesLista";
@@ -285,6 +295,31 @@ namespace ARTEC.GUI
             this.btnNuevoAgente.Text = "Crear Nuevo Agente";
             this.btnNuevoAgente.Click += new System.EventHandler(this.btnNuevoAgente_Click);
             // 
+            // vldFrmDependenciaModificar
+            // 
+            this.vldFrmDependenciaModificar.ContainerControl = this.btnModificar;
+            this.vldFrmDependenciaModificar.ErrorProvider = this.errorProvider1;
+            this.vldFrmDependenciaModificar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese una Dependencia";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese un Agente";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // frmDependenciaModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,6 +349,7 @@ namespace ARTEC.GUI
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDependenciaModificar_FormClosing);
             this.Load += new System.EventHandler(this.frmDependenciaModificar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentesLista)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,5 +373,10 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCandado;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.ButtonX btnNuevoAgente;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmDependenciaModificar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
     }
 }

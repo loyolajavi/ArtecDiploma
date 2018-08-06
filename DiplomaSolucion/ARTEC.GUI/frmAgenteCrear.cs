@@ -44,17 +44,30 @@ namespace ARTEC.GUI
 
         private void btnCrearAgente_Click(object sender, EventArgs e)
         {
+            if (!vldFrmAgenteCrear.Validate())
+                return;
+
             Agente NuevoAgente = new Agente();
-            NuevoAgente.NombreAgente = txtNombre.Text;
-            NuevoAgente.ApellidoAgente = txtApellido.Text;
-            NuevoAgente.unaDependencia = new Dependencia();
-            NuevoAgente.unaDependencia.IdDependencia = IdDependencia;
-            NuevoAgente.unCargo = new Cargo();
-            NuevoAgente.unCargo.IdCargo = (int)cboCargo.SelectedValue;
-            NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
-            if (ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia) > 0)
-                MessageBox.Show("Agente creado correctamente");
-            this.Close();
+
+            try
+            {
+                NuevoAgente.NombreAgente = txtNombre.Text;
+                NuevoAgente.ApellidoAgente = txtApellido.Text;
+                NuevoAgente.unaDependencia = new Dependencia();
+                NuevoAgente.unaDependencia.IdDependencia = IdDependencia;
+                NuevoAgente.unCargo = new Cargo();
+                NuevoAgente.unCargo.IdCargo = (int)cboCargo.SelectedValue;
+                NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
+                if (ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia) > 0)
+                    MessageBox.Show("Agente creado correctamente");
+                this.Close();
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmAgenteCrear - btnCrearAgente_Click");
+                MessageBox.Show("Ocurrio un error al intentar crear el Agente: " + NuevoAgente.NombreAgente + " " + NuevoAgente.ApellidoAgente + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
         }
     }
 }

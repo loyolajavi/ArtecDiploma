@@ -26,10 +26,19 @@ namespace ARTEC.BLL
 
         public int AgenteCrear(Agente NuevoAgente, int IdDep)
         {
-            int IdAgenteNuevo = GestorAgente.AgenteCrear(NuevoAgente, IdDep);
-            if (IdAgenteNuevo > 0)
-                return IdAgenteNuevo;
-            return 0;
+            try
+            {
+                int IdAgenteNuevo = GestorAgente.AgenteCrear(NuevoAgente, IdDep);
+                if (IdAgenteNuevo > 0)
+                    return IdAgenteNuevo;
+                return 0;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+           
+
         }
     }
 }

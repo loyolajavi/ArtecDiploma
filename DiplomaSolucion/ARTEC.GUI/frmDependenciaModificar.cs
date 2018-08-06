@@ -149,6 +149,10 @@ namespace ARTEC.GUI
 
         private void btnAgregarAgente_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator2.Enabled = true;
+            if (!vldFrmDependenciaModificar.Validate())
+                return;
+
             //Para prevenir que se agregue un agente que ya está en la dependencia
             if (AgentesLista.Exists(x => x.IdAgente == unAgenSelect.IdAgente))
             {
@@ -172,6 +176,10 @@ namespace ARTEC.GUI
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator2.Enabled = false;
+            if (!vldFrmDependenciaModificar.Validate())
+                return;
+            
             if (txtDependencia.Enabled)
                 ManagerDependencia.DependenciaModifNombre(txtDependencia.Text, DepModif.IdDependencia);
 
@@ -310,6 +318,8 @@ namespace ARTEC.GUI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            vldFrmDependenciaModificar.ClearFailedValidations();
+
             AgentesAQuitar.Clear();
             AgentesAQuitarIndex.Clear();
             AgentesLista.Clear();
