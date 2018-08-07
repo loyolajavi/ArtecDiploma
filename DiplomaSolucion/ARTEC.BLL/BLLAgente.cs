@@ -40,5 +40,57 @@ namespace ARTEC.BLL
            
 
         }
+
+        public Agente AgenteBuscar(string ApellidoAgente)
+        {
+            try
+            {
+                return GestorAgente.AgenteBuscar(ApellidoAgente);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Dependencia> AgenteTraerDependencias(int IdAgente)
+        {
+            try
+            {
+                return GestorAgente.AgenteTraerDependencias(IdAgente);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+        public Cargo AgenteTraerCargoPorDep(Dependencia unaDependencia, int IdAgente)
+        {
+            try
+            {
+                return GestorAgente.AgenteTraerCargoPorDep(unaDependencia, IdAgente);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool AgenteModificar(Agente unAgente)
+        {
+            try
+            {
+                if (GestorAgente.AgenteModificar(unAgente))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

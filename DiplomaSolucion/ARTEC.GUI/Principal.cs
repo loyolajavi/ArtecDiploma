@@ -131,10 +131,10 @@ namespace ARTEC.GUI
         }
 
 
-        private void btnBienesCat_Click(object sender, EventArgs e)
+        private void btnAgentes_Click(object sender, EventArgs e)
         {
-            frmCategoriaGestion unfrmBienesCat = new frmCategoriaGestion();
-            unfrmBienesCat.Show();
+            frmAgentesGestion unFrmAgentesGestion = new frmAgentesGestion();
+            unFrmAgentesGestion.Show();
         }
 
 

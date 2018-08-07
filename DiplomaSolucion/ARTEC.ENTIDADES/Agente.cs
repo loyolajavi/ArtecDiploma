@@ -15,6 +15,15 @@ namespace ARTEC.ENTIDADES
         public Cargo unCargo { get; set; }
         public Dependencia unaDependencia { get; set; }
 
+        private List<Dependencia> _unasDependencias = new List<Dependencia>();
+
+        public List<Dependencia> UnasDependencias
+        {
+            get { return _unasDependencias; }
+            set { _unasDependencias = value; }
+        }
+        
+
         public override string ToString()
         {
             if (!string.IsNullOrEmpty(this.ApellidoAgente))

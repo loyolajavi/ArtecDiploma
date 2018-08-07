@@ -56,49 +56,65 @@ namespace ARTEC.GUI
             try
             {
                 unaCategoria = null;
-                unaCategoria = ManagerCategoria.CategoriaBuscar(txtCategoriaBuscar.Text);
-                if (!string.IsNullOrEmpty(txtCategoriaBuscar.Text) && !string.IsNullOrWhiteSpace(txtCategoriaBuscar.Text) && unaCategoria != null && unaCategoria.IdCategoria > 0)
+                if (!string.IsNullOrEmpty(txtCategoriaBuscar.Text) && !string.IsNullOrWhiteSpace(txtCategoriaBuscar.Text))
                 {
-                    txtCategoria.Text = unaCategoria.DescripCategoria;
-                    cboTipo.SelectedValue = unaCategoria.unTipoBien.IdTipoBien;
-                    txtCategoriaBuscar.Clear();
-
-                    if (unaCategoria.Activo == 0)
+                    unaCategoria = ManagerCategoria.CategoriaBuscar(txtCategoriaBuscar.Text);
+                    if (unaCategoria != null && unaCategoria.IdCategoria > 0)
                     {
-                        lblBaja.Visible = true;
-                        btnReactivar.Enabled = true;
-                        btnModificar.Enabled = false;
-                        btnEliminar.Enabled = false;
-                        btnAgregar.Enabled = false;
-                        txtCategoria.Enabled = false;
-                        cboProveedor.Enabled = false;
-                        cboTipo.Enabled = false;
-                        GrillaProveedores.Enabled = false;
+                        txtCategoria.Text = unaCategoria.DescripCategoria;
+                        cboTipo.SelectedValue = unaCategoria.unTipoBien.IdTipoBien;
+                        txtCategoriaBuscar.Clear();
+
+                        if (unaCategoria.Activo == 0)
+                        {
+                            lblBaja.Visible = true;
+                            btnReactivar.Enabled = true;
+                            btnModificar.Enabled = false;
+                            btnEliminar.Enabled = false;
+                            btnAgregar.Enabled = false;
+                            txtCategoria.Enabled = false;
+                            cboProveedor.Enabled = false;
+                            cboTipo.Enabled = false;
+                            GrillaProveedores.Enabled = false;
+                        }
+                        else
+                        {
+                            lblBaja.Visible = false;
+                            btnReactivar.Enabled = false;
+                            btnModificar.Enabled = true;
+                            btnEliminar.Enabled = true;
+                            btnAgregar.Enabled = true;
+                            txtCategoria.Enabled = true;
+                            cboProveedor.Enabled = true;
+                            cboTipo.Enabled = true;
+                            GrillaProveedores.Enabled = true;
+                        }
+
+                        ProvsAgregar.Clear();
+                        ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
+                        ProvsAgregarBKP = ProvsAgregar.ToList();
+
+                        GrillaProveedores.DataSource = null;
+                        GrillaProveedores.DataSource = ProvsAgregar;
+                        btnCrearCategoria.Enabled = false;
                     }
                     else
                     {
-                        lblBaja.Visible = false;
-                        btnReactivar.Enabled = false;
-                        btnModificar.Enabled = true;
-                        btnEliminar.Enabled = true;
-                        btnAgregar.Enabled = true;
-                        txtCategoria.Enabled = true;
-                        cboProveedor.Enabled = true;
-                        cboTipo.Enabled = true;
-                        GrillaProveedores.Enabled = true;
+                        MessageBox.Show("La categoría ingresada no existe");
+                        txtCategoria.Clear();
+                        cboTipo.Refresh();
+                        cboProveedor.Refresh();
+                        GrillaProveedores.DataSource = null;
+                        unaCategoria = null;
+                        btnCrearCategoria.Enabled = true;
+                        btnModificar.Enabled = false;
+                        btnEliminar.Enabled = false;
+                        ProvsAgregar.Clear();
                     }
-
-                    ProvsAgregar.Clear();
-                    ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
-                    ProvsAgregarBKP = ProvsAgregar.ToList();
-
-                    GrillaProveedores.DataSource = null;
-                    GrillaProveedores.DataSource = ProvsAgregar;
-                    btnCrearCategoria.Enabled = false;
                 }
                 else
                 {
-                    MessageBox.Show("La categoría ingresada no existe");
+                    MessageBox.Show("No ha ingresado ninguna categoría");
                     txtCategoria.Clear();
                     cboTipo.Refresh();
                     cboProveedor.Refresh();

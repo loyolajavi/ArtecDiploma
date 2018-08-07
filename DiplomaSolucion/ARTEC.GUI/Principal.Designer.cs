@@ -39,7 +39,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnBienes = new DevComponents.DotNetBar.ButtonX();
+            this.btnAgentes = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
             this.btnBackup = new DevComponents.DotNetBar.ButtonX();
@@ -191,20 +191,20 @@ namespace ARTEC.GUI
             this.cboIdioma.TabIndex = 6;
             this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
-            // btnBienes
+            // btnAgentes
             // 
-            this.btnBienes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBienes.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnBienes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnBienes.CustomColorName = "Blue";
-            this.btnBienes.Location = new System.Drawing.Point(813, 13);
-            this.btnBienes.Name = "btnBienes";
-            this.btnBienes.Size = new System.Drawing.Size(108, 40);
-            this.btnBienes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBienes.TabIndex = 7;
-            this.btnBienes.Text = "btnBienes";
-            this.btnBienes.TextColor = System.Drawing.Color.White;
-            this.btnBienes.Click += new System.EventHandler(this.btnBienesCat_Click);
+            this.btnAgentes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgentes.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnAgentes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnAgentes.CustomColorName = "Blue";
+            this.btnAgentes.Location = new System.Drawing.Point(813, 13);
+            this.btnAgentes.Name = "btnAgentes";
+            this.btnAgentes.Size = new System.Drawing.Size(108, 40);
+            this.btnAgentes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgentes.TabIndex = 7;
+            this.btnAgentes.Text = "btnAgentes";
+            this.btnAgentes.TextColor = System.Drawing.Color.White;
+            this.btnAgentes.Click += new System.EventHandler(this.btnAgentes_Click);
             // 
             // panelEx1
             // 
@@ -321,7 +321,7 @@ namespace ARTEC.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
             this.Controls.Add(this.btnCategorias);
-            this.Controls.Add(this.btnBienes);
+            this.Controls.Add(this.btnAgentes);
             this.Controls.Add(this.cboIdioma);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.btnRendicionCrear);
@@ -356,7 +356,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboIdioma;
         private System.Windows.Forms.TabPage tabPartidas;
         private System.Windows.Forms.TabPage tabDependencia;
-        private DevComponents.DotNetBar.ButtonX btnBienes;
+        private DevComponents.DotNetBar.ButtonX btnAgentes;
         private DevComponents.DotNetBar.PanelEx panelEx1;
         private DevComponents.DotNetBar.ButtonX btnVolver;
         private DevComponents.DotNetBar.ButtonX btnAvanzadas;
