@@ -63,27 +63,11 @@ namespace ARTEC.DAL
                     }
                     try
                     {
-                        ResProveedor.MailAlternativoProv = row["MailAlternativoProv"].ToString();
-                    }
-                    catch (Exception es)
-                    {
-                    }
-                    try
-                    {
                         ResProveedor.MailContactoProv = row["MailContactoProv"].ToString();
                     }
                     catch (Exception es)
                     {
                     }
-                    try
-                    {
-                        ResProveedor.RazonSocialProv = row["RazonSocialProv"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    
-                    
                     //ResProveedor.unasCategorias;
                     //ResProveedor.unasDirecciones;
                     //ResProveedor.unosTelefonos;

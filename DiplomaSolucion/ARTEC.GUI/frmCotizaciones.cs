@@ -246,7 +246,7 @@ namespace ARTEC.GUI
 
             foreach (Proveedor unProv in ListaProv)
             {
-                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.RazonSocialProv, txtAsunto.Text, txtCuerpo.Text);
+                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
             }
             
         }

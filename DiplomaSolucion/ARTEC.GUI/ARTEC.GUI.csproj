@@ -238,11 +238,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProveedorCrear.cs">
+    <Compile Include="frmProveedorCrear.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProveedorCrear.Designer.cs">
-      <DependentUpon>ProveedorCrear.cs</DependentUpon>
+    <Compile Include="frmProveedorCrear.Designer.cs">
+      <DependentUpon>frmProveedorCrear.cs</DependentUpon>
     </Compile>
     <Compile Include="SoftHomologadoBuscar.cs">
       <SubType>Form</SubType>
@@ -344,8 +344,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ProveedorCrear.resx">
-      <DependentUpon>ProveedorCrear.cs</DependentUpon>
+    <EmbeddedResource Include="frmProveedorCrear.resx">
+      <DependentUpon>frmProveedorCrear.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SoftHomologadoBuscar.resx">
       <DependentUpon>SoftHomologadoBuscar.cs</DependentUpon>

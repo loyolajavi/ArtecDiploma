@@ -38,7 +38,7 @@ namespace ARTEC.GUI
             unosProveedores = ManagerProveedor.ProveedorTraerTodos();
             cboProveedor.DataSource = null;
             cboProveedor.DataSource = unosProveedores;
-            cboProveedor.DisplayMember = "RazonSocialProv";
+            cboProveedor.DisplayMember = "AliasProv";
             cboProveedor.ValueMember = "IdProveedor";
 
             //Traer TipoBien

@@ -10,11 +10,9 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdProveedor { get; set; }
-        public string RazonSocialProv { get; set; }
         public string AliasProv { get; set; }
         public string ContactoProv { get; set; }
         public string MailContactoProv { get; set; }
-        public string MailAlternativoProv { get; set; }
 
         private List<Telefono> _unosTelefonos = new List<Telefono>();
 

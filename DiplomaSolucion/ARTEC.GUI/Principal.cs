@@ -174,6 +174,12 @@ namespace ARTEC.GUI
             unFrmCategoriaGestion.Show();
         }
 
+        private void btnProveedor_Click(object sender, EventArgs e)
+        {
+            frmProveedorCrear unFrmProveedorCrear = new frmProveedorCrear();
+            unFrmProveedorCrear.Show();
+        }
+
 
 
 
