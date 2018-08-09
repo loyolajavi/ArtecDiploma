@@ -19,5 +19,53 @@ namespace ARTEC.BLL
         }
 
 
+
+        public List<Categoria> ProveedorTraerCategorias(int IdProveedor)
+        {
+            try
+            {
+                return GestorProveedor.ProveedorTraerCategorias(IdProveedor);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Telefono> ProveedorTraerTelefonos(int IdProveedor)
+        {
+            try
+            {
+                return GestorProveedor.ProveedorTraerTelefonos(IdProveedor);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Direccion> ProveedorTraerDirecciones(int IdProveedor)
+        {
+            try
+            {
+                return GestorProveedor.ProveedorTraerDirecciones(IdProveedor);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public Proveedor ProveedorBuscar(string NomProveedor)
+        {
+            try
+            {
+                return GestorProveedor.ProveedorBuscar(NomProveedor);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

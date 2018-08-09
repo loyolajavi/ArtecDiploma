@@ -82,5 +82,93 @@ namespace ARTEC.DAL
         }
 
 
+
+        public List<Categoria> ProveedorTraerCategorias(int IdProveedor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdProveedor", IdProveedor)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "ProveedorTraerCategorias", parameters))
+                {
+                    List<Categoria> ListaCateg = new List<Categoria>();
+                    ListaCateg = FRAMEWORK.Persistencia.Mapeador.Mapear<Categoria>(ds);
+                    return ListaCateg;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Telefono> ProveedorTraerTelefonos(int IdProveedor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdProveedor", IdProveedor)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "ProveedorTraerTelefonos", parameters))
+                {
+                    List<Telefono> ListaTel = new List<Telefono>();
+                    ListaTel = FRAMEWORK.Persistencia.Mapeador.Mapear<Telefono>(ds);
+                    return ListaTel;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Direccion> ProveedorTraerDirecciones(int IdProveedor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdProveedor", IdProveedor)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "ProveedorTraerDirecciones", parameters))
+                {
+                    List<Direccion> ListaDir = new List<Direccion>();
+                    ListaDir = FRAMEWORK.Persistencia.Mapeador.Mapear<Direccion>(ds);
+                    return ListaDir;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public Proveedor ProveedorBuscar(string NomProveedor)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NomProveedor", NomProveedor)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "ProveedorBuscar", parameters))
+                {
+                    Proveedor unProv = new Proveedor();
+                    unProv = FRAMEWORK.Persistencia.Mapeador.MapearUno<Proveedor>(ds);
+                    return unProv;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

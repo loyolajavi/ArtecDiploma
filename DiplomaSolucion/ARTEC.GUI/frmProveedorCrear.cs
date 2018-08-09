@@ -13,6 +13,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.BLL.Servicios;
+using System.Text.RegularExpressions;
 
 namespace ARTEC.GUI
 {
@@ -23,9 +24,11 @@ namespace ARTEC.GUI
         List<Categoria> unasCategorias = new List<Categoria>();
         Categoria unaCat;
         Proveedor unProvBuscar;
-        List<Categoria> CategoriasAsociadas = new List<Categoria>();
+        List<Categoria> CategoriasAgregar = new List<Categoria>();
         BLLProveedor ManagerProveedor = new BLLProveedor();
         List<Proveedor> unosProveedores = new List<Proveedor>();
+        List<Telefono> TelsAgregar = new List<Telefono>();
+        List<Direccion> DirAgregar = new List<Direccion>();
 
         public frmProveedorCrear()
         {
@@ -37,6 +40,7 @@ namespace ARTEC.GUI
             BLLCategoria ManagerCategoria = new BLLCategoria();
             unasCategorias = ManagerCategoria.CategoriaTraerTodosActivos();
             unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+
             BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             
@@ -119,31 +123,32 @@ namespace ARTEC.GUI
 
         private void btnAgregarProd_Click(object sender, EventArgs e)
         {
-            if (unaCat != null)
-            {
-                CategoriasAsociadas.Add(unaCat);
-            }
+            if (unaCat != null && !CategoriasAgregar.Contains(unaCat))
+                CategoriasAgregar.Add(unaCat);
 
             GrillaProductos.DataSource = null;
-            GrillaProductos.DataSource = CategoriasAsociadas;
+            GrillaProductos.DataSource = CategoriasAgregar;
             GrillaProductos.Columns[0].Visible = false;
             GrillaProductos.Columns[1].HeaderText = "Productos";
             
         }
 
-        private void btnCrearProveedor_Click(object sender, EventArgs e)
-        {
-            
-            nuevoProveedor.AliasProv = txtNombreEmpresa.Text;
-            nuevoProveedor.ContactoProv = txtContacto.Text;
-            //SEGUIR
-        }
+   
 
         private void btnTelefono_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator3.Enabled = true;
+            requiredFieldValidator4.Enabled = true;
             Telefono unTel = new Telefono();
-            
-            //nuevoProveedor.unosTelefonos.Add
+            unTel.NroTelefono = Int32.Parse(txtNroTelefono.Text);
+            unTel.CodArea = Int32.Parse(txtCodArea.Text);
+            unTel.unTipoTelefono = cboTipo.SelectedItem as TipoTelefono;
+
+            if (!TelsAgregar.Contains(unTel))
+                TelsAgregar.Add(unTel);
+
+            GrillaTelefonos.DataSource = null;
+            GrillaTelefonos.DataSource = TelsAgregar;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -239,7 +244,7 @@ namespace ARTEC.GUI
         //Busqueda Dinamica Proveedores
         private void txtProveedorBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtProveedorBuscar.Text))
+            if (!string.IsNullOrWhiteSpace(txtProveedorBuscar.Text) & txtProveedorBuscar.TextLength >= 3 || !string.IsNullOrWhiteSpace(txtProveedorBuscar.Text) & txtProveedorBuscar.TextLength <= 2 & Regex.IsMatch(txtProveedorBuscar.Text, @"\d"))
             {
 
                 List<Proveedor> resProv = new List<Proveedor>();
@@ -304,10 +309,122 @@ namespace ARTEC.GUI
                     txtProveedorBuscar.Text = cbo3.GetItemText(cbo3.SelectedItem);
                     this.txtProveedorBuscar.TextChanged += new System.EventHandler(this.txtProveedorBuscar_TextChanged);
                     txtProveedorBuscar.SelectionStart = txtProveedorBuscar.Text.Length + 1;
-                    //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
-                    //validBien.Validate(); //AGREGARLA
+
+                    try
+                    {
+                        //nuevoProveedor = unProvBuscar;
+                        unProvBuscar.unasCategorias = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
+                        unProvBuscar.unosTelefonos = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
+                        unProvBuscar.unasDirecciones = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
+
+                        txtNombreEmpresa.Text = unProvBuscar.AliasProv;
+                        txtContacto.Text = unProvBuscar.ContactoProv;
+                        txtMailContacto.Text = unProvBuscar.MailContactoProv;
+                        GrillaProductos.DataSource = null;
+                        GrillaProductos.DataSource = unProvBuscar.unasCategorias;
+                        GrillaTelefonos.DataSource = null;
+                        GrillaTelefonos.DataSource = unProvBuscar.unosTelefonos;
+                        GrillaDirecciones.DataSource = null;
+                        GrillaDirecciones.DataSource = unProvBuscar.unasDirecciones;
+
+                        //if (unaCategoria.Activo == 0)
+                        //{
+                        //    lblBaja.Visible = true;
+                        //    btnReactivar.Enabled = true;
+                        //    btnModificar.Enabled = false;
+                        //    btnEliminar.Enabled = false;
+                        //    btnAgregar.Enabled = false;
+                        //    txtCategoria.Enabled = false;
+                        //    cboProveedor.Enabled = false;
+                        //    cboTipo.Enabled = false;
+                        //    GrillaProveedores.Enabled = false;
+                        //}
+                        //else
+                        //{
+                        //    lblBaja.Visible = false;
+                        //    btnReactivar.Enabled = false;
+                        //    btnModificar.Enabled = true;
+                        //    btnEliminar.Enabled = true;
+                        //    btnAgregar.Enabled = true;
+                        //    txtCategoria.Enabled = true;
+                        //    cboProveedor.Enabled = true;
+                        //    cboTipo.Enabled = true;
+                        //    GrillaProveedores.Enabled = true;
+                        //}
+
+                        //ProvsAgregar.Clear();
+                        //ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
+                        //ProvsAgregarBKP = ProvsAgregar.ToList();
+                    }
+                    catch (Exception es)
+                    {
+                        string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - cboProveedor_SelectionChangeCommitted");
+                        MessageBox.Show("Ocurrio un error al buscar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                    }
+
                 }
             }
+        }
+
+
+        private void btnCrearProveedor_Click(object sender, EventArgs e)
+        {
+            requiredFieldValidator2.Enabled = false;
+            requiredFieldValidator3.Enabled = false;
+            requiredFieldValidator4.Enabled = false;
+            requiredFieldValidator5.Enabled = false;
+            requiredFieldValidator6.Enabled = false;
+            requiredFieldValidator7.Enabled = false;
+            requiredFieldValidator8.Enabled = false;
+
+            if (!vldFrmProveedorCrear.Validate())
+                return;
+
+          
+
+            try
+            {
+                Proveedor ProvAux = ManagerProveedor.ProveedorBuscar(txtNombreEmpresa.Text);
+                if (ProvAux != null && ProvAux.IdProveedor > 0)
+                {
+                    MessageBox.Show("El Proveedor ingresado ya existe");
+                    return;
+                }
+
+                nuevoProveedor.AliasProv = txtNombreEmpresa.Text;
+                nuevoProveedor.ContactoProv = txtContacto.Text;
+                nuevoProveedor.MailContactoProv = txtMailContacto.Text;
+                nuevoProveedor.unasCategorias = CategoriasAgregar;
+                nuevoProveedor.unosTelefonos = TelsAgregar;
+                nuevoProveedor.unasDirecciones = DirAgregar;
+                //SEGUIR
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnCrearProveedor_Click");
+                MessageBox.Show("Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+        }
+
+        private void btnDireccion_Click(object sender, EventArgs e)
+        {
+            requiredFieldValidator5.Enabled = true;
+            requiredFieldValidator6.Enabled = true;
+            requiredFieldValidator7.Enabled = true;
+            requiredFieldValidator8.Enabled = true;
+            Direccion unaDir = new Direccion();
+            unaDir.Calle = txtCalle.Text;
+            unaDir.NumeroCalle = txtNroCalle.Text;
+            unaDir.Piso = txtPiso.Text;
+            unaDir.Localidad = txtLocalidad.Text;
+            unaDir.unaProvincia = cboProvincia.SelectedItem as Provincia;
+
+            if (!DirAgregar.Contains(unaDir))
+                DirAgregar.Add(unaDir);
+
+            GrillaDirecciones.DataSource = null;
+            GrillaDirecciones.DataSource = DirAgregar;
         }
 
 

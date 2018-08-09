@@ -29,10 +29,16 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProveedorCrear));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProveedorCrear));
             this.lblNombreEmpresa = new DevComponents.DotNetBar.LabelX();
             this.lblContacto = new DevComponents.DotNetBar.LabelX();
             this.lblTelefono = new DevComponents.DotNetBar.LabelX();
@@ -47,9 +53,7 @@ namespace ARTEC.GUI
             this.cboProducto = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnCrearProveedor = new DevComponents.DotNetBar.ButtonX();
             this.btnTelefono = new DevComponents.DotNetBar.ButtonX();
-            this.lviewTelefono = new DevComponents.DotNetBar.Controls.ListViewEx();
             this.btnDireccion = new DevComponents.DotNetBar.ButtonX();
-            this.lviewDireccion = new DevComponents.DotNetBar.Controls.ListViewEx();
             this.txtMailContacto = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtCalle = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtNroCalle = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -59,27 +63,31 @@ namespace ARTEC.GUI
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblProveedor = new DevComponents.DotNetBar.LabelX();
             this.txtProveedorBuscar = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.txtCodArea = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtNroTelefono = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboTipo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblTipo = new DevComponents.DotNetBar.LabelX();
             this.txtLocalidad = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.vldFrmProveedorCrear = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator6 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator7 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator8 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.GrillaTelefonos = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.GrillaDirecciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.gpanelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProductos)).BeginInit();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaTelefonos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaDirecciones)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombreEmpresa
@@ -231,35 +239,35 @@ namespace ARTEC.GUI
             // GrillaProductos
             // 
             this.GrillaProductos.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GrillaProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.GrillaProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaProductos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaProductos.DefaultCellStyle = dataGridViewCellStyle8;
             this.GrillaProductos.EnableHeadersVisualStyles = false;
             this.GrillaProductos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaProductos.Location = new System.Drawing.Point(3, 40);
             this.GrillaProductos.Name = "GrillaProductos";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GrillaProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.GrillaProductos.Size = new System.Drawing.Size(248, 142);
             this.GrillaProductos.TabIndex = 2;
             // 
@@ -331,22 +339,6 @@ namespace ARTEC.GUI
             this.btnTelefono.Text = "btnTelefono";
             this.btnTelefono.Click += new System.EventHandler(this.btnTelefono_Click);
             // 
-            // lviewTelefono
-            // 
-            this.lviewTelefono.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.lviewTelefono.Border.Class = "ListViewBorder";
-            this.lviewTelefono.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lviewTelefono.DisabledBackColor = System.Drawing.Color.Empty;
-            this.lviewTelefono.ForeColor = System.Drawing.Color.Black;
-            this.lviewTelefono.Location = new System.Drawing.Point(481, 116);
-            this.lviewTelefono.Name = "lviewTelefono";
-            this.lviewTelefono.Size = new System.Drawing.Size(353, 83);
-            this.lviewTelefono.TabIndex = 20;
-            this.lviewTelefono.UseCompatibleStateImageBehavior = false;
-            // 
             // btnDireccion
             // 
             this.btnDireccion.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -357,22 +349,7 @@ namespace ARTEC.GUI
             this.btnDireccion.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDireccion.TabIndex = 21;
             this.btnDireccion.Text = "btnDireccion";
-            // 
-            // lviewDireccion
-            // 
-            this.lviewDireccion.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.lviewDireccion.Border.Class = "ListViewBorder";
-            this.lviewDireccion.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lviewDireccion.DisabledBackColor = System.Drawing.Color.Empty;
-            this.lviewDireccion.ForeColor = System.Drawing.Color.Black;
-            this.lviewDireccion.Location = new System.Drawing.Point(481, 240);
-            this.lviewDireccion.Name = "lviewDireccion";
-            this.lviewDireccion.Size = new System.Drawing.Size(353, 167);
-            this.lviewDireccion.TabIndex = 22;
-            this.lviewDireccion.UseCompatibleStateImageBehavior = false;
+            this.btnDireccion.Click += new System.EventHandler(this.btnDireccion_Click);
             // 
             // txtMailContacto
             // 
@@ -525,6 +502,20 @@ namespace ARTEC.GUI
             this.txtProveedorBuscar.TabIndex = 0;
             this.txtProveedorBuscar.TextChanged += new System.EventHandler(this.txtProveedorBuscar_TextChanged);
             // 
+            // cboProveedor
+            // 
+            this.cboProveedor.DisplayMember = "Text";
+            this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboProveedor.ForeColor = System.Drawing.Color.Black;
+            this.cboProveedor.FormattingEnabled = true;
+            this.cboProveedor.ItemHeight = 16;
+            this.cboProveedor.Location = new System.Drawing.Point(106, 6);
+            this.cboProveedor.Name = "cboProveedor";
+            this.cboProveedor.Size = new System.Drawing.Size(227, 22);
+            this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboProveedor.TabIndex = 101;
+            this.cboProveedor.SelectionChangeCommitted += new System.EventHandler(this.cboProveedor_SelectionChangeCommitted);
+            // 
             // txtCodArea
             // 
             this.txtCodArea.BackColor = System.Drawing.Color.White;
@@ -609,15 +600,6 @@ namespace ARTEC.GUI
             this.vldFrmProveedorCrear.ErrorProvider = this.errorProvider1;
             this.vldFrmProveedorCrear.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
@@ -627,16 +609,6 @@ namespace ARTEC.GUI
             // 
             this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator3
-            // 
-            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator4
-            // 
-            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator5
             // 
@@ -653,30 +625,107 @@ namespace ARTEC.GUI
             this.requiredFieldValidator7.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator7.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // requiredFieldValidator8
             // 
             this.requiredFieldValidator8.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator8.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // cboProveedor
+            // errorProvider1
             // 
-            this.cboProveedor.DisplayMember = "Text";
-            this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboProveedor.ForeColor = System.Drawing.Color.Black;
-            this.cboProveedor.FormattingEnabled = true;
-            this.cboProveedor.ItemHeight = 16;
-            this.cboProveedor.Location = new System.Drawing.Point(106, 6);
-            this.cboProveedor.Name = "cboProveedor";
-            this.cboProveedor.Size = new System.Drawing.Size(227, 22);
-            this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboProveedor.TabIndex = 101;
-            this.cboProveedor.SelectionChangeCommitted += new System.EventHandler(this.cboProveedor_SelectionChangeCommitted);
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // GrillaTelefonos
+            // 
+            this.GrillaTelefonos.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaTelefonos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.GrillaTelefonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaTelefonos.DefaultCellStyle = dataGridViewCellStyle5;
+            this.GrillaTelefonos.EnableHeadersVisualStyles = false;
+            this.GrillaTelefonos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaTelefonos.Location = new System.Drawing.Point(471, 116);
+            this.GrillaTelefonos.Name = "GrillaTelefonos";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaTelefonos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.GrillaTelefonos.Size = new System.Drawing.Size(373, 83);
+            this.GrillaTelefonos.TabIndex = 4;
+            // 
+            // GrillaDirecciones
+            // 
+            this.GrillaDirecciones.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaDirecciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.GrillaDirecciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDirecciones.DefaultCellStyle = dataGridViewCellStyle2;
+            this.GrillaDirecciones.EnableHeadersVisualStyles = false;
+            this.GrillaDirecciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.GrillaDirecciones.Location = new System.Drawing.Point(471, 244);
+            this.GrillaDirecciones.Name = "GrillaDirecciones";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaDirecciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.GrillaDirecciones.Size = new System.Drawing.Size(373, 142);
+            this.GrillaDirecciones.TabIndex = 101;
             // 
             // frmProveedorCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 580);
+            this.Controls.Add(this.GrillaDirecciones);
+            this.Controls.Add(this.GrillaTelefonos);
             this.Controls.Add(this.txtLocalidad);
             this.Controls.Add(this.lblTipo);
             this.Controls.Add(this.cboTipo);
@@ -688,9 +737,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtNroCalle);
             this.Controls.Add(this.txtCalle);
             this.Controls.Add(this.txtMailContacto);
-            this.Controls.Add(this.lviewDireccion);
             this.Controls.Add(this.btnDireccion);
-            this.Controls.Add(this.lviewTelefono);
             this.Controls.Add(this.btnTelefono);
             this.Controls.Add(this.btnCrearProveedor);
             this.Controls.Add(this.gpanelProductos);
@@ -710,6 +757,8 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProductos)).EndInit();
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaTelefonos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaDirecciones)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -730,9 +779,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCrearProveedor;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProducto;
         private DevComponents.DotNetBar.ButtonX btnTelefono;
-        private DevComponents.DotNetBar.Controls.ListViewEx lviewTelefono;
         private DevComponents.DotNetBar.ButtonX btnDireccion;
-        private DevComponents.DotNetBar.Controls.ListViewEx lviewDireccion;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMailContacto;
         private DevComponents.DotNetBar.Controls.TextBoxX txtCalle;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroCalle;
@@ -759,5 +806,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProveedor;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDirecciones;
+        private DevComponents.DotNetBar.Controls.DataGridViewX GrillaTelefonos;
     }
 }
