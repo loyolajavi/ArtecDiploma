@@ -29,6 +29,8 @@ namespace ARTEC.GUI
         List<Proveedor> unosProveedores = new List<Proveedor>();
         List<Telefono> TelsAgregar = new List<Telefono>();
         List<Direccion> DirAgregar = new List<Direccion>();
+        List<TipoTelefono> unosTipoTelefonos = new List<TipoTelefono>();
+        List<Provincia> unasProvincias = new List<Provincia>();
 
         public frmProveedorCrear()
         {
@@ -37,11 +39,35 @@ namespace ARTEC.GUI
 
         private void ProveedorCrear_Load(object sender, EventArgs e)
         {
-            BLLCategoria ManagerCategoria = new BLLCategoria();
-            unasCategorias = ManagerCategoria.CategoriaTraerTodosActivos();
-            unosProveedores = ManagerProveedor.ProveedorTraerTodos();
 
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            try
+            {
+                BLLCategoria ManagerCategoria = new BLLCategoria();
+                unasCategorias = ManagerCategoria.CategoriaTraerTodosActivos();
+                unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+
+                BLLTelefono ManagerTelefono = new BLLTelefono();
+                unosTipoTelefonos = ManagerTelefono.TelefonoTipoTraerTodos();
+                cboTipo.DataSource = null;
+                cboTipo.DataSource = unosTipoTelefonos;
+                cboTipo.DisplayMember = "DescripTipoTel";
+                cboTipo.ValueMember = "IdTipoTelefono";
+
+                BLLDireccion ManagerDireccion = new BLLDireccion();
+                unasProvincias = ManagerDireccion.DireccionProvinciaTraerTodos();
+                cboProvincia.DataSource = null;
+                cboProvincia.DataSource = unasProvincias;
+                cboProvincia.DisplayMember = "NombreProvincia";
+                cboProvincia.ValueMember = "IdProvincia";
+
+                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - ProveedorCrear_Load");
+                MessageBox.Show("Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+           
 
             
         }
@@ -123,6 +149,18 @@ namespace ARTEC.GUI
 
         private void btnAgregarProd_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator3.Enabled = false;
+            requiredFieldValidator4.Enabled = false;
+            requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator2.Enabled = true;
+            requiredFieldValidator5.Enabled = false;
+            requiredFieldValidator6.Enabled = false;
+            requiredFieldValidator7.Enabled = false;
+            requiredFieldValidator8.Enabled = false;
+
+            if (!vldFrmProveedorCrear.Validate())
+                return;
+
             if (unaCat != null && !CategoriasAgregar.Contains(unaCat))
                 CategoriasAgregar.Add(unaCat);
 
@@ -139,6 +177,14 @@ namespace ARTEC.GUI
         {
             requiredFieldValidator3.Enabled = true;
             requiredFieldValidator4.Enabled = true;
+            requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator2.Enabled = false;
+            requiredFieldValidator5.Enabled = false;
+            requiredFieldValidator6.Enabled = false;
+            requiredFieldValidator7.Enabled = false;
+            requiredFieldValidator8.Enabled = false;
+            if (!vldFrmProveedorCrear.Validate())
+                return;
             Telefono unTel = new Telefono();
             unTel.NroTelefono = Int32.Parse(txtNroTelefono.Text);
             unTel.CodArea = Int32.Parse(txtCodArea.Text);
@@ -302,6 +348,7 @@ namespace ARTEC.GUI
             {
                 if (cboProveedor.SelectedIndex > -1)
                 {
+                    vldFrmProveedorCrear.ClearFailedValidations();
                     ComboBox cbo3 = (ComboBox)sender;
                     unProvBuscar = new Proveedor();
                     unProvBuscar = (Proveedor)cbo3.SelectedItem;
@@ -369,6 +416,7 @@ namespace ARTEC.GUI
 
         private void btnCrearProveedor_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator1.Enabled = true;
             requiredFieldValidator2.Enabled = false;
             requiredFieldValidator3.Enabled = false;
             requiredFieldValidator4.Enabled = false;
@@ -379,8 +427,6 @@ namespace ARTEC.GUI
 
             if (!vldFrmProveedorCrear.Validate())
                 return;
-
-          
 
             try
             {
@@ -397,7 +443,10 @@ namespace ARTEC.GUI
                 nuevoProveedor.unasCategorias = CategoriasAgregar;
                 nuevoProveedor.unosTelefonos = TelsAgregar;
                 nuevoProveedor.unasDirecciones = DirAgregar;
-                //SEGUIR
+
+                if(ManagerProveedor.ProveedorCrear(nuevoProveedor))
+                    MessageBox.Show("Proveedor creado correctamente");
+
             }
             catch (Exception es)
             {
@@ -409,10 +458,18 @@ namespace ARTEC.GUI
 
         private void btnDireccion_Click(object sender, EventArgs e)
         {
+            requiredFieldValidator3.Enabled = false;
+            requiredFieldValidator4.Enabled = false;
+            requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator2.Enabled = false;
             requiredFieldValidator5.Enabled = true;
             requiredFieldValidator6.Enabled = true;
             requiredFieldValidator7.Enabled = true;
             requiredFieldValidator8.Enabled = true;
+
+            if (!vldFrmProveedorCrear.Validate())
+                return;
+
             Direccion unaDir = new Direccion();
             unaDir.Calle = txtCalle.Text;
             unaDir.NumeroCalle = txtNroCalle.Text;

@@ -67,5 +67,19 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool ProveedorCrear(Proveedor nuevoProveedor)
+        {
+            try
+            {
+                if (GestorProveedor.ProveedorCrear(nuevoProveedor))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="BLLCotizacion.cs" />
     <Compile Include="BLLDependencia.cs" />
     <Compile Include="BLLDeposito.cs" />
+    <Compile Include="BLLDireccion.cs" />
     <Compile Include="BLLEstadoInventario.cs" />
     <Compile Include="BLLEstadoSolicDetalle.cs" />
     <Compile Include="BLLEstadoSolicitud.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="BLLSoftware.cs" />
     <Compile Include="BLLSolicDetalle.cs" />
     <Compile Include="BLLSolicitud.cs" />
+    <Compile Include="BLLTelefono.cs" />
     <Compile Include="BLLTipoBien.cs" />
     <Compile Include="BLLUsuario.cs" />
     <Compile Include="IBLLBien.cs" />

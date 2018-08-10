@@ -50,6 +50,7 @@
     <Compile Include="DALCotizacion.cs" />
     <Compile Include="DALDependencia.cs" />
     <Compile Include="DALDeposito.cs" />
+    <Compile Include="DALDireccion.cs" />
     <Compile Include="DALEstadoInventario.cs" />
     <Compile Include="DALEstadoSolicDetalle.cs" />
     <Compile Include="DALEstadoSolicitud.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="DALSoftware.cs" />
     <Compile Include="DALSolicDetalle.cs" />
     <Compile Include="DALSolicitud.cs" />
+    <Compile Include="DALTelefono.cs" />
     <Compile Include="DALTipoBien.cs" />
     <Compile Include="DALTipoDependencia.cs" />
     <Compile Include="DALUsuario.cs" />
