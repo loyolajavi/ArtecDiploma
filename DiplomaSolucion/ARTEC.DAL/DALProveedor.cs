@@ -234,7 +234,7 @@ namespace ARTEC.DAL
                 {
                     foreach (Direccion unaDire in nuevoProveedor.unasDirecciones)
                     {
-                        SqlParameter[] parametersTel = new SqlParameter[]
+                        SqlParameter[] parametersDir = new SqlParameter[]
 			            {
                             new SqlParameter("@Calle", unaDire.Calle),
                             new SqlParameter("@NumeroCalle", unaDire.NumeroCalle),
@@ -243,7 +243,7 @@ namespace ARTEC.DAL
                             new SqlParameter("@IdProvincia", unaDire.unaProvincia.IdProvincia)
 			            };
 
-                        var ResDir = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "DireccionCrear", parametersTel);
+                        var ResDir = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "DireccionCrear", parametersDir);
                         int IdDirRes = Decimal.ToInt32(ResDir);
                         unaDire.IdDireccion = IdDirRes;
 
@@ -258,6 +258,147 @@ namespace ARTEC.DAL
                     }
                 }
 
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public bool ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
+        {
+            SqlParameter[] parametersProvModif = new SqlParameter[]
+			{
+                new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor),
+                new SqlParameter("@AliasProv", unProvBuscar.AliasProv),
+                new SqlParameter("@ContactoProv", unProvBuscar.ContactoProv),
+                new SqlParameter("@MailContactoProv", unProvBuscar.MailContactoProv)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorModificar", parametersProvModif);
+
+                //Categorias Modif
+                if (CatQuitarMod.Count > 0)
+                {
+                    foreach (Categoria unaCat in CatQuitarMod)
+                    {
+                        SqlParameter[] parametersCatQuitar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdCategoria", unaCat.IdCategoria),
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaProvDesasociar", parametersCatQuitar);
+                    }
+                }
+
+                if (CatAgregarMod.Count > 0)
+                {
+                    foreach (Categoria unaCat in CatAgregarMod)
+                    {
+                        SqlParameter[] parametersCatAgregar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdCategoria", unaCat.IdCategoria),
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaProvAsociar", parametersCatAgregar);
+                    }
+                }
+
+                //Telefonos Modif
+                if (TelQuitarMod.Count > 0)
+                {
+                    foreach (Telefono unTel in TelQuitarMod)
+                    {
+                        SqlParameter[] parametersTelQuitar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor),
+                            new SqlParameter("@IdTelefono", unTel.IdTelefono)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorTelDesasociar", parametersTelQuitar);
+                    }
+                }
+
+                if (TelAgregarMod.Count > 0)
+                {
+                    foreach (Telefono unTel in TelAgregarMod)
+                    {
+                        SqlParameter[] parametersTel = new SqlParameter[]
+			            {
+                            new SqlParameter("@CodArea", unTel.CodArea),
+                            new SqlParameter("@NroTelefono", unTel.NroTelefono),
+                            new SqlParameter("@IdTipoTelefono", unTel.unTipoTelefono.IdTipoTelefono)
+			            };
+
+                        var ResTel = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TelefonoCrear", parametersTel);
+                        int IdTelRes = Decimal.ToInt32(ResTel);
+                        unTel.IdTelefono = IdTelRes;
+
+                        SqlParameter[] parametersTelAgregar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor),
+                            new SqlParameter("@IdTelefono", unTel.IdTelefono)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorTelAsociar", parametersTelAgregar);
+                    }
+                }
+
+                //Direcciones Modif
+                if (DirQuitarMod.Count > 0)
+                {
+                    foreach (Direccion unaDire in DirQuitarMod)
+                    {
+                        SqlParameter[] parametersDirQuitar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor),
+                            new SqlParameter("@IdDireccion", unaDire.IdDireccion)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorDireDesasociar", parametersDirQuitar);
+                    }
+                }
+
+                if (DirAgregarMod.Count > 0)
+                {
+                    foreach (Direccion unaDire in DirAgregarMod)
+                    {
+                        SqlParameter[] parametersDir = new SqlParameter[]
+			            {
+                            new SqlParameter("@Calle", unaDire.Calle),
+                            new SqlParameter("@NumeroCalle", unaDire.NumeroCalle),
+                            new SqlParameter("@Piso", unaDire.Piso),
+                            new SqlParameter("@Localidad", unaDire.Localidad),
+                            new SqlParameter("@IdProvincia", unaDire.unaProvincia.IdProvincia)
+			            };
+
+                        var ResDir = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "DireccionCrear", parametersDir);
+                        int IdDirRes = Decimal.ToInt32(ResDir);
+                        unaDire.IdDireccion = IdDirRes;
+
+                        SqlParameter[] parametersDirAgregar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdProveedor", unProvBuscar.IdProveedor),
+                            new SqlParameter("@IdDireccion", unaDire.IdDireccion)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorDireAsociar", parametersDirAgregar);
+                    }
+                }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
             }

@@ -82,6 +82,7 @@ namespace ARTEC.GUI
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.GrillaTelefonos = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.GrillaDirecciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.gpanelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProductos)).BeginInit();
             this.pnlBuscar.SuspendLayout();
@@ -270,6 +271,7 @@ namespace ARTEC.GUI
             this.GrillaProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.GrillaProductos.Size = new System.Drawing.Size(248, 142);
             this.GrillaProductos.TabIndex = 2;
+            this.GrillaProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaProductos_CellClick);
             // 
             // btnAgregarProd
             // 
@@ -683,6 +685,7 @@ namespace ARTEC.GUI
             this.GrillaTelefonos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.GrillaTelefonos.Size = new System.Drawing.Size(373, 83);
             this.GrillaTelefonos.TabIndex = 4;
+            this.GrillaTelefonos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaTelefonos_CellClick);
             // 
             // GrillaDirecciones
             // 
@@ -718,12 +721,27 @@ namespace ARTEC.GUI
             this.GrillaDirecciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaDirecciones.Size = new System.Drawing.Size(373, 142);
             this.GrillaDirecciones.TabIndex = 101;
+            this.GrillaDirecciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaDirecciones_CellClick);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnModificar.Enabled = false;
+            this.btnModificar.Location = new System.Drawing.Point(230, 530);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(98, 38);
+            this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnModificar.TabIndex = 105;
+            this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // frmProveedorCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 580);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.GrillaDirecciones);
             this.Controls.Add(this.GrillaTelefonos);
             this.Controls.Add(this.txtLocalidad);
@@ -750,6 +768,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNombreEmpresa);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmProveedorCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.ProveedorCrear_Load);
@@ -808,5 +827,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProveedor;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDirecciones;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaTelefonos;
+        private DevComponents.DotNetBar.ButtonX btnModificar;
     }
 }

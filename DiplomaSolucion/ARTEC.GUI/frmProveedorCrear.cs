@@ -25,10 +25,13 @@ namespace ARTEC.GUI
         Categoria unaCat;
         Proveedor unProvBuscar;
         List<Categoria> CategoriasAgregar = new List<Categoria>();
+        List<Categoria> CategoriasAgregarBKP = new List<Categoria>();
         BLLProveedor ManagerProveedor = new BLLProveedor();
         List<Proveedor> unosProveedores = new List<Proveedor>();
         List<Telefono> TelsAgregar = new List<Telefono>();
+        List<Telefono> TelsAgregarBKP = new List<Telefono>();
         List<Direccion> DirAgregar = new List<Direccion>();
+        List<Direccion> DirAgregarBKP = new List<Direccion>();
         List<TipoTelefono> unosTipoTelefonos = new List<TipoTelefono>();
         List<Provincia> unasProvincias = new List<Provincia>();
 
@@ -59,6 +62,8 @@ namespace ARTEC.GUI
                 cboProvincia.DataSource = unasProvincias;
                 cboProvincia.DisplayMember = "NombreProvincia";
                 cboProvincia.ValueMember = "IdProvincia";
+
+
 
                 BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             }
@@ -142,7 +147,6 @@ namespace ARTEC.GUI
                     this.txtProducto.TextChanged += new System.EventHandler(this.txtProducto_TextChanged);
                     txtProducto.SelectionStart = txtProducto.Text.Length + 1;
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
-                    //validBien.Validate(); //AGREGARLA
                 }
             }
         }
@@ -168,7 +172,7 @@ namespace ARTEC.GUI
             GrillaProductos.DataSource = CategoriasAgregar;
             GrillaProductos.Columns[0].Visible = false;
             GrillaProductos.Columns[1].HeaderText = "Productos";
-            
+            FormatearGrillaCategorias();
         }
 
    
@@ -195,6 +199,7 @@ namespace ARTEC.GUI
 
             GrillaTelefonos.DataSource = null;
             GrillaTelefonos.DataSource = TelsAgregar;
+            FormatearGrillaTelefonos();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -359,20 +364,32 @@ namespace ARTEC.GUI
 
                     try
                     {
-                        //nuevoProveedor = unProvBuscar;
-                        unProvBuscar.unasCategorias = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
-                        unProvBuscar.unosTelefonos = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
-                        unProvBuscar.unasDirecciones = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
+                        CategoriasAgregar.Clear();
+                        CategoriasAgregar = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
+                        CategoriasAgregarBKP = CategoriasAgregar.ToList();
+                        TelsAgregar.Clear();
+                        TelsAgregar = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
+                        TelsAgregarBKP = TelsAgregar.ToList();
+                        DirAgregar.Clear();
+                        DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
+                        DirAgregarBKP = DirAgregar.ToList();
 
                         txtNombreEmpresa.Text = unProvBuscar.AliasProv;
                         txtContacto.Text = unProvBuscar.ContactoProv;
                         txtMailContacto.Text = unProvBuscar.MailContactoProv;
                         GrillaProductos.DataSource = null;
-                        GrillaProductos.DataSource = unProvBuscar.unasCategorias;
+                        GrillaProductos.DataSource = CategoriasAgregar;
                         GrillaTelefonos.DataSource = null;
-                        GrillaTelefonos.DataSource = unProvBuscar.unosTelefonos;
+                        GrillaTelefonos.DataSource = TelsAgregar;
                         GrillaDirecciones.DataSource = null;
-                        GrillaDirecciones.DataSource = unProvBuscar.unasDirecciones;
+                        GrillaDirecciones.DataSource = DirAgregar;
+
+                        btnModificar.Enabled = true;
+                        btnCrearProveedor.Enabled = false;
+
+                        FormatearGrillaCategorias();
+                        FormatearGrillaTelefonos();
+                        FormatearGrillaDirecciones();
 
                         //if (unaCategoria.Activo == 0)
                         //{
@@ -482,7 +499,200 @@ namespace ARTEC.GUI
 
             GrillaDirecciones.DataSource = null;
             GrillaDirecciones.DataSource = DirAgregar;
+            FormatearGrillaDirecciones();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            List<Categoria> CatQuitarMod = new List<Categoria>();
+            List<Categoria> CatAgregarMod = new List<Categoria>();
+            List<Telefono> TelQuitarMod = new List<Telefono>();
+            List<Telefono> TelAgregarMod = new List<Telefono>();
+            List<Direccion> DirQuitarMod = new List<Direccion>();
+            List<Direccion> DirAgregarMod = new List<Direccion>();
+
+            requiredFieldValidator1.Enabled = true;
+            requiredFieldValidator2.Enabled = false;
+            requiredFieldValidator3.Enabled = false;
+            requiredFieldValidator4.Enabled = false;
+            requiredFieldValidator5.Enabled = false;
+            requiredFieldValidator6.Enabled = false;
+            requiredFieldValidator7.Enabled = false;
+            requiredFieldValidator8.Enabled = false;
+
+            if (!vldFrmProveedorCrear.Validate())
+                return;
+
+            try
+            {
+                //Verificar que no existe un proveedor con el nombre ingresado en la modificacion
+                Proveedor ProvAux = null;
+                if (unProvBuscar.AliasProv != txtNombreEmpresa.Text)
+                    ProvAux = ManagerProveedor.ProveedorBuscar(txtNombreEmpresa.Text);
+                if (ProvAux != null && ProvAux.IdProveedor > 0)
+                {
+                    MessageBox.Show("El proveedor ingresado ya existe");
+                    return;
+                }
+
+                unProvBuscar.AliasProv = txtNombreEmpresa.Text;
+                unProvBuscar.ContactoProv = txtContacto.Text;
+                unProvBuscar.MailContactoProv = txtMailContacto.Text;
+
+                //Categorias Modif
+                CatQuitarMod = CategoriasAgregarBKP.Where(d => !CategoriasAgregar.Any(a => a.IdCategoria == d.IdCategoria)).ToList();
+                CatAgregarMod = CategoriasAgregar.Where(d => !CategoriasAgregarBKP.Any(a => a.IdCategoria == d.IdCategoria)).ToList();
+
+                //Telefonos Modif
+                TelQuitarMod = TelsAgregarBKP.Where(d => !TelsAgregar.Any(a => a.IdTelefono == d.IdTelefono)).ToList();
+                TelAgregarMod = TelsAgregar.Where(d => !TelsAgregarBKP.Any(a => a.IdTelefono == d.IdTelefono)).ToList();
+
+                //Direcciones Modif
+                DirQuitarMod = DirAgregarBKP.Where(d => !DirAgregar.Any(a => a.IdDireccion == d.IdDireccion)).ToList();
+                DirAgregarMod = DirAgregar.Where(d => !DirAgregarBKP.Any(a => a.IdDireccion == d.IdDireccion)).ToList();
+
+                if (ManagerProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod))
+                {
+                    CategoriasAgregar = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
+                    CategoriasAgregarBKP = CategoriasAgregar.ToList();
+                    TelsAgregar = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
+                    TelsAgregarBKP = TelsAgregar.ToList();
+                    DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
+                    DirAgregarBKP = DirAgregar.ToList();
+                    MessageBox.Show("Modificación realizada");
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnModificar_Click");
+                MessageBox.Show("Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
+        }
+
+        private void GrillaProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == GrillaProductos.Columns["btnDinBorrar"].Index)
+                {
+                    CategoriasAgregar.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    GrillaProductos.DataSource = null;
+                    GrillaProductos.DataSource = CategoriasAgregar;
+                    FormatearGrillaCategorias();
+                }
+            }
+        }
+
+
+        private void FormatearGrillaCategorias()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaProductos.Columns.Contains("btnDinBorrar"))
+                GrillaProductos.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaProductos.Columns.Add(deleteButton);
+
+            //Formato Grilla Categoria
+            GrillaProductos.Columns["IdCategoria"].Visible = false;
+            GrillaProductos.Columns["Activo"].Visible = false;
+            GrillaProductos.Columns["DescripCategoria"].HeaderText = "Nombre";
+            GrillaProductos.Columns["unTipoBien"].HeaderText = "Tipo";
+        }
+
+
+        private void GrillaTelefonos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == GrillaTelefonos.Columns["btnDinBorrar"].Index)
+                {
+                    TelsAgregar.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    GrillaTelefonos.DataSource = null;
+                    GrillaTelefonos.DataSource = TelsAgregar;
+                    FormatearGrillaTelefonos();
+                }
+            }
+        }
+
+
+        private void FormatearGrillaTelefonos()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaTelefonos.Columns.Contains("btnDinBorrar"))
+                GrillaTelefonos.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaTelefonos.Columns.Add(deleteButton);
+
+            //Formato Grilla Telefono
+            GrillaTelefonos.Columns["IdTelefono"].Visible = false;
+        }
+
+
+        private void GrillaDirecciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == GrillaDirecciones.Columns["btnDinBorrar"].Index)
+                {
+                    DirAgregar.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    GrillaDirecciones.DataSource = null;
+                    GrillaDirecciones.DataSource = DirAgregar;
+                    FormatearGrillaDirecciones();
+                }
+            }
+        }
+
+
+        private void FormatearGrillaDirecciones()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaDirecciones.Columns.Contains("btnDinBorrar"))
+                GrillaDirecciones.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaDirecciones.Columns.Add(deleteButton);
+
+            //Formato Grilla Direccion
+            GrillaDirecciones.Columns["IdDireccion"].Visible = false;
+        }
+
+
 
 
     }

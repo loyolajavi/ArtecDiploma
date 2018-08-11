@@ -81,5 +81,19 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
+        {
+            try
+            {
+                if (GestorProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

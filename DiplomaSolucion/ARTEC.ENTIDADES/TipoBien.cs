@@ -17,5 +17,15 @@ namespace ARTEC.ENTIDADES
             Hard = 1, Soft = 2
         }
 
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.DescripTipoBien))
+            {
+                return this.DescripTipoBien;
+            }
+            return "";
+        }
+
+
     }
 }

@@ -12,6 +12,13 @@ namespace ARTEC.ENTIDADES
         public int IdTipoTelefono { get; set; }
         public string DescripTipoTel { get; set; }
 
-
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.DescripTipoTel))
+            {
+                return this.DescripTipoTel;
+            }
+            return "";
+        }
     }
 }

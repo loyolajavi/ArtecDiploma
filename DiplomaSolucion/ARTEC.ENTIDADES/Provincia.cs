@@ -12,5 +12,14 @@ namespace ARTEC.ENTIDADES
         public int IdProvincia{ get; set; }
         public string NombreProvincia { get; set; }
 
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.NombreProvincia))
+            {
+                return this.NombreProvincia;
+            }
+            return "";
+        }
+
     }
 }
