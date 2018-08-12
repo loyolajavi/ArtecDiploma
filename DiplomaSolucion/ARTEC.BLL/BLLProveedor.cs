@@ -19,6 +19,11 @@ namespace ARTEC.BLL
         }
 
 
+        public List<Proveedor> ProveedorTraerTodosActivos()
+        {
+            return GestorProveedor.ProveedorTraerTodosActivos();
+        }
+
 
         public List<Categoria> ProveedorTraerCategorias(int IdProveedor)
         {
@@ -87,6 +92,36 @@ namespace ARTEC.BLL
             try
             {
                 if (GestorProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+        public bool ProveedorEliminar(Proveedor unProvBuscar)
+        {
+            try
+            {
+                if (GestorProveedor.ProveedorEliminar(unProvBuscar.IdProveedor))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool ProveedorReactivar(int IdProveedor)
+        {
+            try
+            {
+                if (GestorProveedor.ProveedorReactivar(IdProveedor))
                     return true;
                 return false;
             }

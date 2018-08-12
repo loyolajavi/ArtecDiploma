@@ -200,7 +200,7 @@ namespace ARTEC.GUI
         {
 
             //Cargar proveedores
-            unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+            unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
 
             ///Para poder seleccionar Hard o Soft
             BLLTipoBien ManagerTipoBien = new BLLTipoBien();

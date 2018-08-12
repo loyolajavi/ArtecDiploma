@@ -35,7 +35,7 @@ namespace ARTEC.GUI
         private void frmCategoriaGestion_Load(object sender, EventArgs e)
         {
             //Traer Proveedores
-            unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+            unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
             cboProveedor.DataSource = null;
             cboProveedor.DataSource = unosProveedores;
             cboProveedor.DisplayMember = "AliasProv";

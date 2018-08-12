@@ -43,7 +43,7 @@ namespace ARTEC.GUI
             grillaProveedor.DataSource = null;
             grillaProveedor.DataSource = unasCotizaciones;
 
-            unosProveedores = ManagerProveedor.ProveedorTraerTodos();
+            unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
 
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {

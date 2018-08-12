@@ -83,6 +83,10 @@ namespace ARTEC.GUI
             this.GrillaTelefonos = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.GrillaDirecciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
+            this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
+            this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
+            this.btnLimpiar = new DevComponents.DotNetBar.ButtonX();
+            this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.gpanelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProductos)).BeginInit();
             this.pnlBuscar.SuspendLayout();
@@ -321,7 +325,7 @@ namespace ARTEC.GUI
             // 
             this.btnCrearProveedor.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCrearProveedor.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCrearProveedor.Location = new System.Drawing.Point(80, 530);
+            this.btnCrearProveedor.Location = new System.Drawing.Point(117, 530);
             this.btnCrearProveedor.Name = "btnCrearProveedor";
             this.btnCrearProveedor.Size = new System.Drawing.Size(98, 38);
             this.btnCrearProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -728,7 +732,7 @@ namespace ARTEC.GUI
             this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(230, 530);
+            this.btnModificar.Location = new System.Drawing.Point(267, 530);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(98, 38);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -736,11 +740,67 @@ namespace ARTEC.GUI
             this.btnModificar.Text = "btnModificar";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEliminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(571, 530);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(98, 38);
+            this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEliminar.TabIndex = 106;
+            this.btnEliminar.Text = "btnEliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnReactivar
+            // 
+            this.btnReactivar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnReactivar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnReactivar.Enabled = false;
+            this.btnReactivar.Location = new System.Drawing.Point(419, 530);
+            this.btnReactivar.Name = "btnReactivar";
+            this.btnReactivar.Size = new System.Drawing.Size(98, 38);
+            this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnReactivar.TabIndex = 107;
+            this.btnReactivar.Text = "btnReactivar";
+            this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnLimpiar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnLimpiar.Location = new System.Drawing.Point(9, 68);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 22);
+            this.btnLimpiar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnLimpiar.TabIndex = 108;
+            this.btnLimpiar.Text = "btnLimpiar";
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // lblBaja
+            // 
+            // 
+            // 
+            // 
+            this.lblBaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblBaja.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaja.Location = new System.Drawing.Point(109, 89);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(108, 22);
+            this.lblBaja.TabIndex = 109;
+            this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblBaja.Visible = false;
+            // 
             // frmProveedorCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 580);
+            this.Controls.Add(this.lblBaja);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnReactivar);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.GrillaDirecciones);
             this.Controls.Add(this.GrillaTelefonos);
@@ -828,5 +888,9 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDirecciones;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaTelefonos;
         private DevComponents.DotNetBar.ButtonX btnModificar;
+        private DevComponents.DotNetBar.ButtonX btnEliminar;
+        private DevComponents.DotNetBar.ButtonX btnReactivar;
+        private DevComponents.DotNetBar.ButtonX btnLimpiar;
+        private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
     }
 }

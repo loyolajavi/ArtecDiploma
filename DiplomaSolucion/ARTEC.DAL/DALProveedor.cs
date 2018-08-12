@@ -31,6 +31,23 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Proveedor> ProveedorTraerTodosActivos()
+        {
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "ProveedorTraerTodosActivos"))
+                {
+                    List<Proveedor> unaLista = new List<Proveedor>();
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Proveedor>(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public static Proveedor MapearProveedorUno(DataSet ds)
         {
@@ -401,6 +418,66 @@ namespace ARTEC.DAL
                 }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+        public bool ProveedorEliminar(int IdProveedor)
+        {
+            SqlParameter[] parametersProvEliminar = new SqlParameter[]
+			{
+                new SqlParameter("@IdProveedor", IdProveedor)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorEliminar", parametersProvEliminar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public bool ProveedorReactivar(int IdProveedor)
+        {
+            SqlParameter[] parametersProvReactivar = new SqlParameter[]
+			  {
+                new SqlParameter("@IdProveedor", IdProveedor)
+			  };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorReactivar", parametersProvReactivar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
             }
             catch (Exception es)
             {

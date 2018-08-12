@@ -261,7 +261,7 @@ namespace ARTEC.GUI
             this.btnEliminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnEliminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(231, 390);
+            this.btnEliminar.Location = new System.Drawing.Point(339, 390);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 35);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -332,7 +332,7 @@ namespace ARTEC.GUI
             this.btnReactivar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnReactivar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnReactivar.Enabled = false;
-            this.btnReactivar.Location = new System.Drawing.Point(333, 390);
+            this.btnReactivar.Location = new System.Drawing.Point(233, 390);
             this.btnReactivar.Name = "btnReactivar";
             this.btnReactivar.Size = new System.Drawing.Size(87, 35);
             this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -362,7 +362,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmCategoriaGestion";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmCategoriaGestion_Load);

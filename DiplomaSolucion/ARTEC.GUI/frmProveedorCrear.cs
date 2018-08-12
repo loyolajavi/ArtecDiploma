@@ -391,34 +391,40 @@ namespace ARTEC.GUI
                         FormatearGrillaTelefonos();
                         FormatearGrillaDirecciones();
 
-                        //if (unaCategoria.Activo == 0)
-                        //{
-                        //    lblBaja.Visible = true;
-                        //    btnReactivar.Enabled = true;
-                        //    btnModificar.Enabled = false;
-                        //    btnEliminar.Enabled = false;
-                        //    btnAgregar.Enabled = false;
-                        //    txtCategoria.Enabled = false;
-                        //    cboProveedor.Enabled = false;
-                        //    cboTipo.Enabled = false;
-                        //    GrillaProveedores.Enabled = false;
-                        //}
-                        //else
-                        //{
-                        //    lblBaja.Visible = false;
-                        //    btnReactivar.Enabled = false;
-                        //    btnModificar.Enabled = true;
-                        //    btnEliminar.Enabled = true;
-                        //    btnAgregar.Enabled = true;
-                        //    txtCategoria.Enabled = true;
-                        //    cboProveedor.Enabled = true;
-                        //    cboTipo.Enabled = true;
-                        //    GrillaProveedores.Enabled = true;
-                        //}
-
-                        //ProvsAgregar.Clear();
-                        //ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
-                        //ProvsAgregarBKP = ProvsAgregar.ToList();
+                        if (unProvBuscar.Activo == 0)
+                        {
+                            lblBaja.Visible = true;
+                            btnReactivar.Enabled = true;
+                            btnEliminar.Enabled = false;
+                            btnModificar.Enabled = false;
+                            btnCrearProveedor.Enabled = false;
+                            btnAgregarProd.Enabled = false;
+                            btnTelefono.Enabled = false;
+                            btnDireccion.Enabled = false;
+                            txtNombreEmpresa.Enabled = false;
+                            txtContacto.Enabled = false;
+                            txtMailContacto.Enabled = false;
+                            GrillaProductos.Enabled = false;
+                            GrillaTelefonos.Enabled = false;
+                            GrillaDirecciones.Enabled = false;
+                        }
+                        else
+                        {
+                            lblBaja.Visible = false;
+                            btnReactivar.Enabled = false;
+                            btnEliminar.Enabled = true;
+                            btnModificar.Enabled = true;
+                            btnCrearProveedor.Enabled = false;
+                            btnAgregarProd.Enabled = true;
+                            btnTelefono.Enabled = true;
+                            btnDireccion.Enabled = true;
+                            txtNombreEmpresa.Enabled = true;
+                            txtContacto.Enabled = true;
+                            txtMailContacto.Enabled = true;
+                            GrillaProductos.Enabled = true;
+                            GrillaTelefonos.Enabled = true;
+                            GrillaDirecciones.Enabled = true;
+                        }
                     }
                     catch (Exception es)
                     {
@@ -690,6 +696,125 @@ namespace ARTEC.GUI
 
             //Formato Grilla Direccion
             GrillaDirecciones.Columns["IdDireccion"].Visible = false;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (unProvBuscar != null && !string.IsNullOrWhiteSpace(txtNombreEmpresa.Text) && unProvBuscar.IdProveedor > 0)
+                {
+                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja al Proveedor: " + unProvBuscar.AliasProv + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                        if (ManagerProveedor.ProveedorEliminar(unProvBuscar))
+                        {
+                            lblBaja.Visible = true;
+                            btnReactivar.Enabled = true;
+                            btnEliminar.Enabled = false;
+                            btnModificar.Enabled = false;
+                            btnCrearProveedor.Enabled = false;
+                            btnAgregarProd.Enabled = false;
+                            btnTelefono.Enabled = false;
+                            btnDireccion.Enabled = false;
+                            txtNombreEmpresa.Enabled = false;
+                            txtContacto.Enabled = false;
+                            txtMailContacto.Enabled = false;
+                            GrillaProductos.Enabled = false;
+                            GrillaTelefonos.Enabled = false;
+                            GrillaDirecciones.Enabled = false;
+                            MessageBox.Show("Proveedor: " + unProvBuscar.AliasProv + " dado de baja correctamente");
+                        }
+                        else
+                            return;
+                }
+                else
+                    MessageBox.Show("Para dar de baja un proveedor primero debe buscarlo");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnReactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (unProvBuscar != null && !string.IsNullOrWhiteSpace(txtNombreEmpresa.Text) && unProvBuscar.IdProveedor > 0)
+                {
+                    if (ManagerProveedor.ProveedorReactivar(unProvBuscar.IdProveedor))
+                    {
+                        lblBaja.Visible = false;
+                        btnReactivar.Enabled = false;
+                        btnEliminar.Enabled = true;
+                        btnModificar.Enabled = true;
+                        btnCrearProveedor.Enabled = false;
+                        btnAgregarProd.Enabled = true;
+                        btnTelefono.Enabled = true;
+                        btnDireccion.Enabled = true;
+                        txtNombreEmpresa.Enabled = true;
+                        txtContacto.Enabled = true;
+                        txtMailContacto.Enabled = true;
+                        GrillaProductos.Enabled = true;
+                        GrillaTelefonos.Enabled = true;
+                        GrillaDirecciones.Enabled = true;
+                        MessageBox.Show("Proveedor: " + unProvBuscar.AliasProv + " reactivado correctamente");
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnReactivar_Click");
+                MessageBox.Show("Ocurrio un error al intentar reactivar al proveedor: " + unProvBuscar.AliasProv + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            vldFrmProveedorCrear.ClearFailedValidations();
+            lblBaja.Visible = false;
+            btnReactivar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnModificar.Enabled = false;
+            btnCrearProveedor.Enabled = true;
+            btnAgregarProd.Enabled = true;
+            btnTelefono.Enabled = true;
+            btnDireccion.Enabled = true;
+            txtNombreEmpresa.Enabled = true;
+            txtContacto.Enabled = true;
+            txtMailContacto.Enabled = true;
+            GrillaProductos.Enabled = true;
+            GrillaTelefonos.Enabled = true;
+            GrillaDirecciones.Enabled = true;
+            txtCalle.Clear();
+            txtCodArea.Clear();
+            txtContacto.Clear();
+            txtLocalidad.Clear();
+            txtMailContacto.Clear();
+            txtNombreEmpresa.Clear();
+            txtNroCalle.Clear();
+            txtNroTelefono.Clear();
+            txtPiso.Clear();
+            txtProducto.Clear();
+            txtProveedorBuscar.Clear();
+            cboProducto.Refresh();
+            cboProveedor.Refresh();
+            cboProvincia.Refresh();
+            cboTipo.Refresh();
+            GrillaProductos.DataSource = null;
+            GrillaProductos.Columns.Clear();
+            GrillaTelefonos.DataSource = null;
+            GrillaTelefonos.Columns.Clear();
+            GrillaDirecciones.DataSource = null;
+            GrillaDirecciones.Columns.Clear();
+            unProvBuscar = null;
+            CategoriasAgregar.Clear();
+            TelsAgregar.Clear();
+            DirAgregar.Clear();
+            CategoriasAgregarBKP.Clear();
+            TelsAgregarBKP.Clear();
+            DirAgregarBKP.Clear();
         }
 
 

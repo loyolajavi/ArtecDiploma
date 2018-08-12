@@ -14,6 +14,8 @@ namespace ARTEC.ENTIDADES
         public string ContactoProv { get; set; }
         public string MailContactoProv { get; set; }
 
+        public int Activo { get; set; }
+
         private List<Telefono> _unosTelefonos = new List<Telefono>();
 
         public List<Telefono> unosTelefonos
