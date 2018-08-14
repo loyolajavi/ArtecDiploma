@@ -164,6 +164,12 @@
     <Compile Include="frmDVRecomponer.Designer.cs">
       <DependentUpon>frmDVRecomponer.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFamiliaGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFamiliaGestion.Designer.cs">
+      <DependentUpon>frmFamiliaGestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPartidaAsociar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDVRecomponer.resx">
       <DependentUpon>frmDVRecomponer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFamiliaGestion.resx">
+      <DependentUpon>frmFamiliaGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartidaAsociar.resx">
       <DependentUpon>frmPartidaAsociar.cs</DependentUpon>

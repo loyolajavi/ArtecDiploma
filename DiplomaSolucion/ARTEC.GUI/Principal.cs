@@ -180,6 +180,12 @@ namespace ARTEC.GUI
             unFrmProveedorCrear.Show();
         }
 
+        private void btnFamilias_Click(object sender, EventArgs e)
+        {
+            frmFamiliaGestion unFrmFamiliasGestion = new frmFamiliaGestion();
+            unFrmFamiliasGestion.Show();
+        }
+
 
 
 

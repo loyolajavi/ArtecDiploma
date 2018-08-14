@@ -48,6 +48,7 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
+            this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -211,6 +212,7 @@ namespace ARTEC.GUI
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.btnFamilias);
             this.panelEx1.Controls.Add(this.btnBitacora);
             this.panelEx1.Controls.Add(this.btnBackup);
             this.panelEx1.Controls.Add(this.btnUsuarios);
@@ -331,6 +333,21 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
+            // btnFamilias
+            // 
+            this.btnFamilias.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFamilias.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnFamilias.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnFamilias.CustomColorName = "Blue";
+            this.btnFamilias.Location = new System.Drawing.Point(894, 9);
+            this.btnFamilias.Name = "btnFamilias";
+            this.btnFamilias.Size = new System.Drawing.Size(108, 40);
+            this.btnFamilias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFamilias.TabIndex = 12;
+            this.btnFamilias.Text = "btnFamilias";
+            this.btnFamilias.TextColor = System.Drawing.Color.White;
+            this.btnFamilias.Click += new System.EventHandler(this.btnFamilias_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,6 +399,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnUsuarios;
         private DevComponents.DotNetBar.ButtonX btnCategorias;
         private DevComponents.DotNetBar.ButtonX btnProveedor;
+        private DevComponents.DotNetBar.ButtonX btnFamilias;
 
 
 

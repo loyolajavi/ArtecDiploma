@@ -32,6 +32,21 @@ namespace ARTEC.BLL.Servicios
             }
         }
 
+
+        public void FamiliaUnaTraerSubPermisos(IFamPat unaFamilia)
+        {
+            try
+            {
+                //Reviso si tiene subpermisos para agregarselos
+                GestorFamilia.FamiliaTraerFamiliasHijas(unaFamilia);
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "FamiliaUnaTraerSubPermisos");
+                throw;
+            }
+        }
+
         public List<IFamPat> PermisosTraerTodos()
         {
             try
