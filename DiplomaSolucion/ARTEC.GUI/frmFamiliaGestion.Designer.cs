@@ -31,8 +31,8 @@ namespace ARTEC.GUI
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFamiliaGestion));
             this.pnlBuscar = new DevComponents.DotNetBar.PanelEx();
-            this.lblFamiliaBuscar = new DevComponents.DotNetBar.LabelX();
             this.cboFamilia = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblFamiliaBuscar = new DevComponents.DotNetBar.LabelX();
             this.lblNombre = new DevComponents.DotNetBar.LabelX();
             this.txtNombre = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.pnlPermisos = new DevComponents.DotNetBar.Controls.GroupPanel();
@@ -50,6 +50,7 @@ namespace ARTEC.GUI
             this.vldFrmFamiliaGestion = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un nombre");
             this.pnlBuscar.SuspendLayout();
             this.pnlPermisos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -73,19 +74,6 @@ namespace ARTEC.GUI
             this.pnlBuscar.Style.GradientAngle = 90;
             this.pnlBuscar.TabIndex = 78;
             // 
-            // lblFamiliaBuscar
-            // 
-            // 
-            // 
-            // 
-            this.lblFamiliaBuscar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFamiliaBuscar.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFamiliaBuscar.Location = new System.Drawing.Point(9, 9);
-            this.lblFamiliaBuscar.Name = "lblFamiliaBuscar";
-            this.lblFamiliaBuscar.Size = new System.Drawing.Size(100, 17);
-            this.lblFamiliaBuscar.TabIndex = 62;
-            this.lblFamiliaBuscar.Text = "lblFamiliaBuscar";
-            // 
             // cboFamilia
             // 
             this.cboFamilia.DisplayMember = "Text";
@@ -99,6 +87,19 @@ namespace ARTEC.GUI
             this.cboFamilia.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboFamilia.TabIndex = 63;
             this.cboFamilia.SelectionChangeCommitted += new System.EventHandler(this.cboFamilia_SelectionChangeCommitted);
+            // 
+            // lblFamiliaBuscar
+            // 
+            // 
+            // 
+            // 
+            this.lblFamiliaBuscar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFamiliaBuscar.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFamiliaBuscar.Location = new System.Drawing.Point(9, 9);
+            this.lblFamiliaBuscar.Name = "lblFamiliaBuscar";
+            this.lblFamiliaBuscar.Size = new System.Drawing.Size(100, 17);
+            this.lblFamiliaBuscar.TabIndex = 62;
+            this.lblFamiliaBuscar.Text = "lblFamiliaBuscar";
             // 
             // lblNombre
             // 
@@ -128,6 +129,7 @@ namespace ARTEC.GUI
             this.txtNombre.PreventEnterBeep = true;
             this.txtNombre.Size = new System.Drawing.Size(202, 22);
             this.txtNombre.TabIndex = 80;
+            this.vldFrmFamiliaGestion.SetValidator1(this.txtNombre, this.requiredFieldValidator1);
             // 
             // pnlPermisos
             // 
@@ -209,6 +211,7 @@ namespace ARTEC.GUI
             this.btnQuitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnQuitar.TabIndex = 4;
             this.btnQuitar.Text = "btnQuitar";
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // btnAgregar
             // 
@@ -220,6 +223,7 @@ namespace ARTEC.GUI
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "btnAgregar";
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // treeDisponibles
             // 
@@ -269,6 +273,7 @@ namespace ARTEC.GUI
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 103;
             this.btnCrear.Text = "btnCrear";
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // treeTodos
             // 
@@ -304,6 +309,11 @@ namespace ARTEC.GUI
             // highlighter1
             // 
             this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un nombre";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmFamiliaGestion
             // 
@@ -353,5 +363,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.SuperValidator vldFrmFamiliaGestion;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

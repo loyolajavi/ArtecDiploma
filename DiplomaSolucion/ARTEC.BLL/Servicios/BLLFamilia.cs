@@ -65,5 +65,19 @@ namespace ARTEC.BLL.Servicios
 
 
 
+
+        public bool FamiliaCrear(IFamPat nuevaFamilia)
+        {
+            try
+            {
+                if (GestorFamilia.FamiliaCrear(nuevaFamilia))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

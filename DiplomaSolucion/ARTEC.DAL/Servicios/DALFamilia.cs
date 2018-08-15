@@ -99,5 +99,64 @@ namespace ARTEC.DAL.Servicios
         }
 
 
+
+        public bool FamiliaCrear(IFamPat nuevaFamilia)
+        {
+            SqlParameter[] parametersFamCrear = new SqlParameter[]
+			{
+                new SqlParameter("@NombreFamilia", nuevaFamilia.NombreIFamPat)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "FamiliaCrear", parametersFamCrear);
+                int IdFamRes = Decimal.ToInt32(Resultado);
+                nuevaFamilia.IdIFamPat = IdFamRes;
+
+                if (nuevaFamilia.CantHijos > 0)
+                {
+                    foreach (IFamPat unPermiso in (nuevaFamilia as Familia).ElementosFamPat)
+                    {
+                        //Asociar Familia con Familia
+                        if (unPermiso.CantHijos > 0)
+                        {
+                            SqlParameter[] parametersRelFamFam = new SqlParameter[]
+			                {
+                            new SqlParameter("@IdFamiliaPadre", nuevaFamilia.IdIFamPat),
+                            new SqlParameter("@IdFamiliaHijo", unPermiso.IdIFamPat)
+			                };
+
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaFamiliaAsociar", parametersRelFamFam);
+                        }
+                        //Asociar Familia con Patente
+                        else
+                        {
+                            SqlParameter[] parametersRelFamPat = new SqlParameter[]
+			                {
+                            new SqlParameter("@IdFamilia", nuevaFamilia.IdIFamPat),
+                            new SqlParameter("@IdPatente", unPermiso.IdIFamPat)
+			                };
+
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaPatenteAsociar", parametersRelFamPat);
+                        }
+                    }
+                }
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

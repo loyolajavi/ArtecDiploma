@@ -22,6 +22,7 @@ namespace ARTEC.GUI
         List<IFamPat> PermisosCbo = new List<IFamPat>();
         List<IFamPat> LisAuxAsig;
         List<IFamPat> LisAuxDisp;
+        List<IFamPat> LisAuxAsigBKP = new List<IFamPat>();
 
         public frmFamiliaGestion()
         {
@@ -33,11 +34,14 @@ namespace ARTEC.GUI
             try
             {
                 PermisosTodos = ManagerFamilia.PermisosTraerTodos();
-                PermisosCbo = ManagerFamilia.PermisosTraerTodos();
+                PermisosCbo = PermisosTodos.Where(X=>X.CantHijos > 0).ToList();
                 cboFamilia.DataSource = PermisosCbo;
                 cboFamilia.DisplayMember = "NombreIFamPat";
                 cboFamilia.ValueMember = "IdIFamPat";
+                LisAuxDisp = PermisosTodos.ToList();
+                LisAuxAsig = new List<IFamPat>();
                 ListarPermisos(PermisosTodos, treeTodos);
+                ListarPermisos(LisAuxDisp, treeDisponibles);
             }
             catch (Exception es)
             {
@@ -93,9 +97,117 @@ namespace ARTEC.GUI
         {
             LisAuxAsig = new List<IFamPat>();
             LisAuxAsig.Add(cboFamilia.SelectedItem as Familia);
-            ManagerFamilia.FamiliaTraerSubPermisos(LisAuxAsig);
+            LisAuxAsigBKP = LisAuxAsig.ToList();
+            LisAuxDisp = new List<IFamPat>();
+            LisAuxDisp = PermisosTodos.ToList();
+            FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
             ListarPermisos(LisAuxAsig, treeAsignados);
+            ListarPermisos(LisAuxDisp, treeDisponibles); 
         }
+
+
+
+        public void FiltrarDisponibles(ref List<IFamPat> PerDisp, List<IFamPat> PerAsig)
+        {
+            PerDisp = PerDisp.Where(d => !PerAsig.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+
+            foreach (IFamPat item in PerAsig)
+            {
+                if (item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref PerDisp);
+            }
+        }
+
+
+        public void FiltrarSubpermisos(Familia fam, ref List<IFamPat> disp)
+        {
+            disp = disp.Where(d => !fam.ElementosFamPat.Any(a => a.NombreIFamPat == d.NombreIFamPat)).ToList();
+            foreach (IFamPat item in fam.ElementosFamPat)
+            {
+                if (item.CantHijos > 0)
+                    FiltrarSubpermisos(item as Familia, ref disp);
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
+                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
+            else
+            {
+                LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
+                //PerAgregados.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
+                //LisAuxDisp.RemoveAt(treeDisponibles.SelectedNode.Index);
+
+                LisAuxDisp = PermisosTodos.ToList();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados);
+            }
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
+                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
+            else
+            {
+                //LisAuxDisp.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
+                //PerQuitados.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
+                LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);
+
+                LisAuxDisp = PermisosTodos.ToList();
+                FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                ListarPermisos(LisAuxDisp, treeDisponibles);
+                ListarPermisos(LisAuxAsig, treeAsignados);
+            }
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            IFamPat nuevaFamilia = new Familia();
+
+            if (!vldFrmFamiliaGestion.Validate())
+                return;
+
+            //Verificar que quede al menos un permiso asignado
+            if (LisAuxAsig.Count == 0)
+            {
+                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos un permiso asignado");
+                return;
+            }
+
+            try
+            {
+                //FamiliaBuscar en BD lo reemplazo por una consulta en Linq
+                if(PermisosTodos.Any(X=>X.NombreIFamPat.ToLower() == txtNombre.Text.ToLower()))
+                {
+                    MessageBox.Show("La Familia ingresada ya existe");
+                    return;
+                }
+
+                nuevaFamilia.NombreIFamPat = txtNombre.Text;
+                (nuevaFamilia as Familia).ElementosFamPat = LisAuxAsig;
+
+                if (ManagerFamilia.FamiliaCrear(nuevaFamilia))
+                {
+                    MessageBox.Show("Familia creada correctamente");
+
+                    PermisosTodos = ManagerFamilia.PermisosTraerTodos();
+                    PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
+                    cboFamilia.DataSource = PermisosCbo;
+                    cboFamilia.DisplayMember = "NombreIFamPat";
+                    cboFamilia.ValueMember = "IdIFamPat";
+                    ListarPermisos(PermisosTodos, treeTodos);
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnCrear_Click");
+                MessageBox.Show("Ocurrio un error al intentar crear una Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
 
 
 
