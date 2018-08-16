@@ -512,6 +512,7 @@ namespace ARTEC.GUI
             // 
             this.cboProveedor.DisplayMember = "Text";
             this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProveedor.ForeColor = System.Drawing.Color.Black;
             this.cboProveedor.FormattingEnabled = true;
             this.cboProveedor.ItemHeight = 16;
@@ -828,7 +829,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNombreEmpresa);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmProveedorCrear";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.ProveedorCrear_Load);

@@ -48,9 +48,9 @@ namespace ARTEC.GUI
             this.treeTodos = new System.Windows.Forms.TreeView();
             this.lblPermisosTodos = new DevComponents.DotNetBar.LabelX();
             this.vldFrmFamiliaGestion = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un nombre");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un nombre");
             this.pnlBuscar.SuspendLayout();
             this.pnlPermisos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -78,6 +78,7 @@ namespace ARTEC.GUI
             // 
             this.cboFamilia.DisplayMember = "Text";
             this.cboFamilia.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboFamilia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFamilia.ForeColor = System.Drawing.Color.Black;
             this.cboFamilia.FormattingEnabled = true;
             this.cboFamilia.ItemHeight = 16;
@@ -293,13 +294,18 @@ namespace ARTEC.GUI
             this.lblPermisosTodos.Name = "lblPermisosTodos";
             this.lblPermisosTodos.Size = new System.Drawing.Size(146, 17);
             this.lblPermisosTodos.TabIndex = 106;
-            this.lblPermisosTodos.Text = "Detalle de Familias";
+            this.lblPermisosTodos.Text = "Detalle de Permisos";
             // 
             // vldFrmFamiliaGestion
             // 
             this.vldFrmFamiliaGestion.ContainerControl = this.btnCrear;
             this.vldFrmFamiliaGestion.ErrorProvider = this.errorProvider1;
             this.vldFrmFamiliaGestion.Highlighter = this.highlighter1;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un nombre";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider1
             // 
@@ -309,11 +315,6 @@ namespace ARTEC.GUI
             // highlighter1
             // 
             this.highlighter1.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Ingrese un nombre";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmFamiliaGestion
             // 

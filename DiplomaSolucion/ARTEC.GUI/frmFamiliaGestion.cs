@@ -35,9 +35,15 @@ namespace ARTEC.GUI
             {
                 PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                 PermisosCbo = PermisosTodos.Where(X=>X.CantHijos > 0).ToList();
+                Familia FamAux = new Familia();
+                FamAux.IdIFamPat = -1;
+                FamAux.NombreIFamPat = "";
+                PermisosCbo.Insert(0, FamAux);
+                cboFamilia.DataSource = null;
                 cboFamilia.DataSource = PermisosCbo;
                 cboFamilia.DisplayMember = "NombreIFamPat";
                 cboFamilia.ValueMember = "IdIFamPat";
+                
                 LisAuxDisp = PermisosTodos.ToList();
                 LisAuxAsig = new List<IFamPat>();
                 ListarPermisos(PermisosTodos, treeTodos);
@@ -96,13 +102,32 @@ namespace ARTEC.GUI
         private void cboFamilia_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LisAuxAsig = new List<IFamPat>();
-            LisAuxAsig.Add(cboFamilia.SelectedItem as Familia);
-            LisAuxAsigBKP = LisAuxAsig.ToList();
+            LisAuxAsig = (cboFamilia.SelectedItem as Familia).ElementosFamPat.Where(x=>x.IdIFamPat > 0).ToList();
+            //LisAuxAsig.Add(cboFamilia.SelectedItem as Familia);
+            //LisAuxAsigBKP = LisAuxAsig.ToList();
             LisAuxDisp = new List<IFamPat>();
             LisAuxDisp = PermisosTodos.ToList();
+            //FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
             FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+            LisAuxDisp.Remove(cboFamilia.SelectedItem as Familia);
             ListarPermisos(LisAuxAsig, treeAsignados);
-            ListarPermisos(LisAuxDisp, treeDisponibles); 
+            ListarPermisos(LisAuxDisp, treeDisponibles);
+            if ((cboFamilia.SelectedItem as Familia).IdIFamPat > 0)
+            {
+                btnCrear.Enabled = false;
+                btnModificar.Enabled = true;
+                btnEliminar.Enabled = true;
+                txtNombre.Text = (cboFamilia.SelectedItem as Familia).NombreIFamPat;
+                txtNombre.ReadOnly = true;
+            }
+            else
+            {
+                btnCrear.Enabled = true;
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
+                txtNombre.Clear();
+                txtNombre.ReadOnly = false;
+            }
         }
 
 
@@ -136,13 +161,16 @@ namespace ARTEC.GUI
             else
             {
                 LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
-                //PerAgregados.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
-                //LisAuxDisp.RemoveAt(treeDisponibles.SelectedNode.Index);
 
                 LisAuxDisp = PermisosTodos.ToList();
+                //FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                //ListarPermisos(LisAuxDisp, treeDisponibles);
+                //ListarPermisos(LisAuxAsig, treeAsignados);
                 FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
-                ListarPermisos(LisAuxDisp, treeDisponibles);
+                LisAuxDisp.Remove(cboFamilia.SelectedItem as Familia);
                 ListarPermisos(LisAuxAsig, treeAsignados);
+                ListarPermisos(LisAuxDisp, treeDisponibles); 
+
             }
         }
 
@@ -152,14 +180,17 @@ namespace ARTEC.GUI
                 MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
             else
             {
-                //LisAuxDisp.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
-                //PerQuitados.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
+                //LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);
                 LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);
 
                 LisAuxDisp = PermisosTodos.ToList();
+                //FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
+                //ListarPermisos(LisAuxDisp, treeDisponibles);
+                //ListarPermisos((LisAuxAsig.First() as Familia).ElementosFamPat, treeAsignados);
                 FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
-                ListarPermisos(LisAuxDisp, treeDisponibles);
+                LisAuxDisp.Remove(cboFamilia.SelectedItem as Familia);
                 ListarPermisos(LisAuxAsig, treeAsignados);
+                ListarPermisos(LisAuxDisp, treeDisponibles); 
             }
         }
 
@@ -195,10 +226,17 @@ namespace ARTEC.GUI
 
                     PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                     PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
+                    Familia FamAux = new Familia();
+                    FamAux.IdIFamPat = -1;
+                    FamAux.NombreIFamPat = "";
+                    PermisosCbo.Insert(0, FamAux);
+                    cboFamilia.DataSource = null;
                     cboFamilia.DataSource = PermisosCbo;
                     cboFamilia.DisplayMember = "NombreIFamPat";
                     cboFamilia.ValueMember = "IdIFamPat";
                     ListarPermisos(PermisosTodos, treeTodos);
+                    txtNombre.Clear();
+                    cboFamilia.SelectedItem = cboFamilia.Items[cboFamilia.Items.Count - 1];
                 }
             }
             catch (Exception es)

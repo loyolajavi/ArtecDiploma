@@ -646,6 +646,7 @@ namespace ARTEC.GUI
                     cboDep.DisplayMember = "NombreDependencia";
                     cboDep.ValueMember = "IdDependencia";
                     cboDep.Visible = true;
+                    cboDep.Focus();
                     cboDep.DroppedDown = true;
                     Cursor.Current = Cursors.Default;
                 }
