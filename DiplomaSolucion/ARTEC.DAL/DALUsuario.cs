@@ -96,7 +96,6 @@ namespace ARTEC.DAL
                 {
                     List<IFamPat> unasPatentes = new List<IFamPat>();
                     unasPatentes = MapearPatentes(ds);
-                    if (unosPermisos != null && unosPermisos.Count() > 0)
                         unosPermisos.AddRange(unasPatentes);
                 }
 

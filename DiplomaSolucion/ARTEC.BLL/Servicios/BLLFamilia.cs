@@ -110,7 +110,7 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
-                //if (GestorFamilia.FamiliaEliminar(unafamilia.IdIFamPat))
+                if (GestorFamilia.FamiliaEliminar(unafamilia.IdIFamPat))
                     return true;
                 return false;
             }
@@ -125,6 +125,18 @@ namespace ARTEC.BLL.Servicios
             try
             {
                 return GestorFamilia.FamiliaUsuariosComprometidos(IdFamilia);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<ENTIDADES.Usuario> FamiliaUsuariosAsociados(int IdFamilia)
+        {
+            try
+            {
+                return GestorFamilia.FamiliaUsuariosAsociados(IdFamilia);
             }
             catch (Exception es)
             {

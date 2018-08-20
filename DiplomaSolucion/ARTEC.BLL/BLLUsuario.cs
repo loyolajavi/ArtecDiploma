@@ -134,15 +134,24 @@ namespace ARTEC.BLL
         {
             try
             {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 if (PerAgregar.Count > 0)
                     GestorUsuario.UsuarioAgregarPermisos(PerAgregar, IdUsuario);
                 if (PerQuitar.Count > 0)
                     GestorUsuario.UsuarioQuitarPermisos(PerQuitar, IdUsuario);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
             }
             catch (Exception es)
             {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
             
         }

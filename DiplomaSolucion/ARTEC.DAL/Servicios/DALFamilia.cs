@@ -291,5 +291,76 @@ namespace ARTEC.DAL.Servicios
                 throw;
             }
         }
+
+        public List<Usuario> FamiliaUsuariosAsociados(int IdFamilia)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdFamilia", IdFamilia)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "FamiliaUsuariosAsociados", parameters))
+                {
+                    List<Usuario> unosUsuarios = new List<Usuario>();
+                    unosUsuarios = FRAMEWORK.Persistencia.Mapeador.Mapear<Usuario>(ds);
+                    return unosUsuarios;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool FamiliaEliminar(int IdFamilia)
+        {
+
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                
+            //Quitar Permisos
+                //Quitar Familias asociadas
+                SqlParameter[] parametersFamQuitar = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamiliaPadre", IdFamilia),
+                    new SqlParameter("@IdFamiliaHijo", IdFamilia)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminarAsocFamilias", parametersFamQuitar);
+                
+                //Quitar Patentes asociadas
+                SqlParameter[] parametersPatQuitar = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", IdFamilia)
+			    };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminarAsocPatentes", parametersPatQuitar);
+                
+                //Eliminar Familia
+                SqlParameter[] parametersFam = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdFamilia", IdFamilia)
+			    };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "FamiliaEliminar", parametersFam);
+
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }   
+        }
     }
 }

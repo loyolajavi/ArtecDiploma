@@ -204,7 +204,13 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un permiso asignado
             if (LisAuxAsig.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos un permiso asignado");
+                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos una patente asignada");
+                return;
+            }
+
+            if (LisAuxAsig.Count == 1 && LisAuxAsig.First().CantHijos > 0)
+            {
+                MessageBox.Show("La Familia a crear no puede contener solamente una familia");
                 return;
             }
 
@@ -258,7 +264,13 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un permiso asignado
             if (LisAuxAsig.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos un permiso asignado");
+                MessageBox.Show("Por favor revisar que la Familia posea al menos una patente asignada");
+                return;
+            }
+
+            if (LisAuxAsig.Count == 1 && LisAuxAsig.First().CantHijos > 0)
+            {
+                MessageBox.Show("La Familia no puede contener solamente una familia");
                 return;
             }
 
@@ -308,12 +320,18 @@ namespace ARTEC.GUI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            BLLUsuario ManagerUsuario = new BLLUsuario();
+            List<IFamPat> PerAgregar = new List<IFamPat>();
+            List<IFamPat> PerQuitar = new List<IFamPat>();
+            List<Usuario> UsuariosComprometidos = new List<Usuario>();
+            List<Usuario> UsuariosConFamiliaAEliminar = new List<Usuario>();
+
             try
             {
                 if ((cboFamilia.SelectedItem as Familia).IdIFamPat > 0)
                 {
                     DialogResult resmbox;
-                    List<Usuario> UsuariosComprometidos = new List<Usuario>();
+                    UsuariosConFamiliaAEliminar = ManagerFamilia.FamiliaUsuariosAsociados((cboFamilia.SelectedItem as Familia).IdIFamPat);
                     UsuariosComprometidos = ManagerFamilia.FamiliaUsuariosComprometidos((cboFamilia.SelectedItem as Familia).IdIFamPat);
                     if (UsuariosComprometidos.Count > 0)
                     {
@@ -324,7 +342,6 @@ namespace ARTEC.GUI
 	                    }
                         string UsuariosCompString = string.Join(Environment.NewLine, LisUs);
                         resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Familia: " + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?" + "\n" + "Se deberán modificar los permisos de los siguientes usuarios: \n" + UsuariosCompString, "Advertencia", MessageBoxButtons.YesNo);
-                        //Abrir ventana de modificación permisos usuarios comprometidos
                     }
                     else
                     {
@@ -333,20 +350,54 @@ namespace ARTEC.GUI
                     
                     if (resmbox == DialogResult.Yes)
                     {
-
+                        PerQuitar.Add((cboFamilia.SelectedItem as Familia));
+                        //Modifico los permisos de los usuarios comprometidos (que tienen como único permiso la Familia que se eliminará)
+                        if (UsuariosComprometidos.Count > 0)
+                        {
+                            frmDialogUsuariosComprometidos unFrmDialogUsuariosComp = new frmDialogUsuariosComprometidos();
+                            unFrmDialogUsuariosComp.cboFamilia.DataSource = null;
+                            unFrmDialogUsuariosComp.cboFamilia.DataSource = PermisosCbo.Where(X => (X.IdIFamPat != (cboFamilia.SelectedItem as Familia).IdIFamPat) && (X.IdIFamPat > 0)).ToList();
+                            unFrmDialogUsuariosComp.cboFamilia.DisplayMember = "NombreIFamPat";
+                            unFrmDialogUsuariosComp.cboFamilia.ValueMember = "IdIFamPat";
+                            unFrmDialogUsuariosComp.lboxUsuarios.DataSource = null;
+                            unFrmDialogUsuariosComp.lboxUsuarios.DataSource = UsuariosComprometidos;
+                            unFrmDialogUsuariosComp.lboxUsuarios.DisplayMember = "NombreUsuario";
+                            if (unFrmDialogUsuariosComp.ShowDialog(this) == DialogResult.OK)
+                            {
+                                PerAgregar.Add((unFrmDialogUsuariosComp.cboFamilia.SelectedItem as Familia));
+                                foreach (Usuario unUs in UsuariosComprometidos)
+                                {
+                                    ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUs.IdUsuario);
+                                }
+                            }
+                        }
+                        //Modifico los permisos de los usuarios que no están comprometidos
+                        PerAgregar.Clear(); //Limpio para que no agregue permisos a los usuarios no comprometidos
+                        foreach (Usuario unUs in UsuariosConFamiliaAEliminar.Where(x => !UsuariosComprometidos.Any(y => y.IdUsuario == x.IdUsuario)).ToList())
+                        {
+                            ManagerUsuario.UsuarioModificarPermisos(PerAgregar, PerQuitar, unUs.IdUsuario);
+                        }
+                        
                         if (ManagerFamilia.FamiliaEliminar((cboFamilia.SelectedItem as Familia)))
                         {
-                            //lblBaja.Visible = true;
-                            //btnReactivar.Enabled = true;
-                            //btnEliminar.Enabled = false;
-                            //btnModificar.Enabled = false;
-                            //btnCrearCategoria.Enabled = false;
-                            //btnAgregar.Enabled = false;
-                            //txtCategoria.Enabled = false;
-                            //cboProveedor.Enabled = false;
-                            //cboTipo.Enabled = false;
-                            //GrillaProveedores.Enabled = false;
-                            //MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " dada de baja correctamente");
+                            PermisosTodos = ManagerFamilia.PermisosTraerTodos();
+                            PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
+                            txtNombre.Clear();
+                            Familia FamAux = new Familia();
+                            FamAux.IdIFamPat = -1;
+                            FamAux.NombreIFamPat = "";
+                            PermisosCbo.Insert(0, FamAux);
+                            cboFamilia.DataSource = null;
+                            cboFamilia.DataSource = PermisosCbo;
+                            cboFamilia.DisplayMember = "NombreIFamPat";
+                            cboFamilia.ValueMember = "IdIFamPat";
+                            LisAuxDisp = PermisosTodos.ToList();
+                            LisAuxAsig = new List<IFamPat>();
+                            LisAuxAsigBKP = new List<IFamPat>();
+                            ListarPermisos(PermisosTodos, treeTodos);
+                            ListarPermisos(LisAuxDisp, treeDisponibles);
+                            ListarPermisos(LisAuxAsig, treeAsignados);
+                            MessageBox.Show("Familia eliminada correctamente");
                         }
                     }
                     else

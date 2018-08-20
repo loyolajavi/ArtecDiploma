@@ -158,6 +158,12 @@
     <Compile Include="frmDialogJustificacion.Designer.cs">
       <DependentUpon>frmDialogJustificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDialogUsuariosComprometidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDialogUsuariosComprometidos.Designer.cs">
+      <DependentUpon>frmDialogUsuariosComprometidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDVRecomponer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDialogJustificacion.resx">
       <DependentUpon>frmDialogJustificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDialogUsuariosComprometidos.resx">
+      <DependentUpon>frmDialogUsuariosComprometidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDVRecomponer.resx">
       <DependentUpon>frmDVRecomponer.cs</DependentUpon>
