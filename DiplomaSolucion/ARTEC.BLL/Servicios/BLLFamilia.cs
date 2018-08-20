@@ -79,5 +79,57 @@ namespace ARTEC.BLL.Servicios
                 throw;
             }
         }
+
+        public Familia FamiliaBuscar(string NombreIFamPat)
+        {
+            try
+            {
+                return GestorFamilia.FamiliaBuscar(NombreIFamPat);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool FamiliaModificar(IFamPat AModifFamilia, List<IFamPat> FamQuitarMod, List<IFamPat> FamAgregarMod)
+        {
+            try
+            {
+                if (GestorFamilia.FamiliaModificar(AModifFamilia, FamQuitarMod, FamAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool FamiliaEliminar(Familia unafamilia)
+        {
+            try
+            {
+                //if (GestorFamilia.FamiliaEliminar(unafamilia.IdIFamPat))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<ENTIDADES.Usuario> FamiliaUsuariosComprometidos(int IdFamilia)
+        {
+            try
+            {
+                return GestorFamilia.FamiliaUsuariosComprometidos(IdFamilia);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -300,7 +300,6 @@ namespace ARTEC.GUI
                 comboBoxEx4.DisplayMember = "NombreDependencia";
                 comboBoxEx4.ValueMember = "IdDependencia";
                 comboBoxEx4.Visible = true;
-                comboBoxEx4.Focus();
                 comboBoxEx4.DroppedDown = true;
                 Cursor.Current = Cursors.Default;
                 //}
@@ -439,7 +438,6 @@ namespace ARTEC.GUI
                         cboBien.DisplayMember = "DescripCategoria";
                         cboBien.ValueMember = "IdCategoria";
                         cboBien.Visible = true;
-                        cboBien.Focus();
                         cboBien.DroppedDown = true;
                         Cursor.Current = Cursors.Default;
                     }
@@ -517,7 +515,6 @@ namespace ARTEC.GUI
                             cboAgentesAsociados.DisplayMember = "ApellidoAgente";
                             cboAgentesAsociados.ValueMember = "IdAgente";
                             cboAgentesAsociados.Visible = true;
-                            cboAgentesAsociados.Focus();
                             cboAgentesAsociados.DroppedDown = true;
                             Cursor.Current = Cursors.Default;
                         }

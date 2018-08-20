@@ -93,7 +93,6 @@ namespace ARTEC.GUI
                         cboProveedor.DisplayMember = "AliasProv";
                         cboProveedor.ValueMember = "IdProveedor";
                         cboProveedor.Visible = true;
-                        cboProveedor.Focus();
                         cboProveedor.DroppedDown = true;
                         Cursor.Current = Cursors.Default;
                     }
@@ -193,7 +192,6 @@ namespace ARTEC.GUI
                         cboProvSol.DisplayMember = "AliasProv";
                         cboProvSol.ValueMember = "IdProveedor";
                         cboProvSol.Visible = true;
-                        cboProvSol.Focus();
                         cboProvSol.DroppedDown = true;
                         Cursor.Current = Cursors.Default;
                     }

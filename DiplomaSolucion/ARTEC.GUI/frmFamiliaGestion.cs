@@ -104,7 +104,7 @@ namespace ARTEC.GUI
             LisAuxAsig = new List<IFamPat>();
             LisAuxAsig = (cboFamilia.SelectedItem as Familia).ElementosFamPat.Where(x=>x.IdIFamPat > 0).ToList();
             //LisAuxAsig.Add(cboFamilia.SelectedItem as Familia);
-            //LisAuxAsigBKP = LisAuxAsig.ToList();
+            LisAuxAsigBKP = LisAuxAsig.ToList();
             LisAuxDisp = new List<IFamPat>();
             LisAuxDisp = PermisosTodos.ToList();
             //FiltrarDisponibles(ref LisAuxDisp, LisAuxAsig);
@@ -118,7 +118,7 @@ namespace ARTEC.GUI
                 btnModificar.Enabled = true;
                 btnEliminar.Enabled = true;
                 txtNombre.Text = (cboFamilia.SelectedItem as Familia).NombreIFamPat;
-                txtNombre.ReadOnly = true;
+                txtNombre.ReadOnly = false;
             }
             else
             {
@@ -126,7 +126,7 @@ namespace ARTEC.GUI
                 btnModificar.Enabled = false;
                 btnEliminar.Enabled = false;
                 txtNombre.Clear();
-                txtNombre.ReadOnly = false;
+                txtNombre.ReadOnly = true;
             }
         }
 
@@ -243,6 +243,122 @@ namespace ARTEC.GUI
             {
                 string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnCrear_Click");
                 MessageBox.Show("Ocurrio un error al intentar crear una Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            IFamPat AModifFamilia = new Familia();
+            List<IFamPat> FamQuitarMod = new List<IFamPat>();
+            List<IFamPat> FamAgregarMod = new List<IFamPat>();
+
+            if (!vldFrmFamiliaGestion.Validate())
+                return;
+
+            //Verificar que quede al menos un permiso asignado
+            if (LisAuxAsig.Count == 0)
+            {
+                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos un permiso asignado");
+                return;
+            }
+
+            try
+            {
+                //Verificar que no existe una Familia con el nombre ingresado en la modificacion
+                Familia FamAux2 = null;
+                if ((cboFamilia.SelectedItem as Familia).NombreIFamPat != txtNombre.Text)
+                    FamAux2 = ManagerFamilia.FamiliaBuscar(txtNombre.Text);
+                if (FamAux2 != null && FamAux2.IdIFamPat > 0)
+                {
+                    MessageBox.Show("La Familia ingresada ya existe");
+                    return;
+                }
+
+                AModifFamilia.IdIFamPat = (cboFamilia.SelectedItem as Familia).IdIFamPat;
+                AModifFamilia.NombreIFamPat = txtNombre.Text;
+
+                FamQuitarMod = LisAuxAsigBKP.Where(d => !LisAuxAsig.Any(a => a.IdIFamPat == d.IdIFamPat)).ToList();
+                FamAgregarMod = LisAuxAsig.Where(d => !LisAuxAsigBKP.Any(a => a.IdIFamPat == d.IdIFamPat)).ToList();
+
+                if (ManagerFamilia.FamiliaModificar(AModifFamilia, FamQuitarMod, FamAgregarMod))
+                {
+                    int Seleccionado = cboFamilia.SelectedIndex;
+                    PermisosTodos = ManagerFamilia.PermisosTraerTodos();
+                    PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
+                    Familia FamAux = new Familia();
+                    FamAux.IdIFamPat = -1;
+                    FamAux.NombreIFamPat = "";
+                    PermisosCbo.Insert(0, FamAux);
+                    cboFamilia.DataSource = null;
+                    cboFamilia.DataSource = PermisosCbo;
+                    cboFamilia.DisplayMember = "NombreIFamPat";
+                    cboFamilia.ValueMember = "IdIFamPat";
+                    ListarPermisos(PermisosTodos, treeTodos);
+                    cboFamilia.SelectedIndex = Seleccionado;
+                    LisAuxAsigBKP = LisAuxAsig.ToList();
+                    MessageBox.Show("Modificación realizada");
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnModificar_Click");
+                MessageBox.Show("Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if ((cboFamilia.SelectedItem as Familia).IdIFamPat > 0)
+                {
+                    DialogResult resmbox;
+                    List<Usuario> UsuariosComprometidos = new List<Usuario>();
+                    UsuariosComprometidos = ManagerFamilia.FamiliaUsuariosComprometidos((cboFamilia.SelectedItem as Familia).IdIFamPat);
+                    if (UsuariosComprometidos.Count > 0)
+                    {
+                        List<string> LisUs = new List<string>();
+                        foreach (Usuario unUs in UsuariosComprometidos)
+	                    {
+		                    LisUs.Add(unUs.NombreUsuario);
+	                    }
+                        string UsuariosCompString = string.Join(Environment.NewLine, LisUs);
+                        resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Familia: " + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?" + "\n" + "Se deberán modificar los permisos de los siguientes usuarios: \n" + UsuariosCompString, "Advertencia", MessageBoxButtons.YesNo);
+                        //Abrir ventana de modificación permisos usuarios comprometidos
+                    }
+                    else
+                    {
+                        resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Familia: " + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    }
+                    
+                    if (resmbox == DialogResult.Yes)
+                    {
+
+                        if (ManagerFamilia.FamiliaEliminar((cboFamilia.SelectedItem as Familia)))
+                        {
+                            //lblBaja.Visible = true;
+                            //btnReactivar.Enabled = true;
+                            //btnEliminar.Enabled = false;
+                            //btnModificar.Enabled = false;
+                            //btnCrearCategoria.Enabled = false;
+                            //btnAgregar.Enabled = false;
+                            //txtCategoria.Enabled = false;
+                            //cboProveedor.Enabled = false;
+                            //cboTipo.Enabled = false;
+                            //GrillaProveedores.Enabled = false;
+                            //MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " dada de baja correctamente");
+                        }
+                    }
+                    else
+                        return;
+                }
+                else
+                    MessageBox.Show("Para dar de baja una Familia primero debe seleccionar una de la lista");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 

@@ -157,7 +157,6 @@ namespace ARTEC.GUI
                         cboAgentes.DisplayMember = "ApellidoAgente";
                         cboAgentes.ValueMember = "IdAgente";
                         cboAgentes.Visible = true;
-                        cboAgentes.Focus();
                         cboAgentes.DroppedDown = true;
                         Cursor.Current = Cursors.Default;
                     }
