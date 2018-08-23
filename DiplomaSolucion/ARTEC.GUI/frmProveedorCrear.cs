@@ -156,6 +156,7 @@ namespace ARTEC.GUI
             requiredFieldValidator3.Enabled = false;
             requiredFieldValidator4.Enabled = false;
             requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator9.Enabled = false;
             requiredFieldValidator2.Enabled = true;
             requiredFieldValidator5.Enabled = false;
             requiredFieldValidator6.Enabled = false;
@@ -182,6 +183,7 @@ namespace ARTEC.GUI
             requiredFieldValidator3.Enabled = true;
             requiredFieldValidator4.Enabled = true;
             requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator9.Enabled = false;
             requiredFieldValidator2.Enabled = false;
             requiredFieldValidator5.Enabled = false;
             requiredFieldValidator6.Enabled = false;
@@ -440,6 +442,7 @@ namespace ARTEC.GUI
         private void btnCrearProveedor_Click(object sender, EventArgs e)
         {
             requiredFieldValidator1.Enabled = true;
+            requiredFieldValidator9.Enabled = true;
             requiredFieldValidator2.Enabled = false;
             requiredFieldValidator3.Enabled = false;
             requiredFieldValidator4.Enabled = false;
@@ -484,6 +487,7 @@ namespace ARTEC.GUI
             requiredFieldValidator3.Enabled = false;
             requiredFieldValidator4.Enabled = false;
             requiredFieldValidator1.Enabled = false;
+            requiredFieldValidator9.Enabled = false;
             requiredFieldValidator2.Enabled = false;
             requiredFieldValidator5.Enabled = true;
             requiredFieldValidator6.Enabled = true;
@@ -518,6 +522,7 @@ namespace ARTEC.GUI
             List<Direccion> DirAgregarMod = new List<Direccion>();
 
             requiredFieldValidator1.Enabled = true;
+            requiredFieldValidator9.Enabled = true;
             requiredFieldValidator2.Enabled = false;
             requiredFieldValidator3.Enabled = false;
             requiredFieldValidator4.Enabled = false;

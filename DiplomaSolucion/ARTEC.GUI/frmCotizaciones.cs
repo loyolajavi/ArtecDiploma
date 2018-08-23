@@ -13,6 +13,7 @@ using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.ENTIDADES.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -24,6 +25,7 @@ namespace ARTEC.GUI
         public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
         List<Cotizacion> unasCotizaciones;
+        List<Cotizacion> unasCotizacionesBKP = new List<Cotizacion>();
         List<Proveedor> unosProveedores = new List<Proveedor>();
         Proveedor ProvSeleccionado;
         BLLProveedor ManagerProveedor = new BLLProveedor();
@@ -35,13 +37,15 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unasCotizaciones = unasCotiz;
+            unasCotizacionesBKP = unasCotizaciones.ToList();
             unDetSolic = unDetSolicP;
         }
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
         {
-            grillaProveedor.DataSource = null;
-            grillaProveedor.DataSource = unasCotizaciones;
+            grillaCotizacion.DataSource = null;
+            grillaCotizacion.DataSource = unasCotizaciones;
+            FormatearGrillaCotizacion();
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
 
@@ -137,6 +141,9 @@ namespace ARTEC.GUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (!vldFrmCotozacionAgreCot.Validate())
+                return;
+
             Cotizacion unaCotiz = new Cotizacion();
             unaCotiz.MontoCotizado = Decimal.Parse(txtPrecioUn.Text);
             unaCotiz.FechaCotizacion = DateTime.Today;
@@ -149,11 +156,12 @@ namespace ARTEC.GUI
             //{
                 //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
                 unasCotizaciones.Add(unaCotiz);
-                grillaProveedor.DataSource = null;
-                grillaProveedor.DataSource = unasCotizaciones;
-                
-                //Actualiza SolicDetalles en frmModificarSolicitud por Evento
-                this.EventoActualizarDetalles(unasCotizaciones);
+                grillaCotizacion.DataSource = null;
+                grillaCotizacion.DataSource = unasCotizaciones;
+                FormatearGrillaCotizacion();
+
+                ////Actualiza SolicDetalles en frmModificarSolicitud por Evento
+                //this.EventoActualizarDetalles(unasCotizaciones);
             //}
         }
 
@@ -232,16 +240,25 @@ namespace ARTEC.GUI
 
         private void btnAgregarProvSol_Click(object sender, EventArgs e)
         {
-            ListaProv.Add((Proveedor)cboProvSol.SelectedItem);
-            GrillaProvSolic.DataSource = null;
-            GrillaProvSolic.DataSource = ListaProv;
+            if (!vldAgregarProv.Validate())
+                return;
+
+            if ((Proveedor)cboProvSol.SelectedItem != null && !ListaProv.Contains((Proveedor)cboProvSol.SelectedItem))
+            {
+                ListaProv.Add((Proveedor)cboProvSol.SelectedItem);
+                GrillaProvSolic.DataSource = null;
+                GrillaProvSolic.DataSource = ListaProv;
+                FormatearGrillaProvSolic();
+            }
+
             txtProvSol.Clear();
             cboProvSol.Refresh();
         }
 
         private void btnSolicitar_Click(object sender, EventArgs e)
         {
-
+            if (!vldFrmCotizacionesSolic.Validate())
+                return;
             BLL.Servicios.BLLServicioMail.CargarMailConfig();
 
             foreach (Proveedor unProv in ListaProv)
@@ -252,7 +269,111 @@ namespace ARTEC.GUI
         }
 
 
+        private void FormatearGrillaProvSolic()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaProvSolic.Columns.Contains("btnDinBorrar"))
+                GrillaProvSolic.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            GrillaProvSolic.Columns.Add(deleteButton);
 
+            //Formato Grilla ProvSolic
+            GrillaProvSolic.Columns["IdProveedor"].Visible = false;
+            GrillaProvSolic.Columns["Activo"].Visible = false;
+            GrillaProvSolic.Columns["AliasProv"].HeaderText = "Nombre";
+            GrillaProvSolic.Columns["MailContactoProv"].HeaderText = "Mail";
+        }
+
+        private void GrillaProvSolic_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == GrillaProvSolic.Columns["btnDinBorrar"].Index)
+                {
+                    ListaProv.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    GrillaProvSolic.DataSource = null;
+                    GrillaProvSolic.DataSource = ListaProv;
+                    FormatearGrillaProvSolic();
+                }
+            }
+        }
+
+
+        private void FormatearGrillaCotizacion()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (grillaCotizacion.Columns.Contains("btnDinBorrar"))
+                grillaCotizacion.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaCotizacion.Columns.Add(deleteButton);
+
+            //Formato GrillaCotizacion
+            grillaCotizacion.Columns["IdCotizacion"].Visible = false;
+            grillaCotizacion.Columns["MontoCotizado"].HeaderText = "Monto";
+            grillaCotizacion.Columns["FechaCotizacion"].HeaderText = "Fecha";
+            grillaCotizacion.Columns["unProveedor"].HeaderText = "Proveedor";
+            grillaCotizacion.Columns["unDetalleAsociado"].Visible = false;
+            grillaCotizacion.Columns["Seleccionada"].Visible = false;
+            grillaCotizacion.Columns["unaPartidaDetalleIDs"].Visible = false;
+        }
+
+
+        private void grillaCotizacion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+            else
+            {
+                //Si hizo click en Quitar
+                if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
+                {
+                    unasCotizaciones.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    grillaCotizacion.DataSource = null;
+                    grillaCotizacion.DataSource = unasCotizaciones;
+                    FormatearGrillaCotizacion();
+                }
+            }
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            List<Cotizacion> CotiQuitarMod = new List<Cotizacion>();
+            List<Cotizacion> CotiAgregarMod = new List<Cotizacion>();
+
+            CotiQuitarMod = unasCotizacionesBKP.Where(x => !unasCotizaciones.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
+            CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
+
+            if (ManagerCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+            {
+                //Actualiza SolicDetalles en frmModificarSolicitud por Evento
+                this.EventoActualizarDetalles(unasCotizaciones);
+                this.Close();
+            }
+            else
+                MessageBox.Show("No se encontraron modificaciones a realizar");
+
+        }
 
 
 

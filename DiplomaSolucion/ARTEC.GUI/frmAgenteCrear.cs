@@ -60,7 +60,7 @@ namespace ARTEC.GUI
                 NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
                 if (ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia) > 0)
                     MessageBox.Show("Agente creado correctamente");
-                this.Close();
+                DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {

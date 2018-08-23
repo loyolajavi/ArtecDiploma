@@ -47,5 +47,20 @@ namespace ARTEC.BLL
             return GestorCotizacion.CotizacionAsociarConPartidaDetalle(IdCotizacion, UIDPartDetalle, IdPartida);
         }
 
+
+        public bool CotizacionModifEnSolic(SolicDetalle unDetSolic, List<Cotizacion> CotiQuitarMod, List<Cotizacion> CotiAgregarMod)
+        {
+            try
+            {
+                if(CotiQuitarMod.Count > 0 | CotiAgregarMod.Count > 0)
+                    if (GestorCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+                        return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

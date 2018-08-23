@@ -87,6 +87,7 @@ namespace ARTEC.GUI
             this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
             this.btnLimpiar = new DevComponents.DotNetBar.ButtonX();
             this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.requiredFieldValidator9 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.gpanelProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProductos)).BeginInit();
             this.pnlBuscar.SuspendLayout();
@@ -372,6 +373,7 @@ namespace ARTEC.GUI
             this.txtMailContacto.PreventEnterBeep = true;
             this.txtMailContacto.Size = new System.Drawing.Size(160, 22);
             this.txtMailContacto.TabIndex = 23;
+            this.vldFrmProveedorCrear.SetValidator1(this.txtMailContacto, this.requiredFieldValidator9);
             // 
             // txtCalle
             // 
@@ -793,6 +795,11 @@ namespace ARTEC.GUI
             this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
             this.lblBaja.Visible = false;
             // 
+            // requiredFieldValidator9
+            // 
+            this.requiredFieldValidator9.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator9.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // frmProveedorCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -892,5 +899,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnReactivar;
         private DevComponents.DotNetBar.ButtonX btnLimpiar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator9;
     }
 }

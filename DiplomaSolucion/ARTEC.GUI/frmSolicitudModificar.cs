@@ -359,7 +359,9 @@ namespace ARTEC.GUI
 
                 unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
 
+                this.txtBien.TextChanged -= new System.EventHandler(this.txtBien_TextChanged);
                 txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+                this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
                 unaCat = unDetSolic.unaCategoria;
                 txtCantBien.Text = unDetSolic.Cantidad.ToString();
 

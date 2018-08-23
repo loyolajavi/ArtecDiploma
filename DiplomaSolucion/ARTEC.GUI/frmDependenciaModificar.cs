@@ -31,6 +31,7 @@ namespace ARTEC.GUI
         List<int> AgentesAQuitarIndex = new List<int>();
         List<Agente> AgentesListaBKP = new List<Agente>();
         bool Modificacion = false;
+        DialogResult ResCrearAgente = new DialogResult();
 
         public frmDependenciaModificar(Dependencia unaDep)
         {
@@ -361,21 +362,34 @@ namespace ARTEC.GUI
         private void btnNuevoAgente_Click(object sender, EventArgs e)
         {
             frmAgenteCrear unfrmAgenteCrear = new frmAgenteCrear(DepModif.IdDependencia, DepModif.NombreDependencia);
-            //CON ESTO hago que al cerrar el formulario del showdialog (frmAgenteCrear), 
-            //voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
-            unfrmAgenteCrear.FormClosing += unfrmAgenteCrear_FormClosing;
-            unfrmAgenteCrear.ShowDialog();
+            ////CON ESTO hago que al cerrar el formulario del showdialog (frmAgenteCrear), 
+            ////voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
+            //unfrmAgenteCrear.FormClosing += unfrmAgenteCrear_FormClosing;
+            ResCrearAgente = unfrmAgenteCrear.ShowDialog();
+            if (ResCrearAgente == DialogResult.OK)
+            {
+                AgentesLista.Add(ManagerDependencia.TraerAgentesDependencia(DepModif.IdDependencia).Last());
+                //Regenero la grilla de agentes, agregando a AgentesListaBKP el nuevo agente creado en la bd, para que si se hace click en cancelar, no lo quite de la grilla
+                GrillaAgentesLista.DataSource = null;
+                GrillaAgentesLista.DataSource = AgentesLista;
+                AgentesListaBKP.Add(AgentesLista.Last());
+                FormatearGrillaAgentes();
+            }
         }
 
-        private void unfrmAgenteCrear_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            AgentesLista.Add(ManagerDependencia.TraerAgentesDependencia(DepModif.IdDependencia).Last());
-            //Regenero la grilla de agentes, agregando a AgentesListaBKP el nuevo agente creado en la bd, para que si se hace click en cancelar, no lo quite de la grilla
-            GrillaAgentesLista.DataSource = null;
-            GrillaAgentesLista.DataSource = AgentesLista;
-            AgentesListaBKP.Add(AgentesLista.Last());
-            FormatearGrillaAgentes();
-        }
+        //private void unfrmAgenteCrear_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (ResCrearAgente == DialogResult.OK)
+        //    {
+        //        AgentesLista.Add(ManagerDependencia.TraerAgentesDependencia(DepModif.IdDependencia).Last());
+        //        //Regenero la grilla de agentes, agregando a AgentesListaBKP el nuevo agente creado en la bd, para que si se hace click en cancelar, no lo quite de la grilla
+        //        GrillaAgentesLista.DataSource = null;
+        //        GrillaAgentesLista.DataSource = AgentesLista;
+        //        AgentesListaBKP.Add(AgentesLista.Last());
+        //        FormatearGrillaAgentes();
+        //    }
+            
+        //}
 
 
 
