@@ -241,7 +241,7 @@ namespace ARTEC.BLL
                 if (ResAcum > 0)
                 {
                     unUsuario.DVH = ResAcum;
-                    if (GestorUsuario.UsuarioEliminar(unUsuario.IdUsuario, unUsuario.DVH))
+                    if (GestorUsuario.UsuarioEliminar(unUsuario, unUsuario.DVH))
                         return true;
                 }
                 return false;
@@ -261,7 +261,7 @@ namespace ARTEC.BLL
                  if (ResAcum > 0)
                  {
                      unUsuario.DVH = ResAcum;
-                     if (GestorUsuario.UsuarioReactivar(unUsuario.IdUsuario, unUsuario.DVH))
+                     if (GestorUsuario.UsuarioReactivar(unUsuario, unUsuario.DVH))
                          return true;
                  }
                 return false;

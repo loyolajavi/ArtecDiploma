@@ -547,11 +547,11 @@ namespace ARTEC.DAL
 
 
 
-        public bool UsuarioEliminar(int IdUsuario, long unDVH)
+        public bool UsuarioEliminar(Usuario unUsuario, long unDVH)
         {
             SqlParameter[] parametersUsEliminar = new SqlParameter[]
 			{
-                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@IdUsuario", unUsuario.IdUsuario),
                 new SqlParameter("@DVH", unDVH)
 			};
 
@@ -560,9 +560,18 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioEliminar", parametersUsEliminar);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
+                long ResAcum = ServicioDV.DVCalcularDVH(unUsuario);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                }
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //if (FilasAfectadas > 0)
+                    //return true;
                 return false;
             }
             catch (Exception es)
@@ -577,11 +586,11 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool UsuarioReactivar(int IdUsuario, long unDVH)
+        public bool UsuarioReactivar(Usuario unUsuario, long unDVH)
         {
             SqlParameter[] parametersUsReactivar = new SqlParameter[]
 			{
-                new SqlParameter("@IdUsuario", IdUsuario),
+                new SqlParameter("@IdUsuario", unUsuario.IdUsuario),
                 new SqlParameter("@DVH", unDVH)
 			};
 
@@ -590,9 +599,18 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "UsuarioReactivar", parametersUsReactivar);
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
+                long ResAcum = ServicioDV.DVCalcularDVH(unUsuario);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                }
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                //if (FilasAfectadas > 0)
+                    //return true;
                 return false;
             }
             catch (Exception es)

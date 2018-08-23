@@ -87,8 +87,47 @@ namespace ARTEC.FRAMEWORK.Servicios
             }
             catch (Exception es)
             {
+                throw;
+            }
+        }
+
+
+        public static bool DVActualizarDVHIniBD(int IdFila, long Acum, string NomTabla, string NomColumnaWhere)
+        {
+            FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+            FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", NomTabla),
+                new SqlParameter("@IdFila", IdFila),
+                new SqlParameter("@ValorAcum", Acum),
+                new SqlParameter("@NomColumna", NomColumnaWhere)
+            };
+
+            try
+            {
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DVActualizarDVH", parameters);
+                if (FilasAfectadas > 0)
+                {
+                    if (DVActualizarDVV(NomTabla))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                        
+                }
+                return false;
+            }
+            catch (Exception es)
+            {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
 
@@ -382,7 +421,6 @@ namespace ARTEC.FRAMEWORK.Servicios
                     {
                         if (unaListaUsuarios[I].DVH != LisDVHs[I])
                         {
-                            System.Windows.Forms.MessageBox.Show("En BD: " + unaListaUsuarios[I].DVH.ToString() + " - Calculado: " + LisDVHs[I]);
                             DVRecomponerDVH(unaListaUsuarios[I].IdUsuario, LisDVHs[I], "Usuario", "IdUsuario");
                         }
                     }
@@ -414,7 +452,6 @@ namespace ARTEC.FRAMEWORK.Servicios
                     {
                         if (unaListaSolicitudes[I].DVH != LisDVHs[I])
                         {
-                            System.Windows.Forms.MessageBox.Show("En BD: " + unaListaSolicitudes[I].DVH.ToString() + " - Calculado: " + LisDVHs[I]);
                             DVRecomponerDVH(unaListaSolicitudes[I].IdSolicitud, LisDVHs[I], "Solicitud", "IdSolicitud");
                         }
                     }

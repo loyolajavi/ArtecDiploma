@@ -115,6 +115,14 @@ namespace ARTEC.BLL.Servicios
                 if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
                 {
                     DALServicioIdioma.IdiomaUsuarioActualModificar();
+                    //Digito Verificador
+                    FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual = unIdioma;
+                    long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado);
+                    if (ResAcum > 0)
+                    {
+                        FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.DVH = ResAcum;
+                        FRAMEWORK.Servicios.ServicioDV.DVActualizarDVHIniBD(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.DVH, FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.GetType().Name, "IdUsuario");
+                    }
                 }
                 return true;
             }
