@@ -361,18 +361,25 @@ namespace ARTEC.GUI
             List<Cotizacion> CotiQuitarMod = new List<Cotizacion>();
             List<Cotizacion> CotiAgregarMod = new List<Cotizacion>();
 
-            CotiQuitarMod = unasCotizacionesBKP.Where(x => !unasCotizaciones.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
-            CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
-
-            if (ManagerCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+            try
             {
-                //Actualiza SolicDetalles en frmModificarSolicitud por Evento
-                this.EventoActualizarDetalles(unasCotizaciones);
-                this.Close();
-            }
-            else
-                MessageBox.Show("No se encontraron modificaciones a realizar");
+                CotiQuitarMod = unasCotizacionesBKP.Where(x => !unasCotizaciones.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
+                CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
 
+                if (ManagerCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+                {
+                    //Actualiza SolicDetalles en frmModificarSolicitud por Evento
+                    this.EventoActualizarDetalles(unasCotizaciones);
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("No se encontraron modificaciones a realizar");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnConfirmar_Click");
+                MessageBox.Show("Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
         }
 
 

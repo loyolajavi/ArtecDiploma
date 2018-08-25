@@ -408,6 +408,7 @@ namespace ARTEC.GUI
                 //Además abre el frmCotizaciones
                 if (e.ColumnIndex == grillaDetalles.Columns["btnDinCotizar"].Index)
                 {
+                    unDetSolic.IdSolicitud = unaSolicitud.IdSolicitud;
                     frmCotizaciones UnFrmCotizaciones = new frmCotizaciones(unaSolicitud.unosDetallesSolicitud[e.RowIndex].unasCotizaciones, unDetSolic);
                     UnFrmCotizaciones.EventoActualizarDetalles += new frmCotizaciones.DelegaActualizarSolicDetalles(ActualizarDetallesSolicitud);
                     UnFrmCotizaciones.Show();
