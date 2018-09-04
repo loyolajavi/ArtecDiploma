@@ -60,7 +60,15 @@ namespace ARTEC.BLL
    
         public Solicitud SolicitudTraerIdsolNomdepPorIdPartida(int IdPartida)
         {
-            return GestorSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(IdPartida);
+            try
+            {
+                return GestorSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(IdPartida);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
 
 

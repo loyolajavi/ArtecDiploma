@@ -30,7 +30,7 @@ namespace ARTEC.GUI
         {
             this.tabsPrincipal = new System.Windows.Forms.TabControl();
             this.tabSolic = new System.Windows.Forms.TabPage();
-            this.tabHomol = new System.Windows.Forms.TabPage();
+            this.tabRendiciones = new System.Windows.Forms.TabPage();
             this.tabPartidas = new System.Windows.Forms.TabPage();
             this.tabDependencia = new System.Windows.Forms.TabPage();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
@@ -41,6 +41,7 @@ namespace ARTEC.GUI
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnAgentes = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
             this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
             this.btnBackup = new DevComponents.DotNetBar.ButtonX();
             this.btnUsuarios = new DevComponents.DotNetBar.ButtonX();
@@ -48,7 +49,6 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
-            this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +56,7 @@ namespace ARTEC.GUI
             // tabsPrincipal
             // 
             this.tabsPrincipal.Controls.Add(this.tabSolic);
-            this.tabsPrincipal.Controls.Add(this.tabHomol);
+            this.tabsPrincipal.Controls.Add(this.tabRendiciones);
             this.tabsPrincipal.Controls.Add(this.tabPartidas);
             this.tabsPrincipal.Controls.Add(this.tabDependencia);
             this.tabsPrincipal.Location = new System.Drawing.Point(12, 59);
@@ -76,15 +76,15 @@ namespace ARTEC.GUI
             this.tabSolic.Text = "Solicitudes";
             this.tabSolic.UseVisualStyleBackColor = true;
             // 
-            // tabHomol
+            // tabRendiciones
             // 
-            this.tabHomol.Location = new System.Drawing.Point(4, 22);
-            this.tabHomol.Name = "tabHomol";
-            this.tabHomol.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHomol.Size = new System.Drawing.Size(1335, 635);
-            this.tabHomol.TabIndex = 1;
-            this.tabHomol.Text = "tabPage2";
-            this.tabHomol.UseVisualStyleBackColor = true;
+            this.tabRendiciones.Location = new System.Drawing.Point(4, 22);
+            this.tabRendiciones.Name = "tabRendiciones";
+            this.tabRendiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRendiciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabRendiciones.TabIndex = 1;
+            this.tabRendiciones.Text = "tabRendiciones";
+            this.tabRendiciones.UseVisualStyleBackColor = true;
             // 
             // tabPartidas
             // 
@@ -231,6 +231,21 @@ namespace ARTEC.GUI
             this.panelEx1.Text = "panelEx1";
             this.panelEx1.Visible = false;
             // 
+            // btnFamilias
+            // 
+            this.btnFamilias.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnFamilias.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnFamilias.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnFamilias.CustomColorName = "Blue";
+            this.btnFamilias.Location = new System.Drawing.Point(894, 9);
+            this.btnFamilias.Name = "btnFamilias";
+            this.btnFamilias.Size = new System.Drawing.Size(108, 40);
+            this.btnFamilias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnFamilias.TabIndex = 12;
+            this.btnFamilias.Text = "btnFamilias";
+            this.btnFamilias.TextColor = System.Drawing.Color.White;
+            this.btnFamilias.Click += new System.EventHandler(this.btnFamilias_Click);
+            // 
             // btnBitacora
             // 
             this.btnBitacora.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -333,21 +348,6 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
-            // btnFamilias
-            // 
-            this.btnFamilias.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnFamilias.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnFamilias.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnFamilias.CustomColorName = "Blue";
-            this.btnFamilias.Location = new System.Drawing.Point(894, 9);
-            this.btnFamilias.Name = "btnFamilias";
-            this.btnFamilias.Size = new System.Drawing.Size(108, 40);
-            this.btnFamilias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnFamilias.TabIndex = 12;
-            this.btnFamilias.Text = "btnFamilias";
-            this.btnFamilias.TextColor = System.Drawing.Color.White;
-            this.btnFamilias.Click += new System.EventHandler(this.btnFamilias_Click);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -381,7 +381,7 @@ namespace ARTEC.GUI
 
         private System.Windows.Forms.TabControl tabsPrincipal;
         private System.Windows.Forms.TabPage tabSolic;
-        private System.Windows.Forms.TabPage tabHomol;
+        private System.Windows.Forms.TabPage tabRendiciones;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
         private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;

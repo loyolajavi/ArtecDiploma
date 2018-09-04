@@ -175,6 +175,7 @@ namespace ARTEC.DAL
 
             catch (Exception es)
             {
+                throw;
             }
             return ResRendicion;
         }
@@ -183,5 +184,91 @@ namespace ARTEC.DAL
 
 
 
+
+        public List<Rendicion> RendicionBuscar(string IdRendicion, string IdPartida, string IdSolicitud, string NombreDependencia)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(IdRendicion))
+                parameters.Add(new SqlParameter("@IdRendicion", Int32.Parse(IdRendicion)));
+            if (!string.IsNullOrEmpty(IdPartida))
+                parameters.Add(new SqlParameter("@IdPartida", Int32.Parse(IdPartida)));
+            if (!string.IsNullOrEmpty(IdSolicitud))
+                parameters.Add(new SqlParameter("@IdSolicitud", Int32.Parse(IdSolicitud)));
+            if (!string.IsNullOrEmpty(NombreDependencia))
+                parameters.Add(new SqlParameter("@NombreDependencia", NombreDependencia));
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "RendicionBuscar", parameters.ToArray()))
+                {
+                    List<Rendicion> unaLis = new List<Rendicion>();
+                    unaLis = MapearUnasRendiciones(ds);
+                    return unaLis;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public static List<Rendicion> MapearUnasRendiciones(DataSet ds)
+        {
+            List<Rendicion> unasRendiciones = new List<Rendicion>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Rendicion ResRendicion = new Rendicion();
+                    ResRendicion.IdRendicion = (int)row["IdRendicion"];
+                    ResRendicion.IdPartida = (int)row["IdPartida"];
+                    ResRendicion.MontoGasto = (decimal)row["MontoGasto"];
+                    ResRendicion.FechaRen = DateTime.Parse(row["FechaRen"].ToString());
+
+                    unasRendiciones.Add(ResRendicion);
+                }
+                return unasRendiciones;
+            }
+
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
+        public bool RendicionEliminar(int IdRendicion)
+        {
+            SqlParameter[] parametersRenEliminar = new SqlParameter[]
+			{
+                new SqlParameter("@IdRendicion", IdRendicion)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RendicionEliminar", parametersRenEliminar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

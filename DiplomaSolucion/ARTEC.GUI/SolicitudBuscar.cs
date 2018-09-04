@@ -84,7 +84,6 @@ namespace ARTEC.GUI
             {
                 string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click");
                 MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
-                return;
             }
 
             

@@ -206,6 +206,12 @@
     <Compile Include="frmRendicionCrear.Designer.cs">
       <DependentUpon>frmRendicionCrear.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRendicionModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRendicionModif.Designer.cs">
+      <DependentUpon>frmRendicionModif.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSolicitudModificar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,11 +262,11 @@
     <Compile Include="frmProveedorCrear.Designer.cs">
       <DependentUpon>frmProveedorCrear.cs</DependentUpon>
     </Compile>
-    <Compile Include="SoftHomologadoBuscar.cs">
+    <Compile Include="frmRendicionBuscar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SoftHomologadoBuscar.Designer.cs">
-      <DependentUpon>SoftHomologadoBuscar.cs</DependentUpon>
+    <Compile Include="frmRendicionBuscar.Designer.cs">
+      <DependentUpon>frmRendicionBuscar.cs</DependentUpon>
     </Compile>
     <Compile Include="SolicitudBuscar.cs">
       <SubType>Form</SubType>
@@ -331,6 +337,9 @@
     <EmbeddedResource Include="frmRendicionCrear.resx">
       <DependentUpon>frmRendicionCrear.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRendicionModif.resx">
+      <DependentUpon>frmRendicionModif.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSolicitudModificar.resx">
       <DependentUpon>frmSolicitudModificar.cs</DependentUpon>
     </EmbeddedResource>
@@ -365,8 +374,8 @@
     <EmbeddedResource Include="frmProveedorCrear.resx">
       <DependentUpon>frmProveedorCrear.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SoftHomologadoBuscar.resx">
-      <DependentUpon>SoftHomologadoBuscar.cs</DependentUpon>
+    <EmbeddedResource Include="frmRendicionBuscar.resx">
+      <DependentUpon>frmRendicionBuscar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SolicitudBuscar.resx">
       <DependentUpon>SolicitudBuscar.cs</DependentUpon>

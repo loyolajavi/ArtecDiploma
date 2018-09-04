@@ -61,12 +61,12 @@ namespace ARTEC.GUI
                 case 0:
                     break;
                 case 1:
-                    SoftHomologadoBuscar frmSoftHom = SoftHomologadoBuscar.ObtenerInstancia();
-                    frmSoftHom.TopLevel = false;
-                    frmSoftHom.FormBorderStyle = FormBorderStyle.None;
-                    frmSoftHom.Visible = true;
-                    frmSoftHom.Dock = DockStyle.Fill;
-                    tabHomol.Controls.Add(frmSoftHom);
+                    frmRendicionBuscar unFrmRendicionBuscar = frmRendicionBuscar.ObtenerInstancia();
+                    unFrmRendicionBuscar.TopLevel = false;
+                    unFrmRendicionBuscar.FormBorderStyle = FormBorderStyle.None;
+                    unFrmRendicionBuscar.Visible = true;
+                    unFrmRendicionBuscar.Dock = DockStyle.Fill;
+                    tabRendiciones.Controls.Add(unFrmRendicionBuscar);
                     break;
                 case 2:
                     frmPartidaBuscar unFrmPartidaBuscar = frmPartidaBuscar.ObtenerInstancia();
