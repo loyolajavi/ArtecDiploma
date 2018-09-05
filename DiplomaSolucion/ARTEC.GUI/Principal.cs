@@ -84,7 +84,14 @@ namespace ARTEC.GUI
                     unFrmDependenciaBuscar.Dock = DockStyle.Fill;
                     tabDependencia.Controls.Add(unFrmDependenciaBuscar);
                     break;
-
+                case 4:
+                    frmAsignacionBuscar unFrmAsignacionBuscar = frmAsignacionBuscar.ObtenerInstancia();
+                    unFrmAsignacionBuscar.TopLevel = false;
+                    unFrmAsignacionBuscar.FormBorderStyle = FormBorderStyle.None;
+                    unFrmAsignacionBuscar.Visible = true;
+                    unFrmAsignacionBuscar.Dock = DockStyle.Fill;
+                    tabAsignaciones.Controls.Add(unFrmAsignacionBuscar);
+                    break;
             }
         }
 
@@ -185,6 +192,7 @@ namespace ARTEC.GUI
             frmFamiliaGestion unFrmFamiliasGestion = new frmFamiliaGestion();
             unFrmFamiliasGestion.Show();
         }
+
 
 
 

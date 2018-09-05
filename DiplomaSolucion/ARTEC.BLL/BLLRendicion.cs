@@ -47,7 +47,15 @@ namespace ARTEC.BLL
 
         public List<Rendicion> RendicionBuscar(string IdRendicion = null, string IdPartida = null, string IdSolicitud = null, string NombreDependencia = null)
         {
-            return GestorRendicion.RendicionBuscar(IdRendicion, IdPartida, IdSolicitud, NombreDependencia);
+            try
+            {
+                return GestorRendicion.RendicionBuscar(IdRendicion, IdPartida, IdSolicitud, NombreDependencia);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
 
         public bool RendicionEliminar(Rendicion unaRendicion)

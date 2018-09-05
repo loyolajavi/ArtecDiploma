@@ -104,6 +104,12 @@
     <Compile Include="frmAgentesGestion.Designer.cs">
       <DependentUpon>frmAgentesGestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAsignacionBuscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAsignacionBuscar.Designer.cs">
+      <DependentUpon>frmAsignacionBuscar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBienAsignar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +236,12 @@
     <Compile Include="frmUsuariosModificar.Designer.cs">
       <DependentUpon>frmUsuariosModificar.cs</DependentUpon>
     </Compile>
+    <Compile Include="GrillaAsigBuscarCU.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GrillaAsigBuscarCU.Designer.cs">
+      <DependentUpon>GrillaAsigBuscarCU.cs</DependentUpon>
+    </Compile>
     <Compile Include="GrillaAsignacion.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -285,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgentesGestion.resx">
       <DependentUpon>frmAgentesGestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAsignacionBuscar.resx">
+      <DependentUpon>frmAsignacionBuscar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBienAsignar.resx">
       <DependentUpon>frmBienAsignar.cs</DependentUpon>
@@ -348,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUsuariosModificar.resx">
       <DependentUpon>frmUsuariosModificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GrillaAsigBuscarCU.resx">
+      <DependentUpon>GrillaAsigBuscarCU.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GrillaAsignacion.resx">
       <DependentUpon>GrillaAsignacion.cs</DependentUpon>

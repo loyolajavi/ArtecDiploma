@@ -43,7 +43,6 @@ namespace ARTEC.DAL
             }
             catch (Exception es)
             {
-                return false;
                 throw;
             }
 

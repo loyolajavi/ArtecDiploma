@@ -452,8 +452,8 @@ namespace ARTEC.GUI
             this.txtResBusqueda.Location = new System.Drawing.Point(7, 131);
             this.txtResBusqueda.Name = "txtResBusqueda";
             this.txtResBusqueda.ReadOnly = true;
-            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\ansicpg1252\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4" +
-    "\\uc1\\pard\\lang11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
             this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txtResBusqueda.Size = new System.Drawing.Size(824, 372);
             this.txtResBusqueda.TabIndex = 48;
@@ -557,8 +557,6 @@ namespace ARTEC.GUI
             this.ClientSize = new System.Drawing.Size(1265, 565);
             this.Controls.Add(this.txtFechaFin2);
             this.Controls.Add(this.txtFechaInicio2);
-            this.Controls.Add(this.txtResBusqueda);
-            this.Controls.Add(this.GrillaSolicitudBuscar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.txtDep);
@@ -578,9 +576,10 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtBien);
             this.Controls.Add(this.comboBoxEx4);
             this.Controls.Add(this.comboBoxEx1);
+            this.Controls.Add(this.txtResBusqueda);
+            this.Controls.Add(this.GrillaSolicitudBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "SolicitudBuscar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.SolicitudBuscar_Load);

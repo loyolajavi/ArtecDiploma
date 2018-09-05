@@ -17,8 +17,15 @@ namespace ARTEC.ENTIDADES
         public ModeloVersion unModelo { get; set; }
         public IList<Inventario> unosInventarios { get; set; }
         public Inventario unInventarioAlta { get; set; }
-        
 
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.DescripBien))
+            {
+                return this.DescripBien;
+            }
+            return "";
+        }
 
 
     }

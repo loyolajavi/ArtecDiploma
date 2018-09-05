@@ -49,6 +49,7 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
+            this.tabAsignaciones = new System.Windows.Forms.TabPage();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@ namespace ARTEC.GUI
             this.tabsPrincipal.Controls.Add(this.tabRendiciones);
             this.tabsPrincipal.Controls.Add(this.tabPartidas);
             this.tabsPrincipal.Controls.Add(this.tabDependencia);
+            this.tabsPrincipal.Controls.Add(this.tabAsignaciones);
             this.tabsPrincipal.Location = new System.Drawing.Point(12, 59);
             this.tabsPrincipal.Name = "tabsPrincipal";
             this.tabsPrincipal.SelectedIndex = 0;
@@ -348,6 +350,16 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
+            // tabAsignaciones
+            // 
+            this.tabAsignaciones.Location = new System.Drawing.Point(4, 22);
+            this.tabAsignaciones.Name = "tabAsignaciones";
+            this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabAsignaciones.TabIndex = 4;
+            this.tabAsignaciones.Text = "tabAsignaciones";
+            this.tabAsignaciones.UseVisualStyleBackColor = true;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,6 +412,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCategorias;
         private DevComponents.DotNetBar.ButtonX btnProveedor;
         private DevComponents.DotNetBar.ButtonX btnFamilias;
+        private System.Windows.Forms.TabPage tabAsignaciones;
 
 
 

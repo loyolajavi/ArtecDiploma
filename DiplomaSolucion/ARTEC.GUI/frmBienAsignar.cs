@@ -174,42 +174,52 @@ namespace ARTEC.GUI
             unaAsignacion.unaDependencia = unaSolic.laDependencia;
 
             BLLAsignacion ManagerAsignacion = new BLLAsignacion();
-            if(ManagerAsignacion.AsignacionCrear(unaAsignacion))
+
+            try
             {
-                if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)//VER SI ESTA bien el chequeo del idioma
+                if (ManagerAsignacion.AsignacionCrear(unaAsignacion))
                 {
-                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+                    if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)//VER SI ESTA bien el chequeo del idioma
                     {
-                        doc.AddCustomProperty(new CustomProperty("PFecha", unaAsignacion.Fecha.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        doc.AddCustomProperty(new CustomProperty("PDependencia", unaAsignacion.unaDependencia.NombreDependencia));
-                        CultureInfo ci = new CultureInfo("es-AR");
-                        //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                        //Si se escribio una justificación
-                        //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                        //{
-                        //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                        //}
-                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                        using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+                        {
+                            doc.AddCustomProperty(new CustomProperty("PFecha", unaAsignacion.Fecha.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                            doc.AddCustomProperty(new CustomProperty("PDependencia", unaAsignacion.unaDependencia.NombreDependencia));
+                            CultureInfo ci = new CultureInfo("es-AR");
+                            //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
+                            //Si se escribio una justificación
+                            //if (!string.IsNullOrWhiteSpace(JustifAUX))
+                            //{
+                            //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                            //}
+                            doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                        }
                     }
-                }
-                else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
-                {
-                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                    else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                     {
-                        //doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        //doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
-                        //CultureInfo ci = new CultureInfo("es-AR");
-                        //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                        ////Si se escribio una justificación
-                        //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                        //{
-                        //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                        //}
-                        //doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                        using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                        {
+                            //doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                            //doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
+                            //CultureInfo ci = new CultureInfo("es-AR");
+                            //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
+                            ////Si se escribio una justificación
+                            //if (!string.IsNullOrWhiteSpace(JustifAUX))
+                            //{
+                            //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                            //}
+                            //doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                        }
                     }
+                    MessageBox.Show("Asignacion Creada");
                 }
-                MessageBox.Show("Asignacion Creada");
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmBienAsignar - btnConfirmar_Click");
+                MessageBox.Show("Error al crear la asignación, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
                 
         }
 

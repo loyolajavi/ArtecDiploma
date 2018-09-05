@@ -33,7 +33,6 @@ namespace ARTEC.BLL
             }
             catch (Exception es)
             {
-                return false;    
                 throw;
             }
             
@@ -41,5 +40,29 @@ namespace ARTEC.BLL
             
         }
 
+
+        public List<Asignacion> AsignacionBuscar(string IdAsignacion, string NombreDependencia, string IdSolicitud)
+        {
+            try
+            {
+                return GestorAsignacion.AsignacionBuscar(IdAsignacion, NombreDependencia, IdSolicitud);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<Inventario> AsignacionTraerBienesAsignados(int IdAsignacion)
+        {
+            try
+            {
+                return GestorAsignacion.AsignacionTraerBienesAsignados(IdAsignacion);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

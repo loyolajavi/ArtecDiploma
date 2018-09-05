@@ -22,7 +22,7 @@ namespace ARTEC.ENTIDADES
         //public Deposito unDeposito { get; set; }
         public Adquisicion unaAdquisicion { get; set; }
         
-        public int TipoBien { get; set; }
+        public int unTipoBien { get; set; }
 
         public Bien deBien { get; set; }
     }
