@@ -45,11 +45,14 @@ namespace ARTEC.GUI
             flowAsignaciones.Controls.Clear();
             ListaGrilla.Clear();
 
+            if (!vldFrmAsignacionBuscar.Validate())
+                return;
+            
             try
             {
-                if (!string.IsNullOrEmpty(txtAsignacion.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtNroSolicitud.Text) && !txtAsignacion.Text.Contains("%") & !txtDep.Text.Contains("%") & !txtNroSolicitud.Text.Contains("%") & !txtAsignacion.Text.Contains("_") & !txtDep.Text.Contains("_") & !txtNroSolicitud.Text.Contains("_"))
+                if (!string.IsNullOrEmpty(txtAsignacion.Text) | !string.IsNullOrEmpty(txtDep.Text) | !string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtFechaDesde.Text) | !string.IsNullOrEmpty(txtFechaHasta.Text) && !txtAsignacion.Text.Contains("%") & !txtDep.Text.Contains("%") & !txtNroSolicitud.Text.Contains("%") & !txtAsignacion.Text.Contains("_") & !txtDep.Text.Contains("_") & !txtNroSolicitud.Text.Contains("_"))
                 {
-                    unasAsignaciones = ManagerAsignacion.AsignacionBuscar(txtAsignacion.Text, txtDep.Text, txtNroSolicitud.Text);
+                    unasAsignaciones = ManagerAsignacion.AsignacionBuscar(txtAsignacion.Text, txtDep.Text, txtNroSolicitud.Text, (DateTime?)txtFechaDesde.Value, (DateTime?)txtFechaHasta.Value);
 
                     foreach (Asignacion unaAsig in unasAsignaciones)
                     {
@@ -57,6 +60,7 @@ namespace ARTEC.GUI
                         GrillaAux.IdAsignacion = unaAsig.IdAsignacion.ToString();
                         GrillaAux.NombreDependencia = unaAsig.unaDependencia.NombreDependencia;
                         GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud.ToString();
+                        GrillaAux.laFecha = unaAsig.Fecha.ToString();
                         GrillaAux.unaGrilla.DataSource = null;
                         GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);
                         GrillaAux.unaGrilla.Columns["IdInventario"].Visible = false;

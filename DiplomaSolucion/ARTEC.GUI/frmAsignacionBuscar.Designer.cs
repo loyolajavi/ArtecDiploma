@@ -28,6 +28,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsignacionBuscar));
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblNroAsignacion = new DevComponents.DotNetBar.LabelX();
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -41,8 +43,14 @@ namespace ARTEC.GUI
             this.lblDesde = new DevComponents.DotNetBar.LabelX();
             this.lblHasta = new DevComponents.DotNetBar.LabelX();
             this.flowAsignaciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.vldFrmAsignacionBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
@@ -101,6 +109,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(202, 22);
             this.txtNroSolicitud.TabIndex = 51;
+            this.vldFrmAsignacionBuscar.SetValidator1(this.txtNroSolicitud, this.regularExpressionValidator2);
             // 
             // lblNroSolicitud
             // 
@@ -143,6 +152,7 @@ namespace ARTEC.GUI
             this.txtAsignacion.PreventEnterBeep = true;
             this.txtAsignacion.Size = new System.Drawing.Size(202, 22);
             this.txtAsignacion.TabIndex = 48;
+            this.vldFrmAsignacionBuscar.SetValidator1(this.txtAsignacion, this.regularExpressionValidator1);
             // 
             // comboBoxEx4
             // 
@@ -283,15 +293,44 @@ namespace ARTEC.GUI
             this.flowAsignaciones.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowAsignaciones.Location = new System.Drawing.Point(2, 123);
             this.flowAsignaciones.Name = "flowAsignaciones";
-            this.flowAsignaciones.Size = new System.Drawing.Size(483, 273);
+            this.flowAsignaciones.Size = new System.Drawing.Size(509, 273);
             this.flowAsignaciones.TabIndex = 67;
             this.flowAsignaciones.WrapContents = false;
+            // 
+            // vldFrmAsignacionBuscar
+            // 
+            this.vldFrmAsignacionBuscar.ContainerControl = this.btnBuscar;
+            this.vldFrmAsignacionBuscar.ErrorProvider = this.errorProvider1;
+            this.vldFrmAsignacionBuscar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
             // 
             // frmAsignacionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 396);
+            this.ClientSize = new System.Drawing.Size(512, 396);
             this.Controls.Add(this.flowAsignaciones);
             this.Controls.Add(this.lblHasta);
             this.Controls.Add(this.txtFechaHasta);
@@ -312,6 +351,7 @@ namespace ARTEC.GUI
             this.Load += new System.EventHandler(this.frmAsignacionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -331,5 +371,10 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblDesde;
         private DevComponents.DotNetBar.LabelX lblHasta;
         private System.Windows.Forms.FlowLayoutPanel flowAsignaciones;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmAsignacionBuscar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
     }
 }

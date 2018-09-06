@@ -77,7 +77,7 @@ namespace ARTEC.DAL
         }
 
 
-        public List<Asignacion> AsignacionBuscar(string IdAsignacion, string NombreDependencia, string IdSolicitud)
+        public List<Asignacion> AsignacionBuscar(string IdAsignacion, string NombreDependencia, string IdSolicitud, DateTime? fechaDesde = null, DateTime? fechaHasta = null)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
@@ -87,6 +87,10 @@ namespace ARTEC.DAL
                 parameters.Add(new SqlParameter("@NombreDependencia", NombreDependencia));
             if (!string.IsNullOrEmpty(IdSolicitud))
                 parameters.Add(new SqlParameter("@IdSolicitud", Int32.Parse(IdSolicitud)));
+            if (fechaDesde != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaDesde", fechaDesde));
+            if (fechaHasta != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaHasta", fechaHasta));
      
 
             try

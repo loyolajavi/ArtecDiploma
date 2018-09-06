@@ -41,11 +41,11 @@ namespace ARTEC.BLL
         }
 
 
-        public List<Asignacion> AsignacionBuscar(string IdAsignacion, string NombreDependencia, string IdSolicitud)
+        public List<Asignacion> AsignacionBuscar(string IdAsignacion, string NombreDependencia, string IdSolicitud, DateTime? fechaDesde = null, DateTime? fechaHasta = null)
         {
             try
             {
-                return GestorAsignacion.AsignacionBuscar(IdAsignacion, NombreDependencia, IdSolicitud);
+                return GestorAsignacion.AsignacionBuscar(IdAsignacion, NombreDependencia, IdSolicitud, fechaDesde, fechaHasta);
             }
             catch (Exception es)
             {

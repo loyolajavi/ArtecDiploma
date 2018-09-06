@@ -52,6 +52,12 @@ namespace ARTEC.GUI
                 this.ClickEnGrilla(this, e);
         }
 
+        public string laFecha
+        {
+            get { return txtFecha.Text; }
+            set { txtFecha.Text = value; }
+        }
+
 
     }
 }
