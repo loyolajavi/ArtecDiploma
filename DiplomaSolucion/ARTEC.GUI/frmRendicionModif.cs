@@ -211,10 +211,10 @@ namespace ARTEC.GUI
                         if (ManagerRendicion.RendicionEliminar(unaRendicionSelec))
                         {
                             MessageBox.Show("Rendicion: " + unaRendicionSelec.IdRendicion.ToString() + " eliminada correctamente");
+                            DialogResult = DialogResult.OK;
                         }
                         else
                             return;
-                    DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {

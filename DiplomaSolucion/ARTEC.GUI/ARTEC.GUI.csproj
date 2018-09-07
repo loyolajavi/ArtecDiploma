@@ -110,6 +110,12 @@
     <Compile Include="frmAsignacionBuscar.Designer.cs">
       <DependentUpon>frmAsignacionBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAsignacionModificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAsignacionModificar.Designer.cs">
+      <DependentUpon>frmAsignacionModificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBienAsignar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAsignacionBuscar.resx">
       <DependentUpon>frmAsignacionBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAsignacionModificar.resx">
+      <DependentUpon>frmAsignacionModificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBienAsignar.resx">
       <DependentUpon>frmBienAsignar.cs</DependentUpon>

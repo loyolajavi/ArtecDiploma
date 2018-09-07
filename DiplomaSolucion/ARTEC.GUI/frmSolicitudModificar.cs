@@ -150,7 +150,7 @@ namespace ARTEC.GUI
 
             //Agrega los detalles
             grillaDetalles.DataSource = null;
-            unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud).unosDetallesSolicitud.ToList();
+            unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud.IdSolicitud).unosDetallesSolicitud.ToList();
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
             //grillaDetalles.Columns[1].Visible = false;
             //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles

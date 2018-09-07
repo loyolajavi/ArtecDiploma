@@ -14,6 +14,7 @@ namespace ARTEC.GUI
     {
 
         public event DataGridViewCellEventHandler ClickEnGrilla;
+        public event EventHandler ClickEnPanel;
 
         public GrillaAsigBuscarCU()
         {
@@ -46,16 +47,24 @@ namespace ARTEC.GUI
         }
 
 
-        protected void GrillaBienes_CellClick(object sender, DataGridViewCellEventArgs e)
+        public string laFecha
+        {
+            get { return txtFecha.Text; }
+            set { txtFecha.Text = value; }
+        }
+
+
+        private void GrillaBienes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.ClickEnGrilla != null)
                 this.ClickEnGrilla(this, e);
         }
 
-        public string laFecha
+
+        private void pnlTitulos_CellDoubleClick(object sender, EventArgs e)
         {
-            get { return txtFecha.Text; }
-            set { txtFecha.Text = value; }
+            if (this.ClickEnPanel != null)
+                this.ClickEnPanel(this, e);
         }
 
 

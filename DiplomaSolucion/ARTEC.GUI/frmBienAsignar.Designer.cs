@@ -38,8 +38,6 @@ namespace ARTEC.GUI
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.flowInventarios = new System.Windows.Forms.FlowLayoutPanel();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
-            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInvConfirmados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +113,7 @@ namespace ARTEC.GUI
             this.GrillaInvConfirmados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInvConfirmados.Location = new System.Drawing.Point(12, 342);
             this.GrillaInvConfirmados.Name = "GrillaInvConfirmados";
-            this.GrillaInvConfirmados.Size = new System.Drawing.Size(599, 137);
+            this.GrillaInvConfirmados.Size = new System.Drawing.Size(599, 167);
             this.GrillaInvConfirmados.TabIndex = 52;
             // 
             // notifyIcon1
@@ -139,47 +137,19 @@ namespace ARTEC.GUI
             // 
             this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmar.Location = new System.Drawing.Point(251, 540);
+            this.btnConfirmar.Location = new System.Drawing.Point(261, 523);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 23);
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 30);
             this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnConfirmar.TabIndex = 54;
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
-            // comboBoxEx1
-            // 
-            this.comboBoxEx1.DisplayMember = "Text";
-            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx1.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx1.FormattingEnabled = true;
-            this.comboBoxEx1.ItemHeight = 16;
-            this.comboBoxEx1.Location = new System.Drawing.Point(136, 492);
-            this.comboBoxEx1.Name = "comboBoxEx1";
-            this.comboBoxEx1.Size = new System.Drawing.Size(111, 22);
-            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx1.TabIndex = 55;
-            // 
-            // labelX1
-            // 
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(14, 492);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(116, 22);
-            this.labelX1.TabIndex = 56;
-            this.labelX1.Text = "lblModoEntrega";
-            // 
             // frmBienAsignar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 567);
-            this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.comboBoxEx1);
+            this.ClientSize = new System.Drawing.Size(623, 558);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.flowInventarios);
             this.Controls.Add(this.GrillaInvConfirmados);
@@ -207,7 +177,5 @@ namespace ARTEC.GUI
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.FlowLayoutPanel flowInventarios;
         private DevComponents.DotNetBar.ButtonX btnConfirmar;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
-        private DevComponents.DotNetBar.LabelX labelX1;
     }
 }

@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitulos = new DevComponents.DotNetBar.PanelEx();
+            this.txtFecha = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.lblFecha = new DevComponents.DotNetBar.LabelX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroAsignacion = new DevComponents.DotNetBar.LabelX();
             this.lblNroSolicitud = new DevComponents.DotNetBar.LabelX();
@@ -37,11 +39,9 @@
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.GrillaBienes = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.lblFecha = new DevComponents.DotNetBar.LabelX();
-            this.txtFecha = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.pnlTitulos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitulos
@@ -68,6 +68,65 @@
             this.pnlTitulos.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.pnlTitulos.Style.GradientAngle = 90;
             this.pnlTitulos.TabIndex = 0;
+            this.pnlTitulos.DoubleClick += new System.EventHandler(this.pnlTitulos_CellDoubleClick);
+            // 
+            // txtFecha
+            // 
+            // 
+            // 
+            // 
+            this.txtFecha.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtFecha.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFecha.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.txtFecha.ButtonDropDown.Visible = true;
+            this.txtFecha.IsPopupCalendarOpen = false;
+            this.txtFecha.Location = new System.Drawing.Point(403, 3);
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.txtFecha.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFecha.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
+            this.txtFecha.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFecha.MonthCalendar.DisplayMonth = new System.DateTime(2017, 3, 1, 0, 0, 0, 0);
+            this.txtFecha.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
+            // 
+            // 
+            // 
+            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFecha.MonthCalendar.TodayButtonVisible = true;
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(79, 20);
+            this.txtFecha.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.txtFecha.TabIndex = 62;
+            // 
+            // lblFecha
+            // 
+            // 
+            // 
+            // 
+            this.lblFecha.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblFecha.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFecha.Location = new System.Drawing.Point(344, 3);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(62, 22);
+            this.lblFecha.TabIndex = 60;
+            this.lblFecha.Text = "lblFecha";
             // 
             // txtNroSolicitud
             // 
@@ -160,7 +219,7 @@
             // 
             this.GrillaBienes.AllowUserToAddRows = false;
             this.GrillaBienes.AllowUserToDeleteRows = false;
-            this.GrillaBienes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.GrillaBienes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GrillaBienes.BackgroundColor = System.Drawing.Color.White;
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -178,65 +237,7 @@
             this.GrillaBienes.ReadOnly = true;
             this.GrillaBienes.Size = new System.Drawing.Size(485, 93);
             this.GrillaBienes.TabIndex = 65;
-            this.GrillaBienes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaBienes_CellClick);
-            // 
-            // lblFecha
-            // 
-            // 
-            // 
-            // 
-            this.lblFecha.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblFecha.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFecha.Location = new System.Drawing.Point(344, 3);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(62, 22);
-            this.lblFecha.TabIndex = 60;
-            this.lblFecha.Text = "lblFecha";
-            // 
-            // txtFecha
-            // 
-            // 
-            // 
-            // 
-            this.txtFecha.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtFecha.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtFecha.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.txtFecha.ButtonDropDown.Visible = true;
-            this.txtFecha.IsPopupCalendarOpen = false;
-            this.txtFecha.Location = new System.Drawing.Point(403, 3);
-            // 
-            // 
-            // 
-            // 
-            // 
-            // 
-            this.txtFecha.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtFecha.MonthCalendar.CalendarDimensions = new System.Drawing.Size(1, 1);
-            this.txtFecha.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.txtFecha.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtFecha.MonthCalendar.DisplayMonth = new System.DateTime(2017, 3, 1, 0, 0, 0, 0);
-            this.txtFecha.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday;
-            // 
-            // 
-            // 
-            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.txtFecha.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtFecha.MonthCalendar.TodayButtonVisible = true;
-            this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(79, 20);
-            this.txtFecha.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.txtFecha.TabIndex = 62;
+            this.GrillaBienes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaBienes_CellDoubleClick);
             // 
             // GrillaAsigBuscarCU
             // 
@@ -248,8 +249,8 @@
             this.Name = "GrillaAsigBuscarCU";
             this.Size = new System.Drawing.Size(485, 150);
             this.pnlTitulos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).EndInit();
             this.ResumeLayout(false);
 
         }

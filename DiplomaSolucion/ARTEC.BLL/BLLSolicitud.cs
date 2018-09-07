@@ -47,12 +47,13 @@ namespace ARTEC.BLL
 
 
 
-        public Solicitud SolicitudTraerDetalles(Solicitud unaSolic)
+        public Solicitud SolicitudTraerDetalles(int IdSolic)
         {
-
+            Solicitud unaSolic = new Solicitud();
+            unaSolic.IdSolicitud = IdSolic;
             BLLSolicDetalle GestorSolicDetalle = new BLLSolicDetalle();
 
-            unaSolic.unosDetallesSolicitud = GestorSolicDetalle.SolicDetallesTraerPorNroSolicitud(unaSolic.IdSolicitud).ToList();
+            unaSolic.unosDetallesSolicitud = GestorSolicDetalle.SolicDetallesTraerPorNroSolicitud(IdSolic).ToList();
             return unaSolic;
         }
 

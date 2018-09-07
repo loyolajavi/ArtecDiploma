@@ -32,24 +32,26 @@ namespace ARTEC.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsignacionBuscar));
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblNroAsignacion = new DevComponents.DotNetBar.LabelX();
-            this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroSolicitud = new DevComponents.DotNetBar.LabelX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtAsignacion = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.txtFechaHasta = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtFechaDesde = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblDesde = new DevComponents.DotNetBar.LabelX();
             this.lblHasta = new DevComponents.DotNetBar.LabelX();
             this.flowAsignaciones = new System.Windows.Forms.FlowLayoutPanel();
             this.vldFrmAsignacionBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).BeginInit();
+            this.flowAsignaciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,21 +80,22 @@ namespace ARTEC.GUI
             this.lblNroAsignacion.TabIndex = 52;
             this.lblNroAsignacion.Text = "lblNroAsignacion";
             // 
-            // txtDep
+            // txtDependencia
             // 
-            this.txtDep.BackColor = System.Drawing.Color.White;
+            this.txtDependencia.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.txtDep.Border.Class = "TextBoxBorder";
-            this.txtDep.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDep.DisabledBackColor = System.Drawing.Color.White;
-            this.txtDep.ForeColor = System.Drawing.Color.Black;
-            this.txtDep.Location = new System.Drawing.Point(99, 38);
-            this.txtDep.Name = "txtDep";
-            this.txtDep.PreventEnterBeep = true;
-            this.txtDep.Size = new System.Drawing.Size(202, 22);
-            this.txtDep.TabIndex = 53;
+            this.txtDependencia.Border.Class = "TextBoxBorder";
+            this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
+            this.txtDependencia.ForeColor = System.Drawing.Color.Black;
+            this.txtDependencia.Location = new System.Drawing.Point(99, 38);
+            this.txtDependencia.Name = "txtDependencia";
+            this.txtDependencia.PreventEnterBeep = true;
+            this.txtDependencia.Size = new System.Drawing.Size(304, 22);
+            this.txtDependencia.TabIndex = 53;
+            this.txtDependencia.TextChanged += new System.EventHandler(this.txtDependencia_TextChanged);
             // 
             // txtNroSolicitud
             // 
@@ -107,7 +110,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Location = new System.Drawing.Point(99, 66);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
-            this.txtNroSolicitud.Size = new System.Drawing.Size(202, 22);
+            this.txtNroSolicitud.Size = new System.Drawing.Size(304, 22);
             this.txtNroSolicitud.TabIndex = 51;
             this.vldFrmAsignacionBuscar.SetValidator1(this.txtNroSolicitud, this.regularExpressionValidator2);
             // 
@@ -124,18 +127,18 @@ namespace ARTEC.GUI
             this.lblNroSolicitud.TabIndex = 50;
             this.lblNroSolicitud.Text = "NroSolicitud";
             // 
-            // labelX1
+            // lblDependencia
             // 
             // 
             // 
             // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(2, 38);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(91, 22);
-            this.labelX1.TabIndex = 47;
-            this.labelX1.Text = "Dependencia";
+            this.lblDependencia.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDependencia.Location = new System.Drawing.Point(2, 38);
+            this.lblDependencia.Name = "lblDependencia";
+            this.lblDependencia.Size = new System.Drawing.Size(91, 22);
+            this.lblDependencia.TabIndex = 47;
+            this.lblDependencia.Text = "Dependencia";
             // 
             // txtAsignacion
             // 
@@ -150,25 +153,26 @@ namespace ARTEC.GUI
             this.txtAsignacion.Location = new System.Drawing.Point(99, 10);
             this.txtAsignacion.Name = "txtAsignacion";
             this.txtAsignacion.PreventEnterBeep = true;
-            this.txtAsignacion.Size = new System.Drawing.Size(202, 22);
+            this.txtAsignacion.Size = new System.Drawing.Size(304, 22);
             this.txtAsignacion.TabIndex = 48;
             this.vldFrmAsignacionBuscar.SetValidator1(this.txtAsignacion, this.regularExpressionValidator1);
             // 
-            // comboBoxEx4
+            // cboDep
             // 
-            this.comboBoxEx4.DisplayMember = "Text";
-            this.comboBoxEx4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEx4.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx4.FormattingEnabled = true;
-            this.comboBoxEx4.ItemHeight = 16;
-            this.comboBoxEx4.Location = new System.Drawing.Point(99, 38);
-            this.comboBoxEx4.MaxDropDownItems = 10;
-            this.comboBoxEx4.Name = "comboBoxEx4";
-            this.comboBoxEx4.Size = new System.Drawing.Size(156, 22);
-            this.comboBoxEx4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx4.TabIndex = 49;
-            this.comboBoxEx4.Visible = false;
+            this.cboDep.DisplayMember = "Text";
+            this.cboDep.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDep.ForeColor = System.Drawing.Color.Black;
+            this.cboDep.FormattingEnabled = true;
+            this.cboDep.ItemHeight = 16;
+            this.cboDep.Location = new System.Drawing.Point(99, 38);
+            this.cboDep.MaxDropDownItems = 10;
+            this.cboDep.Name = "cboDep";
+            this.cboDep.Size = new System.Drawing.Size(304, 22);
+            this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboDep.TabIndex = 49;
+            this.cboDep.Visible = false;
+            this.cboDep.SelectionChangeCommitted += new System.EventHandler(this.cboDep_SelectionChangeCommitted);
             // 
             // txtFechaHasta
             // 
@@ -180,7 +184,7 @@ namespace ARTEC.GUI
             this.txtFechaHasta.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaHasta.ButtonDropDown.Visible = true;
             this.txtFechaHasta.IsPopupCalendarOpen = false;
-            this.txtFechaHasta.Location = new System.Drawing.Point(393, 48);
+            this.txtFechaHasta.Location = new System.Drawing.Point(479, 48);
             // 
             // 
             // 
@@ -225,7 +229,7 @@ namespace ARTEC.GUI
             this.txtFechaDesde.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaDesde.ButtonDropDown.Visible = true;
             this.txtFechaDesde.IsPopupCalendarOpen = false;
-            this.txtFechaDesde.Location = new System.Drawing.Point(393, 10);
+            this.txtFechaDesde.Location = new System.Drawing.Point(479, 10);
             // 
             // 
             // 
@@ -267,7 +271,7 @@ namespace ARTEC.GUI
             // 
             this.lblDesde.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblDesde.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.lblDesde.Location = new System.Drawing.Point(318, 10);
+            this.lblDesde.Location = new System.Drawing.Point(409, 10);
             this.lblDesde.Name = "lblDesde";
             this.lblDesde.Size = new System.Drawing.Size(69, 22);
             this.lblDesde.TabIndex = 60;
@@ -280,7 +284,7 @@ namespace ARTEC.GUI
             // 
             this.lblHasta.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblHasta.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.lblHasta.Location = new System.Drawing.Point(318, 48);
+            this.lblHasta.Location = new System.Drawing.Point(409, 48);
             this.lblHasta.Name = "lblHasta";
             this.lblHasta.Size = new System.Drawing.Size(69, 22);
             this.lblHasta.TabIndex = 66;
@@ -290,10 +294,11 @@ namespace ARTEC.GUI
             // 
             this.flowAsignaciones.AutoScroll = true;
             this.flowAsignaciones.BackColor = System.Drawing.Color.Transparent;
+            this.flowAsignaciones.Controls.Add(this.txtResBusqueda);
             this.flowAsignaciones.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowAsignaciones.Location = new System.Drawing.Point(2, 123);
             this.flowAsignaciones.Name = "flowAsignaciones";
-            this.flowAsignaciones.Size = new System.Drawing.Size(509, 273);
+            this.flowAsignaciones.Size = new System.Drawing.Size(556, 273);
             this.flowAsignaciones.TabIndex = 67;
             this.flowAsignaciones.WrapContents = false;
             // 
@@ -302,6 +307,20 @@ namespace ARTEC.GUI
             this.vldFrmAsignacionBuscar.ContainerControl = this.btnBuscar;
             this.vldFrmAsignacionBuscar.ErrorProvider = this.errorProvider1;
             this.vldFrmAsignacionBuscar.Highlighter = this.highlighter1;
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
             // 
             // errorProvider1
             // 
@@ -312,25 +331,30 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
-            // regularExpressionValidator1
+            // txtResBusqueda
             // 
-            this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
             // 
-            // regularExpressionValidator2
             // 
-            this.regularExpressionValidator2.EmptyValueIsValid = true;
-            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusqueda.Location = new System.Drawing.Point(3, 3);
+            this.txtResBusqueda.Name = "txtResBusqueda";
+            this.txtResBusqueda.ReadOnly = true;
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusqueda.Size = new System.Drawing.Size(545, 258);
+            this.txtResBusqueda.TabIndex = 68;
+            this.txtResBusqueda.Text = "No hay resultados";
+            this.txtResBusqueda.Visible = false;
             // 
             // frmAsignacionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 396);
+            this.ClientSize = new System.Drawing.Size(570, 396);
             this.Controls.Add(this.flowAsignaciones);
             this.Controls.Add(this.lblHasta);
             this.Controls.Add(this.txtFechaHasta);
@@ -338,12 +362,12 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblDesde);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lblNroAsignacion);
-            this.Controls.Add(this.txtDep);
+            this.Controls.Add(this.txtDependencia);
             this.Controls.Add(this.txtNroSolicitud);
             this.Controls.Add(this.lblNroSolicitud);
-            this.Controls.Add(this.labelX1);
+            this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtAsignacion);
-            this.Controls.Add(this.comboBoxEx4);
+            this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAsignacionBuscar";
@@ -351,6 +375,7 @@ namespace ARTEC.GUI
             this.Load += new System.EventHandler(this.frmAsignacionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).EndInit();
+            this.flowAsignaciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -360,12 +385,12 @@ namespace ARTEC.GUI
 
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.LabelX lblNroAsignacion;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtDep;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolicitud;
         private DevComponents.DotNetBar.LabelX lblNroSolicitud;
-        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtAsignacion;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaHasta;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaDesde;
         private DevComponents.DotNetBar.LabelX lblDesde;
@@ -376,5 +401,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
     }
 }
