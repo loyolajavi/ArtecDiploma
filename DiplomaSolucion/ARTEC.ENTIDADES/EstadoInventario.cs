@@ -11,6 +11,11 @@ namespace ARTEC.ENTIDADES
 
         public int IdEstadoInventario { get; set; }
         public string DescripEstadoInv { get; set; }
+
+        public enum EnumEstadoInventario
+        {
+            Disponible = 1, Entregado = 2
+        }
    
     }
 }

@@ -106,6 +106,9 @@ namespace ARTEC.DAL
                     unInven.unInventarioAlta = new XInventarioHard();
                     unInven.unInventarioAlta.IdInventario = (int)row["IdInventario"];
                     unInven.unInventarioAlta.SerieKey = row["SerieKey"].ToString();
+                    unInven.unInventarioAlta.deBien = new Hardware();
+                    unInven.unInventarioAlta.deBien.IdBien = (int)row["IdBien"];
+                    unInven.unInventarioAlta.deBien.DescripBien = row["DescripCategoria"].ToString();
                     unInven.unaMarca = new Marca();
                     unInven.unaMarca.DescripMarca = row["DescripMarca"].ToString();
                     unInven.unModelo = new ModeloVersion();

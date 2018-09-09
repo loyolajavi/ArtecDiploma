@@ -41,6 +41,27 @@ namespace ARTEC.DAL
 
 
 
+        public int InventarioEntregadoPorSolicDetalle2(int IdSolicitudDetalle, int IdSolicitud)
+        {
+            SqlParameter[] parametersInvCantEntregado = new SqlParameter[]
+			{
+                new SqlParameter("@IdSolicitud", IdSolicitud),
+                new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle)
+			};
+
+            try
+            {
+                int CantInv = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioEntregadoPorSolicDetalle", parametersInvCantEntregado);
+                return CantInv;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
         public List<Inventario> InventariosTraerListosParaAsignar(int IdSolicitud)
         {
              SqlParameter[] parameters = new SqlParameter[]

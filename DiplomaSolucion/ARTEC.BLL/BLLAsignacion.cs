@@ -64,5 +64,31 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        {
+            try
+            {
+                if (GestorAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public List<AsigDetalle> AsigDetallesTraer(int IdAsignacion)
+        {
+            try
+            {
+                return GestorAsignacion.AsigDetallesTraer(IdAsignacion);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

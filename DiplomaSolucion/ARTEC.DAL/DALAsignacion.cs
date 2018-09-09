@@ -48,7 +48,7 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AsigDetalleCrear", parametersAsigDetalles);
                     
                     //Actualizar Estado Inventario
-                    GestorEstadoInventario.InventarioEstadoUpdate(item.unInventario.IdInventario);
+                    GestorEstadoInventario.InventarioEstadoUpdate(item.unInventario.IdInventario, EstadoInventario.EnumEstadoInventario.Entregado);
 
                     //PRUEBA DE PONER ESTO EN BLLAsignacion; SI ANDA QUITAR
                     //DALInventario GestorInventario = new DALInventario();
@@ -221,5 +221,174 @@ namespace ARTEC.DAL
 
 
 
+
+        public bool AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        {
+            DALEstadoInventario GestorEstadoInventario = new DALEstadoInventario();
+            DALInventario GestorInventario = new DALInventario();
+            DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
+            int ConteoDetalles = unaAsignacionModif.unosAsigDetalles.Count;
+            
+            SqlParameter[] parametersAsigModif = new SqlParameter[]
+			{
+                new SqlParameter("@Fecha", unaAsignacionModif.Fecha),
+                new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AsignacionModificar", parametersAsigModif);
+
+
+                if (InvQuitarMod.Count > 0)
+                {
+                    foreach (Inventario unInv in InvQuitarMod)
+                    {
+                        int IdSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
+                        int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
+                        int IdAsigDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().IdAsigDetalle;
+
+                        //Eliminar el AsigDetalle
+                        SqlParameter[] parametersAsigDetallesEliminar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdAsigDetalle", IdAsigDetalleAUX),
+                            new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AsigDetalleEliminar", parametersAsigDetallesEliminar);
+                        unaAsignacionModif.unosAsigDetalles.RemoveAll(x => x.IdAsigDetalle == IdAsigDetalleAUX);
+
+                        //Reordenar los IdAsigDetalles
+                        if (unaAsignacionModif.unosAsigDetalles.Count > 0 && IdAsigDetalleAUX < unaAsignacionModif.unosAsigDetalles.Last().IdAsigDetalle)
+                        {
+                            foreach (AsigDetalle unAsigDet in unaAsignacionModif.unosAsigDetalles)
+                            {
+                                if (unAsigDet.IdAsigDetalle > IdAsigDetalleAUX)
+                                {
+                                    SqlParameter[] parametersAsigDetallesReordenar = new SqlParameter[]
+			                        {
+                                        new SqlParameter("@IdAsigDetalle", unAsigDet.IdAsigDetalle),
+                                        new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion)
+			                        };
+                                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AsigDetalleReordenar", parametersAsigDetallesReordenar);
+                                    unAsigDet.IdAsigDetalle--;
+                                }
+                            }
+                        }
+
+                        //Actualizar Estado Inventario
+                        GestorEstadoInventario.InventarioEstadoUpdate(unInv.IdInventario, EstadoInventario.EnumEstadoInventario.Disponible);
+
+                        //Actualizar EstadoSolicDetalle a "Adquirido"
+                        SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdSolicitud", IdSolicitudAUX),
+                                new SqlParameter("@IdSolicDetalle", IdSolicDetalleAUX),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
+                    }
+                }
+
+                if (InvAgregarMod.Count > 0)
+                {
+                    foreach (Inventario unInv in InvAgregarMod)
+                    {
+
+                        int IdSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
+                        int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
+
+                        SqlParameter[] parametersAsigDetalles = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdAsigDetalle", ConteoDetalles),
+                            new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion),
+                            new SqlParameter("@IdInventario", unInv.IdInventario),
+                            new SqlParameter("@IdSolicitudDetalle", IdSolicDetalleAUX),
+                            new SqlParameter("@IdSolicitud", IdSolicitudAUX)
+                            //VER TEMA DE HARD SOFT POR LO DEL AGENTE
+			             };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AsigDetalleCrear", parametersAsigDetalles);
+                        ConteoDetalles++;
+
+                        //Actualizar Estado Inventario
+                        GestorEstadoInventario.InventarioEstadoUpdate(unInv.IdInventario, EstadoInventario.EnumEstadoInventario.Entregado);
+
+                        //Actualizar EstadoSolicDetalle si es que todos los inv fueron entregados
+                        if (unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(IdSolicDetalleAUX, IdSolicitudAUX))
+                        {
+                            SqlParameter[] parametersEstadoSolicDet = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdSolicitud", IdSolicitudAUX),
+                                new SqlParameter("@IdSolicDetalle", IdSolicDetalleAUX),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado)
+                            };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDet);
+                        }
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public List<AsigDetalle> AsigDetallesTraer(int IdAsignacion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdAsignacion", IdAsignacion)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "AsigDetallesTraer", parameters))
+                {
+                    List<AsigDetalle> unaLis = new List<AsigDetalle>();
+                    unaLis = MapearAsigDetalles(ds);
+                    return unaLis;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        private List<AsigDetalle> MapearAsigDetalles(DataSet ds)
+        {
+            List<AsigDetalle> unosAsigDetalles = new List<AsigDetalle>();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    AsigDetalle ResAsigDetalle = new AsigDetalle();
+                    ResAsigDetalle.IdAsignacion = (int)row["IdAsignacion"];
+                    ResAsigDetalle.IdAsigDetalle = (int)row["IdAsigDetalle"];
+                    ResAsigDetalle.SolicDetalleAsoc = new SolicDetalle();
+                    ResAsigDetalle.SolicDetalleAsoc.IdSolicitud = (int)row["IdSolicitud"];
+                    ResAsigDetalle.SolicDetalleAsoc.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
+                    unosAsigDetalles.Add(ResAsigDetalle);
+                }
+                return unosAsigDetalles;
+            }
+
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

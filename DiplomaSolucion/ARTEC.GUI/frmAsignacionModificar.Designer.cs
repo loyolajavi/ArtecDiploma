@@ -28,7 +28,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsignacionModificar));
             this.lblNroAsignacion = new DevComponents.DotNetBar.LabelX();
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -47,11 +49,16 @@ namespace ARTEC.GUI
             this.pnlBotones = new DevComponents.DotNetBar.PanelEx();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
+            this.vldFrmAsignacionModificar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienesAsignados)).BeginInit();
             this.pnlBotones.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNroAsignacion
@@ -80,6 +87,7 @@ namespace ARTEC.GUI
             this.txtDep.Location = new System.Drawing.Point(99, 40);
             this.txtDep.Name = "txtDep";
             this.txtDep.PreventEnterBeep = true;
+            this.txtDep.ReadOnly = true;
             this.txtDep.Size = new System.Drawing.Size(306, 22);
             this.txtDep.TabIndex = 60;
             // 
@@ -96,6 +104,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Location = new System.Drawing.Point(99, 68);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
+            this.txtNroSolicitud.ReadOnly = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(306, 22);
             this.txtNroSolicitud.TabIndex = 58;
             // 
@@ -138,6 +147,7 @@ namespace ARTEC.GUI
             this.txtAsignacion.Location = new System.Drawing.Point(99, 12);
             this.txtAsignacion.Name = "txtAsignacion";
             this.txtAsignacion.PreventEnterBeep = true;
+            this.txtAsignacion.ReadOnly = true;
             this.txtAsignacion.Size = new System.Drawing.Size(306, 22);
             this.txtAsignacion.TabIndex = 55;
             // 
@@ -201,6 +211,7 @@ namespace ARTEC.GUI
             this.txtFecha.Size = new System.Drawing.Size(79, 22);
             this.txtFecha.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtFecha.TabIndex = 64;
+            this.vldFrmAsignacionModificar.SetValidator1(this.txtFecha, this.requiredFieldValidator1);
             // 
             // lblFecha
             // 
@@ -222,20 +233,21 @@ namespace ARTEC.GUI
             this.GrillaBienesAsignados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GrillaBienesAsignados.BackgroundColor = System.Drawing.Color.White;
             this.GrillaBienesAsignados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienesAsignados.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienesAsignados.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaBienesAsignados.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBienesAsignados.Location = new System.Drawing.Point(2, 136);
             this.GrillaBienesAsignados.Name = "GrillaBienesAsignados";
             this.GrillaBienesAsignados.ReadOnly = true;
             this.GrillaBienesAsignados.Size = new System.Drawing.Size(556, 139);
             this.GrillaBienesAsignados.TabIndex = 65;
+            this.GrillaBienesAsignados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaBienesAsignados_CellClick);
             // 
             // labelX2
             // 
@@ -286,6 +298,7 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 68;
             this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -371,6 +384,26 @@ namespace ARTEC.GUI
             this.panelEx2.Style.GradientAngle = 90;
             this.panelEx2.TabIndex = 82;
             // 
+            // vldFrmAsignacionModificar
+            // 
+            this.vldFrmAsignacionModificar.ContainerControl = this.btnModificar;
+            this.vldFrmAsignacionModificar.ErrorProvider = this.errorProvider1;
+            this.vldFrmAsignacionModificar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // frmAsignacionModificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +427,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panelEx2);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(586, 2000);
             this.MinimumSize = new System.Drawing.Size(586, 433);
@@ -406,6 +440,7 @@ namespace ARTEC.GUI
             this.panelEx1.ResumeLayout(false);
             this.panelEx1.PerformLayout();
             this.panelEx2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,5 +466,9 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.PanelEx pnlBotones;
         private DevComponents.DotNetBar.PanelEx panelEx1;
         private DevComponents.DotNetBar.PanelEx panelEx2;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmAsignacionModificar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
     }
 }

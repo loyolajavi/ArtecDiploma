@@ -44,8 +44,8 @@ namespace ARTEC.GUI
 
         private void frmAsignacionBuscar_Load(object sender, EventArgs e)
         {
-            txtFechaDesde.Text = DateTime.Today.AddDays(-31).ToString();
-            txtFechaHasta.Text = DateTime.Today.ToString();
+            //txtFechaDesde.Text = DateTime.Today.AddDays(-31).ToString();
+            //txtFechaHasta.Text = DateTime.Today.ToString();
 
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();
@@ -137,19 +137,49 @@ namespace ARTEC.GUI
             frmAsignacionModificar unFrmAsignacionModificar = new frmAsignacionModificar((Asignacion)unasAsignaciones.Where(x => x.IdAsignacion == Int32.Parse(GrillaActual.IdAsignacion)).FirstOrDefault());
             ResFrmAsignacionModif = unFrmAsignacionModificar.ShowDialog();
 
-            //if (unFrmAsignacionModificar == DialogResult.OK)
-            //{
-            //    unasRendiciones.RemoveAt(e.RowIndex);
-            //    GrillaRendicionBuscar.DataSource = null;
-            //    GrillaRendicionBuscar.DataSource = unasRendiciones;
-            //    if (unasRendiciones.Count == 0)
-            //    {
-            //        GrillaRendicionBuscar.Visible = false;
-            //        txtResBusqueda.Visible = true;
-            //    }
-            //    else
-            //        FormatearGrillaRendicionBuscar();
-            //}
+            if (ResFrmAsignacionModif == DialogResult.OK)
+            {
+                flowAsignaciones.Controls.Clear();
+                ListaGrilla.Clear();
+                txtResBusqueda.Visible = false;
+
+                if (unasAsignaciones.Count > 0)
+                {
+                    foreach (Asignacion unaAsig in unasAsignaciones)
+                    {
+                        GrillaAsigBuscarCU GrillaAux = new GrillaAsigBuscarCU();
+                        GrillaAux.ClickEnGrilla += new DataGridViewCellEventHandler(ClickEnGrilla_EventoManejado);
+                        GrillaAux.ClickEnPanel += new EventHandler(ClickEnGrilla_EventoManejado);
+
+                        GrillaAux.IdAsignacion = unaAsig.IdAsignacion.ToString();
+                        GrillaAux.NombreDependencia = unaAsig.unaDependencia.NombreDependencia;
+                        GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud.ToString();
+                        GrillaAux.laFecha = unaAsig.Fecha.ToString();
+                        GrillaAux.unaGrilla.DataSource = null;
+                        GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);
+                        GrillaAux.unaGrilla.Columns["IdInventario"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["IdBienEspecif"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["unEstado"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["PartidaDetalleAsoc"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["Costo"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["unaAdquisicion"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["unTipoBien"].Visible = false;
+
+                        ListaGrilla.Add(GrillaAux);
+                    }
+
+                    foreach (GrillaAsigBuscarCU gri in ListaGrilla)
+                    {
+                        flowAsignaciones.Controls.Add(gri);
+                    }
+                }
+
+                if (flowAsignaciones.Controls.Count == 0)
+                {
+                    txtResBusqueda.Visible = true;
+                    flowAsignaciones.Controls.Add(txtResBusqueda);
+                }
+            }
 
 
             //if (GrillaActual.unaGrilla.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.LightGray)

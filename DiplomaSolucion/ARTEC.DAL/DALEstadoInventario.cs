@@ -29,11 +29,12 @@ namespace ARTEC.DAL
 
 
 
-        public bool InventarioEstadoUpdate(int IdInv)
+        public bool InventarioEstadoUpdate(int IdInv, EstadoInventario.EnumEstadoInventario unEstadoInv)
         {
             SqlParameter[] parametersEstInv = new SqlParameter[]
 			{
-                new SqlParameter("@IdInventario", IdInv)
+                new SqlParameter("@IdInventario", IdInv),
+                new SqlParameter("@IdEstadoInventario", (int)unEstadoInv)
 			};
 
             try
