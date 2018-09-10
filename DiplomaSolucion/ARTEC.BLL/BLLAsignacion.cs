@@ -90,5 +90,19 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool AsignacionEliminar(Asignacion unaAsignacionModif)
+        {
+            try
+            {
+                if (GestorAsignacion.AsignacionEliminar(unaAsignacionModif))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

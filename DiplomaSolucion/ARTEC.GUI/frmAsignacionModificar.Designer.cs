@@ -50,9 +50,9 @@ namespace ARTEC.GUI
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.vldFrmAsignacionModificar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienesAsignados)).BeginInit();
             this.pnlBotones.SuspendLayout();
@@ -310,6 +310,7 @@ namespace ARTEC.GUI
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 69;
             this.btnEliminar.Text = "btnEliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnBienesRestantes
             // 
@@ -390,6 +391,11 @@ namespace ARTEC.GUI
             this.vldFrmAsignacionModificar.ErrorProvider = this.errorProvider1;
             this.vldFrmAsignacionModificar.Highlighter = this.highlighter1;
             // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -398,11 +404,6 @@ namespace ARTEC.GUI
             // highlighter1
             // 
             this.highlighter1.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmAsignacionModificar
             // 
@@ -427,7 +428,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panelEx2);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(586, 2000);
             this.MinimumSize = new System.Drawing.Size(586, 433);

@@ -238,6 +238,27 @@ namespace ARTEC.GUI
             if (!vldFrmAsignacionModificar.Validate())
                 return;
 
+            //Verificar que quede al menos un permiso asignado
+            if (InventariosAgregar.Count == 0)
+            {
+                MessageBox.Show("Por favor revisar que la asignación posea al menos un detalle");
+                InventariosAgregar.Clear();
+                InventariosAgregar = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsignacionSelec.IdAsignacion);
+                InventariosAgregarBKP = InventariosAgregar.ToList();
+                GrillaBienesAsignados.DataSource = null;
+                GrillaBienesAsignados.DataSource = InventariosAgregar;
+                FormatearGrillaBienesAsignados();
+                flowBienesAAsignar.Visible = false;
+                flowBienesAAsignar.Controls.Clear();
+                unaAsignacionModif.unosAsigDetalles = ManagerAsignacion.AsigDetallesTraer(unaAsignacionSelec.IdAsignacion);
+                for (int i = 0; i < unaAsignacionModif.unosAsigDetalles.Count; i++)
+                {
+                    unaAsignacionModif.unosAsigDetalles[i].unInventario = InventariosAgregar[i];
+                }
+                ListaGrilla.Clear();
+                return;
+            }
+
             try
             {
                 
@@ -307,6 +328,27 @@ namespace ARTEC.GUI
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAsignacionModificar - btnModificar_Click");
                 MessageBox.Show("Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                if (resmbox == DialogResult.Yes)
+                    if (ManagerAsignacion.AsignacionEliminar(unaAsignacionModif))
+                    {
+                        MessageBox.Show("Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + " eliminada correctamente");
+                        DialogResult = DialogResult.No;
+                    }
+                    else
+                        return;
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmAsignacionModificar - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar la rendición: " + unaAsignacionModif.IdAsignacion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 

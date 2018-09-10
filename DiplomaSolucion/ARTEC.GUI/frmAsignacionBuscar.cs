@@ -180,6 +180,17 @@ namespace ARTEC.GUI
                     flowAsignaciones.Controls.Add(txtResBusqueda);
                 }
             }
+            else if (ResFrmAsignacionModif == DialogResult.No)
+            {
+                flowAsignaciones.Controls.Clear();
+                ListaGrilla.Clear();
+                txtResBusqueda.Visible = false;
+                txtAsignacion.Clear();
+                txtDependencia.Clear();
+                txtFechaDesde.Refresh();
+                txtFechaHasta.Refresh();
+                txtNroSolicitud.Clear();
+            }
 
 
             //if (GrillaActual.unaGrilla.Rows[e.RowIndex].DefaultCellStyle.BackColor != Color.LightGray)

@@ -390,5 +390,67 @@ namespace ARTEC.DAL
                 throw;
             }
         }
+
+        public bool AsignacionEliminar(Asignacion unaAsignacionModif)
+        {
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+                //Colocar Inventarios asociados en "Disponible"
+                foreach (AsigDetalle unAsigDet in unaAsignacionModif.unosAsigDetalles)
+                {
+                    SqlParameter[] parametersInvEstado = new SqlParameter[]
+			        {
+                        new SqlParameter("@IdInventario", unAsigDet.unInventario.IdInventario),
+                        new SqlParameter("@IdEstadoInventario", EstadoInventario.EnumEstadoInventario.Disponible)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioEstadoUpdate", parametersInvEstado);
+                }
+
+                //Colocar todos los SolicDetalle en "Adquirido"
+                foreach (AsigDetalle unAsigDet2 in unaAsignacionModif.unosAsigDetalles)
+                {
+                    SqlParameter[] parametersEstadoSolicDet = new SqlParameter[]
+                    {
+                        new SqlParameter("@IdSolicitud", unAsigDet2.SolicDetalleAsoc.IdSolicitud),
+                        new SqlParameter("@IdSolicDetalle", unAsigDet2.SolicDetalleAsoc.IdSolicitudDetalle),
+                        new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                    };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDet);
+                }
+
+                //Eliminar los AsigDetalles
+                SqlParameter[] parametersAsigDet = new SqlParameter[]
+                {
+                    new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion)
+                };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AsigDetallesEliminarTodos", parametersAsigDet);
+                
+                //Eliminar Asignacion
+                SqlParameter[] parametersAsigEliminar = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion)
+			    };
+
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AsignacionEliminar", parametersAsigEliminar);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }
