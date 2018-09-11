@@ -92,6 +92,14 @@ namespace ARTEC.GUI
                     unFrmAsignacionBuscar.Dock = DockStyle.Fill;
                     tabAsignaciones.Controls.Add(unFrmAsignacionBuscar);
                     break;
+                case 5:
+                    frmAdquisicionBuscar unFrmAdquisicionBuscar = frmAdquisicionBuscar.ObtenerInstancia();
+                    unFrmAdquisicionBuscar.TopLevel = false;
+                    unFrmAdquisicionBuscar.FormBorderStyle = FormBorderStyle.None;
+                    unFrmAdquisicionBuscar.Visible = true;
+                    unFrmAdquisicionBuscar.Dock = DockStyle.Fill;
+                    tabAdquisiciones.Controls.Add(unFrmAdquisicionBuscar);
+                    break;
             }
         }
 

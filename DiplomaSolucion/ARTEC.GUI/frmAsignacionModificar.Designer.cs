@@ -37,7 +37,6 @@ namespace ARTEC.GUI
             this.lblNroSolicitud = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtAsignacion = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.txtFecha = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblFecha = new DevComponents.DotNetBar.LabelX();
             this.GrillaBienesAsignados = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -150,22 +149,6 @@ namespace ARTEC.GUI
             this.txtAsignacion.ReadOnly = true;
             this.txtAsignacion.Size = new System.Drawing.Size(306, 22);
             this.txtAsignacion.TabIndex = 55;
-            // 
-            // comboBoxEx4
-            // 
-            this.comboBoxEx4.DisplayMember = "Text";
-            this.comboBoxEx4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEx4.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEx4.FormattingEnabled = true;
-            this.comboBoxEx4.ItemHeight = 16;
-            this.comboBoxEx4.Location = new System.Drawing.Point(99, 40);
-            this.comboBoxEx4.MaxDropDownItems = 10;
-            this.comboBoxEx4.Name = "comboBoxEx4";
-            this.comboBoxEx4.Size = new System.Drawing.Size(156, 22);
-            this.comboBoxEx4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx4.TabIndex = 56;
-            this.comboBoxEx4.Visible = false;
             // 
             // txtFecha
             // 
@@ -371,6 +354,7 @@ namespace ARTEC.GUI
             this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelEx2.Controls.Add(this.txtFecha);
+            this.panelEx2.Controls.Add(this.txtDep);
             this.panelEx2.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelEx2.Location = new System.Drawing.Point(0, 0);
@@ -419,15 +403,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.GrillaBienesAsignados);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblNroAsignacion);
-            this.Controls.Add(this.txtDep);
             this.Controls.Add(this.txtNroSolicitud);
             this.Controls.Add(this.lblNroSolicitud);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.txtAsignacion);
-            this.Controls.Add(this.comboBoxEx4);
             this.Controls.Add(this.panelEx2);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(586, 2000);
             this.MinimumSize = new System.Drawing.Size(586, 433);
@@ -454,7 +437,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblNroSolicitud;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.TextBoxX txtAsignacion;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx4;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFecha;
         private DevComponents.DotNetBar.LabelX lblFecha;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaBienesAsignados;

@@ -92,6 +92,12 @@
     <Compile Include="CrearSolicitud.Designer.cs">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAdquisicionBuscar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdquisicionBuscar.Designer.cs">
+      <DependentUpon>frmAdquisicionBuscar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAgenteCrear.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearSolicitud.resx">
       <DependentUpon>CrearSolicitud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdquisicionBuscar.resx">
+      <DependentUpon>frmAdquisicionBuscar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgenteCrear.resx">
       <DependentUpon>frmAgenteCrear.cs</DependentUpon>

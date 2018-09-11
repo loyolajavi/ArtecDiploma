@@ -49,5 +49,17 @@ namespace ARTEC.BLL
             
         }
 
+
+        public List<Adquisicion> AdquisicionBuscar(string IdAdquisicion, string IdPartida, string NombreDependencia, DateTime? unaFecha, DateTime? unaFechaCompra, string NroFactura, string IdSolicitud)
+        {
+            try
+            {
+                return GestorAdquisicion.AdquisicionBuscar(IdAdquisicion, IdPartida, NombreDependencia, unaFecha, unaFechaCompra, NroFactura, IdSolicitud);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

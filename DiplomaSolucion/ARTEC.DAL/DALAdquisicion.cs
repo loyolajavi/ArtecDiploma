@@ -67,8 +67,71 @@ namespace ARTEC.DAL
             FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
         }
 
+
+
+
+
+        public List<Adquisicion> AdquisicionBuscar(string IdAdquisicion, string IdPartida, string NombreDependencia, DateTime? unaFecha, DateTime? unaFechaCompra, string NroFactura, string IdSolicitud)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(IdAdquisicion))
+                parameters.Add(new SqlParameter("@IdAdquisicion", Int32.Parse(IdAdquisicion)));
+            if (!string.IsNullOrEmpty(IdPartida))
+                parameters.Add(new SqlParameter("@IdPartida", Int32.Parse(IdPartida)));
+            if (!string.IsNullOrEmpty(NombreDependencia))
+                parameters.Add(new SqlParameter("@NombreDependencia", NombreDependencia));
+            if (unaFecha != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@unaFecha", unaFecha));
+            if (unaFechaCompra != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@unaFechaCompra", unaFechaCompra));
+            if (!string.IsNullOrEmpty(NroFactura))
+                parameters.Add(new SqlParameter("@NroFactura", Int32.Parse(NroFactura)));
+            if (!string.IsNullOrEmpty(IdSolicitud))
+                parameters.Add(new SqlParameter("@IdSolicitud", Int32.Parse(IdSolicitud)));
             
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "AdquisicionBuscar", parameters.ToArray()))
+                {
+                    List<Adquisicion> unaLis = new List<Adquisicion>();
+                    unaLis = MapearUnasAdquisiciones(ds);
+                    return unaLis;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
+        public static List<Adquisicion> MapearUnasAdquisiciones(DataSet ds)
+        {
+            List<Adquisicion> unasAdquisiciones = new List<Adquisicion>();
 
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Adquisicion ResAdquisicion = new Adquisicion();
+                    ResAdquisicion.IdAdquisicion = (int)row["IdAdquisicion"];
+                    ResAdquisicion.FechaAdq = DateTime.Parse(row["FechaAdq"].ToString());
+                    ResAdquisicion.FechaCompra = DateTime.Parse(row["FechaCompra"].ToString());
+                    ResAdquisicion.NroFactura = row["NroFactura"].ToString();
+                    ResAdquisicion.MontoCompra = (decimal)row["MontoCompra"];
+                    ResAdquisicion.ProveedorAdquisicion = new Proveedor();
+                    ResAdquisicion.ProveedorAdquisicion.IdProveedor = (int)row["IdProveedor"];
+                    ResAdquisicion.ProveedorAdquisicion.AliasProv = row["AliasProv"].ToString();
+
+                    unasAdquisiciones.Add(ResAdquisicion);
+                }
+                return unasAdquisiciones;
+            }
+
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }
