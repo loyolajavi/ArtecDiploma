@@ -52,14 +52,14 @@ namespace ARTEC.GUI
             this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.GrillaAdquisicionBuscar = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.vldFrmAdquisicionBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator4 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator5 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator6 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAdquisicionBuscar)).BeginInit();
@@ -439,29 +439,6 @@ namespace ARTEC.GUI
             this.vldFrmAdquisicionBuscar.ErrorProvider = this.errorProvider1;
             this.vldFrmAdquisicionBuscar.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
-            // regularExpressionValidator1
-            // 
-            this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "Sólo números";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
-            // 
-            // regularExpressionValidator2
-            // 
-            this.regularExpressionValidator2.EmptyValueIsValid = true;
-            this.regularExpressionValidator2.ErrorMessage = "Sólo Números";
-            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
-            // 
             // regularExpressionValidator3
             // 
             this.regularExpressionValidator3.EmptyValueIsValid = true;
@@ -490,11 +467,35 @@ namespace ARTEC.GUI
             this.regularExpressionValidator6.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator6.ValidationExpression = "^[a-zA-Z0-9 ]*$";
             // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Sólo números";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Sólo Números";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
             // frmAdquisicionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 396);
+            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtIdAdquisicion);
             this.Controls.Add(this.lblIdAdquisicion);
@@ -511,12 +512,12 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroFactura);
             this.Controls.Add(this.lblSerieKey);
             this.Controls.Add(this.txtSerieKey);
-            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.GrillaAdquisicionBuscar);
             this.Controls.Add(this.txtDep);
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmAdquisicionBuscar";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmAdquisicionBuscar_Load);

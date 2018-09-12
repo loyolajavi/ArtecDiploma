@@ -23,7 +23,11 @@ namespace ARTEC.ENTIDADES
             get { return _BienesInventarioAsociados; }
             set { _BienesInventarioAsociados = value; }
         }
-        
+
+        public Dependencia unaDependencia { get; set; }
+
+        public int unIdPartida { get; set; }
+        public int unIdSolicitud { get; set; }
 
 
         

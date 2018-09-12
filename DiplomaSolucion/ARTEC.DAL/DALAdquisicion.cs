@@ -86,7 +86,7 @@ namespace ARTEC.DAL
             if (unaFechaCompra != DateTime.MinValue)
                 parameters.Add(new SqlParameter("@unaFechaCompra", unaFechaCompra));
             if (!string.IsNullOrEmpty(NroFactura))
-                parameters.Add(new SqlParameter("@NroFactura", Int32.Parse(NroFactura)));
+                parameters.Add(new SqlParameter("@NroFactura", NroFactura));
             if (!string.IsNullOrEmpty(IdSolicitud))
                 parameters.Add(new SqlParameter("@IdSolicitud", Int32.Parse(IdSolicitud)));
             
@@ -122,6 +122,11 @@ namespace ARTEC.DAL
                     ResAdquisicion.ProveedorAdquisicion = new Proveedor();
                     ResAdquisicion.ProveedorAdquisicion.IdProveedor = (int)row["IdProveedor"];
                     ResAdquisicion.ProveedorAdquisicion.AliasProv = row["AliasProv"].ToString();
+                    ResAdquisicion.unaDependencia = new Dependencia();
+                    ResAdquisicion.unaDependencia.IdDependencia = (int)row["IdDependencia"];
+                    ResAdquisicion.unaDependencia.NombreDependencia = row["NombreDependencia"].ToString();
+                    ResAdquisicion.unIdPartida = (int)row["IdPartida"];
+                    ResAdquisicion.unIdSolicitud = (int)row["IdSolicitud"];
 
                     unasAdquisiciones.Add(ResAdquisicion);
                 }
