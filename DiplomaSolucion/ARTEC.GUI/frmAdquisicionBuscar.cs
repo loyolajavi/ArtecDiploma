@@ -162,6 +162,34 @@ namespace ARTEC.GUI
             }
         }
 
+        private void GrillaAdquisicionBuscar_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DialogResult ResFrmAdquisicionModif = new DialogResult();
+
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
+            {
+                frmAdquisicionGestion unFrmAdquisicionGestion = new frmAdquisicionGestion((Adquisicion)unasAdquisiciones.Where(x => x.IdAdquisicion == (int)GrillaAdquisicionBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
+                ResFrmAdquisicionModif = unFrmAdquisicionGestion.ShowDialog();
+
+                if (ResFrmAdquisicionModif == DialogResult.OK)
+                {
+                    unasAdquisiciones.RemoveAt(e.RowIndex);
+                    GrillaAdquisicionBuscar.DataSource = null;
+                    if (unasAdquisiciones.Count == 0)
+                    {
+                        GrillaAdquisicionBuscar.Visible = false;
+                        txtResBusqueda.Visible = true;
+                    }
+                    else
+                    {
+                        GrillaAdquisicionBuscar.DataSource = unasAdquisiciones;
+                        //FormatearGrillaRendicionBuscar();
+                    }
+                        
+                }
+            }
+        }
+
 
     }
 }

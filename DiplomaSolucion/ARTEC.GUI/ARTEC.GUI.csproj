@@ -98,6 +98,12 @@
     <Compile Include="frmAdquisicionBuscar.Designer.cs">
       <DependentUpon>frmAdquisicionBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAdquisicionGestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdquisicionGestion.Designer.cs">
+      <DependentUpon>frmAdquisicionGestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAgenteCrear.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAdquisicionBuscar.resx">
       <DependentUpon>frmAdquisicionBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdquisicionGestion.resx">
+      <DependentUpon>frmAdquisicionGestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgenteCrear.resx">
       <DependentUpon>frmAgenteCrear.cs</DependentUpon>

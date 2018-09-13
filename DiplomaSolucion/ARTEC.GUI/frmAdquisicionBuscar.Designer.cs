@@ -432,6 +432,7 @@ namespace ARTEC.GUI
             this.GrillaAdquisicionBuscar.ReadOnly = true;
             this.GrillaAdquisicionBuscar.Size = new System.Drawing.Size(649, 252);
             this.GrillaAdquisicionBuscar.TabIndex = 74;
+            this.GrillaAdquisicionBuscar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaAdquisicionBuscar_CellDoubleClick);
             // 
             // vldFrmAdquisicionBuscar
             // 
@@ -495,7 +496,6 @@ namespace ARTEC.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 396);
-            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtIdAdquisicion);
             this.Controls.Add(this.lblIdAdquisicion);
@@ -512,9 +512,10 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroFactura);
             this.Controls.Add(this.lblSerieKey);
             this.Controls.Add(this.txtSerieKey);
-            this.Controls.Add(this.GrillaAdquisicionBuscar);
             this.Controls.Add(this.txtDep);
             this.Controls.Add(this.cboDep);
+            this.Controls.Add(this.txtResBusqueda);
+            this.Controls.Add(this.GrillaAdquisicionBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
