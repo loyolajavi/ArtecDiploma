@@ -743,8 +743,8 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.progressSteps1);
             this.Controls.Add(this.btnContinuar);
-            this.Controls.Add(this.pnlAdquisicion);
             this.Controls.Add(this.pnlBienes);
+            this.Controls.Add(this.pnlAdquisicion);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmBienRegistrar";

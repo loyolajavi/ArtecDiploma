@@ -138,5 +138,242 @@ namespace ARTEC.DAL
                 throw;
             }
         }
+
+        public List<Inventario> AdquisicionInventariosAsoc(string IdPartida, string IdAdquisicion)
+        {
+            SqlParameter[] parametersAdqInvAsoc = new SqlParameter[]
+			{
+                new SqlParameter("@IdPartida", Int32.Parse(IdPartida)),
+                new SqlParameter("@IdAdquisicion", Int32.Parse(IdAdquisicion))
+			};
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "AdquisicionInventariosAsoc", parametersAdqInvAsoc))
+                {
+                    List<Inventario> unaLis = new List<Inventario>();
+                    unaLis = MapearUnosInventarios(ds);
+                    return unaLis;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        private List<Inventario> MapearUnosInventarios(DataSet ds)
+        {
+            List<Inventario> ResInventarios = new List<Inventario>();
+            Inventario uno;
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+
+                    int IdTipoAUX = (int)row["IdTipoBien"];
+                    if (IdTipoAUX == (int)TipoBien.EnumTipoBien.Hard)
+                    {
+                        uno = new XInventarioHard();
+                        uno.deBien = new Hardware();
+                    }
+                    else
+                    {
+                        uno = new XInventarioSoft();
+                        uno.deBien = new Software();
+                    }
+                    uno.IdInventario = (int)row["IdInventario"];
+                    uno.IdBienEspecif = (int)row["IdBien"];
+                    uno.deBien.IdBien = (int)row["IdBien"];
+                    uno.deBien.DescripBien = row["DescripCategoria"].ToString();
+                    uno.deBien.unaMarca = new Marca();
+                    uno.deBien.unaMarca.IdMarca = (int)row["IdMarca"];
+                    uno.deBien.unaMarca.DescripMarca = row["DescripMarca"].ToString();
+                    uno.deBien.unModelo = new ModeloVersion();
+                    uno.deBien.unModelo.IdModeloVersion = (int)row["IdModeloVersion"];
+                    uno.deBien.unModelo.DescripModeloVersion = row["DescripModeloVersion"].ToString();
+                    uno.unTipoBien = (int)row["IdTipoBien"];
+                    if (uno.unTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        (uno as XInventarioSoft).SerialMaster = row["SerialMaster"].ToString();
+                    }
+                    uno.unEstado = new EstadoInventario();
+                    //uno.unEstado.IdEstadoInventario = (int)row["IdEstadoInventario"];
+                    uno.SerieKey = row["SerieKey"].ToString();
+                    uno.PartidaDetalleAsoc = new PartidaDetalle();
+                    uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
+                    uno.PartidaDetalleAsoc.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
+                    if (uno.unTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    {
+                        (uno as XInventarioHard).unDeposito = new Deposito();
+                        (uno as XInventarioHard).unDeposito.IdDeposito = (int)row["IdDeposito"];
+                    }
+                    uno.unaAdquisicion = new Adquisicion();
+                    uno.unaAdquisicion.IdAdquisicion = (int)row["IdAdquisicion"];
+
+                    uno.Costo = (decimal)row["Costo"];
+
+                    ResInventarios.Add(uno);
+                }
+
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            return ResInventarios;
+        }
+
+
+
+
+
+        public bool AdquisicionModificar(Adquisicion unaAdqModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        {
+            DALEstadoInventario GestorEstadoInventario = new DALEstadoInventario();
+            DALInventario GestorInventario = new DALInventario();
+            DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
+
+            SqlParameter[] parametersAdqModif = new SqlParameter[]
+			{
+                new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion),
+                new SqlParameter("@FechaAdq", unaAdqModif.FechaAdq),
+                new SqlParameter("@FechaCompra", unaAdqModif.FechaCompra),
+                new SqlParameter("@NroFactura", unaAdqModif.NroFactura),
+                new SqlParameter("@MontoCompra", unaAdqModif.MontoCompra),
+                new SqlParameter("@IdProveedor", unaAdqModif.ProveedorAdquisicion.IdProveedor)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdquisicionModificar", parametersAdqModif);
+
+
+                if (InvQuitarMod.Count > 0)
+                {
+                    foreach (Inventario unInv in InvQuitarMod)
+                    {
+                        //Actualizar SolicDetalle a "Comprar" (Revierto desde Adquirido)
+                        SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
+                            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
+
+                        //Eliminar el RelPDetAdq
+                        SqlParameter[] parametersRelPDetAdqEliminar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion),
+                            new SqlParameter("@IdInventario", unInv.IdInventario)
+			            };
+
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPdetAdqEliminar", parametersRelPDetAdqEliminar);
+
+                        //Eliminar el Inventario
+                        SqlParameter[] parametersInventarioEliminar = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdInventario", unInv.IdInventario)
+                            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioEliminar", parametersInventarioEliminar);
+
+
+                    }
+                }
+
+                if (InvAgregarMod.Count > 0)
+                {
+                    foreach (Inventario unInv in InvAgregarMod)
+                    {
+                        int IDDevuelto;
+                        if (unInv.unTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                        {
+                            SqlParameter[] parametersInvHard = new SqlParameter[]
+			                {
+                                new SqlParameter("@IdBienEspecif", unInv.IdBienEspecif),
+                                new SqlParameter("@SerieKey", unInv.SerieKey),
+                                new SqlParameter("@IdDeposito", unInv.unDeposito.IdDeposito),
+                                new SqlParameter("@IdEstadoInventario", unInv.unEstado.IdEstadoInventario),
+                                new SqlParameter("@Costo", unInv.Costo)
+			                };
+                            //Guarda Inventario
+                            var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioHardCrear", parametersInvHard);
+                            IDDevuelto = Decimal.ToInt32(Resultado);
+                        }
+                        else
+                        {
+                            SqlParameter[] parametersInvSoft = new SqlParameter[]
+			                {
+                                new SqlParameter("@IdBienEspecif", unInv.IdBienEspecif),
+                                new SqlParameter("@SerieKey ", unInv.SerieKey),
+                                new SqlParameter("@SerialMaster", ""),
+                                new SqlParameter("@IdEstadoInventario", unInv.unEstado.IdEstadoInventario),
+                                new SqlParameter("@Costo", unInv.Costo)
+			                };
+                            //Guarda Inventario
+                            var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InventarioSoftCrear", parametersInvSoft);
+                            IDDevuelto = Decimal.ToInt32(Resultado);
+
+                        }
+
+                        //Guarda asociación en tabla RelPdetAdq entre Inventario, PartidaDetalle y Adquisicion
+                        SqlParameter[] parametersRelPdetAdq = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdInventario", IDDevuelto),
+                            new SqlParameter("@IdPartida", unaAdqModif.unIdPartida),
+                            new SqlParameter("@UIDPartidaDetalle", unInv.PartidaDetalleAsoc.UIDPartidaDetalle),
+                            new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion)
+			            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPDetAdqCrear", parametersRelPdetAdq);
+                        
+                        //Actualizar EstadoSolicDetalle si es que todos los inv fueron adquiridos
+                            //Busco Cantidad, IdSolicitud y IdSolicDetalle
+                            SqlParameter[] parametersCantUIDSolicDetalle = new SqlParameter[]
+                                {
+                                    new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                    new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle)
+                                };
+                            int ResCantidad = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleCantidadPorUIDSolicDetalle", parametersCantUIDSolicDetalle);
+                        
+                            //Busco Cantidad de Inventarios adquiridos asociados al SolicDetalle
+                            SqlParameter[] parametersCantInvCompradoPorUIDPartidaDetalle = new SqlParameter[]
+                                {
+                                    new SqlParameter("@UIDPartidaDetalle", unInv.PartidaDetalleAsoc.UIDPartidaDetalle)
+                                };
+                            int CantComprada = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InvAdquiridosPorUIDPartidaDetalle", parametersCantInvCompradoPorUIDPartidaDetalle);
+                            //CantComprada;//Porque recién agregué un inventario a la adquisición, pero como todavía no se hizo el Commit no me lo va a traer
+                        
+                        //La comprobación
+                        if (ResCantidad == CantComprada)
+                        {
+                            SqlParameter[] parametersEstadoSolicDetModif = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                            };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetModif);
+                        }
+                    }
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

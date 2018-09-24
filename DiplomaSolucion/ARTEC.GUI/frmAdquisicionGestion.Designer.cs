@@ -49,14 +49,19 @@ namespace ARTEC.GUI
             this.pnlBotones = new DevComponents.DotNetBar.PanelEx();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
-            this.flowBienesAAsignar = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowBienesAAdquirir = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlFlow = new DevComponents.DotNetBar.PanelEx();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnBienesRestantes = new DevComponents.DotNetBar.ButtonX();
+            this.lblProveedor = new DevComponents.DotNetBar.LabelX();
+            this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cboProveedor = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInventarios)).BeginInit();
             this.pnlBotones.SuspendLayout();
             this.pnlFlow.SuspendLayout();
+            this.panelEx1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtIdAdquisicion
@@ -114,6 +119,7 @@ namespace ARTEC.GUI
             this.txtNroPartida.Location = new System.Drawing.Point(133, 39);
             this.txtNroPartida.Name = "txtNroPartida";
             this.txtNroPartida.PreventEnterBeep = true;
+            this.txtNroPartida.ReadOnly = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
             this.txtNroPartida.TabIndex = 73;
             // 
@@ -145,6 +151,7 @@ namespace ARTEC.GUI
             this.txtDep.PreventEnterBeep = true;
             this.txtDep.Size = new System.Drawing.Size(306, 22);
             this.txtDep.TabIndex = 75;
+            this.txtDep.TextChanged += new System.EventHandler(this.txtDependencia_TextChanged);
             // 
             // cboDep
             // 
@@ -161,6 +168,7 @@ namespace ARTEC.GUI
             this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboDep.TabIndex = 76;
             this.cboDep.Visible = false;
+            this.cboDep.SelectionChangeCommitted += new System.EventHandler(this.cboDep_SelectionChangeCommitted);
             // 
             // txtFechaCompra
             // 
@@ -357,6 +365,7 @@ namespace ARTEC.GUI
             this.GrillaInventarios.ReadOnly = true;
             this.GrillaInventarios.Size = new System.Drawing.Size(649, 159);
             this.GrillaInventarios.TabIndex = 87;
+            this.GrillaInventarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaInventarios_CellClick);
             // 
             // txtResBusqueda
             // 
@@ -407,6 +416,7 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 68;
             this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
@@ -418,31 +428,34 @@ namespace ARTEC.GUI
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 69;
             this.btnEliminar.Text = "btnEliminar";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // flowBienesAAsignar
+            // flowBienesAAdquirir
             // 
-            this.flowBienesAAsignar.AutoScroll = true;
-            this.flowBienesAAsignar.AutoSize = true;
-            this.flowBienesAAsignar.BackColor = System.Drawing.Color.Transparent;
-            this.flowBienesAAsignar.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowBienesAAsignar.Location = new System.Drawing.Point(39, 11);
-            this.flowBienesAAsignar.MaximumSize = new System.Drawing.Size(556, 1000);
-            this.flowBienesAAsignar.Name = "flowBienesAAsignar";
-            this.flowBienesAAsignar.Size = new System.Drawing.Size(556, 21);
-            this.flowBienesAAsignar.TabIndex = 67;
-            this.flowBienesAAsignar.Visible = false;
-            this.flowBienesAAsignar.WrapContents = false;
+            this.flowBienesAAdquirir.AutoScroll = true;
+            this.flowBienesAAdquirir.AutoSize = true;
+            this.flowBienesAAdquirir.BackColor = System.Drawing.Color.Transparent;
+            this.flowBienesAAdquirir.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowBienesAAdquirir.Location = new System.Drawing.Point(39, 11);
+            this.flowBienesAAdquirir.MaximumSize = new System.Drawing.Size(556, 1800);
+            this.flowBienesAAdquirir.Name = "flowBienesAAdquirir";
+            this.flowBienesAAdquirir.Size = new System.Drawing.Size(556, 21);
+            this.flowBienesAAdquirir.TabIndex = 67;
+            this.flowBienesAAdquirir.Visible = false;
+            this.flowBienesAAdquirir.WrapContents = false;
             // 
             // pnlFlow
             // 
+            this.pnlFlow.AutoSize = true;
+            this.pnlFlow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlFlow.CanvasColor = System.Drawing.SystemColors.Control;
             this.pnlFlow.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.pnlFlow.Controls.Add(this.flowBienesAAsignar);
+            this.pnlFlow.Controls.Add(this.flowBienesAAdquirir);
             this.pnlFlow.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlFlow.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFlow.Location = new System.Drawing.Point(0, 302);
+            this.pnlFlow.Location = new System.Drawing.Point(0, 305);
             this.pnlFlow.Name = "pnlFlow";
-            this.pnlFlow.Size = new System.Drawing.Size(678, 38);
+            this.pnlFlow.Size = new System.Drawing.Size(678, 35);
             this.pnlFlow.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.pnlFlow.Style.BackColor1.Color = System.Drawing.Color.Transparent;
             this.pnlFlow.Style.BackColor2.Color = System.Drawing.Color.Transparent;
@@ -456,6 +469,10 @@ namespace ARTEC.GUI
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.btnBienesRestantes);
+            this.panelEx1.Controls.Add(this.lblProveedor);
+            this.panelEx1.Controls.Add(this.txtProveedor);
+            this.panelEx1.Controls.Add(this.cboProveedor);
             this.panelEx1.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
@@ -470,14 +487,72 @@ namespace ARTEC.GUI
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 104;
             // 
+            // btnBienesRestantes
+            // 
+            this.btnBienesRestantes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBienesRestantes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnBienesRestantes.Location = new System.Drawing.Point(12, 266);
+            this.btnBienesRestantes.Name = "btnBienesRestantes";
+            this.btnBienesRestantes.Size = new System.Drawing.Size(102, 17);
+            this.btnBienesRestantes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBienesRestantes.TabIndex = 108;
+            this.btnBienesRestantes.Text = "btnBienesRestantes";
+            this.btnBienesRestantes.Click += new System.EventHandler(this.btnBienesRestantes_Click);
+            // 
+            // lblProveedor
+            // 
+            // 
+            // 
+            // 
+            this.lblProveedor.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblProveedor.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProveedor.Location = new System.Drawing.Point(457, 70);
+            this.lblProveedor.Name = "lblProveedor";
+            this.lblProveedor.Size = new System.Drawing.Size(91, 22);
+            this.lblProveedor.TabIndex = 108;
+            this.lblProveedor.Text = "lblProveedor";
+            // 
+            // txtProveedor
+            // 
+            this.txtProveedor.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtProveedor.Border.Class = "TextBoxBorder";
+            this.txtProveedor.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtProveedor.DisabledBackColor = System.Drawing.Color.White;
+            this.txtProveedor.ForeColor = System.Drawing.Color.Black;
+            this.txtProveedor.Location = new System.Drawing.Point(560, 70);
+            this.txtProveedor.Name = "txtProveedor";
+            this.txtProveedor.PreventEnterBeep = true;
+            this.txtProveedor.Size = new System.Drawing.Size(102, 22);
+            this.txtProveedor.TabIndex = 108;
+            this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
+            // 
+            // cboProveedor
+            // 
+            this.cboProveedor.DisplayMember = "Text";
+            this.cboProveedor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProveedor.ForeColor = System.Drawing.Color.Black;
+            this.cboProveedor.FormattingEnabled = true;
+            this.cboProveedor.ItemHeight = 16;
+            this.cboProveedor.Location = new System.Drawing.Point(560, 70);
+            this.cboProveedor.Name = "cboProveedor";
+            this.cboProveedor.Size = new System.Drawing.Size(101, 22);
+            this.cboProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboProveedor.TabIndex = 108;
+            this.cboProveedor.SelectionChangeCommitted += new System.EventHandler(this.cboProovedor_SelectionChangeCommitted);
+            // 
             // frmAdquisicionGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(678, 396);
             this.Controls.Add(this.pnlFlow);
             this.Controls.Add(this.pnlBotones);
-            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.GrillaInventarios);
             this.Controls.Add(this.txtFechaCompra);
             this.Controls.Add(this.lblFechaCompra);
@@ -495,17 +570,22 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtDep);
             this.Controls.Add(this.cboDep);
             this.Controls.Add(this.panelEx1);
+            this.Controls.Add(this.txtResBusqueda);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "frmAdquisicionGestion";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.frmAdquisicionGestion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaInventarios)).EndInit();
             this.pnlBotones.ResumeLayout(false);
             this.pnlFlow.ResumeLayout(false);
             this.pnlFlow.PerformLayout();
+            this.panelEx1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -531,8 +611,12 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.PanelEx pnlBotones;
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.ButtonX btnEliminar;
-        private System.Windows.Forms.FlowLayoutPanel flowBienesAAsignar;
+        private System.Windows.Forms.FlowLayoutPanel flowBienesAAdquirir;
         private DevComponents.DotNetBar.PanelEx pnlFlow;
         private DevComponents.DotNetBar.PanelEx panelEx1;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtProveedor;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cboProveedor;
+        private DevComponents.DotNetBar.LabelX lblProveedor;
+        private DevComponents.DotNetBar.ButtonX btnBienesRestantes;
     }
 }

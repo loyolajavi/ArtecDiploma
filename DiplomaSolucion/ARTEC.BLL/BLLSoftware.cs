@@ -20,9 +20,9 @@ namespace ARTEC.BLL
         //}
 
 
-        public int BienTraerIdPorDescripMarcaModelo(Bien unBien)
+        public int BienTraerIdPorDescripMarcaModelo(int IdCat, int IdMarca, int IdModelo)
         {
-            return GestorSoftware.BienTraerIdPorDescripMarcaModelo(unBien);
+            return GestorSoftware.BienTraerIdPorDescripMarcaModelo(IdCat, IdMarca, IdModelo);
         }
 
 

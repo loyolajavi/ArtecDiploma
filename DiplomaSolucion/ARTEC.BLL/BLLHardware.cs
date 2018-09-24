@@ -31,10 +31,10 @@ namespace ARTEC.BLL
         }
 
 
-        
-        public int BienTraerIdPorDescripMarcaModelo(Bien unBien)
+
+        public int BienTraerIdPorDescripMarcaModelo(int IdCat, int IdMarca, int IdModelo)
         {
-            return GestorHardware.BienTraerIdPorDescripMarcaModelo(unBien);
+            return GestorHardware.BienTraerIdPorDescripMarcaModelo(IdCat, IdMarca, IdModelo);
         }
 
 

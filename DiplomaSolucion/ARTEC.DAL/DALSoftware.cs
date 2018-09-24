@@ -17,14 +17,14 @@ namespace ARTEC.DAL
 
 
 
-        public int BienTraerIdPorDescripMarcaModelo(Bien unBien)
+        public int BienTraerIdPorDescripMarcaModelo(int IdCat, int IdMarca, int IdModelo)
         {
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
-                new SqlParameter("@IdCategoria", unBien.unaCategoria.IdCategoria),
-                new SqlParameter("@IdMarca", unBien.unaMarca.IdMarca),
-                new SqlParameter("@IdModelo", unBien.unModelo.IdModeloVersion)
+                new SqlParameter("@IdCategoria", IdCat),
+                new SqlParameter("@IdMarca", IdMarca),
+                new SqlParameter("@IdModelo", IdModelo)
 			};
 
 

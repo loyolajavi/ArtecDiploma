@@ -12,7 +12,7 @@ namespace ARTEC.BLL
     {
 
         //IBien BienInstanciar();
-        int BienTraerIdPorDescripMarcaModelo(Bien unBien);
+        int BienTraerIdPorDescripMarcaModelo(int IdCat, int IdMarca, int IdModelo);
 
     }
 }

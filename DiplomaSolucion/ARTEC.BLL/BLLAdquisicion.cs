@@ -61,5 +61,33 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+
+
+        public List<Inventario> AdquisicionInventariosAsoc(string IdPartida, string IdAdquisicion)
+        {
+            try
+            {
+                return GestorAdquisicion.AdquisicionInventariosAsoc(IdPartida, IdAdquisicion);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+        public bool AdquisicionModificar(Adquisicion unaAdqModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        {
+            try
+            {
+                if (GestorAdquisicion.AdquisicionModificar(unaAdqModif, InvQuitarMod, InvAgregarMod))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

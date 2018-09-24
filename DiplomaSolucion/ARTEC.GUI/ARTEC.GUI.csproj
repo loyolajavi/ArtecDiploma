@@ -80,6 +80,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarInventarioCU.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AgregarInventarioCU.Designer.cs">
+      <DependentUpon>AgregarInventarioCU.cs</DependentUpon>
+    </Compile>
     <Compile Include="Backup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,6 +310,9 @@
     <Compile Include="SolicitudBuscar.Designer.cs">
       <DependentUpon>SolicitudBuscar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AgregarInventarioCU.resx">
+      <DependentUpon>AgregarInventarioCU.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Backup.resx">
       <DependentUpon>Backup.cs</DependentUpon>
     </EmbeddedResource>

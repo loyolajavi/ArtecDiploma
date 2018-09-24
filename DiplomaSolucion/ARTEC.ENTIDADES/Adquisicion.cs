@@ -29,6 +29,14 @@ namespace ARTEC.ENTIDADES
         public int unIdPartida { get; set; }
         public int unIdSolicitud { get; set; }
 
+        private List<Inventario> _unosInventariosAsoc = new List<Inventario>();
+
+        public List<Inventario> unosInventariosAsoc
+        {
+            get { return _unosInventariosAsoc; }
+            set { _unosInventariosAsoc = value; }
+        }
+        
 
         
     }

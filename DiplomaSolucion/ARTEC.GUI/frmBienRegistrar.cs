@@ -353,7 +353,7 @@ namespace ARTEC.GUI
                 unBien.unaMarca = unaMarca;
                 unBien.unModelo = unModelo;//(ModeloVersion)cboModelo.SelectedItem;
 
-                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien);
+                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien.unaCategoria.IdCategoria, unBien.unaMarca.IdMarca, unBien.unModelo.IdModeloVersion);
 
 
                 //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
@@ -526,7 +526,7 @@ namespace ARTEC.GUI
                 unBien.unaMarca = unaMarca;
                 unBien.unModelo = unModelo;//(ModeloVersion)cboModelo.SelectedItem;
 
-                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien);
+                unBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unBien.unaCategoria.IdCategoria, unBien.unaMarca.IdMarca, unBien.unModelo.IdModeloVersion);
 
 
                 //Valido para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
