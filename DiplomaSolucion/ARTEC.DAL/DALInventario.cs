@@ -168,5 +168,49 @@ namespace ARTEC.DAL
 
 
 
+
+        public EstadoInventario InventarioTraerEstadoPorIdInventario(int IdInventario)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdInventario", IdInventario)
+			};
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "InventarioTraerEstadoPorIdInventario", parameters))
+                {
+                    EstadoInventario unEstInv = new EstadoInventario();
+                    unEstInv = MapearEstadoInventario(ds);
+                    return unEstInv;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        private EstadoInventario MapearEstadoInventario(DataSet ds)
+        {
+            EstadoInventario ResEstInventarios = new EstadoInventario();
+
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    ResEstInventarios.IdEstadoInventario = (int)row["IdEstadoInventario"];
+                    ResEstInventarios.DescripEstadoInv = row["DescripEstadoInv"].ToString();
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            return ResEstInventarios;
+        }
+
+
     }
 }

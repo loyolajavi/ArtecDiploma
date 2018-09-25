@@ -37,7 +37,19 @@ namespace ARTEC.BLL
 
         }
 
-        
 
+
+
+        public EstadoInventario InventarioTraerEstadoPorIdInventario(int IdInventario)
+        {
+            try
+            {
+                return GestorInventario.InventarioTraerEstadoPorIdInventario(IdInventario);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

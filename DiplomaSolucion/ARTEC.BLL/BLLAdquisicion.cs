@@ -89,5 +89,19 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool AdquisicionEliminar(Adquisicion unaAdqModif)
+        {
+            try
+            {
+                if (GestorAdquisicion.AdquisicionEliminar(unaAdqModif))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

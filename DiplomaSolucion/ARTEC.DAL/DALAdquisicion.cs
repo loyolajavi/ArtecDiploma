@@ -261,7 +261,7 @@ namespace ARTEC.DAL
                         SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
                             {
                                 new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
-                                new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
+                                new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
                             };
                         FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
@@ -363,6 +363,67 @@ namespace ARTEC.DAL
                 }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+        public bool AdquisicionEliminar(Adquisicion unaAdqModif)
+        {
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+                //Colocar todos los SolicDetalle en "Comprar" (Revierto desde Adquirido)
+                foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
+                {
+                    SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdSolicitud", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicDetalle", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
+                            };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
+                }
+                
+                //Eliminar todos los RelPDetAdq
+                SqlParameter[] parametersRelPDetAdqEliminar = new SqlParameter[]
+			            {
+                            new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion)
+			            };
+
+                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelPdetAdqEliminarTodosPorIdAdq", parametersRelPDetAdqEliminar);
+
+                //Eliminar todos los Inventarios
+                foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
+                {
+                    SqlParameter[] parametersInventarioEliminar = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdInventario", unInven.IdInventario)
+                            };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioEliminar", parametersInventarioEliminar);
+                }
+               
+                //Eliminar la adquisicion
+                SqlParameter[] parametersAdqEliminar = new SqlParameter[]
+                            {
+                                new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion)
+                            };
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdquisicionEliminar", parametersAdqEliminar);
+                
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                if (FilasAfectadas > 0)
+                    return true;
+                return false;
             }
             catch (Exception es)
             {

@@ -142,17 +142,20 @@ namespace ARTEC.GUI
                     {
                         GrillaAdquisicionBuscar.DataSource = null;
                         GrillaAdquisicionBuscar.DataSource = unasAdquisiciones;
+                        GrillaAdquisicionBuscar.BringToFront();
                     }
                     else
                     {
                         GrillaAdquisicionBuscar.DataSource = null;
                         txtResBusqueda.Visible = true;
+                        txtResBusqueda.BringToFront();
                     }
                 }
                 else
                 {
                     GrillaAdquisicionBuscar.DataSource = null;
                     txtResBusqueda.Visible = true;
+                    txtResBusqueda.BringToFront();
                 }
             }
             catch (Exception es)
@@ -168,10 +171,19 @@ namespace ARTEC.GUI
 
             if (e.RowIndex > -1 && e.ColumnIndex > -1)
             {
+                int IndexAdqSelec = unasAdquisiciones.IndexOf(unasAdquisiciones.Where(x => x.IdAdquisicion == (int)GrillaAdquisicionBuscar.Rows[e.RowIndex].Cells[0].Value).First());
+                int IdAdqSelec = unasAdquisiciones.Where(x => x.IdAdquisicion == (int)GrillaAdquisicionBuscar.Rows[e.RowIndex].Cells[0].Value).First().IdAdquisicion;
                 frmAdquisicionGestion unFrmAdquisicionGestion = new frmAdquisicionGestion((Adquisicion)unasAdquisiciones.Where(x => x.IdAdquisicion == (int)GrillaAdquisicionBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 ResFrmAdquisicionModif = unFrmAdquisicionGestion.ShowDialog();
 
                 if (ResFrmAdquisicionModif == DialogResult.OK)
+                {
+                    unasAdquisiciones[IndexAdqSelec] = ManagerAdquisicion.AdquisicionBuscar(IdAdqSelec.ToString(), "", "", DateTime.MinValue, DateTime.MinValue, "", "").First();
+                    GrillaAdquisicionBuscar.DataSource = null;
+                    GrillaAdquisicionBuscar.DataSource = unasAdquisiciones;
+                    GrillaAdquisicionBuscar.BringToFront();
+                }
+                else if (ResFrmAdquisicionModif == DialogResult.No)
                 {
                     unasAdquisiciones.RemoveAt(e.RowIndex);
                     GrillaAdquisicionBuscar.DataSource = null;
@@ -179,13 +191,13 @@ namespace ARTEC.GUI
                     {
                         GrillaAdquisicionBuscar.Visible = false;
                         txtResBusqueda.Visible = true;
+                        txtResBusqueda.BringToFront();
                     }
                     else
                     {
                         GrillaAdquisicionBuscar.DataSource = unasAdquisiciones;
-                        //FormatearGrillaRendicionBuscar();
+                        GrillaAdquisicionBuscar.BringToFront();
                     }
-                        
                 }
             }
         }

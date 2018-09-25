@@ -39,6 +39,7 @@ namespace ARTEC.GUI
         BLLTipoBien ManagerTipoBien = new BLLTipoBien();
         List<TipoBien> unosTipoBien = new List<TipoBien>();
         Marca unaMarca;
+        BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
         
 
         public frmAdquisicionGestion()
@@ -75,8 +76,20 @@ namespace ARTEC.GUI
 
                 unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
                 InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
+
+                unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+
                 foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
 	            {
+                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
+                    unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
+
+
 		            HLPBienInventario unInvHlp = new HLPBienInventario();
                     unInvHlp.IdInventario = unInv.IdInventario;
                     unInvHlp.DescripBien = unInv.deBien.DescripBien;
@@ -134,42 +147,37 @@ namespace ARTEC.GUI
             else
             {
                 //Si hizo click en Quitar
-                if (e.ColumnIndex == GrillaInventarios.Columns["btnDinBorrar"].Index)
-                {
-                    unaAdqModif.unosInventariosAsoc.RemoveAt(e.RowIndex);
-                    //Lo mismo con el helper
-                    unosInventariosHlp.RemoveAt(e.RowIndex);
+                BLLInventario ManagerInventario = new BLLInventario();
+                EstadoInventario unEstadosInv = new EstadoInventario();
 
-                    //Regenero la grilla
-                    GrillaInventarios.DataSource = null;
-                    GrillaInventarios.DataSource = unosInventariosHlp;
-                    FormatearGrillaInventarios();
+                try
+                {
+                    unEstadosInv = ManagerInventario.InventarioTraerEstadoPorIdInventario(unaAdqModif.unosInventariosAsoc[e.RowIndex].IdInventario);
+                    if (unEstadosInv.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado)
+                        MessageBox.Show("El inventario no puede ser eliminado porque ya fue asignado");
+                    else
+                    {
+                        if (e.ColumnIndex == GrillaInventarios.Columns["btnDinBorrar"].Index)
+                        {
+                            unaAdqModif.unosInventariosAsoc.RemoveAt(e.RowIndex);
+                            //Lo mismo con el helper
+                            unosInventariosHlp.RemoveAt(e.RowIndex);
+
+                            //Regenero la grilla
+                            GrillaInventarios.DataSource = null;
+                            GrillaInventarios.DataSource = unosInventariosHlp;
+                            FormatearGrillaInventarios();
+                        }
+                    }
+                    
+                }
+                catch (Exception es)
+                {
+                    string IdError = ServicioLog.CrearLog(es, "frmAsquisicionGestion - GrillaInventarios_CellClick");
+                    MessageBox.Show("Ocurrio un error al eliminar un inventario, por favor informe del error Nro " + IdError + " del Log de Eventos");
                 }
             }
         }
-
-
-        //private void btnEliminar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
-        //        if (resmbox == DialogResult.Yes)
-        //            if (ManagerAsignacion.AsignacionEliminar(unaAsignacionModif))
-        //            {
-        //                MessageBox.Show("Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + " eliminada correctamente");
-        //                DialogResult = DialogResult.No;
-        //            }
-        //            else
-        //                return;
-        //    }
-        //    catch (Exception es)
-        //    {
-        //        string IdError = ServicioLog.CrearLog(es, "frmAsignacionModificar - btnEliminar_Click");
-        //        MessageBox.Show("Ocurrio un error al intentar eliminar la rendición: " + unaAsignacionModif.IdAsignacion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
-        //    }
-        //}
-
 
 
 
@@ -358,6 +366,11 @@ namespace ARTEC.GUI
                 InvQuitarMod = InventariosAgregarBKP.Where(d => !unaAdqModif.unosInventariosAsoc.Any(a => a.IdInventario == d.IdInventario)).ToList();
                 InvAgregarMod = unaAdqModif.unosInventariosAsoc.Where(d => !InventariosAgregarBKP.Any(a => a.IdInventario == d.IdInventario)).ToList();
 
+                unaAdqModif.FechaAdq = DateTime.Parse(txtFecha.Text);
+                unaAdqModif.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+                unaAdqModif.NroFactura = txtNroFactura.Text;
+                //unaAdqModif.ProveedorAdquisicion = txtProveedor.Text; VER:
+
                 if (ManagerAdquisicion.AdquisicionModificar(unaAdqModif, InvQuitarMod, InvAgregarMod))
                 {
                     unaAdqModif.unosInventariosAsoc.Clear();
@@ -405,15 +418,13 @@ namespace ARTEC.GUI
             unAgregarInventarioCU.unTipoBien.DisplayMember = "DescripTipoBien";
             unAgregarInventarioCU.unTipoBien.ValueMember = "IdTipoBien";
 
-            //BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+            //BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
             
             flowBienesAAdquirir.Visible = false;
             flowBienesAAdquirir.Controls.Clear();
             GrillaBienesAAdquirir.DataSource = null;
             
 
-            //unaSolic.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaAdqModif.unIdSolicitud).unosDetallesSolicitud;
             unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
             LisAUXDetalles = unaSolic.unosDetallesSolicitud.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
@@ -549,7 +560,39 @@ namespace ARTEC.GUI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            BLLInventario ManagerInventario = new BLLInventario();
+            List<EstadoInventario> unosEstadosInv = new List<EstadoInventario>();
 
+            try
+            {
+                foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
+                {
+                    unosEstadosInv.Add(ManagerInventario.InventarioTraerEstadoPorIdInventario(unInven.IdInventario));
+                }
+                if (unosEstadosInv.Any(X => X.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado))
+                    MessageBox.Show("La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados");
+                else
+                {
+                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Adquisición: " + unaAdqModif.IdAdquisicion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
+                        if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
+                        {
+                            MessageBox.Show("Asignación: " + unaAdqModif.IdAdquisicion.ToString() + " eliminada correctamente");
+                            DialogResult = DialogResult.No;
+                        }
+                        else
+                            return;
+                }
+
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmAdquisicionGestion - btnEliminar_Click");
+                MessageBox.Show("Ocurrio un error al intentar eliminar la adquisición: " + unaAdqModif.IdAdquisicion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
+            
+            
         }
 
 
