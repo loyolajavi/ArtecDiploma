@@ -328,5 +328,33 @@ namespace ARTEC.DAL
                       FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
               }
           }
+
+          public int CategoriaTraerIdCatPorIdBien(int IdBien)
+          {
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdBien", IdBien)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int IdCatRes = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CategoriaTraerIdCatPorIdBien", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IdCatRes;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+          }
     }
 }

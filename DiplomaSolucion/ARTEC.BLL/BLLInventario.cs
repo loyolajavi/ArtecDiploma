@@ -51,5 +51,19 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public bool InventarioModificar(Inventario unInvModif)
+        {
+            try
+            {
+                if (GestorInventario.InventarioModificar(unInvModif))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

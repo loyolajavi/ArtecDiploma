@@ -212,5 +212,35 @@ namespace ARTEC.DAL
         }
 
 
+
+        public bool InventarioModificar(Inventario unInvModif)
+        {
+            SqlParameter[] parametersInvModif = new SqlParameter[]
+			{
+                new SqlParameter("@IdInventario", unInvModif.IdInventario),
+                new SqlParameter("@IdBien", unInvModif.IdBienEspecif),
+                new SqlParameter("@SerieKey", unInvModif.SerieKey),
+                new SqlParameter("@Costo", unInvModif.Costo)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioModificar", parametersInvModif);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return true;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

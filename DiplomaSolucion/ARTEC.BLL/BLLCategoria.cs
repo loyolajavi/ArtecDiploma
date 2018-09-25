@@ -126,5 +126,17 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+        public int CategoriaTraerIdCatPorIdBien(int IdBien)
+        {
+            try
+            {
+                return GestorCategoria.CategoriaTraerIdCatPorIdBien(IdBien);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }
