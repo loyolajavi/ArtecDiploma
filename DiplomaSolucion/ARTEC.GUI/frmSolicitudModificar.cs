@@ -40,6 +40,7 @@ namespace ARTEC.GUI
         Agente unAgen;
         //Estos son para cargar mas detallesFIN
         int ContDetalles = 0;
+        BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
         List<string> unosAdjuntos = new List<string>();
         List<Nota> unasNotas = new List<Nota>();
@@ -1166,20 +1167,53 @@ namespace ARTEC.GUI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-            grillaDetalles.Columns.Remove("btnDinBorrar");
-            grillaDetalles.Columns.Remove("txtCotizConteo");
-            grillaDetalles.Columns.Remove("btnDinCotizar");
-            grillaDetalles.DataSource = null;
-            frmSolicitudModificar_Load(this, new EventArgs());
-            txtBien.Clear();
-            txtCantBien.Clear();
-            txtNota.Clear();
-            GrillaNotas.DataSource = null;
-            unosAdjuntos.Clear();
-            unasNotas.Clear();
-            GrillaAdjuntos.DataSource = null;
-            flagDetEliminado = false;
+            ////elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            //grillaDetalles.Columns.Remove("btnDinBorrar");
+            //grillaDetalles.Columns.Remove("txtCotizConteo");
+            //grillaDetalles.Columns.Remove("btnDinCotizar");
+            //grillaDetalles.DataSource = null;
+            //frmSolicitudModificar_Load(this, new EventArgs());
+            //txtBien.Clear();
+            //txtCantBien.Clear();
+            //txtNota.Clear();
+            //GrillaNotas.DataSource = null;
+            //unosAdjuntos.Clear();
+            //unasNotas.Clear();
+            //GrillaAdjuntos.DataSource = null;
+            //flagDetEliminado = false;
+
+
+            BLLPartida ManagerPartida = new BLLPartida();
+            List<Partida> unaListaPartidas = new List<Partida>();
+            try
+            {
+                //Verificar que no existan Partidas Asociadas (que no esten canceladas)
+                unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolicitud.IdSolicitud);
+                if (unaListaPartidas != null && unaListaPartidas.Count > 0)
+                {
+                    MessageBox.Show("La solicitud no puede ser cancelada porque contiene Partidas asociadas");
+                    return;
+                }
+                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Solicitud: " + unaSolicitud.IdSolicitud.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                if (resmbox == DialogResult.Yes)
+                {
+                    if (ManagerSolicitud.SolicitudCancelar(unaSolicitud))
+                    {
+                        MessageBox.Show("Solicitud cancelada correctamente");
+                        //VER: Grisear todo
+                    }
+                }
+                else
+                    return;
+
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmSolicitudModificar - btnCancelar_Click");
+                MessageBox.Show("Ocurrio un error al intentar cancelar la Solicitud: " + unaSolicitud.IdSolicitud.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
+
 
         }
 

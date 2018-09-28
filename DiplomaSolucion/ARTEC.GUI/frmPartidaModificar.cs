@@ -286,23 +286,87 @@ namespace ARTEC.GUI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-            grillaDetallesPart.Columns.Remove("btnDinBorrar");
-            grillaCotizaciones.DataSource = null;
-            GrillaCotizAntiguas.DataSource = null;
-            grillaDetallesPart.DataSource = null;
-            frmPartidaModificar_Load(this, new EventArgs());
-            //Limpio los pdetalles a borrar
-            PDetallesBorrar.Clear();
-            //Actualizo campos
-            CalcularMontoTotalPartida();
+            ////elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            //grillaDetallesPart.Columns.Remove("btnDinBorrar");
+            //grillaCotizaciones.DataSource = null;
+            //GrillaCotizAntiguas.DataSource = null;
+            //grillaDetallesPart.DataSource = null;
+            //frmPartidaModificar_Load(this, new EventArgs());
+            ////Limpio los pdetalles a borrar
+            //PDetallesBorrar.Clear();
+            ////Actualizo campos
+            //CalcularMontoTotalPartida();
 
 
+
+            //Verificar que no existan Adquisiciones asociadas (Reutilizo la función para iniciar la creación de las rendiciones)
+            BLLRendicion ManagerRendicion = new BLLRendicion();
+            Rendicion unaRendicion = new Rendicion();
+
+            try
+            {
+                unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(NroPartida);
+                if (unaRendicion != null && unaRendicion.unasAdquisiciones != null && unaRendicion.unasAdquisiciones.Count() > 0)
+                {
+                    MessageBox.Show("La Partida no puede ser cancelada porque contiene Adquisiciones asociadas");
+                    return;
+                }
+                //Verificar que no exista una Rendicion asociada
+                int NroRenAsociada = ManagerRendicion.RendicionTraerIdRendPorIdPartida(NroPartida);
+                if (NroRenAsociada > 0)
+                {
+                    MessageBox.Show("La Partida no puede ser cancelada porque contiene Rendiciones asociadas");
+                    return;
+                }
+                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Partida: " + unaPartida.IdPartida.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                if (resmbox == DialogResult.Yes)
+                {
+                    //Si fue acreditada generar documento de cancelación
+                    if (unaPartida.MontoOtorgado > 0)
+                    {
+
+                        if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
+                        {
+                            using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta
+                            {
+                                doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                                doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                                CultureInfo ci = new CultureInfo("es-AR");
+                                doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                                doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                            }
+                        }
+                        else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
+                        {
+                            using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                            {
+                                doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                                doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                                CultureInfo ci = new CultureInfo("en-US");
+                                doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                                doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                            }
+                        }
+                    }
+                    if (ManagerPartida.PartidaCancelar(unaPartida))
+                    {
+                        MessageBox.Show("Partida Cancelada Correctamente");
+                        DialogResult = DialogResult.No;
+                    }
+                }
+                else
+                    return;
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnCancelar_Click");
+                MessageBox.Show("Ocurrio un error al intentar cancelar la Partida: " + unaPartida.IdPartida.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
         }
+
 
         private void lblVolver_Click(object sender, EventArgs e)
         {
-            btnCancelar_Click(this, new EventArgs());
             this.Close();
         }
 

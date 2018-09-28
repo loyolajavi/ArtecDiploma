@@ -447,5 +447,58 @@ namespace ARTEC.DAL
 
 
 
+
+        public bool SolicitudCancelar(Solicitud unaSolicitud)
+        {
+
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+
+                foreach (SolicDetalle unDetSolic in unaSolicitud.unosDetallesSolicitud)
+                {
+                    SqlParameter[] parametersDetSolicCancelar = new SqlParameter[]
+			        {
+                        new SqlParameter("@UIDSolicDetalle", unDetSolic.UIDSolicDetalle),
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetallePorUIDUpdateEstado", parametersDetSolicCancelar);
+                    unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado;
+                }
+
+                SqlParameter[] parametersSolicCancelar = new SqlParameter[]
+		        {
+                    new SqlParameter("@IdSolicitud", unaSolicitud.IdSolicitud),
+                    new SqlParameter("@NuevoEstado", EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+		        };
+
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudUpdateEstado", parametersSolicCancelar);
+                unaSolicitud.UnEstado.IdEstadoSolicitud = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
+
+                long ResAcum = ServicioDV.DVCalcularDVH(unaSolicitud);
+                if (ResAcum > 0)
+                {
+                    if (ServicioDV.DVActualizarDVH(unaSolicitud.IdSolicitud, ResAcum, unaSolicitud.GetType().Name, "IdSolicitud"))
+                    {
+                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

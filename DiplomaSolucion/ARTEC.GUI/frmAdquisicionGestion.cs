@@ -575,13 +575,15 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Adquisición: " + unaAdqModif.IdAdquisicion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
+                    {
                         if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
                         {
                             MessageBox.Show("Asignación: " + unaAdqModif.IdAdquisicion.ToString() + " eliminada correctamente");
                             DialogResult = DialogResult.No;
                         }
-                        else
-                            return;
+                    }
+                    else
+                        return;
                 }
 
             }

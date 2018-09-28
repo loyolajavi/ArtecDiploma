@@ -128,16 +128,16 @@ namespace ARTEC.GUI
             try
             {
                 Inventario unInvModif;
-                if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
-                {
-                    unInvModif = new XInventarioHard();
-                    unInvModif.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
-                }
-                else
-                {
-                    unInvModif = new XInventarioSoft();
-                    unInvModif.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
-                }
+                //if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
+                //{
+                //    unInvModif = new XInventarioHard();
+                //    unInvModif.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
+                //}
+                //else
+                //{
+                //    unInvModif = new XInventarioSoft();
+                //    unInvModif.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
+                //}
 
                 unInvModif = unInventarioModif;
 

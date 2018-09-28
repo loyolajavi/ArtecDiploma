@@ -79,9 +79,21 @@ namespace ARTEC.BLL
                 return true;
             return false;
         }
+        
 
-
-
+        public bool PartidaCancelar(Partida unaPartida)
+        {
+            try
+            {
+                if (GestorPartida.PartidaCancelar(unaPartida.IdPartida))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
     }

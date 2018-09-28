@@ -101,5 +101,20 @@ namespace ARTEC.BLL
 
 
 
+
+        public bool SolicitudCancelar(Solicitud unaSolicitud)
+        {
+            try
+            {
+                //Coloca en "Cancelada" la Solicitud y además sus SolicDetalles
+                if (GestorSolicitud.SolicitudCancelar(unaSolicitud))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

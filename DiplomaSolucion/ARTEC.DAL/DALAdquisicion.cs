@@ -346,7 +346,6 @@ namespace ARTEC.DAL
                                     new SqlParameter("@UIDPartidaDetalle", unInv.PartidaDetalleAsoc.UIDPartidaDetalle)
                                 };
                             int CantComprada = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "InvAdquiridosPorUIDPartidaDetalle", parametersCantInvCompradoPorUIDPartidaDetalle);
-                            //CantComprada;//Porque recién agregué un inventario a la adquisición, pero como todavía no se hizo el Commit no me lo va a traer
                         
                         //La comprobación
                         if (ResCantidad == CantComprada)
