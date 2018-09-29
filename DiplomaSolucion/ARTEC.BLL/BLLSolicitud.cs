@@ -38,6 +38,10 @@ namespace ARTEC.BLL
             return GestorSolicitud.SolicitudBuscar(NroSolic);
         }
 
+        public List<Solicitud> SolicitudBuscarConCanceladas(int NroSolic)
+        {
+            return GestorSolicitud.SolicitudBuscarConCanceladas(NroSolic);
+        }
 
 
         public List<Solicitud> SolicitudBuscar(string Dep = null, int? estado = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
@@ -45,6 +49,10 @@ namespace ARTEC.BLL
             return GestorSolicitud.SolicitudBuscar(Dep, estado, bien, priori, usasig, fechaInicio, fechaInicio2, fechaFin, fechaFin2);
         }
 
+        public List<Solicitud> SolicitudBuscarConCanceladas(string Dep = null, int? estado = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
+        {
+            return GestorSolicitud.SolicitudBuscarConCanceladas(Dep, estado, bien, priori, usasig, fechaInicio, fechaInicio2, fechaFin, fechaFin2);
+        }
 
 
         public Solicitud SolicitudTraerDetalles(int IdSolic)

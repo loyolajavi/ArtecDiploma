@@ -45,33 +45,36 @@ namespace ARTEC.GUI
                 if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
                 {
                     unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
-                    txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
-                    txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-                    chkCaja.Checked = unaPartida.Caja;
-
-                    unaListaPartidas.Clear();
-                    unaListaPartidas.Add(unaPartida);
-                    GrillaPartidas.DataSource = null;
-                    GrillaPartidas.DataSource = unaListaPartidas;
-
-                    List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
-
-                    grillaDetallesPart.DataSource = null;
-                    foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                    if (unaPartida != null && unaPartida.IdPartida > 0)
                     {
-                        HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
-                        unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
-                        unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
-                        unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+                        txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
+                        txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
+                        chkCaja.Checked = unaPartida.Caja;
 
-                        ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                        unaListaPartidas.Clear();
+                        unaListaPartidas.Add(unaPartida);
+                        GrillaPartidas.DataSource = null;
+                        GrillaPartidas.DataSource = unaListaPartidas;
+
+                        List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+
+                        grillaDetallesPart.DataSource = null;
+                        foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                        {
+                            HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                            unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                            unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                            unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+
+                            ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                        }
+                        grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+
+                        //Limpio datos en grilla solicitud por si quedó algo antiguo
+                        grillaSolicitudes.DataSource = null;
+                        txtDependencia.Clear();
+                        txtNroSolicitud.Clear();
                     }
-                    grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
-
-                    //Limpio datos en grilla solicitud por si quedó algo antiguo
-                    grillaSolicitudes.DataSource = null;
-                    txtDependencia.Clear();
-                    txtNroSolicitud.Clear();
                 }
                 //Si se ingresó NroSolicitud o Dependencia (pero no IdPartida)
                 else

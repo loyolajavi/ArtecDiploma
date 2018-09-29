@@ -48,7 +48,7 @@ namespace ARTEC.GUI
 
         private void frmPartidaModificar_Load(object sender, EventArgs e)
         {
-            unaPartida = ManagerPartida.PartidaTraerPorNroPart(NroPartida).FirstOrDefault();
+            unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(NroPartida).FirstOrDefault();
             if (unaPartida != null && unaPartida.IdPartida > 0)
             {
                 foreach (PartidaDetalle pdet in unaPartida.unasPartidasDetalles)
@@ -351,7 +351,15 @@ namespace ARTEC.GUI
                     if (ManagerPartida.PartidaCancelar(unaPartida))
                     {
                         MessageBox.Show("Partida Cancelada Correctamente");
-                        DialogResult = DialogResult.No;
+                        //Grisear Todo
+                        btnGenerarCaja.Enabled = false;
+                        btnGenerarPartida.Enabled = false;
+                        btnGenerarDocumento.Enabled = false;
+                        btnCancelar.Enabled = false;
+                        grillaDetallesPart.Enabled = false;
+                        grillaCotizaciones.Enabled = false;
+                        GrillaCotizAntiguas.Enabled = false;
+                        //DialogResult = DialogResult.No;
                     }
                 }
                 else

@@ -56,7 +56,7 @@ namespace ARTEC.GUI
                 //Si se ingresó el IdPartida
                 if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
                 {
-                    unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
+                    unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
 
                     unaListaPartidas.Clear();
                     unaListaPartidas.Add(unaPartida);

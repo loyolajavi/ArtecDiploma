@@ -38,6 +38,11 @@ namespace ARTEC.BLL
         }
 
 
+        public List<Partida> PartidaTraerPorNroPartConCanceladas(int NroPart)
+        {
+            return GestorPartida.PartidaTraerPorNroPartConCanceladas(NroPart);
+        }
+
 
         public bool PartidaAsociar(Partida laPartida)
         {
@@ -85,7 +90,7 @@ namespace ARTEC.BLL
         {
             try
             {
-                if (GestorPartida.PartidaCancelar(unaPartida.IdPartida))
+                if (GestorPartida.PartidaCancelar(unaPartida))
                     return true;
                 return false;
             }

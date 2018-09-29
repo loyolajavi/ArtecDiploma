@@ -37,6 +37,7 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblInactivo = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.lblDesvinculado = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -101,7 +102,6 @@ namespace ARTEC.GUI
             this.customValidTxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.lblInactivo = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -148,6 +148,19 @@ namespace ARTEC.GUI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1071, 659);
             this.panel1.TabIndex = 6;
+            // 
+            // lblInactivo
+            // 
+            // 
+            // 
+            // 
+            this.lblInactivo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblInactivo.Location = new System.Drawing.Point(141, 462);
+            this.lblInactivo.Name = "lblInactivo";
+            this.lblInactivo.Size = new System.Drawing.Size(108, 22);
+            this.lblInactivo.TabIndex = 28;
+            this.lblInactivo.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
+            this.lblInactivo.Visible = false;
             // 
             // lblDesvinculado
             // 
@@ -351,6 +364,7 @@ namespace ARTEC.GUI
             // 
             this.cboEstadoSolicitud.DisplayMember = "Text";
             this.cboEstadoSolicitud.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboEstadoSolicitud.Enabled = false;
             this.cboEstadoSolicitud.ForeColor = System.Drawing.Color.Black;
             this.cboEstadoSolicitud.FormattingEnabled = true;
             this.cboEstadoSolicitud.ItemHeight = 16;
@@ -493,7 +507,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -621,6 +634,7 @@ namespace ARTEC.GUI
             this.cboEstadoSolDetalle.DisplayMember = "Text";
             this.cboEstadoSolDetalle.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboEstadoSolDetalle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoSolDetalle.Enabled = false;
             this.cboEstadoSolDetalle.ForeColor = System.Drawing.Color.Black;
             this.cboEstadoSolDetalle.FormattingEnabled = true;
             this.cboEstadoSolDetalle.ItemHeight = 16;
@@ -981,19 +995,6 @@ namespace ARTEC.GUI
             // 
             this.errorProvider6.ContainerControl = this;
             this.errorProvider6.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider6.Icon")));
-            // 
-            // lblInactivo
-            // 
-            // 
-            // 
-            // 
-            this.lblInactivo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblInactivo.Location = new System.Drawing.Point(141, 462);
-            this.lblInactivo.Name = "lblInactivo";
-            this.lblInactivo.Size = new System.Drawing.Size(108, 22);
-            this.lblInactivo.TabIndex = 28;
-            this.lblInactivo.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
-            this.lblInactivo.Visible = false;
             // 
             // frmSolicitudModificar
             // 

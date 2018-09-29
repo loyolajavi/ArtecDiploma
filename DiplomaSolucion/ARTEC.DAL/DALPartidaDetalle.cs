@@ -55,6 +55,7 @@ namespace ARTEC.DAL
                     unDet.SolicDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
                     unDet.SolicDetalleAsociado.unaCategoria.DescripCategoria = row["DescripCategoria"].ToString();
                     unDet.SolicDetalleAsociado.Cantidad = (int)row["Cantidad"];
+                    unDet.SolicDetalleAsociado.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
 
                     ResPartidaDetalles.Add(unDet);
                 }

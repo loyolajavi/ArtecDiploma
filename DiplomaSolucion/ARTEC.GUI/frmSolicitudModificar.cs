@@ -239,6 +239,24 @@ namespace ARTEC.GUI
 
             grillaDetallesFormatoAplicar();
 
+            //Si está cancelada inhabilito la modificación y botones
+            if(unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+            {
+                btnAgregarDetalle.Enabled = false;
+                btnNuevoDetalle.Enabled = false;
+                btnModificar.Enabled = false;
+                btnCancelar.Enabled = false;
+                btnSoliitarPartida.Enabled = false;
+                btnBienAsignar.Enabled = false;
+                grillaDetalles.Enabled = false;
+                btnNotas.Enabled = false;
+                btnAdjuntar.Enabled = false;
+                btnModifSolicitud.Enabled = false;
+                btnAsociarAgente.Enabled = false;
+            }
+
+
+
         }
 
 
@@ -1200,7 +1218,34 @@ namespace ARTEC.GUI
                     if (ManagerSolicitud.SolicitudCancelar(unaSolicitud))
                     {
                         MessageBox.Show("Solicitud cancelada correctamente");
-                        //VER: Grisear todo
+                        //Grisear todo
+                        cboEstadoSolicitud.SelectedValue = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
+                        unaSolicitud.UnEstado = new EstadoSolicitud() { IdEstadoSolicitud = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada, DescripEstadoSolic = "Cancelada" };
+                        foreach (DataGridViewRow unDetFila in grillaDetalles.Rows)
+                        {
+                            EstadoSolicDetalle unEsta = new EstadoSolicDetalle();
+                            unEsta.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado;
+                            unEsta.DescripEstadoSolicDetalle = "Cancelado";
+                            unDetFila.Cells["unEstado"].Value = unEsta;
+                        }
+                        unaSolicitud.FechaFin = DateTime.Today;
+                        txtFechaFin.Text = unaSolicitud.FechaFin.ToString();
+                        //Coloca todos los detalles en Cancelado
+                        foreach (SolicDetalle unSolicDet in unaSolicitud.unosDetallesSolicitud)
+                        {
+                            unSolicDet.unEstado = new EstadoSolicDetalle() { IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado, DescripEstadoSolicDetalle = "Cancelado" };
+                        }
+                        btnAgregarDetalle.Enabled = false;
+                        btnNuevoDetalle.Enabled = false;
+                        btnModificar.Enabled = false;
+                        btnCancelar.Enabled = false;
+                        btnSoliitarPartida.Enabled = false;
+                        btnBienAsignar.Enabled = false;
+                        grillaDetalles.Enabled = false;
+                        btnNotas.Enabled = false;
+                        btnAdjuntar.Enabled = false;
+                        btnModifSolicitud.Enabled = false;
+                        btnAsociarAgente.Enabled = false;
                     }
                 }
                 else

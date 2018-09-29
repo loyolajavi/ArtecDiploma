@@ -116,6 +116,29 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Solicitud> SolicitudBuscarConCanceladas(int NroSolic)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NroSolicitud", NroSolic),
+                new SqlParameter("@IdIdioma", ENTIDADES.Servicios.Idioma.unIdiomaActual)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerPorNroSolicitudConCanceladas", parameters))
+                {
+                    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                    unaListaSolicitudes = MapearSolicitud(ds);
+                    return unaListaSolicitudes;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
 
 
         public Solicitud SolicitudTraerIdsolNomdepPorIdPartida(int IdPartida)
@@ -250,6 +273,46 @@ namespace ARTEC.DAL
             }
         }
 
+
+        public List<Solicitud> SolicitudBuscarConCanceladas(string NombreDep = null, int? EstadoSolic = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
+        {
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrEmpty(NombreDep))
+                parameters.Add(new SqlParameter("@NombreDep", NombreDep));
+            if (EstadoSolic != null)
+                parameters.Add(new SqlParameter("@EstadoSolic", EstadoSolic));
+            if (!string.IsNullOrEmpty(bien))
+                parameters.Add(new SqlParameter("@bien", bien));
+            if (priori != null)
+                parameters.Add(new SqlParameter("@priori", priori));
+            if (usasig != null)
+                parameters.Add(new SqlParameter("@usasig", usasig));
+            parameters.Add(new SqlParameter("@ididioma", ENTIDADES.Servicios.Idioma.unIdiomaActual));
+            if (fechaInicio != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaInicio", fechaInicio));
+            if (fechaInicio2 != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaInicio2", fechaInicio2));
+            if (fechaFin != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaFin", fechaFin));
+            if (fechaFin2 != DateTime.MinValue)
+                parameters.Add(new SqlParameter("@fechaFin2", fechaFin2));
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudBuscarConCanceladas", parameters.ToArray()))
+                {
+                    List<Solicitud> unaListaSolicitudes = new List<Solicitud>();
+                    unaListaSolicitudes = MapearSolicitud(ds);
+                    return unaListaSolicitudes;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
         public bool SolicitudModificar(Solicitud laSolicitud)

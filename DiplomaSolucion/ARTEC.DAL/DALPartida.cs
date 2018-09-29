@@ -141,6 +141,33 @@ namespace ARTEC.DAL
         }
 
 
+        public List<Partida> PartidaTraerPorNroPartConCanceladas(int NroPart)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", NroPart)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "PartidaTraerPorNroPartConCanceladas", parameters))
+                {
+                    List<Partida> unaPartida = new List<Partida>();
+                    unaPartida = MapearPartidas(ds);
+                    DALPartidaDetalle GestorPartidaDetalle = new DALPartidaDetalle();
+                    if (unaPartida.Count() > 0)
+                        unaPartida[0].unasPartidasDetalles = GestorPartidaDetalle.PartidaDetalleTraerTodosPorNroPart(NroPart);
+                    return unaPartida;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
 
         public bool PartidaAsociar(Partida laPartida)
         {
@@ -423,7 +450,7 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", pdet.SolicDetalleAsociado.IdSolicitudDetalle),
-                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
@@ -448,18 +475,32 @@ namespace ARTEC.DAL
         }
 
 
-        public bool PartidaCancelar(int IdPartida)
+        public bool PartidaCancelar(Partida unaPartida)
         {
-            SqlParameter[] parametersParEliminar = new SqlParameter[]
-			{
-                new SqlParameter("@IdPartida", IdPartida)
-			};
+
 
             try
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                //Coloca EstadoSolicDetalle en "Cotizado" (Revierte desde "Partida")
+                foreach (PartidaDetalle unaPDet in unaPartida.unasPartidasDetalles)
+	            {
+                    SqlParameter[] parametersDetSolicCancelar = new SqlParameter[]
+			        {
+                        new SqlParameter("@UIDSolicDetalle", unaPDet.SolicDetalleAsociado.UIDSolicDetalle),
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
+			        };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetallePorUIDUpdateEstado", parametersDetSolicCancelar);
+	            }
+                
+                //Cancela la Partida
+                SqlParameter[] parametersParEliminar = new SqlParameter[]
+		        {
+                    new SqlParameter("@IdPartida", unaPartida.IdPartida)
+		        };
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaCancelar", parametersParEliminar);
+
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 if (FilasAfectadas > 0)
                     return true;

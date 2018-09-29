@@ -57,11 +57,11 @@ namespace ARTEC.GUI
                 {
                     if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
                     {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                        unasSolicitudes = ManagerSolicitud.SolicitudBuscarConCanceladas(Int32.Parse(txtNroSolicitud.Text));
                     }
                     else
                     {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaInicio2.Value, (DateTime?)txtFechaFin.Value, (DateTime?)txtFechaFin2.Value);
+                        unasSolicitudes = ManagerSolicitud.SolicitudBuscarConCanceladas(txtDep.Text, (int?)cboEstadoSolicitud.SelectedValue, txtBien.Text, (int?)cboPrioridad.SelectedValue, (int?)cboAsignado.SelectedValue, (DateTime?)txtFechaInicio.Value, (DateTime?)txtFechaInicio2.Value, (DateTime?)txtFechaFin.Value, (DateTime?)txtFechaFin2.Value);
                     }
                     GrillaSolicitudBuscar.DataSource = null;
                     GrillaSolicitudBuscar.DataSource = unasSolicitudes;
