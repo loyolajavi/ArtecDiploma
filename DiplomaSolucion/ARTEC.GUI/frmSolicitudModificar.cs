@@ -433,31 +433,34 @@ namespace ARTEC.GUI
 
 
 
-        public void ActualizarDetallesSolicitud(List<Cotizacion> unasCotiza)
+        public void ActualizarDetallesSolicitud(List<Cotizacion> unasCotiza, int IdSolDet)
         {
             //Actualizo las cotizaciones en el objeto instanciado en el frmSolicitudModificar
-            //foreach (SolicDetalle det in unaSolicitud.unosDetallesSolicitud)
-            //{
-            //det[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza.Where(x => x.unDetalleAsociado.IdSolicitudDetalle == det.IdSolicitudDetalle).ToList();
-            //}
-            unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones = unasCotiza;
-
+            unaSolicitud.unosDetallesSolicitud.First(X => X.IdSolicitudDetalle == IdSolDet).unasCotizaciones = unasCotiza;
 
             //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
-            grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count().ToString();
+            grillaDetalles.Rows[IdSolDet - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[IdSolDet - 1].unasCotizaciones.Count().ToString();
             //if (unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count() > 2)
-            if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unasCotizaciones.Count() > 2)
+            if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unasCotizaciones.Count() > 2)
             {
-                //Actualizo el estado en la bd
-                //ManagerSolicDetalle.SolicDetalleUpdateEstado(unaSolicitud.IdSolicitud, unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado);
                 //Actualizo el estado en el objeto en memoria
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
                 //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
                 EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
                 EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
                 EstadoAUX.DescripEstadoSolicDetalle = "Cotizado";
-                grillaDetalles.Rows[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].Cells["unEstado"].Value = EstadoAUX;
+                grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
+            }
+            else
+            {
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
+                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Pendiente";
+                //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
+                EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
+                EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
+                EstadoAUX.DescripEstadoSolicDetalle = "Pendiente";
+                grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
             }
         }
 

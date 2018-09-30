@@ -20,7 +20,7 @@ namespace ARTEC.GUI
     public partial class frmCotizaciones : DevComponents.DotNetBar.Metro.MetroForm
     {
         //Delegado para actualizar DetallesSolicitud en frmSolicitudModificar
-        public delegate void DelegaActualizarSolicDetalles(List<Cotizacion> unasCotizaciones);
+        public delegate void DelegaActualizarSolicDetalles(List<Cotizacion> unasCotiz, int IdSolDet);
         //Evento que llama al Delegado
         public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
@@ -366,10 +366,10 @@ namespace ARTEC.GUI
                 CotiQuitarMod = unasCotizacionesBKP.Where(x => !unasCotizaciones.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
                 CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
 
-                if (ManagerCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+                if (CotiQuitarMod.Count > 0 | CotiAgregarMod.Count > 0)
                 {
                     //Actualiza SolicDetalles en frmModificarSolicitud por Evento
-                    this.EventoActualizarDetalles(unasCotizaciones);
+                    this.EventoActualizarDetalles(unasCotizaciones, unDetSolic.IdSolicitudDetalle);
                     this.Close();
                 }
                 else

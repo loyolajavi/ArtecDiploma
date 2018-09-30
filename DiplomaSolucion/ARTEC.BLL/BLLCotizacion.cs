@@ -52,9 +52,8 @@ namespace ARTEC.BLL
         {
             try
             {
-                if(CotiQuitarMod.Count > 0 | CotiAgregarMod.Count > 0)
-                    if (GestorCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
-                        return true;
+                if (GestorCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+                    return true;
                 return false;
             }
             catch (Exception es)
