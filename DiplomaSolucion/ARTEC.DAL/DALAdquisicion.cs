@@ -350,6 +350,7 @@ namespace ARTEC.DAL
                         //La comprobación
                         if (ResCantidad == CantComprada)
                         {
+                            //Actualizo EstadoSolicDetalle
                             SqlParameter[] parametersEstadoSolicDetModif = new SqlParameter[]
                             {
                                 new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),

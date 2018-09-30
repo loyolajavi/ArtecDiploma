@@ -50,6 +50,9 @@ namespace ARTEC.GUI
         BLLDependencia ManagerDependenciaAg = new BLLDependencia();
         bool flagUsuarioInactivo;
         BLLUsuario ManagerUsuario = new BLLUsuario();
+        List<SolicDetalle> unosSolicDetAgregarBKP = new List<SolicDetalle>();
+        BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+        int DetalleSeleccionado = 1;
 
 
         public frmSolicitudModificar(Solicitud unaSolic)
@@ -64,7 +67,7 @@ namespace ARTEC.GUI
 
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
             
-
+            //Traer los agentes Responsables de la dependencia
             txtDependencia.Text = unaSolicitud.laDependencia.NombreDependencia;
             unosAgentesResp = new List<Agente>();
             unosAgentesResp = ManagerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
@@ -141,14 +144,6 @@ namespace ARTEC.GUI
             unosAgentes = new List<Agente>();
             unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaSolicitud.laDependencia.IdDependencia);
 
-            //ESTE CODIGO ESTABA DUPLICADO, REVISAR QUE SE CARGUE EL AGENTE RESPONSABLE CORRECTAMETNE Y ELIMINAR ESTE CODIGO
-            //unosAgentesResp = new List<Agente>();
-            //unosAgentesResp = managerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
-            //cboAgenteResp.DataSource = null;
-            //cboAgenteResp.DataSource = unosAgentesResp;
-            //cboAgenteResp.DisplayMember = "ApellidoAgente";
-            //cboAgenteResp.ValueMember = "IdAgente";
-
             //Agrega los detalles
             grillaDetalles.DataSource = null;
             unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud.IdSolicitud).unosDetallesSolicitud.ToList();
@@ -156,6 +151,8 @@ namespace ARTEC.GUI
             //grillaDetalles.Columns[1].Visible = false;
             //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
+            //Para el BKP de los SolicDetalles existentes
+            unosSolicDetAgregarBKP = unaSolicitud.unosDetallesSolicitud.ToList();
 
             //Agrega los agentes al detalle si es un software
             foreach (SolicDetalle unDetSolicAUX in unaSolicitud.unosDetallesSolicitud)
@@ -295,11 +292,10 @@ namespace ARTEC.GUI
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
                 //Pongo el flag en true para dps regenerar los detalles en la BD
-                flagDetEliminado = true;
+                //flagDetEliminado = true;
 
                 PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
-                BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
                 unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle);
                 if (unaPartDet.IdPartida == 0)
                 {
@@ -314,7 +310,7 @@ namespace ARTEC.GUI
                     //elimino de la memoria el detalle
                     unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
 
-                    //Conteo de detalles
+                    //Reordeno el conteo de detalles
                     foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
                     {
                         if (Det2.IdSolicitudDetalle > NroDetBorrado)
@@ -361,7 +357,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida);
+                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede eliminarse");
                 }
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
@@ -372,7 +368,7 @@ namespace ARTEC.GUI
                 cboTipoBien.Enabled = false;
                 //Para obtener el detalle en donde se hizo click
                 //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
-                int DetalleSeleccionado = e.RowIndex + 1;
+                DetalleSeleccionado = e.RowIndex + 1;
                 unDetSolic = new SolicDetalle();
                 txtBien.ReadOnly = true;
 
@@ -830,26 +826,23 @@ namespace ARTEC.GUI
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
                     if (unaSolicitud.unosDetallesSolicitud.Find(Z => Z.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                     {
-                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
-                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
-                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
-                        if (hhh != null)
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).FirstOrDefault(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        var SolDetDic = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                        if (SolDetDic != null)
                         {
                             if (AuxTipoCategoria == 2)//Tipo Software
                             {
-                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
-                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
-
                                 //Le Agrego los nuevos agentes
                                 foreach (Agente unAgen in unosAgentesAsociados)
                                 {
-                                    hhh.Widget.unosAgentes.Add(unAgen);
+                                    SolDetDic.unSolDet.unosAgentes.Add(unAgen);
                                 }
-                                hhh.Widget.Cantidad = hhh.Widget.unosAgentes.Count();
+                                SolDetDic.unSolDet.Cantidad = SolDetDic.unSolDet.unosAgentes.Count();
                             }
                             else
                             {
-                                hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                                SolDetDic.unSolDet.Cantidad += unDetalleSolicitud.Cantidad;
                             }
                             //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                             grillaDetalles.Columns.Remove("btnDinBorrar");
@@ -859,7 +852,6 @@ namespace ARTEC.GUI
                             //Regenero la grilla
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                            //grillaDetalles.Columns[1].Visible = false;
                             //Vuelve a agregar el conteo de cotizaciones por detalle
                             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
                             ColumnaCotizacionConteo.Name = "txtCotizConteo";
@@ -907,10 +899,6 @@ namespace ARTEC.GUI
                             {
                                 AgregarDetalleConfirmado(ref unDetalleSolicitud);
                             }
-                            else
-                            {
-                                //FIJARME SI HAY QUE RESETEAR ALGO
-                            }
                         }
                     }
                 }
@@ -927,13 +915,11 @@ namespace ARTEC.GUI
             ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
             unDetSolic.IdSolicitudDetalle = ++ContDetalles;
 
-            if (AuxTipoCategoria == 2)//Categoria de Software
+            if (AuxTipoCategoria == (int)TipoBien.EnumTipoBien.Soft)
             {
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
-                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
             }
-            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;//GUARDA REVISAR ESTO en soft tmb
+            unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
             unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
@@ -945,7 +931,6 @@ namespace ARTEC.GUI
             //Regenero la grilla
             grillaDetalles.DataSource = null;
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            //grillaDetalles.Columns[1].Visible = false;
             //Vuelve a agregar el conteo de cotizaciones por detalle
             DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
             ColumnaCotizacionConteo.Name = "txtCotizConteo";
@@ -1116,69 +1101,77 @@ namespace ARTEC.GUI
         {
             if (validBien.Validate())
             {
-                SolicDetalle unDetalleSolicitud = new SolicDetalle();
-                unDetalleSolicitud.unaCategoria = unaCat;
-
-                if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
+                 PartidaDetalle unaPartDet = new PartidaDetalle();
+                //Compruebo que no tenga partidas asociadas
+                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado);
+                if (unaPartDet.IdPartida == 0)
                 {
-                    unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+                    SolicDetalle unDetalleSolicitud = new SolicDetalle();
+                    unDetalleSolicitud.unaCategoria = unaCat;
 
-                    //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
-                    if (unaSolicitud.unosDetallesSolicitud.Find(RR => RR.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
+                    if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
                     {
-                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
-                        if (hhh != null)
+                        unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+
+                        //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
+                        if (unaSolicitud.unosDetallesSolicitud.Find(RR => RR.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                         {
-                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            var SolDetDic = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                            if (SolDetDic != null)
                             {
-                                //Cargo los agentes que ya había (es diferente de btnAgregarDetalle_Click porque aca esta en memoria ya)
-                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
-                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
-                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();
+                                if (AuxTipoCategoria == 2)//Categoria de Software
+                                {
+                                    //Cargo los agentes que ya había (es diferente de btnAgregarDetalle_Click porque aca esta en memoria ya)
+                                    unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                                    SolDetDic.unSolDet.Cantidad = unDetalleSolicitud.unosAgentes.Count();
+                                }
+                                else
+                                {
+                                    SolDetDic.unSolDet.Cantidad = Int32.Parse(txtCantBien.Text);
+                                }
+                                //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                                grillaDetalles.Columns.Remove("btnDinBorrar");
+                                grillaDetalles.Columns.Remove("txtCotizConteo");
+                                grillaDetalles.Columns.Remove("btnDinCotizar");
+
+                                //Regenero la grilla
+                                grillaDetalles.DataSource = null;
+                                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                                //grillaDetalles.Columns[1].Visible = false;
+                                //Vuelve a agregar el conteo de cotizaciones por detalle
+                                DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                                ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                                ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                                grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                                foreach (DataGridViewRow item in grillaDetalles.Rows)
+                                {
+                                    item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                                }
+
+                                //Vuelve a agregar boton para la gestión de cotizaciones
+                                var botonCotizar = new DataGridViewButtonColumn();
+                                botonCotizar.Name = "btnDinCotizar";
+                                botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                                botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                                botonCotizar.UseColumnTextForButtonValue = true;
+                                grillaDetalles.Columns.Add(botonCotizar);
+
+                                //Vuelve a agregar el botón de borrar al final
+                                var deleteButton = new DataGridViewButtonColumn();
+                                deleteButton.Name = "btnDinBorrar";
+                                deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                                deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                                deleteButton.UseColumnTextForButtonValue = true;
+                                grillaDetalles.Columns.Add(deleteButton);
+
+                                grillaDetallesFormatoAplicar();
                             }
-                            else
-                            {
-                                hhh.Widget.Cantidad = Int32.Parse(txtCantBien.Text);
-                            }
-                            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-                            grillaDetalles.Columns.Remove("btnDinBorrar");
-                            grillaDetalles.Columns.Remove("txtCotizConteo");
-                            grillaDetalles.Columns.Remove("btnDinCotizar");
-
-                            //Regenero la grilla
-                            grillaDetalles.DataSource = null;
-                            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                            //grillaDetalles.Columns[1].Visible = false;
-                            //Vuelve a agregar el conteo de cotizaciones por detalle
-                            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
-                            ColumnaCotizacionConteo.Name = "txtCotizConteo";
-                            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
-                            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
-                            foreach (DataGridViewRow item in grillaDetalles.Rows)
-                            {
-                                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
-                            }
-
-                            //Vuelve a agregar boton para la gestión de cotizaciones
-                            var botonCotizar = new DataGridViewButtonColumn();
-                            botonCotizar.Name = "btnDinCotizar";
-                            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                            botonCotizar.UseColumnTextForButtonValue = true;
-                            grillaDetalles.Columns.Add(botonCotizar);
-
-                            //Vuelve a agregar el botón de borrar al final
-                            var deleteButton = new DataGridViewButtonColumn();
-                            deleteButton.Name = "btnDinBorrar";
-                            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                            deleteButton.UseColumnTextForButtonValue = true;
-                            grillaDetalles.Columns.Add(deleteButton);
-
-                            grillaDetallesFormatoAplicar();
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede modificarse");
                 }
             }
         }
@@ -1264,80 +1257,41 @@ namespace ARTEC.GUI
 
         private void btnModifSolicitud_Click(object sender, EventArgs e)
         {
+            List<SolicDetalle> unosSolDetQuitarMod = new List<SolicDetalle>();
+            List<SolicDetalle> unosSolDetAgregarMod = new List<SolicDetalle>();
+            List<SolicDetalle> unosSolDetModifMod = new List<SolicDetalle>();
+
+            //VER:AGREGAR LOS ADJUNTOS
+            //VER:AGREGAR EN EL REGISTRO A LA BD LAS NOTAS 
+            //VER: Validaciones
+
             try
             {
+                //Verificar que quede por lo menos un SolicDetalle
+                if (unaSolicitud.unosDetallesSolicitud.Count == 0)
+                {
+                    MessageBox.Show("Por favor revisar que la Solicitud posea al menos un detalle");
+                    return;
+                }
+
                 unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-                //***FECHA FIN VER Q SI ESTA ESCRITA
                 unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
                 unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
-                if (cboEstadoSolicitud.SelectedIndex + 1 == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
-                {
-                    //MessageBox.Show("Debe ingresar un motivo y la fecha de finalización será la de hoy");
-                     
-                    //Compruebo que no tenga partidas asociadas
-                    List<PartidaDetalle> LisPartDet = new List<PartidaDetalle>();
-                    BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
-                    foreach (SolicDetalle unSolicDet in unaSolicitud.unosDetallesSolicitud)
-                    {
-                        PartidaDetalle unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unSolicDet.IdSolicitudDetalle);
-                        if (unaPartDet.IdPartida > 0)
-                            LisPartDet.Add(unaPartDet);
-                    }
-                    //Si no tiene partidas asociadas se puede cancelar
-                    if (LisPartDet.Count() == 0)
-                    {
-                        frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
-                        if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
-                        {
-                            if (!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
-                            {
-                                Nota unaNota = new Nota();
-                                unaNota.FechaNota = DateTime.Today;
-                                unaNota.DescripNota = unfrmDialogJustificacion.textBox1.Text;
-                                unaSolicitud.unasNotas.Add(unaNota);
-                                unaSolicitud.FechaFin = DateTime.Today;
-                                //Coloca todos los detalles en Cancelado
-                                foreach (SolicDetalle unSolicDet in unaSolicitud.unosDetallesSolicitud)
-                                {
-                                    unSolicDet.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cancelado;
-                                }
-                            }
-                            else
-                                return;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("La solicitud tiene Partidas asociadas, primero debe cancelar las mismas");
-                        return;
-                    }
-                }
+
                 unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
                 unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
-                if (unasNotas.Count > 0)//PONER COUNT
+                if (unasNotas.Count > 0)
                 {
                     unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
                 }
 
-                //VER:HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
-                //VER:AGREGAR LOS ADJUNTOS
-                //VER:AGREGAR EN EL STORE LAS NOTAS
-                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                unosSolDetQuitarMod = unosSolicDetAgregarBKP.Where(d => !unaSolicitud.unosDetallesSolicitud.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
+                unosSolDetAgregarMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolicDetAgregarBKP.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
+                unosSolDetModifMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolDetAgregarMod.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
 
-                //if (flagDetEliminado)
-                //{
-                //Regenerar detalles en BD
-                //ManagerSolicDetalle.SolicDetalleDeletePorSolicitud(unaSolicitud.IdSolicitud);
-                if (unaSolicitud.FechaFin == DateTime.MinValue)
-                    unaSolicitud.FechaFin = null;
-                if (ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud))
+                //if (ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud))//29/09/2018: Esto se puede borrar cuando funcione bien la modif de SolicDetalles
+                if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
                     MessageBox.Show("Modificación realizada correctamente");
-                //}
-                //else
-                //{
-                //     ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud);
-                //    //Modificar datos detalles
-                //}
             }
             catch (Exception es)
             {

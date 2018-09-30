@@ -82,11 +82,18 @@ namespace ARTEC.BLL
 
 
 
-        public bool SolicitudModificar(Solicitud laSolicitud)
+        public bool SolicitudModificar(Solicitud laSolicitud, List<SolicDetalle> unosSolDetQuitarMod, List<SolicDetalle> unosSolDetAgregarMod, List<SolicDetalle> unosSolDetModifMod, List<SolicDetalle> unosSolicDetAgregarBKP)
         {
-            if (GestorSolicitud.SolicitudModificar(laSolicitud))
-                return true;
-            return false;
+            try
+            {
+                if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
 

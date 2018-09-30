@@ -64,8 +64,8 @@ namespace ARTEC.GUI
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
                     if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
                     {
-                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
-                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).FirstOrDefault(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).Widget.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
+                        //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).FirstOrDefault(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
                         var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
                         if (hhh != null)
                         {

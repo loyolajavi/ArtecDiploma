@@ -169,10 +169,6 @@ namespace ARTEC.GUI
 
                 unaAsignacionModif.unosAsigDetalles.Add(unAsigDet);
 
-
-
-                //unaAsignacion.unosAsigDetalles//VER DE PONER BIEN EL INVENTARIO Y EL CONTEODETALLES
-
                 GrillaBienesAsignados.DataSource = null;
                 GrillaBienesAsignados.DataSource = InventariosAgregar;
                 FormatearGrillaBienesAsignados();
@@ -234,7 +230,6 @@ namespace ARTEC.GUI
             List<Inventario> InvQuitarMod = new List<Inventario>();
             List<Inventario> InvAgregarMod = new List<Inventario>();
 
-            //Si tienen que haber Validaciones van aca
             if (!vldFrmAsignacionModificar.Validate())
                 return;
 
