@@ -47,6 +47,29 @@ namespace ARTEC.GUI
             //txtFechaDesde.Text = DateTime.Today.AddDays(-31).ToString();
             //txtFechaHasta.Text = DateTime.Today.ToString();
 
+            //Permisos
+            if (this.Tag != null && this.Tag.ToString() != "")
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag.ToString()))
+                {
+                    this.Enabled = false;
+                }
+            }
+
+            foreach (Control unControl in this.Controls)
+            {
+                //&& unControl.GetType().ToString() == "DevComponents.DotNetBar.ButtonX" 
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
+                {
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag.ToString()))
+                    {
+                        unControl.Visible = false;
+                        unControl.Enabled = false;
+                    }
+
+                }
+            }
+
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();

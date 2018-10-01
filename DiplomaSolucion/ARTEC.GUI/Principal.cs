@@ -11,6 +11,7 @@ using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.BLL.Servicios;
+using System.Linq;
 
 namespace ARTEC.GUI
 {
@@ -39,20 +40,47 @@ namespace ARTEC.GUI
 
         private void Principal_Load(object sender, EventArgs e)
         {
-            //Traduzco con el IdiomaActual del usuario logueado
-            Idioma.unIdiomaActual = ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual;
-            Idioma._EtiquetasCompartidas = null;
-            BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
-            //Traigo todos los idiomas
-            unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
-            cboIdioma.DataSource = null;
-            cboIdioma.DisplayMember = "NombreIdioma";
-            cboIdioma.ValueMember = "IdIdioma";
-            cboIdioma.DataSource = unosIdiomas;
+            try
+            {
+                //Traduzco con el IdiomaActual del usuario logueado
+                Idioma.unIdiomaActual = ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual;
+                Idioma._EtiquetasCompartidas = null;
+                BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+                //Traigo todos los idiomas
+                unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
+                cboIdioma.DataSource = null;
+                cboIdioma.DisplayMember = "NombreIdioma";
+                cboIdioma.ValueMember = "IdIdioma";
+                cboIdioma.DataSource = unosIdiomas;
 
-            //Obtengo el idioma actual del usuario para ponerlo en el cboidioma
-            cboIdioma.SelectedValue = Idioma.unIdiomaActual;
+                //Obtengo el idioma actual del usuario para ponerlo en el cboidioma
+                cboIdioma.SelectedValue = Idioma.unIdiomaActual;
+
+                //Permisos
+                foreach (Control unControl in this.Controls)
+                {
+                    //&& unControl.GetType().ToString() == "DevComponents.DotNetBar.ButtonX" 
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
+                    {
+                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag.ToString()))
+                        {
+                            unControl.Visible = false;
+                            unControl.Enabled = false;
+                        }
+                            
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+            
         }
+
+        
+
 
         private void tabsPrincipal_SelectedIndexChanged(object sender, EventArgs e)
         {

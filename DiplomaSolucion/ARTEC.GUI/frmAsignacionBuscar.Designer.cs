@@ -43,12 +43,12 @@ namespace ARTEC.GUI
             this.lblDesde = new DevComponents.DotNetBar.LabelX();
             this.lblHasta = new DevComponents.DotNetBar.LabelX();
             this.flowAsignaciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.vldFrmAsignacionBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).BeginInit();
             this.flowAsignaciones.SuspendLayout();
@@ -302,6 +302,25 @@ namespace ARTEC.GUI
             this.flowAsignaciones.TabIndex = 67;
             this.flowAsignaciones.WrapContents = false;
             // 
+            // txtResBusqueda
+            // 
+            // 
+            // 
+            // 
+            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusqueda.Location = new System.Drawing.Point(3, 3);
+            this.txtResBusqueda.Name = "txtResBusqueda";
+            this.txtResBusqueda.ReadOnly = true;
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusqueda.Size = new System.Drawing.Size(545, 258);
+            this.txtResBusqueda.TabIndex = 68;
+            this.txtResBusqueda.Text = "No hay resultados";
+            this.txtResBusqueda.Visible = false;
+            // 
             // vldFrmAsignacionBuscar
             // 
             this.vldFrmAsignacionBuscar.ContainerControl = this.btnBuscar;
@@ -331,25 +350,6 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
-            // txtResBusqueda
-            // 
-            // 
-            // 
-            // 
-            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
-            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResBusqueda.Location = new System.Drawing.Point(3, 3);
-            this.txtResBusqueda.Name = "txtResBusqueda";
-            this.txtResBusqueda.ReadOnly = true;
-            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
-    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
-            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtResBusqueda.Size = new System.Drawing.Size(545, 258);
-            this.txtResBusqueda.TabIndex = 68;
-            this.txtResBusqueda.Text = "No hay resultados";
-            this.txtResBusqueda.Visible = false;
-            // 
             // frmAsignacionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,6 +371,7 @@ namespace ARTEC.GUI
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAsignacionBuscar";
+            this.Tag = "Buscar Asignacion";
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmAsignacionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).EndInit();

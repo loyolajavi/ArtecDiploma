@@ -34,7 +34,8 @@ namespace ARTEC.GUI
             this.tabPartidas = new System.Windows.Forms.TabPage();
             this.tabDependencia = new System.Windows.Forms.TabPage();
             this.tabAsignaciones = new System.Windows.Forms.TabPage();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.tabAdquisiciones = new System.Windows.Forms.TabPage();
+            this.btnCrearSolicitud = new DevComponents.DotNetBar.ButtonX();
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
             this.btnBienRegistrar = new DevComponents.DotNetBar.ButtonX();
@@ -50,7 +51,6 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
-            this.tabAdquisiciones = new System.Windows.Forms.TabPage();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +68,7 @@ namespace ARTEC.GUI
             this.tabsPrincipal.SelectedIndex = 0;
             this.tabsPrincipal.Size = new System.Drawing.Size(1343, 661);
             this.tabsPrincipal.TabIndex = 0;
+            this.tabsPrincipal.Tag = "";
             this.tabsPrincipal.SelectedIndexChanged += new System.EventHandler(this.tabsPrincipal_SelectedIndexChanged);
             // 
             // tabSolic
@@ -117,23 +118,35 @@ namespace ARTEC.GUI
             this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
             this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
             this.tabAsignaciones.TabIndex = 4;
+            this.tabAsignaciones.Tag = "";
             this.tabAsignaciones.Text = "tabAsignaciones";
             this.tabAsignaciones.UseVisualStyleBackColor = true;
             // 
-            // buttonX1
+            // tabAdquisiciones
             // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.buttonX1.CustomColorName = "Blue";
-            this.buttonX1.Location = new System.Drawing.Point(128, 13);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(87, 40);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 1;
-            this.buttonX1.Text = "Crear Solicitud";
-            this.buttonX1.TextColor = System.Drawing.Color.White;
-            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
+            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 22);
+            this.tabAdquisiciones.Name = "tabAdquisiciones";
+            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabAdquisiciones.TabIndex = 5;
+            this.tabAdquisiciones.Text = "tabAdquisiciones";
+            this.tabAdquisiciones.UseVisualStyleBackColor = true;
+            // 
+            // btnCrearSolicitud
+            // 
+            this.btnCrearSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCrearSolicitud.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCrearSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnCrearSolicitud.CustomColorName = "Blue";
+            this.btnCrearSolicitud.Location = new System.Drawing.Point(128, 13);
+            this.btnCrearSolicitud.Name = "btnCrearSolicitud";
+            this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
+            this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCrearSolicitud.TabIndex = 1;
+            this.btnCrearSolicitud.Tag = "Crear Solicitud";
+            this.btnCrearSolicitud.Text = "Crear Solicitud";
+            this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
+            this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // btnSolicitarPartida
             // 
@@ -189,6 +202,7 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
             this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRendicionCrear.TabIndex = 5;
+            this.btnRendicionCrear.Tag = "Crear Rendicion";
             this.btnRendicionCrear.Text = "btnRendicionCrear";
             this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
             this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
@@ -362,16 +376,6 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
-            // tabAdquisiciones
-            // 
-            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 22);
-            this.tabAdquisiciones.Name = "tabAdquisiciones";
-            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabAdquisiciones.TabIndex = 5;
-            this.tabAdquisiciones.Text = "tabAdquisiciones";
-            this.tabAdquisiciones.UseVisualStyleBackColor = true;
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -386,7 +390,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnBienRegistrar);
             this.Controls.Add(this.btnPartidaAsociar);
             this.Controls.Add(this.btnSolicitarPartida);
-            this.Controls.Add(this.buttonX1);
+            this.Controls.Add(this.btnCrearSolicitud);
             this.Controls.Add(this.tabsPrincipal);
             this.Controls.Add(this.btnAvanzadas);
             this.DoubleBuffered = true;
@@ -406,7 +410,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabControl tabsPrincipal;
         private System.Windows.Forms.TabPage tabSolic;
         private System.Windows.Forms.TabPage tabRendiciones;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnCrearSolicitud;
         private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
         private DevComponents.DotNetBar.ButtonX btnPartidaAsociar;
         private DevComponents.DotNetBar.ButtonX btnBienRegistrar;
