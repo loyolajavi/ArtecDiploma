@@ -145,19 +145,23 @@ namespace ARTEC.BLL.Servicios
         }
 
 
-        public static bool BuscarPermiso(List<IFamPat> PermisosVer, string unTagControl)
+        public static bool BuscarPermiso(List<IFamPat> PermisosVer, string[] unTagControl)
         {
-            foreach (IFamPat unPermiso in PermisosVer)
+            foreach (var unTag in unTagControl)
             {
-                if (unPermiso.CantHijos > 0)
+                foreach (IFamPat unPermiso in PermisosVer)
                 {
-                    if (BuscarSubPermisos((unPermiso as Familia).ElementosFamPat, unTagControl))
-                        return true;
+                    if (unPermiso.CantHijos > 0)
+                    {
+                        if (BuscarSubPermisos((unPermiso as Familia).ElementosFamPat, unTag))
+                            return true;
+                    }
+                    else
+                        if (unPermiso.NombreIFamPat == unTag)
+                            return true;
                 }
-                else
-                    if (unPermiso.NombreIFamPat == unTagControl)
-                        return true;
             }
+           
             return false;
         }
 

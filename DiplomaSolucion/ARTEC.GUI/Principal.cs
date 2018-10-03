@@ -59,15 +59,14 @@ namespace ARTEC.GUI
                 //Permisos
                 foreach (Control unControl in this.Controls)
                 {
-                    //&& unControl.GetType().ToString() == "DevComponents.DotNetBar.ButtonX" 
-                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType().Name == "String[]")
                     {
-                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag.ToString()))
+                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
                         {
                             unControl.Visible = false;
                             unControl.Enabled = false;
                         }
-                            
+
                     }
                 }
             }

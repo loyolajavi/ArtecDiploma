@@ -50,7 +50,7 @@ namespace ARTEC.GUI
             //Permisos
             if (this.Tag != null && this.Tag.ToString() != "")
             {
-                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag.ToString()))
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
                 {
                     this.Enabled = false;
                 }
@@ -61,12 +61,11 @@ namespace ARTEC.GUI
                 //&& unControl.GetType().ToString() == "DevComponents.DotNetBar.ButtonX" 
                 if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
                 {
-                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag.ToString()))
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
                     {
                         unControl.Visible = false;
                         unControl.Enabled = false;
                     }
-
                 }
             }
 

@@ -68,7 +68,6 @@ namespace ARTEC.GUI
             this.tabsPrincipal.SelectedIndex = 0;
             this.tabsPrincipal.Size = new System.Drawing.Size(1343, 661);
             this.tabsPrincipal.TabIndex = 0;
-            this.tabsPrincipal.Tag = "";
             this.tabsPrincipal.SelectedIndexChanged += new System.EventHandler(this.tabsPrincipal_SelectedIndexChanged);
             // 
             // tabSolic
@@ -118,7 +117,6 @@ namespace ARTEC.GUI
             this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
             this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
             this.tabAsignaciones.TabIndex = 4;
-            this.tabAsignaciones.Tag = "";
             this.tabAsignaciones.Text = "tabAsignaciones";
             this.tabAsignaciones.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +141,7 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
             this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearSolicitud.TabIndex = 1;
-            this.btnCrearSolicitud.Tag = "Crear Solicitud";
+            this.btnCrearSolicitud.Tag = new string[] { "Solicitud Crear" };
             this.btnCrearSolicitud.Text = "Crear Solicitud";
             this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
             this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
@@ -202,7 +200,7 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
             this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRendicionCrear.TabIndex = 5;
-            this.btnRendicionCrear.Tag = "Crear Rendicion";
+            this.btnRendicionCrear.Tag = new string[] { "Rendicion Crear" };
             this.btnRendicionCrear.Text = "btnRendicionCrear";
             this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
             this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
