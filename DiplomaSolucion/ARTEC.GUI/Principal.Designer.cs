@@ -142,7 +142,7 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearSolicitud.TabIndex = 1;
             this.btnCrearSolicitud.Tag = new string[] { "Solicitud Crear" };
-            this.btnCrearSolicitud.Text = "Crear Solicitud";
+            this.btnCrearSolicitud.Text = "Solicitud Crear";
             this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
             this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
             // 

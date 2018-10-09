@@ -155,7 +155,7 @@ namespace ARTEC.GUI
                     {
                         if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
                         {
-                            if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos.Exists(x => x.NombreIFamPat == "ABM Partida"))
+                            if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos.Exists(x => x.NombreIFamPat == "Administracion Total" | x.NombreIFamPat == "Administracion Sistema"))
                             {
                                 this.Close();
                                 ServicioLog.CrearLog("Login", "Ingreso Correcto");
@@ -170,12 +170,12 @@ namespace ARTEC.GUI
                                 }
                                 else
                                 {
+                                    //Abre ventana para Regenerar DV
                                     DialogResult = DialogResult.No;
-                                    //VER: Abrir ventana Regenerar DV
                                 }
                             }
                             else
-                                MessageBox.Show("Solo un usuario con permisos ABM Partida puede loguearse si la BD tiene inconsistencias");
+                                MessageBox.Show("Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias");
                         }
                         else
                         {

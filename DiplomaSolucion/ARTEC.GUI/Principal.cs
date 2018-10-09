@@ -59,7 +59,7 @@ namespace ARTEC.GUI
                 //Permisos
                 foreach (Control unControl in this.Controls)
                 {
-                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType().Name == "String[]")
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
                     {
                         if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
                         {

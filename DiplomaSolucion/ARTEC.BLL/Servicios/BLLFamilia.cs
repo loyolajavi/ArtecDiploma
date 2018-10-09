@@ -161,25 +161,36 @@ namespace ARTEC.BLL.Servicios
                             return true;
                 }
             }
-           
             return false;
         }
 
 
         public static bool BuscarSubPermisos(List<IFamPat> PermisosVer, string unTagControl)
         {
-            int I = 0;
-            do
+            bool Res = false;
+            foreach (IFamPat unPer in PermisosVer)
             {
-                if (PermisosVer[I].CantHijos > 0)
-                    BuscarSubPermisos((PermisosVer[I] as Familia).ElementosFamPat, unTagControl);
+                if (unPer.CantHijos > 0)
+                {
+                    if (BuscarSubPermisos((unPer as Familia).ElementosFamPat, unTagControl))
+                    {
+                        Res = true;
+                        break;
+                    }
+                }
                 else
-                    if (PermisosVer[I].NombreIFamPat == unTagControl)
-                        return true;
-                I++;
-            } while (I < PermisosVer.Count);
-            return false;
+                {
+                    if (unPer.NombreIFamPat == unTagControl)
+                    {
+                        Res = true;
+                        break;
+                    }
+                }
+            }
+            return Res;
         }
+
+
 
     }
 }
