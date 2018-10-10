@@ -63,197 +63,213 @@ namespace ARTEC.GUI
 
         private void frmSolicitudModificar_Load(object sender, EventArgs e)
         {
-
-
-            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-            
-            //Traer los agentes Responsables de la dependencia
-            txtDependencia.Text = unaSolicitud.laDependencia.NombreDependencia;
-            unosAgentesResp = new List<Agente>();
-            unosAgentesResp = ManagerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
-            //Si el responsable de la solicitud ya no es parte de la dependencia
-            if (!unosAgentesResp.Exists(X=>X.IdAgente == unaSolicitud.AgenteResp.IdAgente))
+            try
             {
-                unosAgentesResp.Add(unaSolicitud.AgenteResp);
-                flagRespInhabilitado = true;
-            }
-            cboAgenteResp.DataSource = null;
-            cboAgenteResp.DataSource = unosAgentesResp;
-            cboAgenteResp.DisplayMember = "ApellidoAgente";
-            cboAgenteResp.ValueMember = "IdAgente";
-            cboAgenteResp.SelectedValue = unaSolicitud.AgenteResp.IdAgente;
-            if (flagRespInhabilitado)
-                lblDesvinculado.Visible = true;
-
-            txtFechaInicio.Value = unaSolicitud.FechaInicio;
-            if(unaSolicitud.FechaFin != null && unaSolicitud.FechaFin != DateTime.MinValue)
-                txtFechaFin.Value = (DateTime)unaSolicitud.FechaFin;
-
-            ///Para poder seleccionar Hard o Soft
-            BLLTipoBien ManagerTipoBien = new BLLTipoBien();
-            unosTipoBien = ManagerTipoBien.TraerTodos();
-            cboTipoBien.DataSource = null;
-            cboTipoBien.DataSource = unosTipoBien;
-            cboTipoBien.DisplayMember = "DescripTipoBien";
-            cboTipoBien.ValueMember = "IdTipoBien";
-
-            ///Traer Estados Solicitud
-            BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
-            unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
-            cboEstadoSolicitud.DataSource = null;
-            cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
-            cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
-            cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
-            cboEstadoSolicitud.SelectedValue = unaSolicitud.UnEstado.IdEstadoSolicitud;
-
-            //Traer EstadosDetalleSolicitud
-            BLLEstadoSolicDetalle ManagerEstadoSolDetalle = new BLLEstadoSolicDetalle();
-            unosEstadoSolDetalles = ManagerEstadoSolDetalle.EstadoSolDetallesTraerTodos();
-            cboEstadoSolDetalle.DataSource = null;
-            cboEstadoSolDetalle.DataSource = unosEstadoSolDetalles;
-            cboEstadoSolDetalle.DisplayMember = "DescripEstadoSolicDetalle";
-            cboEstadoSolDetalle.ValueMember = "IdEstadoSolicDetalle";
-
-            ///Traer Prioridad
-            BLLPrioridad ManagerPrioridad = new BLLPrioridad();
-            unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
-            cboPrioridad.DataSource = null;
-            cboPrioridad.DataSource = unasPrioridades;
-            cboPrioridad.DisplayMember = "DescripPrioridad";
-            cboPrioridad.ValueMember = "IdPrioridad";
-            cboPrioridad.SelectedValue = unaSolicitud.UnaPrioridad.IdPrioridad;
-
-            //Traer UsuariosSistema
-            unosUsuarios = ManagerUsuario.UsuarioTraerTodosActivos();
-            //Si el usuario asignado a la solicitud está dado de baja
-            if (!unosUsuarios.Exists(x => x.IdUsuario == unaSolicitud.Asignado.IdUsuario))
-            {
-                unosUsuarios.Add(unaSolicitud.Asignado);
-                flagUsuarioInactivo = true;
-            }
-            cboAsignado.DataSource = null;
-            cboAsignado.DataSource = unosUsuarios;
-            cboAsignado.DisplayMember = "NombreUsuario";
-            cboAsignado.ValueMember = "IdUsuario";
-            cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
-            if (flagUsuarioInactivo)
-                lblInactivo.Visible = true;
-
-            //Traer los agentes de la dependencia seleccionada
-            BLLDependencia managerDependenciaAg = new BLLDependencia();
-            unosAgentes = new List<Agente>();
-            unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaSolicitud.laDependencia.IdDependencia);
-
-            //Agrega los detalles
-            grillaDetalles.DataSource = null;
-            unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud.IdSolicitud).unosDetallesSolicitud.ToList();
-            grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            //grillaDetalles.Columns[1].Visible = false;
-            //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
-            ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
-            //Para el BKP de los SolicDetalles existentes
-            unosSolicDetAgregarBKP = unaSolicitud.unosDetallesSolicitud.ToList();
-
-            //Agrega los agentes al detalle si es un software
-            foreach (SolicDetalle unDetSolicAUX in unaSolicitud.unosDetallesSolicitud)
-            {
-                TipoBien unTipoBienLocal;
-                unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolicAUX.unaCategoria.IdCategoria);
-                if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                //Permisos
+                //Obtengo todos los controles del formulario
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
                 {
-                    unDetSolicAUX.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(unDetSolicAUX.IdSolicitudDetalle, unaSolicitud.IdSolicitud);
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                    {
+                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
+                        {
+                            unControl.Enabled = false;
+                        }
+                    }
+                }
+
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+                //Traer los agentes Responsables de la dependencia
+                txtDependencia.Text = unaSolicitud.laDependencia.NombreDependencia;
+                unosAgentesResp = new List<Agente>();
+                unosAgentesResp = ManagerDependenciaAg.TraerAgentesResp(unaSolicitud.laDependencia.IdDependencia);
+                //Si el responsable de la solicitud ya no es parte de la dependencia
+                if (!unosAgentesResp.Exists(X => X.IdAgente == unaSolicitud.AgenteResp.IdAgente))
+                {
+                    unosAgentesResp.Add(unaSolicitud.AgenteResp);
+                    flagRespInhabilitado = true;
+                }
+                cboAgenteResp.DataSource = null;
+                cboAgenteResp.DataSource = unosAgentesResp;
+                cboAgenteResp.DisplayMember = "ApellidoAgente";
+                cboAgenteResp.ValueMember = "IdAgente";
+                cboAgenteResp.SelectedValue = unaSolicitud.AgenteResp.IdAgente;
+                if (flagRespInhabilitado)
+                    lblDesvinculado.Visible = true;
+
+                txtFechaInicio.Value = unaSolicitud.FechaInicio;
+                if (unaSolicitud.FechaFin != null && unaSolicitud.FechaFin != DateTime.MinValue)
+                    txtFechaFin.Value = (DateTime)unaSolicitud.FechaFin;
+
+                ///Para poder seleccionar Hard o Soft
+                BLLTipoBien ManagerTipoBien = new BLLTipoBien();
+                unosTipoBien = ManagerTipoBien.TraerTodos();
+                cboTipoBien.DataSource = null;
+                cboTipoBien.DataSource = unosTipoBien;
+                cboTipoBien.DisplayMember = "DescripTipoBien";
+                cboTipoBien.ValueMember = "IdTipoBien";
+
+                ///Traer Estados Solicitud
+                BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
+                unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+                cboEstadoSolicitud.DataSource = null;
+                cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
+                cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
+                cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+                cboEstadoSolicitud.SelectedValue = unaSolicitud.UnEstado.IdEstadoSolicitud;
+
+                //Traer EstadosDetalleSolicitud
+                BLLEstadoSolicDetalle ManagerEstadoSolDetalle = new BLLEstadoSolicDetalle();
+                unosEstadoSolDetalles = ManagerEstadoSolDetalle.EstadoSolDetallesTraerTodos();
+                cboEstadoSolDetalle.DataSource = null;
+                cboEstadoSolDetalle.DataSource = unosEstadoSolDetalles;
+                cboEstadoSolDetalle.DisplayMember = "DescripEstadoSolicDetalle";
+                cboEstadoSolDetalle.ValueMember = "IdEstadoSolicDetalle";
+
+                ///Traer Prioridad
+                BLLPrioridad ManagerPrioridad = new BLLPrioridad();
+                unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
+                cboPrioridad.DataSource = null;
+                cboPrioridad.DataSource = unasPrioridades;
+                cboPrioridad.DisplayMember = "DescripPrioridad";
+                cboPrioridad.ValueMember = "IdPrioridad";
+                cboPrioridad.SelectedValue = unaSolicitud.UnaPrioridad.IdPrioridad;
+
+                //Traer UsuariosSistema
+                unosUsuarios = ManagerUsuario.UsuarioTraerTodosActivos();
+                //Si el usuario asignado a la solicitud está dado de baja
+                if (!unosUsuarios.Exists(x => x.IdUsuario == unaSolicitud.Asignado.IdUsuario))
+                {
+                    unosUsuarios.Add(unaSolicitud.Asignado);
+                    flagUsuarioInactivo = true;
+                }
+                cboAsignado.DataSource = null;
+                cboAsignado.DataSource = unosUsuarios;
+                cboAsignado.DisplayMember = "NombreUsuario";
+                cboAsignado.ValueMember = "IdUsuario";
+                cboAsignado.SelectedValue = unaSolicitud.Asignado.IdUsuario;
+                if (flagUsuarioInactivo)
+                    lblInactivo.Visible = true;
+
+                //Traer los agentes de la dependencia seleccionada
+                BLLDependencia managerDependenciaAg = new BLLDependencia();
+                unosAgentes = new List<Agente>();
+                unosAgentes = managerDependenciaAg.TraerAgentesDependencia(unaSolicitud.laDependencia.IdDependencia);
+
+                //Agrega los detalles
+                grillaDetalles.DataSource = null;
+                unaSolicitud.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaSolicitud.IdSolicitud).unosDetallesSolicitud.ToList();
+                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                //grillaDetalles.Columns[1].Visible = false;
+                //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
+                ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
+                //Para el BKP de los SolicDetalles existentes
+                unosSolicDetAgregarBKP = unaSolicitud.unosDetallesSolicitud.ToList();
+
+                //Agrega los agentes al detalle si es un software
+                foreach (SolicDetalle unDetSolicAUX in unaSolicitud.unosDetallesSolicitud)
+                {
+                    TipoBien unTipoBienLocal;
+                    unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolicAUX.unaCategoria.IdCategoria);
+                    if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        unDetSolicAUX.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(unDetSolicAUX.IdSolicitudDetalle, unaSolicitud.IdSolicitud);
+                    }
+                }
+
+                //Agrega el conteo de cotizaciones por detalle
+                DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
+                ColumnaCotizacionConteo.Name = "txtCotizConteo";
+                ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
+                grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
+                foreach (DataGridViewRow item in grillaDetalles.Rows)
+                {
+                    item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                }
+
+                //Agrega boton para la gestión de cotizaciones
+                var botonCotizar = new DataGridViewButtonColumn();
+                botonCotizar.Name = "btnDinCotizar";
+                botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                botonCotizar.UseColumnTextForButtonValue = true;
+                grillaDetalles.Columns.Add(botonCotizar);
+
+                //Agrega boton para Borrar el detalle
+                var deleteButton = new DataGridViewButtonColumn();
+                deleteButton.Name = "btnDinBorrar";
+                deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.UseColumnTextForButtonValue = true;
+                grillaDetalles.Columns.Add(deleteButton);
+
+                //VER:Comente esto porque no lo supuestamente no lo usaba
+                ////Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
+                //unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
+                //if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                //{
+                //    //HARDWARE
+                //    gboxAsociados.Enabled = false;
+                //    txtCantBien.ReadOnly = false;
+                //    lblCantidad.Enabled = true;
+                //    AuxTipoCategoria = 1;//HARDWARE
+                //    cboTipoBien.SelectedValue = 1;//HARDWARE
+                //    txtAgente.Clear();
+                //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                //    grillaAgentesAsociados.DataSource = null;
+                //}
+                //else
+                //{
+                //    gboxAsociados.Enabled = true;
+                //    txtCantBien.ReadOnly = true;
+                //    lblCantidad.Enabled = false;
+                //    AuxTipoCategoria = 2;//SOFTWARE
+                //    cboTipoBien.SelectedValue = 2;//SOFTWARE
+                //    txtAgente.Clear();
+                //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                //    grillaAgentesAsociados.DataSource = null;
+                //    grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud[0].unosAgentes;//Esta puesto [0] porque si el primer detalle es un soft, ya aparece escrito en el form
+                //    //No mostrar columnas que no necesito de los agentes asociados
+                //    grillaAgentesAsociados.Columns[0].Visible = false;
+                //    grillaAgentesAsociados.Columns[3].Visible = false;
+                //    grillaAgentesAsociados.Columns[4].Visible = false;
+                //}
+                cboEstadoSolDetalle.SelectedValue = unaSolicitud.unosDetallesSolicitud[0].unEstado.IdEstadoSolicDetalle;
+
+
+                //Traigo categorias para dps filtrar por hard o soft
+                BLLCategoria ManagerCategoria = new BLLCategoria();
+                unasCategoriasHard = new List<Categoria>();
+                unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHardActivos();
+                unasCategoriasSoft = new List<Categoria>();
+                unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoftActivos();
+
+                unosAgentesAsociados = new List<Agente>();
+
+                grillaDetallesFormatoAplicar();
+
+                //Si está cancelada inhabilito la modificación y botones
+                if (unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+                {
+                    btnAgregarDetalle.Enabled = false;
+                    btnNuevoDetalle.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnCancelar.Enabled = false;
+                    btnSolicitarPartida.Enabled = false;
+                    btnBienAsignar.Enabled = false;
+                    grillaDetalles.Enabled = false;
+                    btnNotas.Enabled = false;
+                    btnAdjuntar.Enabled = false;
+                    btnModifSolicitud.Enabled = false;
+                    btnAsociarAgente.Enabled = false;
                 }
             }
-
-            //Agrega el conteo de cotizaciones por detalle
-            DataGridViewTextBoxColumn ColumnaCotizacionConteo = new DataGridViewTextBoxColumn();
-            ColumnaCotizacionConteo.Name = "txtCotizConteo";
-            ColumnaCotizacionConteo.HeaderText = "txtCotizConteo";
-            grillaDetalles.Columns.Add(ColumnaCotizacionConteo);
-            foreach (DataGridViewRow item in grillaDetalles.Rows)
+            catch (Exception es)
             {
-                item.Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[item.Index].unasCotizaciones.Count().ToString();
+                throw;
             }
-
-            //Agrega boton para la gestión de cotizaciones
-            var botonCotizar = new DataGridViewButtonColumn();
-            botonCotizar.Name = "btnDinCotizar";
-            botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-            botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-            botonCotizar.UseColumnTextForButtonValue = true;
-            grillaDetalles.Columns.Add(botonCotizar);
-
-            //Agrega boton para Borrar el detalle
-            var deleteButton = new DataGridViewButtonColumn();
-            deleteButton.Name = "btnDinBorrar";
-            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-            deleteButton.UseColumnTextForButtonValue = true;
-            grillaDetalles.Columns.Add(deleteButton);
-
-            //VER:Comente esto porque no lo supuestamente no lo usaba
-            ////Coloca el tipo Bien segun el detalle seleccionado (el primero en este caso)
-            //unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaSolicitud.unosDetallesSolicitud[0].unaCategoria.IdCategoria);
-            //if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
-            //{
-            //    //HARDWARE
-            //    gboxAsociados.Enabled = false;
-            //    txtCantBien.ReadOnly = false;
-            //    lblCantidad.Enabled = true;
-            //    AuxTipoCategoria = 1;//HARDWARE
-            //    cboTipoBien.SelectedValue = 1;//HARDWARE
-            //    txtAgente.Clear();
-            //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-            //    grillaAgentesAsociados.DataSource = null;
-            //}
-            //else
-            //{
-            //    gboxAsociados.Enabled = true;
-            //    txtCantBien.ReadOnly = true;
-            //    lblCantidad.Enabled = false;
-            //    AuxTipoCategoria = 2;//SOFTWARE
-            //    cboTipoBien.SelectedValue = 2;//SOFTWARE
-            //    txtAgente.Clear();
-            //    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
-            //    grillaAgentesAsociados.DataSource = null;
-            //    grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud[0].unosAgentes;//Esta puesto [0] porque si el primer detalle es un soft, ya aparece escrito en el form
-            //    //No mostrar columnas que no necesito de los agentes asociados
-            //    grillaAgentesAsociados.Columns[0].Visible = false;
-            //    grillaAgentesAsociados.Columns[3].Visible = false;
-            //    grillaAgentesAsociados.Columns[4].Visible = false;
-            //}
-            cboEstadoSolDetalle.SelectedValue = unaSolicitud.unosDetallesSolicitud[0].unEstado.IdEstadoSolicDetalle;
-
-
-            //Traigo categorias para dps filtrar por hard o soft
-            BLLCategoria ManagerCategoria = new BLLCategoria();
-            unasCategoriasHard = new List<Categoria>();
-            unasCategoriasHard = ManagerCategoria.CategoriaTraerTodosHardActivos();
-            unasCategoriasSoft = new List<Categoria>();
-            unasCategoriasSoft = ManagerCategoria.CategoriaTraerTodosSoftActivos();
-
-            unosAgentesAsociados = new List<Agente>();
-
-            grillaDetallesFormatoAplicar();
-
-            //Si está cancelada inhabilito la modificación y botones
-            if(unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
-            {
-                btnAgregarDetalle.Enabled = false;
-                btnNuevoDetalle.Enabled = false;
-                btnModificar.Enabled = false;
-                btnCancelar.Enabled = false;
-                btnSoliitarPartida.Enabled = false;
-                btnBienAsignar.Enabled = false;
-                grillaDetalles.Enabled = false;
-                btnNotas.Enabled = false;
-                btnAdjuntar.Enabled = false;
-                btnModifSolicitud.Enabled = false;
-                btnAsociarAgente.Enabled = false;
-            }
-
-
-
         }
 
 
@@ -1235,7 +1251,7 @@ namespace ARTEC.GUI
                         btnNuevoDetalle.Enabled = false;
                         btnModificar.Enabled = false;
                         btnCancelar.Enabled = false;
-                        btnSoliitarPartida.Enabled = false;
+                        btnSolicitarPartida.Enabled = false;
                         btnBienAsignar.Enabled = false;
                         grillaDetalles.Enabled = false;
                         btnNotas.Enabled = false;

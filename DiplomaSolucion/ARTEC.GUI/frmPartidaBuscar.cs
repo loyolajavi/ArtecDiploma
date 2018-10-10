@@ -9,6 +9,7 @@ using DevComponents.DotNetBar;
 using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -40,6 +41,15 @@ namespace ARTEC.GUI
 
         private void frmPartidaBuscar_Load(object sender, EventArgs e)
         {
+            //Permisos formulario
+            if (this.Tag != null && this.Tag.GetType() == typeof(string[]))
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
+                {
+                    this.Enabled = false;
+                }
+            }
+
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();

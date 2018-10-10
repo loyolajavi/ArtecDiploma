@@ -417,6 +417,7 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 68;
             this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Tag = new string[] { "Adquisicion Modificar" };
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar

@@ -156,6 +156,7 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
             this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitarPartida.TabIndex = 2;
+            this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
             this.btnSolicitarPartida.Text = "btnSolicitarPartida";
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
             // 
@@ -171,6 +172,7 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPartidaAsociar.TabIndex = 3;
             this.btnPartidaAsociar.Text = "btnPartidaAsociar";
+            this.btnPartidaAsociar.Tag = new string[] { "Partida Asociar" };
             this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
             this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
             // 
@@ -186,6 +188,7 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBienRegistrar.TabIndex = 4;
             this.btnBienRegistrar.Text = "btnBienRegistrar";
+            this.btnBienRegistrar.Tag = new string[] { "Adquisicion Registrar" };
             this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
             this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
             // 

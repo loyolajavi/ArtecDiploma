@@ -12,6 +12,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -119,6 +120,16 @@ namespace ARTEC.GUI
         {
             try
             {
+
+                //Permisos Formulario
+                if (this.Tag != null && this.Tag.GetType() == typeof(string[]))
+                {
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
+                    {
+                        this.Enabled = false;
+                    }
+                }
+
                 ///Traer Estados Solicitud
                 BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
                 unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();

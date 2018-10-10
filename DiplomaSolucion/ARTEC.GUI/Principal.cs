@@ -57,13 +57,15 @@ namespace ARTEC.GUI
                 cboIdioma.SelectedValue = Idioma.unIdiomaActual;
 
                 //Permisos
-                foreach (Control unControl in this.Controls)
+                //Permisos para Controles
+                //Obtengo todos los controles del formulario
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
                 {
-                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
                     {
                         if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
                         {
-                            unControl.Visible = false;
                             unControl.Enabled = false;
                         }
 

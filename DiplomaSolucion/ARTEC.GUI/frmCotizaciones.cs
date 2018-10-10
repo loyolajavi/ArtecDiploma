@@ -43,6 +43,20 @@ namespace ARTEC.GUI
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
         {
+            //Permisos
+            //Obtengo todos los controles del formulario
+            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+            foreach (Control unControl in unosControles)
+            {
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                {
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
+                    {
+                        unControl.Enabled = false;
+                    }
+                }
+            }
+
             grillaCotizacion.DataSource = null;
             grillaCotizacion.DataSource = unasCotizaciones;
             FormatearGrillaCotizacion();

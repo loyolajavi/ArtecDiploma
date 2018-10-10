@@ -59,6 +59,21 @@ namespace ARTEC.GUI
         {
             try
             {
+                //Permisos para Controles
+                //Obtengo todos los controles del formulario
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                    {
+                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
+                        {
+                            unControl.Enabled = false;
+                        }
+
+                    }
+                }
+
                 ///Traigo Dependencias para busqueda dinámica
                 BLLDependencia ManagerDependencia = new BLLDependencia();
                 unasDependencias = ManagerDependencia.TraerTodos();

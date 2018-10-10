@@ -42,6 +42,15 @@ namespace ARTEC.GUI
 
         private void frmAdquisicionBuscar_Load(object sender, EventArgs e)
         {
+            //Permisos Formulario
+            if (this.Tag != null && this.Tag.GetType() == typeof(string[]))
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
+                {
+                    this.Enabled = false;
+                }
+            }
+
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();

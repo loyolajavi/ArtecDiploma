@@ -52,10 +52,8 @@ namespace ARTEC.GUI
             this.pnlResPartida = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.txtMontoTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblMontoTotal = new DevComponents.DotNetBar.LabelX();
-            this.btnGenerarCaja = new DevComponents.DotNetBar.ButtonX();
-            this.btnGenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnGenerarDocumento = new DevComponents.DotNetBar.ButtonX();
+            this.btnRegenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.lblVolver = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
@@ -336,8 +334,7 @@ namespace ARTEC.GUI
             this.pnlResPartida.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.pnlResPartida.Controls.Add(this.txtMontoTotal);
             this.pnlResPartida.Controls.Add(this.lblMontoTotal);
-            this.pnlResPartida.Controls.Add(this.btnGenerarCaja);
-            this.pnlResPartida.Controls.Add(this.btnGenerarPartida);
+            this.pnlResPartida.Controls.Add(this.btnRegenerarPartida);
             this.pnlResPartida.DisabledBackColor = System.Drawing.Color.Empty;
             this.pnlResPartida.Location = new System.Drawing.Point(115, 223);
             this.pnlResPartida.Name = "pnlResPartida";
@@ -401,28 +398,6 @@ namespace ARTEC.GUI
             this.lblMontoTotal.TabIndex = 36;
             this.lblMontoTotal.Text = "lblMontoTotal";
             // 
-            // btnGenerarCaja
-            // 
-            this.btnGenerarCaja.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGenerarCaja.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarCaja.Location = new System.Drawing.Point(28, 78);
-            this.btnGenerarCaja.Name = "btnGenerarCaja";
-            this.btnGenerarCaja.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerarCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGenerarCaja.TabIndex = 33;
-            this.btnGenerarCaja.Text = "btnGenerarCaja";
-            // 
-            // btnGenerarPartida
-            // 
-            this.btnGenerarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGenerarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarPartida.Location = new System.Drawing.Point(109, 78);
-            this.btnGenerarPartida.Name = "btnGenerarPartida";
-            this.btnGenerarPartida.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGenerarPartida.TabIndex = 34;
-            this.btnGenerarPartida.Text = "btnGenerarPartida";
-            // 
             // GrillaCotizAntiguas
             // 
             this.GrillaCotizAntiguas.BackgroundColor = System.Drawing.Color.White;
@@ -442,17 +417,18 @@ namespace ARTEC.GUI
             this.GrillaCotizAntiguas.TabIndex = 81;
             this.GrillaCotizAntiguas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaCotizAntiguas_CellClick);
             // 
-            // btnGenerarDocumento
+            // btnRegenerarPartida
             // 
-            this.btnGenerarDocumento.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGenerarDocumento.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarDocumento.Location = new System.Drawing.Point(146, 388);
-            this.btnGenerarDocumento.Name = "btnGenerarDocumento";
-            this.btnGenerarDocumento.Size = new System.Drawing.Size(123, 37);
-            this.btnGenerarDocumento.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGenerarDocumento.TabIndex = 82;
-            this.btnGenerarDocumento.Text = "btnGenerarDocumento";
-            this.btnGenerarDocumento.Click += new System.EventHandler(this.btnGenerarDocumento_Click);
+            this.btnRegenerarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRegenerarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRegenerarPartida.Location = new System.Drawing.Point(43, 52);
+            this.btnRegenerarPartida.Name = "btnRegenerarPartida";
+            this.btnRegenerarPartida.Size = new System.Drawing.Size(123, 37);
+            this.btnRegenerarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRegenerarPartida.TabIndex = 82;
+            this.btnRegenerarPartida.Text = "btnRegenerarPartida";
+            this.btnRegenerarPartida.Tag = new string[] { "Partida Modificar" };
+            this.btnRegenerarPartida.Click += new System.EventHandler(this.btnGenerarDocumento_Click);
             // 
             // btnCancelar
             // 
@@ -464,6 +440,7 @@ namespace ARTEC.GUI
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancelar.TabIndex = 83;
             this.btnCancelar.Text = "btnCancelar";
+            this.btnCancelar.Tag = new string[] { "Partida Cancelar" };
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // lblVolver
@@ -488,7 +465,6 @@ namespace ARTEC.GUI
             this.ControlBox = false;
             this.Controls.Add(this.lblVolver);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnGenerarDocumento);
             this.Controls.Add(this.GrillaCotizAntiguas);
             this.Controls.Add(this.pnlResPartida);
             this.Controls.Add(this.lblCotizaciones);
@@ -549,10 +525,8 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.GroupPanel pnlResPartida;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoTotal;
         private DevComponents.DotNetBar.LabelX lblMontoTotal;
-        private DevComponents.DotNetBar.ButtonX btnGenerarCaja;
-        private DevComponents.DotNetBar.ButtonX btnGenerarPartida;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
-        private DevComponents.DotNetBar.ButtonX btnGenerarDocumento;
+        private DevComponents.DotNetBar.ButtonX btnRegenerarPartida;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.LabelX lblVolver;
     }

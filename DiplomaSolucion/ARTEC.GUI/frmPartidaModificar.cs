@@ -48,6 +48,20 @@ namespace ARTEC.GUI
 
         private void frmPartidaModificar_Load(object sender, EventArgs e)
         {
+            //Permisos
+            //Obtengo todos los controles del formulario
+            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+            foreach (Control unControl in unosControles)
+            {
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                {
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
+                    {
+                        unControl.Enabled = false;
+                    }
+                }
+            }
+
             unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(NroPartida).FirstOrDefault();
             if (unaPartida != null && unaPartida.IdPartida > 0)
             {
@@ -352,9 +366,7 @@ namespace ARTEC.GUI
                     {
                         MessageBox.Show("Partida Cancelada Correctamente");
                         //Grisear Todo
-                        btnGenerarCaja.Enabled = false;
-                        btnGenerarPartida.Enabled = false;
-                        btnGenerarDocumento.Enabled = false;
+                        btnRegenerarPartida.Enabled = false;
                         btnCancelar.Enabled = false;
                         grillaDetallesPart.Enabled = false;
                         grillaCotizaciones.Enabled = false;

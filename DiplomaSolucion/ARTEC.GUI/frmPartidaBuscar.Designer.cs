@@ -228,6 +228,7 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPartidaBuscar";
             this.Text = "MetroForm";
+            this.Tag = new string[] { "Partida Buscar" };
             this.Load += new System.EventHandler(this.frmPartidaBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).EndInit();
             this.ResumeLayout(false);

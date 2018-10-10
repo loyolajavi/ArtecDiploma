@@ -48,7 +48,8 @@ namespace ARTEC.GUI
             //txtFechaHasta.Text = DateTime.Today.ToString();
 
             //Permisos
-            if (this.Tag != null && this.Tag.ToString() != "")
+            //Permisos para habilitar formulario
+            if (this.Tag != null && this.Tag.GetType() == typeof(string[]))
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
                 {
@@ -56,14 +57,15 @@ namespace ARTEC.GUI
                 }
             }
 
-            foreach (Control unControl in this.Controls)
+            //Permisos para Controles
+            //Obtengo todos los controles del formulario
+            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+            foreach (Control unControl in unosControles)
             {
-                //&& unControl.GetType().ToString() == "DevComponents.DotNetBar.ButtonX" 
-                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.ToString() != "")
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
                 {
                     if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
                     {
-                        unControl.Visible = false;
                         unControl.Enabled = false;
                     }
                 }
