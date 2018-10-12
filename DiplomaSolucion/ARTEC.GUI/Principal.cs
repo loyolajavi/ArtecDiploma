@@ -63,13 +63,7 @@ namespace ARTEC.GUI
                 foreach (Control unControl in unosControles)
                 {
                     if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
-                    {
-                        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]))
-                        {
-                            unControl.Enabled = false;
-                        }
-
-                    }
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]);
                 }
             }
             catch (Exception es)

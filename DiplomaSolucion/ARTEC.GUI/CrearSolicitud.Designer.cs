@@ -464,7 +464,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -772,7 +771,7 @@ namespace ARTEC.GUI
             this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDependencia.Location = new System.Drawing.Point(21, 31);
             this.lblDependencia.Name = "lblDependencia";
-            this.lblDependencia.Size = new System.Drawing.Size(91, 17);
+            this.lblDependencia.Size = new System.Drawing.Size(121, 17);
             this.lblDependencia.TabIndex = 0;
             this.lblDependencia.Text = "lblDependencia";
             // 

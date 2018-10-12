@@ -51,10 +51,7 @@ namespace ARTEC.GUI
             //Permisos para habilitar formulario
             if (this.Tag != null && this.Tag.GetType() == typeof(string[]))
             {
-                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
-                {
-                    this.Enabled = false;
-                }
+                this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]);
             }
 
             //Permisos para Controles
