@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.BLL
 {
@@ -17,6 +19,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorSolicitud.SolicitudCrear(laSolicitud) > 0)
                 {
                     return true;
@@ -35,22 +39,30 @@ namespace ARTEC.BLL
 
         public List<Solicitud> SolicitudBuscar(int NroSolic)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Buscar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             return GestorSolicitud.SolicitudBuscar(NroSolic);
         }
 
         public List<Solicitud> SolicitudBuscarConCanceladas(int NroSolic)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Buscar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             return GestorSolicitud.SolicitudBuscarConCanceladas(NroSolic);
         }
 
 
         public List<Solicitud> SolicitudBuscar(string Dep = null, int? estado = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Buscar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             return GestorSolicitud.SolicitudBuscar(Dep, estado, bien, priori, usasig, fechaInicio, fechaInicio2, fechaFin, fechaFin2);
         }
 
         public List<Solicitud> SolicitudBuscarConCanceladas(string Dep = null, int? estado = null, string bien = null, int? priori = null, int? usasig = null, DateTime? fechaInicio = null, DateTime? fechaInicio2 = null, DateTime? fechaFin = null, DateTime? fechaFin2 = null)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Buscar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             return GestorSolicitud.SolicitudBuscarConCanceladas(Dep, estado, bien, priori, usasig, fechaInicio, fechaInicio2, fechaFin, fechaFin2);
         }
 
@@ -86,9 +98,17 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
                     return true;
                 return false;
+            }
+            catch (InvalidOperationException es1)
+            {
+                string IdError = ServicioLog.CrearLog(es1, "BLL - SolicitudModificar");
+                es1.Data.Add("IdLog", IdError);
+                throw;
             }
             catch (Exception es)
             {
@@ -121,10 +141,18 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Cancelar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 //Coloca en "Cancelada" la Solicitud y además sus SolicDetalles
                 if (GestorSolicitud.SolicitudCancelar(unaSolicitud))
                     return true;
                 return false;
+            }
+            catch (InvalidOperationException es1)
+            {
+                string IdError = ServicioLog.CrearLog(es1, "BLL - SolicitudCancelar");
+                es1.Data.Add("IdLog", IdError);
+                throw;
             }
             catch (Exception es)
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class Principal
@@ -141,7 +142,14 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
             this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearSolicitud.TabIndex = 1;
-            this.btnCrearSolicitud.Tag = new string[] { "Solicitud Crear" };
+            //this.btnCrearSolicitud.Tag = new string[] { "Solicitud Crear" };
+            Dictionary<string, string[]> dicbtnCrearSolicitud = new Dictionary<string, string[]>();
+            string[] PerbtnCrearSolicitud = { "Solicitud Crear" };
+            dicbtnCrearSolicitud.Add("Permisos", PerbtnCrearSolicitud);
+            string[] IdiomabtnCrearSolicitud = { "Solicitud Crear" };
+            dicbtnCrearSolicitud.Add("Idioma", IdiomabtnCrearSolicitud);
+            this.btnCrearSolicitud.Tag = dicbtnCrearSolicitud;
+
             this.btnCrearSolicitud.Text = "Solicitud Crear";
             this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
             this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);

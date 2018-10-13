@@ -70,11 +70,13 @@ namespace ARTEC.GUI
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)
                 {
-                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
                     {
-                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]);
+                        //unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]);
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
+
 
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
@@ -1261,9 +1263,17 @@ namespace ARTEC.GUI
                     return;
 
             }
+            //catch (InvalidOperationException es)
+            //{
+            //    MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + es.Data["IdLog"] + " del Log de Eventos");
+            //}
             catch (Exception es)
             {
-                string IdError = ServicioLog.CrearLog(es, "frmSolicitudModificar - btnCancelar_Click");
+                string IdError;
+                if (es.Data.Contains("IdLog"))
+                    IdError = es.Data["IdLog"].ToString();
+                else
+                    IdError = ServicioLog.CrearLog(es, "frmSolicitudModificar - btnCancelar_Click");
                 MessageBox.Show("Ocurrio un error al intentar cancelar la Solicitud: " + unaSolicitud.IdSolicitud.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
 
@@ -1304,14 +1314,20 @@ namespace ARTEC.GUI
                 unosSolDetQuitarMod = unosSolicDetAgregarBKP.Where(d => !unaSolicitud.unosDetallesSolicitud.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetAgregarMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolicDetAgregarBKP.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetModifMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolDetAgregarMod.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
-
-                //if (ManagerSolicitud.SolicitudModificarConDetallesEliminados(unaSolicitud))//29/09/2018: Esto se puede borrar cuando funcione bien la modif de SolicDetalles
                 if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
                     MessageBox.Show("Modificación realizada correctamente");
             }
+            //catch (InvalidOperationException es)
+            //{
+            //    MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + es.Data["IdLog"] + " del Log de Eventos");
+            //}
             catch (Exception es)
             {
-                string IdError = ServicioLog.CrearLog(es, "btnModifSolicitud_Click");
+                string IdError;
+                if (es.Data.Contains("IdLog"))
+                    IdError = es.Data["IdLog"].ToString();
+                else
+                    IdError = ServicioLog.CrearLog(es, "btnModifSolicitud_Click");
                 MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
 

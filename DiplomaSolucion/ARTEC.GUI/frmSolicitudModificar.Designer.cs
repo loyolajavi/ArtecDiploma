@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmSolicitudModificar
@@ -185,8 +186,20 @@ namespace ARTEC.GUI
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancelar.TabIndex = 26;
-            this.btnCancelar.Tag = new string[] {
-        "Solicitud Cancelar"};
+            Dictionary<string, string[]> dicBtnCancelar = new Dictionary<string, string[]>();
+            string[] PerBtnCancelar = { "Solicitud Cancelar" };
+            dicBtnCancelar.Add("Permisos", PerBtnCancelar);
+            string[] IdiomaBtnCancelar = { "Cancelar" };
+            dicBtnCancelar.Add("Idioma", IdiomaBtnCancelar);
+            this.btnCancelar.Tag = dicBtnCancelar;
+                //{"Permisos", new[] { "Solicitud Cancelar", "hola"}},
+                //{"Idioma", new[] {"Cancelar"}}
+
+            //this.btnCancelar.Tag = Dictionary<string, string>();
+            //(this.btnCancelar.Tag as Dictionary<string, string>).Add("Permisos", "Solicitud Cancelar");
+              //{"Idioma", new[] {"Cancelar"}}
+            //};
+            
             this.btnCancelar.Text = "btnCancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -228,8 +241,14 @@ namespace ARTEC.GUI
             this.btnModifSolicitud.Size = new System.Drawing.Size(75, 23);
             this.btnModifSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModifSolicitud.TabIndex = 22;
-            this.btnModifSolicitud.Tag = new string[] {
-        "Solicitud Modificar"};
+            //this.btnModifSolicitud.Tag = new string[] {
+            //"Solicitud Modificar"};
+            Dictionary<string, string[]> dicbtnModifSolicitud = new Dictionary<string, string[]>();
+            string[] PerdicbtnModifSolicitud = { "Solicitud Modificar" };
+            dicbtnModifSolicitud.Add("Permisos", PerdicbtnModifSolicitud);
+            string[] IdiomadicbtnModifSolicitud = { "Modificar" };
+            dicbtnModifSolicitud.Add("Idioma", IdiomadicbtnModifSolicitud);
+            this.btnModifSolicitud.Tag = dicbtnModifSolicitud;
             this.btnModifSolicitud.Text = "Modificar";
             this.btnModifSolicitud.Click += new System.EventHandler(this.btnModifSolicitud_Click);
             // 
@@ -919,7 +938,13 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Size = new System.Drawing.Size(75, 40);
             this.btnSolicitarPartida.TabIndex = 7;
             this.btnSolicitarPartida.Text = "btnSoliitarPartida";
-            this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
+            //this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
+            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
+            string[] PerbtnSolicitarPartida = { "Partida Crear" };
+            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
+            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
+            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
+            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
             this.btnSolicitarPartida.UseVisualStyleBackColor = true;
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSoliitarPartida_Click);
             // 
