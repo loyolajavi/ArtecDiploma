@@ -43,6 +43,12 @@ namespace ARTEC.GUI
 
         private void frmRendicionBuscar_Load(object sender, EventArgs e)
         {
+            //Permisos Formulario
+            if (this.Tag != null && this.Tag.GetType() == typeof(Dictionary<string, string[]>) && (this.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+            {
+                this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+            }
+
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();

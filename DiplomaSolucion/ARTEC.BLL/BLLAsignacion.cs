@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.BLL
 {
@@ -19,6 +20,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorAsignacion.AsignacionCrear(unaAsig) > 0)
                 {
                     foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
@@ -45,6 +48,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Buscar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 return GestorAsignacion.AsignacionBuscar(IdAsignacion, NombreDependencia, IdSolicitud, fechaDesde, fechaHasta);
             }
             catch (Exception es)
@@ -69,6 +74,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod))
                     return true;
                 return false;
@@ -95,6 +102,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorAsignacion.AsignacionEliminar(unaAsignacionModif))
                     return true;
                 return false;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.BLL
 {
@@ -27,18 +28,37 @@ namespace ARTEC.BLL
 
         public int RendicionCrear(Rendicion unaRendicion)
         {
-            int IdRendAUX = GestorRendicion.RendicionCrear(unaRendicion);
-            if (IdRendAUX > 0 )
-                return IdRendAUX;
-            return 0;
-            //Retorno el idRendicion para dps usarlo en el nombre del documento a generar
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                int IdRendAUX = GestorRendicion.RendicionCrear(unaRendicion);
+                if (IdRendAUX > 0)
+                    //Retorno el idRendicion para dps usarlo en el nombre del documento a generar
+                    return IdRendAUX;
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
 
         public void RendicionModificar(Rendicion unaRendicion)
         {
-            GestorRendicion.RendicionModificar(unaRendicion);
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Regenerar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorRendicion.RendicionModificar(unaRendicion);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
 
@@ -49,6 +69,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Buscar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 return GestorRendicion.RendicionBuscar(IdRendicion, IdPartida, IdSolicitud, NombreDependencia);
             }
             catch (Exception es)
@@ -62,6 +84,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorRendicion.RendicionEliminar(unaRendicion.IdRendicion))
                     return true;
                 return false;

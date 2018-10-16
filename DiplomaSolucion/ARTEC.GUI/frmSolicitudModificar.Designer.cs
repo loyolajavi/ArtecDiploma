@@ -964,6 +964,14 @@ namespace ARTEC.GUI
             this.btnBienAsignar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBienAsignar.TabIndex = 8;
             this.btnBienAsignar.Text = "btnBienAsignar";
+
+            Dictionary<string, string[]> dicbtnBienAsignar = new Dictionary<string, string[]>();
+            string[] PerbtnBienAsignar = { "Asignacion Crear" };
+            dicbtnBienAsignar.Add("Permisos", PerbtnBienAsignar);
+            string[] IdiomabtnBienAsignar = { "Crear Asignación" };
+            dicbtnBienAsignar.Add("Idioma", IdiomabtnBienAsignar);
+            this.btnBienAsignar.Tag = dicbtnBienAsignar;
+
             this.btnBienAsignar.TextColor = System.Drawing.Color.White;
             this.btnBienAsignar.Click += new System.EventHandler(this.btnBienAsignar_Click);
             // 

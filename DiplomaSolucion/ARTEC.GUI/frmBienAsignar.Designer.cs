@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmBienAsignar
@@ -143,6 +144,14 @@ namespace ARTEC.GUI
             this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnConfirmar.TabIndex = 54;
             this.btnConfirmar.Text = "btnConfirmar";
+
+            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
+            string[] PerbtnConfirmar = { "Asignacion Crear" };
+            dicbtnConfirmar.Add("Permisos", PerbtnConfirmar);
+            string[] IdiomabtnConfirmar = { "Confirmar" };
+            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
+            this.btnConfirmar.Tag = dicbtnConfirmar;
+
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // frmBienAsignar

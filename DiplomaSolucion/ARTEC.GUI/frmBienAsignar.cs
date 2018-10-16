@@ -16,6 +16,7 @@ using ARTEC.FRAMEWORK.Servicios;
 using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -40,6 +41,16 @@ namespace ARTEC.GUI
 
         private void frmBienAsignar_Load(object sender, EventArgs e)
         {
+
+            //Permisos
+            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+            foreach (Control unControl in unosControles)
+            {
+                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                {
+                    unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                }
+            }
             
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;

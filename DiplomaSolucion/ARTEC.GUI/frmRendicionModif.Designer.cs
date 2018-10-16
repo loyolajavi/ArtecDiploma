@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmRendicionModif
@@ -86,6 +87,14 @@ namespace ARTEC.GUI
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 88;
             this.btnEliminar.Text = "btnEliminar";
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] PerbtnEliminar = { "Rendicion Eliminar" };
+            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // txtPartRef
@@ -127,6 +136,14 @@ namespace ARTEC.GUI
             this.btnGenerar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGenerar.TabIndex = 84;
             this.btnGenerar.Text = "btnGenerar";
+
+            Dictionary<string, string[]> dicbtnGenerar = new Dictionary<string, string[]>();
+            string[] PerbtnGenerar = { "Rendicion Regenerar" };
+            dicbtnGenerar.Add("Permisos", PerbtnGenerar);
+            string[] IdiomabtnGenerar = { "Regenerar" };
+            dicbtnGenerar.Add("Idioma", IdiomabtnGenerar);
+            this.btnGenerar.Tag = dicbtnGenerar;
+
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // txtMontoEmpleado

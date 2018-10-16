@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmDependenciaBuscar
@@ -54,6 +55,14 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 0;
             this.btnModificar.Text = "btnModificar";
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Dependencia Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // lblDependencia
@@ -169,6 +178,14 @@ namespace ARTEC.GUI
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 58;
             this.btnEliminar.Text = "btnEliminar";
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] PerbtnEliminar = { "Dependencia Eliminar" };
+            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnCrear
@@ -181,6 +198,14 @@ namespace ARTEC.GUI
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 59;
             this.btnCrear.Text = "btnCrear";
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] PerbtnCrear = { "Dependencia Crear" };
+            dicbtnCrear.Add("Permisos", PerbtnCrear);
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // btnReactivar
@@ -194,6 +219,14 @@ namespace ARTEC.GUI
             this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReactivar.TabIndex = 60;
             this.btnReactivar.Text = "btnReactivar";
+
+            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
+            string[] PerbtnReactivar = { "Dependencia Reactivar" };
+            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
+            string[] IdiomabtnReactivar = { "Reactivar" };
+            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
+            this.btnReactivar.Tag = dicbtnReactivar;
+
             this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
             // 
             // lblBaja
@@ -231,6 +264,12 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmDependenciaBuscar";
             this.Text = "MetroForm";
+
+            Dictionary<string, string[]> dicfrmDepBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmDepBuscar = { "Dependencia Buscar", "Dependencia Crear", "Dependencia Modificar", "Dependencia Eliminar", "Dependencia Reactivar" };
+            dicfrmDepBuscar.Add("Permisos", PerfrmDepBuscar);
+            this.Tag = dicfrmDepBuscar;
+
             this.Load += new System.EventHandler(this.frmDependenciaBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
             this.ResumeLayout(false);

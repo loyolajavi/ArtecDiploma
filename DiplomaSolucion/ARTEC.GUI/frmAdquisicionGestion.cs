@@ -136,7 +136,20 @@ namespace ARTEC.GUI
             deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
+            
+            Dictionary<string, string[]> dicdeleteButton = new Dictionary<string, string[]>();
+            string[] PerdeleteButton = { "Inventario Eliminar" };
+            dicdeleteButton.Add("Permisos", PerdeleteButton);
+            string[] IdiomadeleteButton = { "Eliminar" };
+            dicdeleteButton.Add("Idioma", IdiomadeleteButton);
+            deleteButton.Tag = dicdeleteButton;
+            
             GrillaInventarios.Columns.Add(deleteButton);
+
+            if (!string.IsNullOrEmpty(deleteButton.Name) && deleteButton.Tag != null && deleteButton.Tag.GetType() == typeof(Dictionary<string, string[]>) && (deleteButton.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+            {
+                deleteButton.Visible = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((deleteButton.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+            }
 
             //Formato GrillaInventarios
             GrillaInventarios.Columns["IdInventario"].Visible = false;

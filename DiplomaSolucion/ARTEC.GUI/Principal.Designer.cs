@@ -235,8 +235,16 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
             this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRendicionCrear.TabIndex = 5;
-            this.btnRendicionCrear.Tag = new string[] { "Rendicion Crear" };
+            //this.btnRendicionCrear.Tag = new string[] { "Rendicion Crear" };
             this.btnRendicionCrear.Text = "btnRendicionCrear";
+
+            Dictionary<string, string[]> dicbtnRendicionCrear = new Dictionary<string, string[]>();
+            string[] PerbtnRendicionCrear = { "Rendicion Crear" };
+            dicbtnRendicionCrear.Add("Permisos", PerbtnRendicionCrear);
+            string[] IdiomabtnRendicionCrear = { "Crear Rendición" };
+            dicbtnRendicionCrear.Add("Idioma", IdiomabtnRendicionCrear);
+            this.btnRendicionCrear.Tag = dicbtnRendicionCrear;
+
             this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
             this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
             // 

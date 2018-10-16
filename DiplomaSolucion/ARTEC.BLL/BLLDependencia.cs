@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 
 
 
@@ -51,23 +52,67 @@ namespace ARTEC.BLL
 
         public void DependenciaModifTipoDep(int IdDep, TipoDependencia TipoDep)
         {
-            GestorDependencia.DependenciaModifTipoDep(IdDep, TipoDep);
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorDependencia.DependenciaModifTipoDep(IdDep, TipoDep);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         public void DependenciaAgenteAgregar(List<Agente> AgentesNuevos, int IdDep)
         {
-            GestorDependencia.DependenciaAgenteAgregar(AgentesNuevos, IdDep);
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorDependencia.DependenciaAgenteAgregar(AgentesNuevos, IdDep);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
         
 
         public void DependenciaModifNombre(string NombreDep, int IdDep)
         {
-            GestorDependencia.DependenciaModifNombre(NombreDep, IdDep);
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorDependencia.DependenciaModifNombre(NombreDep, IdDep);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         public void DependenciaAgentesQuitarLista(List<int> AgentesAQuitar, int IdDep)
         {
-            GestorDependencia.DependenciaAgentesQuitarLista(AgentesAQuitar, IdDep);
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorDependencia.DependenciaAgentesQuitarLista(AgentesAQuitar, IdDep);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         public Dependencia DependenciaBuscar(string NomDependencia)
@@ -86,6 +131,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorDependencia.DependenciaCrear(nuevaDependencia))
                     return true;
                 return false;
@@ -100,6 +147,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 unaDependencia.Activo = 0;
                 if (GestorDependencia.DependenciaEliminar(unaDependencia.IdDependencia))
                     return true;
@@ -115,6 +164,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Reactivar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 unaDependencia.Activo = 1;
                 if (GestorDependencia.DependenciaReactivar(unaDependencia.IdDependencia))
                     return true;

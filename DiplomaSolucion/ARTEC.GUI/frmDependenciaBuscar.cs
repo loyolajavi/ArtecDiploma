@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -38,12 +39,37 @@ namespace ARTEC.GUI
 
         private void frmDependenciaBuscar_Load(object sender, EventArgs e)
         {
-            ///Traigo Dependencias para busqueda dinámica
-            unasDependencias = ManagerDependencia.TraerTodos();
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnReactivar.Enabled = false;
-            lblBaja.Visible = false;
+            try
+            {
+                //Permisos Formulario
+                if (this.Tag != null && this.Tag.GetType() == typeof(Dictionary<string, string[]>) && (this.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                {
+                    this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                }
+
+                //Permisos controles
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+                ///Traigo Dependencias para busqueda dinámica
+                unasDependencias = ManagerDependencia.TraerTodos();
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
+                btnReactivar.Enabled = false;
+                lblBaja.Visible = false;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            
         }
 
 
@@ -146,13 +172,16 @@ namespace ARTEC.GUI
                             lblBaja.Visible = true;
                             btnModificar.Enabled = false;
                             btnEliminar.Enabled = false;
-                            btnReactivar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnReactivar.Enabled = true;
                         }
                         else
                         {
                             lblBaja.Visible = false;
-                            btnModificar.Enabled = true;
-                            btnEliminar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnModificar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnEliminar.Enabled = true;
                             btnReactivar.Enabled = false;
                         }
 
@@ -209,7 +238,8 @@ namespace ARTEC.GUI
                             lblBaja.Visible = true;
                             btnModificar.Enabled = false;
                             btnEliminar.Enabled = false;
-                            btnReactivar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnReactivar.Enabled = true;
                             MessageBox.Show("Dependencia: " + DepSeleccionada.NombreDependencia + " dada de baja correctamente");
                         }
                         else
@@ -234,7 +264,9 @@ namespace ARTEC.GUI
                     if (ManagerDependencia.DependenciaReactivar(DepSeleccionada))
                     {
                         lblBaja.Visible = false;
-                        btnModificar.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnModificar.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnEliminar.Enabled = true;
                         btnReactivar.Enabled = false;
                         MessageBox.Show("Categoría: " + DepSeleccionada.NombreDependencia + " reactivada correctamente");

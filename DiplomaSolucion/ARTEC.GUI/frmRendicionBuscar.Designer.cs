@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmRendicionBuscar
@@ -250,6 +251,12 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmRendicionBuscar";
             this.Text = "MetroForm";
+
+            Dictionary<string, string[]> dicfrmRendicionBus = new Dictionary<string, string[]>();
+            string[] PerfrmRendicionBus = { "Rendicion Buscar" };
+            dicfrmRendicionBus.Add("Permisos", PerfrmRendicionBus);
+            this.Tag = dicfrmRendicionBus;
+
             this.Load += new System.EventHandler(this.frmRendicionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaRendicionBuscar)).EndInit();
             this.ResumeLayout(false);
