@@ -1,4 +1,5 @@
-﻿namespace ARTEC.GUI
+﻿using System.Collections.Generic;
+namespace ARTEC.GUI
 {
     partial class AgregarInventarioCU
     {
@@ -220,6 +221,14 @@
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregar.TabIndex = 71;
             this.btnAgregar.Text = "btnAgregar";
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] PerbtnAgregar = { "Inventario Agregar" };
+            dicbtnAgregar.Add("Permisos", PerbtnAgregar);
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
+
             // 
             // txtIdBien
             // 

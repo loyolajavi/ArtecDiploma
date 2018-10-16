@@ -64,9 +64,9 @@ namespace ARTEC.GUI
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)
                 {
-                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
                     {
-                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, unControl.Tag as string[]);
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
 
@@ -421,6 +421,11 @@ namespace ARTEC.GUI
 
         private void btnBienesRestantes_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(unAgregarInventarioCU.unBtnAgregar.Name) && unAgregarInventarioCU.unBtnAgregar.Tag != null && unAgregarInventarioCU.unBtnAgregar.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unAgregarInventarioCU.unBtnAgregar.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+            {
+                unAgregarInventarioCU.unBtnAgregar.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unAgregarInventarioCU.unBtnAgregar.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+            }
+            
             //Traer TiposBien
             unosTipoBien = ManagerTipoBien.TraerTodos();
             unosTipoBien.Insert(0, new TipoBien { IdTipoBien = 0, DescripTipoBien = "<Seleccionar>" });
@@ -526,6 +531,7 @@ namespace ARTEC.GUI
                 {
                     //unBienAUX = new Hardware();
                     unInvAgregar = new XInventarioHard();
+                    unInvAgregar.deBien = new Hardware();
                     unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
                     //unBienAUX.unInventarioAlta = new XInventarioHard();
                 }
@@ -533,6 +539,7 @@ namespace ARTEC.GUI
                 {
                     //unBienAUX = new Software();
                     unInvAgregar = new XInventarioSoft();
+                    unInvAgregar.deBien = new Software();
                     unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
                     //unBienAUX.unInventarioAlta = new XInventarioSoft();
                 }
@@ -549,7 +556,12 @@ namespace ARTEC.GUI
                 unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                 unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitud;
                 unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitudDetalle;
-                unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
+
+                BLLCategoria ManagerCategoria = new BLLCategoria();
+                unInvAgregar.deBien.unaCategoria = new Categoria();
+                unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.IdBienEspecif);
+                unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unIdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
+                //unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 
                 unInvAgregarHLP.DescripBien = unAgregarInventarioCU.unBien;
                 unInvAgregarHLP.DescripMarca = (unAgregarInventarioCU.unaMarca.SelectedItem as Marca).DescripMarca;

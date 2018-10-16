@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmPartidaModificar
@@ -427,7 +428,15 @@ namespace ARTEC.GUI
             this.btnRegenerarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRegenerarPartida.TabIndex = 82;
             this.btnRegenerarPartida.Text = "btnRegenerarPartida";
-            this.btnRegenerarPartida.Tag = new string[] { "Partida Modificar" };
+            //this.btnRegenerarPartida.Tag = new string[] { "Partida Modificar" };
+
+            Dictionary<string, string[]> dicbtnRegenerarPartida = new Dictionary<string, string[]>();
+            string[] PerbtnRegenerarPartida = { "Partida Modificar" };
+            dicbtnRegenerarPartida.Add("Permisos", PerbtnRegenerarPartida);
+            string[] IdiomabtnRegenerarPartida = { "Regenerar Partida" };
+            dicbtnRegenerarPartida.Add("Idioma", IdiomabtnRegenerarPartida);
+            this.btnRegenerarPartida.Tag = dicbtnRegenerarPartida;
+
             this.btnRegenerarPartida.Click += new System.EventHandler(this.btnGenerarDocumento_Click);
             // 
             // btnCancelar
@@ -440,7 +449,15 @@ namespace ARTEC.GUI
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancelar.TabIndex = 83;
             this.btnCancelar.Text = "btnCancelar";
-            this.btnCancelar.Tag = new string[] { "Partida Cancelar" };
+            //this.btnCancelar.Tag = new string[] { "Partida Cancelar" };
+
+            Dictionary<string, string[]> dicbtnCancelar = new Dictionary<string, string[]>();
+            string[] PerbtnCancelar = { "Partida Cancelar" };
+            dicbtnCancelar.Add("Permisos", PerbtnCancelar);
+            string[] IdiomabtnCancelar = { "Cancelar" };
+            dicbtnCancelar.Add("Idioma", IdiomabtnCancelar);
+            this.btnCancelar.Tag = dicbtnCancelar;
+
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // lblVolver

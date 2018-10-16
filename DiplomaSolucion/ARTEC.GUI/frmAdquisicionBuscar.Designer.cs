@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmAdquisicionBuscar
@@ -520,7 +521,13 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAdquisicionBuscar";
             this.Text = "MetroForm";
-            this.Tag = new string[] { "Adquisicion Buscar" };
+            //this.Tag = new string[] { "Adquisicion Buscar" };
+
+            Dictionary<string, string[]> dicfrmAdquisicionBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmAdquisicionBuscar = { "Adquisicion Buscar" };
+            dicfrmAdquisicionBuscar.Add("Permisos", PerfrmAdquisicionBuscar);
+            this.Tag = dicfrmAdquisicionBuscar;
+
             this.Load += new System.EventHandler(this.frmAdquisicionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).EndInit();

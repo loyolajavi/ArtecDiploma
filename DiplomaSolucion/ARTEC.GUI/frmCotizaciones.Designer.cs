@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmCotizaciones
@@ -228,7 +229,13 @@ namespace ARTEC.GUI
             this.btnSolicitar.Size = new System.Drawing.Size(75, 23);
             this.btnSolicitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitar.TabIndex = 50;
-            this.btnSolicitar.Tag = new string[] { "Cotizacion Solicitar" };
+            //this.btnSolicitar.Tag = new string[] { "Cotizacion Solicitar" };
+            Dictionary<string, string[]> dicbtnSolicitar = new Dictionary<string, string[]>();
+            string[] PerbtnSolicitar = { "Cotizacion Solicitar" };
+            dicbtnSolicitar.Add("Permisos", PerbtnSolicitar);
+            string[] IdiomabtnSolicitar = { "Solicitar" };
+            dicbtnSolicitar.Add("Idioma", IdiomabtnSolicitar);
+            this.btnSolicitar.Tag = dicbtnSolicitar;
             this.btnSolicitar.Text = "btnSolicitar";
             this.btnSolicitar.Click += new System.EventHandler(this.btnSolicitar_Click);
             // 
@@ -458,7 +465,13 @@ namespace ARTEC.GUI
             this.btnConfirmar.Size = new System.Drawing.Size(87, 35);
             this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnConfirmar.TabIndex = 92;
-            this.btnConfirmar.Tag = new string[] { "Cotizacion Agregar" };
+            //this.btnConfirmar.Tag = new string[] { "Cotizacion Agregar" };
+            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
+            string[] PerbtnConfirmar = { "Cotizacion Agregar" };
+            dicbtnConfirmar.Add("Permisos", PerbtnConfirmar);
+            string[] IdiomabtnConfirmar = { "Confirmar" };
+            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
+            this.btnConfirmar.Tag = dicbtnConfirmar;
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 

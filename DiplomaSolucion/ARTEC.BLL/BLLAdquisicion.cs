@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.BLL
 {
@@ -19,6 +20,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Adquisicion Registrar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 GestorAdquisicion.ComenzarAdquisicion();
                 int IdAdq = GestorAdquisicion.AdquisicionCrear(unaAdquisicion);
                 foreach (Bien unBien in unaAdquisicion.BienesInventarioAsociados)
@@ -54,6 +57,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Adquisicion Buscar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 return GestorAdquisicion.AdquisicionBuscar(IdAdquisicion, IdPartida, NombreDependencia, unaFecha, unaFechaCompra, NroFactura, IdSolicitud);
             }
             catch (Exception es)
@@ -80,6 +85,14 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Adquisicion Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                if (InvAgregarMod.Count>0)
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Inventario Agregar" }))
+                        throw new InvalidOperationException("No posee los permisos suficientes");
+                if (InvQuitarMod.Count > 0)
+                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Inventario Eliminar" }))
+                        throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorAdquisicion.AdquisicionModificar(unaAdqModif, InvQuitarMod, InvAgregarMod))
                     return true;
                 return false;
@@ -94,6 +107,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Adquisicion Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorAdquisicion.AdquisicionEliminar(unaAdqModif))
                     return true;
                 return false;

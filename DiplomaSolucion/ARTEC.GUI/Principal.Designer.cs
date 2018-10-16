@@ -164,7 +164,15 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
             this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitarPartida.TabIndex = 2;
-            this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
+            //this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
+
+            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
+            string[] PerbtnSolicitarPartida = { "Partida Crear" };
+            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
+            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
+            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
+            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
+
             this.btnSolicitarPartida.Text = "btnSolicitarPartida";
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
             // 
@@ -180,7 +188,15 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPartidaAsociar.TabIndex = 3;
             this.btnPartidaAsociar.Text = "btnPartidaAsociar";
-            this.btnPartidaAsociar.Tag = new string[] { "Partida Asociar" };
+            //this.btnPartidaAsociar.Tag = new string[] { "Partida Asociar" };
+
+            Dictionary<string, string[]> dicbtnPartidaAsociar = new Dictionary<string, string[]>();
+            string[] PerbtnPartidaAsociar = { "Partida Asociar" };
+            dicbtnPartidaAsociar.Add("Permisos", PerbtnPartidaAsociar);
+            string[] IdiomabtnPartidaAsociar = { "Asociar Partida" };
+            dicbtnPartidaAsociar.Add("Idioma", IdiomabtnPartidaAsociar);
+            this.btnPartidaAsociar.Tag = dicbtnPartidaAsociar;
+
             this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
             this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
             // 
@@ -196,7 +212,15 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBienRegistrar.TabIndex = 4;
             this.btnBienRegistrar.Text = "btnBienRegistrar";
-            this.btnBienRegistrar.Tag = new string[] { "Adquisicion Registrar" };
+            //this.btnBienRegistrar.Tag = new string[] { "Adquisicion Registrar" };
+
+            Dictionary<string, string[]> dicbtnBienRegistrar = new Dictionary<string, string[]>();
+            string[] PerbtnBienRegistrar = { "Adquisicion Registrar" };
+            dicbtnBienRegistrar.Add("Permisos", PerbtnBienRegistrar);
+            string[] IdiomabtnBienRegistrar = { "Registrar Adquisición" };
+            dicbtnBienRegistrar.Add("Idioma", IdiomabtnBienRegistrar);
+            this.btnBienRegistrar.Tag = dicbtnBienRegistrar;
+
             this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
             this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
             // 

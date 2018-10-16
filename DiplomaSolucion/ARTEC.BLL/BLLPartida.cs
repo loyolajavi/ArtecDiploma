@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ARTEC.ENTIDADES;
 using ARTEC.DAL;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.BLL
 {
@@ -22,6 +23,8 @@ namespace ARTEC.BLL
 
         public bool PartidaCrear(Partida laPartida)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Crear" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             if (GestorPartida.PartidaCrear(laPartida) > 0)
             {
                 return true;
@@ -46,6 +49,8 @@ namespace ARTEC.BLL
 
         public bool PartidaAsociar(Partida laPartida)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Asociar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             if (GestorPartida.PartidaAsociar(laPartida))
             {
                 BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
@@ -80,6 +85,8 @@ namespace ARTEC.BLL
 
         public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar)
         {
+            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Modificar" }))
+                throw new InvalidOperationException("No posee los permisos suficientes");
             if (GestorPartida.PartidaModifDetalles(PDetallesBorrar))
                 return true;
             return false;
@@ -90,6 +97,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Cancelar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorPartida.PartidaCancelar(unaPartida))
                     return true;
                 return false;

@@ -186,12 +186,14 @@ namespace ARTEC.GUI
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancelar.TabIndex = 26;
+
             Dictionary<string, string[]> dicBtnCancelar = new Dictionary<string, string[]>();
             string[] PerBtnCancelar = { "Solicitud Cancelar" };
             dicBtnCancelar.Add("Permisos", PerBtnCancelar);
             string[] IdiomaBtnCancelar = { "Cancelar" };
             dicBtnCancelar.Add("Idioma", IdiomaBtnCancelar);
             this.btnCancelar.Tag = dicBtnCancelar;
+
                 //{"Permisos", new[] { "Solicitud Cancelar", "hola"}},
                 //{"Idioma", new[] {"Cancelar"}}
 
@@ -939,12 +941,14 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.TabIndex = 7;
             this.btnSolicitarPartida.Text = "btnSoliitarPartida";
             //this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
+            
             Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
             string[] PerbtnSolicitarPartida = { "Partida Crear" };
             dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
             string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
             dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
             this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
+            
             this.btnSolicitarPartida.UseVisualStyleBackColor = true;
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSoliitarPartida_Click);
             // 
