@@ -35,17 +35,24 @@ namespace ARTEC.GUI
 
         private void frmUsuariosGestion_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    ListarPermisosDisponibles(ManagerFamilia.PermisosTraerTodos());
-            //    ListarPermisosAsignados(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos);
-            //}
-            //catch (Exception es)
-            //{
-            //    string IdError = ServicioLog.CrearLog(es, "frmUsuariosGestion_Load");
-            //    MessageBox.Show("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro " + IdError + " del Log de Eventos");
-            //    this.Close();
-            //}
+            try
+            {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmUsuariosGestion_Load");
+                MessageBox.Show("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                this.Close();
+            }
             
         }
 
@@ -112,7 +119,8 @@ namespace ARTEC.GUI
                     if (unUsuario.Activo == 0)
                     {
                         lblBaja.Visible = true;
-                        btnReactivarUs.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivarUs.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnReactivarUs.Enabled = true;
                         btnEliminarUsuario.Enabled = false;
                         btnModifUsuario.Enabled = false;
                         btnAgregar.Enabled = false;
@@ -127,7 +135,9 @@ namespace ARTEC.GUI
                     {
                         lblBaja.Visible = false;
                         btnReactivarUs.Enabled = false;
-                        btnEliminarUsuario.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminarUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnEliminarUsuario.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModifUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnModifUsuario.Enabled = true;
                         btnAgregar.Enabled = true;
                         btnQuitar.Enabled = true;
@@ -341,7 +351,8 @@ namespace ARTEC.GUI
                         if(ManagerUsuario.UsuarioEliminar(unUsuario))
                         {
                             lblBaja.Visible = true;
-                            btnReactivarUs.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivarUs.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnReactivarUs.Enabled = true;
                             btnEliminarUsuario.Enabled = false;
                             btnModifUsuario.Enabled = false;
                             btnAgregar.Enabled = false;
@@ -377,8 +388,10 @@ namespace ARTEC.GUI
                     {
                         lblBaja.Visible = false;
                         btnReactivarUs.Enabled = false;
-                        btnEliminarUsuario.Enabled = true;
-                        btnModifUsuario.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminarUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnEliminarUsuario.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModifUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnModifUsuario.Enabled = true;
                         btnAgregar.Enabled = true;
                         btnQuitar.Enabled = true;
                         txtNomUs.Enabled = true;

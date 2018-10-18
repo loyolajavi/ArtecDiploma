@@ -55,6 +55,7 @@
     <Compile Include="Servicios\ServicioLog.cs" />
     <Compile Include="Servicios\ServicioLogin.cs" />
     <Compile Include="Servicios\ServicioMail.cs" />
+    <Compile Include="Servicios\ServicioPermisos.cs" />
     <Compile Include="Servicios\ServicioSecurizacion.cs" />
   </ItemGroup>
   <ItemGroup>

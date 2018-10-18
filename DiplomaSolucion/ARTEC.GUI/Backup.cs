@@ -151,7 +151,26 @@ namespace ARTEC.GUI
 
         private void Backup_Load(object sender, EventArgs e)
         {
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            try
+            {
+                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
 

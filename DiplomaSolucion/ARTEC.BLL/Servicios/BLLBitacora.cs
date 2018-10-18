@@ -19,6 +19,8 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Bitacora Buscar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 return GestorBitacora.BitacoraVerLogs(unTipoLog, fechaInicio, fechaFin);
             }
             catch (Exception es)

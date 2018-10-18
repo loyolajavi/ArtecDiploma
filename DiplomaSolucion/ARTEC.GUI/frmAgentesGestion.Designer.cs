@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmAgentesGestion
@@ -44,11 +45,11 @@ namespace ARTEC.GUI
             this.lblCargo = new DevComponents.DotNetBar.LabelX();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.vldFrmAgentesGestion = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Nombre");
             this.txtCargo = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Apellido");
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -83,6 +84,14 @@ namespace ARTEC.GUI
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 78;
             this.btnBuscar.Text = "btnBuscar";
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] PerbtnBuscar = { "Agente Buscar" };
+            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblAgenteBuscar
@@ -242,6 +251,14 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 94;
             this.btnModificar.Text = "btnModificar";
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Agente Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // vldFrmAgentesGestion
@@ -249,6 +266,16 @@ namespace ARTEC.GUI
             this.vldFrmAgentesGestion.ContainerControl = this.btnModificar;
             this.vldFrmAgentesGestion.ErrorProvider = this.errorProvider1;
             this.vldFrmAgentesGestion.Highlighter = this.highlighter1;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese un Apellido";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // errorProvider1
             // 
@@ -258,11 +285,6 @@ namespace ARTEC.GUI
             // highlighter1
             // 
             this.highlighter1.ContainerControl = this;
-            // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Nombre";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // txtCargo
             // 
@@ -280,11 +302,6 @@ namespace ARTEC.GUI
             this.txtCargo.ReadOnly = true;
             this.txtCargo.Size = new System.Drawing.Size(227, 22);
             this.txtCargo.TabIndex = 95;
-            // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "Ingrese un Apellido";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // frmAgentesGestion
             // 
@@ -305,6 +322,7 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAgentesGestion";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.frmAgentesGestion_Load);
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

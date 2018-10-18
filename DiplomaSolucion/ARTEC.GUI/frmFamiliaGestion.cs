@@ -33,6 +33,16 @@ namespace ARTEC.GUI
         {
             try
             {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+
                 PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                 PermisosCbo = PermisosTodos.Where(X=>X.CantHijos > 0).ToList();
                 Familia FamAux = new Familia();

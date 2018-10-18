@@ -267,7 +267,7 @@ namespace ARTEC.GUI
                         if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnModificar.Enabled = true;
                         if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                        btnEliminar.Enabled = true;
+                            btnEliminar.Enabled = true;
                         btnReactivar.Enabled = false;
                         MessageBox.Show("Categoría: " + DepSeleccionada.NombreDependencia + " reactivada correctamente");
                     }

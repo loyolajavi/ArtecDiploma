@@ -70,6 +70,8 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorFamilia.FamiliaCrear(nuevaFamilia))
                     return true;
                 return false;
@@ -96,6 +98,8 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorFamilia.FamiliaModificar(AModifFamilia, FamQuitarMod, FamAgregarMod))
                     return true;
                 return false;
@@ -110,6 +114,8 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 if (GestorFamilia.FamiliaEliminar(unafamilia.IdIFamPat))
                     return true;
                 return false;

@@ -147,6 +147,27 @@ namespace ARTEC.GUI
             }
         }
 
+        private void frmAgentesGestion_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmAgentesGestion - frmAgentesGestion_Load");
+                MessageBox.Show("Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
 
 
     }

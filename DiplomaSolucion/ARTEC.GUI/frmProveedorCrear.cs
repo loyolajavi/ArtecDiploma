@@ -45,6 +45,24 @@ namespace ARTEC.GUI
 
             try
             {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+
+                //Permisos para buscar
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Buscar" }))
+                {
+                    this.txtProveedorBuscar.TextChanged -= new System.EventHandler(this.txtProveedorBuscar_TextChanged);
+                    this.cboProveedor.SelectionChangeCommitted -= new System.EventHandler(this.cboProveedor_SelectionChangeCommitted);
+                }
+                    
+
                 BLLCategoria ManagerCategoria = new BLLCategoria();
                 unasCategorias = ManagerCategoria.CategoriaTraerTodosActivos();
                 unosProveedores = ManagerProveedor.ProveedorTraerTodos();
@@ -386,6 +404,7 @@ namespace ARTEC.GUI
                         GrillaDirecciones.DataSource = null;
                         GrillaDirecciones.DataSource = DirAgregar;
 
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnModificar.Enabled = true;
                         btnCrearProveedor.Enabled = false;
 
@@ -396,7 +415,8 @@ namespace ARTEC.GUI
                         if (unProvBuscar.Activo == 0)
                         {
                             lblBaja.Visible = true;
-                            btnReactivar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnReactivar.Enabled = true;
                             btnEliminar.Enabled = false;
                             btnModificar.Enabled = false;
                             btnCrearProveedor.Enabled = false;
@@ -414,7 +434,9 @@ namespace ARTEC.GUI
                         {
                             lblBaja.Visible = false;
                             btnReactivar.Enabled = false;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnEliminar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnModificar.Enabled = true;
                             btnCrearProveedor.Enabled = false;
                             btnAgregarProd.Enabled = true;
@@ -714,6 +736,7 @@ namespace ARTEC.GUI
                         if (ManagerProveedor.ProveedorEliminar(unProvBuscar))
                         {
                             lblBaja.Visible = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnReactivar.Enabled = true;
                             btnEliminar.Enabled = false;
                             btnModificar.Enabled = false;
@@ -752,7 +775,9 @@ namespace ARTEC.GUI
                     {
                         lblBaja.Visible = false;
                         btnReactivar.Enabled = false;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnEliminar.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnModificar.Enabled = true;
                         btnCrearProveedor.Enabled = false;
                         btnAgregarProd.Enabled = true;
@@ -782,6 +807,7 @@ namespace ARTEC.GUI
             btnReactivar.Enabled = false;
             btnEliminar.Enabled = false;
             btnModificar.Enabled = false;
+            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnCrearProveedor.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
             btnCrearProveedor.Enabled = true;
             btnAgregarProd.Enabled = true;
             btnTelefono.Enabled = true;

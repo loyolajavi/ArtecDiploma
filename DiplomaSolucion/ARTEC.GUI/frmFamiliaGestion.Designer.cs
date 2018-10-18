@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmFamiliaGestion
@@ -251,6 +252,14 @@ namespace ARTEC.GUI
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 105;
             this.btnEliminar.Text = "btnEliminar";
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] PerbtnEliminar = { "Familia Eliminar" };
+            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
@@ -264,6 +273,14 @@ namespace ARTEC.GUI
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 104;
             this.btnModificar.Text = "btnModificar";
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Familia Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnCrear
@@ -276,6 +293,14 @@ namespace ARTEC.GUI
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 103;
             this.btnCrear.Text = "btnCrear";
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] PerbtnCrear = { "Familia Crear" };
+            dicbtnCrear.Add("Permisos", PerbtnCrear);
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // treeTodos

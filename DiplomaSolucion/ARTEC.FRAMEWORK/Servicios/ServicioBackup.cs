@@ -27,6 +27,8 @@ namespace ARTEC.FRAMEWORK.Servicios
 
             try
             {
+                if (!ServicioPermisos.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Backup BD" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "BaseDatosRespaldar", parameters);
                 return true;
@@ -49,6 +51,8 @@ namespace ARTEC.FRAMEWORK.Servicios
         {
             try
             {
+                if (!ServicioPermisos.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Restore BD" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 string stringPararProcesos = "DECLARE @ProcessId varchar(4) " + Environment.NewLine + "DECLARE CurrentProcesses SCROLL CURSOR FOR" + Environment.NewLine + 
                                 "select spid from sysprocesses where dbid = (select dbid from sysdatabases where name = 'Artec' ) order by spid " + Environment.NewLine + 
                                 "FOR READ ONLY" + Environment.NewLine + "OPEN CurrentProcesses" + Environment.NewLine + "FETCH NEXT FROM CurrentProcesses INTO @ProcessId" + 

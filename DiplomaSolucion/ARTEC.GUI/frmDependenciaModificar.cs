@@ -41,35 +41,55 @@ namespace ARTEC.GUI
 
         private void frmDependenciaModificar_Load(object sender, EventArgs e)
         {
-            txtDependencia.Text = DepModif.NombreDependencia;
-            //Coloco el TipoDependencia
-            LisTipoDep = ManagerDependencia.TipoDepTraerTodos();
-            cboTipoDep.DataSource = null;
-            cboTipoDep.DataSource = LisTipoDep;
-            cboTipoDep.DisplayMember = "DescripTipoDependencia";
-            cboTipoDep.ValueMember = "IdTipoDependencia";
-            cboTipoDep.SelectedValue = DepModif.unTipoDep.IdTipoDependencia;
-            //Coloco los agentes
-            GrillaAgentesLista.DataSource = null;
-            GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
-            //Resguardo
-            AgentesListaBKP = AgentesLista.Where(X=>X.IdAgente > 0).ToList() as List<Agente>;
 
-            //AgregarBotonEliminar();
-            FormatearGrillaAgentes();
+            try
+            {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
 
-            //Traer todos los agentes (para agregar)
-            BLLAgente ManagerAgente = new BLLAgente();
-            unosAgentes = new List<Agente>();
-            unosAgentes = ManagerAgente.AgentesTraerTodos();
-            //Traigo los cargos
-            BLLCargo ManagerCargo = new BLLCargo();
-            unosCargos = new List<Cargo>();
-            unosCargos = ManagerCargo.CargosTraerTodos();
-            cboCargo.DataSource = null;
-            cboCargo.DataSource = unosCargos;
-            cboCargo.DisplayMember = "DescripCargo";
-            cboCargo.ValueMember = "IdCargo";
+                txtDependencia.Text = DepModif.NombreDependencia;
+                //Coloco el TipoDependencia
+                LisTipoDep = ManagerDependencia.TipoDepTraerTodos();
+                cboTipoDep.DataSource = null;
+                cboTipoDep.DataSource = LisTipoDep;
+                cboTipoDep.DisplayMember = "DescripTipoDependencia";
+                cboTipoDep.ValueMember = "IdTipoDependencia";
+                cboTipoDep.SelectedValue = DepModif.unTipoDep.IdTipoDependencia;
+                //Coloco los agentes
+                GrillaAgentesLista.DataSource = null;
+                GrillaAgentesLista.DataSource = AgentesLista = DepModif.unosAgentes;
+                //Resguardo
+                AgentesListaBKP = AgentesLista.Where(X => X.IdAgente > 0).ToList() as List<Agente>;
+
+                //AgregarBotonEliminar();
+                FormatearGrillaAgentes();
+
+                //Traer todos los agentes (para agregar)
+                BLLAgente ManagerAgente = new BLLAgente();
+                unosAgentes = new List<Agente>();
+                unosAgentes = ManagerAgente.AgentesTraerTodos();
+                //Traigo los cargos
+                BLLCargo ManagerCargo = new BLLCargo();
+                unosCargos = new List<Cargo>();
+                unosCargos = ManagerCargo.CargosTraerTodos();
+                cboCargo.DataSource = null;
+                cboCargo.DataSource = unosCargos;
+                cboCargo.DisplayMember = "DescripCargo";
+                cboCargo.ValueMember = "IdCargo";
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+          
             
         }
 
@@ -236,7 +256,20 @@ namespace ARTEC.GUI
             deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
             deleteButton.UseColumnTextForButtonValue = true;
+
+            Dictionary<string, string[]> dicdeleteButton = new Dictionary<string, string[]>();
+            string[] PerdeleteButton = { "Agente Eliminar" };
+            dicdeleteButton.Add("Permisos", PerdeleteButton);
+            string[] IdiomadeleteButton = { "Eliminar" };
+            dicdeleteButton.Add("Idioma", IdiomadeleteButton);
+            deleteButton.Tag = dicdeleteButton;
+
             GrillaAgentesLista.Columns.Add(deleteButton);
+
+            if (!string.IsNullOrEmpty(deleteButton.Name) && deleteButton.Tag != null && deleteButton.Tag.GetType() == typeof(Dictionary<string, string[]>) && (deleteButton.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+            {
+                deleteButton.Visible = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((deleteButton.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+            }
 
             //Formato
             GrillaAgentesLista.Columns["IdAgente"].Visible = false;

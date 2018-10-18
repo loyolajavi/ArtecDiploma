@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmBitacora
@@ -237,6 +238,14 @@ namespace ARTEC.GUI
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 58;
             this.btnBuscar.Text = "Buscar";
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] PerbtnBuscar = { "Bitacora Buscar" };
+            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // frmBitacora

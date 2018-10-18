@@ -117,6 +117,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Buscar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 return GestorUsuario.UsuarioTraerDatosPorNomUs(NomUs);
             }
             catch (Exception es)
@@ -134,6 +136,9 @@ namespace ARTEC.BLL
         {
             try
             {
+                //Esta función está ligada a FamiliaEliminar
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Familia Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 if (PerAgregar.Count > 0)
@@ -156,7 +161,7 @@ namespace ARTEC.BLL
             
         }
 
-        public void UsuarioModificarNomUs(int IdUsuario, string NomUs)
+        private void UsuarioModificarNomUs(int IdUsuario, string NomUs)
         {
             try
             {
@@ -169,7 +174,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public void UsuarioModificarNombre(int IdUsuario, string Nombre)
+        private void UsuarioModificarNombre(int IdUsuario, string Nombre)
         {
             try
             {
@@ -181,7 +186,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public void UsuarioModificarApellido(int IdUsuario, string Apellido)
+        private void UsuarioModificarApellido(int IdUsuario, string Apellido)
         {
             try
             {
@@ -193,7 +198,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public void UsuarioModificarMail(int IdUsuario, string Mail)
+        private void UsuarioModificarMail(int IdUsuario, string Mail)
         {
             try
             {
@@ -205,7 +210,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public void UsuarioModificarPass(int IdUsuario, string Pass)
+        private void UsuarioModificarPass(int IdUsuario, string Pass)
         {
             try
             {
@@ -221,6 +226,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Crear" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 unUsuario.Activo = 1;
                 if (GestorUsuario.UsuarioCrear(unUsuario))
                         return true;
@@ -236,6 +243,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Eliminar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 unUsuario.Activo = 0;
                 long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(unUsuario);
                 if (ResAcum > 0)
@@ -256,6 +265,8 @@ namespace ARTEC.BLL
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Reactivar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 unUsuario.Activo = 1;
                  long ResAcum = FRAMEWORK.Servicios.ServicioDV.DVCalcularDVH(unUsuario);
                  if (ResAcum > 0)
@@ -281,6 +292,8 @@ namespace ARTEC.BLL
 
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
 

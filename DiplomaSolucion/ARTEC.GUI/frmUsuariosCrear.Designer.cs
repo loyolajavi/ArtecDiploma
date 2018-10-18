@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmUsuariosCrear
@@ -338,6 +339,14 @@ namespace ARTEC.GUI
             this.btnCrearUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearUsuario.TabIndex = 73;
             this.btnCrearUsuario.Text = "btnCrearUsuario";
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] PerbtnCrear = { "Usuario Crear" };
+            dicbtnCrear.Add("Permisos", PerbtnCrear);
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrearUsuario.Tag = dicbtnCrear;
+
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
             // vldfrmUsuarioCrear

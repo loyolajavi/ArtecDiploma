@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmDependenciaModificar
@@ -293,6 +294,14 @@ namespace ARTEC.GUI
             this.btnNuevoAgente.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnNuevoAgente.TabIndex = 84;
             this.btnNuevoAgente.Text = "Crear Nuevo Agente";
+
+            Dictionary<string, string[]> dicbtnNuevoAgente = new Dictionary<string, string[]>();
+            string[] PerbtnNuevoAgente = { "Agente Crear" };
+            dicbtnNuevoAgente.Add("Permisos", PerbtnNuevoAgente);
+            string[] IdiomabtnNuevoAgente = { "Crear Agente" };
+            dicbtnNuevoAgente.Add("Idioma", IdiomabtnNuevoAgente);
+            this.btnNuevoAgente.Tag = dicbtnNuevoAgente;
+
             this.btnNuevoAgente.Click += new System.EventHandler(this.btnNuevoAgente_Click);
             // 
             // vldFrmDependenciaModificar

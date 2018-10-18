@@ -34,19 +34,39 @@ namespace ARTEC.GUI
 
         private void frmCategoriaGestion_Load(object sender, EventArgs e)
         {
-            //Traer Proveedores
-            unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
-            cboProveedor.DataSource = null;
-            cboProveedor.DataSource = unosProveedores;
-            cboProveedor.DisplayMember = "AliasProv";
-            cboProveedor.ValueMember = "IdProveedor";
 
-            //Traer TipoBien
-            unosTiposBien = ManagerTipoBien.TraerTodos();
-            cboTipo.DataSource = null;
-            cboTipo.DataSource = unosTiposBien;
-            cboTipo.DisplayMember = "DescripTipoBien";
-            cboTipo.ValueMember = "IdTipoBien";
+            try
+            {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+
+                //Traer Proveedores
+                unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
+                cboProveedor.DataSource = null;
+                cboProveedor.DataSource = unosProveedores;
+                cboProveedor.DisplayMember = "AliasProv";
+                cboProveedor.ValueMember = "IdProveedor";
+
+                //Traer TipoBien
+                unosTiposBien = ManagerTipoBien.TraerTodos();
+                cboTipo.DataSource = null;
+                cboTipo.DataSource = unosTiposBien;
+                cboTipo.DisplayMember = "DescripTipoBien";
+                cboTipo.ValueMember = "IdTipoBien";
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -68,7 +88,8 @@ namespace ARTEC.GUI
                         if (unaCategoria.Activo == 0)
                         {
                             lblBaja.Visible = true;
-                            btnReactivar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnReactivar.Enabled = true;
                             btnModificar.Enabled = false;
                             btnEliminar.Enabled = false;
                             btnAgregar.Enabled = false;
@@ -81,8 +102,10 @@ namespace ARTEC.GUI
                         {
                             lblBaja.Visible = false;
                             btnReactivar.Enabled = false;
-                            btnModificar.Enabled = true;
-                            btnEliminar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnModificar.Enabled = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                                btnEliminar.Enabled = true;
                             btnAgregar.Enabled = true;
                             txtCategoria.Enabled = true;
                             cboProveedor.Enabled = true;
@@ -106,6 +129,7 @@ namespace ARTEC.GUI
                         cboProveedor.Refresh();
                         GrillaProveedores.DataSource = null;
                         unaCategoria = null;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnCrearCategoria.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnCrearCategoria.Enabled = true;
                         btnModificar.Enabled = false;
                         btnEliminar.Enabled = false;
@@ -120,6 +144,7 @@ namespace ARTEC.GUI
                     cboProveedor.Refresh();
                     GrillaProveedores.DataSource = null;
                     unaCategoria = null;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnCrearCategoria.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                     btnCrearCategoria.Enabled = true;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
@@ -177,6 +202,7 @@ namespace ARTEC.GUI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             vldfrmCategoriaGestion.ClearFailedValidations();
+            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnCrearCategoria.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
             btnCrearCategoria.Enabled = true;
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
@@ -249,6 +275,7 @@ namespace ARTEC.GUI
                         if(ManagerCategoria.CategoriaEliminar(unaCategoria))
                         {
                             lblBaja.Visible = true;
+                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnReactivar.Enabled = true;
                             btnEliminar.Enabled = false;
                             btnModificar.Enabled = false;
@@ -283,7 +310,9 @@ namespace ARTEC.GUI
                     {
                         lblBaja.Visible = false;
                         btnReactivar.Enabled = false;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnModificar.Enabled = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnEliminar.Enabled = true;
                         btnAgregar.Enabled = true;
                         txtCategoria.Enabled = true;

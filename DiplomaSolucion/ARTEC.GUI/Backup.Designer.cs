@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class Backup
@@ -89,6 +90,14 @@ namespace ARTEC.GUI
             this.btnRespaldar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRespaldar.TabIndex = 2;
             this.btnRespaldar.Text = "Respaldar";
+
+            Dictionary<string, string[]> dicbtnRespaldar = new Dictionary<string, string[]>();
+            string[] PerbtnRespaldar = { "Backup BD" };
+            dicbtnRespaldar.Add("Permisos", PerbtnRespaldar);
+            string[] IdiomabtnRespaldar = { "Respaldar" };
+            dicbtnRespaldar.Add("Idioma", IdiomabtnRespaldar);
+            this.btnRespaldar.Tag = dicbtnRespaldar;
+
             this.btnRespaldar.Click += new System.EventHandler(this.btnRespaldar_Click);
             // 
             // btnExaminarRespaldar
@@ -215,6 +224,14 @@ namespace ARTEC.GUI
             this.btnRestaurar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRestaurar.TabIndex = 2;
             this.btnRestaurar.Text = "Restaurar";
+
+            Dictionary<string, string[]> dicbtnRestaurar = new Dictionary<string, string[]>();
+            string[] PerbtnRestaurar = { "Restore BD" };
+            dicbtnRestaurar.Add("Permisos", PerbtnRestaurar);
+            string[] IdiomabtnRestaurar = { "Restaurar" };
+            dicbtnRestaurar.Add("Idioma", IdiomabtnRestaurar);
+            this.btnRestaurar.Tag = dicbtnRestaurar;
+
             this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
             // btnExaminarRestaurar

@@ -33,10 +33,31 @@ namespace ARTEC.GUI
 
         private void frmUsuariosCrear_Load(object sender, EventArgs e)
         {
-            LisAuxDisp = new List<IFamPat>();
-            LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
-            LisAuxAsig = new List<IFamPat>();
-            ListarPermisos(LisAuxDisp, treeDisponibles); 
+            try
+            {
+                //Permisos
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
+                {
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
+                }
+                
+                LisAuxDisp = new List<IFamPat>();
+                LisAuxDisp = ManagerFamilia.PermisosTraerTodos();
+                LisAuxAsig = new List<IFamPat>();
+                ListarPermisos(LisAuxDisp, treeDisponibles); 
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            
             
         }
 
