@@ -45,12 +45,28 @@ namespace ARTEC.BLL.Servicios
                         {
                             CambiarIdiomaCboBox(unControl);
                         }
-                        else
+                        //Antes de implementar Idioma con Diccionario y Tags estaba así (ya no utilizado)
+                        //else
+                        //{
+                        //    //unControl.Text = Idioma._EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto; esto estaba comentado incluse antes de la prueba de Diccionario
+                        //    foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
+                        //    {
+                        //        if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                        //        {
+                        //            unControl.Text = unaEtiqueta.Texto;
+                        //            break;
+                        //        }
+                        //    }
+                        //}
+                        //End Antes de implementar Idioma con Diccionario y Tags estaba así (ya no utilizado)
+
+                        //Idioma con Diccionario y Tags
+                        else if (unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Idioma"))
                         {
-                            //unControl.Text = Idioma._EtiquetasCompartidas.Find(X => X.NombreControl == unControl.Name).Texto;
+                            string unaClave = (unControl.Tag as Dictionary<string, string[]>)["Idioma"].First();
                             foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
                             {
-                                if (string.Equals(unControl.Name, unaEtiqueta.NombreControl))
+                                if (string.Equals(unaClave , unaEtiqueta.NombreControl))
                                 {
                                     unControl.Text = unaEtiqueta.Texto;
                                     break;
@@ -168,7 +184,9 @@ namespace ARTEC.BLL.Servicios
             BLLEstadoSolicitud ManagerEstadoSolic = new BLLEstadoSolicitud();
             List<EstadoSolicitud> unosEstadoSolicitud = new List<EstadoSolicitud>();
             unosEstadoSolicitud = ManagerEstadoSolic.EstadoSolicitudTraerTodos();
-            int seleccionado = (int)elCboBox.SelectedValue;
+            int seleccionado = 0;
+            if (elCboBox.SelectedValue != null)
+                seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
             elCboBox.DataSource = unosEstadoSolicitud;
@@ -182,7 +200,9 @@ namespace ARTEC.BLL.Servicios
             BLLPrioridad ManagerPrioridad = new BLLPrioridad();
             List<Prioridad> unasPrioridades = new List<Prioridad>();
             unasPrioridades = ManagerPrioridad.PrioridadTraerTodos();
-            int seleccionado = (int)elCboBox.SelectedValue;
+            int seleccionado = 0;
+            if(elCboBox.SelectedValue != null)
+                seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             unasPrioridades.Insert(0, new Prioridad(-1, ""));
             elCboBox.DataSource = unasPrioridades;
@@ -196,7 +216,9 @@ namespace ARTEC.BLL.Servicios
             BLLEstadoInventario ManagerEstadoInventario = new BLLEstadoInventario();
             List<EstadoInventario> unosEstInven = new List<EstadoInventario>();
             unosEstInven = ManagerEstadoInventario.EstadoInvTraerTodos();
-            int seleccionado = (int)elCboBox.SelectedValue;
+            int seleccionado = 0;
+            if (elCboBox.SelectedValue != null)
+                seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             //unosEstInven.Insert(0, new EstadoInventario(-1, ""));
             elCboBox.DataSource = unosEstInven;
@@ -210,7 +232,9 @@ namespace ARTEC.BLL.Servicios
             BLLEstadoSolicDetalle ManagerEstadoSolicDetalle = new BLLEstadoSolicDetalle();
             List<EstadoSolicDetalle> unosEstSolicDetalle = new List<EstadoSolicDetalle>();
             unosEstSolicDetalle = ManagerEstadoSolicDetalle.EstadoSolDetallesTraerTodos();
-            int seleccionado = (int)elCboBox.SelectedValue;
+            int seleccionado = 0;
+            if (elCboBox.SelectedValue != null)
+                seleccionado = (int)elCboBox.SelectedValue;
             elCboBox.DataSource = null;
             //unosEstInven.Insert(0, new EstadoInventario(-1, "")); //QUEDA COMENTADO PARA QUE NO TENGA UN VALOR NULL 
             elCboBox.DataSource = unosEstSolicDetalle;

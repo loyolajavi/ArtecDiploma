@@ -30,14 +30,16 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblSolicitud = new DevComponents.DotNetBar.LabelX();
             this.lblInactivo = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.lblDesvinculado = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
@@ -123,6 +125,8 @@ namespace ARTEC.GUI
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.textBoxX1);
+            this.panel1.Controls.Add(this.lblSolicitud);
             this.panel1.Controls.Add(this.lblInactivo);
             this.panel1.Controls.Add(this.lblDesvinculado);
             this.panel1.Controls.Add(this.btnCancelar);
@@ -149,6 +153,36 @@ namespace ARTEC.GUI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1071, 659);
             this.panel1.TabIndex = 6;
+            // 
+            // textBoxX1
+            // 
+            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
+            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
+            this.textBoxX1.Location = new System.Drawing.Point(969, 3);
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.PreventEnterBeep = true;
+            this.textBoxX1.ReadOnly = true;
+            this.textBoxX1.Size = new System.Drawing.Size(99, 22);
+            this.textBoxX1.TabIndex = 30;
+            // 
+            // lblSolicitud
+            // 
+            // 
+            // 
+            // 
+            this.lblSolicitud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSolicitud.Location = new System.Drawing.Point(901, 6);
+            this.lblSolicitud.Name = "lblSolicitud";
+            this.lblSolicitud.Size = new System.Drawing.Size(67, 17);
+            this.lblSolicitud.TabIndex = 29;
+            this.lblSolicitud.Text = "lblSolicitud";
             // 
             // lblInactivo
             // 
@@ -186,22 +220,6 @@ namespace ARTEC.GUI
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCancelar.TabIndex = 26;
-
-            Dictionary<string, string[]> dicBtnCancelar = new Dictionary<string, string[]>();
-            string[] PerBtnCancelar = { "Solicitud Cancelar" };
-            dicBtnCancelar.Add("Permisos", PerBtnCancelar);
-            string[] IdiomaBtnCancelar = { "Cancelar" };
-            dicBtnCancelar.Add("Idioma", IdiomaBtnCancelar);
-            this.btnCancelar.Tag = dicBtnCancelar;
-
-                //{"Permisos", new[] { "Solicitud Cancelar", "hola"}},
-                //{"Idioma", new[] {"Cancelar"}}
-
-            //this.btnCancelar.Tag = Dictionary<string, string>();
-            //(this.btnCancelar.Tag as Dictionary<string, string>).Add("Permisos", "Solicitud Cancelar");
-              //{"Idioma", new[] {"Cancelar"}}
-            //};
-            
             this.btnCancelar.Text = "btnCancelar";
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -243,14 +261,6 @@ namespace ARTEC.GUI
             this.btnModifSolicitud.Size = new System.Drawing.Size(75, 23);
             this.btnModifSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModifSolicitud.TabIndex = 22;
-            //this.btnModifSolicitud.Tag = new string[] {
-            //"Solicitud Modificar"};
-            Dictionary<string, string[]> dicbtnModifSolicitud = new Dictionary<string, string[]>();
-            string[] PerdicbtnModifSolicitud = { "Solicitud Modificar" };
-            dicbtnModifSolicitud.Add("Permisos", PerdicbtnModifSolicitud);
-            string[] IdiomadicbtnModifSolicitud = { "Modificar" };
-            dicbtnModifSolicitud.Add("Idioma", IdiomadicbtnModifSolicitud);
-            this.btnModifSolicitud.Tag = dicbtnModifSolicitud;
             this.btnModifSolicitud.Text = "Modificar";
             this.btnModifSolicitud.Click += new System.EventHandler(this.btnModifSolicitud_Click);
             // 
@@ -532,7 +542,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -940,15 +949,6 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Size = new System.Drawing.Size(75, 40);
             this.btnSolicitarPartida.TabIndex = 7;
             this.btnSolicitarPartida.Text = "btnSoliitarPartida";
-            //this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
-            
-            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
-            string[] PerbtnSolicitarPartida = { "Partida Crear" };
-            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
-            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
-            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
-            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
-            
             this.btnSolicitarPartida.UseVisualStyleBackColor = true;
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSoliitarPartida_Click);
             // 
@@ -964,14 +964,6 @@ namespace ARTEC.GUI
             this.btnBienAsignar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBienAsignar.TabIndex = 8;
             this.btnBienAsignar.Text = "btnBienAsignar";
-
-            Dictionary<string, string[]> dicbtnBienAsignar = new Dictionary<string, string[]>();
-            string[] PerbtnBienAsignar = { "Asignacion Crear" };
-            dicbtnBienAsignar.Add("Permisos", PerbtnBienAsignar);
-            string[] IdiomabtnBienAsignar = { "Crear Asignación" };
-            dicbtnBienAsignar.Add("Idioma", IdiomabtnBienAsignar);
-            this.btnBienAsignar.Tag = dicbtnBienAsignar;
-
             this.btnBienAsignar.TextColor = System.Drawing.Color.White;
             this.btnBienAsignar.Click += new System.EventHandler(this.btnBienAsignar_Click);
             // 
@@ -1140,5 +1132,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblDesvinculado;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblInactivo;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.LabelX lblSolicitud;
     }
 }

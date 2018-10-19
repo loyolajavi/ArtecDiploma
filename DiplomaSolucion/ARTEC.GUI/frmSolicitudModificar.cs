@@ -58,13 +58,50 @@ namespace ARTEC.GUI
         public frmSolicitudModificar(Solicitud unaSolic)
         {
             InitializeComponent();
+            Dictionary<string, string[]> diclblSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblSolicitud = { "Solicitud" };
+            diclblSolicitud.Add("Idioma", IdiomalblSolicitud);
+            this.lblSolicitud.Tag = diclblSolicitud;
             unaSolicitud = unaSolic;
+
+            Dictionary<string, string[]> dicbtnCancelar = new Dictionary<string, string[]>();
+            string[] PerbtnCancelar = { "Solicitud Cancelar" };
+            dicbtnCancelar.Add("Permisos", PerbtnCancelar);
+            string[] IdiomabtnCancelar = { "Cancelar" };
+            dicbtnCancelar.Add("Idioma", IdiomabtnCancelar);
+            this.btnCancelar.Tag = dicbtnCancelar;
+
+            Dictionary<string, string[]> dicbtnModifSolicitud = new Dictionary<string, string[]>();
+            string[] PerbtnModifSolicitud = { "Solicitud Modificar" };
+            dicbtnModifSolicitud.Add("Permisos", PerbtnModifSolicitud);
+            string[] IdiomabtnModifSolicitud = { "Modificar" };
+            dicbtnModifSolicitud.Add("Idioma", IdiomabtnModifSolicitud);
+            this.btnModifSolicitud.Tag = dicbtnModifSolicitud;
+
+            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
+            string[] PerbtnSolicitarPartida = { "Partida Crear" };
+            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
+            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
+            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
+            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
+
+            Dictionary<string, string[]> dicbtnBienAsignar = new Dictionary<string, string[]>();
+            string[] PerbtnBienAsignar = { "Asignacion Crear" };
+            dicbtnBienAsignar.Add("Permisos", PerbtnBienAsignar);
+            string[] IdiomabtnBienAsignar = { "Crear Asignación" };
+            dicbtnBienAsignar.Add("Idioma", IdiomabtnBienAsignar);
+            this.btnBienAsignar.Tag = dicbtnBienAsignar;
+            
+            
+
         }
 
         private void frmSolicitudModificar_Load(object sender, EventArgs e)
         {
             try
             {
+                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)

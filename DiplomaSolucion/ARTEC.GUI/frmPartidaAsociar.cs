@@ -10,6 +10,8 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.ENTIDADES.Helpers;
+using ARTEC.BLL.Servicios;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -29,9 +31,19 @@ namespace ARTEC.GUI
 
         private void frmPartidaAsociar_Load(object sender, EventArgs e)
         {
-            ///Traigo Dependencias para busqueda dinámica
-            BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
-            unasDependencias = ManagerDependencia.TraerTodos();
+            try
+            {
+                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                ///Traigo Dependencias para busqueda dinámica
+                BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
+                unasDependencias = ManagerDependencia.TraerTodos();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

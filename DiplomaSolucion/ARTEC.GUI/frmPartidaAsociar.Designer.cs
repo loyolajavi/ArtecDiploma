@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace ARTEC.GUI
 {
     partial class frmPartidaAsociar
@@ -321,6 +322,12 @@ namespace ARTEC.GUI
             this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkCaja.TabIndex = 47;
             this.chkCaja.Text = "chkCaja";
+
+            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
+            string[] IdiomachkCaja = { "Caja" };
+            dicchkCaja.Add("Idioma", IdiomachkCaja);
+            this.chkCaja.Tag = dicchkCaja;
+
             // 
             // lblMontoSolic
             // 

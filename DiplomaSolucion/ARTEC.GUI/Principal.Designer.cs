@@ -146,7 +146,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnCrearSolicitud = new Dictionary<string, string[]>();
             string[] PerbtnCrearSolicitud = { "Solicitud Crear" };
             dicbtnCrearSolicitud.Add("Permisos", PerbtnCrearSolicitud);
-            string[] IdiomabtnCrearSolicitud = { "Solicitud Crear" };
+            string[] IdiomabtnCrearSolicitud = { "Crear Solicitud" };
             dicbtnCrearSolicitud.Add("Idioma", IdiomabtnCrearSolicitud);
             this.btnCrearSolicitud.Tag = dicbtnCrearSolicitud;
 
@@ -278,7 +278,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnAgentes = new Dictionary<string, string[]>();
             string[] PerbtnAgentes = { "Agente Buscar", "Agente Modificar" };
             dicbtnAgentes.Add("Permisos", PerbtnAgentes);
-            string[] IdiomabtnAgentes = { "Crear Rendición" };
+            string[] IdiomabtnAgentes = { "Agentes" };
             dicbtnAgentes.Add("Idioma", IdiomabtnAgentes);
             this.btnAgentes.Tag = dicbtnAgentes;
 
@@ -305,7 +305,7 @@ namespace ARTEC.GUI
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 8;
-            this.panelEx1.Text = "panelEx1";
+            this.panelEx1.Text = "";
             this.panelEx1.Visible = false;
             // 
             // btnFamilias
@@ -347,7 +347,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnBitacora = new Dictionary<string, string[]>();
             string[] PerbtnBitacora = { "Bitacora Buscar" };
             dicbtnBitacora.Add("Permisos", PerbtnBitacora);
-            string[] IdiomabtnBitacora = { "Bitácora" };
+            string[] IdiomabtnBitacora = { "Bitacora" };
             dicbtnBitacora.Add("Idioma", IdiomabtnBitacora);
             this.btnBitacora.Tag = dicbtnBitacora;
 
@@ -370,7 +370,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnBackup = new Dictionary<string, string[]>();
             string[] PerbtnBackup = { "Backup BD", "Restore BD" };
             dicbtnBackup.Add("Permisos", PerbtnBackup);
-            string[] IdiomabtnBackup = { "Crear" };
+            string[] IdiomabtnBackup = { "Backup" };
             dicbtnBackup.Add("Idioma", IdiomabtnBackup);
             this.btnBackup.Tag = dicbtnBackup;
 
@@ -393,7 +393,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnUsuarios = new Dictionary<string, string[]>();
             string[] PerbtnUsuarios = { "Usuario Buscar", "Usuario Crear", "Usuario Modificar", "Usuario Eliminar", "Usuario Reactivar" };
             dicbtnUsuarios.Add("Permisos", PerbtnUsuarios);
-            string[] IdiomabtnUsuarios = { "Crear" };
+            string[] IdiomabtnUsuarios = { "Usuarios" };
             dicbtnUsuarios.Add("Idioma", IdiomabtnUsuarios);
             this.btnUsuarios.Tag = dicbtnUsuarios;
 
@@ -410,6 +410,12 @@ namespace ARTEC.GUI
             this.btnVolver.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "btnVolver";
+
+            Dictionary<string, string[]> dicbtnVolver = new Dictionary<string, string[]>();
+            string[] IdiomabtnVolver = { "Volver" };
+            dicbtnVolver.Add("Idioma", IdiomabtnVolver);
+            this.btnVolver.Tag = dicbtnVolver;
+
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnAvanzadas
@@ -453,7 +459,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnCategorias = new Dictionary<string, string[]>();
             string[] PerbtnCategorias = { "Categoria Buscar", "Categoria Crear", "Categoria Modificar", "Categoria Eliminar", "Categoria Reactivar" };
             dicbtnCategorias.Add("Permisos", PerbtnCategorias);
-            string[] IdiomabtnCategorias = { "Categorias" };
+            string[] IdiomabtnCategorias = { "Categorías" };
             dicbtnCategorias.Add("Idioma", IdiomabtnCategorias);
             this.btnCategorias.Tag = dicbtnCategorias;
 
