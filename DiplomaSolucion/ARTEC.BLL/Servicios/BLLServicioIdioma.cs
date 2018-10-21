@@ -8,13 +8,16 @@ using ARTEC.ENTIDADES;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.DAL;
 using ARTEC.DAL.Servicios;
+using System.ComponentModel;
+using System.Reflection;
+using DevComponents.DotNetBar.Validator;
 
 
 namespace ARTEC.BLL.Servicios
 {
     public static class BLLServicioIdioma
     {
-
+        public static List<SuperValidator> LisAUX = new List<SuperValidator>();
         public static List<Idioma> IdiomaTraerTodos()
         {
             return DALServicioIdioma.IdiomaTraerTodos();
@@ -24,9 +27,6 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
-
-
-
                 //Obtengo las etiquetas de la BD una única vez para todos los formularios y las pongo en la static variable de Etiquetas (si cambio de idioma voy a la bd de nuevo)
                 if (Idioma._EtiquetasCompartidas == null)
                 {
@@ -36,9 +36,50 @@ namespace ARTEC.BLL.Servicios
                 //Obtengo todos los controles del formulario
                 IEnumerable<Control> unosControles = ObtenerControles(unForm);
 
+                //Obtengo los SuperValidator
+                ComponentCollection unosComponentes = GetComponents(unForm as Form);
+                LisAUX.Clear();
+                foreach (Component item in unosComponentes)
+                {
+                    if (item.GetType() == typeof(SuperValidator))
+                        LisAUX.Add(item as SuperValidator);
+                }
+
                 //Coloco el texto en cada control
                 foreach (Control unControl in unosControles)
                 {
+                    //Traducción de los msjs de validaciones
+                    foreach (SuperValidator item in LisAUX)
+                    {
+                        if (item.GetValidator1(unControl) != null && item.GetValidator1(unControl).ErrorMessage.Length > 0)
+                            if (unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Idioma"))
+                            {
+                                string unaClave = (unControl.Tag as Dictionary<string, string[]>)["Idioma"].First();
+                                foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
+                                {
+                                    if (string.Equals(unaClave , unaEtiqueta.NombreControl))
+                                    {
+                                        item.GetValidator1(unControl).ErrorMessage = unaEtiqueta.Texto;
+                                        break;
+                                    }
+                                }
+                            }
+                        if (item.GetValidator2(unControl) != null && item.GetValidator2(unControl).ErrorMessage.Length > 0)
+                            if (unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Idioma"))
+                            {
+                                string unaClave = (unControl.Tag as Dictionary<string, string[]>)["Idioma"].ElementAt(1);
+                                foreach (Etiqueta unaEtiqueta in Idioma._EtiquetasCompartidas)
+                                {
+                                    if (string.Equals(unaClave, unaEtiqueta.NombreControl))
+                                    {
+                                        item.GetValidator2(unControl).ErrorMessage = unaEtiqueta.Texto;
+                                        break;
+                                    }
+                                }
+                            }
+                    }
+
+                    //Traducción de los ComboBox
                     if (!string.IsNullOrEmpty(unControl.Name) && unControl.GetType().ToString() != "System.Windows.Forms.PictureBox" && unControl.GetType().ToString() != "DevComponents.DotNetBar.Controls.TextBoxX")
                     {
                         if (unControl.Name.StartsWith("cbo"))
@@ -60,7 +101,7 @@ namespace ARTEC.BLL.Servicios
                         //}
                         //End Antes de implementar Idioma con Diccionario y Tags estaba así (ya no utilizado)
 
-                        //Idioma con Diccionario y Tags
+                        //Idioma del resto de los controles (todos en definitiva) con Diccionario y Tags
                         else if (unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Idioma"))
                         {
                             string unaClave = (unControl.Tag as Dictionary<string, string[]>)["Idioma"].First();
@@ -79,9 +120,29 @@ namespace ARTEC.BLL.Servicios
             }
             catch (Exception es)
             {
-
                 throw;
             }
+        }
+
+
+        //Para obtener los componentes de un formulario por reflection
+        public static ComponentCollection GetComponents(Form frm)
+        {
+            List<Component> components = new List<Component>();
+            FieldInfo[] fieldInfos = frm.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            foreach (FieldInfo f in fieldInfos)
+            {
+                if (f.FieldType.BaseType == typeof(Component))
+                {
+                    Component c = f.GetValue(frm) as Component;
+                    if (c != null)
+                        components.Add(c);
+                }
+            }
+
+            ComponentCollection ArrayComponentes = new ComponentCollection(components.ToArray());
+
+            return ArrayComponentes;
         }
 
 

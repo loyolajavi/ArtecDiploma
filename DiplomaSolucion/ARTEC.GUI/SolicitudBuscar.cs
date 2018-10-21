@@ -13,6 +13,7 @@ using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.BLL.Servicios;
+using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -28,6 +29,77 @@ namespace ARTEC.GUI
         public SolicitudBuscar()
         {
             InitializeComponent();
+            
+            //Carga de Tags
+
+            Dictionary<string, string[]> dicFrmSolicitudBuscar = new Dictionary<string, string[]>();
+            string[] PerFrmSolicitudBuscar = { "Solicitud Buscar" };
+            dicFrmSolicitudBuscar.Add("Permisos", PerFrmSolicitudBuscar);
+            string[] IdiomaFrmSolicitudBuscar = { "Buscar Solicitudes" };
+            dicFrmSolicitudBuscar.Add("Idioma", IdiomaFrmSolicitudBuscar);
+            this.Tag = dicFrmSolicitudBuscar;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Dependencia" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclabelX6 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX6 = { "Finalización" };
+            diclabelX6.Add("Idioma", IdiomalabelX6);
+            this.labelX6.Tag = diclabelX6;
+
+            Dictionary<string, string[]> diclabelX5 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX5 = { "Creación" };
+            diclabelX5.Add("Idioma", IdiomalabelX5);
+            this.labelX5.Tag = diclabelX5;
+
+            Dictionary<string, string[]> diclblNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolicitud = { "Solicitud" };
+            diclblNroSolicitud.Add("Idioma", IdiomalblNroSolicitud);
+            this.lblNroSolicitud.Tag = diclblNroSolicitud;
+
+            Dictionary<string, string[]> diclabelX8 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX8 = { "Estado" };
+            diclabelX8.Add("Idioma", IdiomalabelX8);
+            this.labelX8.Tag = diclabelX8;
+
+            Dictionary<string, string[]> diclabelX10 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX10 = { "Asignado a" };
+            diclabelX10.Add("Idioma", IdiomalabelX10);
+            this.labelX10.Tag = diclabelX10;
+
+            Dictionary<string, string[]> diclabelX9 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX9 = { "Prioridad" };
+            diclabelX9.Add("Idioma", IdiomalabelX9);
+            this.labelX9.Tag = diclabelX9;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Bien" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
+            string[] IdiomatxtResBusqueda = { "No hay resultados" };
+            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
+            this.txtResBusqueda.Tag = dictxtResBusqueda;
+
+            Dictionary<string, string[]> dicvld1NroSolic = new Dictionary<string, string[]>();
+            string[] Idiomavld1NroSolic = { "Solo se aceptan números" };
+            dicvld1NroSolic.Add("Idioma", Idiomavld1NroSolic);
+            this.vld1NroSolic.Tag = dicvld1NroSolic;
+
+            Dictionary<string, string[]> dictxtNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomatxtNroSolicitud = { "Solo se aceptan números" };
+            dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
+            this.txtNroSolicitud.Tag = dictxtNroSolicitud;
+            
+            
         }
 
         public static SolicitudBuscar ObtenerInstancia()
@@ -126,6 +198,9 @@ namespace ARTEC.GUI
                 {
                     this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                 }
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
                 ///Traer Estados Solicitud
                 BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();

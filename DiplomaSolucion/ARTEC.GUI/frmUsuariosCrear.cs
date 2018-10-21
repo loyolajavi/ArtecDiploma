@@ -29,6 +29,25 @@ namespace ARTEC.GUI
         public frmUsuariosCrear()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] PerbtnCrear = { "Usuario Crear" };
+            dicbtnCrear.Add("Permisos", PerbtnCrear);
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrearUsuario.Tag = dicbtnCrear;
+
+            Dictionary<string, string[]> dicvldfrmUsuarioCrear = new Dictionary<string, string[]>();
+            string[] IdiomavldfrmUsuarioCrear = { "Solo se aceptan números" };
+            dicvldfrmUsuarioCrear.Add("Idioma", IdiomavldfrmUsuarioCrear);
+            this.vldfrmUsuarioCrear.ErrorProvider.Tag = dicvldfrmUsuarioCrear;
+
+            Dictionary<string, string[]> dictxtNomUs = new Dictionary<string, string[]>();
+            string[] IdiomatxtNomUs = { "Ingrese un Nombre de Usuario", "Deben ser únicamente letras" };
+            dictxtNomUs.Add("Idioma", IdiomatxtNomUs);
+            this.txtNomUs.Tag = dictxtNomUs;
+
+            
         }
 
         private void frmUsuariosCrear_Load(object sender, EventArgs e)
@@ -44,6 +63,9 @@ namespace ARTEC.GUI
                         unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
                 
                 LisAuxDisp = new List<IFamPat>();
                 LisAuxDisp = ManagerFamilia.PermisosTraerTodos();

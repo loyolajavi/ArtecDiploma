@@ -17,8 +17,6 @@ namespace ARTEC.GUI
 {
     public partial class Principal : DevComponents.DotNetBar.Metro.MetroForm
     {
-
-
         List<Idioma> unosIdiomas = new List<Idioma>();
 
         public Principal()
@@ -26,6 +24,137 @@ namespace ARTEC.GUI
             InitializeComponent();
 
             //tabsPrincipal.SelectedIndexChanged += tabsPrincipal_SelectedIndexChanged;
+
+            //Diccionario
+            Dictionary<string, string[]> dicbtnCrearSolicitud = new Dictionary<string, string[]>();
+            string[] PerbtnCrearSolicitud = { "Solicitud Crear" };
+            dicbtnCrearSolicitud.Add("Permisos", PerbtnCrearSolicitud);
+            string[] IdiomabtnCrearSolicitud = { "Crear Solicitud" };
+            dicbtnCrearSolicitud.Add("Idioma", IdiomabtnCrearSolicitud);
+            this.btnCrearSolicitud.Tag = dicbtnCrearSolicitud;
+
+            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
+            string[] PerbtnSolicitarPartida = { "Partida Crear" };
+            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
+            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
+            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
+            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
+
+            Dictionary<string, string[]> dicbtnPartidaAsociar = new Dictionary<string, string[]>();
+            string[] PerbtnPartidaAsociar = { "Partida Asociar" };
+            dicbtnPartidaAsociar.Add("Permisos", PerbtnPartidaAsociar);
+            string[] IdiomabtnPartidaAsociar = { "Asociar Partida" };
+            dicbtnPartidaAsociar.Add("Idioma", IdiomabtnPartidaAsociar);
+            this.btnPartidaAsociar.Tag = dicbtnPartidaAsociar;
+
+            Dictionary<string, string[]> dicbtnBienRegistrar = new Dictionary<string, string[]>();
+            string[] PerbtnBienRegistrar = { "Adquisicion Registrar" };
+            dicbtnBienRegistrar.Add("Permisos", PerbtnBienRegistrar);
+            string[] IdiomabtnBienRegistrar = { "Registrar Adquisición" };
+            dicbtnBienRegistrar.Add("Idioma", IdiomabtnBienRegistrar);
+            this.btnBienRegistrar.Tag = dicbtnBienRegistrar;
+
+            Dictionary<string, string[]> dicbtnRendicionCrear = new Dictionary<string, string[]>();
+            string[] PerbtnRendicionCrear = { "Rendicion Crear" };
+            dicbtnRendicionCrear.Add("Permisos", PerbtnRendicionCrear);
+            string[] IdiomabtnRendicionCrear = { "Crear Rendición" };
+            dicbtnRendicionCrear.Add("Idioma", IdiomabtnRendicionCrear);
+            this.btnRendicionCrear.Tag = dicbtnRendicionCrear;
+
+            Dictionary<string, string[]> dicbtnAgentes = new Dictionary<string, string[]>();
+            string[] PerbtnAgentes = { "Agente Buscar", "Agente Modificar" };
+            dicbtnAgentes.Add("Permisos", PerbtnAgentes);
+            string[] IdiomabtnAgentes = { "Agentes" };
+            dicbtnAgentes.Add("Idioma", IdiomabtnAgentes);
+            this.btnAgentes.Tag = dicbtnAgentes;
+
+            Dictionary<string, string[]> dicbtnFamilias = new Dictionary<string, string[]>();
+            string[] PerbtnFamilias = { "Familia Buscar", "Familia Crear", "Familia Modificar", "Familia Eliminar" };
+            dicbtnFamilias.Add("Permisos", PerbtnFamilias);
+            string[] IdiomabtnFamilias = { "Familias" };
+            dicbtnFamilias.Add("Idioma", IdiomabtnFamilias);
+            this.btnFamilias.Tag = dicbtnFamilias;
+
+            Dictionary<string, string[]> dicbtnBitacora = new Dictionary<string, string[]>();
+            string[] PerbtnBitacora = { "Bitacora Buscar" };
+            dicbtnBitacora.Add("Permisos", PerbtnBitacora);
+            string[] IdiomabtnBitacora = { "Bitacora" };
+            dicbtnBitacora.Add("Idioma", IdiomabtnBitacora);
+            this.btnBitacora.Tag = dicbtnBitacora;
+
+            Dictionary<string, string[]> dicbtnBackup = new Dictionary<string, string[]>();
+            string[] PerbtnBackup = { "Backup BD", "Restore BD" };
+            dicbtnBackup.Add("Permisos", PerbtnBackup);
+            string[] IdiomabtnBackup = { "Backup" };
+            dicbtnBackup.Add("Idioma", IdiomabtnBackup);
+            this.btnBackup.Tag = dicbtnBackup;
+
+            Dictionary<string, string[]> dicbtnUsuarios = new Dictionary<string, string[]>();
+            string[] PerbtnUsuarios = { "Usuario Buscar", "Usuario Crear", "Usuario Modificar", "Usuario Eliminar", "Usuario Reactivar" };
+            dicbtnUsuarios.Add("Permisos", PerbtnUsuarios);
+            string[] IdiomabtnUsuarios = { "Usuarios" };
+            dicbtnUsuarios.Add("Idioma", IdiomabtnUsuarios);
+            this.btnUsuarios.Tag = dicbtnUsuarios;
+
+            Dictionary<string, string[]> dicbtnVolver = new Dictionary<string, string[]>();
+            string[] IdiomabtnVolver = { "Volver" };
+            dicbtnVolver.Add("Idioma", IdiomabtnVolver);
+            this.btnVolver.Tag = dicbtnVolver;
+
+            Dictionary<string, string[]> dicbtnAvanzadas = new Dictionary<string, string[]>();
+            string[] PerbtnAvanzadas = { "Usuario Buscar", "Usuario Crear", "Usuario Modificar", "Usuario Eliminar", "Usuario Reactivar",
+                                         "Backup BD", "Restore BD", "Bitacora Buscar",
+                                         "Familia Buscar", "Familia Crear", "Familia Modificar", "Familia Eliminar" };
+            dicbtnAvanzadas.Add("Permisos", PerbtnAvanzadas);
+            string[] IdiomabtnAvanzadas = { "Avanzadas" };
+            dicbtnAvanzadas.Add("Idioma", IdiomabtnAvanzadas);
+            this.btnAvanzadas.Tag = dicbtnAvanzadas;
+
+            Dictionary<string, string[]> dicbtnCategorias = new Dictionary<string, string[]>();
+            string[] PerbtnCategorias = { "Categoria Buscar", "Categoria Crear", "Categoria Modificar", "Categoria Eliminar", "Categoria Reactivar" };
+            dicbtnCategorias.Add("Permisos", PerbtnCategorias);
+            string[] IdiomabtnCategorias = { "Categorías" };
+            dicbtnCategorias.Add("Idioma", IdiomabtnCategorias);
+            this.btnCategorias.Tag = dicbtnCategorias;
+
+            Dictionary<string, string[]> dicbtnProveedor = new Dictionary<string, string[]>();
+            string[] PerbtnProveedor = { "Proveedor Buscar", "Proveedor Crear", "Proveedor Modificar", "Proveedor Eliminar", "Proveedor Reactivar" };
+            dicbtnProveedor.Add("Permisos", PerbtnProveedor);
+            string[] IdiomabtnProveedor = { "Proveedores" };
+            dicbtnProveedor.Add("Idioma", IdiomabtnProveedor);
+            this.btnProveedor.Tag = dicbtnProveedor;
+
+            Dictionary<string, string[]> dictabSolic = new Dictionary<string, string[]>();
+            string[] IdiomatabSolic = { "Solicitudes" };
+            dictabSolic.Add("Idioma", IdiomatabSolic);
+            this.tabSolic.Tag = dictabSolic;
+
+            Dictionary<string, string[]> dictabRendiciones = new Dictionary<string, string[]>();
+            string[] IdiomatabRendiciones = { "Rendiciones" };
+            dictabRendiciones.Add("Idioma", IdiomatabRendiciones);
+            this.tabRendiciones.Tag = dictabRendiciones;
+
+            Dictionary<string, string[]> dictabPartidas = new Dictionary<string, string[]>();
+            string[] IdiomatabPartidas = { "Partidas" };
+            dictabPartidas.Add("Idioma", IdiomatabPartidas);
+            this.tabPartidas.Tag = dictabPartidas;
+
+            Dictionary<string, string[]> dictabDependencia = new Dictionary<string, string[]>();
+            string[] IdiomatabDependencia = { "Dependencias" };
+            dictabDependencia.Add("Idioma", IdiomatabDependencia);
+            this.tabDependencia.Tag = dictabDependencia;
+
+            Dictionary<string, string[]> dictabAsignaciones = new Dictionary<string, string[]>();
+            string[] IdiomatabAsignaciones = { "Asignaciones" };
+            dictabAsignaciones.Add("Idioma", IdiomatabAsignaciones);
+            this.tabAsignaciones.Tag = dictabAsignaciones;
+
+            Dictionary<string, string[]> dictabAdquisiciones = new Dictionary<string, string[]>();
+            string[] IdiomatabAdquisiciones = { "Adquisiciones" };
+            dictabAdquisiciones.Add("Idioma", IdiomatabAdquisiciones);
+            this.tabAdquisiciones.Tag = dictabAdquisiciones;
+
+            //END Diccionarios
 
             SolicitudBuscar frmSolicitudBuscar = new SolicitudBuscar();
             frmSolicitudBuscar.TopLevel = false;

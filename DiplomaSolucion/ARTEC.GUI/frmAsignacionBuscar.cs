@@ -29,6 +29,11 @@ namespace ARTEC.GUI
         public frmAsignacionBuscar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmAsigBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmAsigBuscar = { "Asignacion Buscar" };
+            dicfrmAsigBuscar.Add("Permisos", PerfrmAsigBuscar);
+            this.Tag = dicfrmAsigBuscar;
         }
 
         public static frmAsignacionBuscar ObtenerInstancia()

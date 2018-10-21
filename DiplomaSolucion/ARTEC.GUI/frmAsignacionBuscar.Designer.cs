@@ -373,13 +373,6 @@ namespace ARTEC.GUI
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmAsignacionBuscar";
             this.Text = "MetroForm";
-            //this.Tag = new string[] { "Asignacion Buscar" };
-
-            Dictionary<string, string[]> dicfrmAsigBuscar = new Dictionary<string, string[]>();
-            string[] PerfrmAsigBuscar = { "Asignacion Buscar" };
-            dicfrmAsigBuscar.Add("Permisos", PerfrmAsigBuscar);
-            this.Tag = dicfrmAsigBuscar;
-
             this.Load += new System.EventHandler(this.frmAsignacionBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).EndInit();

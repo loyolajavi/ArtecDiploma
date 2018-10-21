@@ -142,14 +142,6 @@ namespace ARTEC.GUI
             this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
             this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearSolicitud.TabIndex = 1;
-            //this.btnCrearSolicitud.Tag = new string[] { "Solicitud Crear" };
-            Dictionary<string, string[]> dicbtnCrearSolicitud = new Dictionary<string, string[]>();
-            string[] PerbtnCrearSolicitud = { "Solicitud Crear" };
-            dicbtnCrearSolicitud.Add("Permisos", PerbtnCrearSolicitud);
-            string[] IdiomabtnCrearSolicitud = { "Crear Solicitud" };
-            dicbtnCrearSolicitud.Add("Idioma", IdiomabtnCrearSolicitud);
-            this.btnCrearSolicitud.Tag = dicbtnCrearSolicitud;
-
             this.btnCrearSolicitud.Text = "Solicitud Crear";
             this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
             this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
@@ -164,15 +156,6 @@ namespace ARTEC.GUI
             this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
             this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitarPartida.TabIndex = 2;
-            //this.btnSolicitarPartida.Tag = new string[] { "Partida Crear" };
-
-            Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
-            string[] PerbtnSolicitarPartida = { "Partida Crear" };
-            dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
-            string[] IdiomabtnSolicitarPartida = { "Solicitar Partida" };
-            dicbtnSolicitarPartida.Add("Idioma", IdiomabtnSolicitarPartida);
-            this.btnSolicitarPartida.Tag = dicbtnSolicitarPartida;
-
             this.btnSolicitarPartida.Text = "btnSolicitarPartida";
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
             // 
@@ -188,15 +171,6 @@ namespace ARTEC.GUI
             this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPartidaAsociar.TabIndex = 3;
             this.btnPartidaAsociar.Text = "btnPartidaAsociar";
-            //this.btnPartidaAsociar.Tag = new string[] { "Partida Asociar" };
-
-            Dictionary<string, string[]> dicbtnPartidaAsociar = new Dictionary<string, string[]>();
-            string[] PerbtnPartidaAsociar = { "Partida Asociar" };
-            dicbtnPartidaAsociar.Add("Permisos", PerbtnPartidaAsociar);
-            string[] IdiomabtnPartidaAsociar = { "Asociar Partida" };
-            dicbtnPartidaAsociar.Add("Idioma", IdiomabtnPartidaAsociar);
-            this.btnPartidaAsociar.Tag = dicbtnPartidaAsociar;
-
             this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
             this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
             // 
@@ -212,15 +186,6 @@ namespace ARTEC.GUI
             this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBienRegistrar.TabIndex = 4;
             this.btnBienRegistrar.Text = "btnBienRegistrar";
-            //this.btnBienRegistrar.Tag = new string[] { "Adquisicion Registrar" };
-
-            Dictionary<string, string[]> dicbtnBienRegistrar = new Dictionary<string, string[]>();
-            string[] PerbtnBienRegistrar = { "Adquisicion Registrar" };
-            dicbtnBienRegistrar.Add("Permisos", PerbtnBienRegistrar);
-            string[] IdiomabtnBienRegistrar = { "Registrar Adquisición" };
-            dicbtnBienRegistrar.Add("Idioma", IdiomabtnBienRegistrar);
-            this.btnBienRegistrar.Tag = dicbtnBienRegistrar;
-
             this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
             this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
             // 
@@ -235,16 +200,7 @@ namespace ARTEC.GUI
             this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
             this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRendicionCrear.TabIndex = 5;
-            //this.btnRendicionCrear.Tag = new string[] { "Rendicion Crear" };
             this.btnRendicionCrear.Text = "btnRendicionCrear";
-
-            Dictionary<string, string[]> dicbtnRendicionCrear = new Dictionary<string, string[]>();
-            string[] PerbtnRendicionCrear = { "Rendicion Crear" };
-            dicbtnRendicionCrear.Add("Permisos", PerbtnRendicionCrear);
-            string[] IdiomabtnRendicionCrear = { "Crear Rendición" };
-            dicbtnRendicionCrear.Add("Idioma", IdiomabtnRendicionCrear);
-            this.btnRendicionCrear.Tag = dicbtnRendicionCrear;
-
             this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
             this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
             // 
@@ -274,14 +230,6 @@ namespace ARTEC.GUI
             this.btnAgentes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgentes.TabIndex = 7;
             this.btnAgentes.Text = "btnAgentes";
-
-            Dictionary<string, string[]> dicbtnAgentes = new Dictionary<string, string[]>();
-            string[] PerbtnAgentes = { "Agente Buscar", "Agente Modificar" };
-            dicbtnAgentes.Add("Permisos", PerbtnAgentes);
-            string[] IdiomabtnAgentes = { "Agentes" };
-            dicbtnAgentes.Add("Idioma", IdiomabtnAgentes);
-            this.btnAgentes.Tag = dicbtnAgentes;
-
             this.btnAgentes.TextColor = System.Drawing.Color.White;
             this.btnAgentes.Click += new System.EventHandler(this.btnAgentes_Click);
             // 
@@ -320,14 +268,6 @@ namespace ARTEC.GUI
             this.btnFamilias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnFamilias.TabIndex = 12;
             this.btnFamilias.Text = "btnFamilias";
-
-            Dictionary<string, string[]> dicbtnFamilias = new Dictionary<string, string[]>();
-            string[] PerbtnFamilias = { "Familia Buscar", "Familia Crear", "Familia Modificar", "Familia Eliminar" };
-            dicbtnFamilias.Add("Permisos", PerbtnFamilias);
-            string[] IdiomabtnFamilias = { "Familias" };
-            dicbtnFamilias.Add("Idioma", IdiomabtnFamilias);
-            this.btnFamilias.Tag = dicbtnFamilias;
-
             this.btnFamilias.TextColor = System.Drawing.Color.White;
             this.btnFamilias.Click += new System.EventHandler(this.btnFamilias_Click);
             // 
@@ -343,14 +283,6 @@ namespace ARTEC.GUI
             this.btnBitacora.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBitacora.TabIndex = 11;
             this.btnBitacora.Text = "btnBitacora";
-
-            Dictionary<string, string[]> dicbtnBitacora = new Dictionary<string, string[]>();
-            string[] PerbtnBitacora = { "Bitacora Buscar" };
-            dicbtnBitacora.Add("Permisos", PerbtnBitacora);
-            string[] IdiomabtnBitacora = { "Bitacora" };
-            dicbtnBitacora.Add("Idioma", IdiomabtnBitacora);
-            this.btnBitacora.Tag = dicbtnBitacora;
-
             this.btnBitacora.TextColor = System.Drawing.Color.White;
             this.btnBitacora.Click += new System.EventHandler(this.btnBitacora_Click);
             // 
@@ -366,14 +298,6 @@ namespace ARTEC.GUI
             this.btnBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBackup.TabIndex = 10;
             this.btnBackup.Text = "btnBackup";
-
-            Dictionary<string, string[]> dicbtnBackup = new Dictionary<string, string[]>();
-            string[] PerbtnBackup = { "Backup BD", "Restore BD" };
-            dicbtnBackup.Add("Permisos", PerbtnBackup);
-            string[] IdiomabtnBackup = { "Backup" };
-            dicbtnBackup.Add("Idioma", IdiomabtnBackup);
-            this.btnBackup.Tag = dicbtnBackup;
-
             this.btnBackup.TextColor = System.Drawing.Color.White;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
@@ -389,14 +313,6 @@ namespace ARTEC.GUI
             this.btnUsuarios.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnUsuarios.TabIndex = 9;
             this.btnUsuarios.Text = "btnUsuarios";
-
-            Dictionary<string, string[]> dicbtnUsuarios = new Dictionary<string, string[]>();
-            string[] PerbtnUsuarios = { "Usuario Buscar", "Usuario Crear", "Usuario Modificar", "Usuario Eliminar", "Usuario Reactivar" };
-            dicbtnUsuarios.Add("Permisos", PerbtnUsuarios);
-            string[] IdiomabtnUsuarios = { "Usuarios" };
-            dicbtnUsuarios.Add("Idioma", IdiomabtnUsuarios);
-            this.btnUsuarios.Tag = dicbtnUsuarios;
-
             this.btnUsuarios.TextColor = System.Drawing.Color.White;
             this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
@@ -410,12 +326,6 @@ namespace ARTEC.GUI
             this.btnVolver.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "btnVolver";
-
-            Dictionary<string, string[]> dicbtnVolver = new Dictionary<string, string[]>();
-            string[] IdiomabtnVolver = { "Volver" };
-            dicbtnVolver.Add("Idioma", IdiomabtnVolver);
-            this.btnVolver.Tag = dicbtnVolver;
-
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnAvanzadas
@@ -430,16 +340,6 @@ namespace ARTEC.GUI
             this.btnAvanzadas.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAvanzadas.TabIndex = 8;
             this.btnAvanzadas.Text = "btnAvanzadas";
-
-            Dictionary<string, string[]> dicbtnAvanzadas = new Dictionary<string, string[]>();
-            string[] PerbtnAvanzadas = { "Usuario Buscar", "Usuario Crear", "Usuario Modificar", "Usuario Eliminar", "Usuario Reactivar",
-                                         "Backup BD", "Restore BD", "Bitacora Buscar",
-                                         "Familia Buscar", "Familia Crear", "Familia Modificar", "Familia Eliminar" };
-            dicbtnAvanzadas.Add("Permisos", PerbtnAvanzadas);
-            string[] IdiomabtnAvanzadas = { "Avanzadas" };
-            dicbtnAvanzadas.Add("Idioma", IdiomabtnAvanzadas);
-            this.btnAvanzadas.Tag = dicbtnAvanzadas;
-
             this.btnAvanzadas.TextColor = System.Drawing.Color.White;
             this.btnAvanzadas.Click += new System.EventHandler(this.btnAvanzadas_Click_1);
             // 
@@ -455,14 +355,6 @@ namespace ARTEC.GUI
             this.btnCategorias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCategorias.TabIndex = 9;
             this.btnCategorias.Text = "btnCategorias";
-
-            Dictionary<string, string[]> dicbtnCategorias = new Dictionary<string, string[]>();
-            string[] PerbtnCategorias = { "Categoria Buscar", "Categoria Crear", "Categoria Modificar", "Categoria Eliminar", "Categoria Reactivar" };
-            dicbtnCategorias.Add("Permisos", PerbtnCategorias);
-            string[] IdiomabtnCategorias = { "Categorías" };
-            dicbtnCategorias.Add("Idioma", IdiomabtnCategorias);
-            this.btnCategorias.Tag = dicbtnCategorias;
-
             this.btnCategorias.TextColor = System.Drawing.Color.White;
             this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
             // 
@@ -478,14 +370,6 @@ namespace ARTEC.GUI
             this.btnProveedor.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnProveedor.TabIndex = 10;
             this.btnProveedor.Text = "btnProveedor";
-
-            Dictionary<string, string[]> dicbtnProveedor = new Dictionary<string, string[]>();
-            string[] PerbtnProveedor = { "Proveedor Buscar", "Proveedor Crear", "Proveedor Modificar", "Proveedor Eliminar", "Proveedor Reactivar" };
-            dicbtnProveedor.Add("Permisos", PerbtnProveedor);
-            string[] IdiomabtnProveedor = { "Proveedores" };
-            dicbtnProveedor.Add("Idioma", IdiomabtnProveedor);
-            this.btnProveedor.Tag = dicbtnProveedor;
-
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
