@@ -18,7 +18,7 @@ namespace ARTEC.GUI
 {
     public partial class frmSolicitudModificar : DevComponents.DotNetBar.Metro.MetroForm
     {
-
+        private static List<frmSolicitudModificar> _unfrmSolicitudModificarInst;
         Solicitud unaSolicitud;
         Solicitud unaSolicitudSinModif;
         List<Agente> unosAgentesResp;
@@ -55,14 +55,16 @@ namespace ARTEC.GUI
         int DetalleSeleccionado = 1;
 
 
-        public frmSolicitudModificar(Solicitud unaSolic)
+        private frmSolicitudModificar(Solicitud unaSolic)
         {
             InitializeComponent();
+
+            unaSolicitud = unaSolic;
+
             Dictionary<string, string[]> diclblSolicitud = new Dictionary<string, string[]>();
             string[] IdiomalblSolicitud = { "Solicitud" };
             diclblSolicitud.Add("Idioma", IdiomalblSolicitud);
             this.lblSolicitud.Tag = diclblSolicitud;
-            unaSolicitud = unaSolic;
 
             Dictionary<string, string[]> dicbtnCancelar = new Dictionary<string, string[]>();
             string[] PerbtnCancelar = { "Solicitud Cancelar" };
@@ -91,15 +93,41 @@ namespace ARTEC.GUI
             string[] IdiomabtnBienAsignar = { "Crear Asignación" };
             dicbtnBienAsignar.Add("Idioma", IdiomabtnBienAsignar);
             this.btnBienAsignar.Tag = dicbtnBienAsignar;
+
+            Dictionary<string, string[]> dictxtCantBien = new Dictionary<string, string[]>();
+            string[] IdiomatxtCantBien = { "Ingrese la cantidad" };
+            dictxtCantBien.Add("Idioma", IdiomatxtCantBien);
+            this.txtCantBien.Tag = dictxtCantBien;
+
+            
             
             
 
+        }
+
+
+
+        public static frmSolicitudModificar ObtenerInstancia(Solicitud unaSolic)
+        {
+            if (_unfrmSolicitudModificarInst == null)
+            {
+                _unfrmSolicitudModificarInst = new List<frmSolicitudModificar>();
+                _unfrmSolicitudModificarInst.Add(new frmSolicitudModificar(unaSolic));
+            }
+            else
+            {
+                if (!_unfrmSolicitudModificarInst.Exists(X => X.unaSolicitud != null && X.unaSolicitud.IdSolicitud == unaSolic.IdSolicitud))
+                    _unfrmSolicitudModificarInst.Add(new frmSolicitudModificar(unaSolic));
+            }
+
+            return _unfrmSolicitudModificarInst.First(X=>X.unaSolicitud.IdSolicitud == unaSolic.IdSolicitud);
         }
 
         private void frmSolicitudModificar_Load(object sender, EventArgs e)
         {
             try
             {
+                //Traducir formulario
                 BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
                 //Permisos
@@ -112,7 +140,7 @@ namespace ARTEC.GUI
                     }
                 }
 
-
+                txtNroSolic.Text = unaSolicitud.IdSolicitud.ToString();
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
                 //Traer los agentes Responsables de la dependencia

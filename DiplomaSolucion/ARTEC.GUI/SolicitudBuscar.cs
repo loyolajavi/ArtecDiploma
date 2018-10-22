@@ -181,7 +181,7 @@ namespace ARTEC.GUI
                 
                 //MessageBox.Show(GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value.ToString());
 
-                frmSolicitudModificar unfrmSolicitudModificar = new frmSolicitudModificar((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
+                frmSolicitudModificar unfrmSolicitudModificar = frmSolicitudModificar.ObtenerInstancia((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 unfrmSolicitudModificar.Show();
             }
         }

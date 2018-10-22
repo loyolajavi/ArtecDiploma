@@ -137,7 +137,7 @@ namespace ARTEC.GUI
                 //Consulta us y pass coincidentes y loguea al usuario
                 try
                 {
-                    Idioma._EtiquetasCompartidas = null;
+                    
                     if (FlagSinIntegridad == false)
                     {
                         if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
@@ -185,6 +185,7 @@ namespace ARTEC.GUI
                         }
                         
                     }
+                    Idioma._EtiquetasCompartidas = null;
                     
                 }
                 catch (Exception es)

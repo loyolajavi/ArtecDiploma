@@ -30,15 +30,15 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSolicitudModificar));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtNroSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSolicitud = new DevComponents.DotNetBar.LabelX();
             this.lblInactivo = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.lblDesvinculado = new DevComponents.DotNetBar.Controls.ReflectionLabel();
@@ -125,7 +125,7 @@ namespace ARTEC.GUI
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.textBoxX1);
+            this.panel1.Controls.Add(this.txtNroSolic);
             this.panel1.Controls.Add(this.lblSolicitud);
             this.panel1.Controls.Add(this.lblInactivo);
             this.panel1.Controls.Add(this.lblDesvinculado);
@@ -151,25 +151,25 @@ namespace ARTEC.GUI
             this.panel1.Controls.Add(this.comboBoxEx4);
             this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1071, 659);
+            this.panel1.Size = new System.Drawing.Size(1071, 671);
             this.panel1.TabIndex = 6;
             // 
-            // textBoxX1
+            // txtNroSolic
             // 
-            this.textBoxX1.BackColor = System.Drawing.Color.White;
+            this.txtNroSolic.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.DisabledBackColor = System.Drawing.Color.White;
-            this.textBoxX1.ForeColor = System.Drawing.Color.Black;
-            this.textBoxX1.Location = new System.Drawing.Point(969, 3);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.PreventEnterBeep = true;
-            this.textBoxX1.ReadOnly = true;
-            this.textBoxX1.Size = new System.Drawing.Size(99, 22);
-            this.textBoxX1.TabIndex = 30;
+            this.txtNroSolic.Border.Class = "TextBoxBorder";
+            this.txtNroSolic.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNroSolic.DisabledBackColor = System.Drawing.Color.White;
+            this.txtNroSolic.ForeColor = System.Drawing.Color.Black;
+            this.txtNroSolic.Location = new System.Drawing.Point(89, 8);
+            this.txtNroSolic.Name = "txtNroSolic";
+            this.txtNroSolic.PreventEnterBeep = true;
+            this.txtNroSolic.ReadOnly = true;
+            this.txtNroSolic.Size = new System.Drawing.Size(99, 22);
+            this.txtNroSolic.TabIndex = 30;
             // 
             // lblSolicitud
             // 
@@ -178,7 +178,7 @@ namespace ARTEC.GUI
             // 
             this.lblSolicitud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSolicitud.Location = new System.Drawing.Point(901, 6);
+            this.lblSolicitud.Location = new System.Drawing.Point(21, 11);
             this.lblSolicitud.Name = "lblSolicitud";
             this.lblSolicitud.Size = new System.Drawing.Size(67, 17);
             this.lblSolicitud.TabIndex = 29;
@@ -190,7 +190,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.lblInactivo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblInactivo.Location = new System.Drawing.Point(141, 462);
+            this.lblInactivo.Location = new System.Drawing.Point(141, 473);
             this.lblInactivo.Name = "lblInactivo";
             this.lblInactivo.Size = new System.Drawing.Size(108, 22);
             this.lblInactivo.TabIndex = 28;
@@ -203,7 +203,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.lblDesvinculado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDesvinculado.Location = new System.Drawing.Point(517, 45);
+            this.lblDesvinculado.Location = new System.Drawing.Point(517, 56);
             this.lblDesvinculado.Name = "lblDesvinculado";
             this.lblDesvinculado.Size = new System.Drawing.Size(108, 22);
             this.lblDesvinculado.TabIndex = 27;
@@ -215,7 +215,7 @@ namespace ARTEC.GUI
             this.btnCancelar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCancelar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelar.Location = new System.Drawing.Point(993, 633);
+            this.btnCancelar.Location = new System.Drawing.Point(993, 644);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -231,7 +231,7 @@ namespace ARTEC.GUI
             this.cboAgenteResp.ForeColor = System.Drawing.Color.Black;
             this.cboAgenteResp.FormattingEnabled = true;
             this.cboAgenteResp.ItemHeight = 16;
-            this.cboAgenteResp.Location = new System.Drawing.Point(350, 45);
+            this.cboAgenteResp.Location = new System.Drawing.Point(350, 56);
             this.cboAgenteResp.Name = "cboAgenteResp";
             this.cboAgenteResp.Size = new System.Drawing.Size(161, 22);
             this.cboAgenteResp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -245,7 +245,7 @@ namespace ARTEC.GUI
             // 
             this.lblAgenteResponsable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblAgenteResponsable.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgenteResponsable.Location = new System.Drawing.Point(350, 26);
+            this.lblAgenteResponsable.Location = new System.Drawing.Point(350, 37);
             this.lblAgenteResponsable.Name = "lblAgenteResponsable";
             this.lblAgenteResponsable.Size = new System.Drawing.Size(91, 17);
             this.lblAgenteResponsable.TabIndex = 23;
@@ -256,7 +256,7 @@ namespace ARTEC.GUI
             this.btnModifSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModifSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnModifSolicitud.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnModifSolicitud.Location = new System.Drawing.Point(425, 633);
+            this.btnModifSolicitud.Location = new System.Drawing.Point(425, 644);
             this.btnModifSolicitud.Name = "btnModifSolicitud";
             this.btnModifSolicitud.Size = new System.Drawing.Size(75, 23);
             this.btnModifSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -269,7 +269,7 @@ namespace ARTEC.GUI
             this.gboxNotas.Controls.Add(this.btnNotas);
             this.gboxNotas.Controls.Add(this.GrillaNotas);
             this.gboxNotas.Controls.Add(this.txtNota);
-            this.gboxNotas.Location = new System.Drawing.Point(15, 484);
+            this.gboxNotas.Location = new System.Drawing.Point(15, 495);
             this.gboxNotas.Name = "gboxNotas";
             this.gboxNotas.Size = new System.Drawing.Size(928, 131);
             this.gboxNotas.TabIndex = 21;
@@ -333,7 +333,7 @@ namespace ARTEC.GUI
             this.txtFechaFin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaFin.ButtonDropDown.Visible = true;
             this.txtFechaFin.IsPopupCalendarOpen = false;
-            this.txtFechaFin.Location = new System.Drawing.Point(864, 45);
+            this.txtFechaFin.Location = new System.Drawing.Point(864, 56);
             // 
             // 
             // 
@@ -375,7 +375,7 @@ namespace ARTEC.GUI
             this.cboAsignado.ForeColor = System.Drawing.Color.Black;
             this.cboAsignado.FormattingEnabled = true;
             this.cboAsignado.ItemHeight = 16;
-            this.cboAsignado.Location = new System.Drawing.Point(141, 439);
+            this.cboAsignado.Location = new System.Drawing.Point(141, 450);
             this.cboAsignado.Name = "cboAsignado";
             this.cboAsignado.Size = new System.Drawing.Size(167, 22);
             this.cboAsignado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -389,7 +389,7 @@ namespace ARTEC.GUI
             this.cboPrioridad.ForeColor = System.Drawing.Color.Black;
             this.cboPrioridad.FormattingEnabled = true;
             this.cboPrioridad.ItemHeight = 16;
-            this.cboPrioridad.Location = new System.Drawing.Point(141, 409);
+            this.cboPrioridad.Location = new System.Drawing.Point(141, 420);
             this.cboPrioridad.Name = "cboPrioridad";
             this.cboPrioridad.Size = new System.Drawing.Size(167, 22);
             this.cboPrioridad.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -403,7 +403,7 @@ namespace ARTEC.GUI
             this.cboEstadoSolicitud.ForeColor = System.Drawing.Color.Black;
             this.cboEstadoSolicitud.FormattingEnabled = true;
             this.cboEstadoSolicitud.ItemHeight = 16;
-            this.cboEstadoSolicitud.Location = new System.Drawing.Point(141, 382);
+            this.cboEstadoSolicitud.Location = new System.Drawing.Point(141, 393);
             this.cboEstadoSolicitud.Name = "cboEstadoSolicitud";
             this.cboEstadoSolicitud.Size = new System.Drawing.Size(167, 22);
             this.cboEstadoSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -416,7 +416,7 @@ namespace ARTEC.GUI
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX8.Location = new System.Drawing.Point(21, 382);
+            this.labelX8.Location = new System.Drawing.Point(21, 393);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(121, 23);
             this.labelX8.TabIndex = 14;
@@ -429,7 +429,7 @@ namespace ARTEC.GUI
             // 
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX10.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX10.Location = new System.Drawing.Point(21, 439);
+            this.labelX10.Location = new System.Drawing.Point(21, 450);
             this.labelX10.Name = "labelX10";
             this.labelX10.Size = new System.Drawing.Size(87, 22);
             this.labelX10.TabIndex = 16;
@@ -442,7 +442,7 @@ namespace ARTEC.GUI
             // 
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX9.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX9.Location = new System.Drawing.Point(21, 409);
+            this.labelX9.Location = new System.Drawing.Point(21, 420);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(75, 22);
             this.labelX9.TabIndex = 15;
@@ -458,7 +458,7 @@ namespace ARTEC.GUI
             this.txtFechaInicio.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaInicio.ButtonDropDown.Visible = true;
             this.txtFechaInicio.IsPopupCalendarOpen = false;
-            this.txtFechaInicio.Location = new System.Drawing.Point(714, 45);
+            this.txtFechaInicio.Location = new System.Drawing.Point(714, 56);
             // 
             // 
             // 
@@ -499,7 +499,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(803, 45);
+            this.labelX6.Location = new System.Drawing.Point(803, 56);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(65, 22);
             this.labelX6.TabIndex = 10;
@@ -511,7 +511,7 @@ namespace ARTEC.GUI
             // 
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(665, 45);
+            this.labelX5.Location = new System.Drawing.Point(665, 56);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(48, 22);
             this.labelX5.TabIndex = 9;
@@ -526,7 +526,7 @@ namespace ARTEC.GUI
             this.pnlAdjuntos.Controls.Add(this.btnSeleccionarArchivo);
             this.pnlAdjuntos.Controls.Add(this.txtNombreAdjunto);
             this.pnlAdjuntos.Controls.Add(this.btnAdjuntar);
-            this.pnlAdjuntos.Location = new System.Drawing.Point(342, 376);
+            this.pnlAdjuntos.Location = new System.Drawing.Point(342, 387);
             this.pnlAdjuntos.Name = "pnlAdjuntos";
             this.pnlAdjuntos.Size = new System.Drawing.Size(601, 104);
             this.pnlAdjuntos.TabIndex = 7;
@@ -542,6 +542,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -619,7 +620,7 @@ namespace ARTEC.GUI
             this.gboxBienes.Controls.Add(this.txtBien);
             this.gboxBienes.Controls.Add(this.cboBien);
             this.gboxBienes.Controls.Add(this.btnAgregarDetalle);
-            this.gboxBienes.Location = new System.Drawing.Point(15, 73);
+            this.gboxBienes.Location = new System.Drawing.Point(15, 84);
             this.gboxBienes.Name = "gboxBienes";
             this.gboxBienes.Size = new System.Drawing.Size(1053, 293);
             this.gboxBienes.TabIndex = 2;
@@ -903,7 +904,7 @@ namespace ARTEC.GUI
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(21, 26);
+            this.labelX1.Location = new System.Drawing.Point(21, 37);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(91, 17);
             this.labelX1.TabIndex = 0;
@@ -919,7 +920,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
-            this.txtDependencia.Location = new System.Drawing.Point(21, 45);
+            this.txtDependencia.Location = new System.Drawing.Point(21, 56);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.ReadOnly = true;
@@ -934,7 +935,7 @@ namespace ARTEC.GUI
             this.comboBoxEx4.ForeColor = System.Drawing.Color.Black;
             this.comboBoxEx4.FormattingEnabled = true;
             this.comboBoxEx4.ItemHeight = 16;
-            this.comboBoxEx4.Location = new System.Drawing.Point(21, 45);
+            this.comboBoxEx4.Location = new System.Drawing.Point(21, 56);
             this.comboBoxEx4.MaxDropDownItems = 10;
             this.comboBoxEx4.Name = "comboBoxEx4";
             this.comboBoxEx4.Size = new System.Drawing.Size(315, 22);
@@ -1035,12 +1036,13 @@ namespace ARTEC.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1279, 669);
+            this.ClientSize = new System.Drawing.Size(1279, 672);
             this.Controls.Add(this.btnBienAsignar);
             this.Controls.Add(this.btnSolicitarPartida);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "frmSolicitudModificar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = resources.GetString("$this.Text");
@@ -1132,7 +1134,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblDesvinculado;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblInactivo;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtNroSolic;
         private DevComponents.DotNetBar.LabelX lblSolicitud;
     }
 }

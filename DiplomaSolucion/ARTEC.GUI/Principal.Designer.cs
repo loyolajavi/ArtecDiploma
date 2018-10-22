@@ -253,7 +253,6 @@ namespace ARTEC.GUI
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 8;
-            this.panelEx1.Text = "";
             this.panelEx1.Visible = false;
             // 
             // btnFamilias
@@ -392,6 +391,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnAvanzadas);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARTEC";
