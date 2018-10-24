@@ -12,6 +12,8 @@ namespace ARTEC.ENTIDADES
         public int IdNota { get; set; }
         public DateTime FechaNota { get; set; }
         public string DescripNota { get; set; }
+        public int IdUsuario { get; set; }
+        public int IdSolicitud { get; set; }
 
 
     }

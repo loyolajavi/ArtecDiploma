@@ -337,6 +337,22 @@ namespace ARTEC.DAL
 
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudModificar", parameters);
 
+                //Agregar Notas
+                if (laSolicitud.unasNotas.Count > 0)
+                {
+                    foreach (Nota unaNota in laSolicitud.unasNotas)
+                    {
+                        SqlParameter[] parametersNotas = new SqlParameter[]
+			            {
+                            new SqlParameter("@FechaNota", unaNota.FechaNota),
+                            new SqlParameter("@DescripNota", unaNota.DescripNota),
+                            new SqlParameter("@IdUsuario", FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario),
+                            new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+			            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "NotaCrear", parametersNotas);
+                    }
+                }
+
                 //Quitar Detalles eliminados
                 if (unosSolDetQuitarMod.Count > 0)
                 {
@@ -821,5 +837,54 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+
+        public List<Nota> SolicitudTraerNotas(int IdSolic)
+        {
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                    new SqlParameter("@IdSolicitud", IdSolic)
+                };
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicitudTraerNotas", parameters))
+                {
+                    List<Nota> LisNotas;
+                    LisNotas = MapearNotas(ds);
+                    return LisNotas;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        private List<Nota> MapearNotas(DataSet ds)
+        {
+            List<Nota> ResNotas = new List<Nota>();
+            try
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    Nota unaNota = new Nota();
+
+                    unaNota.IdNota = (int)row["IdNota"];
+                    unaNota.DescripNota = row["DescripNota"].ToString();
+                    unaNota.FechaNota = DateTime.Parse(row["FechaNota"].ToString());
+                    unaNota.IdSolicitud = (int)row["IdSolicitud"];
+                    unaNota.IdUsuario = (int)row["IdUsuario"];
+                    ResNotas.Add(unaNota);
+                }
+                return ResNotas;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

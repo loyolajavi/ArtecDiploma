@@ -312,6 +312,18 @@ namespace ARTEC.GUI
 
                 grillaDetallesFormatoAplicar();
 
+                //Agrega las notas
+                unasNotas = ManagerSolicitud.SolicitudTraerNotas(unaSolicitud.IdSolicitud);
+                GrillaNotas.DataSource = null;
+                if (unasNotas.Count > 0)
+                {
+                    GrillaNotas.DataSource = unasNotas;
+                    GrillaNotas.Columns[0].Visible = false;
+                }
+                    
+
+
+
                 //Si está cancelada inhabilito la modificación y botones
                 if (unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
                 {
@@ -1432,6 +1444,11 @@ namespace ARTEC.GUI
                 }
             }
             
+        }
+
+        private void frmSolicitudModificar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _unfrmSolicitudModificarInst.Remove(this);
         }
 
 

@@ -159,5 +159,18 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+
+        public List<Nota> SolicitudTraerNotas(int IdSolic)
+        {
+            try
+            {
+                return GestorSolicitud.SolicitudTraerNotas(IdSolic);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

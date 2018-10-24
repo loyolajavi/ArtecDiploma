@@ -542,7 +542,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -1046,6 +1045,7 @@ namespace ARTEC.GUI
             this.Name = "frmSolicitudModificar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = resources.GetString("$this.Text");
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSolicitudModificar_FormClosing);
             this.Load += new System.EventHandler(this.frmSolicitudModificar_Load);
             this.panel1.ResumeLayout(false);
             this.gboxNotas.ResumeLayout(false);
