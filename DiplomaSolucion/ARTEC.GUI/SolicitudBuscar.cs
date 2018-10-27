@@ -183,6 +183,8 @@ namespace ARTEC.GUI
 
                 frmSolicitudModificar unfrmSolicitudModificar = frmSolicitudModificar.ObtenerInstancia((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
                 unfrmSolicitudModificar.Show();
+                unfrmSolicitudModificar.Focus();
+                unfrmSolicitudModificar.WindowState = FormWindowState.Normal;
             }
         }
 

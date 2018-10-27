@@ -228,7 +228,30 @@ namespace ARTEC.GUI
                 //Para que el conteo empiece desde el nro de detalles que hay al agregar más detalles
                 ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
                 //Para el BKP de los SolicDetalles existentes
-                unosSolicDetAgregarBKP = unaSolicitud.unosDetallesSolicitud.ToList();
+                //unosSolicDetAgregarBKP = unaSolicitud.unosDetallesSolicitud.ToList();
+
+                //foreach (SolicDetalle unSDet in unaSolicitud.unosDetallesSolicitud)
+                //{
+                //    SolicDetalle unDet = new SolicDetalle();
+                //    unDet.Cantidad = unSDet.Cantidad;
+                //    int aux;
+                //    aux = unSDet.IdSolicitudDetalle;
+                //    unDet.IdSolicitudDetalle = aux;
+                //    unDet.IdSolicitud = unSDet.IdSolicitud;
+                //    unDet.Seleccionado = unSDet.Seleccionado;
+                //    unDet.UIDSolicDetalle = unSDet.UIDSolicDetalle;
+                //    unDet.unaCategoria = unSDet.unaCategoria;
+                //    unDet.unasCotizaciones = unSDet.unasCotizaciones;
+                //    unDet.unEstado = unSDet.unEstado;
+                //    unDet.unosAgentes = unSDet.unosAgentes;
+                //    unDet.unosBienes = unSDet.unosBienes;
+                //    unosSolicDetAgregarBKP.Add(unSDet);
+                //}
+
+                foreach (SolicDetalle unSDet in unaSolicitud.unosDetallesSolicitud)
+                {
+                    unosSolicDetAgregarBKP.Add(unSDet.Clonar());
+                }
 
                 //Agrega los agentes al detalle si es un software
                 foreach (SolicDetalle unDetSolicAUX in unaSolicitud.unosDetallesSolicitud)
@@ -1196,7 +1219,7 @@ namespace ARTEC.GUI
             {
                  PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
-                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado);
+                 unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado);
                 if (unaPartDet.IdPartida == 0)
                 {
                     SolicDetalle unDetalleSolicitud = new SolicDetalle();

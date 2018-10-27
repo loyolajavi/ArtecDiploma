@@ -23,7 +23,7 @@ namespace ARTEC.DAL
 
             try
             {
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "CotizacionTraerPorSolicitudYDetalle", parameters))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSetPrueba(CommandType.StoredProcedure, "CotizacionTraerPorSolicitudYDetalle", parameters))
                 {
                     List<Cotizacion> unaLista = new List<Cotizacion>();
                     //unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<Cotizacion>(ds);
@@ -315,6 +315,50 @@ namespace ARTEC.DAL
             {
                 if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
                     FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+        public int? CotizTraerRelPartDet(int IdCotizacion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdCotizacion", IdCotizacion)
+            };
+
+            try
+            {
+                int? Resultado = (int?)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizTraerRelPartDet", parameters);
+                return Resultado;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+
+
+        public List<Cotizacion> CotizacionTraerPorUIDSolicDetalle(int UIDSDet)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@UIDSolicDetalle", UIDSDet)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSetPrueba(CommandType.StoredProcedure, "CotizacionTraerPorUIDSolicDetalle", parameters))
+                {
+                    List<Cotizacion> unaLista = new List<Cotizacion>();
+                    unaLista = MapearCotizaciones(ds);
+                    return unaLista;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

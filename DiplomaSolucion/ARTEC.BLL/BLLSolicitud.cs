@@ -100,8 +100,12 @@ namespace ARTEC.BLL
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
-                    return true;
+                int DetallesCant = unosSolicDetAgregarBKP.Count + unosSolDetAgregarMod.Count - unosSolDetQuitarMod.Count;
+                if (DetallesCant < 1)
+                    throw new InvalidOperationException("La solicitud debe quedar con al menos un detalle");
+
+                    if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
+                        return true;
                 return false;
             }
             catch (InvalidOperationException es1)

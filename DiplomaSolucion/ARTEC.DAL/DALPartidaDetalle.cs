@@ -38,7 +38,7 @@ namespace ARTEC.DAL
 
 
         
-        private List<PartidaDetalle> MapearPartidaDetalles(DataSet ds)
+        public static List<PartidaDetalle> MapearPartidaDetalles(DataSet ds)
         {
             List<PartidaDetalle> ResPartidaDetalles = new List<PartidaDetalle>();
 
@@ -69,7 +69,7 @@ namespace ARTEC.DAL
 
 
 
-        private PartidaDetalle MapearPartidaDetalleUNO(DataSet ds)
+        public static PartidaDetalle MapearPartidaDetalleUNO(DataSet ds)
         {
             PartidaDetalle unDet = new PartidaDetalle();
             
@@ -200,6 +200,31 @@ namespace ARTEC.DAL
             try
             {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallePartidaDetalleAsociacionTraer", parametersPartDet))
+                {
+                    PartidaDetalle unaPartidaDetalle = new PartidaDetalle();
+                    unaPartidaDetalle = MapearPartidaDetalleUNO(ds);
+                    return unaPartidaDetalle;
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
+        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraerSinFiltro(int IdSolic, int IdSolicDetalle)
+        {
+
+            SqlParameter[] parametersPartDet = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicitud", IdSolic),
+                new SqlParameter("@IdSolicDetalle", IdSolicDetalle)
+            };
+
+            try
+            {
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallePartidaDetalleAsociacionTraerSinFiltro", parametersPartDet))
                 {
                     PartidaDetalle unaPartidaDetalle = new PartidaDetalle();
                     unaPartidaDetalle = MapearPartidaDetalleUNO(ds);

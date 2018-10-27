@@ -57,5 +57,23 @@ namespace ARTEC.ENTIDADES
         //    set { _InventariosHard = value; }
         //}
 
+
+        public SolicDetalle Clonar()
+        {
+            return new SolicDetalle
+            {
+                Cantidad = this.Cantidad,
+                IdSolicitudDetalle = this.IdSolicitudDetalle,
+                IdSolicitud = this.IdSolicitud,
+                Seleccionado = this.Seleccionado,
+                UIDSolicDetalle = this.UIDSolicDetalle,
+                unaCategoria = this.unaCategoria,
+                unasCotizaciones = this.unasCotizaciones,
+                unEstado = this.unEstado,
+                unosAgentes = this.unosAgentes,
+                unosBienes = this.unosBienes,
+            };
+        }
+
     }
 }
