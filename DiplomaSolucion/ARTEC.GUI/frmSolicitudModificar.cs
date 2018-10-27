@@ -44,6 +44,7 @@ namespace ARTEC.GUI
 
         List<string> unosAdjuntos = new List<string>();
         List<Nota> unasNotas = new List<Nota>();
+        List<Nota> unasNotasAgregar = new List<Nota>();
         BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
         bool flagDetEliminado = false;
         bool flagRespInhabilitado;
@@ -1192,6 +1193,7 @@ namespace ARTEC.GUI
                 Nota unaNota = new Nota();
                 unaNota.FechaNota = DateTime.Now;
                 unaNota.DescripNota = txtNota.Text;
+                unasNotasAgregar.Add(unaNota);
                 unasNotas.Add(unaNota);
                 GrillaNotas.DataSource = null;
                 GrillaNotas.DataSource = unasNotas;
@@ -1379,6 +1381,11 @@ namespace ARTEC.GUI
 
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnModifSolicitud control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnModifSolicitud_Click(object sender, EventArgs e)
         {
             List<SolicDetalle> unosSolDetQuitarMod = new List<SolicDetalle>();
@@ -1404,9 +1411,9 @@ namespace ARTEC.GUI
 
                 unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
                 unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
-                if (unasNotas.Count > 0)
+                if (unasNotasAgregar.Count > 0)
                 {
-                    unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                    unaSolicitud.unasNotas = (List<Nota>)this.unasNotasAgregar.ToList();
                 }
 
                 unosSolDetQuitarMod = unosSolicDetAgregarBKP.Where(d => !unaSolicitud.unosDetallesSolicitud.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();

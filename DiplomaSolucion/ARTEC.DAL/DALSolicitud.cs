@@ -456,23 +456,27 @@ namespace ARTEC.DAL
                             };
                         FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleEliminarPorId", parametersSolDetEliminar);
 
-                        //Reordenar los IdSolicDetalles
-                        if (unSolDet.IdSolicitudDetalle < unosSolicDetAgregarBKP.Last().IdSolicitudDetalle)
-                        {
-                            foreach (SolicDetalle unSolDetBKP in unosSolicDetAgregarBKP)
-                            {
-                                if (unSolDetBKP.IdSolicitudDetalle > unSolDet.IdSolicitudDetalle)
-                                {
-                                    SqlParameter[] parametersSolDetallesReordenar = new SqlParameter[]
-			                        {
-                                        new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
-                                        new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle)
-			                        };
-                                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleReordenar", parametersSolDetallesReordenar);
-                                    unSolDetBKP.IdSolicitudDetalle--;
-                                }
-                            }
-                        }
+                        ////Reordenar los IdSolicDetalles
+                        //if (unSolDet.IdSolicitudDetalle < unosSolicDetAgregarBKP.Last().IdSolicitudDetalle)
+                        //{
+                        //    foreach (SolicDetalle item in collection)
+                        //    {
+                                
+                        //    }
+                        //    foreach (SolicDetalle unSolDetBKP in unosSolicDetAgregarBKP)
+                        //    {
+                        //        if (unSolDetBKP.IdSolicitudDetalle > unSolDet.IdSolicitudDetalle)
+                        //        {
+                        //            SqlParameter[] parametersSolDetallesReordenar = new SqlParameter[]
+                        //            {
+                        //                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                        //                new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle)
+                        //            };
+                        //            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleReordenar", parametersSolDetallesReordenar);
+                        //            unSolDetBKP.IdSolicitudDetalle--;
+                        //        }
+                        //    }
+                        //}
                         unosSolicDetAgregarBKP.Remove(unSolDet);
                     }
                 }
@@ -653,9 +657,9 @@ namespace ARTEC.DAL
 
                         //Modif de los datos propios de la tabla SolicDetalle
                         //Me aseguro de que el Id SolicDetalle sea el correcto en unSolDet
-                        SolicDetalle SDetAUX = unosSolicDetAgregarBKP.Where(X=>X.unaCategoria.IdCategoria == unSolDet.unaCategoria.IdCategoria).First();
-                        if (SDetAUX.IdSolicitudDetalle != unSolDet.IdSolicitudDetalle)
-                            unSolDet.IdSolicitudDetalle = SDetAUX.IdSolicitudDetalle;
+                        //SolicDetalle SDetAUX = unosSolicDetAgregarBKP.Where(X=>X.unaCategoria.IdCategoria == unSolDet.unaCategoria.IdCategoria).First();
+                        //if (SDetAUX.IdSolicitudDetalle != unSolDet.IdSolicitudDetalle)
+                        //    unSolDet.IdSolicitudDetalle = SDetAUX.IdSolicitudDetalle;
                         SqlParameter[] parametersSolDetModif = new SqlParameter[]
                             {
                                 new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
