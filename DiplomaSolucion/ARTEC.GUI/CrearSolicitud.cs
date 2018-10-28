@@ -44,6 +44,102 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unaSolicitud = new Solicitud();
+
+            Dictionary<string, string[]> dicCrearSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomaCrearSolicitud = { "Crear Solicitud" };
+            dicCrearSolicitud.Add("Idioma", IdiomaCrearSolicitud);
+            this.Tag = dicCrearSolicitud;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblAgenteResponsable = new Dictionary<string, string[]>();
+            string[] IdiomalblAgenteResponsable = { "Responsable" };
+            diclblAgenteResponsable.Add("Idioma", IdiomalblAgenteResponsable);
+            this.lblAgenteResponsable.Tag = diclblAgenteResponsable;
+
+            Dictionary<string, string[]> diclabelX5 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX5 = { "Creación" };
+            diclabelX5.Add("Idioma", IdiomalabelX5);
+            this.labelX5.Tag = diclabelX5;
+
+            Dictionary<string, string[]> diclabelX6 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX6 = { "Finalización" };
+            diclabelX6.Add("Idioma", IdiomalabelX6);
+            this.labelX6.Tag = diclabelX6;
+
+            Dictionary<string, string[]> dicgboxBienes = new Dictionary<string, string[]>();
+            string[] IdiomagboxBienes = { "Agregar Bienes" };
+            dicgboxBienes.Add("Idioma", IdiomagboxBienes);
+            this.gboxBienes.Tag = dicgboxBienes;
+
+            Dictionary<string, string[]> diclblCantidad = new Dictionary<string, string[]>();
+            string[] IdiomalblCantidad = { "Cantidad" };
+            diclblCantidad.Add("Idioma", IdiomalblCantidad);
+            this.lblCantidad.Tag = diclblCantidad;
+
+            Dictionary<string, string[]> dicgboxAsociados = new Dictionary<string, string[]>();
+            string[] IdiomagboxAsociados = { "Agentes Asociados" };
+            dicgboxAsociados.Add("Idioma", IdiomagboxAsociados);
+            this.gboxAsociados.Tag = dicgboxAsociados;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Agente" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> dicbtnAsociarAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnAsociarAgente = { "Asociar" };
+            dicbtnAsociarAgente.Add("Idioma", IdiomabtnAsociarAgente);
+            this.btnAsociarAgente.Tag = dicbtnAsociarAgente;
+
+            Dictionary<string, string[]> dictxtAgregarDetalle = new Dictionary<string, string[]>();
+            string[] IdiomatxtAgregarDetalle = { "Agregar" };
+            dictxtAgregarDetalle.Add("Idioma", IdiomatxtAgregarDetalle);
+            this.txtAgregarDetalle.Tag = dictxtAgregarDetalle;
+
+            Dictionary<string, string[]> diclabelX8 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX8 = { "Estado" };
+            diclabelX8.Add("Idioma", IdiomalabelX8);
+            this.labelX8.Tag = diclabelX8;
+
+            Dictionary<string, string[]> diclabelX9 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX9 = { "Prioridad" };
+            diclabelX9.Add("Idioma", IdiomalabelX9);
+            this.labelX9.Tag = diclabelX9;
+
+            Dictionary<string, string[]> diclabelX10 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX10 = { "Asignado a" };
+            diclabelX10.Add("Idioma", IdiomalabelX10);
+            this.labelX10.Tag = diclabelX10;
+
+            Dictionary<string, string[]> dicgboxNotas = new Dictionary<string, string[]>();
+            string[] IdiomagboxNotas = { "Notas" };
+            dicgboxNotas.Add("Idioma", IdiomagboxNotas);
+            this.gboxNotas.Tag = dicgboxNotas;
+
+            Dictionary<string, string[]> dicbtnSeleccionarArchivo = new Dictionary<string, string[]>();
+            string[] IdiomabtnSeleccionarArchivo = { "Seleccionar un Archivo" };
+            dicbtnSeleccionarArchivo.Add("Idioma", IdiomabtnSeleccionarArchivo);
+            this.btnSeleccionarArchivo.Tag = dicbtnSeleccionarArchivo;
+
+            Dictionary<string, string[]> dicbtnAdjuntar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAdjuntar = { "Adjuntar" };
+            dicbtnAdjuntar.Add("Idioma", IdiomabtnAdjuntar);
+            this.btnAdjuntar.Tag = dicbtnAdjuntar;
+
+            Dictionary<string, string[]> dicbtnNotas = new Dictionary<string, string[]>();
+            string[] IdiomabtnNotas = { "Agregar" };
+            dicbtnNotas.Add("Idioma", IdiomabtnNotas);
+            this.btnNotas.Tag = dicbtnNotas;
+
+            Dictionary<string, string[]> dicbtnCrearSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearSolicitud = { "Crear Solicitud" };
+            dicbtnCrearSolicitud.Add("Idioma", IdiomabtnCrearSolicitud);
+            this.btnCrearSolicitud.Tag = dicbtnCrearSolicitud;
+
         }
 
 

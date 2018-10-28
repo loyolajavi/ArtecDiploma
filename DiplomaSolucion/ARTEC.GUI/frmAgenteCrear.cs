@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -26,10 +27,44 @@ namespace ARTEC.GUI
             InitializeComponent();
             IdDependencia = IdDep;
             NombreDependencia = NomDep;
+
+            Dictionary<string, string[]> dicfrmAgenteCrear = new Dictionary<string, string[]>();
+            string[] IdiomafrmAgenteCrear = { "Crear Agente" };
+            dicfrmAgenteCrear.Add("Idioma", IdiomafrmAgenteCrear);
+            this.Tag = dicfrmAgenteCrear;
+
+            Dictionary<string, string[]> diclblNombre = new Dictionary<string, string[]>();
+            string[] IdiomalblNombre = { "Nombre" };
+            diclblNombre.Add("Idioma", IdiomalblNombre);
+            this.lblNombre.Tag = diclblNombre;
+
+            Dictionary<string, string[]> diclblApellido = new Dictionary<string, string[]>();
+            string[] IdiomalblApellido = { "Apellido" };
+            diclblApellido.Add("Idioma", IdiomalblApellido);
+            this.lblApellido.Tag = diclblApellido;
+
+            Dictionary<string, string[]> diclblCargo = new Dictionary<string, string[]>();
+            string[] IdiomalblCargo = { "Cargo" };
+            diclblCargo.Add("Idioma", IdiomalblCargo);
+            this.lblCargo.Tag = diclblCargo;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> dicbtnCrearAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearAgente = { "Crear Agente" };
+            dicbtnCrearAgente.Add("Idioma", IdiomabtnCrearAgente);
+            this.btnCrearAgente.Tag = dicbtnCrearAgente;
+
         }
 
         private void frmAgenteCrear_Load(object sender, EventArgs e)
         {
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
             //Traigo los cargos
             BLLCargo ManagerCargo = new BLLCargo();
             unosCargos = new List<Cargo>();

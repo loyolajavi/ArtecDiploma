@@ -638,22 +638,22 @@ namespace ARTEC.DAL
                         //No se implementa porque no se permite modificar las cotizaciones
 
 
-                        //Chequeo TipoBien SolDet 
-                        SqlParameter[] parametersTipoBienEnQui2 = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdCategoria", unSolDet.unaCategoria.IdCategoria)
-			            };
-                        int IdTipoBienAUX3 = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBienEnQui2);
-                        if (IdTipoBienAUX3 == (int)TipoBien.EnumTipoBien.Soft)
-                        {
-                            //Elimina la relacion entre SolDet y Agente (por detalles de software)
-                            SqlParameter[] parametersSolDetAgenteRel2 = new SqlParameter[]
-                            {
-                                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
-                                new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle)
-                            };
-                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteEliminarPorSolDet", parametersSolDetAgenteRel2);
-                        }
+                        ////Chequeo TipoBien SolDet 
+                        //SqlParameter[] parametersTipoBienEnQui2 = new SqlParameter[]
+                        //{
+                        //    new SqlParameter("@IdCategoria", unSolDet.unaCategoria.IdCategoria)
+                        //};
+                        //int IdTipoBienAUX3 = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBienEnQui2);
+                        //if (IdTipoBienAUX3 == (int)TipoBien.EnumTipoBien.Soft)
+                        //{
+                        //    //Elimina la relacion entre SolDet y Agente (por detalles de software)
+                        //    SqlParameter[] parametersSolDetAgenteRel2 = new SqlParameter[]
+                        //    {
+                        //        new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                        //        new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle)
+                        //    };
+                        //    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteEliminarPorSolDet", parametersSolDetAgenteRel2);
+                        //}
 
                         //Modif de los datos propios de la tabla SolicDetalle
                         //Me aseguro de que el Id SolicDetalle sea el correcto en unSolDet
@@ -692,25 +692,25 @@ namespace ARTEC.DAL
                             FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolDetEnAgregar3);
                         }
 
-                        //Chequeo TipoBien SolDet (Si es Software)
-                        SqlParameter[] parametersTipoBienEnAgre2 = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdCategoria", unSolDet.unaCategoria.IdCategoria)
-			            };
-                        int IdTipoBienAUX4 = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBienEnAgre2);
-                        if (IdTipoBienAUX4 == (int)TipoBien.EnumTipoBien.Soft)
-                        {
-                            foreach (Agente unAgente in unSolDet.unosAgentes)
-                            {
-                                SqlParameter[] parametersAgentes2 = new SqlParameter[]
-			                    {
-                                    new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
-                                    new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
-                                    new SqlParameter("@IdAgente", unAgente.IdAgente)
-			                    };
-                                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteAgregar", parametersAgentes2);
-                            }
-                        }
+                        ////Chequeo TipoBien SolDet (Si es Software)
+                        //SqlParameter[] parametersTipoBienEnAgre2 = new SqlParameter[]
+                        //{
+                        //    new SqlParameter("@IdCategoria", unSolDet.unaCategoria.IdCategoria)
+                        //};
+                        //int IdTipoBienAUX4 = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "TipoBienTraerIDTipoBienPorIdCategoria", parametersTipoBienEnAgre2);
+                        //if (IdTipoBienAUX4 == (int)TipoBien.EnumTipoBien.Soft)
+                        //{
+                        //    foreach (Agente unAgente in unSolDet.unosAgentes)
+                        //    {
+                        //        SqlParameter[] parametersAgentes2 = new SqlParameter[]
+                        //        {
+                        //            new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
+                        //            new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                        //            new SqlParameter("@IdAgente", unAgente.IdAgente)
+                        //        };
+                        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RelSolDetalleAgenteAgregar", parametersAgentes2);
+                        //    }
+                        //}
                     }
                 }
 

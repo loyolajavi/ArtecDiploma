@@ -46,6 +46,67 @@ namespace ARTEC.GUI
         public frmAdquisicionGestion()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmAdquisicionGestion = new Dictionary<string, string[]>();
+            string[] IdiomafrmAdquisicionGestion = { "Adquisicion Gestión" };
+            dicfrmAdquisicionGestion.Add("Idioma", IdiomafrmAdquisicionGestion);
+            this.Tag = dicfrmAdquisicionGestion;
+
+            Dictionary<string, string[]> diclblIdAdquisicion = new Dictionary<string, string[]>();
+            string[] IdiomalblIdAdquisicion = { "Adquisición" };
+            diclblIdAdquisicion.Add("Idioma", IdiomalblIdAdquisicion);
+            this.lblIdAdquisicion.Tag = diclblIdAdquisicion;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Partida" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Dependencia" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> diclblFecha = new Dictionary<string, string[]>();
+            string[] IdiomalblFecha = { "Fecha" };
+            diclblFecha.Add("Idioma", IdiomalblFecha);
+            this.lblFecha.Tag = diclblFecha;
+
+            Dictionary<string, string[]> diclblFechaCompra = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaCompra = { "Fecha Compra" };
+            diclblFechaCompra.Add("Idioma", IdiomalblFechaCompra);
+            this.lblFechaCompra.Tag = diclblFechaCompra;
+
+            Dictionary<string, string[]> diclblNroFactura = new Dictionary<string, string[]>();
+            string[] IdiomalblNroFactura = { "Factura" };
+            diclblNroFactura.Add("Idioma", IdiomalblNroFactura);
+            this.lblNroFactura.Tag = diclblNroFactura;
+
+            Dictionary<string, string[]> diclblNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolicitud = { "Solicitud" };
+            diclblNroSolicitud.Add("Idioma", IdiomalblNroSolicitud);
+            this.lblNroSolicitud.Tag = diclblNroSolicitud;
+
+            Dictionary<string, string[]> diclblProveedor = new Dictionary<string, string[]>();
+            string[] IdiomalblProveedor = { "Proveedor" };
+            diclblProveedor.Add("Idioma", IdiomalblProveedor);
+            this.lblProveedor.Tag = diclblProveedor;
+
+            Dictionary<string, string[]> dicbtnBienesRestantes = new Dictionary<string, string[]>();
+            string[] IdiomabtnBienesRestantes = { "Bienes Restantes" };
+            dicbtnBienesRestantes.Add("Idioma", IdiomabtnBienesRestantes);
+            this.btnBienesRestantes.Tag = dicbtnBienesRestantes;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
         }
 
 
@@ -53,6 +114,67 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unaAdqModif = unaAdq;
+
+            Dictionary<string, string[]> dicfrmAdquisicionGestion = new Dictionary<string, string[]>();
+            string[] IdiomafrmAdquisicionGestion = { "Adquisicion Gestión" };
+            dicfrmAdquisicionGestion.Add("Idioma", IdiomafrmAdquisicionGestion);
+            this.Tag = dicfrmAdquisicionGestion;
+
+            Dictionary<string, string[]> diclblIdAdquisicion = new Dictionary<string, string[]>();
+            string[] IdiomalblIdAdquisicion = { "Adquisición" };
+            diclblIdAdquisicion.Add("Idioma", IdiomalblIdAdquisicion);
+            this.lblIdAdquisicion.Tag = diclblIdAdquisicion;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Partida" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Dependencia" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> diclblFecha = new Dictionary<string, string[]>();
+            string[] IdiomalblFecha = { "Fecha" };
+            diclblFecha.Add("Idioma", IdiomalblFecha);
+            this.lblFecha.Tag = diclblFecha;
+
+            Dictionary<string, string[]> diclblFechaCompra = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaCompra = { "Fecha Compra" };
+            diclblFechaCompra.Add("Idioma", IdiomalblFechaCompra);
+            this.lblFechaCompra.Tag = diclblFechaCompra;
+
+            Dictionary<string, string[]> diclblNroFactura = new Dictionary<string, string[]>();
+            string[] IdiomalblNroFactura = { "Factura" };
+            diclblNroFactura.Add("Idioma", IdiomalblNroFactura);
+            this.lblNroFactura.Tag = diclblNroFactura;
+
+            Dictionary<string, string[]> diclblNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolicitud = { "Solicitud" };
+            diclblNroSolicitud.Add("Idioma", IdiomalblNroSolicitud);
+            this.lblNroSolicitud.Tag = diclblNroSolicitud;
+
+            Dictionary<string, string[]> diclblProveedor = new Dictionary<string, string[]>();
+            string[] IdiomalblProveedor = { "Proveedor" };
+            diclblProveedor.Add("Idioma", IdiomalblProveedor);
+            this.lblProveedor.Tag = diclblProveedor;
+
+            Dictionary<string, string[]> dicbtnBienesRestantes = new Dictionary<string, string[]>();
+            string[] IdiomabtnBienesRestantes = { "Bienes Restantes" };
+            dicbtnBienesRestantes.Add("Idioma", IdiomabtnBienesRestantes);
+            this.btnBienesRestantes.Tag = dicbtnBienesRestantes;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
         }
 
         private void frmAdquisicionGestion_Load(object sender, EventArgs e)

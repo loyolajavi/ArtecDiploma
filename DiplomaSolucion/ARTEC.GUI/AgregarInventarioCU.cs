@@ -16,6 +16,41 @@ namespace ARTEC.GUI
         public AgregarInventarioCU()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> diclblBien = new Dictionary<string, string[]>();
+            string[] IdiomalblBien = { "Bien" };
+            diclblBien.Add("Idioma", IdiomalblBien);
+            this.lblBien.Tag = diclblBien;
+
+            Dictionary<string, string[]> diclblMarca = new Dictionary<string, string[]>();
+            string[] IdiomalblMarca = { "Marca" };
+            diclblMarca.Add("Idioma", IdiomalblMarca);
+            this.lblMarca.Tag = diclblMarca;
+
+            Dictionary<string, string[]> diclblTipoBien = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoBien = { "Tipo" };
+            diclblTipoBien.Add("Idioma", IdiomalblTipoBien);
+            this.lblTipoBien.Tag = diclblTipoBien;
+
+            Dictionary<string, string[]> diclblSerieKey = new Dictionary<string, string[]>();
+            string[] IdiomalblSerieKey = { "Serie" };
+            diclblSerieKey.Add("Idioma", IdiomalblSerieKey);
+            this.lblSerieKey.Tag = diclblSerieKey;
+
+            Dictionary<string, string[]> diclblModelo = new Dictionary<string, string[]>();
+            string[] IdiomalblModelo = { "Modelo" };
+            diclblModelo.Add("Idioma", IdiomalblModelo);
+            this.lblModelo.Tag = diclblModelo;
+
+            Dictionary<string, string[]> diclblCosto = new Dictionary<string, string[]>();
+            string[] IdiomalblCosto = { "Costo" };
+            diclblCosto.Add("Idioma", IdiomalblCosto);
+            this.lblCosto.Tag = diclblCosto;
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
         }
 
         public string unBien

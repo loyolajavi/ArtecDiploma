@@ -37,6 +37,26 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unaSolic = unaSolicAsig;
+
+            Dictionary<string, string[]> dicfrmBienAsignar = new Dictionary<string, string[]>();
+            string[] IdiomafrmBienAsignar = { "Asignar Bien" };
+            dicfrmBienAsignar.Add("Idioma", IdiomafrmBienAsignar);
+            this.Tag = dicfrmBienAsignar;
+
+            Dictionary<string, string[]> diclblNroSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolic = { "Solicitud" };
+            diclblNroSolic.Add("Idioma", IdiomalblNroSolic);
+            this.lblNroSolic.Tag = diclblNroSolic;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
+            string[] IdiomabtnConfirmar = { "Confirmar" };
+            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
+            this.btnConfirmar.Tag = dicbtnConfirmar;
         }
 
         private void frmBienAsignar_Load(object sender, EventArgs e)
@@ -51,6 +71,9 @@ namespace ARTEC.GUI
                     unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                 }
             }
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;

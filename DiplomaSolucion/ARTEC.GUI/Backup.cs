@@ -16,6 +16,67 @@ namespace ARTEC.GUI
         public Backup()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicBackUp = new Dictionary<string, string[]>();
+            string[] IdiomaBackUp = { "Respaldo y Restauración de la BD" };
+            dicBackUp.Add("Idioma", IdiomaBackUp);
+            this.Tag = dicBackUp;
+
+            Dictionary<string, string[]> dicbtnRespaldar = new Dictionary<string, string[]>();
+            string[] IdiomabtnRespaldar = { "Respaldar" };
+            dicbtnRespaldar.Add("Idioma", IdiomabtnRespaldar);
+            this.btnRespaldar.Tag = dicbtnRespaldar;
+
+            Dictionary<string, string[]> diclblNombreRespaldar = new Dictionary<string, string[]>();
+            string[] IdiomalblNombreRespaldar = { "Nombre" };
+            diclblNombreRespaldar.Add("Idioma", IdiomalblNombreRespaldar);
+            this.lblNombreRespaldar.Tag = diclblNombreRespaldar;
+
+            Dictionary<string, string[]> diclblDestinoRespaldar = new Dictionary<string, string[]>();
+            string[] IdiomalblDestinoRespaldar = { "Destino" };
+            diclblDestinoRespaldar.Add("Idioma", IdiomalblDestinoRespaldar);
+            this.lblDestinoRespaldar.Tag = diclblDestinoRespaldar;
+
+            Dictionary<string, string[]> diclblObservaciones = new Dictionary<string, string[]>();
+            string[] IdiomalblObservaciones = { "Observaciones" };
+            diclblObservaciones.Add("Idioma", IdiomalblObservaciones);
+            this.lblObservaciones.Tag = diclblObservaciones;
+
+            Dictionary<string, string[]> dicbtnExaminarRespaldar = new Dictionary<string, string[]>();
+            string[] IdiomabtnExaminarRespaldar = { "Examinar" };
+            dicbtnExaminarRespaldar.Add("Idioma", IdiomabtnExaminarRespaldar);
+            this.btnExaminarRespaldar.Tag = dicbtnExaminarRespaldar;
+
+            Dictionary<string, string[]> dicgboxRestaurar = new Dictionary<string, string[]>();
+            string[] IdiomagboxRestaurar = { "Restaurar" };
+            dicgboxRestaurar.Add("Idioma", IdiomagboxRestaurar);
+            this.gboxRestaurar.Tag = dicgboxRestaurar;
+
+            Dictionary<string, string[]> diclblNombreRestaurar = new Dictionary<string, string[]>();
+            string[] IdiomalblNombreRestaurar = { "Nombre" };
+            diclblNombreRestaurar.Add("Idioma", IdiomalblNombreRestaurar);
+            this.lblNombreRestaurar.Tag = diclblNombreRestaurar;
+
+            Dictionary<string, string[]> diclblUbicacionRestaurar = new Dictionary<string, string[]>();
+            string[] IdiomalblUbicacionRestaurar = { "Ubicación" };
+            diclblUbicacionRestaurar.Add("Idioma", IdiomalblUbicacionRestaurar);
+            this.lblUbicacionRestaurar.Tag = diclblUbicacionRestaurar;
+
+            Dictionary<string, string[]> dicbtnExaminarRestaurar = new Dictionary<string, string[]>();
+            string[] IdiomabtnExaminarRestaurar = { "Examinar" };
+            dicbtnExaminarRestaurar.Add("Idioma", IdiomabtnExaminarRestaurar);
+            this.btnExaminarRestaurar.Tag = dicbtnExaminarRestaurar;
+
+            Dictionary<string, string[]> dicbtnRestaurar = new Dictionary<string, string[]>();
+            string[] IdiomabtnRestaurar = { "Restaurar" };
+            dicbtnRestaurar.Add("Idioma", IdiomabtnRestaurar);
+            this.btnRestaurar.Tag = dicbtnRestaurar;
+
+            Dictionary<string, string[]> dicgboxRespaldar = new Dictionary<string, string[]>();
+            string[] IdiomagboxRespaldar = { "Respaldar (Realizar BACKUP)" };
+            dicgboxRespaldar.Add("Idioma", IdiomagboxRespaldar);
+            this.gboxRespaldar.Tag = dicgboxRespaldar;
+
         }
 
 
