@@ -164,7 +164,7 @@ namespace ARTEC.GUI
             this.txtNroSolic.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroSolic.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolic.ForeColor = System.Drawing.Color.Black;
-            this.txtNroSolic.Location = new System.Drawing.Point(89, 8);
+            this.txtNroSolic.Location = new System.Drawing.Point(116, 8);
             this.txtNroSolic.Name = "txtNroSolic";
             this.txtNroSolic.PreventEnterBeep = true;
             this.txtNroSolic.ReadOnly = true;
@@ -180,7 +180,7 @@ namespace ARTEC.GUI
             this.lblSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSolicitud.Location = new System.Drawing.Point(21, 11);
             this.lblSolicitud.Name = "lblSolicitud";
-            this.lblSolicitud.Size = new System.Drawing.Size(67, 17);
+            this.lblSolicitud.Size = new System.Drawing.Size(91, 17);
             this.lblSolicitud.TabIndex = 29;
             this.lblSolicitud.Text = "lblSolicitud";
             // 

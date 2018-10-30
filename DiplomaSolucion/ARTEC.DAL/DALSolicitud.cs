@@ -66,6 +66,22 @@ namespace ARTEC.DAL
                     }
                 }
 
+                //Agregar Notas
+                if (laSolicitud.unasNotas.Count > 0)
+                {
+                    foreach (Nota unaNota in laSolicitud.unasNotas)
+                    {
+                        SqlParameter[] parametersNotas = new SqlParameter[]
+			            {
+                            new SqlParameter("@FechaNota", unaNota.FechaNota),
+                            new SqlParameter("@DescripNota", unaNota.DescripNota),
+                            new SqlParameter("@IdUsuario", FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario),
+                            new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud)
+			            };
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "NotaCrear", parametersNotas);
+                    }
+                }
+
                 long ResAcum = ServicioDV.DVCalcularDVH(laSolicitud);
                 if (ResAcum > 0)
                 {

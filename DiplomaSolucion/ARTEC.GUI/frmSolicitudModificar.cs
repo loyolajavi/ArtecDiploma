@@ -128,9 +128,6 @@ namespace ARTEC.GUI
         {
             try
             {
-                //Traducir formulario
-                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
-
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)
@@ -140,6 +137,9 @@ namespace ARTEC.GUI
                         unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
+
+                //Traducir formulario
+                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
                 txtNroSolic.Text = unaSolicitud.IdSolicitud.ToString();
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
@@ -402,7 +402,7 @@ namespace ARTEC.GUI
                 return;
             }
 
-            //VER:Si hizo click en Borrar *************************BORRAR EL DETALLE DE LA BD; PARA QUE EL e.index NO QUEDE COLGADO 
+            //Si hizo click en Eliminar el Detalle
             if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
                 //Pongo el flag en true para dps regenerar los detalles en la BD
@@ -415,8 +415,10 @@ namespace ARTEC.GUI
                 {
                     //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                     grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
-                    grillaDetalles.Columns.Remove("txtCotizConteo");
-                    grillaDetalles.Columns.Remove("btnDinCotizar");
+                    if (grillaDetalles.Columns.Contains("txtCotizConteo"))
+                        grillaDetalles.Columns.Remove("txtCotizConteo");
+                    if (grillaDetalles.Columns.Contains("btnDinCotizar"))
+                        grillaDetalles.Columns.Remove("btnDinCotizar");
 
                     //Obtengo el Nro IDDetalle que se borrará
                     int NroDetBorrado = unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle;
@@ -491,21 +493,22 @@ namespace ARTEC.GUI
                 this.txtBien.TextChanged -= new System.EventHandler(this.txtBien_TextChanged);
                 txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
                 this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
-                unaCat = unDetSolic.unaCategoria;
                 txtCantBien.Text = unDetSolic.Cantidad.ToString();
 
+                //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
+                unaCat = unDetSolic.unaCategoria;
                 cboEstadoSolDetalle.SelectedValue = unDetSolic.unEstado.IdEstadoSolicDetalle;
 
                 unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
 
-                if (unTipoBienAux.IdTipoBien == 1)
+                if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
                 {
                     //HARDWARE
                     gboxAsociados.Enabled = false;
                     txtCantBien.ReadOnly = false;
                     lblCantidad.Enabled = true;
-                    AuxTipoCategoria = 1;//HARDWARE
-                    cboTipoBien.SelectedValue = 1;//HARDWARE
+                    AuxTipoCategoria = (int)TipoBien.EnumTipoBien.Hard;
+                    cboTipoBien.SelectedValue = (int)TipoBien.EnumTipoBien.Hard;
                     txtAgente.Clear();
                     //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
                     grillaAgentesAsociados.DataSource = null;
@@ -518,7 +521,7 @@ namespace ARTEC.GUI
                     AuxTipoCategoria = (int)TipoBien.EnumTipoBien.Soft;
                     cboTipoBien.SelectedValue = (int)TipoBien.EnumTipoBien.Soft;
                     txtAgente.Clear();
-                    //VER: unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERRORVER**********************************
+                    //VER: unAgen = null;
                     grillaAgentesAsociados.DataSource = null;
                     if (unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes.Count() > 0)
                     {
@@ -528,7 +531,6 @@ namespace ARTEC.GUI
                     {
                         grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
                     }
-
                     //No mostrar columnas que no necesito de los agentes asociados VER: GUARDA CON ESTO QUE PUEDE QUE ESTE OCULTANDO COSAS QUE NO QUIERO OCULTAR
                     grillaAgentesAsociados.Columns[0].Visible = false;
                     grillaAgentesAsociados.Columns[3].Visible = false;
@@ -662,6 +664,8 @@ namespace ARTEC.GUI
             AuxTipoCategoria = 1;
             txtCantBien.Clear();
             txtAgente.Clear();
+            if (unAgen != null)
+                unosAgentesAsociados.Remove(unAgen);
             unAgen = null;
             grillaAgentesAsociados.DataSource = null;
             cboEstadoSolDetalle.SelectedIndex = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente - 1;
@@ -681,7 +685,7 @@ namespace ARTEC.GUI
             validCantBien.ClearFailedValidations();
             txtBien.ReadOnly = false;
 
-            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)//Hardware
             {
                 gboxAsociados.Enabled = false;
                 txtCantBien.ReadOnly = false;
@@ -693,7 +697,7 @@ namespace ARTEC.GUI
                 unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
                 grillaAgentesAsociados.DataSource = null;
             }
-            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Soft)//Software
             {
                 gboxAsociados.Enabled = true;
                 txtCantBien.ReadOnly = true;
@@ -962,9 +966,12 @@ namespace ARTEC.GUI
                                 SolDetDic.unSolDet.Cantidad += unDetalleSolicitud.Cantidad;
                             }
                             //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-                            grillaDetalles.Columns.Remove("btnDinBorrar");
-                            grillaDetalles.Columns.Remove("txtCotizConteo");
-                            grillaDetalles.Columns.Remove("btnDinCotizar");
+                            if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                                grillaDetalles.Columns.Remove("btnDinBorrar");
+                            if (grillaDetalles.Columns.Contains("txtCotizConteo"))
+                                grillaDetalles.Columns.Remove("txtCotizConteo");
+                            if (grillaDetalles.Columns.Contains("btnDinCotizar"))
+                                grillaDetalles.Columns.Remove("btnDinCotizar");
 
                             //Regenero la grilla
                             grillaDetalles.DataSource = null;
@@ -1021,7 +1028,7 @@ namespace ARTEC.GUI
                 }
             }
 
-        }
+}
 
 
 
@@ -1033,17 +1040,18 @@ namespace ARTEC.GUI
             unDetSolic.IdSolicitudDetalle = ++ContDetalles;
 
             if (AuxTipoCategoria == (int)TipoBien.EnumTipoBien.Soft)
-            {
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-            }
             unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
             unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
             //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-            grillaDetalles.Columns.Remove("btnDinBorrar");
-            grillaDetalles.Columns.Remove("txtCotizConteo");
-            grillaDetalles.Columns.Remove("btnDinCotizar");
+            if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                grillaDetalles.Columns.Remove("btnDinBorrar");
+            if (grillaDetalles.Columns.Contains("txtCotizConteo"))
+                grillaDetalles.Columns.Remove("txtCotizConteo");
+            if (grillaDetalles.Columns.Contains("btnDinCotizar"))
+                grillaDetalles.Columns.Remove("btnDinCotizar");
 
             //Regenero la grilla
             grillaDetalles.DataSource = null;
@@ -1248,9 +1256,12 @@ namespace ARTEC.GUI
                                     SolDetDic.unSolDet.Cantidad = Int32.Parse(txtCantBien.Text);
                                 }
                                 //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
-                                grillaDetalles.Columns.Remove("btnDinBorrar");
-                                grillaDetalles.Columns.Remove("txtCotizConteo");
-                                grillaDetalles.Columns.Remove("btnDinCotizar");
+                                if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                                    grillaDetalles.Columns.Remove("btnDinBorrar");
+                                if (grillaDetalles.Columns.Contains("txtCotizConteo"))
+                                    grillaDetalles.Columns.Remove("txtCotizConteo");
+                                if (grillaDetalles.Columns.Contains("btnDinCotizar"))
+                                    grillaDetalles.Columns.Remove("btnDinCotizar");
 
                                 //Regenero la grilla
                                 grillaDetalles.DataSource = null;
@@ -1393,7 +1404,6 @@ namespace ARTEC.GUI
             List<SolicDetalle> unosSolDetModifMod = new List<SolicDetalle>();
 
             //VER:AGREGAR LOS ADJUNTOS
-            //VER:AGREGAR EN EL REGISTRO A LA BD LAS NOTAS 
             //VER: Validaciones
 
             try
@@ -1480,7 +1490,6 @@ namespace ARTEC.GUI
         {
             _unfrmSolicitudModificarInst.Remove(this);
         }
-
 
 
 

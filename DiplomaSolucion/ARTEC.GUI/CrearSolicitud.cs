@@ -36,8 +36,13 @@ namespace ARTEC.GUI
         List<Usuario> unosUsuarios = new List<Usuario>();
         List<Agente> unosAgentesResp;
         List<string> unosAdjuntos = new List<string>();
+        BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+        SolicDetalle unDetSolic;
+        BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+        BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+        int DetalleSeleccionado = 1;
         List<Nota> unasNotas = new List<Nota>();
-
+        List<Nota> unasNotasAgregar = new List<Nota>();
 
 
         public CrearSolicitud()
@@ -98,7 +103,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dictxtAgregarDetalle = new Dictionary<string, string[]>();
             string[] IdiomatxtAgregarDetalle = { "Agregar" };
             dictxtAgregarDetalle.Add("Idioma", IdiomatxtAgregarDetalle);
-            this.txtAgregarDetalle.Tag = dictxtAgregarDetalle;
+            this.btnAgregarDetalle.Tag = dictxtAgregarDetalle;
 
             Dictionary<string, string[]> diclabelX8 = new Dictionary<string, string[]>();
             string[] IdiomalabelX8 = { "Estado" };
@@ -152,43 +157,48 @@ namespace ARTEC.GUI
                 SolicDetalle unDetalleSolicitud = new SolicDetalle();
                 unDetalleSolicitud.unaCategoria = unaCat;
 
-                if (validCantBien.Validate())
+                if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
                 {
-
                     unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
 
                     //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
-                    if (unaSolicitud.unosDetallesSolicitud.Count() != 0)
+                    if (unaSolicitud.unosDetallesSolicitud.Find(Z => Z.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
                     {
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault().unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
                         //if ((unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).FirstOrDefault(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).unSolDet.Cantidad += unDetalleSolicitud.Cantidad) > 0) Antiguo
-                        var hhh = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { Widget = o, Index = i }).Where(item => item.Widget.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
-                        if (hhh != null)
+                        var SolDetDic = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+                        if (SolDetDic != null)
                         {
-                            if (AuxTipoCategoria == 2)//Categoria de Software
+                            if (AuxTipoCategoria == 2)//Tipo Software
                             {
-                                unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-                                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
-                                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
-                                hhh.Widget.Cantidad = unDetalleSolicitud.unosAgentes.Count();// += unDetalleSolicitud.Cantidad;
+                                //Le Agrego los nuevos agentes
+                                foreach (Agente unAgen in unosAgentesAsociados)
+                                {
+                                    SolDetDic.unSolDet.unosAgentes.Add(unAgen);
+                                }
+                                SolDetDic.unSolDet.Cantidad = SolDetDic.unSolDet.unosAgentes.Count();
                             }
                             else
                             {
-                                hhh.Widget.Cantidad += unDetalleSolicitud.Cantidad;
+                                SolDetDic.unSolDet.Cantidad += unDetalleSolicitud.Cantidad;
                             }
+                            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                            if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                                grillaDetalles.Columns.Remove("btnDinBorrar");
+
+                            //Regenero la grilla
                             grillaDetalles.DataSource = null;
                             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-                            //Formato de la grillaDetalles
-                            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                            grillaDetalles.Columns[0].HeaderText = "#";
-                            grillaDetalles.Columns[2].HeaderText = "Bien";
-                            grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                            grillaDetalles.Columns[4].Width = 80;
-                            grillaDetalles.Columns[4].HeaderText = "Estado";
-                            grillaDetalles.Columns[1].Visible = false;
-                            grillaDetalles.Columns["Seleccionado"].Visible = false;
+
+                            //Vuelve a agregar el botón de borrar al final
+                            var deleteButton = new DataGridViewButtonColumn();
+                            deleteButton.Name = "btnDinBorrar";
+                            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                            deleteButton.UseColumnTextForButtonValue = true;
+                            grillaDetalles.Columns.Add(deleteButton);
+
+                            grillaDetallesFormatoAplicar();
                         }
                         else
                         { 
@@ -209,15 +219,11 @@ namespace ARTEC.GUI
                             {
                                 AgregarDetalleConfirmado(ref unDetalleSolicitud);
                             }
-                            else
-                            {
-                                //FIJARME SI HAY QUE RESETEAR ALGO
-                            }
                         }
                     }
                 }
             }
-        }
+}
 
 
 
@@ -225,32 +231,32 @@ namespace ARTEC.GUI
         {
 
             //Conteo Detalles
-            ContDetalles += 1;
-            unDetSolic.IdSolicitudDetalle = ContDetalles;
+            ContDetalles = unaSolicitud.unosDetallesSolicitud.Count();
+            unDetSolic.IdSolicitudDetalle = ++ContDetalles;
 
-            if (AuxTipoCategoria == 2)//Categoria de Software
-            {
+            if (AuxTipoCategoria == (int)TipoBien.EnumTipoBien.Soft)
                 unDetSolic.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
-                //HAY QUE CONSULTAR SI EL SOFT ESTA HOMOLOGADO Y ES GRATIS
-                //SI ESTA HOMOLOGADO Y ES GRATIS, MBOX INDICANDO QUE SE AUTORIZA LA INSTALACION DIRECTAMENTE (MANDA MAIL A MESA DE AYUDA) Y PONE EL DETALLE COMO FINALIZADO
-            }
             unDetSolic.unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;//GUARDA REVISAR ESTO en soft tmb
             unDetSolic.unEstado.DescripEstadoSolicDetalle = "Pendiente";
             unaSolicitud.unosDetallesSolicitud.Add(unDetSolic);
 
+            //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+            if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                grillaDetalles.Columns.Remove("btnDinBorrar");
+
+            //Regenero la grilla
             grillaDetalles.DataSource = null;
             grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
-            //Formato de la grillaDetalles
-            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            grillaDetalles.Columns[0].HeaderText = "#";
-            grillaDetalles.Columns[2].HeaderText = "Bien";
-            grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            grillaDetalles.Columns[4].Width = 80;
-            grillaDetalles.Columns[4].HeaderText = "Estado";
-            grillaDetalles.Columns[1].Visible = false;
-            grillaDetalles.Columns["Seleccionado"].Visible = false;
+            
+            //Vuelve a agregar el botón de borrar al final
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaDetalles.Columns.Add(deleteButton);
+
+            grillaDetallesFormatoAplicar();
 
         }
 
@@ -260,7 +266,8 @@ namespace ARTEC.GUI
 
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
-            
+            //Traducir
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
@@ -312,7 +319,7 @@ namespace ARTEC.GUI
             //Cargar fecha Inicio
             txtFechaInicio.Text = DateTime.Today.ToString("d");
 
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            
         }
 
 
@@ -464,6 +471,9 @@ namespace ARTEC.GUI
         {
             //Quita los msjs de validación
             validAgenteAsoc.ClearFailedValidations();
+            validBien.ClearFailedValidations();
+            validCantBien.ClearFailedValidations();
+            txtBien.ReadOnly = false;
             
             if ((int)cboTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)//Hardware
             {
@@ -568,6 +578,15 @@ namespace ARTEC.GUI
                     txtBien.Text = cbo2.GetItemText(cbo2.SelectedItem);
                     this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
                     txtBien.SelectionStart = txtBien.Text.Length + 1;
+                    TipoBien unTipoBienLocal;
+                    unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unaCat.IdCategoria);
+                    if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    {
+                        SolicDetalle unSDetLocal;
+                        unSDetLocal = unaSolicitud.unosDetallesSolicitud.Find(X => X.unaCategoria.IdCategoria == unaCat.IdCategoria);
+                        if (unSDetLocal != null)
+                            unosAgentesAsociados = unSDetLocal.unosAgentes;
+                    }
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
                     validBien.Validate();
                 }
@@ -676,6 +695,7 @@ namespace ARTEC.GUI
                         if (resultado.Count() > 0)
                         {
                             MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                            validCantBien.ClearFailedValidations();
                         }
                         else
                         {
@@ -700,7 +720,7 @@ namespace ARTEC.GUI
                     grillaAgentesAsociados.Columns[4].Visible = false;
                 }
                 //Valido CantBien para que al momento de haberse emitido la advertencia y se lo ingrese correctamente, la validación de true y se vaya
-                validCantBien.Validate();
+                //validCantBien.Validate();
             }
 
         }
@@ -732,63 +752,122 @@ namespace ARTEC.GUI
         private void grillaDetalles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Si se hizo click en el header, salir
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
                 return;
             }
 
-
-            //Para obtener el detalle en donde se hizo click
-            //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
-            int DetalleSeleccionado = e.RowIndex + 1;
-            SolicDetalle unDetSolic = new SolicDetalle();
-
-            unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
-
-            txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
-            txtCantBien.Text = unDetSolic.Cantidad.ToString();
-
-            //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
-            unaCat = unDetSolic.unaCategoria;
-            TipoBien unTipoBienAux = new TipoBien();
-            BLLTipoBien managerTipoBienAux = new BLLTipoBien();
-            unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
-
-            if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+            //Si hizo click en Eliminar el Detalle
+            if (e.ColumnIndex == grillaDetalles.Columns["btnDinBorrar"].Index)
             {
-                //HARDWARE
-                gboxAsociados.Enabled = false;
-                txtCantBien.ReadOnly = false;
-                lblCantidad.Enabled = true;
-                AuxTipoCategoria = 1;//HARDWARE
-                cboTipoBien.SelectedValue = 1;//HARDWARE
-                txtAgente.Clear();
-                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
-                grillaAgentesAsociados.DataSource = null;
+                PartidaDetalle unaPartDet = new PartidaDetalle();
+                //Compruebo que no tenga partidas asociadas
+                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle);
+                if (unaPartDet.IdPartida == 0)
+                {
+                    //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                    grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
 
+                    //Obtengo el Nro IDDetalle que se borrará
+                    int NroDetBorrado = unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle;
+
+                    //elimino de la memoria el detalle
+                    unaSolicitud.unosDetallesSolicitud.RemoveAt(e.RowIndex);
+
+                    //Reordeno el conteo de detalles
+                    foreach (SolicDetalle Det2 in unaSolicitud.unosDetallesSolicitud)
+                    {
+                        if (Det2.IdSolicitudDetalle > NroDetBorrado)
+                            Det2.IdSolicitudDetalle--;
+                    }
+                    //Regenero la grilla
+                    grillaDetalles.DataSource = null;
+                    grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+
+                    //Vuelve a agregar el botón de borrar al final
+                    var deleteButton = new DataGridViewButtonColumn();
+                    deleteButton.Name = "btnDinBorrar";
+                    deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.UseColumnTextForButtonValue = true;
+                    grillaDetalles.Columns.Add(deleteButton);
+
+                    grillaDetallesFormatoAplicar();
+
+                    //Limpio el formulario en donde aparecen los datos de carga de soft y hard
+                    grillaAgentesAsociados.DataSource = null;
+                    txtAgente.Clear();
+                    txtBien.Clear();
+                    txtCantBien.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede eliminarse");
+                }
             }
-            else
+            else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
             {
-                gboxAsociados.Enabled = true;
-                txtCantBien.ReadOnly = true;
-                lblCantidad.Enabled = false;
-                AuxTipoCategoria = 2;//SOFTWARE
-                cboTipoBien.SelectedValue = 2;//SOFTWARE
-                txtAgente.Clear();
-                unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
-                grillaAgentesAsociados.DataSource = null;
-                grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
-                //No mostrar columnas que no necesito de los agentes asociados
-                grillaAgentesAsociados.Columns[0].Visible = false;
-                grillaAgentesAsociados.Columns[3].Visible = false;
-                grillaAgentesAsociados.Columns[4].Visible = false;
+                //Muestro boton modificar y oculto el de crear
+                btnModificar.Visible = true;
+                btnAgregarDetalle.Visible = false;
+                cboTipoBien.Enabled = false;
 
+                //Para obtener el detalle en donde se hizo click
+                //MessageBox.Show(grillaDetalles.Rows.SharedRow(e.RowIndex).ToString());
+                DetalleSeleccionado = e.RowIndex + 1;
+                unDetSolic = new SolicDetalle();
+                txtBien.ReadOnly = true;
 
+                unDetSolic = unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado);
 
+                this.txtBien.TextChanged -= new System.EventHandler(this.txtBien_TextChanged);
+                txtBien.Text = unDetSolic.unaCategoria.DescripCategoria;
+                this.txtBien.TextChanged += new System.EventHandler(this.txtBien_TextChanged);
+                txtCantBien.Text = unDetSolic.Cantidad.ToString();
 
+                //Traer TIPOBIEN por IdCategoria y ponerlo en el cbobox para que quede ese seleccionado
+                unaCat = unDetSolic.unaCategoria;
+                TipoBien unTipoBienAux = new TipoBien();
+                BLLTipoBien managerTipoBienAux = new BLLTipoBien();
+                unTipoBienAux = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+
+                if (unTipoBienAux.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                {
+                    //HARDWARE
+                    gboxAsociados.Enabled = false;
+                    txtCantBien.ReadOnly = false;
+                    lblCantidad.Enabled = true;
+                    AuxTipoCategoria = (int)TipoBien.EnumTipoBien.Hard;
+                    cboTipoBien.SelectedValue = (int)TipoBien.EnumTipoBien.Hard;
+                    txtAgente.Clear();
+                    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                    grillaAgentesAsociados.DataSource = null;
+                }
+                else
+                {
+                    gboxAsociados.Enabled = true;
+                    txtCantBien.ReadOnly = true;
+                    lblCantidad.Enabled = false;
+                    AuxTipoCategoria = (int)TipoBien.EnumTipoBien.Soft;
+                    cboTipoBien.SelectedValue = (int)TipoBien.EnumTipoBien.Soft;
+                    txtAgente.Clear();
+                    //unAgen = null; //GUARDA, FIJARSE QUE NO HAGA NINGUN ERROR
+                    grillaAgentesAsociados.DataSource = null;
+                    if (unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes.Count() > 0)
+                    {
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes;
+                    }
+                    else
+                    {
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
+                    }
+                    //No mostrar columnas que no necesito de los agentes asociados
+                    grillaAgentesAsociados.Columns[0].Visible = false;
+                    grillaAgentesAsociados.Columns[3].Visible = false;
+                    grillaAgentesAsociados.Columns[4].Visible = false;
+                }
             }
-
-        }
+}
 
 
         //FIJARSE QUE NO VALIDA SI CANTIDAD ES 0
@@ -816,24 +895,29 @@ namespace ARTEC.GUI
 
             try
             {
+                //VER:AGREGAR LOS ADJUNTOS
+                //VER: Validaciones
+
                 if (ValidDep2.Validate())
                 {
+                    //Verificar que haya por lo menos un SolicDetalle
+                    if (unaSolicitud.unosDetallesSolicitud.Count == 0)
+                    {
+                        MessageBox.Show("Por favor revisar que la Solicitud posea al menos un detalle");
+                        return;
+                    }
 
                     unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
-                    //***FECHA FIN VER Q SI ESTA ESCRITA
                     unaSolicitud.laDependencia = unaDep;
                     unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
                     unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
                     unaSolicitud.UnEstado = (EstadoSolicitud)cboEstadoSolicitud.SelectedItem;
                     unaSolicitud.AgenteResp = (Agente)cboAgenteResp.SelectedItem;
-                    if (unasNotas != null)
+                    if (unasNotasAgregar != null)
                     {
-                        unaSolicitud.unasNotas = (List<Nota>)this.unasNotas.ToList();
+                        unaSolicitud.unasNotas = (List<Nota>)this.unasNotasAgregar.ToList();
                     }
 
-                    //***HACER LO DE FECHA FIN Y EL ESTADO EN FINALIZADO
-                    //***AGREGAR LOS ADJUNTOS
-                    //***AGREGAR EN EL STORE LAS NOTAS
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     if (ManagerSolicitud.SolicitudCrear(unaSolicitud))
                         MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
@@ -911,6 +995,7 @@ namespace ARTEC.GUI
                 Nota unaNota = new Nota();
                 unaNota.FechaNota = DateTime.Now;
                 unaNota.DescripNota = txtNota.Text;
+                unasNotasAgregar.Add(unaNota);
                 unasNotas.Add(unaNota);
                 GrillaNotas.DataSource = null;
                 GrillaNotas.DataSource = unasNotas;
@@ -972,6 +1057,100 @@ namespace ARTEC.GUI
             }
         }
 
+        private void btnNuevoDetalle_Click(object sender, EventArgs e)
+        {
+            validCantBien.ClearFailedValidations();
+            //Muestro el boton para agregar detalles y oculto el que modifica
+            btnAgregarDetalle.Visible = true;
+            btnModificar.Visible = false;
+            cboTipoBien.Enabled = true;
+            unDetSolic = null;
+            txtBien.ReadOnly = false;
+            gboxAsociados.Enabled = false;
+            txtCantBien.ReadOnly = false;
+            lblCantidad.Enabled = true;
+            cboTipoBien.SelectedIndex = (int)TipoBien.EnumTipoBien.Hard - 1;
+            txtBien.Clear();
+            AuxTipoCategoria = 1;
+            txtCantBien.Clear();
+            txtAgente.Clear();
+            if (unAgen != null)
+                unosAgentesAsociados.Remove(unAgen);
+            unAgen = null;
+            grillaAgentesAsociados.DataSource = null;
+        }
+
+        public void grillaDetallesFormatoAplicar()
+        {
+            //Formato de la grillaDetalles
+            grillaDetalles.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grillaDetalles.Columns[0].HeaderText = "#";
+            grillaDetalles.Columns[1].Visible = false;
+            grillaDetalles.Columns["unaCategoria"].HeaderText = "Bien";
+            grillaDetalles.Columns["unEstado"].HeaderText = "Estado";
+            //grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //grillaDetalles.Columns[4].Width = 80;
+            //grillaDetalles.Columns[4].HeaderText = "Estado";
+            grillaDetalles.Columns["Seleccionado"].Visible = false;
+            grillaDetalles.Columns["UIDSolicDetalle"].Visible = false;
+        }
+
+private void btnModificar_Click(object sender, EventArgs e)
+{
+    if (!validBien.Validate())
+        return;
+
+    SolicDetalle unDetalleSolicitud = new SolicDetalle();
+    unDetalleSolicitud.unaCategoria = unaCat;
+
+    if (validCantBien.Validate() && Int32.Parse(txtCantBien.Text) > 0)
+    {
+        unDetalleSolicitud.Cantidad = Int32.Parse(txtCantBien.Text);
+
+        //Verifica si ya hay un detalle para sumarle cantidad y así no haya Bienes repetidos en distintos detalles
+        if (unaSolicitud.unosDetallesSolicitud.Find(RR => RR.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria) != null)//SI YA HAY UN DETALLE
+        {
+            var SolDetDic = unaSolicitud.unosDetallesSolicitud.Select((o, i) => new { unSolDet = o, Index = i }).Where(item => item.unSolDet.unaCategoria.IdCategoria == unDetalleSolicitud.unaCategoria.IdCategoria).FirstOrDefault();
+            if (SolDetDic != null)
+            {
+                if (AuxTipoCategoria == 2)//Categoria de Software
+                {
+                    //Cargo los agentes que ya había (es diferente de btnAgregarDetalle_Click porque aca esta en memoria ya)
+                    unDetalleSolicitud.unosAgentes = (List<Agente>)unosAgentesAsociados.ToList();
+                    SolDetDic.unSolDet.Cantidad = unDetalleSolicitud.unosAgentes.Count();
+                }
+                else
+                {
+                    SolDetDic.unSolDet.Cantidad = Int32.Parse(txtCantBien.Text);
+                }
+                //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
+                if (grillaDetalles.Columns.Contains("btnDinBorrar"))
+                    grillaDetalles.Columns.Remove("btnDinBorrar");
+                if (grillaDetalles.Columns.Contains("txtCotizConteo"))
+                    grillaDetalles.Columns.Remove("txtCotizConteo");
+                if (grillaDetalles.Columns.Contains("btnDinCotizar"))
+                    grillaDetalles.Columns.Remove("btnDinCotizar");
+
+                //Regenero la grilla
+                grillaDetalles.DataSource = null;
+                grillaDetalles.DataSource = unaSolicitud.unosDetallesSolicitud;
+                
+                //Vuelve a agregar el botón de borrar al final
+                var deleteButton = new DataGridViewButtonColumn();
+                deleteButton.Name = "btnDinBorrar";
+                deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.UseColumnTextForButtonValue = true;
+                grillaDetalles.Columns.Add(deleteButton);
+
+                grillaDetallesFormatoAplicar();
+            }
+        }
+    }
+
+}
 
 
 

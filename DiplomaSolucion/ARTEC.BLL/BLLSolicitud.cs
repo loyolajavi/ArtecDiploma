@@ -21,11 +21,10 @@ namespace ARTEC.BLL
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Solicitud Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
+                if (laSolicitud.unosDetallesSolicitud.Count == 0)
+                    throw new InvalidOperationException("Por favor revisar que la Solicitud posea al menos un detalle");
                 if (GestorSolicitud.SolicitudCrear(laSolicitud) > 0)
-                {
                     return true;
-                }
-
                 return false;
             }
             catch (Exception es)
