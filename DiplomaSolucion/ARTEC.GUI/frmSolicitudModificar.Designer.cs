@@ -542,6 +542,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(9, 36);
@@ -786,6 +787,8 @@ namespace ARTEC.GUI
             // 
             // grillaDetalles
             // 
+            this.grillaDetalles.AllowUserToAddRows = false;
+            this.grillaDetalles.AllowUserToDeleteRows = false;
             this.grillaDetalles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grillaDetalles.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetalles.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -810,6 +813,7 @@ namespace ARTEC.GUI
             this.grillaDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaDetalles.Location = new System.Drawing.Point(327, 13);
             this.grillaDetalles.Name = "grillaDetalles";
+            this.grillaDetalles.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1041,6 +1045,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.Name = "frmSolicitudModificar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

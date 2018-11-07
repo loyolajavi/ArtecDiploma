@@ -49,9 +49,7 @@ namespace ARTEC.FRAMEWORK.Servicios
                 {
                     try 
 	                {
-                        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                        FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-                        if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null)
+                        if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null && ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario > 0)
                         {
                             GrabarLogBD(ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario, DateTime.Now, "Error", AccionExcepcion, MsjExcepciones);
                             NombreUsuario = ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario;
@@ -62,7 +60,7 @@ namespace ARTEC.FRAMEWORK.Servicios
                             NombreUsuario = "SIN_USUARIO";
                         }
 	                }
-	                catch (Exception)
+	                catch (Exception es)
 	                {
                         System.Windows.Forms.MessageBox.Show("Error crítico y general de conexión a la base de datos");
 	                }

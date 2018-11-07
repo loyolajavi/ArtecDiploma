@@ -47,11 +47,14 @@ namespace ARTEC.DAL
             {
                 using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "UsuarioTraerPorLogin", parameters))
                 {
-                    FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = FRAMEWORK.Persistencia.Mapeador.MapearUno<Usuario>(ds);
-                    if (!string.IsNullOrEmpty(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario))
+                    Usuario unUsAux = new Usuario();
+                    unUsAux = FRAMEWORK.Persistencia.Mapeador.MapearUno<Usuario>(ds);
+                    if (unUsAux != null && unUsAux.IdUsuario > 0)
                     {
+                        FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = unUsAux;
                         return true;
                     }
+                    return false;
                 }
             }
             catch (Exception es)
@@ -60,8 +63,6 @@ namespace ARTEC.DAL
                     //System.Windows.Forms.MessageBox.Show(es.StackTrace);
                     throw;
             }
-            return false;
-
         }
 
 

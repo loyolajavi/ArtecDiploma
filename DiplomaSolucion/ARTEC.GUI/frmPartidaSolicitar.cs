@@ -15,6 +15,7 @@ using ARTEC.FRAMEWORK.Servicios;
 using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -39,6 +40,17 @@ namespace ARTEC.GUI
         private frmPartidaSolicitar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
+            string[] IdiomatxtResBusqueda = { "No hay resultados" };
+            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
+            this.txtResBusqueda.Tag = dictxtResBusqueda;
+
+            Dictionary<string, string[]> dictxtNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomatxtNroSolicitud = { "Solo se aceptan números" };
+            dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
+            this.txtNroSolicitud.Tag = dictxtNroSolicitud;
+
             //Agrega Checkbox para seleccionar SolicDetalles
             var CheckBoxColumna = new DataGridViewCheckBoxColumn();
             CheckBoxColumna.Name = "chkBoxDetalles";
@@ -69,6 +81,13 @@ namespace ARTEC.GUI
         private frmPartidaSolicitar(Solicitud unaSolic)
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
+            string[] IdiomatxtResBusqueda = { "No hay resultados" };
+            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
+            this.txtResBusqueda.Tag = dictxtResBusqueda;
+
+
             unaSolicitud = unaSolic;
             //Agrega Checkbox para seleccionar SolicDetalles
             var CheckBoxColumna = new DataGridViewCheckBoxColumn();
@@ -100,7 +119,10 @@ namespace ARTEC.GUI
 
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
         {
-            
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
             txtMontoTotal.Text = "0";
             TraerLimitePartida();
 
@@ -208,13 +230,7 @@ namespace ARTEC.GUI
         }
 
 
-
-        /// <summary>
-        /// Interacción con la grilla de las Cotizaciones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void grillaCotizaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void grillaCotizaciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Si se hizo click en el header, salir
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
@@ -231,11 +247,11 @@ namespace ARTEC.GUI
                     var chkCell = (DataGridViewCheckBoxCell)grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"];
                     if ((bool)chkCell.EditedFormattedValue)//Si se tilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
                     }
                     else //Si se destilda
                     {
-                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
+                        ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
                     }
                     grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
                     grillaAuxCot.EndEdit();
@@ -243,7 +259,6 @@ namespace ARTEC.GUI
                 }
             }
         }
-
 
 
         private void grillaSolicDetalles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -358,21 +373,53 @@ namespace ARTEC.GUI
 
         private void btnGenerarCaja_Click(object sender, EventArgs e)
         {
-            if (decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
+            try
             {
-                if (GenerarPartidaGlobal(true))
-                    MessageBox.Show("Pedido por Caja generado correctamente");
+                if (!vldFrmPartidaSolicitarCaja.Validate())
+                    return;
+
+                if (Int32.Parse(txtMontoTotal.Text) > 0 && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
+                {
+                    if (GenerarPartidaGlobal(true))
+                        MessageBox.Show("Pedido por Caja generado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("No se puede solicitar dinero por caja si el monto es mayor a $2.000");
+                }
             }
-            else
+            catch (Exception es)
             {
-                MessageBox.Show("No se puede solicitar dinero por caja si el monto es mayor a $2.000");
+                
+                throw;
             }
+       
+
+           
         }
 
         private void btnGenerarPartida_Click(object sender, EventArgs e)
         {
-            if (GenerarPartidaGlobal(false))
-                MessageBox.Show("Solicitud de Partida generada correctamente");
+            try
+            {
+                if (!vldfrmPartidaSolicitarGenerarPar.Validate())
+                    return;
+
+                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Any(Y => Y.Seleccionada == true)) && Int32.Parse(txtMontoTotal.Text) > 0)
+                {
+                    if (GenerarPartidaGlobal(false))
+                        MessageBox.Show("Solicitud de Partida generada correctamente");
+                }
+                else
+                    MessageBox.Show("Por favor revise los detalles, sus cotizaciones, y el Monto Total");
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaSolicitar - btnGenerarPartida_Click");
+                MessageBox.Show("Error al intentar generar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+            
         }
 
 
@@ -469,24 +516,47 @@ namespace ARTEC.GUI
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
             ListaSolicitudes = new List<Solicitud>();
 
-            if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text))
+
+            try
             {
-                if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                txtResBusqueda.Visible = false;
+                grillaSolicitudes.Visible = true;
+                vldFrmPartidaSolicitarBuscar.ClearFailedValidations();
+
+                if (!string.IsNullOrEmpty(txtNroSolicitud.Text) | !string.IsNullOrEmpty(txtDep.Text))
                 {
-                    ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                    if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                    {
+                        if (!vldFrmPartidaSolicitarBuscar.Validate())
+                            return;
+                        ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                    }
+                    else
+                    {
+                        ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text);
+                    }
+                    grillaSolicitudes.DataSource = null;
+                    grillaSolicitudes.DataSource = ListaSolicitudes;
+                    grillaSolicitudes.Columns["Asignado"].Visible = true;
+                    if (ListaSolicitudes.Count == 0)
+                    {
+                        grillaSolicitudes.Visible = false;
+                        txtResBusqueda.Visible = true;
+                    }
                 }
                 else
                 {
-                    ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDep.Text);
+                    grillaSolicitudes.DataSource = null;
+                    grillaSolicitudes.Visible = false;
+                    txtResBusqueda.Visible = true;
                 }
-                grillaSolicitudes.DataSource = null;
-                grillaSolicitudes.DataSource = ListaSolicitudes;
-                grillaSolicitudes.Columns["Asignado"].Visible = true;
             }
-            else
+            catch (Exception es)
             {
-                grillaSolicitudes.DataSource = null;
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaSolicitar - btnBuscar_Click");
+                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
+
 
 
         }
@@ -684,6 +754,8 @@ namespace ARTEC.GUI
                 return true;
             return false;
         }
+
+
 
 
 

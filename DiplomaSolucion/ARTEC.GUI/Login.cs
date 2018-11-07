@@ -118,6 +118,7 @@ namespace ARTEC.GUI
         /// <param name="e"></param>
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            Idioma._EtiquetasCompartidas = null;
             BLLServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
         }
 
@@ -177,6 +178,7 @@ namespace ARTEC.GUI
                             }
                             else
                                 MessageBox.Show("Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias");
+                            
                         }
                         else
                         {
@@ -185,8 +187,6 @@ namespace ARTEC.GUI
                         }
                         
                     }
-                    Idioma._EtiquetasCompartidas = null;
-                    
                 }
                 catch (Exception es)
                 {
