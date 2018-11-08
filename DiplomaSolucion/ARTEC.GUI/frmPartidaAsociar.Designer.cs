@@ -29,9 +29,11 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartidaAsociar));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.txtIdPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdPartida = new DevComponents.DotNetBar.LabelX();
@@ -55,10 +57,18 @@ namespace ARTEC.GUI
             this.grillaSolicitudes = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.GrillaPartidas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.lblGrillaPartidas = new DevComponents.DotNetBar.LabelX();
+            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.txtResBusquedaPar = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.vldFrmPartidaAsociarBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             this.gboxDetallesPartida.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicitudes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscar
@@ -88,6 +98,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
             this.txtIdPartida.TabIndex = 31;
+            this.vldFrmPartidaAsociarBuscar.SetValidator1(this.txtIdPartida, this.regularExpressionValidator2);
             // 
             // lblIdPartida
             // 
@@ -151,19 +162,22 @@ namespace ARTEC.GUI
             // 
             // grillaDetallesPart
             // 
+            this.grillaDetallesPart.AllowUserToAddRows = false;
+            this.grillaDetallesPart.AllowUserToDeleteRows = false;
             this.grillaDetallesPart.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetallesPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle4;
             this.grillaDetallesPart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaDetallesPart.Location = new System.Drawing.Point(11, 86);
             this.grillaDetallesPart.Name = "grillaDetallesPart";
+            this.grillaDetallesPart.ReadOnly = true;
             this.grillaDetallesPart.Size = new System.Drawing.Size(426, 92);
             this.grillaDetallesPart.TabIndex = 34;
             // 
@@ -252,6 +266,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
             this.txtNroSolicitud.TabIndex = 41;
+            this.vldFrmPartidaAsociarBuscar.SetValidator1(this.txtNroSolicitud, this.regularExpressionValidator1);
             // 
             // lblIdSolicitud
             // 
@@ -279,6 +294,7 @@ namespace ARTEC.GUI
             this.txtFechaEnvio.Location = new System.Drawing.Point(11, 46);
             this.txtFechaEnvio.Name = "txtFechaEnvio";
             this.txtFechaEnvio.PreventEnterBeep = true;
+            this.txtFechaEnvio.ReadOnly = true;
             this.txtFechaEnvio.Size = new System.Drawing.Size(102, 22);
             this.txtFechaEnvio.TabIndex = 43;
             // 
@@ -297,12 +313,12 @@ namespace ARTEC.GUI
             // 
             // gboxDetallesPartida
             // 
+            this.gboxDetallesPartida.Controls.Add(this.grillaDetallesPart);
             this.gboxDetallesPartida.Controls.Add(this.chkCaja);
             this.gboxDetallesPartida.Controls.Add(this.lblMontoSolic);
             this.gboxDetallesPartida.Controls.Add(this.txtMontoSolic);
             this.gboxDetallesPartida.Controls.Add(this.lblFechaEnvio);
             this.gboxDetallesPartida.Controls.Add(this.txtFechaEnvio);
-            this.gboxDetallesPartida.Controls.Add(this.grillaDetallesPart);
             this.gboxDetallesPartida.Location = new System.Drawing.Point(2, 339);
             this.gboxDetallesPartida.Name = "gboxDetallesPartida";
             this.gboxDetallesPartida.Size = new System.Drawing.Size(448, 193);
@@ -316,18 +332,14 @@ namespace ARTEC.GUI
             // 
             // 
             this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkCaja.Enabled = false;
             this.chkCaja.Location = new System.Drawing.Point(261, 46);
             this.chkCaja.Name = "chkCaja";
             this.chkCaja.Size = new System.Drawing.Size(86, 22);
             this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkCaja.TabIndex = 47;
+            this.chkCaja.Tag = ((object)(resources.GetObject("chkCaja.Tag")));
             this.chkCaja.Text = "chkCaja";
-
-            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
-            string[] IdiomachkCaja = { "Caja" };
-            dicchkCaja.Add("Idioma", IdiomachkCaja);
-            this.chkCaja.Tag = dicchkCaja;
-
             // 
             // lblMontoSolic
             // 
@@ -355,43 +367,50 @@ namespace ARTEC.GUI
             this.txtMontoSolic.Location = new System.Drawing.Point(137, 46);
             this.txtMontoSolic.Name = "txtMontoSolic";
             this.txtMontoSolic.PreventEnterBeep = true;
+            this.txtMontoSolic.ReadOnly = true;
             this.txtMontoSolic.Size = new System.Drawing.Size(102, 22);
             this.txtMontoSolic.TabIndex = 45;
             // 
             // grillaSolicitudes
             // 
+            this.grillaSolicitudes.AllowUserToAddRows = false;
+            this.grillaSolicitudes.AllowUserToDeleteRows = false;
             this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle5;
             this.grillaSolicitudes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicitudes.Location = new System.Drawing.Point(12, 127);
             this.grillaSolicitudes.Name = "grillaSolicitudes";
+            this.grillaSolicitudes.ReadOnly = true;
             this.grillaSolicitudes.Size = new System.Drawing.Size(438, 81);
             this.grillaSolicitudes.TabIndex = 45;
             this.grillaSolicitudes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaSolicitudes_CellClick);
             // 
             // GrillaPartidas
             // 
+            this.GrillaPartidas.AllowUserToAddRows = false;
+            this.GrillaPartidas.AllowUserToDeleteRows = false;
             this.GrillaPartidas.BackgroundColor = System.Drawing.Color.White;
             this.GrillaPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaPartidas.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaPartidas.DefaultCellStyle = dataGridViewCellStyle6;
             this.GrillaPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaPartidas.Location = new System.Drawing.Point(13, 242);
             this.GrillaPartidas.Name = "GrillaPartidas";
+            this.GrillaPartidas.ReadOnly = true;
             this.GrillaPartidas.Size = new System.Drawing.Size(438, 81);
             this.GrillaPartidas.TabIndex = 46;
             this.GrillaPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaPartidas_CellClick);
@@ -409,14 +428,79 @@ namespace ARTEC.GUI
             this.lblGrillaPartidas.TabIndex = 48;
             this.lblGrillaPartidas.Text = "lblGrillaPartidas";
             // 
+            // txtResBusqueda
+            // 
+            // 
+            // 
+            // 
+            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusqueda.Location = new System.Drawing.Point(11, 127);
+            this.txtResBusqueda.Name = "txtResBusqueda";
+            this.txtResBusqueda.ReadOnly = true;
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusqueda.Size = new System.Drawing.Size(439, 81);
+            this.txtResBusqueda.TabIndex = 63;
+            this.txtResBusqueda.Text = "No hay resultados";
+            this.txtResBusqueda.Visible = false;
+            // 
+            // txtResBusquedaPar
+            // 
+            // 
+            // 
+            // 
+            this.txtResBusquedaPar.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusquedaPar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusquedaPar.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusquedaPar.Location = new System.Drawing.Point(12, 242);
+            this.txtResBusquedaPar.Name = "txtResBusquedaPar";
+            this.txtResBusquedaPar.ReadOnly = true;
+            this.txtResBusquedaPar.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusquedaPar.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusquedaPar.Size = new System.Drawing.Size(439, 81);
+            this.txtResBusquedaPar.TabIndex = 64;
+            this.txtResBusquedaPar.Text = "No hay resultados";
+            this.txtResBusquedaPar.Visible = false;
+            // 
+            // vldFrmPartidaAsociarBuscar
+            // 
+            this.vldFrmPartidaAsociarBuscar.ContainerControl = this.btnBuscar;
+            this.vldFrmPartidaAsociarBuscar.ErrorProvider = this.errorProvider1;
+            this.vldFrmPartidaAsociarBuscar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
             // frmPartidaAsociar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 591);
             this.Controls.Add(this.lblGrillaPartidas);
-            this.Controls.Add(this.GrillaPartidas);
-            this.Controls.Add(this.grillaSolicitudes);
             this.Controls.Add(this.gboxDetallesPartida);
             this.Controls.Add(this.txtNroSolicitud);
             this.Controls.Add(this.lblIdSolicitud);
@@ -431,6 +515,10 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblDependencia);
             this.Controls.Add(this.txtDependencia);
             this.Controls.Add(this.cboDep);
+            this.Controls.Add(this.txtResBusqueda);
+            this.Controls.Add(this.txtResBusquedaPar);
+            this.Controls.Add(this.grillaSolicitudes);
+            this.Controls.Add(this.GrillaPartidas);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPartidaAsociar";
@@ -440,6 +528,7 @@ namespace ARTEC.GUI
             this.gboxDetallesPartida.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicitudes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,5 +558,12 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaSolicitudes;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaPartidas;
         private DevComponents.DotNetBar.LabelX lblGrillaPartidas;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusquedaPar;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmPartidaAsociarBuscar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
     }
 }

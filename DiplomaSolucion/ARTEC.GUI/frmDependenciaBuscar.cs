@@ -78,7 +78,8 @@ namespace ARTEC.GUI
             DepSeleccionada = null;
             txtTipoDep.Clear();
             GrillaAgentes.DataSource = null;
-
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
 
             if (!string.IsNullOrWhiteSpace(txtDependencia.Text))
             {
@@ -186,6 +187,7 @@ namespace ARTEC.GUI
                         }
 
                     }
+
                     
                 }
             }
@@ -193,15 +195,32 @@ namespace ARTEC.GUI
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            frmDependenciaModificar unfrmDependenciaModificar = new frmDependenciaModificar(DepSeleccionada);
-            //CON ESTO hago que al cerrar el formulario del showdialog (frmdependenciamodificar), 
-            //voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
-            unfrmDependenciaModificar.FormClosing += unfrmDependenciaModificar_FormClosing; 
-            txtDependencia.Clear();
-            DepSeleccionada = null;
-            txtTipoDep.Clear();
-            this.GrillaAgentes.DataSource = null;
-            unfrmDependenciaModificar.ShowDialog();
+            try
+            {
+                if(DepSeleccionada != null && DepSeleccionada.IdDependencia > 0)
+                {
+                    frmDependenciaModificar unfrmDependenciaModificar = new frmDependenciaModificar(DepSeleccionada);
+                    //CON ESTO hago que al cerrar el formulario del showdialog (frmdependenciamodificar), 
+                    //voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
+                    unfrmDependenciaModificar.FormClosing += unfrmDependenciaModificar_FormClosing;
+                    txtDependencia.Clear();
+                    DepSeleccionada = null;
+                    txtTipoDep.Clear();
+                    this.GrillaAgentes.DataSource = null;
+                    unfrmDependenciaModificar.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Primero seleccione una dependencia");
+                }
+                
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnModificar_Click");
+                MessageBox.Show("Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
             
 
 
@@ -246,7 +265,7 @@ namespace ARTEC.GUI
                             return;
                 }
                 else
-                    MessageBox.Show("Para dar de baja una Categoría primero debe buscarla");
+                    MessageBox.Show("Primero selecciona una Dependencia");
             }
             catch (Exception es)
             {

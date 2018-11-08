@@ -142,6 +142,9 @@ namespace ARTEC.GUI
 
             try
             {
+                if (!vldFrmRendicionBuscar.Validate())
+                    return;
+
                 if (!string.IsNullOrEmpty(txtNroRendicion.Text) | !string.IsNullOrEmpty(txtNroPart.Text) | !string.IsNullOrEmpty(txtNroSolic.Text) | !string.IsNullOrEmpty(txtDependencia.Text) && !txtNroRendicion.Text.Contains("%") & !txtNroPart.Text.Contains("%") & !txtNroSolic.Text.Contains("%") & !txtDependencia.Text.Contains("%") & !txtNroRendicion.Text.Contains("_") & !txtNroPart.Text.Contains("_") & !txtNroSolic.Text.Contains("_") & !txtDependencia.Text.Contains("_"))
                 {
                     unasRendiciones = ManagerRendicion.RendicionBuscar(txtNroRendicion.Text, txtNroPart.Text, txtNroSolic.Text, txtDependencia.Text);

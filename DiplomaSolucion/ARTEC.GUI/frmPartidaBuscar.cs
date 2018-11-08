@@ -10,6 +10,7 @@ using ARTEC.BLL;
 using ARTEC.ENTIDADES;
 using System.Linq;
 using ARTEC.BLL.Servicios;
+using ARTEC.FRAMEWORK.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -55,61 +56,42 @@ namespace ARTEC.GUI
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            txtResBusqueda.Visible = false;
+            GrillaPartidas.Visible = true;
+
             BLLPartida ManagerPartida = new BLLPartida();
 
-            //Si se ingresó algun dato
-            if (!string.IsNullOrWhiteSpace(txtIdPartida.Text) | !string.IsNullOrWhiteSpace(txtNroSolicitud.Text) | !string.IsNullOrWhiteSpace(txtDependencia.Text))
+            try
             {
-                //Si se ingresó el IdPartida
-                if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
+                if (!vldFrmPartidaBuscar.Validate())
+                    return;
+
+                //Si se ingresó algun dato
+                if (!string.IsNullOrWhiteSpace(txtIdPartida.Text) | !string.IsNullOrWhiteSpace(txtNroSolicitud.Text) | !string.IsNullOrWhiteSpace(txtDependencia.Text))
                 {
-                    unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
-
-                    unaListaPartidas.Clear();
-                    unaListaPartidas.Add(unaPartida);
-                    GrillaPartidas.DataSource = null;
-                    GrillaPartidas.DataSource = unaListaPartidas;
-
-                    txtDependencia.Clear();
-                    txtNroSolicitud.Clear();
-                }
-                //Si se ingresó NroSolicitud o Dependencia (pero no IdPartida)
-                else
-                {
-                    unasSolicitudes = new List<Solicitud>();
-                    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-
-                    //Si se ingresó el NroSolicitud
-                    if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                    //Si se ingresó el IdPartida
+                    if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
                     {
-                        unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(Int32.Parse(txtNroSolicitud.Text));
-                        if (unaListaPartidas.Count() > 0)
-                        {
-                            GrillaPartidas.DataSource = null;
-                            GrillaPartidas.DataSource = unaListaPartidas;
-                        }
-                        else
-                        {
-                            GrillaPartidas.DataSource = null;
-                            MessageBox.Show("La Solicitud no posee Partidas solicitadas");
-                        }
+                        unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
+
+                        unaListaPartidas.Clear();
+                        unaListaPartidas.Add(unaPartida);
+                        GrillaPartidas.DataSource = null;
+                        GrillaPartidas.DataSource = unaListaPartidas;
 
                         txtDependencia.Clear();
+                        txtNroSolicitud.Clear();
                     }
-                    //Si se ingresó dependencia
+                    //Si se ingresó NroSolicitud o Dependencia (pero no IdPartida)
                     else
                     {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDependencia.Text);
-                        if (unasSolicitudes.Count() > 0)
+                        unasSolicitudes = new List<Solicitud>();
+                        BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+                        //Si se ingresó el NroSolicitud
+                        if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
                         {
-                            unaListaPartidas.Clear();
-                            foreach (Solicitud unaSolic in unasSolicitudes)
-                            {
-                                List<Partida> LisPartidasLocal = new List<Partida>();
-                                LisPartidasLocal = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolic.IdSolicitud);
-                                if (LisPartidasLocal.Count() > 0)
-                                    unaListaPartidas.AddRange(LisPartidasLocal);
-                            }
+                            unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(Int32.Parse(txtNroSolicitud.Text));
                             if (unaListaPartidas.Count() > 0)
                             {
                                 GrillaPartidas.DataSource = null;
@@ -118,17 +100,65 @@ namespace ARTEC.GUI
                             else
                             {
                                 GrillaPartidas.DataSource = null;
+                                txtResBusqueda.Visible = true;
+                                GrillaPartidas.Visible = false;
                                 MessageBox.Show("La Solicitud no posee Partidas solicitadas");
                             }
+
+                            txtDependencia.Clear();
                         }
+                        //Si se ingresó dependencia
                         else
                         {
-                            GrillaPartidas.DataSource = null;
-                            MessageBox.Show("La dependencia no posee solicitudes ni partidas");
+                            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDependencia.Text);
+                            if (unasSolicitudes.Count() > 0)
+                            {
+                                unaListaPartidas.Clear();
+                                foreach (Solicitud unaSolic in unasSolicitudes)
+                                {
+                                    List<Partida> LisPartidasLocal = new List<Partida>();
+                                    LisPartidasLocal = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolic.IdSolicitud);
+                                    if (LisPartidasLocal.Count() > 0)
+                                        unaListaPartidas.AddRange(LisPartidasLocal);
+                                }
+                                if (unaListaPartidas.Count() > 0)
+                                {
+                                    GrillaPartidas.DataSource = null;
+                                    GrillaPartidas.DataSource = unaListaPartidas;
+                                }
+                                else
+                                {
+                                    GrillaPartidas.DataSource = null;
+                                    txtResBusqueda.Visible = true;
+                                    GrillaPartidas.Visible = false;
+                                    MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                                }
+                            }
+                            else
+                            {
+                                GrillaPartidas.DataSource = null;
+                                MessageBox.Show("La dependencia no posee solicitudes ni partidas");
+                                txtResBusqueda.Visible = true;
+                                GrillaPartidas.Visible = false;
+                            }
                         }
                     }
                 }
+                else
+                {
+                    txtResBusqueda.Visible = true;
+                    GrillaPartidas.DataSource = null;
+                    GrillaPartidas.Visible = false;
+                }
             }
+            
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaBuscar - btnBuscar_Click");
+                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
+
 
         }
 

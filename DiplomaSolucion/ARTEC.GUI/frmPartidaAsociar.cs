@@ -50,66 +50,111 @@ namespace ARTEC.GUI
         {
             BLLPartida ManagerPartida = new BLLPartida();
 
-            //Si se ingresó algun dato
-            if (!string.IsNullOrWhiteSpace(txtIdPartida.Text) | !string.IsNullOrWhiteSpace(txtNroSolicitud.Text) | !string.IsNullOrWhiteSpace(txtDependencia.Text))
+            try
             {
-                //Si se ingresó el IdPartida
-                if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
+                if (!vldFrmPartidaAsociarBuscar.Validate())
+                    return;
+
+                txtResBusqueda.Visible = false;
+                txtResBusquedaPar.Visible = false;
+                grillaSolicitudes.Visible = true;
+                GrillaPartidas.Visible = true;
+
+                //Si se ingresó algun dato
+                if (!string.IsNullOrWhiteSpace(txtIdPartida.Text) | !string.IsNullOrWhiteSpace(txtNroSolicitud.Text) | !string.IsNullOrWhiteSpace(txtDependencia.Text))
                 {
-                    unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
-                    if (unaPartida != null && unaPartida.IdPartida > 0)
+                    //Si se ingresó el IdPartida
+                    if (!string.IsNullOrWhiteSpace(txtIdPartida.Text))
                     {
-                        txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
-                        txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-                        chkCaja.Checked = unaPartida.Caja;
-
-                        unaListaPartidas.Clear();
-                        unaListaPartidas.Add(unaPartida);
-                        GrillaPartidas.DataSource = null;
-                        GrillaPartidas.DataSource = unaListaPartidas;
-
-                        List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
-
-                        grillaDetallesPart.DataSource = null;
-                        foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                        unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
+                        if (unaPartida != null && unaPartida.IdPartida > 0)
                         {
-                            HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
-                            unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
-                            unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
-                            unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+                            txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
+                            txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
+                            chkCaja.Checked = unaPartida.Caja;
 
-                            ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                            unaListaPartidas.Clear();
+                            unaListaPartidas.Add(unaPartida);
+                            GrillaPartidas.DataSource = null;
+                            GrillaPartidas.DataSource = unaListaPartidas;
+
+                            List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
+
+                            grillaDetallesPart.DataSource = null;
+                            foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
+                            {
+                                HLPPartidaDetalle unHLPPartDetalle = new HLPPartidaDetalle();
+                                unHLPPartDetalle.IdPartidaDetalle = unPartDet.IdPartidaDetalle;
+                                unHLPPartDetalle.DescripCategoria = unPartDet.SolicDetalleAsociado.unaCategoria.DescripCategoria;
+                                unHLPPartDetalle.Cantidad = unPartDet.SolicDetalleAsociado.Cantidad;
+
+                                ListaHelperPartidaDetalle.Add(unHLPPartDetalle);
+                            }
+                            grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
+
+                            //Limpio datos en grilla solicitud por si quedó algo antiguo
+                            grillaSolicitudes.DataSource = null;
+                            txtDependencia.Clear();
+                            txtNroSolicitud.Clear();
                         }
-                        grillaDetallesPart.DataSource = ListaHelperPartidaDetalle;
-
-                        //Limpio datos en grilla solicitud por si quedó algo antiguo
-                        grillaSolicitudes.DataSource = null;
-                        txtDependencia.Clear();
-                        txtNroSolicitud.Clear();
+                        else
+                        {
+                            txtResBusqueda.Visible = true;
+                            txtResBusquedaPar.Visible = true;
+                            grillaSolicitudes.DataSource = null;
+                            GrillaPartidas.DataSource = null;
+                            GrillaPartidas.Visible = false;
+                            grillaDetallesPart.DataSource = null;
+                        }
                     }
-                }
-                //Si se ingresó NroSolicitud o Dependencia (pero no IdPartida)
-                else
-                {
-                    unasSolicitudes = new List<Solicitud>();
-                    BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-
-                    //Si se ingresó el NroSolicitud
-                    if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
-                    {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
-                        txtDependencia.Clear();
-                    }
-                    //Si se ingresó dependencia
+                    //Si se ingresó NroSolicitud o Dependencia (pero no IdPartida)
                     else
                     {
-                        unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDependencia.Text);
+                        unasSolicitudes = new List<Solicitud>();
+                        BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+
+                        //Si se ingresó el NroSolicitud
+                        if (!string.IsNullOrEmpty(txtNroSolicitud.Text))
+                        {
+                            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                            txtDependencia.Clear();
+                        }
+                        //Si se ingresó dependencia
+                        else
+                        {
+                            unasSolicitudes = ManagerSolicitud.SolicitudBuscar(txtDependencia.Text);
+                        }
+                        //Carga las solicitudes encontradas
+                        if (unasSolicitudes != null && unasSolicitudes.Count > 0)
+                        {
+                            grillaSolicitudes.DataSource = null;
+                            grillaSolicitudes.DataSource = unasSolicitudes;
+                            grillaSolicitudes.Columns["Asignado"].Visible = true;
+                            //Limpia las grillas que quedaron en memoria de búsqueda anterior
+                            GrillaPartidas.DataSource = null;
+                            grillaDetallesPart.DataSource = null;
+                            txtFechaEnvio.Clear();
+                            txtMontoSolic.Clear();
+                            chkCaja.Checked = false;
+                        }
+                        else
+                        {
+                            txtResBusqueda.Visible = true;
+                            txtResBusquedaPar.Visible = true;
+                            grillaSolicitudes.DataSource = null;
+                            GrillaPartidas.DataSource = null;
+                            GrillaPartidas.Visible = false;
+                            grillaDetallesPart.DataSource = null;
+                        }
+
                     }
-                    //Carga las solicitudes encontradas
+                }
+                else
+                {
+                    txtResBusqueda.Visible = true;
+                    txtResBusquedaPar.Visible = true;
+                    grillaSolicitudes.Visible = false;
                     grillaSolicitudes.DataSource = null;
-                    grillaSolicitudes.DataSource = unasSolicitudes;
-                    grillaSolicitudes.Columns["Asignado"].Visible = true;
-                    //Limpia las grillas que quedaron en memoria de búsqueda anterior
                     GrillaPartidas.DataSource = null;
                     grillaDetallesPart.DataSource = null;
                     txtFechaEnvio.Clear();
@@ -117,28 +162,39 @@ namespace ARTEC.GUI
                     chkCaja.Checked = false;
                 }
             }
-            else
+            catch (Exception es)
             {
-                grillaSolicitudes.DataSource = null;
-                GrillaPartidas.DataSource = null;
-                grillaDetallesPart.DataSource = null;
-                txtFechaEnvio.Clear();
-                txtMontoSolic.Clear();
-                chkCaja.Checked = false;
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaAsociar - btnBuscar_Click");
+                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
-            
         }
 
 
 
         private void btnAsociar_Click(object sender, EventArgs e)
         {
-            unaPartida.FechaAcreditacion = DateTime.Today;
-            unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
-            unaPartida.NroPartida = txtNroPartAsignado.Text;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtNroPartAsignado.Text) && !string.IsNullOrWhiteSpace(txtMontoOtorgado.Text) && decimal.Parse(txtMontoOtorgado.Text) > 0)
+                {
+                    unaPartida.FechaAcreditacion = DateTime.Today;
+                    unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
+                    unaPartida.NroPartida = txtNroPartAsignado.Text;
 
-            if(ManagerPartida.PartidaAsociar(unaPartida))
-                MessageBox.Show("Partida Asociada correctamente");
+                    if (ManagerPartida.PartidaAsociar(unaPartida))
+                        MessageBox.Show("Partida Asociada correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("Por favor completar el Nro de Partida asignada y el monto acreditado");
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaAsociar - btnAsociar_Click");
+                MessageBox.Show("Error al intentar asociar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
         }
 
         private void grillaSolicitudes_CellClick(object sender, DataGridViewCellEventArgs e)

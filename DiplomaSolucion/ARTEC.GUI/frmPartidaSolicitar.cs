@@ -378,7 +378,7 @@ namespace ARTEC.GUI
                 if (!vldFrmPartidaSolicitarCaja.Validate())
                     return;
 
-                if (Int32.Parse(txtMontoTotal.Text) > 0 && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
+                if (decimal.Parse(txtMontoTotal.Text) > 0 && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
                 {
                     if (GenerarPartidaGlobal(true))
                         MessageBox.Show("Pedido por Caja generado correctamente");
@@ -530,6 +530,7 @@ namespace ARTEC.GUI
                         if (!vldFrmPartidaSolicitarBuscar.Validate())
                             return;
                         ListaSolicitudes = ManagerSolicitud.SolicitudBuscar(Int32.Parse(txtNroSolicitud.Text));
+                        txtDep.Clear();
                     }
                     else
                     {

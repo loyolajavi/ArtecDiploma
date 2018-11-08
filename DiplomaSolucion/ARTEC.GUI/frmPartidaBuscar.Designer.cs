@@ -29,7 +29,9 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartidaBuscar));
             this.GrillaPartidas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.txtNroSolicitud = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdSolicitud = new DevComponents.DotNetBar.LabelX();
@@ -41,7 +43,14 @@ namespace ARTEC.GUI
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
             this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.vldFrmPartidaBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // GrillaPartidas
@@ -78,6 +87,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
             this.txtNroSolicitud.TabIndex = 56;
+            this.vldFrmPartidaBuscar.SetValidator1(this.txtNroSolicitud, this.regularExpressionValidator2);
             // 
             // lblIdSolicitud
             // 
@@ -119,6 +129,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
             this.txtIdPartida.TabIndex = 53;
+            this.vldFrmPartidaBuscar.SetValidator1(this.txtIdPartida, this.regularExpressionValidator1);
             // 
             // lblIdPartida
             // 
@@ -209,11 +220,60 @@ namespace ARTEC.GUI
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
             this.txtNroPartida.TabIndex = 61;
             // 
+            // vldFrmPartidaBuscar
+            // 
+            this.vldFrmPartidaBuscar.ContainerControl = this.btnBuscar;
+            this.vldFrmPartidaBuscar.ErrorProvider = this.errorProvider1;
+            this.vldFrmPartidaBuscar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // txtResBusqueda
+            // 
+            // 
+            // 
+            // 
+            this.txtResBusqueda.BackgroundStyle.Class = "RichTextBoxBorder";
+            this.txtResBusqueda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtResBusqueda.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResBusqueda.Location = new System.Drawing.Point(0, 153);
+            this.txtResBusqueda.Name = "txtResBusqueda";
+            this.txtResBusqueda.ReadOnly = true;
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
+    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.txtResBusqueda.Size = new System.Drawing.Size(613, 231);
+            this.txtResBusqueda.TabIndex = 62;
+            this.txtResBusqueda.Text = "No hay resultados";
+            this.txtResBusqueda.Visible = false;
+            // 
             // frmPartidaBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 396);
+            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.txtNroPartida);
             this.Controls.Add(this.lblNroPartida);
             this.Controls.Add(this.GrillaPartidas);
@@ -228,16 +288,11 @@ namespace ARTEC.GUI
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmPartidaBuscar";
+            this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
-            //this.Tag = new string[] { "Partida Buscar" };
-
-            Dictionary<string, string[]> dicfrmPartidaBuscar = new Dictionary<string, string[]>();
-            string[] PerfrmPartidaBuscar = { "Partida Buscar" };
-            dicfrmPartidaBuscar.Add("Permisos", PerfrmPartidaBuscar);
-            this.Tag = dicfrmPartidaBuscar;
-
             this.Load += new System.EventHandler(this.frmPartidaBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -255,5 +310,11 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
         private DevComponents.DotNetBar.LabelX lblNroPartida;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartida;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmPartidaBuscar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
+        private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
     }
 }
