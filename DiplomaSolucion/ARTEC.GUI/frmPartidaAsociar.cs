@@ -175,18 +175,23 @@ namespace ARTEC.GUI
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(txtNroPartAsignado.Text) && !string.IsNullOrWhiteSpace(txtMontoOtorgado.Text) && decimal.Parse(txtMontoOtorgado.Text) > 0)
+                if (!string.IsNullOrWhiteSpace(txtNroPartAsignado.Text) && !string.IsNullOrWhiteSpace(txtMontoOtorgado.Text) && grillaDetallesPart.DataSource != null)
                 {
-                    unaPartida.FechaAcreditacion = DateTime.Today;
-                    unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
-                    unaPartida.NroPartida = txtNroPartAsignado.Text;
+                    if (!vldFrmPartidaAsociarAsoc.Validate())
+                        return;
+                    else if (Int32.Parse(txtMontoOtorgado.Text) > 0)
+                    {
+                        unaPartida.FechaAcreditacion = DateTime.Today;
+                        unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
+                        unaPartida.NroPartida = txtNroPartAsignado.Text;
 
-                    if (ManagerPartida.PartidaAsociar(unaPartida))
-                        MessageBox.Show("Partida Asociada correctamente");
+                        if (ManagerPartida.PartidaAsociar(unaPartida))
+                            MessageBox.Show("Partida Asociada correctamente");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor completar el Nro de Partida asignada y el monto acreditado");
+                    MessageBox.Show("Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado");
                 }
             }
             catch (Exception es)

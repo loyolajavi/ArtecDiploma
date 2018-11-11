@@ -405,7 +405,7 @@ namespace ARTEC.GUI
                 if (!vldfrmPartidaSolicitarGenerarPar.Validate())
                     return;
 
-                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Any(Y => Y.Seleccionada == true)) && Int32.Parse(txtMontoTotal.Text) > 0)
+                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Any(Y => Y.Seleccionada == true)) && decimal.Parse(txtMontoTotal.Text) > 0)
                 {
                     if (GenerarPartidaGlobal(false))
                         MessageBox.Show("Solicitud de Partida generada correctamente");
