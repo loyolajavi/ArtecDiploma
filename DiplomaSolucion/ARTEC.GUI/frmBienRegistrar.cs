@@ -41,6 +41,10 @@ namespace ARTEC.GUI
         BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
         List<HLPDetallesAdquisicion> LisAUXDetalles;
         int DetalleSeleccionado;
+        BLLMarca ManagerMarca = new BLLMarca();
+        List<Marca> unasMarcas = new List<Marca>();
+        BLLModelo ManagerModelo = new BLLModelo();
+        List<ModeloVersion> unosModelos = new List<ModeloVersion>();
 
 
         public frmBienRegistrar()
@@ -93,10 +97,8 @@ namespace ARTEC.GUI
 
 
 
-        private void btnContinuar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            pnlAdquisicion.Visible = false;
-            pnlBienes.Visible = true;
             this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
             this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
             BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
@@ -182,15 +184,15 @@ namespace ARTEC.GUI
 
                 txtBienCategoria.Text = unDetSolic.unaCategoria.DescripCategoria;
 
-                BLLMarca ManagerMarca = new BLLMarca();
-                List<Marca> unasMarcas = new List<Marca>();
+                //Traer Marcas
+
                 unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
                 cboMarca.DataSource = null;
                 cboMarca.DataSource = unasMarcas;
                 cboMarca.DisplayMember = "DescripMarca";
                 cboMarca.ValueMember = "IdMarca";
 
-
+                //unosProveedores = unosProveedores.Where(X=>X.IdProveedor == )
             }
         }
 
@@ -248,8 +250,7 @@ namespace ARTEC.GUI
                 unaMarca = new Marca();
                 unaMarca = (Marca)cbo.SelectedItem;
 
-                BLLModelo ManagerModelo = new BLLModelo();
-                List<ModeloVersion> unosModelos = new List<ModeloVersion>();
+
                 unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, unaMarca.IdMarca);
                 cboModelo.DataSource = null;
                 cboModelo.DataSource = unosModelos;
@@ -534,6 +535,69 @@ namespace ARTEC.GUI
 
             }
         }
+
+        private void btnCrearMarca_Click(object sender, EventArgs e)
+        {
+            frmMarcaCrear unFrmMarcaCrear = new frmMarcaCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue);
+            unFrmMarcaCrear.EventoActualizarMarcaModelo += new frmMarcaCrear.DelegaActualizarMarcaModelo(ActualizarMarcaModelo);
+            unFrmMarcaCrear.Show();
+        }
+
+        public void ActualizarMarcaModelo(Bien unNuevoBien)
+        {
+            //Mostrar la marca creada
+            this.cboMarca.SelectionChangeCommitted -= new System.EventHandler(this.cboMarca_SelectionChangeCommitted);
+            TraerMarcas();
+            cboMarca.SelectedValue = unNuevoBien.unaMarca.IdMarca;
+            unaMarca = unNuevoBien.unaMarca;
+            this.cboMarca.SelectionChangeCommitted += new System.EventHandler(this.cboMarca_SelectionChangeCommitted);
+
+            //Mostrar el modelo creado
+            this.cboModelo.SelectionChangeCommitted -= new System.EventHandler(this.cboModelo_SelectionChangeCommitted);
+            TraerModelos(unNuevoBien.unaMarca);
+            cboModelo.SelectedValue = unNuevoBien.unModelo.IdModeloVersion;
+            unModelo = unNuevoBien.unModelo;
+            this.cboModelo.SelectionChangeCommitted += new System.EventHandler(this.cboModelo_SelectionChangeCommitted);
+            
+        }
+
+        private void TraerMarcas()
+        {
+            try
+            {
+                unasMarcas = ManagerMarca.MarcaTraerPorIdCategoria(unDetSolic.unaCategoria.IdCategoria);
+                cboMarca.DataSource = null;
+                cboMarca.DataSource = unasMarcas;
+                cboMarca.DisplayMember = "DescripMarca";
+                cboMarca.ValueMember = "IdMarca";
+            }
+            catch (Exception es )
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - TraerMarcas");
+                MessageBox.Show("Ocurrio un error al mostrar la marca creada, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+        }
+
+        private void TraerModelos(Marca laMarca)
+        {
+            try
+            {
+                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, laMarca.IdMarca);
+                cboModelo.DataSource = null;
+                cboModelo.DataSource = unosModelos;
+                cboModelo.DisplayMember = "DescripModeloVersion";
+                cboModelo.ValueMember = "IdModeloVersion";
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - TraerModelos");
+                MessageBox.Show("Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            
+        }
+
+        
 
 
 

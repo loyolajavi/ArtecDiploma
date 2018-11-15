@@ -17,5 +17,18 @@ namespace ARTEC.BLL
         {
             return GestorMarca.MarcaTraerPorIdCategoria(IdCat);
         }
+
+        public void MarcaCrear(Bien NuevoBien, int IdTipoBien)
+        {
+            try
+            {
+                GestorMarca.MarcaCrear(NuevoBien, IdTipoBien);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
+        }
     }
 }

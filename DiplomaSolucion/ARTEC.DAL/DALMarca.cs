@@ -28,5 +28,54 @@ namespace ARTEC.DAL
             }
         }
 
+
+        public void MarcaCrear(Bien NuevoBien, int IdTipoBien)
+        {
+            SqlParameter[] parametersMarcaCrear = new SqlParameter[]
+			{
+                new SqlParameter("@DescripMarca", NuevoBien.unaMarca.DescripMarca)
+			};
+
+            try
+            {
+                //Crear MARCA
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "MarcaCrear", parametersMarcaCrear);
+                int IdMarcaRes = Decimal.ToInt32(Resultado);
+                NuevoBien.unaMarca.IdMarca = IdMarcaRes;
+
+                //Crear MODELO
+                SqlParameter[] parametersModeloCrear = new SqlParameter[]
+			    {
+                    new SqlParameter("@DescripModelo", NuevoBien.unModelo.DescripModeloVersion)
+			    };
+                var ResModelo = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "ModeloCrear", parametersModeloCrear);
+                int IdModeloRes = Decimal.ToInt32(ResModelo);
+                NuevoBien.unModelo.IdModeloVersion = IdModeloRes;
+
+                //Crear BIEN
+                SqlParameter[] parametersBienCrear = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdCategoria", NuevoBien.unaCategoria.IdCategoria),
+                    new SqlParameter("@IdMarca", NuevoBien.unaMarca.IdMarca),
+                    new SqlParameter("@IdModeloVersion", NuevoBien.unModelo.IdModeloVersion)
+			    };
+                var ResBien = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "BienCrear", parametersBienCrear);
+                int IdBienRes = Decimal.ToInt32(ResBien);
+                NuevoBien.IdBien = IdBienRes;
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }
