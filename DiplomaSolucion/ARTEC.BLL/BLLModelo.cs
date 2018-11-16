@@ -19,5 +19,17 @@ namespace ARTEC.BLL
         }
 
 
+
+        public void ModeloCrear(Bien NuevoBien, int IdTipoBien)
+        {
+            try
+            {
+                GestorModelo.ModeloCrear(NuevoBien, IdTipoBien);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

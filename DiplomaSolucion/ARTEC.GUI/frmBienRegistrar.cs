@@ -597,8 +597,31 @@ namespace ARTEC.GUI
             
         }
 
-        
+        private void btnCrearModelo_Click(object sender, EventArgs e)
+        {
+            frmModeloCrear unFrmMarcaCrear = new frmModeloCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue, unaMarca);
+            unFrmMarcaCrear.EventoActualizarModelo += new frmModeloCrear.DelegaActualizarModelo(ActualizarModelo);
+            unFrmMarcaCrear.Show();
+        }
 
+
+        public void ActualizarModelo(Bien unNuevoBien)
+        {
+            ////Mostrar la marca creada
+            //this.cboMarca.SelectionChangeCommitted -= new System.EventHandler(this.cboMarca_SelectionChangeCommitted);
+            //TraerMarcas();
+            //cboMarca.SelectedValue = unNuevoBien.unaMarca.IdMarca;
+            //unaMarca = unNuevoBien.unaMarca;
+            //this.cboMarca.SelectionChangeCommitted += new System.EventHandler(this.cboMarca_SelectionChangeCommitted);
+
+            //Mostrar el modelo creado
+            this.cboModelo.SelectionChangeCommitted -= new System.EventHandler(this.cboModelo_SelectionChangeCommitted);
+            TraerModelos(unNuevoBien.unaMarca);
+            cboModelo.SelectedValue = unNuevoBien.unModelo.IdModeloVersion;
+            unModelo = unNuevoBien.unModelo;
+            this.cboModelo.SelectionChangeCommitted += new System.EventHandler(this.cboModelo_SelectionChangeCommitted);
+
+        }
 
 
 
