@@ -56,53 +56,66 @@ namespace ARTEC.GUI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
+            if (!vldFrmBienRegistrarBtnConfirmar.Validate())
+                return;
+
+            try
             {
-                BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
-                unaAdquisicion.NroFactura = txtNroFactura.Text;
-                unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
-                unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);
-                unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
-                unaAdquisicion.FechaAdq = DateTime.Now;
-
-                ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
-
-                List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
-                LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
-                foreach (var item2 in LisAUXDetalles)
+                if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
                 {
-                    item2.Comprado = (from x in LisAUXCant
-                                      where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
-                                      select x.Comprado).FirstOrDefault();
-                }
-                GrillaDetallesBienes.DataSource = null;
-                GrillaDetallesBienes.DataSource = LisAUXDetalles;
+                    BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+                    unaAdquisicion.NroFactura = txtNroFactura.Text;
+                    unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+                    unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);
+                    unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
+                    unaAdquisicion.FechaAdq = DateTime.Now;
 
-                //Coloca en estado Adquirido a un detalle de la solicitud cuando todos los bienes de ese detalle fueron adquiridos
-                foreach (HLPDetallesAdquisicion AuxDet in LisAUXDetalles)
-                {
-                    if (AuxDet.Cantidad == AuxDet.Comprado)
+                    ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
+
+                    List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
+                    LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
+                    foreach (var item2 in LisAUXDetalles)
                     {
-                        BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-                        ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido);
+                        item2.Comprado = (from x in LisAUXCant
+                                          where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
+                                          select x.Comprado).FirstOrDefault();
                     }
-                }
+                    GrillaDetallesBienes.DataSource = null;
+                    GrillaDetallesBienes.DataSource = LisAUXDetalles;
 
+                    //Coloca en estado Adquirido a un detalle de la solicitud cuando todos los bienes de ese detalle fueron adquiridos
+                    foreach (HLPDetallesAdquisicion AuxDet in LisAUXDetalles)
+                    {
+                        if (AuxDet.Cantidad == AuxDet.Comprado)
+                        {
+                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                            ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido);
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Faltan cargar los bienes adquiridos");
+                }
             }
-            else
+            catch (Exception es)
             {
-                MessageBox.Show("Faltan cargar los bienes adquiridos");
+                string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - btnConfirmar_Click");
+                MessageBox.Show("Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
+
+            
         }
 
 
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            this.stepItem1.BackColors = new System.Drawing.Color[] { System.Drawing.Color.Transparent };
-            this.stepItem2.BackColors = new System.Drawing.Color[] { System.Drawing.Color.MediumAquamarine };
-            BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
+            if (!vldFrmBienRegistrarBtnBuscar.Validate())
+                return;
 
+            BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
             unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text), EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
             //List<HLPDetallesAdquisicion> LisAUXDetalles 
@@ -134,6 +147,7 @@ namespace ARTEC.GUI
 
                 GrillaDetallesBienes.DataSource = null;
                 GrillaDetallesBienes.DataSource = LisAUXDetalles;
+                FormatearGrillaDetallesBienes();
 
 
                 unDetSolic = new SolicDetalle();
@@ -191,9 +205,25 @@ namespace ARTEC.GUI
                 cboMarca.DataSource = unasMarcas;
                 cboMarca.DisplayMember = "DescripMarca";
                 cboMarca.ValueMember = "IdMarca";
+                unaMarca = unasMarcas.First() as Marca;
+
+                //Traer Modelos asociadas a la marca
+                unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, unaMarca.IdMarca);
+                cboModelo.DataSource = null;
+                cboModelo.DataSource = unosModelos;
+                cboModelo.DisplayMember = "DescripModeloVersion";
+                cboModelo.ValueMember = "IdModeloVersion";
 
                 //unosProveedores = unosProveedores.Where(X=>X.IdProveedor == )
             }
+        }
+
+
+        private void FormatearGrillaDetallesBienes()
+        {
+            GrillaDetallesBienes.Columns["DescripCategoria"].HeaderText = "Bien";
+            GrillaDetallesBienes.Columns["IdCategoria"].Visible = false;
+            GrillaDetallesBienes.Columns["IdSolicitudDetalle"].Visible = false;
         }
 
 
@@ -266,6 +296,14 @@ namespace ARTEC.GUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if (LisAUXDetalles == null || LisAUXDetalles.Count == 0)
+            {
+                MessageBox.Show("Ingrese la partida asociada por favor");
+                return;
+            }
+
+            if (!vldFrmBienRegistrarBtnAgregar.Validate())
+                return;
 
             if (unDetSolic.Cantidad <= LisAUXDetalles.Where(x => x.IdSolicitudDetalle == unDetSolic.IdSolicitudDetalle).First().Comprado)//LisAUXDetalles[DetalleSeleccionado - 1].Comprado)
             {
@@ -291,7 +329,7 @@ namespace ARTEC.GUI
                 //IBien unBien = FactoryBien.CrearBien((int)cboTipoBien.SelectedValue);
                 //Inventario unInven;// = new Inventario();
                 HLPBienInventario unBienhlp = new HLPBienInventario();
-                //unBienhlp.DescripBien = txtBienCategoria.Text;
+                unBienhlp.DescripBien = unDetSolic.unaCategoria.DescripCategoria;
                 unBienAUX.unaCategoria = unDetSolic.unaCategoria;
                 unBienhlp.DescripEstadoInv = cboEstadoInv.Text;
                 //unInven.unEstado = (EstadoInventario)cboEstado.SelectedItem;
@@ -301,6 +339,7 @@ namespace ARTEC.GUI
                 unBienhlp.DescripModeloVersion = cboModelo.Text;
                 unBienAUX.unModelo = (ModeloVersion)cboModelo.SelectedItem;
                 unBienhlp.SerieKey = txtSerieKey.Text;
+                unBienhlp.Costo = decimal.Parse(txtCosto.Text);
                 //unInven.SerieKey = txtSerieKey.Text;
                 unBienAUX.unInventarioAlta.SerieKey = txtSerieKey.Text;
                 if (unInven is XInventarioHard)
@@ -331,6 +370,7 @@ namespace ARTEC.GUI
                 GrillaBienes.DataSource = null;
                 unosBieneshlp.Add(unBienhlp);
                 GrillaBienes.DataSource = unosBieneshlp;
+                GrillaBienes.Columns["IdInventario"].Visible = false;
 
             }
 

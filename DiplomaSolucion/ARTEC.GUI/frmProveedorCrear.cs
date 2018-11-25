@@ -61,7 +61,12 @@ namespace ARTEC.GUI
                     this.txtProveedorBuscar.TextChanged -= new System.EventHandler(this.txtProveedorBuscar_TextChanged);
                     this.cboProveedor.SelectionChangeCommitted -= new System.EventHandler(this.cboProveedor_SelectionChangeCommitted);
                 }
-                    
+
+                btnModificar.Enabled = false;
+                lblBaja.Visible = false;
+                btnReactivar.Enabled = false;
+                btnEliminar.Enabled = false;
+
 
                 BLLCategoria ManagerCategoria = new BLLCategoria();
                 unasCategorias = ManagerCategoria.CategoriaTraerTodosActivos();

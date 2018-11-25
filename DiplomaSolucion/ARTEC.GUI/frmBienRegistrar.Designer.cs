@@ -28,12 +28,10 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBienRegistrar));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.progressSteps1 = new DevComponents.DotNetBar.ProgressSteps();
-            this.stepItem1 = new DevComponents.DotNetBar.StepItem();
-            this.stepItem2 = new DevComponents.DotNetBar.StepItem();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.txtNroFactura = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFechaCompra = new DevComponents.DotNetBar.LabelX();
@@ -75,43 +73,32 @@ namespace ARTEC.GUI
             this.txtBienCategoria = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBienCategoria = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
+            this.vldFrmBienRegistrarBtnBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.vldFrmBienRegistrarBtnAgregar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.vldFrmBienRegistrarBtnConfirmar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             this.pnlAdquisicion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).BeginInit();
             this.pnlBienes.SuspendLayout();
             this.pnlHardware.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // progressSteps1
-            // 
-            // 
-            // 
-            // 
-            this.progressSteps1.BackgroundStyle.Class = "ProgressSteps";
-            this.progressSteps1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.progressSteps1.ContainerControlProcessDialogKey = true;
-            this.progressSteps1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.stepItem1,
-            this.stepItem2});
-            this.progressSteps1.Location = new System.Drawing.Point(424, 481);
-            this.progressSteps1.Name = "progressSteps1";
-            this.progressSteps1.Size = new System.Drawing.Size(163, 26);
-            this.progressSteps1.TabIndex = 0;
-            // 
-            // stepItem1
-            // 
-            this.stepItem1.BackColors = new System.Drawing.Color[] {
-        System.Drawing.Color.MediumAquamarine};
-            this.stepItem1.Name = "stepItem1";
-            this.stepItem1.SymbolSize = 13F;
-            this.stepItem1.Text = "Datos Adquisición";
-            // 
-            // stepItem2
-            // 
-            this.stepItem2.Name = "stepItem2";
-            this.stepItem2.SymbolSize = 13F;
-            this.stepItem2.Text = " Bienes ";
             // 
             // btnBuscar
             // 
@@ -140,6 +127,7 @@ namespace ARTEC.GUI
             this.txtNroFactura.PreventEnterBeep = true;
             this.txtNroFactura.Size = new System.Drawing.Size(102, 22);
             this.txtNroFactura.TabIndex = 43;
+            this.vldFrmBienRegistrarBtnConfirmar.SetValidator1(this.txtNroFactura, this.requiredFieldValidator4);
             // 
             // lblFechaCompra
             // 
@@ -237,6 +225,7 @@ namespace ARTEC.GUI
             this.txtFechaCompra.Size = new System.Drawing.Size(102, 22);
             this.txtFechaCompra.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtFechaCompra.TabIndex = 49;
+            this.vldFrmBienRegistrarBtnConfirmar.SetValidator1(this.txtFechaCompra, this.requiredFieldValidator2);
             // 
             // txtMontoTotal
             // 
@@ -253,6 +242,7 @@ namespace ARTEC.GUI
             this.txtMontoTotal.PreventEnterBeep = true;
             this.txtMontoTotal.Size = new System.Drawing.Size(102, 22);
             this.txtMontoTotal.TabIndex = 50;
+            this.vldFrmBienRegistrarBtnConfirmar.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator3);
             // 
             // txtProveedor
             // 
@@ -269,6 +259,7 @@ namespace ARTEC.GUI
             this.txtProveedor.PreventEnterBeep = true;
             this.txtProveedor.Size = new System.Drawing.Size(102, 22);
             this.txtProveedor.TabIndex = 51;
+            this.vldFrmBienRegistrarBtnConfirmar.SetValidator1(this.txtProveedor, this.requiredFieldValidator3);
             this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
             // 
             // cboProveedor
@@ -331,18 +322,19 @@ namespace ARTEC.GUI
             this.txtNroPartida.PreventEnterBeep = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
             this.txtNroPartida.TabIndex = 54;
+            this.vldFrmBienRegistrarBtnBuscar.SetValidator1(this.txtNroPartida, this.regularExpressionValidator1);
             // 
             // GrillaDetallesBienes
             // 
             this.GrillaDetallesBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaDetallesBienes.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaDetallesBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaDetallesBienes.Location = new System.Drawing.Point(12, 189);
             this.GrillaDetallesBienes.Name = "GrillaDetallesBienes";
@@ -449,6 +441,7 @@ namespace ARTEC.GUI
             this.txtCosto.PreventEnterBeep = true;
             this.txtCosto.Size = new System.Drawing.Size(111, 22);
             this.txtCosto.TabIndex = 26;
+            this.vldFrmBienRegistrarBtnAgregar.SetValidator1(this.txtCosto, this.regularExpressionValidator2);
             // 
             // btnAgregar
             // 
@@ -557,6 +550,7 @@ namespace ARTEC.GUI
             this.txtSerieKey.PreventEnterBeep = true;
             this.txtSerieKey.Size = new System.Drawing.Size(173, 22);
             this.txtSerieKey.TabIndex = 22;
+            this.vldFrmBienRegistrarBtnAgregar.SetValidator1(this.txtSerieKey, this.requiredFieldValidator1);
             // 
             // lblSerial
             // 
@@ -613,14 +607,14 @@ namespace ARTEC.GUI
             // GrillaBienes
             // 
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBienes.Location = new System.Drawing.Point(13, 284);
             this.GrillaBienes.Name = "GrillaBienes";
@@ -765,17 +759,100 @@ namespace ARTEC.GUI
             this.btnConfirmar.Text = "btnConfirmar";
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // vldFrmBienRegistrarBtnBuscar
+            // 
+            this.vldFrmBienRegistrarBtnBuscar.ContainerControl = this.btnBuscar;
+            this.vldFrmBienRegistrarBtnBuscar.ErrorProvider = this.errorProvider1;
+            this.vldFrmBienRegistrarBtnBuscar.Highlighter = this.highlighter1;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // vldFrmBienRegistrarBtnAgregar
+            // 
+            this.vldFrmBienRegistrarBtnAgregar.ContainerControl = this.btnAgregar;
+            this.vldFrmBienRegistrarBtnAgregar.ErrorProvider = this.errorProvider2;
+            this.vldFrmBienRegistrarBtnAgregar.Highlighter = this.highlighter2;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
+            // 
+            // highlighter2
+            // 
+            this.highlighter2.ContainerControl = this;
+            // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // vldFrmBienRegistrarBtnConfirmar
+            // 
+            this.vldFrmBienRegistrarBtnConfirmar.ContainerControl = this.btnConfirmar;
+            this.vldFrmBienRegistrarBtnConfirmar.ErrorProvider = this.errorProvider3;
+            this.vldFrmBienRegistrarBtnConfirmar.Highlighter = this.highlighter3;
+            // 
+            // errorProvider3
+            // 
+            this.errorProvider3.ContainerControl = this;
+            this.errorProvider3.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider3.Icon")));
+            // 
+            // highlighter3
+            // 
+            this.highlighter3.ContainerControl = this;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // regularExpressionValidator3
+            // 
+            this.regularExpressionValidator3.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator3.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator4
+            // 
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // frmBienRegistrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 514);
             this.Controls.Add(this.btnConfirmar);
-            this.Controls.Add(this.progressSteps1);
             this.Controls.Add(this.pnlBienes);
             this.Controls.Add(this.pnlAdquisicion);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmBienRegistrar";
             this.Text = "frmBienRegistrar";
             this.Load += new System.EventHandler(this.frmBienRegistrar_Load);
@@ -785,15 +862,15 @@ namespace ARTEC.GUI
             this.pnlBienes.ResumeLayout(false);
             this.pnlHardware.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevComponents.DotNetBar.ProgressSteps progressSteps1;
-        private DevComponents.DotNetBar.StepItem stepItem1;
-        private DevComponents.DotNetBar.StepItem stepItem2;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroFactura;
         private DevComponents.DotNetBar.LabelX lblFechaCompra;
@@ -835,5 +912,21 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtCosto;
         private DevComponents.DotNetBar.ButtonX btnCrearModelo;
         private DevComponents.DotNetBar.ButtonX btnCrearMarca;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmBienRegistrarBtnBuscar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmBienRegistrarBtnAgregar;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter2;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmBienRegistrarBtnConfirmar;
+        private System.Windows.Forms.ErrorProvider errorProvider3;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator3;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
     }
 }

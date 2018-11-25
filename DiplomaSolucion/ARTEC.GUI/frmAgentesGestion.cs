@@ -153,11 +153,20 @@ namespace ARTEC.GUI
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (!vldFrmAgentesGestion.Validate())
-                return;
+            
 
             try
             {
+                if (unAgente == null || string.IsNullOrEmpty(unAgente.NombreAgente))
+                {
+                    MessageBox.Show("Por favor busque un agente");
+                    return;
+                }
+                    
+
+                if (!vldFrmAgentesGestion.Validate())
+                    return;
+
                 unAgente.NombreAgente = txtNombre.Text;
                 unAgente.ApellidoAgente = txtApellido.Text;
 

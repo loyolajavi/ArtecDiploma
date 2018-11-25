@@ -46,6 +46,14 @@ namespace ARTEC.GUI
                         unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
+
+                lblBaja.Visible = false;
+                btnReactivarUs.Enabled = false;
+                btnEliminarUsuario.Enabled = false;
+                btnModifUsuario.Enabled = false;
+                btnAgregar.Enabled = false;
+                btnQuitar.Enabled = false;
+
             }
             catch (Exception es)
             {

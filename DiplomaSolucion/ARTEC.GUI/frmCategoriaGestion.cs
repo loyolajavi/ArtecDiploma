@@ -47,6 +47,12 @@ namespace ARTEC.GUI
                     }
                 }
 
+                lblBaja.Visible = false;
+                btnReactivar.Enabled = false;
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
+
+
                 //Traer Proveedores
                 unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
                 cboProveedor.DataSource = null;
