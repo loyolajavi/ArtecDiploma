@@ -27,6 +27,47 @@ namespace ARTEC.GUI
         public frmPartidaBuscar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicGrillaPartidas = new Dictionary<string, string[]>();
+            string[] IdiomaGrillaPartidas = { "Partidas" };
+            dicGrillaPartidas.Add("Idioma", IdiomaGrillaPartidas);
+            this.GrillaPartidas.Tag = dicGrillaPartidas;
+
+            //Dictionary<string, string[]> dictxtNroSolicitud = new Dictionary<string, string[]>();
+            //string[] IdiomatxtNroSolicitud = { "Solicitud" };
+            //dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
+            //this.txtNroSolicitud.Tag = dictxtNroSolicitud;
+
+            Dictionary<string, string[]> diclblIdSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblIdSolicitud = { "Solicitud" };
+            diclblIdSolicitud.Add("Idioma", IdiomalblIdSolicitud);
+            this.lblIdSolicitud.Tag = diclblIdSolicitud;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            //Dictionary<string, string[]> dictxtIdPartida = new Dictionary<string, string[]>();
+            //string[] IdiomatxtIdPartida = { "Partida" };
+            //dictxtIdPartida.Add("Idioma", IdiomatxtIdPartida);
+            //this.txtIdPartida.Tag = dictxtIdPartida;
+
+            Dictionary<string, string[]> diclblIdPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblIdPartida = { "Partida" };
+            diclblIdPartida.Add("Idioma", IdiomalblIdPartida);
+            this.lblIdPartida.Tag = diclblIdPartida;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Partida Referenciada" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
         }
 
 
@@ -47,6 +88,9 @@ namespace ARTEC.GUI
             {
                 this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
             }
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();

@@ -38,6 +38,99 @@ namespace ARTEC.GUI
         public frmProveedorCrear()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> diclblNombreEmpresa = new Dictionary<string, string[]>();
+            string[] IdiomalblNombreEmpresa = { "Nombre" };
+            diclblNombreEmpresa.Add("Idioma", IdiomalblNombreEmpresa);
+            this.lblNombreEmpresa.Tag = diclblNombreEmpresa;
+
+            Dictionary<string, string[]> diclblContacto = new Dictionary<string, string[]>();
+            string[] IdiomalblContacto = { "Contacto" };
+            diclblContacto.Add("Idioma", IdiomalblContacto);
+            this.lblContacto.Tag = diclblContacto;
+
+            Dictionary<string, string[]> diclblTelefono = new Dictionary<string, string[]>();
+            string[] IdiomalblTelefono = { "Telefono" };
+            diclblTelefono.Add("Idioma", IdiomalblTelefono);
+            this.lblTelefono.Tag = diclblTelefono;
+
+            Dictionary<string, string[]> diclblDireccion = new Dictionary<string, string[]>();
+            string[] IdiomalblDireccion = { "Dirección" };
+            diclblDireccion.Add("Idioma", IdiomalblDireccion);
+            this.lblDireccion.Tag = diclblDireccion;
+
+            Dictionary<string, string[]> diclblMailContacto = new Dictionary<string, string[]>();
+            string[] IdiomalblMailContacto = { "Mail" };
+            diclblMailContacto.Add("Idioma", IdiomalblMailContacto);
+            this.lblMailContacto.Tag = diclblMailContacto;
+
+            Dictionary<string, string[]> dicgpanelProductos = new Dictionary<string, string[]>();
+            string[] IdiomagpanelProductos = { "Productos" };
+            dicgpanelProductos.Add("Idioma", IdiomagpanelProductos);
+            this.gpanelProductos.Tag = dicgpanelProductos;
+
+            Dictionary<string, string[]> dicbtnAgregarProd = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregarProd = { "Agregar" };
+            dicbtnAgregarProd.Add("Idioma", IdiomabtnAgregarProd);
+            this.btnAgregarProd.Tag = dicbtnAgregarProd;
+
+            Dictionary<string, string[]> dicbtnCrearProveedor = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearProveedor = { "Crear Proveedor" };
+            dicbtnCrearProveedor.Add("Idioma", IdiomabtnCrearProveedor);
+            this.btnCrearProveedor.Tag = dicbtnCrearProveedor;
+
+            Dictionary<string, string[]> dicbtnTelefono = new Dictionary<string, string[]>();
+            string[] IdiomabtnTelefono = { "Agregar" };
+            dicbtnTelefono.Add("Idioma", IdiomabtnTelefono);
+            this.btnTelefono.Tag = dicbtnTelefono;
+
+            Dictionary<string, string[]> dicbtnDireccion = new Dictionary<string, string[]>();
+            string[] IdiomabtnDireccion = { "Agregar" };
+            dicbtnDireccion.Add("Idioma", IdiomabtnDireccion);
+            this.btnDireccion.Tag = dicbtnDireccion;
+
+            Dictionary<string, string[]> dicpnlBuscar = new Dictionary<string, string[]>();
+            string[] IdiomapnlBuscar = { "Buscar" };
+            dicpnlBuscar.Add("Idioma", IdiomapnlBuscar);
+            this.pnlBuscar.Tag = dicpnlBuscar;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> diclblProveedor = new Dictionary<string, string[]>();
+            string[] IdiomalblProveedor = { "Proveedor" };
+            diclblProveedor.Add("Idioma", IdiomalblProveedor);
+            this.lblProveedor.Tag = diclblProveedor;
+
+            Dictionary<string, string[]> diclblTipo = new Dictionary<string, string[]>();
+            string[] IdiomalblTipo = { "Tipo" };
+            diclblTipo.Add("Idioma", IdiomalblTipo);
+            this.lblTipo.Tag = diclblTipo;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
+            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
+            string[] IdiomabtnReactivar = { "Reactivar" };
+            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
+            this.btnReactivar.Tag = dicbtnReactivar;
+
+            Dictionary<string, string[]> dicbtnLimpiar = new Dictionary<string, string[]>();
+            string[] IdiomabtnLimpiar = { "Limpiar" };
+            dicbtnLimpiar.Add("Idioma", IdiomabtnLimpiar);
+            this.btnLimpiar.Tag = dicbtnLimpiar;
+
+
+
         }
 
         private void ProveedorCrear_Load(object sender, EventArgs e)
@@ -54,6 +147,9 @@ namespace ARTEC.GUI
                         unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                     }
                 }
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
                 //Permisos para buscar
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Buscar" }))

@@ -28,6 +28,39 @@ namespace ARTEC.GUI
         private frmRendicionBuscar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Partida" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblNroSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolic = { "Solicitud" };
+            diclblNroSolic.Add("Idioma", IdiomalblNroSolic);
+            this.lblNroSolic.Tag = diclblNroSolic;
+
+            Dictionary<string, string[]> diclblNroRendicion = new Dictionary<string, string[]>();
+            string[] IdiomalblNroRendicion = { "Rendición" };
+            diclblNroRendicion.Add("Idioma", IdiomalblNroRendicion);
+            this.lblNroRendicion.Tag = diclblNroRendicion;
+
+            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
+            string[] IdiomatxtResBusqueda = { "No hay resultados" };
+            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
+            this.txtResBusqueda.Tag = dictxtResBusqueda;
+
+
+
         }
 
         public static frmRendicionBuscar ObtenerInstancia()
@@ -48,6 +81,9 @@ namespace ARTEC.GUI
             {
                 this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
             }
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();

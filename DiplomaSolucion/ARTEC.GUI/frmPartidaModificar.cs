@@ -44,6 +44,78 @@ namespace ARTEC.GUI
             //chkCotizacion.TrueValue = true;
             //chkCotizacion.FalseValue = false;
             //grillaCotizaciones.Columns.Add(chkCotizacion);
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Número de Partida" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
+            Dictionary<string, string[]> diclblIdSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblIdSolicitud = { "Solicitud" };
+            diclblIdSolicitud.Add("Idioma", IdiomalblIdSolicitud);
+            this.lblIdSolicitud.Tag = diclblIdSolicitud;
+
+            Dictionary<string, string[]> diclblIdPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblIdPartida = { "Partida" };
+            diclblIdPartida.Add("Idioma", IdiomalblIdPartida);
+            this.lblIdPartida.Tag = diclblIdPartida;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
+            string[] IdiomachkCaja = { "Caja" };
+            dicchkCaja.Add("Idioma", IdiomachkCaja);
+            this.chkCaja.Tag = dicchkCaja;
+
+            Dictionary<string, string[]> diclblMontoSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoSolic = { "Monto Solicitado" };
+            diclblMontoSolic.Add("Idioma", IdiomalblMontoSolic);
+            this.lblMontoSolic.Tag = diclblMontoSolic;
+
+            Dictionary<string, string[]> diclblFechaEnvio = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaEnvio = { "Fecha envío" };
+            diclblFechaEnvio.Add("Idioma", IdiomalblFechaEnvio);
+            this.lblFechaEnvio.Tag = diclblFechaEnvio;
+
+            Dictionary<string, string[]> diclblDetalles = new Dictionary<string, string[]>();
+            string[] IdiomalblDetalles = { "Detalles" };
+            diclblDetalles.Add("Idioma", IdiomalblDetalles);
+            this.lblDetalles.Tag = diclblDetalles;
+
+            Dictionary<string, string[]> diclblCotizaciones = new Dictionary<string, string[]>();
+            string[] IdiomalblCotizaciones = { "Cotizaciones" };
+            diclblCotizaciones.Add("Idioma", IdiomalblCotizaciones);
+            this.lblCotizaciones.Tag = diclblCotizaciones;
+
+            Dictionary<string, string[]> dicpnlResPartida = new Dictionary<string, string[]>();
+            string[] IdiomapnlResPartida = { "Partida" };
+            dicpnlResPartida.Add("Idioma", IdiomapnlResPartida);
+            this.pnlResPartida.Tag = dicpnlResPartida;
+
+            Dictionary<string, string[]> diclblMontoTotal = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoTotal = { "Monto Total" };
+            diclblMontoTotal.Add("Idioma", IdiomalblMontoTotal);
+            this.lblMontoTotal.Tag = diclblMontoTotal;
+
+            Dictionary<string, string[]> dicbtnRegenerarPartida = new Dictionary<string, string[]>();
+            string[] IdiomabtnRegenerarPartida = { "Generar Partida" };
+            dicbtnRegenerarPartida.Add("Idioma", IdiomabtnRegenerarPartida);
+            this.btnRegenerarPartida.Tag = dicbtnRegenerarPartida;
+
+            Dictionary<string, string[]> dicbtnCancelar = new Dictionary<string, string[]>();
+            string[] IdiomabtnCancelar = { "Cancelar" };
+            dicbtnCancelar.Add("Idioma", IdiomabtnCancelar);
+            this.btnCancelar.Tag = dicbtnCancelar;
+
+            Dictionary<string, string[]> diclblVolver = new Dictionary<string, string[]>();
+            string[] IdiomalblVolver = { "Volver" };
+            diclblVolver.Add("Idioma", IdiomalblVolver);
+            this.lblVolver.Tag = diclblVolver;
+            
+
         }
 
         private void frmPartidaModificar_Load(object sender, EventArgs e)
@@ -58,6 +130,9 @@ namespace ARTEC.GUI
                     unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
                 }
             }
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(NroPartida).FirstOrDefault();
             if (unaPartida != null && unaPartida.IdPartida > 0)

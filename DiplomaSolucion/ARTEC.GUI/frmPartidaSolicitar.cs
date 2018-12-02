@@ -41,15 +41,7 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
 
-            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
-            string[] IdiomatxtResBusqueda = { "No hay resultados" };
-            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
-            this.txtResBusqueda.Tag = dictxtResBusqueda;
-
-            Dictionary<string, string[]> dictxtNroSolicitud = new Dictionary<string, string[]>();
-            string[] IdiomatxtNroSolicitud = { "Solo se aceptan números" };
-            dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
-            this.txtNroSolicitud.Tag = dictxtNroSolicitud;
+            CargarTags();
 
             //Agrega Checkbox para seleccionar SolicDetalles
             var CheckBoxColumna = new DataGridViewCheckBoxColumn();
@@ -82,11 +74,7 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
 
-            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
-            string[] IdiomatxtResBusqueda = { "No hay resultados" };
-            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
-            this.txtResBusqueda.Tag = dictxtResBusqueda;
-
+            CargarTags();
 
             unaSolicitud = unaSolic;
             //Agrega Checkbox para seleccionar SolicDetalles
@@ -115,6 +103,67 @@ namespace ARTEC.GUI
             return _unFrmPartidaSolicituar;
         }
 
+
+        private void CargarTags()
+        {
+            Dictionary<string, string[]> dictxtResBusqueda = new Dictionary<string, string[]>();
+            string[] IdiomatxtResBusqueda = { "No hay resultados" };
+            dictxtResBusqueda.Add("Idioma", IdiomatxtResBusqueda);
+            this.txtResBusqueda.Tag = dictxtResBusqueda;
+
+            Dictionary<string, string[]> dictxtNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomatxtNroSolicitud = { "Solo se aceptan números" };
+            dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
+            this.txtNroSolicitud.Tag = dictxtNroSolicitud;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblIdSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblIdSolicitud = { "Solicitud" };
+            diclblIdSolicitud.Add("Idioma", IdiomalblIdSolicitud);
+            this.lblIdSolicitud.Tag = diclblIdSolicitud;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> diclblDetalles = new Dictionary<string, string[]>();
+            string[] IdiomalblDetalles = { "Detalles" };
+            diclblDetalles.Add("Idioma", IdiomalblDetalles);
+            this.lblDetalles.Tag = diclblDetalles;
+
+            Dictionary<string, string[]> diclblCotizaciones = new Dictionary<string, string[]>();
+            string[] IdiomalblCotizaciones = { "Cotizaciones" };
+            diclblCotizaciones.Add("Idioma", IdiomalblCotizaciones);
+            this.lblCotizaciones.Tag = diclblCotizaciones;
+
+            Dictionary<string, string[]> dicbtnGenerarCaja = new Dictionary<string, string[]>();
+            string[] IdiomabtnGenerarCaja = { "Generar Caja" };
+            dicbtnGenerarCaja.Add("Idioma", IdiomabtnGenerarCaja);
+            this.btnGenerarCaja.Tag = dicbtnGenerarCaja;
+
+            Dictionary<string, string[]> dicbtnGenerarPartida = new Dictionary<string, string[]>();
+            string[] IdiomabtnGenerarPartida = { "Generar Partida" };
+            dicbtnGenerarPartida.Add("Idioma", IdiomabtnGenerarPartida);
+            this.btnGenerarPartida.Tag = dicbtnGenerarPartida;
+
+            Dictionary<string, string[]> diclblMontoTotal = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoTotal = { "Monto Total" };
+            diclblMontoTotal.Add("Idioma", IdiomalblMontoTotal);
+            this.lblMontoTotal.Tag = diclblMontoTotal;
+
+            Dictionary<string, string[]> dicpnlResPartida = new Dictionary<string, string[]>();
+            string[] IdiomapnlResPartida = { "Resumen Partida" };
+            dicpnlResPartida.Add("Idioma", IdiomapnlResPartida);
+            this.pnlResPartida.Tag = dicpnlResPartida;
+
+
+
+        }
 
 
         private void frmPartidaSolicitar_Load(object sender, EventArgs e)
