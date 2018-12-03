@@ -920,7 +920,11 @@ namespace ARTEC.GUI
 
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     if (ManagerSolicitud.SolicitudCrear(unaSolicitud))
+                    {
                         MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
+                        this.Close();
+                    }
+                        
 
                 }
             }
