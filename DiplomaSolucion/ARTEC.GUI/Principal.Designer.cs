@@ -208,6 +208,7 @@ namespace ARTEC.GUI
             // 
             this.cboIdioma.DisplayMember = "Text";
             this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboIdioma.ForeColor = System.Drawing.Color.Black;
             this.cboIdioma.FormattingEnabled = true;
             this.cboIdioma.ItemHeight = 16;

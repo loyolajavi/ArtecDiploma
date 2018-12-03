@@ -45,7 +45,7 @@ namespace ARTEC.GUI
             this.pnlAdquisicion = new DevComponents.DotNetBar.PanelEx();
             this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.GrillaDetallesBienes = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.lblPartida = new DevComponents.DotNetBar.LabelX();
             this.pnlBienes = new DevComponents.DotNetBar.PanelEx();
             this.btnCrearModelo = new DevComponents.DotNetBar.ButtonX();
             this.btnCrearMarca = new DevComponents.DotNetBar.ButtonX();
@@ -74,21 +74,21 @@ namespace ARTEC.GUI
             this.cboBienCategoria = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
             this.vldFrmBienRegistrarBtnBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.vldFrmBienRegistrarBtnAgregar = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.vldFrmBienRegistrarBtnConfirmar = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             this.pnlAdquisicion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaDetallesBienes)).BeginInit();
@@ -285,7 +285,7 @@ namespace ARTEC.GUI
             this.pnlAdquisicion.Controls.Add(this.txtNroPartida);
             this.pnlAdquisicion.Controls.Add(this.GrillaDetallesBienes);
             this.pnlAdquisicion.Controls.Add(this.btnBuscar);
-            this.pnlAdquisicion.Controls.Add(this.labelX1);
+            this.pnlAdquisicion.Controls.Add(this.lblPartida);
             this.pnlAdquisicion.Controls.Add(this.lblMontoTotal);
             this.pnlAdquisicion.Controls.Add(this.txtProveedor);
             this.pnlAdquisicion.Controls.Add(this.cboProveedor);
@@ -342,18 +342,18 @@ namespace ARTEC.GUI
             this.GrillaDetallesBienes.TabIndex = 34;
             this.GrillaDetallesBienes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaDetallesBienes_CellClick);
             // 
-            // labelX1
+            // lblPartida
             // 
             // 
             // 
             // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(12, 12);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(97, 17);
-            this.labelX1.TabIndex = 53;
-            this.labelX1.Text = "lblNroPartida";
+            this.lblPartida.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblPartida.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPartida.Location = new System.Drawing.Point(12, 12);
+            this.lblPartida.Name = "lblPartida";
+            this.lblPartida.Size = new System.Drawing.Size(97, 17);
+            this.lblPartida.TabIndex = 53;
+            this.lblPartida.Text = "lblNroPartida";
             // 
             // pnlBienes
             // 
@@ -765,6 +765,12 @@ namespace ARTEC.GUI
             this.vldFrmBienRegistrarBtnBuscar.ErrorProvider = this.errorProvider1;
             this.vldFrmBienRegistrarBtnBuscar.Highlighter = this.highlighter1;
             // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -774,26 +780,11 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
-            // regularExpressionValidator1
-            // 
-            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
-            // 
             // vldFrmBienRegistrarBtnAgregar
             // 
             this.vldFrmBienRegistrarBtnAgregar.ContainerControl = this.btnAgregar;
             this.vldFrmBienRegistrarBtnAgregar.ErrorProvider = this.errorProvider2;
             this.vldFrmBienRegistrarBtnAgregar.Highlighter = this.highlighter2;
-            // 
-            // errorProvider2
-            // 
-            this.errorProvider2.ContainerControl = this;
-            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
-            // 
-            // highlighter2
-            // 
-            this.highlighter2.ContainerControl = this;
             // 
             // regularExpressionValidator2
             // 
@@ -806,20 +797,25 @@ namespace ARTEC.GUI
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            this.errorProvider2.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider2.Icon")));
+            // 
+            // highlighter2
+            // 
+            this.highlighter2.ContainerControl = this;
+            // 
             // vldFrmBienRegistrarBtnConfirmar
             // 
             this.vldFrmBienRegistrarBtnConfirmar.ContainerControl = this.btnConfirmar;
             this.vldFrmBienRegistrarBtnConfirmar.ErrorProvider = this.errorProvider3;
             this.vldFrmBienRegistrarBtnConfirmar.Highlighter = this.highlighter3;
             // 
-            // errorProvider3
+            // requiredFieldValidator4
             // 
-            this.errorProvider3.ContainerControl = this;
-            this.errorProvider3.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider3.Icon")));
-            // 
-            // highlighter3
-            // 
-            this.highlighter3.ContainerControl = this;
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator2
             // 
@@ -837,10 +833,14 @@ namespace ARTEC.GUI
             this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator4
+            // errorProvider3
             // 
-            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.errorProvider3.ContainerControl = this;
+            this.errorProvider3.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider3.Icon")));
+            // 
+            // highlighter3
+            // 
+            this.highlighter3.ContainerControl = this;
             // 
             // frmBienRegistrar
             // 
@@ -905,7 +905,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblSerial;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboBienCategoria;
         private DevComponents.DotNetBar.Controls.TextBoxX txtNroPartida;
-        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.LabelX lblPartida;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaDetallesBienes;
         private DevComponents.DotNetBar.LabelX lblSerieKey;
         private DevComponents.DotNetBar.LabelX lblCosto;

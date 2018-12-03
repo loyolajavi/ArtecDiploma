@@ -85,6 +85,7 @@
             this.Name = "frmDialogJustificacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmDialogJustificacion";
+            this.Load += new System.EventHandler(this.frmDialogJustificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

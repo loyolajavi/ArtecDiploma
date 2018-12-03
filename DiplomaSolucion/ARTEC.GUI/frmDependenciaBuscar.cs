@@ -25,6 +25,60 @@ namespace ARTEC.GUI
         public frmDependenciaBuscar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmDependenciaBuscar = new Dictionary<string, string[]>();
+            string[] IdiomafrmDependenciaBuscar = { "Buscar Dependencia" };
+            dicfrmDependenciaBuscar.Add("Idioma", IdiomafrmDependenciaBuscar);
+            this.Tag = dicfrmDependenciaBuscar;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblBaja = new Dictionary<string, string[]>();
+            string[] IdiomalblBaja = { "Dado de Baja" };
+            diclblBaja.Add("Idioma", IdiomalblBaja);
+            this.lblBaja.Tag = diclblBaja;
+
+            Dictionary<string, string[]> diclblTipoDep = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoDep = { "Tipo Dependencia" };
+            diclblTipoDep.Add("Idioma", IdiomalblTipoDep);
+            this.lblTipoDep.Tag = diclblTipoDep;
+
+            Dictionary<string, string[]> diclblAgentes = new Dictionary<string, string[]>();
+            string[] IdiomalblAgentes = { "Agentes" };
+            diclblAgentes.Add("Idioma", IdiomalblAgentes);
+            this.lblAgentes.Tag = diclblAgentes;
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] PerbtnCrear = { "Dependencia Crear" };
+            dicbtnCrear.Add("Permisos", PerbtnCrear);
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Dependencia Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] PerbtnEliminar = { "Dependencia Eliminar" };
+            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
+            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
+            string[] PerbtnReactivar = { "Dependencia Reactivar" };
+            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
+            string[] IdiomabtnReactivar = { "Reactivar" };
+            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
+            this.btnReactivar.Tag = dicbtnReactivar;
+
         }
 
         public static frmDependenciaBuscar ObtenerInstancia()
@@ -41,6 +95,9 @@ namespace ARTEC.GUI
         {
             try
             {
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Permisos Formulario
                 if (this.Tag != null && this.Tag.GetType() == typeof(Dictionary<string, string[]>) && (this.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
                 {

@@ -37,6 +37,60 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             DepModif = unaDep;
+
+            Dictionary<string, string[]> dicfrmDependenciaModificar = new Dictionary<string, string[]>();
+            string[] IdiomafrmDependenciaModificar = { "Modificar Dependencia" };
+            dicfrmDependenciaModificar.Add("Idioma", IdiomafrmDependenciaModificar);
+            this.Tag = dicfrmDependenciaModificar;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblTipoDep = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoDep = { "Tipo Dependencia" };
+            diclblTipoDep.Add("Idioma", IdiomalblTipoDep);
+            this.lblTipoDep.Tag = diclblTipoDep;
+
+            Dictionary<string, string[]> diclblAgentes = new Dictionary<string, string[]>();
+            string[] IdiomalblAgentes = { "Agentes" };
+            diclblAgentes.Add("Idioma", IdiomalblAgentes);
+            this.lblAgentes.Tag = diclblAgentes;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Agente" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> dicbtnNuevoAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnNuevoAgente = { "Crear Nuevo Agente" };
+            dicbtnNuevoAgente.Add("Idioma", IdiomabtnNuevoAgente);
+            this.btnNuevoAgente.Tag = dicbtnNuevoAgente;
+
+            Dictionary<string, string[]> diclblCargo = new Dictionary<string, string[]>();
+            string[] IdiomalblCargo = { "Cargo" };
+            diclblCargo.Add("Idioma", IdiomalblCargo);
+            this.lblCargo.Tag = diclblCargo;
+
+            Dictionary<string, string[]> dicbtnAgregarAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregarAgente = { "Agregar Agente" };
+            dicbtnAgregarAgente.Add("Idioma", IdiomabtnAgregarAgente);
+            this.btnAgregarAgente.Tag = dicbtnAgregarAgente;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Dependencia Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
+            string[] IdiomabtnModificar = { "Crear Solicitud" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnCancelar = new Dictionary<string, string[]>();
+            string[] PerbtnCancelar = { "Dependencia Cancelar" };
+            dicbtnCancelar.Add("Permisos", PerbtnCancelar);
+            string[] IdiomabtnCancelar = { "Cancelar" };
+            dicbtnCancelar.Add("Idioma", IdiomabtnCancelar);
+            this.btnCancelar.Tag = dicbtnCancelar;
         }
 
         private void frmDependenciaModificar_Load(object sender, EventArgs e)
@@ -44,6 +98,10 @@ namespace ARTEC.GUI
 
             try
             {
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)

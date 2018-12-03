@@ -13,6 +13,7 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
+using ARTEC.BLL.Servicios;
 
 
 namespace ARTEC.GUI
@@ -50,6 +51,101 @@ namespace ARTEC.GUI
         public frmBienRegistrar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmBienRegistrar = new Dictionary<string, string[]>();
+            string[] IdiomafrmBienRegistrar = { "Registrar Bien" };
+            dicfrmBienRegistrar.Add("Idioma", IdiomafrmBienRegistrar);
+            this.Tag = dicfrmBienRegistrar;
+
+            Dictionary<string, string[]> diclblTipoBien = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoBien = { "Tipo" };
+            diclblTipoBien.Add("Idioma", IdiomalblTipoBien);
+            this.lblTipoBien.Tag = diclblTipoBien;
+
+            Dictionary<string, string[]> diclblBien = new Dictionary<string, string[]>();
+            string[] IdiomalblBien = { "Bien" };
+            diclblBien.Add("Idioma", IdiomalblBien);
+            this.lblBien.Tag = diclblBien;
+
+            Dictionary<string, string[]> diclblMarca = new Dictionary<string, string[]>();
+            string[] IdiomalblMarca = { "Marca" };
+            diclblMarca.Add("Idioma", IdiomalblMarca);
+            this.lblMarca.Tag = diclblMarca;
+
+            Dictionary<string, string[]> diclblCosto = new Dictionary<string, string[]>();
+            string[] IdiomalblCosto = { "Costo" };
+            diclblCosto.Add("Idioma", IdiomalblCosto);
+            this.lblCosto.Tag = diclblCosto;
+
+            Dictionary<string, string[]> diclblModelo = new Dictionary<string, string[]>();
+            string[] IdiomalblModelo = { "Modelo" };
+            diclblModelo.Add("Idioma", IdiomalblModelo);
+            this.lblModelo.Tag = diclblModelo;
+
+            Dictionary<string, string[]> diclblSerieKey = new Dictionary<string, string[]>();
+            string[] IdiomalblSerieKey = { "Serie" };
+            diclblSerieKey.Add("Idioma", IdiomalblSerieKey);
+            this.lblSerieKey.Tag = diclblSerieKey;
+
+            Dictionary<string, string[]> diclblSerial = new Dictionary<string, string[]>();
+            string[] IdiomalblSerial = { "Serie" };
+            diclblSerial.Add("Idioma", IdiomalblSerial);
+            this.lblSerial.Tag = diclblSerial;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Estado" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
+
+            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
+            string[] IdiomabtnConfirmar = { "Confirmar" };
+            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
+            this.btnConfirmar.Tag = dicbtnConfirmar;
+
+            Dictionary<string, string[]> diclblPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblPartida = { "Partida" };
+            diclblPartida.Add("Idioma", IdiomalblPartida);
+            this.lblPartida.Tag = diclblPartida;
+
+            Dictionary<string, string[]> diclblFechaCompra = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaCompra = { "Fecha Compra" };
+            diclblFechaCompra.Add("Idioma", IdiomalblFechaCompra);
+            this.lblFechaCompra.Tag = diclblFechaCompra;
+
+            Dictionary<string, string[]> diclblMontoTotal = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoTotal = { "Monto Total" };
+            diclblMontoTotal.Add("Idioma", IdiomalblMontoTotal);
+            this.lblMontoTotal.Tag = diclblMontoTotal;
+
+            Dictionary<string, string[]> diclblProveedor = new Dictionary<string, string[]>();
+            string[] IdiomalblProveedor = { "Proveedor" };
+            diclblProveedor.Add("Idioma", IdiomalblProveedor);
+            this.lblProveedor.Tag = diclblProveedor;
+
+            Dictionary<string, string[]> diclblNroFactura = new Dictionary<string, string[]>();
+            string[] IdiomalblNroFactura = { "Factura" };
+            diclblNroFactura.Add("Idioma", IdiomalblNroFactura);
+            this.lblNroFactura.Tag = diclblNroFactura;
+
+            Dictionary<string, string[]> dicbtnCrearMarca = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearMarca = { "Crear" };
+            dicbtnCrearMarca.Add("Idioma", IdiomabtnCrearMarca);
+            this.btnCrearMarca.Tag = dicbtnCrearMarca;
+
+            Dictionary<string, string[]> dicbtnCrearModelo = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearModelo = { "Crear" };
+            dicbtnCrearModelo.Add("Idioma", IdiomabtnCrearModelo);
+            this.btnCrearModelo.Tag = dicbtnCrearModelo;
+
+
+
+
+
         }
 
 
@@ -230,6 +326,9 @@ namespace ARTEC.GUI
 
         private void frmBienRegistrar_Load(object sender, EventArgs e)
         {
+
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             //Cargar proveedores
             unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();

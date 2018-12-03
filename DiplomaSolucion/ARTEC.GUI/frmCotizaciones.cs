@@ -39,10 +39,79 @@ namespace ARTEC.GUI
             unasCotizaciones = unasCotiz;
             unasCotizacionesBKP = unasCotizaciones.ToList();
             unDetSolic = unDetSolicP;
+
+            
+            Dictionary<string, string[]> dicfrmCotizaciones = new Dictionary<string, string[]>();
+            string[] IdiomafrmCotizaciones = { "Cotizaciones" };
+            dicfrmCotizaciones.Add("Idioma", IdiomafrmCotizaciones);
+            this.Tag = dicfrmCotizaciones;
+
+            Dictionary<string, string[]> dictabPage2 = new Dictionary<string, string[]>();
+            string[] IdiomatabPage2 = { "Solicitar Cotización" };
+            dictabPage2.Add("Idioma", IdiomatabPage2);
+            this.tabPage2.Tag = dictabPage2;
+
+            Dictionary<string, string[]> dictabPage1 = new Dictionary<string, string[]>();
+            string[] IdiomatabPage1 = { "Agregar Cotización" };
+            dictabPage1.Add("Idioma", IdiomatabPage1);
+            this.tabPage1.Tag = dictabPage1;
+
+            Dictionary<string, string[]> diclblProvSol = new Dictionary<string, string[]>();
+            string[] IdiomalblProvSol = { "Proveedores" };
+            diclblProvSol.Add("Idioma", IdiomalblProvSol);
+            this.lblProvSol.Tag = diclblProvSol;
+
+            Dictionary<string, string[]> dicbtnAgregarProvSol = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregarProvSol = { "Agregar Proveedor" };
+            dicbtnAgregarProvSol.Add("Idioma", IdiomabtnAgregarProvSol);
+            this.btnAgregarProvSol.Tag = dicbtnAgregarProvSol;
+
+            Dictionary<string, string[]> diclblAsunto = new Dictionary<string, string[]>();
+            string[] IdiomalblAsunto = { "Asunto" };
+            diclblAsunto.Add("Idioma", IdiomalblAsunto);
+            this.lblAsunto.Tag = diclblAsunto;
+
+            Dictionary<string, string[]> diclblCuerpo = new Dictionary<string, string[]>();
+            string[] IdiomalblCuerpo = { "Cuerpo" };
+            diclblCuerpo.Add("Idioma", IdiomalblCuerpo);
+            this.lblCuerpo.Tag = diclblCuerpo;
+
+            Dictionary<string, string[]> dictxtCuerpo = new Dictionary<string, string[]>();
+            string[] IdiomatxtCuerpo = { "Cuerpo" };
+            dictxtCuerpo.Add("Idioma", IdiomatxtCuerpo);
+            this.txtCuerpo.Tag = dictxtCuerpo;
+
+            Dictionary<string, string[]> dicbtnSolicitar = new Dictionary<string, string[]>();
+            string[] IdiomabtnSolicitar = { "Solicitar" };
+            dicbtnSolicitar.Add("Idioma", IdiomabtnSolicitar);
+            this.btnSolicitar.Tag = dicbtnSolicitar;
+
+            Dictionary<string, string[]> diclblProveedor = new Dictionary<string, string[]>();
+            string[] IdiomalblProveedor = { "Proveedor" };
+            diclblProveedor.Add("Idioma", IdiomalblProveedor);
+            this.lblProveedor.Tag = diclblProveedor;
+
+            Dictionary<string, string[]> diclblPrecioUn = new Dictionary<string, string[]>();
+            string[] IdiomalblPrecioUn = { "Precio" };
+            diclblPrecioUn.Add("Idioma", IdiomalblPrecioUn);
+            this.lblPrecioUn.Tag = diclblPrecioUn;
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
+
+            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
+            string[] IdiomabtnConfirmar = { "Confirmar" };
+            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
+            this.btnConfirmar.Tag = dicbtnConfirmar;
         }
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
         {
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
             //Permisos
             //Obtengo todos los controles del formulario
             IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);

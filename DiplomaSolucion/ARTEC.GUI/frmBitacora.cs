@@ -24,12 +24,41 @@ namespace ARTEC.GUI
         public frmBitacora()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmBitacora = new Dictionary<string, string[]>();
+            string[] IdiomafrmBitacora = { "Bitacora" };
+            dicfrmBitacora.Add("Idioma", IdiomafrmBitacora);
+            this.Tag = dicfrmBitacora;
+
+            Dictionary<string, string[]> diclblFechaInicio = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaInicio = { "Fecha Inicio" };
+            diclblFechaInicio.Add("Idioma", IdiomalblFechaInicio);
+            this.lblFechaInicio.Tag = diclblFechaInicio;
+
+            Dictionary<string, string[]> diclblFechaFin = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaFin = { "Fecha Fin" };
+            diclblFechaFin.Add("Idioma", IdiomalblFechaFin);
+            this.lblFechaFin.Tag = diclblFechaFin;
+
+            Dictionary<string, string[]> diclblTipoLog = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoLog = { "Tipo Log" };
+            diclblTipoLog.Add("Idioma", IdiomalblTipoLog);
+            this.lblTipoLog.Tag = diclblTipoLog;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
         }
 
         private void frmBitacora_Load(object sender, EventArgs e)
         {
             try
             {
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)

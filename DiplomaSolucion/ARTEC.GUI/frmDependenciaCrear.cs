@@ -28,12 +28,57 @@ namespace ARTEC.GUI
         public frmDependenciaCrear()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmDependenciaCrear = new Dictionary<string, string[]>();
+            string[] IdiomafrmDependenciaCrear = { "Crear Dependencia" };
+            dicfrmDependenciaCrear.Add("Idioma", IdiomafrmDependenciaCrear);
+            this.Tag = dicfrmDependenciaCrear;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblTipoDep = new Dictionary<string, string[]>();
+            string[] IdiomalblTipoDep = { "Tipo Dependencia" };
+            diclblTipoDep.Add("Idioma", IdiomalblTipoDep);
+            this.lblTipoDep.Tag = diclblTipoDep;
+
+            Dictionary<string, string[]> diclblAgentes = new Dictionary<string, string[]>();
+            string[] IdiomalblAgentes = { "Agentes" };
+            diclblAgentes.Add("Idioma", IdiomalblAgentes);
+            this.lblAgentes.Tag = diclblAgentes;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Agente" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> diclblCargo = new Dictionary<string, string[]>();
+            string[] IdiomalblCargo = { "Cargo" };
+            diclblCargo.Add("Idioma", IdiomalblCargo);
+            this.lblCargo.Tag = diclblCargo;
+
+            Dictionary<string, string[]> dicbtnAgregarAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregarAgente = { "Agregar Agente" };
+            dicbtnAgregarAgente.Add("Idioma", IdiomabtnAgregarAgente);
+            this.btnAgregarAgente.Tag = dicbtnAgregarAgente;
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
         }
 
         private void frmDependenciaCrear_Load(object sender, EventArgs e)
         {
             try
             {
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Traer TipoDependencias
                 LisTipoDep = ManagerDependencia.TipoDepTraerTodos();
                 cboTipoDep.DataSource = null;
