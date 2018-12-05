@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data.SqlClient;
+using System.Data;
 
 
 namespace ARTEC.FRAMEWORK.Servicios
@@ -43,6 +45,31 @@ namespace ARTEC.FRAMEWORK.Servicios
             }
             return false;
         }
+
+        public static string obtenerRutaAdjuntos()
+        {
+            
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string laRuta = (string)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "obtenerRutaAdjuntos");
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return laRuta;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
 
     }
 }

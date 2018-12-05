@@ -45,8 +45,7 @@ namespace ARTEC.GUI
 
                 btnModificar.Enabled = false;
                 btnEliminar.Enabled = false;
-                btnAgregar.Enabled = false;
-                btnQuitar.Enabled = false;
+                
 
                 PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                 PermisosCbo = PermisosTodos.Where(X=>X.CantHijos > 0).ToList();

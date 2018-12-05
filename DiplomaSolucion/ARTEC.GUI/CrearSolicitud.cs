@@ -36,6 +36,7 @@ namespace ARTEC.GUI
         List<Usuario> unosUsuarios = new List<Usuario>();
         List<Agente> unosAgentesResp;
         List<string> unosAdjuntos = new List<string>();
+        List<string> unosAdjuntosRutas = new List<string>();
         BLLTipoBien managerTipoBienAux = new BLLTipoBien();
         SolicDetalle unDetSolic;
         BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
@@ -921,6 +922,11 @@ namespace ARTEC.GUI
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     if (ManagerSolicitud.SolicitudCrear(unaSolicitud))
                     {
+                        //Copio el archivo adjunto
+                        if (unosAdjuntos.Count > 0)
+                        {
+                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
+                        }
                         MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
                         this.Close();
                     }
@@ -947,9 +953,9 @@ namespace ARTEC.GUI
         //Copiar el archivo
         private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
         {
-            if (unosAdjuntos.Count > 2)
+            if (unosAdjuntos.Count > 1)
             {
-                MessageBox.Show("No pueden adjuntarse más de 3 archivos");
+                MessageBox.Show("No puede adjuntarse más de 1 archivo");
             }
             else
             {
@@ -961,12 +967,11 @@ namespace ARTEC.GUI
                     string NombreArchivo = Path.GetFileName(item);
                     if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(item))
                     {
-                        //Copio el archivo
-                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
                         pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
 
                         //Añado a la grilla el nombre del archivo
                         unosAdjuntos.Add(NombreArchivo);
+                        unosAdjuntosRutas.Add(item);
 
                         lstAdjuntos.DataSource = null;
                         lstAdjuntos.DataSource = unosAdjuntos;
@@ -978,6 +983,31 @@ namespace ARTEC.GUI
                     {
                         MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
                     }
+                    /// BKP/Agarro la ruta de los archivos arrastrados
+                    //string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                    //foreach (var item in unArchivo)
+                    //{
+                    //    //Agarro el nombre del archivo
+                    //    string NombreArchivo = Path.GetFileName(item);
+                    //    if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(item))
+                    //    {
+                    //        //Copio el archivo
+                    //        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
+                    //        pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+
+                    //        //Añado a la grilla el nombre del archivo
+                    //        unosAdjuntos.Add(NombreArchivo);
+
+                    //        lstAdjuntos.DataSource = null;
+                    //        lstAdjuntos.DataSource = unosAdjuntos;
+
+                    //        //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+
+                    //    }
+                    //    else
+                    //    {
+                    //        MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                    //    }
                 }
             }
         }
