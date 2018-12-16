@@ -31,6 +31,12 @@ namespace ARTEC.GUI
         {
             this.tabsPrincipal = new System.Windows.Forms.TabControl();
             this.tabSolic = new System.Windows.Forms.TabPage();
+            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
+            this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
+            this.btnBackup = new DevComponents.DotNetBar.ButtonX();
+            this.btnUsuarios = new DevComponents.DotNetBar.ButtonX();
+            this.btnVolver = new DevComponents.DotNetBar.ButtonX();
             this.tabRendiciones = new System.Windows.Forms.TabPage();
             this.tabPartidas = new System.Windows.Forms.TabPage();
             this.tabDependencia = new System.Windows.Forms.TabPage();
@@ -43,12 +49,6 @@ namespace ARTEC.GUI
             this.btnRendicionCrear = new DevComponents.DotNetBar.ButtonX();
             this.cboIdioma = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.btnAgentes = new DevComponents.DotNetBar.ButtonX();
-            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
-            this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
-            this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
-            this.btnBackup = new DevComponents.DotNetBar.ButtonX();
-            this.btnUsuarios = new DevComponents.DotNetBar.ButtonX();
-            this.btnVolver = new DevComponents.DotNetBar.ButtonX();
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
@@ -73,6 +73,8 @@ namespace ARTEC.GUI
             // 
             // tabSolic
             // 
+            this.tabSolic.BackColor = System.Drawing.Color.Transparent;
+            this.tabSolic.ForeColor = System.Drawing.Color.White;
             this.tabSolic.Location = new System.Drawing.Point(4, 22);
             this.tabSolic.Name = "tabSolic";
             this.tabSolic.Padding = new System.Windows.Forms.Padding(3);
@@ -80,159 +82,6 @@ namespace ARTEC.GUI
             this.tabSolic.TabIndex = 0;
             this.tabSolic.Text = "Solicitudes";
             this.tabSolic.UseVisualStyleBackColor = true;
-            // 
-            // tabRendiciones
-            // 
-            this.tabRendiciones.Location = new System.Drawing.Point(4, 22);
-            this.tabRendiciones.Name = "tabRendiciones";
-            this.tabRendiciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRendiciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabRendiciones.TabIndex = 1;
-            this.tabRendiciones.Text = "tabRendiciones";
-            this.tabRendiciones.UseVisualStyleBackColor = true;
-            // 
-            // tabPartidas
-            // 
-            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
-            this.tabPartidas.Name = "tabPartidas";
-            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
-            this.tabPartidas.TabIndex = 2;
-            this.tabPartidas.Text = "tabPartidas";
-            this.tabPartidas.UseVisualStyleBackColor = true;
-            // 
-            // tabDependencia
-            // 
-            this.tabDependencia.Location = new System.Drawing.Point(4, 22);
-            this.tabDependencia.Name = "tabDependencia";
-            this.tabDependencia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDependencia.Size = new System.Drawing.Size(1335, 635);
-            this.tabDependencia.TabIndex = 3;
-            this.tabDependencia.Text = "tabDependencia";
-            this.tabDependencia.UseVisualStyleBackColor = true;
-            // 
-            // tabAsignaciones
-            // 
-            this.tabAsignaciones.Location = new System.Drawing.Point(4, 22);
-            this.tabAsignaciones.Name = "tabAsignaciones";
-            this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabAsignaciones.TabIndex = 4;
-            this.tabAsignaciones.Text = "tabAsignaciones";
-            this.tabAsignaciones.UseVisualStyleBackColor = true;
-            // 
-            // tabAdquisiciones
-            // 
-            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 22);
-            this.tabAdquisiciones.Name = "tabAdquisiciones";
-            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabAdquisiciones.TabIndex = 5;
-            this.tabAdquisiciones.Text = "tabAdquisiciones";
-            this.tabAdquisiciones.UseVisualStyleBackColor = true;
-            // 
-            // btnCrearSolicitud
-            // 
-            this.btnCrearSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnCrearSolicitud.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnCrearSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnCrearSolicitud.CustomColorName = "Blue";
-            this.btnCrearSolicitud.Location = new System.Drawing.Point(128, 13);
-            this.btnCrearSolicitud.Name = "btnCrearSolicitud";
-            this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
-            this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCrearSolicitud.TabIndex = 1;
-            this.btnCrearSolicitud.Text = "Solicitud Crear";
-            this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
-            this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
-            // 
-            // btnSolicitarPartida
-            // 
-            this.btnSolicitarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSolicitarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSolicitarPartida.CustomColorName = "blue";
-            this.btnSolicitarPartida.Location = new System.Drawing.Point(240, 13);
-            this.btnSolicitarPartida.Name = "btnSolicitarPartida";
-            this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
-            this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSolicitarPartida.TabIndex = 2;
-            this.btnSolicitarPartida.Text = "btnSolicitarPartida";
-            this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
-            // 
-            // btnPartidaAsociar
-            // 
-            this.btnPartidaAsociar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnPartidaAsociar.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnPartidaAsociar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnPartidaAsociar.CustomColorName = "Blue";
-            this.btnPartidaAsociar.Location = new System.Drawing.Point(360, 13);
-            this.btnPartidaAsociar.Name = "btnPartidaAsociar";
-            this.btnPartidaAsociar.Size = new System.Drawing.Size(87, 40);
-            this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnPartidaAsociar.TabIndex = 3;
-            this.btnPartidaAsociar.Text = "btnPartidaAsociar";
-            this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
-            this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
-            // 
-            // btnBienRegistrar
-            // 
-            this.btnBienRegistrar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnBienRegistrar.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnBienRegistrar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnBienRegistrar.CustomColorName = "Blue";
-            this.btnBienRegistrar.Location = new System.Drawing.Point(477, 13);
-            this.btnBienRegistrar.Name = "btnBienRegistrar";
-            this.btnBienRegistrar.Size = new System.Drawing.Size(87, 40);
-            this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnBienRegistrar.TabIndex = 4;
-            this.btnBienRegistrar.Text = "btnBienRegistrar";
-            this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
-            this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
-            // 
-            // btnRendicionCrear
-            // 
-            this.btnRendicionCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnRendicionCrear.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnRendicionCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnRendicionCrear.CustomColorName = "Blue";
-            this.btnRendicionCrear.Location = new System.Drawing.Point(593, 13);
-            this.btnRendicionCrear.Name = "btnRendicionCrear";
-            this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
-            this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnRendicionCrear.TabIndex = 5;
-            this.btnRendicionCrear.Text = "btnRendicionCrear";
-            this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
-            this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
-            // 
-            // cboIdioma
-            // 
-            this.cboIdioma.DisplayMember = "Text";
-            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
-            this.cboIdioma.FormattingEnabled = true;
-            this.cboIdioma.ItemHeight = 16;
-            this.cboIdioma.Location = new System.Drawing.Point(1230, 53);
-            this.cboIdioma.Name = "cboIdioma";
-            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
-            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboIdioma.TabIndex = 6;
-            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
-            // 
-            // btnAgentes
-            // 
-            this.btnAgentes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAgentes.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnAgentes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnAgentes.CustomColorName = "Blue";
-            this.btnAgentes.Location = new System.Drawing.Point(725, 13);
-            this.btnAgentes.Name = "btnAgentes";
-            this.btnAgentes.Size = new System.Drawing.Size(108, 40);
-            this.btnAgentes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAgentes.TabIndex = 7;
-            this.btnAgentes.Text = "btnAgentes";
-            this.btnAgentes.TextColor = System.Drawing.Color.White;
-            this.btnAgentes.Click += new System.EventHandler(this.btnAgentes_Click);
             // 
             // panelEx1
             // 
@@ -328,6 +177,161 @@ namespace ARTEC.GUI
             this.btnVolver.Text = "btnVolver";
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // tabRendiciones
+            // 
+            this.tabRendiciones.Location = new System.Drawing.Point(4, 22);
+            this.tabRendiciones.Name = "tabRendiciones";
+            this.tabRendiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRendiciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabRendiciones.TabIndex = 1;
+            this.tabRendiciones.Text = "tabRendiciones";
+            this.tabRendiciones.UseVisualStyleBackColor = true;
+            // 
+            // tabPartidas
+            // 
+            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
+            this.tabPartidas.Name = "tabPartidas";
+            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
+            this.tabPartidas.TabIndex = 2;
+            this.tabPartidas.Text = "tabPartidas";
+            this.tabPartidas.UseVisualStyleBackColor = true;
+            // 
+            // tabDependencia
+            // 
+            this.tabDependencia.Location = new System.Drawing.Point(4, 22);
+            this.tabDependencia.Name = "tabDependencia";
+            this.tabDependencia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDependencia.Size = new System.Drawing.Size(1335, 635);
+            this.tabDependencia.TabIndex = 3;
+            this.tabDependencia.Text = "tabDependencia";
+            this.tabDependencia.UseVisualStyleBackColor = true;
+            // 
+            // tabAsignaciones
+            // 
+            this.tabAsignaciones.Location = new System.Drawing.Point(4, 22);
+            this.tabAsignaciones.Name = "tabAsignaciones";
+            this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabAsignaciones.TabIndex = 4;
+            this.tabAsignaciones.Text = "tabAsignaciones";
+            this.tabAsignaciones.UseVisualStyleBackColor = true;
+            // 
+            // tabAdquisiciones
+            // 
+            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 22);
+            this.tabAdquisiciones.Name = "tabAdquisiciones";
+            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 635);
+            this.tabAdquisiciones.TabIndex = 5;
+            this.tabAdquisiciones.Text = "tabAdquisiciones";
+            this.tabAdquisiciones.UseVisualStyleBackColor = true;
+            // 
+            // btnCrearSolicitud
+            // 
+            this.btnCrearSolicitud.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnCrearSolicitud.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCrearSolicitud.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnCrearSolicitud.CustomColorName = "Blue";
+            this.btnCrearSolicitud.Location = new System.Drawing.Point(128, 13);
+            this.btnCrearSolicitud.Name = "btnCrearSolicitud";
+            this.btnCrearSolicitud.Size = new System.Drawing.Size(87, 40);
+            this.btnCrearSolicitud.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnCrearSolicitud.TabIndex = 1;
+            this.btnCrearSolicitud.Text = "Solicitud Crear";
+            this.btnCrearSolicitud.TextColor = System.Drawing.Color.White;
+            this.btnCrearSolicitud.Click += new System.EventHandler(this.buttonX1_Click);
+            // 
+            // btnSolicitarPartida
+            // 
+            this.btnSolicitarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSolicitarPartida.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSolicitarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSolicitarPartida.CustomColorName = "Blue";
+            this.btnSolicitarPartida.Location = new System.Drawing.Point(240, 13);
+            this.btnSolicitarPartida.Name = "btnSolicitarPartida";
+            this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
+            this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSolicitarPartida.TabIndex = 2;
+            this.btnSolicitarPartida.Text = "btnSolicitarPartida";
+            this.btnSolicitarPartida.TextColor = System.Drawing.Color.White;
+            this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSolicitarPartida_Click);
+            // 
+            // btnPartidaAsociar
+            // 
+            this.btnPartidaAsociar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPartidaAsociar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnPartidaAsociar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnPartidaAsociar.CustomColorName = "Blue";
+            this.btnPartidaAsociar.Location = new System.Drawing.Point(360, 13);
+            this.btnPartidaAsociar.Name = "btnPartidaAsociar";
+            this.btnPartidaAsociar.Size = new System.Drawing.Size(87, 40);
+            this.btnPartidaAsociar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPartidaAsociar.TabIndex = 3;
+            this.btnPartidaAsociar.Text = "btnPartidaAsociar";
+            this.btnPartidaAsociar.TextColor = System.Drawing.Color.White;
+            this.btnPartidaAsociar.Click += new System.EventHandler(this.btnPartidaAsociar_Click);
+            // 
+            // btnBienRegistrar
+            // 
+            this.btnBienRegistrar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnBienRegistrar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnBienRegistrar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnBienRegistrar.CustomColorName = "Blue";
+            this.btnBienRegistrar.Location = new System.Drawing.Point(477, 13);
+            this.btnBienRegistrar.Name = "btnBienRegistrar";
+            this.btnBienRegistrar.Size = new System.Drawing.Size(87, 40);
+            this.btnBienRegistrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnBienRegistrar.TabIndex = 4;
+            this.btnBienRegistrar.Text = "btnBienRegistrar";
+            this.btnBienRegistrar.TextColor = System.Drawing.Color.White;
+            this.btnBienRegistrar.Click += new System.EventHandler(this.btnBienRegistrar_Click);
+            // 
+            // btnRendicionCrear
+            // 
+            this.btnRendicionCrear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRendicionCrear.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnRendicionCrear.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnRendicionCrear.CustomColorName = "Blue";
+            this.btnRendicionCrear.Location = new System.Drawing.Point(593, 13);
+            this.btnRendicionCrear.Name = "btnRendicionCrear";
+            this.btnRendicionCrear.Size = new System.Drawing.Size(108, 40);
+            this.btnRendicionCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRendicionCrear.TabIndex = 5;
+            this.btnRendicionCrear.Text = "btnRendicionCrear";
+            this.btnRendicionCrear.TextColor = System.Drawing.Color.White;
+            this.btnRendicionCrear.Click += new System.EventHandler(this.btnRendicionCrear_Click);
+            // 
+            // cboIdioma
+            // 
+            this.cboIdioma.DisplayMember = "Text";
+            this.cboIdioma.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboIdioma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboIdioma.ForeColor = System.Drawing.Color.Black;
+            this.cboIdioma.FormattingEnabled = true;
+            this.cboIdioma.ItemHeight = 16;
+            this.cboIdioma.Location = new System.Drawing.Point(1230, 53);
+            this.cboIdioma.Name = "cboIdioma";
+            this.cboIdioma.Size = new System.Drawing.Size(121, 22);
+            this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboIdioma.TabIndex = 6;
+            this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
+            // 
+            // btnAgentes
+            // 
+            this.btnAgentes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgentes.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnAgentes.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnAgentes.CustomColorName = "Blue";
+            this.btnAgentes.Location = new System.Drawing.Point(725, 13);
+            this.btnAgentes.Name = "btnAgentes";
+            this.btnAgentes.Size = new System.Drawing.Size(108, 40);
+            this.btnAgentes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgentes.TabIndex = 7;
+            this.btnAgentes.Text = "btnAgentes";
+            this.btnAgentes.TextColor = System.Drawing.Color.White;
+            this.btnAgentes.Click += new System.EventHandler(this.btnAgentes_Click);
+            // 
             // btnAvanzadas
             // 
             this.btnAvanzadas.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -378,10 +382,10 @@ namespace ARTEC.GUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.btnProveedor);
             this.Controls.Add(this.btnCategorias);
             this.Controls.Add(this.btnAgentes);
-            this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.cboIdioma);
             this.Controls.Add(this.btnRendicionCrear);
             this.Controls.Add(this.btnBienRegistrar);

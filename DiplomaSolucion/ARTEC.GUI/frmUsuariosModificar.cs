@@ -354,6 +354,11 @@ namespace ARTEC.GUI
             {
                 if (unUsuario != null && !string.IsNullOrWhiteSpace(unUsuario.NombreUsuario) && unUsuario.IdUsuario > 0)
                 {
+                    if (unUsuario.NombreUsuario == ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario)
+                    {
+                        MessageBox.Show("No puede eliminarse a sí mismo");
+                        return;
+                    }
                     DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja el Usuario: " + unUsuario.NombreUsuario + "?", "Advertencia", MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if(ManagerUsuario.UsuarioEliminar(unUsuario))

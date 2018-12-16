@@ -142,8 +142,8 @@ namespace ARTEC.GUI
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.BackgroundImage = global::ARTEC.GUI.Properties.Resources.CandadoBloc;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox2.Location = new System.Drawing.Point(39, 13);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(25, 32);
@@ -210,7 +210,7 @@ namespace ARTEC.GUI
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(39, 14);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 32);
@@ -231,7 +231,7 @@ namespace ARTEC.GUI
             this.txtNombreUsuario.Location = new System.Drawing.Point(70, 12);
             this.txtNombreUsuario.Name = "txtNombreUsuario";
             this.txtNombreUsuario.PreventEnterBeep = true;
-            this.txtNombreUsuario.Size = new System.Drawing.Size(278, 36);
+            this.txtNombreUsuario.Size = new System.Drawing.Size(278, 32);
             this.txtNombreUsuario.TabIndex = 18;
             this.vldNombreUs.SetValidator1(this.txtNombreUsuario, this.customvldtxtNombreUsuario);
             this.txtNombreUsuario.Enter += new System.EventHandler(this.txtNombreUsuario_Enter);
