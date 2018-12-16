@@ -56,6 +56,7 @@ namespace ARTEC.GUI
         List<SolicDetalle> unosSolicDetAgregarBKP = new List<SolicDetalle>();
         BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
         int DetalleSeleccionado = 1;
+        string RutaCompletaAdjuntoGuardado;
 
 
         private frmSolicitudModificar(Solicitud unaSolic)
@@ -164,9 +165,11 @@ namespace ARTEC.GUI
                 if (flagRespInhabilitado)
                     lblDesvinculado.Visible = true;
 
+                //Cargar fecha Inicio y Fin
                 txtFechaInicio.Value = unaSolicitud.FechaInicio;
                 if (unaSolicitud.FechaFin != null && unaSolicitud.FechaFin != DateTime.MinValue)
                     txtFechaFin.Value = (DateTime)unaSolicitud.FechaFin;
+                txtFechaInicio.MaxDate = DateTime.Today;
 
                 ///Para poder seleccionar Hard o Soft
                 BLLTipoBien ManagerTipoBien = new BLLTipoBien();
@@ -349,10 +352,10 @@ namespace ARTEC.GUI
                 
                 //Agrega el adjunto
                 NombreAdjunto = ManagerSolicitud.ObtenerNombreAdjuntoSolic(unaSolicitud.IdSolicitud);
-                string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                RutaCompletaAdjuntoGuardado = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
                 //Añado a la grilla el nombre del archivo
                 unosAdjuntos.Add(NombreAdjunto);
-                unosAdjuntosRutas.Add(RutaCompletaAdjunto);
+                unosAdjuntosRutas.Add(RutaCompletaAdjuntoGuardado);
 
                 lstAdjuntos.DataSource = null;
                 lstAdjuntos.DataSource = unosAdjuntos;
@@ -1207,6 +1210,7 @@ namespace ARTEC.GUI
                 lstAdjuntos.DataSource = null;
                 lstAdjuntos.Items.Clear();
                 NombreAdjunto = null;
+                RutaCompletaAdjuntoGuardado = null;
             }
         }
 
@@ -1456,7 +1460,8 @@ namespace ARTEC.GUI
                     //Guardo el archivo adjunto
                     if (unosAdjuntos.Count > 0)
                     {
-                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
+                        if(RutaCompletaAdjuntoGuardado == null)
+                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
                         MessageBox.Show("Modificación realizada correctamente");
                     }
                     
@@ -1526,11 +1531,14 @@ namespace ARTEC.GUI
         {
             if (NombreAdjunto != null)
             {
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
-                proc.StartInfo.FileName = RutaCompletaAdjunto;
-                proc.Start();
-                proc.Close();
+                using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
+                {
+                    string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                    proc.StartInfo.FileName = RutaCompletaAdjunto;
+                    proc.Start();
+                    proc.Close();
+                }
+                
             }
             
         }

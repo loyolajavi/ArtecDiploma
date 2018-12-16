@@ -17,7 +17,11 @@ namespace ARTEC.FRAMEWORK.Servicios
         {
             try
             {
-                // Copiar el archivo si existe lo sobreescribe  
+                // Copiar el archivo si existe lo sobreescribe
+                if(File.Exists(Destino))
+                {
+                    File.Delete(Destino);
+                }
                 File.Copy(Origen, Destino, true);
 
             }

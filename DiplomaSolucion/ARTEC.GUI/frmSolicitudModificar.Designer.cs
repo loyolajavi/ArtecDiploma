@@ -83,7 +83,7 @@ namespace ARTEC.GUI
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnSolicitarPartida = new System.Windows.Forms.Button();
+            this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnBienAsignar = new DevComponents.DotNetBar.ButtonX();
             this.validCantBien = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.customValidtxtCantBien = new DevComponents.DotNetBar.Validator.CustomValidator();
@@ -327,6 +327,7 @@ namespace ARTEC.GUI
             this.txtFechaFin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtFechaFin.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.txtFechaFin.ButtonDropDown.Visible = true;
+            this.txtFechaFin.Enabled = false;
             this.txtFechaFin.IsPopupCalendarOpen = false;
             this.txtFechaFin.Location = new System.Drawing.Point(864, 56);
             // 
@@ -898,12 +899,17 @@ namespace ARTEC.GUI
             // 
             // btnSolicitarPartida
             // 
+            this.btnSolicitarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSolicitarPartida.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnSolicitarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSolicitarPartida.CustomColorName = "Blue";
             this.btnSolicitarPartida.Location = new System.Drawing.Point(1087, 34);
             this.btnSolicitarPartida.Name = "btnSolicitarPartida";
-            this.btnSolicitarPartida.Size = new System.Drawing.Size(75, 40);
+            this.btnSolicitarPartida.Size = new System.Drawing.Size(87, 40);
+            this.btnSolicitarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitarPartida.TabIndex = 7;
             this.btnSolicitarPartida.Text = "btnSoliitarPartida";
-            this.btnSolicitarPartida.UseVisualStyleBackColor = true;
+            this.btnSolicitarPartida.TextColor = System.Drawing.Color.White;
             this.btnSolicitarPartida.Click += new System.EventHandler(this.btnSoliitarPartida_Click);
             // 
             // btnBienAsignar
@@ -1061,7 +1067,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboEstadoSolDetalle;
         private DevComponents.DotNetBar.ButtonX btnNuevoDetalle;
-        private System.Windows.Forms.Button btnSolicitarPartida;
+        private DevComponents.DotNetBar.ButtonX btnSolicitarPartida;
         private DevComponents.DotNetBar.ButtonX btnBienAsignar;
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.Validator.SuperValidator validCantBien;

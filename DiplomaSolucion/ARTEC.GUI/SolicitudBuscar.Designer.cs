@@ -30,7 +30,7 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolicitudBuscar));
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -405,18 +405,21 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaSolicitudBuscar.BackgroundColor = System.Drawing.Color.White;
             this.GrillaSolicitudBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaSolicitudBuscar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaSolicitudBuscar.Location = new System.Drawing.Point(7, 131);
             this.GrillaSolicitudBuscar.Name = "GrillaSolicitudBuscar";
             this.GrillaSolicitudBuscar.ReadOnly = true;
+            this.GrillaSolicitudBuscar.ShowCellToolTips = false;
+            this.GrillaSolicitudBuscar.ShowEditingIcon = false;
+            this.GrillaSolicitudBuscar.ShowRowErrors = false;
             this.GrillaSolicitudBuscar.Size = new System.Drawing.Size(824, 372);
             this.GrillaSolicitudBuscar.TabIndex = 47;
             this.GrillaSolicitudBuscar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaSolicitudBuscar_CellDoubleClick);

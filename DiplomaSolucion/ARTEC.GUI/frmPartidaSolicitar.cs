@@ -641,9 +641,9 @@ namespace ARTEC.GUI
             {
                 BLLSolicDetalle ManagerSolicDetalles = new BLLSolicDetalle();
                 unaSolicitud.unosDetallesSolicitud = ManagerSolicDetalles.SolicDetallesTraerPorNroSolicitud(unaSolicitud.IdSolicitud);
-                //Me fijo si tiene detalles
-                if (unaSolicitud.unosDetallesSolicitud != null)
-                {
+                //Me fijo si tiene detalles preparados para solicitar una partida
+                //if (unaSolicitud.unosDetallesSolicitud != null)
+                //{
                     ListaSolicDet = unaSolicitud.unosDetallesSolicitud.Where(x => x.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado).ToList();
 
                     if (ListaSolicDet != null && ListaSolicDet.Count() > 0)
@@ -664,7 +664,7 @@ namespace ARTEC.GUI
                         }
 
                         //Me fijo si tiene cotizaciones
-                        if (ListaSolicDet.Find(R => R.unasCotizaciones != null).unasCotizaciones.Count() > 0)
+                        if (ListaSolicDet.Find(R => R.unasCotizaciones != null).unasCotizaciones.Count() > 2)
                         {
                             foreach (SolicDetalle unDet in ListaSolicDet)
                             {
@@ -696,21 +696,21 @@ namespace ARTEC.GUI
                         }
                         else
                         {
-                            MessageBox.Show("Por favor primero agregue cotizaciones antes de generar una Partida");//VER:IDIOMA
+                            MessageBox.Show("Por favor primero agregue 3 cotizaciones antes de generar una Partida");//VER:IDIOMA
                             return false;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
+                        MessageBox.Show("Esta Solicitud no tiene detalles preparados para solicitar una partida");//VER:IDIOMA
                         return false;
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
-                    return false;
-                }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Esta Solicitud no tiene detalles pendientes");//VER:IDIOMA
+                //    return false;
+                //}
                 return true;
             }
             return false;

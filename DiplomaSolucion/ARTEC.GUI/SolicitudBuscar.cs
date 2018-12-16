@@ -138,7 +138,7 @@ namespace ARTEC.GUI
                     }
                     GrillaSolicitudBuscar.DataSource = null;
                     GrillaSolicitudBuscar.DataSource = unasSolicitudes;
-                    GrillaSolicitudBuscar.Columns["Asignado"].Visible = true;
+                    FormatearGrillaSolicitudBuscar();
                     if (unasSolicitudes.Count == 0)
                     {
                         GrillaSolicitudBuscar.Visible = false;
@@ -163,6 +163,18 @@ namespace ARTEC.GUI
         }
 
 
+        private void FormatearGrillaSolicitudBuscar()
+        {
+            //Formato GrillaSolicitudBuscar
+            GrillaSolicitudBuscar.Columns["IdSolicitud"].HeaderText = "Solicitud";
+            GrillaSolicitudBuscar.Columns["laDependencia"].HeaderText = "Dependencia";
+            GrillaSolicitudBuscar.Columns["FechaInicio"].HeaderText = "Creación";
+            GrillaSolicitudBuscar.Columns["FechaFin"].HeaderText = "Finalización";
+            GrillaSolicitudBuscar.Columns["UnaPrioridad"].HeaderText = "Prioridad";
+            GrillaSolicitudBuscar.Columns["UnEstado"].HeaderText = "Estado";
+            GrillaSolicitudBuscar.Columns["AgenteResp"].HeaderText = "Responsable";
+            GrillaSolicitudBuscar.Columns["DVH"].Visible = false;
+        }
 
         private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)
         {

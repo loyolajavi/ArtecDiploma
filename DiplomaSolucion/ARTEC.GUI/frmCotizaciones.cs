@@ -237,7 +237,7 @@ namespace ARTEC.GUI
             {
                 if (ProvSeleccionado != null && ProvSeleccionado.IdProveedor > 0)
                 {
-                    if (unasCotizaciones.Any(X => X.unProveedor == ProvSeleccionado))
+                    if (unasCotizaciones.Any(X => X.unProveedor.IdProveedor == ProvSeleccionado.IdProveedor))
                         return;
                     Cotizacion unaCotiz = new Cotizacion();
                     unaCotiz.MontoCotizado = Decimal.Parse(txtPrecioUn.Text);
