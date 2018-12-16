@@ -278,8 +278,7 @@ namespace ARTEC.GUI
             // 
             // grillaCotizacion
             // 
-            this.grillaCotizacion.AllowUserToAddRows = false;
-            this.grillaCotizacion.AllowUserToDeleteRows = false;
+            this.grillaCotizacion.AllowUserToOrderColumns = true;
             this.grillaCotizacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grillaCotizacion.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizacion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -304,7 +303,6 @@ namespace ARTEC.GUI
             this.grillaCotizacion.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizacion.Location = new System.Drawing.Point(9, 93);
             this.grillaCotizacion.Name = "grillaCotizacion";
-            this.grillaCotizacion.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

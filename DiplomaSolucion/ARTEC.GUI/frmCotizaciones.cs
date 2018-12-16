@@ -126,8 +126,13 @@ namespace ARTEC.GUI
             }
 
             grillaCotizacion.DataSource = null;
-            grillaCotizacion.DataSource = unasCotizaciones;
-            FormatearGrillaCotizacion();
+            if(unasCotizaciones.Count() > 0)
+            {
+                grillaCotizacion.DataSource = unasCotizaciones;
+                FormatearGrillaCotizacion();
+            }
+            
+            
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
             unosProveedoresSol = ManagerProveedor.ProveedorTraerTodosActivos();
@@ -241,6 +246,7 @@ namespace ARTEC.GUI
                     unaCotiz.unDetalleAsociado = new SolicDetalle();
                     unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
                     unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
+                    unaCotiz.unaPartidaDetalleIDs = new PartidaDetalle();
                     //unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
                     //if (unaCotiz.IdCotizacion > 0)
                     //{
@@ -470,17 +476,17 @@ namespace ARTEC.GUI
                 {
                     return;
                 }
-                else
+                else if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
                 {
-                    //Si hizo click en Quitar
-                    if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
-                    {
+                    ////Si hizo click en Quitar
+                    //if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
+                    //{
                         unasCotizaciones.RemoveAt(e.RowIndex);
                         //Regenero la grilla
                         grillaCotizacion.DataSource = null;
                         grillaCotizacion.DataSource = unasCotizaciones;
                         FormatearGrillaCotizacion();
-                    }
+                    //}
                 }
             }
             catch (Exception es)
