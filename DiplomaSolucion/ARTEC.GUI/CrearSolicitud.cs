@@ -35,7 +35,7 @@ namespace ARTEC.GUI
         int ContDetalles = 0;
         List<Usuario> unosUsuarios = new List<Usuario>();
         List<Agente> unosAgentesResp;
-        List<string> unosAdjuntos = new List<string>();
+        List<string> unosAdjuntosNombre = new List<string>();
         List<string> unosAdjuntosRutas = new List<string>();
         BLLTipoBien managerTipoBienAux = new BLLTipoBien();
         SolicDetalle unDetSolic;
@@ -70,11 +70,6 @@ namespace ARTEC.GUI
             string[] IdiomalabelX5 = { "Creación" };
             diclabelX5.Add("Idioma", IdiomalabelX5);
             this.labelX5.Tag = diclabelX5;
-
-            Dictionary<string, string[]> diclabelX6 = new Dictionary<string, string[]>();
-            string[] IdiomalabelX6 = { "Finalización" };
-            diclabelX6.Add("Idioma", IdiomalabelX6);
-            this.labelX6.Tag = diclabelX6;
 
             Dictionary<string, string[]> dicgboxBienes = new Dictionary<string, string[]>();
             string[] IdiomagboxBienes = { "Agregar Bienes" };
@@ -125,16 +120,6 @@ namespace ARTEC.GUI
             string[] IdiomagboxNotas = { "Notas" };
             dicgboxNotas.Add("Idioma", IdiomagboxNotas);
             this.gboxNotas.Tag = dicgboxNotas;
-
-            Dictionary<string, string[]> dicbtnSeleccionarArchivo = new Dictionary<string, string[]>();
-            string[] IdiomabtnSeleccionarArchivo = { "Seleccionar un Archivo" };
-            dicbtnSeleccionarArchivo.Add("Idioma", IdiomabtnSeleccionarArchivo);
-            this.btnSeleccionarArchivo.Tag = dicbtnSeleccionarArchivo;
-
-            Dictionary<string, string[]> dicbtnAdjuntar = new Dictionary<string, string[]>();
-            string[] IdiomabtnAdjuntar = { "Adjuntar" };
-            dicbtnAdjuntar.Add("Idioma", IdiomabtnAdjuntar);
-            this.btnAdjuntar.Tag = dicbtnAdjuntar;
 
             Dictionary<string, string[]> dicbtnNotas = new Dictionary<string, string[]>();
             string[] IdiomabtnNotas = { "Agregar" };
@@ -318,7 +303,9 @@ namespace ARTEC.GUI
             cboAsignado.ValueMember = "IdUsuario";
 
             //Cargar fecha Inicio
+            txtFechaInicio.MaxDate = DateTime.Today;
             txtFechaInicio.Text = DateTime.Today.ToString("d");
+            
 
             
         }
@@ -908,6 +895,13 @@ namespace ARTEC.GUI
                         return;
                     }
 
+                    //Verificar que haya un adjunto
+                    if (unosAdjuntosNombre.Count != 1)
+                    {
+                        MessageBox.Show("Por favor adjuntar el oficio de la solicitud realizada");
+                        return;
+                    }
+
                     unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
                     unaSolicitud.laDependencia = unaDep;
                     unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
@@ -920,18 +914,14 @@ namespace ARTEC.GUI
                     }
 
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                    if (ManagerSolicitud.SolicitudCrear(unaSolicitud))
+                    ManagerSolicitud.SolicitudCrear(unaSolicitud, unosAdjuntosRutas.First());
+                    //Guardo el archivo adjunto
+                    if (unosAdjuntosNombre.Count > 0)
                     {
-                        //Copio el archivo adjunto
-                        if (unosAdjuntos.Count > 0)
-                        {
-                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
-                        }
+                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntosNombre.First());
                         MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
                         this.Close();
                     }
-                        
-
                 }
             }
             catch (Exception es)
@@ -953,7 +943,7 @@ namespace ARTEC.GUI
         //Copiar el archivo
         private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
         {
-            if (unosAdjuntos.Count > 1)
+            if (unosAdjuntosNombre.Count > 0)
             {
                 MessageBox.Show("No puede adjuntarse más de 1 archivo");
             }
@@ -970,11 +960,11 @@ namespace ARTEC.GUI
                         pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
 
                         //Añado a la grilla el nombre del archivo
-                        unosAdjuntos.Add(NombreArchivo);
+                        unosAdjuntosNombre.Add(NombreArchivo);
                         unosAdjuntosRutas.Add(item);
 
                         lstAdjuntos.DataSource = null;
-                        lstAdjuntos.DataSource = unosAdjuntos;
+                        lstAdjuntos.DataSource = unosAdjuntosNombre;
 
                         //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
 
@@ -996,10 +986,10 @@ namespace ARTEC.GUI
                     //        pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
 
                     //        //Añado a la grilla el nombre del archivo
-                    //        unosAdjuntos.Add(NombreArchivo);
+                    //        unosAdjuntosNombre.Add(NombreArchivo);
 
                     //        lstAdjuntos.DataSource = null;
-                    //        lstAdjuntos.DataSource = unosAdjuntos;
+                    //        lstAdjuntos.DataSource = unosAdjuntosNombre;
 
                     //        //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
 
@@ -1020,6 +1010,17 @@ namespace ARTEC.GUI
             pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
         }
 
+
+        private void btnEliminarAdjunto_Click(object sender, EventArgs e)
+        {
+            if (lstAdjuntos.DataSource != null)
+            {
+                unosAdjuntosNombre.Clear();
+                unosAdjuntosRutas.Clear();
+                lstAdjuntos.DataSource = null;
+                lstAdjuntos.Items.Clear();
+            }
+        }
 
 
         private void btnNotas_Click(object sender, EventArgs e)
@@ -1185,6 +1186,8 @@ private void btnModificar_Click(object sender, EventArgs e)
     }
 
 }
+
+
 
 
 

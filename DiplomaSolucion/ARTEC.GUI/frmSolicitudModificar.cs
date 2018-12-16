@@ -43,6 +43,8 @@ namespace ARTEC.GUI
         BLLSolicitud ManagerSolicitud = new BLLSolicitud();
 
         List<string> unosAdjuntos = new List<string>();
+        List<string> unosAdjuntosRutas = new List<string>();
+        string NombreAdjunto;
         List<Nota> unasNotas = new List<Nota>();
         List<Nota> unasNotasAgregar = new List<Nota>();
         BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
@@ -344,9 +346,16 @@ namespace ARTEC.GUI
                     GrillaNotas.DataSource = unasNotas;
                     GrillaNotas.Columns[0].Visible = false;
                 }
-                    
+                
+                //Agrega el adjunto
+                NombreAdjunto = ManagerSolicitud.ObtenerNombreAdjuntoSolic(unaSolicitud.IdSolicitud);
+                string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                //Añado a la grilla el nombre del archivo
+                unosAdjuntos.Add(NombreAdjunto);
+                unosAdjuntosRutas.Add(RutaCompletaAdjunto);
 
-
+                lstAdjuntos.DataSource = null;
+                lstAdjuntos.DataSource = unosAdjuntos;
 
                 //Si está cancelada inhabilito la modificación y botones
                 if (unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
@@ -359,7 +368,6 @@ namespace ARTEC.GUI
                     btnBienAsignar.Enabled = false;
                     grillaDetalles.Enabled = false;
                     btnNotas.Enabled = false;
-                    btnAdjuntar.Enabled = false;
                     btnModifSolicitud.Enabled = false;
                     btnAsociarAgente.Enabled = false;
                 }
@@ -1149,9 +1157,9 @@ namespace ARTEC.GUI
         //Copiar el archivo
         private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
         {
-            if (unosAdjuntos.Count > 2)
+            if (unosAdjuntos.Count > 0)
             {
-                MessageBox.Show("No pueden adjuntarse más de 3 archivos");
+                MessageBox.Show("No puede adjuntarse más de 1 archivo");
             }
             else
             {
@@ -1163,13 +1171,11 @@ namespace ARTEC.GUI
                     string NombreArchivo = Path.GetFileName(item);
                     if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(item))
                     {
-                        //Copio el archivo
-                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(item, @"D:\Se pueden borrar sin problemas\ArchivosCopiados\" + NombreArchivo);
                         pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
 
                         //Añado a la grilla el nombre del archivo
                         unosAdjuntos.Add(NombreArchivo);
-
+                        unosAdjuntosRutas.Add(item);
                         lstAdjuntos.DataSource = null;
                         lstAdjuntos.DataSource = unosAdjuntos;
 
@@ -1192,7 +1198,17 @@ namespace ARTEC.GUI
             pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
         }
 
-
+        private void btnEliminarAdjunto_Click(object sender, EventArgs e)
+        {
+            if (lstAdjuntos.DataSource != null)
+            {
+                unosAdjuntos.Clear();
+                unosAdjuntosRutas.Clear();
+                lstAdjuntos.DataSource = null;
+                lstAdjuntos.Items.Clear();
+                NombreAdjunto = null;
+            }
+        }
 
         private void btnNotas_Click(object sender, EventArgs e)
         {
@@ -1365,7 +1381,6 @@ namespace ARTEC.GUI
                         btnBienAsignar.Enabled = false;
                         grillaDetalles.Enabled = false;
                         btnNotas.Enabled = false;
-                        btnAdjuntar.Enabled = false;
                         btnModifSolicitud.Enabled = false;
                         btnAsociarAgente.Enabled = false;
                     }
@@ -1415,6 +1430,13 @@ namespace ARTEC.GUI
                     return;
                 }
 
+                //Verificar que haya un adjunto
+                if (unosAdjuntos.Count != 1)
+                {
+                    MessageBox.Show("Por favor adjuntar el oficio de la solicitud realizada");
+                    return;
+                }
+
                 unaSolicitud.FechaInicio = Convert.ToDateTime(txtFechaInicio.Text);
                 unaSolicitud.UnaPrioridad = (Prioridad)cboPrioridad.SelectedItem;
                 unaSolicitud.Asignado = (Usuario)cboAsignado.SelectedItem;
@@ -1429,8 +1451,17 @@ namespace ARTEC.GUI
                 unosSolDetQuitarMod = unosSolicDetAgregarBKP.Where(d => !unaSolicitud.unosDetallesSolicitud.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetAgregarMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolicDetAgregarBKP.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetModifMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolDetAgregarMod.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
-                if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
-                    MessageBox.Show("Modificación realizada correctamente");
+                if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP, unosAdjuntosRutas.First()))
+                {
+                    //Guardo el archivo adjunto
+                    if (unosAdjuntos.Count > 0)
+                    {
+                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
+                        MessageBox.Show("Modificación realizada correctamente");
+                    }
+                    
+                }
+                    
             }
             //catch (InvalidOperationException es)
             //{
@@ -1490,6 +1521,21 @@ namespace ARTEC.GUI
         {
             _unfrmSolicitudModificarInst.Remove(this);
         }
+
+        private void lstAdjuntos_DoubleClick(object sender, EventArgs e)
+        {
+            if (NombreAdjunto != null)
+            {
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                proc.StartInfo.FileName = RutaCompletaAdjunto;
+                proc.Start();
+                proc.Close();
+            }
+            
+        }
+
+
 
 
 

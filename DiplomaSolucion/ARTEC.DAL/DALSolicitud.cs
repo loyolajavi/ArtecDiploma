@@ -9,13 +9,14 @@ using ARTEC.ENTIDADES;
 using ARTEC.FRAMEWORK;
 using System.Diagnostics;
 using ARTEC.FRAMEWORK.Servicios;
+using System.IO;
 
 namespace ARTEC.DAL
 {
     public class DALSolicitud
     {
 
-        public int SolicitudCrear(Solicitud laSolicitud)
+        public int SolicitudCrear(Solicitud laSolicitud, string unAdjuntoRutaCompleta)
         {
 
 
@@ -65,6 +66,21 @@ namespace ARTEC.DAL
                         FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelSolDetalleAgenteAgregar", parametersAgentes);
                     }
                 }
+
+                //Agregar adjunto
+                string NombreArchivo = Path.GetFileName(unAdjuntoRutaCompleta);
+                SqlParameter[] parametersRegistrarAdjunto = new SqlParameter[]
+			    {
+                    new SqlParameter("@Nombre", NombreArchivo)
+			    };
+                var ResAdj = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RegistrarAdjunto", parametersRegistrarAdjunto);
+                int IdAdjunto = Decimal.ToInt32(ResAdj);
+                SqlParameter[] parametersSolicAdj = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdSolicitud", IDDevuelto),
+                    new SqlParameter("@IdAdjunto", IdAdjunto)
+			    };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdjuntoSolicitud", parametersSolicAdj);
 
                 //Agregar Notas
                 if (laSolicitud.unasNotas.Count > 0)
@@ -331,7 +347,7 @@ namespace ARTEC.DAL
         }
 
 
-        public bool SolicitudModificar(Solicitud laSolicitud, List<SolicDetalle> unosSolDetQuitarMod, List<SolicDetalle> unosSolDetAgregarMod, List<SolicDetalle> unosSolDetModifMod, List<SolicDetalle> unosSolicDetAgregarBKP)
+        public bool SolicitudModificar(Solicitud laSolicitud, List<SolicDetalle> unosSolDetQuitarMod, List<SolicDetalle> unosSolDetAgregarMod, List<SolicDetalle> unosSolDetModifMod, List<SolicDetalle> unosSolicDetAgregarBKP, string unAdjuntoRutaCompleta)
         {
             DALTipoBien GestorCategoria = new DALTipoBien();
             DALCotizacion GestorCotizacion = new DALCotizacion();
@@ -353,6 +369,21 @@ namespace ARTEC.DAL
 			    };
 
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudModificar", parameters);
+
+                //Agregar adjunto
+                string NombreArchivo = Path.GetFileName(unAdjuntoRutaCompleta);
+                SqlParameter[] parametersRegistrarAdjunto = new SqlParameter[]
+			    {
+                    new SqlParameter("@Nombre", NombreArchivo)
+			    };
+                var ResAdj = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RegistrarAdjunto", parametersRegistrarAdjunto);
+                int IdAdjunto = Decimal.ToInt32(ResAdj);
+                SqlParameter[] parametersSolicAdj = new SqlParameter[]
+			    {
+                    new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                    new SqlParameter("@IdAdjunto", IdAdjunto)
+			    };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdjuntoSolicitud", parametersSolicAdj);
 
                 //Agregar Notas
                 if (laSolicitud.unasNotas.Count > 0)
@@ -987,5 +1018,32 @@ namespace ARTEC.DAL
         }
 
 
+
+        public string ObtenerNombreAdjuntoSolic(int IdSolicitud)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdSolicitud", IdSolicitud)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string ResRuta = FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "ObtenerNombreAdjuntoSolic", parameters).ToString();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return ResRuta;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

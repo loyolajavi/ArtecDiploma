@@ -15,7 +15,7 @@ namespace ARTEC.BLL
 
         DALSolicitud GestorSolicitud = new DALSolicitud();
 
-        public bool SolicitudCrear(Solicitud laSolicitud)
+        public int SolicitudCrear(Solicitud laSolicitud, string unAdjuntoRutaCompleta)
         {
             try
             {
@@ -23,9 +23,7 @@ namespace ARTEC.BLL
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 if (laSolicitud.unosDetallesSolicitud.Count == 0)
                     throw new InvalidOperationException("Por favor revisar que la Solicitud posea al menos un detalle");
-                if (GestorSolicitud.SolicitudCrear(laSolicitud) > 0)
-                    return true;
-                return false;
+                return GestorSolicitud.SolicitudCrear(laSolicitud, unAdjuntoRutaCompleta);
             }
             catch (Exception es)
             {
@@ -93,7 +91,7 @@ namespace ARTEC.BLL
 
 
 
-        public bool SolicitudModificar(Solicitud laSolicitud, List<SolicDetalle> unosSolDetQuitarMod, List<SolicDetalle> unosSolDetAgregarMod, List<SolicDetalle> unosSolDetModifMod, List<SolicDetalle> unosSolicDetAgregarBKP)
+        public bool SolicitudModificar(Solicitud laSolicitud, List<SolicDetalle> unosSolDetQuitarMod, List<SolicDetalle> unosSolDetAgregarMod, List<SolicDetalle> unosSolDetModifMod, List<SolicDetalle> unosSolicDetAgregarBKP, string unAdjuntoRutaCompleta)
         {
             try
             {
@@ -103,7 +101,7 @@ namespace ARTEC.BLL
                 if (DetallesCant < 1)
                     throw new InvalidOperationException("La solicitud debe quedar con al menos un detalle");
 
-                    if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP))
+                if (GestorSolicitud.SolicitudModificar(laSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP, unAdjuntoRutaCompleta))
                         return true;
                 return false;
             }
@@ -174,6 +172,19 @@ namespace ARTEC.BLL
             {
                 throw;
             }
+        }
+
+        public string ObtenerNombreAdjuntoSolic(int IdSolicitud)
+        {
+            try
+            {
+                return GestorSolicitud.ObtenerNombreAdjuntoSolic(IdSolicitud);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
     }
 }

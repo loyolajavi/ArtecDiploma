@@ -71,5 +71,47 @@ namespace ARTEC.FRAMEWORK.Servicios
         }
 
 
+        //public static void RegistrarAdjunto(int IdSolicitud, string unAdjuntoRutaCompleta, string unAdjuntoNombre)
+        //{
+            
+
+        //    try
+        //    {
+        //        string NombreConExtension;
+        //        string ext = Path.GetExtension(unAdjuntoRutaCompleta).ToLower();
+        //        NombreConExtension = unAdjuntoNombre + "." + ext;
+
+        //        SqlParameter[] parameters = new SqlParameter[]
+        //        {
+        //            new SqlParameter("@Nombre", unAdjuntoNombre)
+        //        };
+
+        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+        //        var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RegistrarAdjunto", parameters);
+        //        int IDDevuelto = Decimal.ToInt32(Resultado);
+        //        SqlParameter[] parametersSolicAdj = new SqlParameter[]
+        //        {
+        //            new SqlParameter("@IdSolicitud", IdSolicitud),
+        //            new SqlParameter("@IdAdjunto", IDDevuelto)
+        //        };
+        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdjuntoSolicitud", parametersSolicAdj);
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+        //    }
+
+        //}
+
+
+
     }
 }

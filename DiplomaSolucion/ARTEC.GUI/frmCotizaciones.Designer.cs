@@ -30,9 +30,11 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCotizaciones));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblCuerpo = new DevComponents.DotNetBar.LabelX();
             this.lblAsunto = new DevComponents.DotNetBar.LabelX();
@@ -46,9 +48,10 @@ namespace ARTEC.GUI
             this.lblProvSol = new DevComponents.DotNetBar.LabelX();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.grillaCotizacion = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
             this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtPrecioUn = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.grillaCotizacion = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.lblPrecioUn = new DevComponents.DotNetBar.LabelX();
             this.lblProveedor = new DevComponents.DotNetBar.LabelX();
@@ -67,7 +70,6 @@ namespace ARTEC.GUI
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProvSolic)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -205,14 +207,14 @@ namespace ARTEC.GUI
             // GrillaProvSolic
             // 
             this.GrillaProvSolic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaProvSolic.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaProvSolic.DefaultCellStyle = dataGridViewCellStyle4;
             this.GrillaProvSolic.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaProvSolic.Location = new System.Drawing.Point(3, 64);
             this.GrillaProvSolic.Name = "GrillaProvSolic";
@@ -229,13 +231,7 @@ namespace ARTEC.GUI
             this.btnSolicitar.Size = new System.Drawing.Size(75, 23);
             this.btnSolicitar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSolicitar.TabIndex = 50;
-            //this.btnSolicitar.Tag = new string[] { "Cotizacion Solicitar" };
-            Dictionary<string, string[]> dicbtnSolicitar = new Dictionary<string, string[]>();
-            string[] PerbtnSolicitar = { "Cotizacion Solicitar" };
-            dicbtnSolicitar.Add("Permisos", PerbtnSolicitar);
-            string[] IdiomabtnSolicitar = { "Solicitar" };
-            dicbtnSolicitar.Add("Idioma", IdiomabtnSolicitar);
-            this.btnSolicitar.Tag = dicbtnSolicitar;
+            this.btnSolicitar.Tag = ((object)(resources.GetObject("btnSolicitar.Tag")));
             this.btnSolicitar.Text = "btnSolicitar";
             this.btnSolicitar.Click += new System.EventHandler(this.btnSolicitar_Click);
             // 
@@ -264,10 +260,10 @@ namespace ARTEC.GUI
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.grillaCotizacion);
             this.tabPage1.Controls.Add(this.btnConfirmar);
             this.tabPage1.Controls.Add(this.txtProveedor);
             this.tabPage1.Controls.Add(this.txtPrecioUn);
-            this.tabPage1.Controls.Add(this.grillaCotizacion);
             this.tabPage1.Controls.Add(this.btnAgregar);
             this.tabPage1.Controls.Add(this.lblPrecioUn);
             this.tabPage1.Controls.Add(this.lblProveedor);
@@ -279,6 +275,60 @@ namespace ARTEC.GUI
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Agregar Cotización";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // grillaCotizacion
+            // 
+            this.grillaCotizacion.AllowUserToAddRows = false;
+            this.grillaCotizacion.AllowUserToDeleteRows = false;
+            this.grillaCotizacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grillaCotizacion.BackgroundColor = System.Drawing.Color.White;
+            this.grillaCotizacion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grillaCotizacion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.grillaCotizacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaCotizacion.DefaultCellStyle = dataGridViewCellStyle2;
+            this.grillaCotizacion.EnableHeadersVisualStyles = false;
+            this.grillaCotizacion.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.grillaCotizacion.Location = new System.Drawing.Point(9, 93);
+            this.grillaCotizacion.Name = "grillaCotizacion";
+            this.grillaCotizacion.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grillaCotizacion.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.grillaCotizacion.Size = new System.Drawing.Size(487, 194);
+            this.grillaCotizacion.TabIndex = 93;
+            this.grillaCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizacion_CellClick);
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnConfirmar.Location = new System.Drawing.Point(502, 252);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(87, 35);
+            this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConfirmar.TabIndex = 92;
+            this.btnConfirmar.Tag = ((object)(resources.GetObject("btnConfirmar.Tag")));
+            this.btnConfirmar.Text = "btnConfirmar";
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // txtProveedor
             // 
@@ -314,24 +364,6 @@ namespace ARTEC.GUI
             this.txtPrecioUn.Size = new System.Drawing.Size(121, 22);
             this.txtPrecioUn.TabIndex = 63;
             this.vldFrmCotozacionAgreCot.SetValidator1(this.txtPrecioUn, this.requiredFieldValidator5);
-            // 
-            // grillaCotizacion
-            // 
-            this.grillaCotizacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaCotizacion.DefaultCellStyle = dataGridViewCellStyle5;
-            this.grillaCotizacion.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.grillaCotizacion.Location = new System.Drawing.Point(7, 102);
-            this.grillaCotizacion.Name = "grillaCotizacion";
-            this.grillaCotizacion.Size = new System.Drawing.Size(480, 185);
-            this.grillaCotizacion.TabIndex = 66;
-            this.grillaCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizacion_CellClick);
             // 
             // btnAgregar
             // 
@@ -456,25 +488,6 @@ namespace ARTEC.GUI
             // 
             this.highlighter3.ContainerControl = this;
             // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnConfirmar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnConfirmar.Location = new System.Drawing.Point(502, 252);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(87, 35);
-            this.btnConfirmar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnConfirmar.TabIndex = 92;
-            //this.btnConfirmar.Tag = new string[] { "Cotizacion Agregar" };
-            Dictionary<string, string[]> dicbtnConfirmar = new Dictionary<string, string[]>();
-            string[] PerbtnConfirmar = { "Cotizacion Agregar" };
-            dicbtnConfirmar.Add("Permisos", PerbtnConfirmar);
-            string[] IdiomabtnConfirmar = { "Confirmar" };
-            dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
-            this.btnConfirmar.Tag = dicbtnConfirmar;
-            this.btnConfirmar.Text = "btnConfirmar";
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
-            // 
             // frmCotizaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,7 +525,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtProveedor;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboProveedor;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPrecioUn;
-        private DevComponents.DotNetBar.Controls.DataGridViewX grillaCotizacion;
         private DevComponents.DotNetBar.ButtonX btnAgregar;
         private DevComponents.DotNetBar.LabelX lblPrecioUn;
         private DevComponents.DotNetBar.LabelX lblProveedor;
@@ -535,6 +547,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator5;
         private DevComponents.DotNetBar.ButtonX btnConfirmar;
+        private DevComponents.DotNetBar.Controls.DataGridViewX grillaCotizacion;
 
     }
 }

@@ -24,10 +24,12 @@ namespace ARTEC.GUI
         //Evento que llama al Delegado
         public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
-        List<Cotizacion> unasCotizaciones;
+        List<Cotizacion> unasCotizaciones = new List<Cotizacion>();
         List<Cotizacion> unasCotizacionesBKP = new List<Cotizacion>();
         List<Proveedor> unosProveedores = new List<Proveedor>();
+        List<Proveedor> unosProveedoresSol = new List<Proveedor>();
         Proveedor ProvSeleccionado;
+        Proveedor ProvSeleccionadoSol;
         BLLProveedor ManagerProveedor = new BLLProveedor();
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
         SolicDetalle unDetSolic = new SolicDetalle();
@@ -128,6 +130,7 @@ namespace ARTEC.GUI
             FormatearGrillaCotizacion();
 
             unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
+            unosProveedoresSol = ManagerProveedor.ProveedorTraerTodosActivos();
 
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
@@ -208,7 +211,8 @@ namespace ARTEC.GUI
                     ProvSeleccionado = new Proveedor();
                     ProvSeleccionado = (Proveedor)cbo2.SelectedItem;
                     this.txtProveedor.TextChanged -= new System.EventHandler(this.txtProveedor_TextChanged);
-                    txtProveedor.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    //txtProveedor.Text = cbo2.GetItemText(cbo2.SelectedItem);
+                    txtProveedor.Text = ProvSeleccionado.AliasProv;
                     this.txtProveedor.TextChanged += new System.EventHandler(this.txtProveedor_TextChanged);
                     txtProveedor.SelectionStart = txtProveedor.Text.Length + 1;
                     //Es una validación para cuando no se escribió el bien y se hizo click en agregar detalle, entonces dps de escribir el bien valido de nuevo para que se vaya el msj de advertencia
@@ -224,25 +228,40 @@ namespace ARTEC.GUI
             if (!vldFrmCotozacionAgreCot.Validate())
                 return;
 
-            Cotizacion unaCotiz = new Cotizacion();
-            unaCotiz.MontoCotizado = Decimal.Parse(txtPrecioUn.Text);
-            unaCotiz.FechaCotizacion = DateTime.Today;
-            unaCotiz.unProveedor = ProvSeleccionado;
-            unaCotiz.unDetalleAsociado = new SolicDetalle();
-            unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
-            unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
-            //unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
-            //if (unaCotiz.IdCotizacion > 0)
-            //{
-                //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
-                unasCotizaciones.Add(unaCotiz);
-                grillaCotizacion.DataSource = null;
-                grillaCotizacion.DataSource = unasCotizaciones;
-                FormatearGrillaCotizacion();
+            try
+            {
+                if (ProvSeleccionado != null && ProvSeleccionado.IdProveedor > 0)
+                {
+                    if (unasCotizaciones.Any(X => X.unProveedor == ProvSeleccionado))
+                        return;
+                    Cotizacion unaCotiz = new Cotizacion();
+                    unaCotiz.MontoCotizado = Decimal.Parse(txtPrecioUn.Text);
+                    unaCotiz.FechaCotizacion = DateTime.Today;
+                    unaCotiz.unProveedor = ProvSeleccionado;
+                    unaCotiz.unDetalleAsociado = new SolicDetalle();
+                    unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
+                    unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
+                    //unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);
+                    //if (unaCotiz.IdCotizacion > 0)
+                    //{
+                    //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
+                    unasCotizaciones.Add(unaCotiz);
+                    grillaCotizacion.DataSource = null;
+                    grillaCotizacion.DataSource = unasCotizaciones;
+                    FormatearGrillaCotizacion();
 
-                ////Actualiza SolicDetalles en frmModificarSolicitud por Evento
-                //this.EventoActualizarDetalles(unasCotizaciones);
-            //}
+                    ////Actualiza SolicDetalles en frmModificarSolicitud por Evento
+                    //this.EventoActualizarDetalles(unasCotizaciones);
+                    //}
+                }
+                
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnAgregar_Click");
+                MessageBox.Show("Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
         }
 
 
@@ -253,7 +272,7 @@ namespace ARTEC.GUI
             {
 
                 List<Proveedor> resProvSol = new List<Proveedor>();
-                resProvSol = unosProveedores;
+                resProvSol = unosProveedoresSol;
 
                 List<string> Palabras = new List<string>();
                 Palabras = FRAMEWORK.Servicios.ManejaCadenas.SepararTexto(txtProvSol.Text, ' ');
@@ -306,8 +325,8 @@ namespace ARTEC.GUI
                 if (cboProvSol.SelectedIndex > -1)
                 {
                     ComboBox cbo3 = (ComboBox)sender;
-                    ProvSeleccionado = new Proveedor();
-                    ProvSeleccionado = (Proveedor)cbo3.SelectedItem;
+                    ProvSeleccionadoSol = new Proveedor();
+                    ProvSeleccionadoSol = (Proveedor)cbo3.SelectedItem;
                     this.txtProvSol.TextChanged -= new System.EventHandler(this.txtProvSol_TextChanged);
                     txtProvSol.Text = cbo3.GetItemText(cbo3.SelectedItem);
                     this.txtProvSol.TextChanged += new System.EventHandler(this.txtProvSol_TextChanged);
@@ -415,26 +434,6 @@ namespace ARTEC.GUI
         }
 
 
-        private void grillaCotizacion_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //Si se hizo click en el header, salir
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-            {
-                return;
-            }
-            else
-            {
-                //Si hizo click en Quitar
-                if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
-                {
-                    unasCotizaciones.RemoveAt(e.RowIndex);
-                    //Regenero la grilla
-                    grillaCotizacion.DataSource = null;
-                    grillaCotizacion.DataSource = unasCotizaciones;
-                    FormatearGrillaCotizacion();
-                }
-            }
-        }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
@@ -459,6 +458,35 @@ namespace ARTEC.GUI
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnConfirmar_Click");
                 MessageBox.Show("Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+        }
+
+        private void grillaCotizacion_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Si se hizo click en el header, salir
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                {
+                    return;
+                }
+                else
+                {
+                    //Si hizo click en Quitar
+                    if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
+                    {
+                        unasCotizaciones.RemoveAt(e.RowIndex);
+                        //Regenero la grilla
+                        grillaCotizacion.DataSource = null;
+                        grillaCotizacion.DataSource = unasCotizaciones;
+                        FormatearGrillaCotizacion();
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - grillaCotizacion_CellClick");
+                MessageBox.Show("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 
