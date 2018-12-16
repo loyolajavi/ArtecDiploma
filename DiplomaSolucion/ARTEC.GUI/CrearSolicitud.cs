@@ -82,7 +82,7 @@ namespace ARTEC.GUI
             this.lblCantidad.Tag = diclblCantidad;
 
             Dictionary<string, string[]> dicgboxAsociados = new Dictionary<string, string[]>();
-            string[] IdiomagboxAsociados = { "Agentes Asociados" };
+            string[] IdiomagboxAsociados = { "Agentes asociados" };
             dicgboxAsociados.Add("Idioma", IdiomagboxAsociados);
             this.gboxAsociados.Tag = dicgboxAsociados;
 
@@ -90,6 +90,11 @@ namespace ARTEC.GUI
             string[] IdiomalabelX2 = { "Agente" };
             diclabelX2.Add("Idioma", IdiomalabelX2);
             this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> dicbtnNuevoDetalle = new Dictionary<string, string[]>();
+            string[] IdiomabtnNuevoDetalle = { "Nuevo Detalle" };
+            dicbtnNuevoDetalle.Add("Idioma", IdiomabtnNuevoDetalle);
+            this.btnNuevoDetalle.Tag = dicbtnNuevoDetalle;
 
             Dictionary<string, string[]> dicbtnAsociarAgente = new Dictionary<string, string[]>();
             string[] IdiomabtnAsociarAgente = { "Asociar" };
@@ -100,6 +105,11 @@ namespace ARTEC.GUI
             string[] IdiomatxtAgregarDetalle = { "Agregar" };
             dictxtAgregarDetalle.Add("Idioma", IdiomatxtAgregarDetalle);
             this.btnAgregarDetalle.Tag = dictxtAgregarDetalle;
+
+            Dictionary<string, string[]> dicbtnEliminarAdjunto = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminarAdjunto = { "Quitar" };
+            dicbtnEliminarAdjunto.Add("Idioma", IdiomabtnEliminarAdjunto);
+            this.btnEliminarAdjunto.Tag = dicbtnEliminarAdjunto;
 
             Dictionary<string, string[]> diclabelX8 = new Dictionary<string, string[]>();
             string[] IdiomalabelX8 = { "Estado" };

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -19,6 +20,25 @@ namespace ARTEC.GUI
         public GrillaAsigBuscarCU()
         {
             InitializeComponent();
+            Dictionary<string, string[]> diclblNroAsignacion = new Dictionary<string, string[]>();
+            string[] IdiomalblNroAsignacion = { "Asignación" };
+            diclblNroAsignacion.Add("Idioma", IdiomalblNroAsignacion);
+            this.lblNroAsignacion.Tag = diclblNroAsignacion;
+
+            Dictionary<string, string[]> diclblNroSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolicitud = { "Solicitud" };
+            diclblNroSolicitud.Add("Idioma", IdiomalblNroSolicitud);
+            this.lblNroSolicitud.Tag = diclblNroSolicitud;
+
+            Dictionary<string, string[]> diclblFecha = new Dictionary<string, string[]>();
+            string[] IdiomalblFecha = { "Fecha" };
+            diclblFecha.Add("Idioma", IdiomalblFecha);
+            this.lblFecha.Tag = diclblFecha;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
         }
 
 
@@ -65,6 +85,12 @@ namespace ARTEC.GUI
         {
             if (this.ClickEnPanel != null)
                 this.ClickEnPanel(this, e);
+        }
+
+        private void GrillaAsigBuscarCU_Load(object sender, EventArgs e)
+        {
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
         }
 
 

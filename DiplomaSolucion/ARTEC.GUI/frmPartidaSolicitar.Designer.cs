@@ -29,9 +29,9 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartidaSolicitar));
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -55,13 +55,13 @@ namespace ARTEC.GUI
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.vldfrmPartidaSolicitarGenerarPar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.vldFrmPartidaSolicitarCaja = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicitudes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaSolicDetalles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
@@ -100,6 +100,7 @@ namespace ARTEC.GUI
             this.txtDep.Size = new System.Drawing.Size(315, 22);
             this.txtDep.TabIndex = 22;
             this.txtDep.TextChanged += new System.EventHandler(this.txtDep_TextChanged);
+            this.txtDep.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDep_KeyPress);
             // 
             // cboDep
             // 
@@ -147,6 +148,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
             this.txtNroSolicitud.TabIndex = 25;
             this.vldFrmPartidaSolicitarBuscar.SetValidator1(this.txtNroSolicitud, this.regularExpressionValidator1);
+            this.txtNroSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroSolicitud_KeyPress);
             // 
             // btnBuscar
             // 
@@ -166,14 +168,14 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.AllowUserToDeleteRows = false;
             this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle3;
             this.grillaSolicitudes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicitudes.Location = new System.Drawing.Point(12, 54);
             this.grillaSolicitudes.Name = "grillaSolicitudes";
@@ -188,14 +190,14 @@ namespace ARTEC.GUI
             this.grillaSolicDetalles.AllowUserToDeleteRows = false;
             this.grillaSolicDetalles.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicDetalles.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicDetalles.DefaultCellStyle = dataGridViewCellStyle2;
             this.grillaSolicDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicDetalles.Location = new System.Drawing.Point(12, 206);
             this.grillaSolicDetalles.Name = "grillaSolicDetalles";
@@ -223,14 +225,14 @@ namespace ARTEC.GUI
             this.grillaCotizaciones.AllowUserToDeleteRows = false;
             this.grillaCotizaciones.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle1;
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizaciones.Location = new System.Drawing.Point(12, 380);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
@@ -394,6 +396,12 @@ namespace ARTEC.GUI
             this.vldfrmPartidaSolicitarGenerarPar.ErrorProvider = this.errorProvider2;
             this.vldfrmPartidaSolicitarGenerarPar.Highlighter = this.highlighter2;
             // 
+            // regularExpressionValidator2
+            // 
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            // 
             // errorProvider2
             // 
             this.errorProvider2.ContainerControl = this;
@@ -403,17 +411,17 @@ namespace ARTEC.GUI
             // 
             this.highlighter2.ContainerControl = this;
             // 
-            // regularExpressionValidator2
-            // 
-            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
-            // 
             // vldFrmPartidaSolicitarCaja
             // 
             this.vldFrmPartidaSolicitarCaja.ContainerControl = this.btnGenerarCaja;
             this.vldFrmPartidaSolicitarCaja.ErrorProvider = this.errorProvider3;
             this.vldFrmPartidaSolicitarCaja.Highlighter = this.highlighter3;
+            // 
+            // regularExpressionValidator3
+            // 
+            this.regularExpressionValidator3.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator3.ValidationExpression = "^[0-9]{1,9}$";
             // 
             // errorProvider3
             // 
@@ -423,12 +431,6 @@ namespace ARTEC.GUI
             // highlighter3
             // 
             this.highlighter3.ContainerControl = this;
-            // 
-            // regularExpressionValidator3
-            // 
-            this.regularExpressionValidator3.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator3.ValidationExpression = "^[0-9]{1,9}$";
             // 
             // frmPartidaSolicitar
             // 

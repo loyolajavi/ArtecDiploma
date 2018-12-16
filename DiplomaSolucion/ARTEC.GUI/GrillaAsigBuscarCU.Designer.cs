@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitulos = new DevComponents.DotNetBar.PanelEx();
             this.txtFecha = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.lblFecha = new DevComponents.DotNetBar.LabelX();
@@ -138,7 +138,7 @@
             this.txtNroSolicitud.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
-            this.txtNroSolicitud.Location = new System.Drawing.Point(262, 3);
+            this.txtNroSolicitud.Location = new System.Drawing.Point(267, 3);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(70, 20);
@@ -153,7 +153,7 @@
             this.lblNroAsignacion.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNroAsignacion.Location = new System.Drawing.Point(3, 3);
             this.lblNroAsignacion.Name = "lblNroAsignacion";
-            this.lblNroAsignacion.Size = new System.Drawing.Size(91, 22);
+            this.lblNroAsignacion.Size = new System.Drawing.Size(96, 22);
             this.lblNroAsignacion.TabIndex = 57;
             this.lblNroAsignacion.Text = "lblNroAsignacion";
             // 
@@ -164,7 +164,7 @@
             // 
             this.lblNroSolicitud.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblNroSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNroSolicitud.Location = new System.Drawing.Point(176, 3);
+            this.lblNroSolicitud.Location = new System.Drawing.Point(178, 3);
             this.lblNroSolicitud.Name = "lblNroSolicitud";
             this.lblNroSolicitud.Size = new System.Drawing.Size(91, 22);
             this.lblNroSolicitud.TabIndex = 58;
@@ -222,14 +222,14 @@
             this.GrillaBienes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GrillaBienes.BackgroundColor = System.Drawing.Color.White;
             this.GrillaBienes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBienes.DefaultCellStyle = dataGridViewCellStyle4;
             this.GrillaBienes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.GrillaBienes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBienes.Location = new System.Drawing.Point(0, 57);
@@ -248,6 +248,7 @@
             this.Controls.Add(this.pnlTitulos);
             this.Name = "GrillaAsigBuscarCU";
             this.Size = new System.Drawing.Size(485, 150);
+            this.Load += new System.EventHandler(this.GrillaAsigBuscarCU_Load);
             this.pnlTitulos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBienes)).EndInit();

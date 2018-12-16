@@ -116,6 +116,11 @@ namespace ARTEC.GUI
             dictxtNroSolicitud.Add("Idioma", IdiomatxtNroSolicitud);
             this.txtNroSolicitud.Tag = dictxtNroSolicitud;
 
+            Dictionary<string, string[]> dicfrmPartidaSolicitar = new Dictionary<string, string[]>();
+            string[] IdiomafrmPartidaSolicitar = { "Crear Partida" };
+            dicfrmPartidaSolicitar.Add("Idioma", IdiomafrmPartidaSolicitar);
+            this.Tag = dicfrmPartidaSolicitar;
+
             Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
             string[] IdiomalblDependencia = { "Dependencia" };
             diclblDependencia.Add("Idioma", IdiomalblDependencia);
@@ -454,7 +459,7 @@ namespace ARTEC.GUI
                 if (!vldfrmPartidaSolicitarGenerarPar.Validate())
                     return;
 
-                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Any(Y => Y.Seleccionada == true)) && decimal.Parse(txtMontoTotal.Text) > 0)
+                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Count(Y => Y.Seleccionada == true) > 2) && decimal.Parse(txtMontoTotal.Text) > 0)
                 {
                     if (GenerarPartidaGlobal(false))
                         MessageBox.Show("Solicitud de Partida generada correctamente");
@@ -564,7 +569,12 @@ namespace ARTEC.GUI
         {
             BLLSolicitud ManagerSolicitud = new BLLSolicitud();
             ListaSolicitudes = new List<Solicitud>();
-
+            grillaSolicitudes.DataSource = null;
+            ListaSolicitudes.Clear();
+            grillaSolicDetalles.DataSource = null;
+            grillaCotizaciones.DataSource = null;
+            ListaSolicDet.Clear();
+            ListaCotiz.Clear();
 
             try
             {
@@ -803,6 +813,22 @@ namespace ARTEC.GUI
             if (PartidaAsociada != null && PartidaAsociada.IdPartida > 0)
                 return true;
             return false;
+        }
+
+        private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnBuscar_Click(this, new EventArgs());
+            }
+        }
+
+        private void txtDep_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                btnBuscar_Click(this, new EventArgs());
+            }
         }
 
 

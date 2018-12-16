@@ -44,10 +44,10 @@ namespace ARTEC.GUI
             this.lblNroPartida = new DevComponents.DotNetBar.LabelX();
             this.txtNroPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.vldFrmPartidaBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
-            this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -82,7 +82,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroSolicitud.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroSolicitud.ForeColor = System.Drawing.Color.Black;
-            this.txtNroSolicitud.Location = new System.Drawing.Point(107, 31);
+            this.txtNroSolicitud.Location = new System.Drawing.Point(111, 31);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
@@ -98,7 +98,7 @@ namespace ARTEC.GUI
             this.lblIdSolicitud.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIdSolicitud.Location = new System.Drawing.Point(0, 36);
             this.lblIdSolicitud.Name = "lblIdSolicitud";
-            this.lblIdSolicitud.Size = new System.Drawing.Size(102, 17);
+            this.lblIdSolicitud.Size = new System.Drawing.Size(110, 17);
             this.lblIdSolicitud.TabIndex = 55;
             this.lblIdSolicitud.Text = "lblIdSolicitud";
             // 
@@ -106,7 +106,7 @@ namespace ARTEC.GUI
             // 
             this.btnBuscar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnBuscar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnBuscar.Location = new System.Drawing.Point(107, 115);
+            this.btnBuscar.Location = new System.Drawing.Point(111, 115);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 22);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -124,7 +124,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtIdPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtIdPartida.ForeColor = System.Drawing.Color.Black;
-            this.txtIdPartida.Location = new System.Drawing.Point(107, 3);
+            this.txtIdPartida.Location = new System.Drawing.Point(111, 3);
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.PreventEnterBeep = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
@@ -140,7 +140,7 @@ namespace ARTEC.GUI
             this.lblIdPartida.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIdPartida.Location = new System.Drawing.Point(0, 8);
             this.lblIdPartida.Name = "lblIdPartida";
-            this.lblIdPartida.Size = new System.Drawing.Size(102, 17);
+            this.lblIdPartida.Size = new System.Drawing.Size(110, 17);
             this.lblIdPartida.TabIndex = 52;
             this.lblIdPartida.Text = "lblIdPartida";
             // 
@@ -153,7 +153,7 @@ namespace ARTEC.GUI
             this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDependencia.Location = new System.Drawing.Point(0, 64);
             this.lblDependencia.Name = "lblDependencia";
-            this.lblDependencia.Size = new System.Drawing.Size(91, 17);
+            this.lblDependencia.Size = new System.Drawing.Size(110, 17);
             this.lblDependencia.TabIndex = 49;
             this.lblDependencia.Text = "lblDependencia";
             // 
@@ -167,7 +167,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
-            this.txtDependencia.Location = new System.Drawing.Point(107, 59);
+            this.txtDependencia.Location = new System.Drawing.Point(111, 59);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(315, 22);
@@ -182,7 +182,7 @@ namespace ARTEC.GUI
             this.cboDep.ForeColor = System.Drawing.Color.Black;
             this.cboDep.FormattingEnabled = true;
             this.cboDep.ItemHeight = 16;
-            this.cboDep.Location = new System.Drawing.Point(107, 59);
+            this.cboDep.Location = new System.Drawing.Point(111, 59);
             this.cboDep.MaxDropDownItems = 10;
             this.cboDep.Name = "cboDep";
             this.cboDep.Size = new System.Drawing.Size(315, 22);
@@ -200,7 +200,7 @@ namespace ARTEC.GUI
             this.lblNroPartida.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNroPartida.Location = new System.Drawing.Point(0, 92);
             this.lblNroPartida.Name = "lblNroPartida";
-            this.lblNroPartida.Size = new System.Drawing.Size(91, 17);
+            this.lblNroPartida.Size = new System.Drawing.Size(110, 17);
             this.lblNroPartida.TabIndex = 60;
             this.lblNroPartida.Text = "lblNroPartida";
             // 
@@ -214,7 +214,7 @@ namespace ARTEC.GUI
             this.txtNroPartida.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNroPartida.DisabledBackColor = System.Drawing.Color.White;
             this.txtNroPartida.ForeColor = System.Drawing.Color.Black;
-            this.txtNroPartida.Location = new System.Drawing.Point(107, 87);
+            this.txtNroPartida.Location = new System.Drawing.Point(111, 87);
             this.txtNroPartida.Name = "txtNroPartida";
             this.txtNroPartida.PreventEnterBeep = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
@@ -226,14 +226,12 @@ namespace ARTEC.GUI
             this.vldFrmPartidaBuscar.ErrorProvider = this.errorProvider1;
             this.vldFrmPartidaBuscar.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
+            // regularExpressionValidator2
             // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
+            this.regularExpressionValidator2.EmptyValueIsValid = true;
+            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
             // 
             // regularExpressionValidator1
             // 
@@ -242,12 +240,14 @@ namespace ARTEC.GUI
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
             // 
-            // regularExpressionValidator2
+            // errorProvider1
             // 
-            this.regularExpressionValidator2.EmptyValueIsValid = true;
-            this.regularExpressionValidator2.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator2.ValidationExpression = "^[0-9]{1,9}$";
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
             // 
             // txtResBusqueda
             // 

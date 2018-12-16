@@ -84,6 +84,11 @@ namespace ARTEC.GUI
             dicbtnModifSolicitud.Add("Idioma", IdiomabtnModifSolicitud);
             this.btnModifSolicitud.Tag = dicbtnModifSolicitud;
 
+            Dictionary<string, string[]> dicbtnEliminarAdjunto = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminarAdjunto = { "Quitar" };
+            dicbtnEliminarAdjunto.Add("Idioma", IdiomabtnEliminarAdjunto);
+            this.btnEliminarAdjunto.Tag = dicbtnEliminarAdjunto;
+
             Dictionary<string, string[]> dicbtnSolicitarPartida = new Dictionary<string, string[]>();
             string[] PerbtnSolicitarPartida = { "Partida Crear" };
             dicbtnSolicitarPartida.Add("Permisos", PerbtnSolicitarPartida);
@@ -102,6 +107,111 @@ namespace ARTEC.GUI
             string[] IdiomatxtCantBien = { "Ingrese la cantidad" };
             dictxtCantBien.Add("Idioma", IdiomatxtCantBien);
             this.txtCantBien.Tag = dictxtCantBien;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Dependencia" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclblAgenteResponsable = new Dictionary<string, string[]>();
+            string[] IdiomalblAgenteResponsable = { "Responsable" };
+            diclblAgenteResponsable.Add("Idioma", IdiomalblAgenteResponsable);
+            this.lblAgenteResponsable.Tag = diclblAgenteResponsable;
+
+            Dictionary<string, string[]> diclblDesvinculado = new Dictionary<string, string[]>();
+            string[] IdiomalblDesvinculado = { "Desvinculado" };
+            diclblDesvinculado.Add("Idioma", IdiomalblDesvinculado);
+            this.lblDesvinculado.Tag = diclblDesvinculado;
+
+            Dictionary<string, string[]> diclabelX5 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX5 = { "Creación" };
+            diclabelX5.Add("Idioma", IdiomalabelX5);
+            this.labelX5.Tag = diclabelX5;
+
+            Dictionary<string, string[]> diclabelX6 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX6 = { "Finalización" };
+            diclabelX6.Add("Idioma", IdiomalabelX6);
+            this.labelX6.Tag = diclabelX6;
+
+            Dictionary<string, string[]> dicgboxBienes = new Dictionary<string, string[]>();
+            string[] IdiomagboxBienes = { "Agregar Bienes" };
+            dicgboxBienes.Add("Idioma", IdiomagboxBienes);
+            this.gboxBienes.Tag = dicgboxBienes;
+
+            Dictionary<string, string[]> dicbtnNuevoDetalle = new Dictionary<string, string[]>();
+            string[] IdiomabtnNuevoDetalle = { "Nuevo Detalle" };
+            dicbtnNuevoDetalle.Add("Idioma", IdiomabtnNuevoDetalle);
+            this.btnNuevoDetalle.Tag = dicbtnNuevoDetalle;
+
+            Dictionary<string, string[]> diclblCantidad = new Dictionary<string, string[]>();
+            string[] IdiomalblCantidad = { "Cantidad" };
+            diclblCantidad.Add("Idioma", IdiomalblCantidad);
+            this.lblCantidad.Tag = diclblCantidad;
+
+            Dictionary<string, string[]> dicgboxAsociados = new Dictionary<string, string[]>();
+            string[] IdiomagboxAsociados = { "Agentes asociados" };
+            dicgboxAsociados.Add("Idioma", IdiomagboxAsociados);
+            this.gboxAsociados.Tag = dicgboxAsociados;
+
+            Dictionary<string, string[]> dictxtAgregarDetalle = new Dictionary<string, string[]>();
+            string[] IdiomatxtAgregarDetalle = { "Agregar" };
+            dictxtAgregarDetalle.Add("Idioma", IdiomatxtAgregarDetalle);
+            this.btnAgregarDetalle.Tag = dictxtAgregarDetalle;
+
+            Dictionary<string, string[]> diclabelX2 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX2 = { "Agente" };
+            diclabelX2.Add("Idioma", IdiomalabelX2);
+            this.labelX2.Tag = diclabelX2;
+
+            Dictionary<string, string[]> dicbtnAsociarAgente = new Dictionary<string, string[]>();
+            string[] IdiomabtnAsociarAgente = { "Asociar" };
+            dicbtnAsociarAgente.Add("Idioma", IdiomabtnAsociarAgente);
+            this.btnAsociarAgente.Tag = dicbtnAsociarAgente;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Estado" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnAgregarDetalle = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregarDetalle = { "Agregar" };
+            dicbtnAgregarDetalle.Add("Idioma", IdiomabtnAgregarDetalle);
+            this.btnAgregarDetalle.Tag = dicbtnAgregarDetalle;
+
+            Dictionary<string, string[]> diclabelX8 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX8 = { "Estado Solicitud" };
+            diclabelX8.Add("Idioma", IdiomalabelX8);
+            this.labelX8.Tag = diclabelX8;
+
+            Dictionary<string, string[]> diclabelX9 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX9 = { "Prioridad" };
+            diclabelX9.Add("Idioma", IdiomalabelX9);
+            this.labelX9.Tag = diclabelX9;
+
+            Dictionary<string, string[]> diclabelX10 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX10 = { "Asignado a" };
+            diclabelX10.Add("Idioma", IdiomalabelX10);
+            this.labelX10.Tag = diclabelX10;
+
+            Dictionary<string, string[]> diclblInactivo = new Dictionary<string, string[]>();
+            string[] IdiomalblInactivo = { "Dado de Baja" };
+            diclblInactivo.Add("Idioma", IdiomalblInactivo);
+            this.lblInactivo.Tag = diclblInactivo;
+
+            Dictionary<string, string[]> dicgboxNotas = new Dictionary<string, string[]>();
+            string[] IdiomagboxNotas = { "Notas" };
+            dicgboxNotas.Add("Idioma", IdiomagboxNotas);
+            this.gboxNotas.Tag = dicgboxNotas;
+
+            Dictionary<string, string[]> dicbtnNotas = new Dictionary<string, string[]>();
+            string[] IdiomabtnNotas = { "Agregar" };
+            dicbtnNotas.Add("Idioma", IdiomabtnNotas);
+            this.btnNotas.Tag = dicbtnNotas;
 
             
             
@@ -283,16 +393,16 @@ namespace ARTEC.GUI
                 //Agrega boton para la gestión de cotizaciones
                 var botonCotizar = new DataGridViewButtonColumn();
                 botonCotizar.Name = "btnDinCotizar";
-                botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                botonCotizar.HeaderText = BLLServicioIdioma.MostrarMensaje("Cotizar").Texto;
+                botonCotizar.Text = BLLServicioIdioma.MostrarMensaje("Cotizar").Texto;
                 botonCotizar.UseColumnTextForButtonValue = true;
                 grillaDetalles.Columns.Add(botonCotizar);
 
                 //Agrega boton para Borrar el detalle
                 var deleteButton = new DataGridViewButtonColumn();
                 deleteButton.Name = "btnDinBorrar";
-                deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("Eliminar").Texto;
+                deleteButton.Text = BLLServicioIdioma.MostrarMensaje("Eliminar").Texto;
                 deleteButton.UseColumnTextForButtonValue = true;
                 grillaDetalles.Columns.Add(deleteButton);
 
@@ -391,13 +501,14 @@ namespace ARTEC.GUI
             grillaDetalles.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             grillaDetalles.Columns[0].HeaderText = "#";
             grillaDetalles.Columns[1].Visible = false;
-            grillaDetalles.Columns["unaCategoria"].HeaderText = "Bien";
-            grillaDetalles.Columns["unEstado"].HeaderText = "Estado";
+            grillaDetalles.Columns["unaCategoria"].HeaderText = BLLServicioIdioma.MostrarMensaje("Categoría").Texto;
+            grillaDetalles.Columns["unEstado"].HeaderText = BLLServicioIdioma.MostrarMensaje("Estado").Texto;
             //grillaDetalles.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             //grillaDetalles.Columns[4].Width = 80;
             //grillaDetalles.Columns[4].HeaderText = "Estado";
             grillaDetalles.Columns["Seleccionado"].Visible = false;
-            grillaDetalles.Columns["txtCotizConteo"].HeaderText = "Cotizaciones";
+            grillaDetalles.Columns["txtCotizConteo"].HeaderText = BLLServicioIdioma.MostrarMensaje("Cotizaciones").Texto;
+            grillaDetalles.Columns["Cantidad"].HeaderText = BLLServicioIdioma.MostrarMensaje("Cantidad").Texto;
             grillaDetalles.Columns["UIDSolicDetalle"].Visible = false;
         }
 
@@ -460,16 +571,16 @@ namespace ARTEC.GUI
                     //Vuelve a agregar boton para la gestión de cotizaciones
                     var botonCotizar = new DataGridViewButtonColumn();
                     botonCotizar.Name = "btnDinCotizar";
-                    botonCotizar.HeaderText = "Cotizar"; //ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
-                    botonCotizar.Text = "Cotizar";//ServicioIdioma.MostrarMensaje("btnDinCotizar").Texto;
+                    botonCotizar.HeaderText = BLLServicioIdioma.MostrarMensaje("Cotizar").Texto;
+                    botonCotizar.Text = BLLServicioIdioma.MostrarMensaje("Cotizar").Texto;
                     botonCotizar.UseColumnTextForButtonValue = true;
                     grillaDetalles.Columns.Add(botonCotizar);
 
                     //Vuelve a agregar el botón de borrar al final
                     var deleteButton = new DataGridViewButtonColumn();
                     deleteButton.Name = "btnDinBorrar";
-                    deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
-                    deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+                    deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("Eliminar").Texto;
+                    deleteButton.Text = BLLServicioIdioma.MostrarMensaje("Eliminar").Texto;
                     deleteButton.UseColumnTextForButtonValue = true;
                     grillaDetalles.Columns.Add(deleteButton);
 

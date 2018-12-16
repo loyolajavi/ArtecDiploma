@@ -33,13 +33,13 @@ namespace ARTEC.GUI
             this.Tag = dicfrmAdquisicionBuscar;
 
             Dictionary<string, string[]> diclblIdAdquisicion = new Dictionary<string, string[]>();
-            string[] IdiomalblIdAdquisicion = { "" };
+            string[] IdiomalblIdAdquisicion = { "Adquisición" };
             diclblIdAdquisicion.Add("Idioma", IdiomalblIdAdquisicion);
             this.lblIdAdquisicion.Tag = diclblIdAdquisicion;
 
 
             Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
-            string[] IdiomalabelX1 = { "Número de Partida" };
+            string[] IdiomalabelX1 = { "Partida" };
             diclabelX1.Add("Idioma", IdiomalabelX1);
             this.labelX1.Tag = diclabelX1;
 
@@ -112,6 +112,10 @@ namespace ARTEC.GUI
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();
             unasDependencias = ManagerDependencia.TraerTodos();
+
+            //Traducir
+            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
         }
 
         private void txtDependencia_TextChanged(object sender, EventArgs e)

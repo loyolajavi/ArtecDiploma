@@ -308,9 +308,9 @@ namespace ARTEC.GUI
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX8.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX8.Location = new System.Drawing.Point(443, 7);
+            this.labelX8.Location = new System.Drawing.Point(434, 7);
             this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(75, 22);
+            this.labelX8.Size = new System.Drawing.Size(93, 22);
             this.labelX8.TabIndex = 37;
             this.labelX8.Text = "Estado";
             // 
@@ -321,9 +321,9 @@ namespace ARTEC.GUI
             // 
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX10.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX10.Location = new System.Drawing.Point(443, 63);
+            this.labelX10.Location = new System.Drawing.Point(434, 63);
             this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(80, 22);
+            this.labelX10.Size = new System.Drawing.Size(93, 22);
             this.labelX10.TabIndex = 39;
             this.labelX10.Text = "Asignado a";
             // 
@@ -334,9 +334,9 @@ namespace ARTEC.GUI
             // 
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX9.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold);
-            this.labelX9.Location = new System.Drawing.Point(443, 35);
+            this.labelX9.Location = new System.Drawing.Point(434, 35);
             this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(75, 22);
+            this.labelX9.Size = new System.Drawing.Size(93, 22);
             this.labelX9.TabIndex = 38;
             this.labelX9.Text = "Prioridad";
             // 

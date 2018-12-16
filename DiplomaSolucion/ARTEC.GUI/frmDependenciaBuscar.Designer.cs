@@ -29,7 +29,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDependenciaBuscar));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -54,15 +55,8 @@ namespace ARTEC.GUI
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 0;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Dependencia Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // lblDependencia
@@ -72,9 +66,9 @@ namespace ARTEC.GUI
             // 
             this.lblDependencia.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblDependencia.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDependencia.Location = new System.Drawing.Point(12, 23);
+            this.lblDependencia.Location = new System.Drawing.Point(12, 19);
             this.lblDependencia.Name = "lblDependencia";
-            this.lblDependencia.Size = new System.Drawing.Size(91, 17);
+            this.lblDependencia.Size = new System.Drawing.Size(75, 17);
             this.lblDependencia.TabIndex = 51;
             this.lblDependencia.Text = "lblDependencia";
             // 
@@ -88,7 +82,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDependencia.DisabledBackColor = System.Drawing.Color.White;
             this.txtDependencia.ForeColor = System.Drawing.Color.Black;
-            this.txtDependencia.Location = new System.Drawing.Point(109, 18);
+            this.txtDependencia.Location = new System.Drawing.Point(93, 19);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
             this.txtDependencia.Size = new System.Drawing.Size(315, 22);
@@ -102,9 +96,9 @@ namespace ARTEC.GUI
             // 
             this.lblTipoDep.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblTipoDep.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoDep.Location = new System.Drawing.Point(12, 52);
+            this.lblTipoDep.Location = new System.Drawing.Point(12, 47);
             this.lblTipoDep.Name = "lblTipoDep";
-            this.lblTipoDep.Size = new System.Drawing.Size(91, 17);
+            this.lblTipoDep.Size = new System.Drawing.Size(75, 17);
             this.lblTipoDep.TabIndex = 53;
             this.lblTipoDep.Text = "lblTipoDep";
             // 
@@ -118,7 +112,7 @@ namespace ARTEC.GUI
             this.txtTipoDep.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtTipoDep.DisabledBackColor = System.Drawing.Color.White;
             this.txtTipoDep.ForeColor = System.Drawing.Color.Black;
-            this.txtTipoDep.Location = new System.Drawing.Point(109, 47);
+            this.txtTipoDep.Location = new System.Drawing.Point(93, 47);
             this.txtTipoDep.Name = "txtTipoDep";
             this.txtTipoDep.PreventEnterBeep = true;
             this.txtTipoDep.Size = new System.Drawing.Size(315, 22);
@@ -140,14 +134,14 @@ namespace ARTEC.GUI
             // GrillaAgentes
             // 
             this.GrillaAgentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaAgentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentes.Location = new System.Drawing.Point(12, 113);
             this.GrillaAgentes.Name = "GrillaAgentes";
@@ -161,7 +155,7 @@ namespace ARTEC.GUI
             this.cboDep.ForeColor = System.Drawing.Color.Black;
             this.cboDep.FormattingEnabled = true;
             this.cboDep.ItemHeight = 16;
-            this.cboDep.Location = new System.Drawing.Point(109, 18);
+            this.cboDep.Location = new System.Drawing.Point(93, 19);
             this.cboDep.Name = "cboDep";
             this.cboDep.Size = new System.Drawing.Size(315, 22);
             this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -177,15 +171,8 @@ namespace ARTEC.GUI
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 58;
+            this.btnEliminar.Tag = ((object)(resources.GetObject("btnEliminar.Tag")));
             this.btnEliminar.Text = "btnEliminar";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Dependencia Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminar.Tag = dicbtnEliminar;
-
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnCrear
@@ -197,15 +184,8 @@ namespace ARTEC.GUI
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 59;
+            this.btnCrear.Tag = ((object)(resources.GetObject("btnCrear.Tag")));
             this.btnCrear.Text = "btnCrear";
-
-            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
-            string[] PerbtnCrear = { "Dependencia Crear" };
-            dicbtnCrear.Add("Permisos", PerbtnCrear);
-            string[] IdiomabtnCrear = { "Crear" };
-            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
-            this.btnCrear.Tag = dicbtnCrear;
-
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // btnReactivar
@@ -218,15 +198,8 @@ namespace ARTEC.GUI
             this.btnReactivar.Size = new System.Drawing.Size(75, 23);
             this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReactivar.TabIndex = 60;
+            this.btnReactivar.Tag = ((object)(resources.GetObject("btnReactivar.Tag")));
             this.btnReactivar.Text = "btnReactivar";
-
-            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
-            string[] PerbtnReactivar = { "Dependencia Reactivar" };
-            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
-            string[] IdiomabtnReactivar = { "Reactivar" };
-            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
-            this.btnReactivar.Tag = dicbtnReactivar;
-
             this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
             // 
             // lblBaja
@@ -236,7 +209,7 @@ namespace ARTEC.GUI
             // 
             this.lblBaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblBaja.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBaja.Location = new System.Drawing.Point(-1, 17);
+            this.lblBaja.Location = new System.Drawing.Point(146, -5);
             this.lblBaja.Name = "lblBaja";
             this.lblBaja.Size = new System.Drawing.Size(108, 22);
             this.lblBaja.TabIndex = 102;
@@ -263,13 +236,8 @@ namespace ARTEC.GUI
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmDependenciaBuscar";
+            this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
-
-            Dictionary<string, string[]> dicfrmDepBuscar = new Dictionary<string, string[]>();
-            string[] PerfrmDepBuscar = { "Dependencia Buscar", "Dependencia Crear", "Dependencia Modificar", "Dependencia Eliminar", "Dependencia Reactivar" };
-            dicfrmDepBuscar.Add("Permisos", PerfrmDepBuscar);
-            this.Tag = dicfrmDepBuscar;
-
             this.Load += new System.EventHandler(this.frmDependenciaBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
             this.ResumeLayout(false);

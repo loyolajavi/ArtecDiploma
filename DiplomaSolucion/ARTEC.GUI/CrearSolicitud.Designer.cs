@@ -36,7 +36,6 @@ namespace ARTEC.GUI
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrearSolicitud));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblAdjunto = new DevComponents.DotNetBar.LabelX();
             this.cboAgenteResp = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblAgenteResponsable = new DevComponents.DotNetBar.LabelX();
             this.btnCrearSolicitud = new DevComponents.DotNetBar.ButtonX();
@@ -117,7 +116,6 @@ namespace ARTEC.GUI
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.lblAdjunto);
             this.panel1.Controls.Add(this.cboAgenteResp);
             this.panel1.Controls.Add(this.lblAgenteResponsable);
             this.panel1.Controls.Add(this.btnCrearSolicitud);
@@ -140,19 +138,6 @@ namespace ARTEC.GUI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(957, 659);
             this.panel1.TabIndex = 3;
-            // 
-            // lblAdjunto
-            // 
-            // 
-            // 
-            // 
-            this.lblAdjunto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblAdjunto.Location = new System.Drawing.Point(352, 390);
-            this.lblAdjunto.Name = "lblAdjunto";
-            this.lblAdjunto.Size = new System.Drawing.Size(79, 20);
-            this.lblAdjunto.TabIndex = 26;
-            this.lblAdjunto.Text = "Adjuntar Oficio";
-            this.lblAdjunto.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
             // cboAgenteResp
             // 
@@ -425,7 +410,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);
@@ -959,6 +943,5 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnNuevoDetalle;
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.ButtonX btnEliminarAdjunto;
-        private DevComponents.DotNetBar.LabelX lblAdjunto;
     }
 }
