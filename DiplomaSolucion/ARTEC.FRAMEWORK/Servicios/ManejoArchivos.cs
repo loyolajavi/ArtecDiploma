@@ -75,6 +75,55 @@ namespace ARTEC.FRAMEWORK.Servicios
         }
 
 
+        public static string obtenerRutaPlantillas()
+        {
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string laRuta = (string)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "obtenerRutaPlantillas");
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return laRuta;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
+
+        public static string obtenerRutaDocumentos()
+        {
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string laRuta = (string)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "obtenerRutaDocumentos");
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return laRuta;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+
+        }
+
+
         //public static void RegistrarAdjunto(int IdSolicitud, string unAdjuntoRutaCompleta, string unAdjuntoNombre)
         //{
             

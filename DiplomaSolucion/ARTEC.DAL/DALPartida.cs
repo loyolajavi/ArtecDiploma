@@ -55,6 +55,7 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
+                laPartida.IdPartida = IDDevuelto;
 
                 //Guardar los Detalles de la Partida
                 foreach (PartidaDetalle item in laPartida.unasPartidasDetalles)
