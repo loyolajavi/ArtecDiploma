@@ -300,14 +300,12 @@ namespace ARTEC.GUI
                 {
                     var chkCell = (DataGridViewCheckBoxCell)grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"];
                     if ((bool)chkCell.EditedFormattedValue)//Si se tilda
-                    {
                         ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = false;
-                    }
                     else //Si se destilda
-                    {
                         ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada = true;
-                    }
-                    grillaCotizaciones.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
+                    
+                    grillaAuxCot.BeginEdit(false);
+                    grillaAuxCot.Rows[e.RowIndex].Cells["chkBoxCotizacion"].Value = ListaSolicDet[PosSolicDet].unasCotizaciones[e.RowIndex].Seleccionada;
                     grillaAuxCot.EndEdit();
                     CalcularMontoTotalPartida();
                 }
@@ -462,7 +460,11 @@ namespace ARTEC.GUI
                 if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Count(Y => Y.Seleccionada == true) > 2) && decimal.Parse(txtMontoTotal.Text) > 0)
                 {
                     if (GenerarPartidaGlobal(false))
+                    {
                         MessageBox.Show("Solicitud de Partida generada correctamente");
+                        this.Close();
+                    }
+                        
                 }
                 else
                     MessageBox.Show("Por favor revise los detalles, sus cotizaciones, y el Monto Total");
