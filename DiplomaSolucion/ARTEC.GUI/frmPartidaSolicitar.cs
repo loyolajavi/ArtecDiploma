@@ -16,6 +16,8 @@ using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL.Servicios;
+using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace ARTEC.GUI
 {
@@ -561,6 +563,43 @@ namespace ARTEC.GUI
                     }
                 }
 
+                //Imprimir la partida
+                //var pi = new ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
+                //pi.UseShellExecute = true;
+                //pi.CreateNoWindow = true;
+                //pi.Verb = "print";
+                //var process = System.Diagnostics.Process.Start(pi);
+
+                // Send it to the selected printer
+                using (PrintDialog printDialog1 = new PrintDialog())
+                {
+                    if (printDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
+                        info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                        info.CreateNoWindow = true;
+                        info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                        info.UseShellExecute = true;
+                        info.Verb = "PrintTo";
+                        System.Diagnostics.Process.Start(info);
+                    }
+                }
+                
+                //PrintDialog hola = new PrintDialog();
+                //hola.ShowDialog();
+                
+                //PrintDocument pd = new PrintDocument();
+                //pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+                //PrintDialog pdi = new PrintDialog();
+                //pdi.Document = pd;
+                //if (pdi.ShowDialog() == DialogResult.OK)
+                //{
+                //    pd.Print();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Print Cancelled");
+                //}
             }
             else
             {
@@ -568,6 +607,11 @@ namespace ARTEC.GUI
             }
             return true;
         }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.Red, new Rectangle(500, 500, 500, 500));
+        }  
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
