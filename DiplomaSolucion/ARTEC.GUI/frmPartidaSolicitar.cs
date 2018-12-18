@@ -564,13 +564,6 @@ namespace ARTEC.GUI
                 }
 
                 //Imprimir la partida
-                //var pi = new ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
-                //pi.UseShellExecute = true;
-                //pi.CreateNoWindow = true;
-                //pi.Verb = "print";
-                //var process = System.Diagnostics.Process.Start(pi);
-
-                // Send it to the selected printer
                 using (PrintDialog printDialog1 = new PrintDialog())
                 {
                     if (printDialog1.ShowDialog() == DialogResult.OK)
@@ -584,22 +577,6 @@ namespace ARTEC.GUI
                         System.Diagnostics.Process.Start(info);
                     }
                 }
-                
-                //PrintDialog hola = new PrintDialog();
-                //hola.ShowDialog();
-                
-                //PrintDocument pd = new PrintDocument();
-                //pd.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
-                //PrintDialog pdi = new PrintDialog();
-                //pdi.Document = pd;
-                //if (pdi.ShowDialog() == DialogResult.OK)
-                //{
-                //    pd.Print();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Print Cancelled");
-                //}
             }
             else
             {
