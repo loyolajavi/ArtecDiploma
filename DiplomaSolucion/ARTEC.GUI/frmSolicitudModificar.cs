@@ -1579,6 +1579,17 @@ namespace ARTEC.GUI
                     {
                         if(RutaCompletaAdjuntoGuardado == null)
                             FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
+
+                        ////Adjuntos cotizaciones
+                        //foreach (SolicDetalle unDetSolic in unaSolicitud.unosDetallesSolicitud)
+                        //{
+                        //    foreach (Cotizacion unaCotiz in unDetSolic.unasCotizaciones)
+                        //    {
+                        //        string extCotiz = Path.GetExtension(unaCotiz.RutaOrigenAdjunto).ToLower();
+                        //        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unaCotiz.RutaOrigenAdjunto, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCotiz.IdCotizacion.ToString() + extCotiz);
+                        //    } 
+                            
+                        //}
                         MessageBox.Show("Modificación realizada correctamente");
                     }
                     

@@ -34,6 +34,13 @@ namespace ARTEC.GUI
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
         SolicDetalle unDetSolic = new SolicDetalle();
         List<Proveedor> ListaProv = new List<Proveedor>();
+        List<string> unosAdjuntosNombre = new List<string>();
+        List<string> unosAdjuntosRutas = new List<string>();
+        string ext;
+        string NombreArchivo;
+        string RutaOrigenCompletaAdjunto;
+        Dictionary<int, List<string>> DicAdjuntos = new Dictionary<int, List<string>>();
+        Dictionary<int, List<string>> DicAdjuntosRutas = new Dictionary<int, List<string>>();
 
         public frmCotizaciones(List<Cotizacion> unasCotiz, SolicDetalle unDetSolicP)
         {
@@ -111,42 +118,69 @@ namespace ARTEC.GUI
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
         {
-            //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
-            //Permisos
-            //Obtengo todos los controles del formulario
-            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
-            foreach (Control unControl in unosControles)
+            try
             {
-                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
+                //Permisos
+                //Obtengo todos los controles del formulario
+                IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+                foreach (Control unControl in unosControles)
                 {
-                    unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(Dictionary<string, string[]>) && (unControl.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+                    {
+                        unControl.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((unControl.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+                    }
                 }
-            }
 
-            grillaCotizacion.DataSource = null;
-            if(unasCotizaciones.Count() > 0)
+                grillaCotizacion.DataSource = null;
+                if (unasCotizaciones.Count() > 0)
+                {
+                    grillaCotizacion.DataSource = unasCotizaciones;
+                    FormatearGrillaCotizacion();
+                }
+
+
+
+                unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
+                unosProveedoresSol = ManagerProveedor.ProveedorTraerTodosActivos();
+
+                if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
+                {
+                    txtCuerpo.Text = "Prueba";
+                    txtAsunto.Text = "Cotización MPF";
+                }
+                else
+                {
+                    txtCuerpo.Text = "Test";
+                    txtAsunto.Text = "MPF Quote";
+                }
+
+                //Agregar adjuntos cotizaciones
+                foreach (Cotizacion unaCotizacion in unasCotizaciones)
+                {
+                    //Agrega el adjunto
+                    string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
+                    unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                    //Añado los adjuntos a los diccionarios
+                    DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
+                    DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                }
+
+                ////Añado a la gilla de adjuntos el adjunto de la primer cotización(Solo con el primero por cuestión de que es dinámico)
+                //lstAdjuntos.DataSource = null;
+                //lstAdjuntos.DataSource = DicAdjuntos[unasCotizaciones[0].IdCotizacion];    
+            }
+            catch (Exception es)
             {
-                grillaCotizacion.DataSource = unasCotizaciones;
-                FormatearGrillaCotizacion();
+                string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - frmCotizaciones_Load");
+                MessageBox.Show("Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
             
             
 
-            unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
-            unosProveedoresSol = ManagerProveedor.ProveedorTraerTodosActivos();
-
-            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
-            {
-                txtCuerpo.Text = "Prueba";
-                txtAsunto.Text = "Cotización MPF";
-            }
-            else
-            {
-                txtCuerpo.Text = "Test";
-                txtAsunto.Text = "MPF Quote";
-            }
         }
 
 
@@ -233,6 +267,13 @@ namespace ARTEC.GUI
             if (!vldFrmCotozacionAgreCot.Validate())
                 return;
 
+            //Verificar que haya un adjunto
+            if (unosAdjuntosNombre.Count != 1)
+            {
+                MessageBox.Show("Por favor adjuntar la cotización");
+                return;
+            }
+
             try
             {
                 if (ProvSeleccionado != null && ProvSeleccionado.IdProveedor > 0)
@@ -251,6 +292,9 @@ namespace ARTEC.GUI
                     //if (unaCotiz.IdCotizacion > 0)
                     //{
                     //unasCotizaciones = ManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaCotiz.unDetalleAsociado.IdSolicitudDetalle, unaCotiz.unDetalleAsociado.IdSolicitud);
+                    
+                    //Adjunto
+                    unaCotiz.RutaOrigenAdjunto = RutaOrigenCompletaAdjunto;
                     unasCotizaciones.Add(unaCotiz);
                     grillaCotizacion.DataSource = null;
                     grillaCotizacion.DataSource = unasCotizaciones;
@@ -259,6 +303,15 @@ namespace ARTEC.GUI
                     ////Actualiza SolicDetalles en frmModificarSolicitud por Evento
                     //this.EventoActualizarDetalles(unasCotizaciones);
                     //}
+                    //Blanqueo campos
+                    txtProveedor.Clear();
+                    ProvSeleccionado = null;
+                    txtPrecioUn.Clear();
+                    unosAdjuntosNombre.Clear();
+                    unosAdjuntosRutas.Clear();
+                    lstAdjuntos.DataSource = null;
+                    lstAdjuntos.Items.Clear();
+                    
                 }
                 
             }
@@ -495,6 +548,113 @@ namespace ARTEC.GUI
                 MessageBox.Show("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
+
+
+        //Estilo que se aplica cuando se arrastra un archivo a pnlAdjuntos
+        private void pnlAdjuntos_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+            pnlAdjuntos.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+
+        //Copiar el archivo
+        private void pnlAdjuntos_DragDrop(object sender, DragEventArgs e)
+        {
+            if (unosAdjuntosNombre.Count > 0)
+            {
+                MessageBox.Show("No puede adjuntarse más de 1 archivo");
+            }
+            else
+            {
+                //Agarro la ruta de los archivos arrastrados
+                string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+                RutaOrigenCompletaAdjunto = unArchivo.First();
+                //Agarro el nombre del archivo
+                NombreArchivo = Path.GetFileName(unArchivo.First());
+                ext = Path.GetExtension(unArchivo.First().ToLower());
+                if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(unArchivo.First()))
+                {
+                    pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+
+                    //Añado a la grilla el nombre del archivo
+                    unosAdjuntosNombre.Add(NombreArchivo);
+                    unosAdjuntosRutas.Add(unArchivo.First());
+
+                    lstAdjuntos.DataSource = null;
+                    lstAdjuntos.DataSource = unosAdjuntosNombre;
+
+                    //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+
+                }
+                else
+                {
+                    MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                }
+            }
+        }
+
+
+
+        //Estilo que se aplica cuando se sale de pnladjuntos (en el evento de arrastrar archivos)
+        private void pnlAdjuntos_DragLeave(object sender, EventArgs e)
+        {
+            pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+
+        private void btnEliminarAdjunto_Click(object sender, EventArgs e)
+        {
+            if (lstAdjuntos.DataSource != null)
+            {
+                unosAdjuntosNombre.Clear();
+                unosAdjuntosRutas.Clear();
+                lstAdjuntos.DataSource = null;
+                lstAdjuntos.Items.Clear();
+            }
+        }
+
+
+        private void lstAdjuntos_DoubleClick(object sender, EventArgs e)
+        {
+            //if (unosAdjuntosNombre.Count > 0)
+            //{
+            //    using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
+            //    {
+            //        ext = Path.GetExtension(lstAdjuntos.SelectedValue.ToString());
+            //        string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+            //        proc.StartInfo.FileName = RutaCompletaAdjunto;
+            //        proc.Start();
+            //        proc.Close();
+            //    }
+
+            //}
+
+        }
+
+        private void grillaCotizacion_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Si se hizo click en el header, salir
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            if (DicAdjuntos[unasCotizaciones[e.RowIndex].IdCotizacion].Count > 0)
+            {
+                using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
+                {
+                    ext = Path.GetExtension(DicAdjuntosRutas[unasCotizaciones[e.RowIndex].IdCotizacion].ToString());
+                    string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + DicAdjuntos[unasCotizaciones[e.RowIndex].IdCotizacion].First();
+                    proc.StartInfo.FileName = RutaCompletaAdjunto;
+                    proc.Start();
+                    proc.Close();
+                }
+
+            }
+
+        }
+
 
 
 

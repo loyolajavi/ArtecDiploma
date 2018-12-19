@@ -35,6 +35,8 @@ namespace ARTEC.ENTIDADES
 
         public long DVH { get; set; }
 
+        public string RutaOrigenAdjunto { get; set; }
+
 
     }
 }

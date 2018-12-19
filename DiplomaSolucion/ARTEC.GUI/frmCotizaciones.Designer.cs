@@ -48,6 +48,9 @@ namespace ARTEC.GUI
             this.lblProvSol = new DevComponents.DotNetBar.LabelX();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pnlAdjuntos = new System.Windows.Forms.Panel();
+            this.btnEliminarAdjunto = new DevComponents.DotNetBar.ButtonX();
+            this.lstAdjuntos = new DevComponents.DotNetBar.ListBoxAdv();
             this.grillaCotizacion = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnConfirmar = new DevComponents.DotNetBar.ButtonX();
             this.txtProveedor = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -70,18 +73,15 @@ namespace ARTEC.GUI
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.pnlAdjuntos = new System.Windows.Forms.Panel();
-            this.btnEliminarAdjunto = new DevComponents.DotNetBar.ButtonX();
-            this.lstAdjuntos = new DevComponents.DotNetBar.ListBoxAdv();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProvSolic)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.pnlAdjuntos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizacion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
-            this.pnlAdjuntos.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -99,7 +99,7 @@ namespace ARTEC.GUI
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(641, 293);
+            this.tabPage2.Size = new System.Drawing.Size(725, 293);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Solicitar Cotizaciones";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -281,6 +281,48 @@ namespace ARTEC.GUI
             this.tabPage1.Text = "Agregar Cotización";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // pnlAdjuntos
+            // 
+            this.pnlAdjuntos.AllowDrop = true;
+            this.pnlAdjuntos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAdjuntos.Controls.Add(this.btnEliminarAdjunto);
+            this.pnlAdjuntos.Controls.Add(this.lstAdjuntos);
+            this.pnlAdjuntos.Location = new System.Drawing.Point(225, 10);
+            this.pnlAdjuntos.Name = "pnlAdjuntos";
+            this.pnlAdjuntos.Size = new System.Drawing.Size(493, 42);
+            this.pnlAdjuntos.TabIndex = 94;
+            this.pnlAdjuntos.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragDrop);
+            this.pnlAdjuntos.DragEnter += new System.Windows.Forms.DragEventHandler(this.pnlAdjuntos_DragEnter);
+            this.pnlAdjuntos.DragLeave += new System.EventHandler(this.pnlAdjuntos_DragLeave);
+            // 
+            // btnEliminarAdjunto
+            // 
+            this.btnEliminarAdjunto.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnEliminarAdjunto.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnEliminarAdjunto.Location = new System.Drawing.Point(409, 6);
+            this.btnEliminarAdjunto.Name = "btnEliminarAdjunto";
+            this.btnEliminarAdjunto.Size = new System.Drawing.Size(75, 27);
+            this.btnEliminarAdjunto.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnEliminarAdjunto.TabIndex = 11;
+            this.btnEliminarAdjunto.Text = "Quitar";
+            this.btnEliminarAdjunto.Click += new System.EventHandler(this.btnEliminarAdjunto_Click);
+            // 
+            // lstAdjuntos
+            // 
+            this.lstAdjuntos.AutoScroll = true;
+            // 
+            // 
+            // 
+            this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
+            this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.ContainerControlProcessDialogKey = true;
+            this.lstAdjuntos.DragDropSupport = true;
+            this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);
+            this.lstAdjuntos.Name = "lstAdjuntos";
+            this.lstAdjuntos.Size = new System.Drawing.Size(396, 27);
+            this.lstAdjuntos.TabIndex = 5;
+            this.lstAdjuntos.DoubleClick += new System.EventHandler(this.lstAdjuntos_DoubleClick);
+            // 
             // grillaCotizacion
             // 
             this.grillaCotizacion.AllowUserToOrderColumns = true;
@@ -308,6 +350,7 @@ namespace ARTEC.GUI
             this.grillaCotizacion.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizacion.Location = new System.Drawing.Point(9, 93);
             this.grillaCotizacion.Name = "grillaCotizacion";
+            this.grillaCotizacion.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -319,6 +362,7 @@ namespace ARTEC.GUI
             this.grillaCotizacion.Size = new System.Drawing.Size(487, 194);
             this.grillaCotizacion.TabIndex = 93;
             this.grillaCotizacion.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizacion_CellClick);
+            this.grillaCotizacion.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizacion_CellDoubleClick);
             // 
             // btnConfirmar
             // 
@@ -492,43 +536,6 @@ namespace ARTEC.GUI
             // 
             this.highlighter3.ContainerControl = this;
             // 
-            // pnlAdjuntos
-            // 
-            this.pnlAdjuntos.AllowDrop = true;
-            this.pnlAdjuntos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAdjuntos.Controls.Add(this.btnEliminarAdjunto);
-            this.pnlAdjuntos.Controls.Add(this.lstAdjuntos);
-            this.pnlAdjuntos.Location = new System.Drawing.Point(225, 10);
-            this.pnlAdjuntos.Name = "pnlAdjuntos";
-            this.pnlAdjuntos.Size = new System.Drawing.Size(493, 42);
-            this.pnlAdjuntos.TabIndex = 94;
-            // 
-            // btnEliminarAdjunto
-            // 
-            this.btnEliminarAdjunto.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnEliminarAdjunto.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnEliminarAdjunto.Location = new System.Drawing.Point(409, 6);
-            this.btnEliminarAdjunto.Name = "btnEliminarAdjunto";
-            this.btnEliminarAdjunto.Size = new System.Drawing.Size(75, 27);
-            this.btnEliminarAdjunto.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnEliminarAdjunto.TabIndex = 11;
-            this.btnEliminarAdjunto.Text = "Quitar";
-            // 
-            // lstAdjuntos
-            // 
-            this.lstAdjuntos.AutoScroll = true;
-            // 
-            // 
-            // 
-            this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
-            this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.ContainerControlProcessDialogKey = true;
-            this.lstAdjuntos.DragDropSupport = true;
-            this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);
-            this.lstAdjuntos.Name = "lstAdjuntos";
-            this.lstAdjuntos.Size = new System.Drawing.Size(396, 27);
-            this.lstAdjuntos.TabIndex = 5;
-            // 
             // frmCotizaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -544,11 +551,11 @@ namespace ARTEC.GUI
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProvSolic)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.pnlAdjuntos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizacion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
-            this.pnlAdjuntos.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -361,5 +361,32 @@ namespace ARTEC.DAL
                 throw;
             }
         }
+
+        public string ObtenerNombreAdjuntoCotiz(int IdCotizacion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdCotizacion", IdCotizacion)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                string ResRuta = FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "ObtenerNombreAdjuntoCotiz", parameters).ToString();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return ResRuta;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

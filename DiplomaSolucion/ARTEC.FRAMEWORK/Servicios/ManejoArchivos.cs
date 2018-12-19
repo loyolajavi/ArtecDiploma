@@ -74,6 +74,20 @@ namespace ARTEC.FRAMEWORK.Servicios
 
         }
 
+        public static string obtenerRutaAdjuntosSinConexion()
+        {
+
+            try
+            {
+                string laRuta = (string)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "obtenerRutaAdjuntos");
+                return laRuta;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
 
         public static string obtenerRutaPlantillas()
         {

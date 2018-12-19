@@ -16,7 +16,7 @@ namespace ARTEC.DAL
     public class DALSolicitud
     {
 
-        public int SolicitudCrear(Solicitud laSolicitud, string unAdjuntoRutaCompleta)
+        public int SolicitudCrear(Solicitud laSolicitud, string ExtAdjunto)
         {
 
 
@@ -68,7 +68,7 @@ namespace ARTEC.DAL
                 }
 
                 //Agregar adjunto
-                string NombreArchivo = Path.GetFileName(unAdjuntoRutaCompleta);
+                string NombreArchivo = Path.GetFileName(@FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntosSinConexion() + "Solicitud " + laSolicitud.IdSolicitud.ToString() + ExtAdjunto);
                 SqlParameter[] parametersRegistrarAdjunto = new SqlParameter[]
 			    {
                     new SqlParameter("@Nombre", NombreArchivo)
@@ -558,6 +558,7 @@ namespace ARTEC.DAL
 
                             var ResCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotizaciones);
                             int IDDevCotiz = Decimal.ToInt32(ResCotiz);
+                            unaCotiza.IdCotizacion = IDDevCotiz;
 
                             //Agregar RelCotSolDet (Tabla de relacion SolicDetalle y Cotizacion)
                             SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
@@ -568,7 +569,30 @@ namespace ARTEC.DAL
 			                };
 
                             FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
+
+
+                            //Agregar adjunto
+                            string NombreArchivoCotiz = Path.GetFileName(unaCotiza.RutaOrigenAdjunto);
+                            string extCotiz = Path.GetExtension(unaCotiza.RutaOrigenAdjunto).ToLower();
+                            SqlParameter[] parametersRegistrarAdjuntoCotiz = new SqlParameter[]
+			                {
+                                new SqlParameter("@Nombre", @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntosSinConexion() + "Cotizacion " + unaCotiza.IdCotizacion.ToString() + extCotiz)
+			                };
+                            var ResAdjCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RegistrarAdjunto", parametersRegistrarAdjuntoCotiz);
+                            int IdAdjuntoCotiz = Decimal.ToInt32(ResAdjCotiz);
+                            SqlParameter[] parametersSolicAdjCotiz = new SqlParameter[]
+			                {
+                                new SqlParameter("@IdCotizacion", unaCotiza.IdCotizacion),
+                                new SqlParameter("@IdAdjunto", IdAdjunto)
+			                };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdjuntoCotizacion", parametersSolicAdj);
+
+                            
+                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unaCotiza.RutaOrigenAdjunto, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntosSinConexion() + "Cotizacion " + unaCotiza.IdCotizacion.ToString() + extCotiz);
+
                         }
+
+                        
 
                         if (unSolDet.unasCotizaciones.Count >= 3)
                         {
@@ -658,26 +682,46 @@ namespace ARTEC.DAL
                         {
                             foreach (Cotizacion unaCoti in unasCotizaAgregarMod)
                             {
-                                SqlParameter[] parametersCotizaciones2 = new SqlParameter[]
-			                {
-                                new SqlParameter("@MontoCotizado", unaCoti.MontoCotizado),
-                                new SqlParameter("@FechaCotizacion", unaCoti.FechaCotizacion),
-                                new SqlParameter("@IdProveedor", unaCoti.unProveedor.IdProveedor)
-			                };
+                                    SqlParameter[] parametersCotizaciones2 = new SqlParameter[]
+			                        {
+                                        new SqlParameter("@MontoCotizado", unaCoti.MontoCotizado),
+                                        new SqlParameter("@FechaCotizacion", unaCoti.FechaCotizacion),
+                                        new SqlParameter("@IdProveedor", unaCoti.unProveedor.IdProveedor)
+			                        };
 
-                                var ResCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotizaciones2);
-                                int IDDevCotiz = Decimal.ToInt32(ResCotiz);
+                                    var ResCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotizaciones2);
+                                    int IDDevCotiz = Decimal.ToInt32(ResCotiz);
+                                    unaCoti.IdCotizacion = IDDevCotiz;
 
-                                //Agregar RelCotSolDet (Tabla de relacion SolicDetalle y Cotizacion)
-                                SqlParameter[] parametersRelCotizSolicDetalle2 = new SqlParameter[]
-			                {
-                                new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
-                                new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
-                                new SqlParameter("@IdCotizacion", IDDevCotiz)
-			                };
+                                    //Agregar RelCotSolDet (Tabla de relacion SolicDetalle y Cotizacion)
+                                    SqlParameter[] parametersRelCotizSolicDetalle2 = new SqlParameter[]
+			                        {
+                                        new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
+                                        new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
+                                        new SqlParameter("@IdCotizacion", IDDevCotiz)
+			                        };
 
-                                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle2);
-                                //unasCotizaBD.Add(unaCoti);
+                                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle2);
+                                    //unasCotizaBD.Add(unaCoti);
+
+                                    //Agregar adjunto
+                                    string NombreArchivoCotiz = Path.GetFileName(unaCoti.RutaOrigenAdjunto);
+                                    string extCotiz = Path.GetExtension(unaCoti.RutaOrigenAdjunto).ToLower();
+                                    SqlParameter[] parametersRegistrarAdjuntoCotiz2 = new SqlParameter[]
+			                        {
+                                        new SqlParameter("@Nombre", "Cotizacion " + unaCoti.IdCotizacion.ToString() + extCotiz)
+			                        };
+                                    var ResAdjCotiz = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RegistrarAdjunto", parametersRegistrarAdjuntoCotiz2);
+                                    int IdAdjuntoCotiz = Decimal.ToInt32(ResAdjCotiz);
+                                    SqlParameter[] parametersSolicAdjCotiz2 = new SqlParameter[]
+			                        {
+                                        new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion),
+                                        new SqlParameter("@IdAdjunto", IdAdjuntoCotiz)
+			                        };
+                                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AdjuntoCotizacion", parametersSolicAdjCotiz2);
+
+                                    
+                                    FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unaCoti.RutaOrigenAdjunto, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntosSinConexion() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + extCotiz);
                             }
                         }
                         

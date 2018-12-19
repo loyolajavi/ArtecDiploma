@@ -15,7 +15,7 @@ namespace ARTEC.BLL
 
         DALSolicitud GestorSolicitud = new DALSolicitud();
 
-        public int SolicitudCrear(Solicitud laSolicitud, string unAdjuntoRutaCompleta)
+        public int SolicitudCrear(Solicitud laSolicitud, string ExtAdjunto)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace ARTEC.BLL
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 if (laSolicitud.unosDetallesSolicitud.Count == 0)
                     throw new InvalidOperationException("Por favor revisar que la Solicitud posea al menos un detalle");
-                return GestorSolicitud.SolicitudCrear(laSolicitud, unAdjuntoRutaCompleta);
+                return GestorSolicitud.SolicitudCrear(laSolicitud, ExtAdjunto);
             }
             catch (Exception es)
             {

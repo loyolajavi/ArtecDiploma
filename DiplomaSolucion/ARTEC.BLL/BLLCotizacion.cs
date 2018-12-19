@@ -61,5 +61,21 @@ namespace ARTEC.BLL
                 throw;
             }
         }
+
+
+        public string ObtenerNombreAdjuntoCotiz(int IdCotizacion)
+        {
+            try
+            {
+                return GestorCotizacion.ObtenerNombreAdjuntoCotiz(IdCotizacion);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
+        }
+
+
     }
 }

@@ -20,5 +20,11 @@ namespace ARTEC.ENTIDADES
 
         public PartidaDetalle unaPartidaDetalleIDs { get; set; }
 
+        public string RutaOrigenAdjunto { get; set; }
+
+        public string RutaDestinoAdjunto { get; set; }
+
+
+
     }
 }

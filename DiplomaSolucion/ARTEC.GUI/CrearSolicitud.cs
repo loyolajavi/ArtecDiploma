@@ -925,7 +925,7 @@ namespace ARTEC.GUI
 
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     string ext = Path.GetExtension(unosAdjuntosRutas.First()).ToLower();
-                    ManagerSolicitud.SolicitudCrear(unaSolicitud, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
+                    ManagerSolicitud.SolicitudCrear(unaSolicitud, ext);
                     //Guardo el archivo adjunto
                     if (unosAdjuntosNombre.Count > 0)
                     {
