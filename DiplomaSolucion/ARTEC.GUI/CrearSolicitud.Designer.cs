@@ -220,6 +220,7 @@ namespace ARTEC.GUI
             this.GrillaNotas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaNotas.Location = new System.Drawing.Point(6, 54);
             this.GrillaNotas.Name = "GrillaNotas";
+            this.GrillaNotas.ReadOnly = true;
             this.GrillaNotas.Size = new System.Drawing.Size(913, 71);
             this.GrillaNotas.TabIndex = 9;
             // 
@@ -410,6 +411,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);
@@ -419,16 +421,16 @@ namespace ARTEC.GUI
             // 
             // gboxBienes
             // 
-            this.gboxBienes.Controls.Add(this.btnModificar);
             this.gboxBienes.Controls.Add(this.btnNuevoDetalle);
             this.gboxBienes.Controls.Add(this.gboxAsociados);
             this.gboxBienes.Controls.Add(this.cboTipoBien);
-            this.gboxBienes.Controls.Add(this.btnAgregarDetalle);
             this.gboxBienes.Controls.Add(this.grillaDetalles);
             this.gboxBienes.Controls.Add(this.txtCantBien);
             this.gboxBienes.Controls.Add(this.lblCantidad);
             this.gboxBienes.Controls.Add(this.txtBien);
             this.gboxBienes.Controls.Add(this.cboBien);
+            this.gboxBienes.Controls.Add(this.btnModificar);
+            this.gboxBienes.Controls.Add(this.btnAgregarDetalle);
             this.gboxBienes.Location = new System.Drawing.Point(15, 78);
             this.gboxBienes.Name = "gboxBienes";
             this.gboxBienes.Size = new System.Drawing.Size(928, 293);

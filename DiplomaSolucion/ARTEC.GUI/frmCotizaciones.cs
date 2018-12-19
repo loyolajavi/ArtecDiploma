@@ -162,11 +162,15 @@ namespace ARTEC.GUI
                 foreach (Cotizacion unaCotizacion in unasCotizaciones)
                 {
                     //Agrega el adjunto
-                    string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
-                    unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
-                    //Añado los adjuntos a los diccionarios
-                    DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
-                    DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                    if (unaCotizacion.IdCotizacion > 0)
+                    {
+                        string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
+                        unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                        //Añado los adjuntos a los diccionarios
+                        DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
+                        DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                    }
+                    
                 }
 
                 ////Añado a la gilla de adjuntos el adjunto de la primer cotización(Solo con el primero por cuestión de que es dinámico)

@@ -210,6 +210,7 @@ namespace ARTEC.GUI
             // 
             // GrillaProvSolic
             // 
+            this.GrillaProvSolic.BackgroundColor = System.Drawing.Color.White;
             this.GrillaProvSolic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -222,6 +223,7 @@ namespace ARTEC.GUI
             this.GrillaProvSolic.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaProvSolic.Location = new System.Drawing.Point(3, 64);
             this.GrillaProvSolic.Name = "GrillaProvSolic";
+            this.GrillaProvSolic.ReadOnly = true;
             this.GrillaProvSolic.Size = new System.Drawing.Size(331, 187);
             this.GrillaProvSolic.TabIndex = 51;
             this.GrillaProvSolic.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaProvSolic_CellClick);
@@ -315,6 +317,7 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);

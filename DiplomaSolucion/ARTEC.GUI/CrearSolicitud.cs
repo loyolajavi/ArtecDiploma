@@ -202,21 +202,7 @@ namespace ARTEC.GUI
                         }
                     }
                     else
-                    {
-                        BLLPolitica ManagerPolitica = new BLLPolitica();
-                        if (ManagerPolitica.VerificarPolitica(unaDep.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
-                        {
-                            AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                        }
-                        else
-                        {
-                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                            if (resmbox == DialogResult.Yes)
-                            {
-                                AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                            }
-                        }
-                    }
+                    AgregarDetalleConfirmado(ref unDetalleSolicitud);
                 }
             }
 }
@@ -1045,9 +1031,19 @@ namespace ARTEC.GUI
                 unasNotas.Add(unaNota);
                 GrillaNotas.DataSource = null;
                 GrillaNotas.DataSource = unasNotas;
-                GrillaNotas.Columns[0].Visible = false;
+                FormatearNotas();
             }
         }
+
+        private void FormatearNotas()
+        {
+            GrillaNotas.Columns["IdNota"].Visible = false;
+            GrillaNotas.Columns["FechaNota"].HeaderText = BLLServicioIdioma.MostrarMensaje("Fecha").Texto;
+            GrillaNotas.Columns["DescripNota"].HeaderText = BLLServicioIdioma.MostrarMensaje("Notas").Texto;
+            GrillaNotas.Columns["IdUsuario"].Visible = false;
+            GrillaNotas.Columns["IdSolicitud"].Visible = false;
+        }
+
 
 
 

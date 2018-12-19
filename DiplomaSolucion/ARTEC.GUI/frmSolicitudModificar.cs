@@ -457,7 +457,7 @@ namespace ARTEC.GUI
                 if (unasNotas.Count > 0)
                 {
                     GrillaNotas.DataSource = unasNotas;
-                    GrillaNotas.Columns[0].Visible = false;
+                    FormatearNotas();
                 }
                 
                 //Agrega el adjunto
@@ -491,7 +491,14 @@ namespace ARTEC.GUI
             }
         }
 
-
+        private void FormatearNotas()
+        {
+            GrillaNotas.Columns["IdNota"].Visible = false;
+            GrillaNotas.Columns["FechaNota"].HeaderText = BLLServicioIdioma.MostrarMensaje("Fecha").Texto;
+            GrillaNotas.Columns["DescripNota"].HeaderText = BLLServicioIdioma.MostrarMensaje("Notas").Texto;
+            GrillaNotas.Columns["IdUsuario"].Visible = false;
+            GrillaNotas.Columns["IdSolicitud"].Visible = false;
+        }
 
         public void grillaDetallesFormatoAplicar()
         {
@@ -1339,7 +1346,7 @@ namespace ARTEC.GUI
                 unasNotas.Add(unaNota);
                 GrillaNotas.DataSource = null;
                 GrillaNotas.DataSource = unasNotas;
-                GrillaNotas.Columns[0].Visible = false;
+                FormatearNotas();
             }
         }
 
