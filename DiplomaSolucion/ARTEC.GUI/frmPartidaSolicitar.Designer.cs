@@ -29,9 +29,9 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartidaSolicitar));
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDep = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -44,7 +44,6 @@ namespace ARTEC.GUI
             this.lblDetalles = new DevComponents.DotNetBar.LabelX();
             this.grillaCotizaciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.lblCotizaciones = new DevComponents.DotNetBar.LabelX();
-            this.btnGenerarCaja = new DevComponents.DotNetBar.ButtonX();
             this.btnGenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.txtMontoTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblMontoTotal = new DevComponents.DotNetBar.LabelX();
@@ -168,14 +167,14 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.AllowUserToDeleteRows = false;
             this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle6;
             this.grillaSolicitudes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicitudes.Location = new System.Drawing.Point(12, 54);
             this.grillaSolicitudes.Name = "grillaSolicitudes";
@@ -190,14 +189,14 @@ namespace ARTEC.GUI
             this.grillaSolicDetalles.AllowUserToDeleteRows = false;
             this.grillaSolicDetalles.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicDetalles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicDetalles.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicDetalles.DefaultCellStyle = dataGridViewCellStyle5;
             this.grillaSolicDetalles.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicDetalles.Location = new System.Drawing.Point(12, 206);
             this.grillaSolicDetalles.Name = "grillaSolicDetalles";
@@ -225,14 +224,14 @@ namespace ARTEC.GUI
             this.grillaCotizaciones.AllowUserToDeleteRows = false;
             this.grillaCotizaciones.BackgroundColor = System.Drawing.Color.White;
             this.grillaCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaCotizaciones.DefaultCellStyle = dataGridViewCellStyle4;
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizaciones.Location = new System.Drawing.Point(12, 380);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
@@ -253,25 +252,13 @@ namespace ARTEC.GUI
             this.lblCotizaciones.TabIndex = 32;
             this.lblCotizaciones.Text = "lblCotizaciones";
             // 
-            // btnGenerarCaja
-            // 
-            this.btnGenerarCaja.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnGenerarCaja.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarCaja.Location = new System.Drawing.Point(28, 78);
-            this.btnGenerarCaja.Name = "btnGenerarCaja";
-            this.btnGenerarCaja.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerarCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnGenerarCaja.TabIndex = 33;
-            this.btnGenerarCaja.Text = "btnGenerarCaja";
-            this.btnGenerarCaja.Click += new System.EventHandler(this.btnGenerarCaja_Click);
-            // 
             // btnGenerarPartida
             // 
             this.btnGenerarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnGenerarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarPartida.Location = new System.Drawing.Point(109, 78);
+            this.btnGenerarPartida.Location = new System.Drawing.Point(59, 32);
             this.btnGenerarPartida.Name = "btnGenerarPartida";
-            this.btnGenerarPartida.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerarPartida.Size = new System.Drawing.Size(94, 34);
             this.btnGenerarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGenerarPartida.TabIndex = 34;
             this.btnGenerarPartida.Text = "btnGenerarPartida";
@@ -292,8 +279,8 @@ namespace ARTEC.GUI
             this.txtMontoTotal.PreventEnterBeep = true;
             this.txtMontoTotal.Size = new System.Drawing.Size(100, 22);
             this.txtMontoTotal.TabIndex = 35;
-            this.vldfrmPartidaSolicitarGenerarPar.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator2);
             this.vldFrmPartidaSolicitarCaja.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator3);
+            this.vldfrmPartidaSolicitarGenerarPar.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator2);
             // 
             // lblMontoTotal
             // 
@@ -313,12 +300,11 @@ namespace ARTEC.GUI
             this.pnlResPartida.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.pnlResPartida.Controls.Add(this.txtMontoTotal);
             this.pnlResPartida.Controls.Add(this.lblMontoTotal);
-            this.pnlResPartida.Controls.Add(this.btnGenerarCaja);
             this.pnlResPartida.Controls.Add(this.btnGenerarPartida);
             this.pnlResPartida.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlResPartida.Location = new System.Drawing.Point(577, 26);
+            this.pnlResPartida.Location = new System.Drawing.Point(571, 421);
             this.pnlResPartida.Name = "pnlResPartida";
-            this.pnlResPartida.Size = new System.Drawing.Size(211, 137);
+            this.pnlResPartida.Size = new System.Drawing.Size(211, 95);
             // 
             // 
             // 
@@ -413,7 +399,6 @@ namespace ARTEC.GUI
             // 
             // vldFrmPartidaSolicitarCaja
             // 
-            this.vldFrmPartidaSolicitarCaja.ContainerControl = this.btnGenerarCaja;
             this.vldFrmPartidaSolicitarCaja.ErrorProvider = this.errorProvider3;
             this.vldFrmPartidaSolicitarCaja.Highlighter = this.highlighter3;
             // 
@@ -480,7 +465,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblDetalles;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaCotizaciones;
         private DevComponents.DotNetBar.LabelX lblCotizaciones;
-        private DevComponents.DotNetBar.ButtonX btnGenerarCaja;
         private DevComponents.DotNetBar.ButtonX btnGenerarPartida;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoTotal;
         private DevComponents.DotNetBar.LabelX lblMontoTotal;

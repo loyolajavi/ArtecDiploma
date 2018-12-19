@@ -13,9 +13,9 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
-using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
+using Xceed.Words.NET;
 
 namespace ARTEC.GUI
 {

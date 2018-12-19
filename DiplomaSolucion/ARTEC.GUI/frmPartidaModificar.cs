@@ -12,10 +12,10 @@ using System.Linq;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
 using ARTEC.ENTIDADES.Helpers;
-using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL.Servicios;
+using Xceed.Words.NET;
 
 namespace ARTEC.GUI
 {
@@ -453,6 +453,10 @@ namespace ARTEC.GUI
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnCancelar_Click");
                 MessageBox.Show("Ocurrio un error al intentar cancelar la Partida: " + unaPartida.IdPartida.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+            finally
+            {
+                DialogResult = DialogResult.Cancel;
             }
         }
 

@@ -716,27 +716,30 @@ namespace ARTEC.DAL
                             };
                         FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleModificar", parametersSolDetModif);
 
-                        if (unSolDet.unasCotizaciones.Count >= 3)
+                        if (unSolDet.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida)
                         {
-                            //Actualizo EstadoSolicDetalle
-                            SqlParameter[] parametersEstadoSolDetEnAgregar2 = new SqlParameter[]
+                            if (unSolDet.unasCotizaciones.Count >= 3)
+                            {
+                                //Actualizo EstadoSolicDetalle
+                                SqlParameter[] parametersEstadoSolDetEnAgregar2 = new SqlParameter[]
                             {
                                 new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unSolDet.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
                             };
-                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolDetEnAgregar2);
-                        }
-                        else
-                        {
-                            //Actualizo EstadoSolicDetalle
-                            SqlParameter[] parametersEstadoSolDetEnAgregar3 = new SqlParameter[]
+                                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolDetEnAgregar2);
+                            }
+                            else
+                            {
+                                //Actualizo EstadoSolicDetalle
+                                SqlParameter[] parametersEstadoSolDetEnAgregar3 = new SqlParameter[]
                             {
                                 new SqlParameter("@IdSolicitud", laSolicitud.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unSolDet.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente)
                             };
-                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolDetEnAgregar3);
+                                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolDetEnAgregar3);
+                            }
                         }
 
                         ////Chequeo TipoBien SolDet (Si es Software)

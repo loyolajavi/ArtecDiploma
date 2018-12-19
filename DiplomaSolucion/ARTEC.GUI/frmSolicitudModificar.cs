@@ -678,28 +678,31 @@ namespace ARTEC.GUI
 
             //Actualiza el conteo de cotizaciones del detalle modificado en frmcotizaciones
             grillaDetalles.Rows[IdSolDet - 1].Cells["txtCotizConteo"].Value = unaSolicitud.unosDetallesSolicitud[IdSolDet - 1].unasCotizaciones.Count().ToString();
-            //if (unaSolicitud.unosDetallesSolicitud[(unasCotiza[0].unDetalleAsociado.IdSolicitudDetalle) - 1].unasCotizaciones.Count() > 2)
-            if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unasCotizaciones.Count() > 2)
+            if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida)
             {
-                //Actualizo el estado en el objeto en memoria
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
-                //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
-                EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
-                EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
-                EstadoAUX.DescripEstadoSolicDetalle = "Cotizado";
-                grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
+                if (unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unasCotizaciones.Count() > 2)
+                {
+                    //Actualizo el estado en el objeto en memoria
+                    unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
+                    unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Cotizado";
+                    //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
+                    EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
+                    EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado;
+                    EstadoAUX.DescripEstadoSolicDetalle = "Cotizado";
+                    grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
+                }
+                else
+                {
+                    unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
+                    unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Pendiente";
+                    //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
+                    EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
+                    EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
+                    EstadoAUX.DescripEstadoSolicDetalle = "Pendiente";
+                    grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
+                }
             }
-            else
-            {
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
-                unaSolicitud.unosDetallesSolicitud.Where(X => X.IdSolicitudDetalle == IdSolDet).FirstOrDefault().unEstado.DescripEstadoSolicDetalle = "Pendiente";
-                //Actualizo en la grilla el estado con un objeto auxiliar porque sino, no lo hacía en tiempo real
-                EstadoSolicDetalle EstadoAUX = new EstadoSolicDetalle();
-                EstadoAUX.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Pendiente;
-                EstadoAUX.DescripEstadoSolicDetalle = "Pendiente";
-                grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
-            }
+            
         }
 
 
@@ -1566,13 +1569,16 @@ namespace ARTEC.GUI
                 unosSolDetQuitarMod = unosSolicDetAgregarBKP.Where(d => !unaSolicitud.unosDetallesSolicitud.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetAgregarMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolicDetAgregarBKP.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
                 unosSolDetModifMod = unaSolicitud.unosDetallesSolicitud.Where(d => !unosSolDetAgregarMod.Any(a => a.UIDSolicDetalle == d.UIDSolicDetalle)).ToList();
-                if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP, unosAdjuntosRutas.First()))
+
+                string ext = Path.GetExtension(unosAdjuntosRutas.First()).ToLower();
+
+                if (ManagerSolicitud.SolicitudModificar(unaSolicitud, unosSolDetQuitarMod, unosSolDetAgregarMod, unosSolDetModifMod, unosSolicDetAgregarBKP, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext))
                 {
                     //Guardo el archivo adjunto
                     if (unosAdjuntos.Count > 0)
                     {
                         if(RutaCompletaAdjuntoGuardado == null)
-                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntos.First());
+                            FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
                         MessageBox.Show("Modificación realizada correctamente");
                     }
                     

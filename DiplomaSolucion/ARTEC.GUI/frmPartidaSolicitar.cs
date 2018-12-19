@@ -12,12 +12,12 @@ using System.Linq;
 using System.IO;
 using ARTEC.FRAMEWORK;
 using ARTEC.FRAMEWORK.Servicios;
-using Novacode;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL.Servicios;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using Xceed.Words.NET;
 
 namespace ARTEC.GUI
 {
@@ -147,11 +147,6 @@ namespace ARTEC.GUI
             string[] IdiomalblCotizaciones = { "Cotizaciones" };
             diclblCotizaciones.Add("Idioma", IdiomalblCotizaciones);
             this.lblCotizaciones.Tag = diclblCotizaciones;
-
-            Dictionary<string, string[]> dicbtnGenerarCaja = new Dictionary<string, string[]>();
-            string[] IdiomabtnGenerarCaja = { "Generar Caja" };
-            dicbtnGenerarCaja.Add("Idioma", IdiomabtnGenerarCaja);
-            this.btnGenerarCaja.Tag = dicbtnGenerarCaja;
 
             Dictionary<string, string[]> dicbtnGenerarPartida = new Dictionary<string, string[]>();
             string[] IdiomabtnGenerarPartida = { "Generar Partida" };
@@ -425,33 +420,6 @@ namespace ARTEC.GUI
 
 
 
-        private void btnGenerarCaja_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!vldFrmPartidaSolicitarCaja.Validate())
-                    return;
-
-                if (decimal.Parse(txtMontoTotal.Text) > 0 && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
-                {
-                    if (GenerarPartidaGlobal(true))
-                        MessageBox.Show("Pedido por Caja generado correctamente");
-                }
-                else
-                {
-                    MessageBox.Show("No se puede solicitar dinero por caja si el monto es mayor a $2.000");
-                }
-            }
-            catch (Exception es)
-            {
-                
-                throw;
-            }
-       
-
-           
-        }
-
         private void btnGenerarPartida_Click(object sender, EventArgs e)
         {
             try
@@ -461,7 +429,7 @@ namespace ARTEC.GUI
 
                 if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Count(Y => Y.Seleccionada == true) > 2) && decimal.Parse(txtMontoTotal.Text) > 0)
                 {
-                    if (GenerarPartidaGlobal(false))
+                    if (GenerarPartidaGlobal())
                     {
                         MessageBox.Show("Solicitud de Partida generada correctamente");
                         this.Close();
@@ -482,16 +450,14 @@ namespace ARTEC.GUI
 
 
 
-        private bool GenerarPartidaGlobal(bool PorCaja)
+        private bool GenerarPartidaGlobal()
         {
             
             nuevaPartida = new Partida();
             int Cont = 1;
-            string JustifAUX = null;
 
             nuevaPartida.FechaEnvio = DateTime.Now;
             nuevaPartida.MontoSolicitado = decimal.Parse(txtMontoTotal.Text);
-            nuevaPartida.Caja = (PorCaja) ? true : false;
 
             foreach (SolicDetalle unDeta in ListaSolicDet.Where(X => X.Seleccionado == true))
             {
@@ -505,31 +471,10 @@ namespace ARTEC.GUI
                 nuevaPartida.unasPartidasDetalles.Add(unaPartDetalle);
             }
 
-            //Me fijo si es partida y necesita justificativo
-            if (!PorCaja && decimal.Parse(txtMontoTotal.Text) <= LimitePartida)
-            {
-                frmDialogJustificacion unfrmDialogJustificacion = new frmDialogJustificacion();
-                if (unfrmDialogJustificacion.ShowDialog(this) == DialogResult.OK)
-                {
-                    if (!string.IsNullOrWhiteSpace(unfrmDialogJustificacion.textBox1.Text))
-                    {
-                        JustifAUX = unfrmDialogJustificacion.textBox1.Text;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    //Si no ingreso el justificativo salgo de la función sin crear la partida en bd ni el documento
-                    return false;
-                }
-            }
             if (ManagerPartida.PartidaCrear(nuevaPartida))
             {
+                //Crear el documento
                 string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
-
                 if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                 {
                     using (DocX doc = DocX.Load(RutaPlantilla))
@@ -538,11 +483,12 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                        //Si se escribio una justificación
-                        if (!string.IsNullOrWhiteSpace(JustifAUX))
+                        var unaLista = doc.AddList(nuevaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.Cantidad.ToString() + " " + nuevaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
+                        for (var I = 1; I == nuevaPartida.unasPartidasDetalles.Count() - 1; I++)
                         {
-                            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
+                            doc.AddListItem(unaLista, nuevaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.Cantidad.ToString() + " " + nuevaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0);
                         }
+                        doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
                         doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
                     }
                 }
@@ -554,11 +500,7 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                        //Si se escribio una justificación
-                        if (!string.IsNullOrWhiteSpace(JustifAUX))
-                        {
-                            doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                        }
+                        
                         doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
                     }
                 }
@@ -658,8 +600,8 @@ namespace ARTEC.GUI
             int SolicSeleccionada = e.RowIndex;
 
             unaSolicitud = ListaSolicitudes[SolicSeleccionada];
-            if (BuscarPartidaAsociada())
-                MessageBox.Show("Existe una partida");
+            //if (BuscarPartidaAsociada())
+                //MessageBox.Show("Existe una partida");
             cargarDetallesYCotizaciones();
 
         }
@@ -737,7 +679,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("Esta Solicitud no tiene detalles preparados para solicitar una partida");//VER:IDIOMA
+                        MessageBox.Show("Esta Solicitud no tiene detalles disponibles para solicitar una partida");//VER:IDIOMA
                         return false;
                     }
                 //}

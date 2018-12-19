@@ -55,6 +55,8 @@ namespace ARTEC.GUI
             // 
             // GrillaPartidas
             // 
+            this.GrillaPartidas.AllowUserToAddRows = false;
+            this.GrillaPartidas.AllowUserToDeleteRows = false;
             this.GrillaPartidas.BackgroundColor = System.Drawing.Color.White;
             this.GrillaPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -68,9 +70,10 @@ namespace ARTEC.GUI
             this.GrillaPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaPartidas.Location = new System.Drawing.Point(0, 153);
             this.GrillaPartidas.Name = "GrillaPartidas";
+            this.GrillaPartidas.ReadOnly = true;
             this.GrillaPartidas.Size = new System.Drawing.Size(613, 231);
             this.GrillaPartidas.TabIndex = 58;
-            this.GrillaPartidas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaPartidas_CellClick);
+            this.GrillaPartidas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaPartidas_CellDoubleClick);
             // 
             // txtNroSolicitud
             // 

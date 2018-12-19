@@ -119,9 +119,13 @@ namespace ARTEC.GUI
                         unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(Int32.Parse(txtIdPartida.Text)).FirstOrDefault();
 
                         unaListaPartidas.Clear();
-                        unaListaPartidas.Add(unaPartida);
                         GrillaPartidas.DataSource = null;
-                        GrillaPartidas.DataSource = unaListaPartidas;
+
+                        if (unaPartida != null)
+                        {
+                            unaListaPartidas.Add(unaPartida);
+                            GrillaPartidas.DataSource = unaListaPartidas;
+                        }
 
                         txtDependencia.Clear();
                         txtNroSolicitud.Clear();
@@ -283,8 +287,11 @@ namespace ARTEC.GUI
             }
         }
 
-        private void GrillaPartidas_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void GrillaPartidas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            DialogResult ResfrmPartidaModificar = new DialogResult();
+
             //Si se hizo click en el header, salir
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
@@ -294,7 +301,16 @@ namespace ARTEC.GUI
             {
                 frmPartidaModificar unfrmPartidaModificar = new frmPartidaModificar((int)GrillaPartidas.Rows[e.RowIndex].Cells["IdPartida"].Value);
                 //((Solicitud)unasSolicitudes.Where(x => x.IdSolicitud == (int)GrillaSolicitudBuscar.Rows[e.RowIndex].Cells[0].Value).FirstOrDefault());
-                unfrmPartidaModificar.Show();
+                ResfrmPartidaModificar = unfrmPartidaModificar.ShowDialog();
+
+                if (ResfrmPartidaModificar == DialogResult.Cancel)
+                {
+                    unaListaPartidas.Clear();
+                    GrillaPartidas.DataSource = null;
+                    txtDependencia.Clear();
+                    txtNroSolicitud.Clear();
+                }
+
 
             }
         }

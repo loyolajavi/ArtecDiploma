@@ -924,11 +924,12 @@ namespace ARTEC.GUI
                     }
 
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                    ManagerSolicitud.SolicitudCrear(unaSolicitud, unosAdjuntosRutas.First());
+                    string ext = Path.GetExtension(unosAdjuntosRutas.First()).ToLower();
+                    ManagerSolicitud.SolicitudCrear(unaSolicitud, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
                     //Guardo el archivo adjunto
                     if (unosAdjuntosNombre.Count > 0)
                     {
-                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + unosAdjuntosNombre.First());
+                        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
                         MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
                         this.Close();
                     }
