@@ -24,7 +24,7 @@ namespace ARTEC.GUI
         //Evento que llama al Delegado
         public event DelegaActualizarSolicDetalles EventoActualizarDetalles;
 
-        List<Cotizacion> unasCotizaciones = new List<Cotizacion>();
+        List<Cotizacion> unasCotizaciones;
         List<Cotizacion> unasCotizacionesBKP = new List<Cotizacion>();
         List<Proveedor> unosProveedores = new List<Proveedor>();
         List<Proveedor> unosProveedoresSol = new List<Proveedor>();
@@ -167,8 +167,17 @@ namespace ARTEC.GUI
                         string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
                         unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
                         //Añado los adjuntos a los diccionarios
-                        DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
-                        DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                        //DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
+                        //DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                        DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreAdjunto });
+                        DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                    }
+                    else
+                    {
+                        //Agarro el nombre del archivo
+                        string NombreArchivoAux = Path.GetFileName(unaCotizacion.RutaOrigenAdjunto);
+                        DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreArchivoAux });
+                        DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaOrigenAdjunto });
                     }
                     
                 }
@@ -299,9 +308,14 @@ namespace ARTEC.GUI
                     
                     //Adjunto
                     unaCotiz.RutaOrigenAdjunto = RutaOrigenCompletaAdjunto;
+                    string NombreArch = Path.GetFileName(unaCotiz.RutaOrigenAdjunto);
                     unasCotizaciones.Add(unaCotiz);
                     grillaCotizacion.DataSource = null;
                     grillaCotizacion.DataSource = unasCotizaciones;
+                    //Agrega el adjunto a la lista global
+                    //Agarro el nombre del archivo
+                    DicAdjuntos.Add(unasCotizaciones.IndexOf(unasCotizaciones.Last()), new List<string> { NombreArch });
+                    DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unasCotizaciones.Last()), new List<string> { unaCotiz.RutaOrigenAdjunto });
                     FormatearGrillaCotizacion();
 
                     ////Actualiza SolicDetalles en frmModificarSolicitud por Evento
@@ -506,13 +520,17 @@ namespace ARTEC.GUI
             try
             {
                 CotiQuitarMod = unasCotizacionesBKP.Where(x => !unasCotizaciones.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
-                CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
+                //Le agregué un && x.IdCotizacion == 0 para que el confirmar funcione al agregar una cotización, confirmar, agregar otra cotizacion, y confirmar de nuevo
+                //CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.IdCotizacion == x.IdCotizacion)).ToList();
+                CotiAgregarMod = unasCotizaciones.Where(x => !unasCotizacionesBKP.Any(y => y.Equals(x))).ToList();
+                //CotiAgregarMod.AddRange(unasCotizaciones.Where(X => CotiAgregarMod.Any(Y => Y.Equals(X)) && X.IdCotizacion == 0));
+                    //=> X.IdCotizacion == 0));
 
                 if (CotiQuitarMod.Count > 0 | CotiAgregarMod.Count > 0)
                 {
                     //Actualiza SolicDetalles en frmModificarSolicitud por Evento
                     this.EventoActualizarDetalles(unasCotizaciones, unDetSolic.IdSolicitudDetalle);
-                    this.Close();
+                    this.Hide();
                 }
                 else
                     MessageBox.Show("No se encontraron modificaciones a realizar");
@@ -580,10 +598,13 @@ namespace ARTEC.GUI
                 if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(unArchivo.First()))
                 {
                     pnlAdjuntos.BorderStyle = BorderStyle.FixedSingle;
-
+                    
                     //Añado a la grilla el nombre del archivo
                     unosAdjuntosNombre.Add(NombreArchivo);
                     unosAdjuntosRutas.Add(unArchivo.First());
+
+
+
 
                     lstAdjuntos.DataSource = null;
                     lstAdjuntos.DataSource = unosAdjuntosNombre;
@@ -644,12 +665,16 @@ namespace ARTEC.GUI
                 return;
             }
 
-            if (DicAdjuntos[unasCotizaciones[e.RowIndex].IdCotizacion].Count > 0)
+            //if (DicAdjuntos[unasCotizaciones[e.RowIndex].IdCotizacion].Count > 0)
+            if (DicAdjuntos[e.RowIndex].Count > 0)
             {
                 using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
                 {
-                    ext = Path.GetExtension(DicAdjuntosRutas[unasCotizaciones[e.RowIndex].IdCotizacion].ToString());
-                    string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + DicAdjuntos[unasCotizaciones[e.RowIndex].IdCotizacion].First();
+                    string RutaCompletaAdjunto;
+                    if (unasCotizaciones[e.RowIndex].IdCotizacion > 0)
+                        RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + DicAdjuntos[e.RowIndex].First();
+                    else
+                        RutaCompletaAdjunto = unasCotizaciones[e.RowIndex].RutaOrigenAdjunto;
                     proc.StartInfo.FileName = RutaCompletaAdjunto;
                     proc.Start();
                     proc.Close();
