@@ -84,13 +84,14 @@ namespace ARTEC.DAL
 
 
 
-        public void SolicDetalleUpdateEstado(int IdSolic, int IdSolicDetalle, int nuevoEstado)
+        public void SolicDetalleUpdateEstado(int IdSolic, int IdSolicDetalle, int nuevoEstado, int UIDSolicDetalle)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@IdSolicitud", IdSolic),
                 new SqlParameter("@IdSolicDetalle", IdSolicDetalle),
-                new SqlParameter("@NuevoEstado", nuevoEstado)
+                new SqlParameter("@NuevoEstado", nuevoEstado),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
             };
 
             try
@@ -115,12 +116,13 @@ namespace ARTEC.DAL
 
 
 
-        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud)
+        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud, int UIDSolicDetalle)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@IdSolicDetalle", IdSolicDetalle),
-                new SqlParameter("@IdSolicitud", IdSolicitud)
+                new SqlParameter("@IdSolicitud", IdSolicitud),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
             };
 
             try
@@ -134,41 +136,40 @@ namespace ARTEC.DAL
             }
             catch (Exception)
             {
-                //VER:Excepciones
                 throw;
             }
 
         }
 
 
-        public bool SolicDetalleDeletePorSolicitud(int IdSolic)
-        {
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@IdSolicitud", IdSolic)
-            };
+        //public bool SolicDetalleDeletePorSolicitud(int IdSolic)
+        //{
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@IdSolicitud", IdSolic)
+        //    };
 
-            try
-            {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleDeletePorSolicitud", parameters);
-                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionAceptar();
-                return true;
-            }
-            catch (Exception es)
-            {
-                //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionCancelar();
-                return false; //VER:Msj
-                throw;
-            }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
+        //    try
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+        //        //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleDeletePorSolicitud", parameters);
+        //        //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionAceptar();
+        //        return true;
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        //FRAMEWORK.Persistencia.MotorBD.GetConexionBDUnica().TransaccionCancelar();
+        //        return false; //VER:Msj
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+        //    }
 
-        }
+        //}
 
 
 

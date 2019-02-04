@@ -48,19 +48,19 @@ namespace ARTEC.BLL
         }
 
 
-        public bool CotizacionModifEnSolic(SolicDetalle unDetSolic, List<Cotizacion> CotiQuitarMod, List<Cotizacion> CotiAgregarMod)
-        {
-            try
-            {
-                if (GestorCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
-                    return true;
-                return false;
-            }
-            catch (Exception es)
-            {
-                throw;
-            }
-        }
+        //public bool CotizacionModifEnSolic(SolicDetalle unDetSolic, List<Cotizacion> CotiQuitarMod, List<Cotizacion> CotiAgregarMod)
+        //{
+        //    try
+        //    {
+        //        if (GestorCotizacion.CotizacionModifEnSolic(unDetSolic, CotiQuitarMod, CotiAgregarMod))
+        //            return true;
+        //        return false;
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
         public string ObtenerNombreAdjuntoCotiz(int IdCotizacion)

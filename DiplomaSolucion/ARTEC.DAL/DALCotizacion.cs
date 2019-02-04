@@ -13,12 +13,13 @@ namespace ARTEC.DAL
     public class DALCotizacion
     {
 
-        public List<Cotizacion> CotizacionTraerPorSolicitudYDetalle(int NroDetalleSolic, int NroSolic)
+        public List<Cotizacion> CotizacionTraerPorSolicitudYDetalle(int NroDetalleSolic, int NroSolic, int UIDSolicDetalle)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@IdSolicitudDetalle", NroDetalleSolic),
-                new SqlParameter("@IdSolicitud", NroSolic)
+                new SqlParameter("@IdSolicitud", NroSolic),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
             };
 
             try
@@ -247,76 +248,76 @@ namespace ARTEC.DAL
 
 
 
-        public bool CotizacionModifEnSolic(SolicDetalle unDetSolic, List<Cotizacion> CotiQuitarMod, List<Cotizacion> CotiAgregarMod)
-        {
-            try
-            {
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+        //public bool CotizacionModifEnSolic(SolicDetalle unDetSolic, List<Cotizacion> CotiQuitarMod, List<Cotizacion> CotiAgregarMod)
+        //{
+        //    try
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
 
-                if (CotiQuitarMod.Count > 0)
-                {
-                    foreach (Cotizacion unaCoti in CotiQuitarMod)
-                    {
-                        //Elimina las relaciones entre cotiz y SolicDetalle
-                        SqlParameter[] parametersRelCotiDesasociar = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdSolicitudDetalle", unDetSolic.IdSolicitudDetalle),
-                            new SqlParameter("@IdSolicitud", unDetSolic.IdSolicitud),
-                            new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion)
-			            };
+        //        if (CotiQuitarMod.Count > 0)
+        //        {
+        //            foreach (Cotizacion unaCoti in CotiQuitarMod)
+        //            {
+        //                //Elimina las relaciones entre cotiz y SolicDetalle
+        //                SqlParameter[] parametersRelCotiDesasociar = new SqlParameter[]
+        //                {
+        //                    new SqlParameter("@IdSolicitudDetalle", unDetSolic.IdSolicitudDetalle),
+        //                    new SqlParameter("@IdSolicitud", unDetSolic.IdSolicitud),
+        //                    new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion)
+        //                };
 
-                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CotiSolicDetDesasociar", parametersRelCotiDesasociar);
+        //                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CotiSolicDetDesasociar", parametersRelCotiDesasociar);
 
-                        //Elimina la cotizacion
-                        SqlParameter[] parametersCotiEliminar = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion)
-			            };
+        //                //Elimina la cotizacion
+        //                SqlParameter[] parametersCotiEliminar = new SqlParameter[]
+        //                {
+        //                    new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion)
+        //                };
 
-                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CotizacionEliminar", parametersCotiEliminar);
-                    }
-                }
+        //                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CotizacionEliminar", parametersCotiEliminar);
+        //            }
+        //        }
 
-                if (CotiAgregarMod.Count > 0)
-                {
-                    foreach (Cotizacion unaCoti in CotiAgregarMod)
-                    {
-                        SqlParameter[] parametersCotiCrear = new SqlParameter[]
-			            {
-                            new SqlParameter("@MontoCotizado", unaCoti.MontoCotizado),
-                            new SqlParameter("@FechaCotizacion", unaCoti.FechaCotizacion),
-                            new SqlParameter("@IdProveedor", unaCoti.unProveedor.IdProveedor)
-			            };
+        //        if (CotiAgregarMod.Count > 0)
+        //        {
+        //            foreach (Cotizacion unaCoti in CotiAgregarMod)
+        //            {
+        //                SqlParameter[] parametersCotiCrear = new SqlParameter[]
+        //                {
+        //                    new SqlParameter("@MontoCotizado", unaCoti.MontoCotizado),
+        //                    new SqlParameter("@FechaCotizacion", unaCoti.FechaCotizacion),
+        //                    new SqlParameter("@IdProveedor", unaCoti.unProveedor.IdProveedor)
+        //                };
 
-                        var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotiCrear);
-                        int IdCotiRes = Decimal.ToInt32(Resultado);
+        //                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrear", parametersCotiCrear);
+        //                int IdCotiRes = Decimal.ToInt32(Resultado);
 
-                        //Tabla de relacion
-                        SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdSolicitudDetalle", unaCoti.unDetalleAsociado.IdSolicitudDetalle),
-                            new SqlParameter("@IdSolicitud", unaCoti.unDetalleAsociado.IdSolicitud),
-                            new SqlParameter("@IdCotizacion", IdCotiRes)
-			            };
+        //                //Tabla de relacion
+        //                SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
+        //                {
+        //                    new SqlParameter("@IdSolicitudDetalle", unaCoti.unDetalleAsociado.IdSolicitudDetalle),
+        //                    new SqlParameter("@IdSolicitud", unaCoti.unDetalleAsociado.IdSolicitud),
+        //                    new SqlParameter("@IdCotizacion", IdCotiRes)
+        //                };
 
-                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
-                    }
-                }
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
-            }
-            catch (Exception es)
-            {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                throw;
-            }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
-        }
+        //                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
+        //            }
+        //        }
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+        //        return true;
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+        //    }
+        //}
 
 
         public int? CotizTraerRelPartDet(int IdCotizacion)

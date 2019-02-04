@@ -185,7 +185,7 @@ namespace ARTEC.GUI
                         if (AuxDet.Cantidad == AuxDet.Comprado)
                         {
                             BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-                            ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido);
+                            ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
                         }
                     }
 
@@ -216,7 +216,7 @@ namespace ARTEC.GUI
 
             //List<HLPDetallesAdquisicion> LisAUXDetalles 
             //LisAUXDetalles = unosDetallesBienes.Where(y => y.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido).Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
-            LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
+            LisAUXDetalles = unosDetallesBienes.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle, UIDSolicDetalle = x.UIDSolicDetalle }).ToList();
 
             if (LisAUXDetalles.Count() > 0)
             {

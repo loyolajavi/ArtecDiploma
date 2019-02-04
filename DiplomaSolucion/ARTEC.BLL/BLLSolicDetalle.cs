@@ -31,25 +31,25 @@ namespace ARTEC.BLL
 
 
 
-        public void SolicDetalleUpdateEstado(int IdSolic, int IdSolicDetalle, int nuevoEstado)
+        public void SolicDetalleUpdateEstado(int IdSolic, int IdSolicDetalle, int nuevoEstado, int UIDSolicDetalle)
         {
-            GestorSolicDetalle.SolicDetalleUpdateEstado(IdSolic, IdSolicDetalle, nuevoEstado);
+            GestorSolicDetalle.SolicDetalleUpdateEstado(IdSolic, IdSolicDetalle, nuevoEstado, UIDSolicDetalle);
         }
 
 
 
-        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud)
+        public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud, int UIDSolicDetalle)
         {
-            return GestorSolicDetalle.SolicDetallesTraerAgentesAsociados(IdSolicDetalle, IdSolicitud);
+            return GestorSolicDetalle.SolicDetallesTraerAgentesAsociados(IdSolicDetalle, IdSolicitud, UIDSolicDetalle);
         }
 
 
-        public bool SolicDetalleDeletePorSolicitud(int IdSolicitud)
-        {
-            if (GestorSolicDetalle.SolicDetalleDeletePorSolicitud(IdSolicitud))
-                return true;
-            return false;
-        }
+        //public bool SolicDetalleDeletePorSolicitud(int IdSolicitud)
+        //{
+        //    if (GestorSolicDetalle.SolicDetalleDeletePorSolicitud(IdSolicitud))
+        //        return true;
+        //    return false;
+        //}
 
 
 

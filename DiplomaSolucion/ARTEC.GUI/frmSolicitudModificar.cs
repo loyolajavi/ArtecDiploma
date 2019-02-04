@@ -376,7 +376,7 @@ namespace ARTEC.GUI
                     unTipoBienLocal = managerTipoBienAux.TipoBienTraerTipoBienPorIdCategoria(unDetSolicAUX.unaCategoria.IdCategoria);
                     if (unTipoBienLocal.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
                     {
-                        unDetSolicAUX.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(unDetSolicAUX.IdSolicitudDetalle, unaSolicitud.IdSolicitud);
+                        unDetSolicAUX.unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(unDetSolicAUX.IdSolicitudDetalle, unaSolicitud.IdSolicitud, unDetSolicAUX.UIDSolicDetalle);
                     }
                 }
 
@@ -539,7 +539,7 @@ namespace ARTEC.GUI
 
                 PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
-                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle);
+                unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle, unaSolicitud.unosDetallesSolicitud[e.RowIndex].UIDSolicDetalle);
                 if (unaPartDet.IdPartida == 0)
                 {
                     //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
@@ -658,7 +658,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud);
+                        grillaAgentesAsociados.DataSource = unaSolicitud.unosDetallesSolicitud.Find(x => x.IdSolicitudDetalle == DetalleSeleccionado).unosAgentes = ManagerSolicDetalle.SolicDetallesTraerAgentesAsociados(DetalleSeleccionado, unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).UIDSolicDetalle);
                     }
                     //No mostrar columnas que no necesito de los agentes asociados VER: GUARDA CON ESTO QUE PUEDE QUE ESTE OCULTANDO COSAS QUE NO QUIERO OCULTAR
                     grillaAgentesAsociados.Columns[0].Visible = false;
@@ -1370,7 +1370,7 @@ namespace ARTEC.GUI
             {
                  PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
-                 unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado);
+                 unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado, unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).UIDSolicDetalle);
                 if (unaPartDet.IdPartida == 0)
                 {
                     SolicDetalle unDetalleSolicitud = new SolicDetalle();

@@ -31,11 +31,11 @@ namespace ARTEC.BLL
         }
 
 
-        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraer(int IdSolic, int IdSolicDetalle)
+        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraer(int IdSolic, int IdSolicDetalle, int UidSolicDetalle)
         {
             try
             {
-                return GestorPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(IdSolic, IdSolicDetalle);
+                return GestorPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(IdSolic, IdSolicDetalle, UidSolicDetalle);
             }
             catch (Exception)
             {
