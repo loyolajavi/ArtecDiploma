@@ -216,29 +216,30 @@ namespace ARTEC.DAL
         }
 
 
-        public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraerSinFiltro(int IdSolic, int IdSolicDetalle)
-        {
+        //public PartidaDetalle SolicDetallePartidaDetalleAsociacionTraerSinFiltro(int IdSolic, int IdSolicDetalle, int UIDSolicDetalle)
+        //{
 
-            SqlParameter[] parametersPartDet = new SqlParameter[]
-            {
-                new SqlParameter("@IdSolicitud", IdSolic),
-                new SqlParameter("@IdSolicDetalle", IdSolicDetalle)
-            };
+        //    SqlParameter[] parametersPartDet = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@IdSolicitud", IdSolic),
+        //        new SqlParameter("@IdSolicDetalle", IdSolicDetalle),
+        //        new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
+        //    };
 
-            try
-            {
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallePartidaDetalleAsociacionTraerSinFiltro", parametersPartDet))
-                {
-                    PartidaDetalle unaPartidaDetalle = new PartidaDetalle();
-                    unaPartidaDetalle = MapearPartidaDetalleUNO(ds);
-                    return unaPartidaDetalle;
-                }
-            }
-            catch (Exception es)
-            {
-                throw;
-            }
-        }
+        //    try
+        //    {
+        //        using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "SolicDetallePartidaDetalleAsociacionTraerSinFiltro", parametersPartDet))
+        //        {
+        //            PartidaDetalle unaPartidaDetalle = new PartidaDetalle();
+        //            unaPartidaDetalle = MapearPartidaDetalleUNO(ds);
+        //            return unaPartidaDetalle;
+        //        }
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
 

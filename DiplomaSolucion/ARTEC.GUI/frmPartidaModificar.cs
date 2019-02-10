@@ -247,7 +247,7 @@ namespace ARTEC.GUI
                     //}
 
                     //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
-                    List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud);
+                    List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.UIDSolicDetalle);
                     ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
                                .ToList();
                     GrillaCotizAntiguas.DataSource = null;

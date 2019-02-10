@@ -262,7 +262,8 @@ namespace ARTEC.DAL
                             {
                                 new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
-                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
+                                new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)                                
                             };
                         FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
 
@@ -336,7 +337,8 @@ namespace ARTEC.DAL
                             SqlParameter[] parametersCantUIDSolicDetalle = new SqlParameter[]
                                 {
                                     new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
-                                    new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle)
+                                    new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
+                                    new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)
                                 };
                             int ResCantidad = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleCantidadPorUIDSolicDetalle", parametersCantUIDSolicDetalle);
                         
@@ -355,7 +357,8 @@ namespace ARTEC.DAL
                             {
                                 new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
-                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido),
+                                new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)
                             };
                             FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetModif);
                         }
@@ -390,7 +393,8 @@ namespace ARTEC.DAL
                             {
                                 new SqlParameter("@IdSolicitud", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
-                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar)
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
+                                new SqlParameter("@UIDSolicDetalle", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)
                             };
                     FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
                 }

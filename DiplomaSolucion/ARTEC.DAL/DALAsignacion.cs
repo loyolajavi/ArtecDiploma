@@ -41,7 +41,8 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdAsignacion", IDDevuelto),
                         new SqlParameter("@IdInventario", item.unInventario.IdInventario),
                         new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsoc.IdSolicitudDetalle),
-                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsoc.IdSolicitud)
+                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsoc.IdSolicitud),
+                        new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsoc.UIDSolicDetalle)
                         //VER TEMA DE HARD SOFT POR LO DEL AGENTE
 			        };
 
@@ -247,6 +248,7 @@ namespace ARTEC.DAL
                     foreach (Inventario unInv in InvQuitarMod)
                     {
                         int IdSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
+                        int UIDSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.UIDSolicDetalle;
                         int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
                         int IdAsigDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().IdAsigDetalle;
 
@@ -286,7 +288,8 @@ namespace ARTEC.DAL
                             {
                                 new SqlParameter("@IdSolicitud", IdSolicitudAUX),
                                 new SqlParameter("@IdSolicDetalle", IdSolicDetalleAUX),
-                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido),
+                                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalleAUX)
                             };
                         FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDetRevertir);
                     }
@@ -297,16 +300,18 @@ namespace ARTEC.DAL
                     foreach (Inventario unInv in InvAgregarMod)
                     {
 
-                        int IdSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
-                        int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
+                        int IdSolicDetalleAUX2 = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
+                        int UIDSolicDetalleAUX2 = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.UIDSolicDetalle;
+                        int IdSolicitudAUX2 = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
 
                         SqlParameter[] parametersAsigDetalles = new SqlParameter[]
 			            {
                             new SqlParameter("@IdAsigDetalle", ConteoDetalles),
                             new SqlParameter("@IdAsignacion", unaAsignacionModif.IdAsignacion),
                             new SqlParameter("@IdInventario", unInv.IdInventario),
-                            new SqlParameter("@IdSolicitudDetalle", IdSolicDetalleAUX),
-                            new SqlParameter("@IdSolicitud", IdSolicitudAUX)
+                            new SqlParameter("@IdSolicitudDetalle", IdSolicDetalleAUX2),
+                            new SqlParameter("@IdSolicitud", IdSolicitudAUX2),
+                            new SqlParameter("@UIDSolicDetalle", UIDSolicDetalleAUX2)
                             //VER TEMA DE HARD SOFT POR LO DEL AGENTE
 			             };
 
@@ -317,13 +322,14 @@ namespace ARTEC.DAL
                         GestorEstadoInventario.InventarioEstadoUpdate(unInv.IdInventario, EstadoInventario.EnumEstadoInventario.Entregado);
 
                         //Actualizar EstadoSolicDetalle si es que todos los inv fueron entregados
-                        if (unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(IdSolicDetalleAUX, IdSolicitudAUX))
+                        if (unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(IdSolicDetalleAUX2, IdSolicitudAUX2, UIDSolicDetalleAUX2))
                         {
                             SqlParameter[] parametersEstadoSolicDet = new SqlParameter[]
                             {
-                                new SqlParameter("@IdSolicitud", IdSolicitudAUX),
-                                new SqlParameter("@IdSolicDetalle", IdSolicDetalleAUX),
-                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado)
+                                new SqlParameter("@IdSolicitud", IdSolicitudAUX2),
+                                new SqlParameter("@IdSolicDetalle", IdSolicDetalleAUX2),
+                                new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado),
+                                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalleAUX2)
                             };
                             FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDet);
                         }
@@ -417,7 +423,8 @@ namespace ARTEC.DAL
                     {
                         new SqlParameter("@IdSolicitud", unAsigDet2.SolicDetalleAsoc.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", unAsigDet2.SolicDetalleAsoc.IdSolicitudDetalle),
-                        new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+                        new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido),
+                        new SqlParameter("@UIDSolicDetalle", unAsigDet2.SolicDetalleAsoc.UIDSolicDetalle)
                     };
                     FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersEstadoSolicDet);
                 }

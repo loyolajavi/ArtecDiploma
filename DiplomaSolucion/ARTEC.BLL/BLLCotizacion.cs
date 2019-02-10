@@ -13,9 +13,9 @@ namespace ARTEC.BLL
 
         DALCotizacion GestorCotizacion = new DALCotizacion();
 
-        public List<Cotizacion> CotizacionTraerPorSolicitudYDetalle(int NroDetalleSolicitud, int NroSolicitud)
+        public List<Cotizacion> CotizacionTraerPorSolicitudYDetalle(int NroDetalleSolicitud, int NroSolicitud, int UIDSolicDetalle)
         {
-            return GestorCotizacion.CotizacionTraerPorSolicitudYDetalle(NroDetalleSolicitud, NroSolicitud);
+            return GestorCotizacion.CotizacionTraerPorSolicitudYDetalle(NroDetalleSolicitud, NroSolicitud, UIDSolicDetalle);
         }
 
         public List<Cotizacion> CotizacionTraerPorSolicitud(int NroSolicitud)

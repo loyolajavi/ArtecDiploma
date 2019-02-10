@@ -541,7 +541,7 @@ namespace ARTEC.DAL
                     foreach (SolicDetalle unSolDet in unosSolDetAgregarMod)
                     {
                         //Me aseguro de que el Id quede correcectamente
-                        unSolDet.IdSolicitudDetalle = (unosSolicDetAgregarBKP.Last().IdSolicitudDetalle + 1);
+                        //unSolDet.IdSolicitudDetalle = (unosSolicDetAgregarBKP.Last().IdSolicitudDetalle + 1);
                         //Crea el Detalle
                         SqlParameter[] parametersSolDetCrear = new SqlParameter[]
 			            {

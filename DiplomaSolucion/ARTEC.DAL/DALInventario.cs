@@ -13,12 +13,13 @@ namespace ARTEC.DAL
     public class DALInventario
     {
 
-        public int InventarioEntregadoPorSolicDetalle(int IdSolicitudDetalle, int IdSolicitud)
+        public int InventarioEntregadoPorSolicDetalle(int IdSolicitudDetalle, int IdSolicitud, int UIDSolicDetalle)
         {
             SqlParameter[] parametersInvCantEntregado = new SqlParameter[]
 			{
                 new SqlParameter("@IdSolicitud", IdSolicitud),
-                new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle)
+                new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
 			};
 
             try
@@ -41,12 +42,13 @@ namespace ARTEC.DAL
 
 
 
-        public int InventarioEntregadoPorSolicDetalle2(int IdSolicitudDetalle, int IdSolicitud)
+        public int InventarioEntregadoPorSolicDetalle2(int IdSolicitudDetalle, int IdSolicitud, int UIDSolicDetalle)
         {
             SqlParameter[] parametersInvCantEntregado = new SqlParameter[]
 			{
                 new SqlParameter("@IdSolicitud", IdSolicitud),
-                new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle)
+                new SqlParameter("@IdSolicitudDetalle", IdSolicitudDetalle),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
 			};
 
             try

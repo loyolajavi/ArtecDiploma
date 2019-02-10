@@ -88,7 +88,8 @@ namespace ARTEC.DAL
 			    {
                     new SqlParameter("@IdSolicitudDetalle", laCotizacion.unDetalleAsociado.IdSolicitudDetalle),
                     new SqlParameter("@IdSolicitud", laCotizacion.unDetalleAsociado.IdSolicitud),
-                    new SqlParameter("@IdCotizacion", IDDevuelto)
+                    new SqlParameter("@IdCotizacion", IDDevuelto),
+                    new SqlParameter("@UIDSolicDetalle", laCotizacion.unDetalleAsociado.UIDSolicDetalle)
 			    };
 
                 FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "CotizacionCrearRelSolicDetalle", parametersRelCotizSolicDetalle);
@@ -133,6 +134,7 @@ namespace ARTEC.DAL
                     unaCotizacion.unDetalleAsociado = new SolicDetalle();
                     unaCotizacion.unDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
                     unaCotizacion.unDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+                    unaCotizacion.unDetalleAsociado.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
 
 
                     ResCotizaciones.Add(unaCotizacion);

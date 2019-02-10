@@ -66,7 +66,8 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle),
                         new SqlParameter("@IdPartida", IDDevuelto),
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
-                        new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle)
+                        new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
+                        new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
 			        };
 
                     var ResultadoUIDPDet = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
@@ -91,7 +92,9 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
-                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida)
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida),
+                        new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
+
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
@@ -352,7 +355,9 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdPartida", laPartida.IdPartida),
                         //*********************GUARDA CON IDSOLICITUD****************************//
                         new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
-                        new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle)
+                        new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
+                        new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
+                        
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
@@ -451,7 +456,8 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", pdet.SolicDetalleAsociado.IdSolicitudDetalle),
-                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado)
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado),
+                        new SqlParameter("@UIDSolicDetalle", pdet.SolicDetalleAsociado.UIDSolicDetalle)
 			        };
 
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
