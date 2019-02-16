@@ -31,17 +31,17 @@ namespace ARTEC.GUI
         {
             this.tabsPrincipal = new System.Windows.Forms.TabControl();
             this.tabSolic = new System.Windows.Forms.TabPage();
+            this.tabRendiciones = new System.Windows.Forms.TabPage();
+            this.tabPartidas = new System.Windows.Forms.TabPage();
+            this.tabDependencia = new System.Windows.Forms.TabPage();
+            this.tabAsignaciones = new System.Windows.Forms.TabPage();
+            this.tabAdquisiciones = new System.Windows.Forms.TabPage();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
             this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
             this.btnBackup = new DevComponents.DotNetBar.ButtonX();
             this.btnUsuarios = new DevComponents.DotNetBar.ButtonX();
             this.btnVolver = new DevComponents.DotNetBar.ButtonX();
-            this.tabRendiciones = new System.Windows.Forms.TabPage();
-            this.tabPartidas = new System.Windows.Forms.TabPage();
-            this.tabDependencia = new System.Windows.Forms.TabPage();
-            this.tabAsignaciones = new System.Windows.Forms.TabPage();
-            this.tabAdquisiciones = new System.Windows.Forms.TabPage();
             this.btnCrearSolicitud = new DevComponents.DotNetBar.ButtonX();
             this.btnSolicitarPartida = new DevComponents.DotNetBar.ButtonX();
             this.btnPartidaAsociar = new DevComponents.DotNetBar.ButtonX();
@@ -64,6 +64,8 @@ namespace ARTEC.GUI
             this.tabsPrincipal.Controls.Add(this.tabDependencia);
             this.tabsPrincipal.Controls.Add(this.tabAsignaciones);
             this.tabsPrincipal.Controls.Add(this.tabAdquisiciones);
+            this.tabsPrincipal.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabsPrincipal.HotTrack = true;
             this.tabsPrincipal.Location = new System.Drawing.Point(12, 59);
             this.tabsPrincipal.Name = "tabsPrincipal";
             this.tabsPrincipal.SelectedIndex = 0;
@@ -74,14 +76,63 @@ namespace ARTEC.GUI
             // tabSolic
             // 
             this.tabSolic.BackColor = System.Drawing.Color.Transparent;
-            this.tabSolic.ForeColor = System.Drawing.Color.White;
-            this.tabSolic.Location = new System.Drawing.Point(4, 22);
+            this.tabSolic.ForeColor = System.Drawing.Color.Transparent;
+            this.tabSolic.Location = new System.Drawing.Point(4, 24);
             this.tabSolic.Name = "tabSolic";
             this.tabSolic.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSolic.Size = new System.Drawing.Size(1335, 635);
+            this.tabSolic.Size = new System.Drawing.Size(1335, 633);
             this.tabSolic.TabIndex = 0;
             this.tabSolic.Text = "Solicitudes";
-            this.tabSolic.UseVisualStyleBackColor = true;
+            // 
+            // tabRendiciones
+            // 
+            this.tabRendiciones.Location = new System.Drawing.Point(4, 24);
+            this.tabRendiciones.Name = "tabRendiciones";
+            this.tabRendiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRendiciones.Size = new System.Drawing.Size(1335, 633);
+            this.tabRendiciones.TabIndex = 1;
+            this.tabRendiciones.Text = "tabRendiciones";
+            this.tabRendiciones.UseVisualStyleBackColor = true;
+            // 
+            // tabPartidas
+            // 
+            this.tabPartidas.Location = new System.Drawing.Point(4, 24);
+            this.tabPartidas.Name = "tabPartidas";
+            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPartidas.Size = new System.Drawing.Size(1335, 633);
+            this.tabPartidas.TabIndex = 2;
+            this.tabPartidas.Text = "tabPartidas";
+            this.tabPartidas.UseVisualStyleBackColor = true;
+            // 
+            // tabDependencia
+            // 
+            this.tabDependencia.Location = new System.Drawing.Point(4, 24);
+            this.tabDependencia.Name = "tabDependencia";
+            this.tabDependencia.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDependencia.Size = new System.Drawing.Size(1335, 633);
+            this.tabDependencia.TabIndex = 3;
+            this.tabDependencia.Text = "tabDependencia";
+            this.tabDependencia.UseVisualStyleBackColor = true;
+            // 
+            // tabAsignaciones
+            // 
+            this.tabAsignaciones.Location = new System.Drawing.Point(4, 24);
+            this.tabAsignaciones.Name = "tabAsignaciones";
+            this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAsignaciones.Size = new System.Drawing.Size(1335, 633);
+            this.tabAsignaciones.TabIndex = 4;
+            this.tabAsignaciones.Text = "tabAsignaciones";
+            this.tabAsignaciones.UseVisualStyleBackColor = true;
+            // 
+            // tabAdquisiciones
+            // 
+            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 24);
+            this.tabAdquisiciones.Name = "tabAdquisiciones";
+            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 633);
+            this.tabAdquisiciones.TabIndex = 5;
+            this.tabAdquisiciones.Text = "tabAdquisiciones";
+            this.tabAdquisiciones.UseVisualStyleBackColor = true;
             // 
             // panelEx1
             // 
@@ -176,56 +227,6 @@ namespace ARTEC.GUI
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "btnVolver";
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // tabRendiciones
-            // 
-            this.tabRendiciones.Location = new System.Drawing.Point(4, 22);
-            this.tabRendiciones.Name = "tabRendiciones";
-            this.tabRendiciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRendiciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabRendiciones.TabIndex = 1;
-            this.tabRendiciones.Text = "tabRendiciones";
-            this.tabRendiciones.UseVisualStyleBackColor = true;
-            // 
-            // tabPartidas
-            // 
-            this.tabPartidas.Location = new System.Drawing.Point(4, 22);
-            this.tabPartidas.Name = "tabPartidas";
-            this.tabPartidas.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPartidas.Size = new System.Drawing.Size(1335, 635);
-            this.tabPartidas.TabIndex = 2;
-            this.tabPartidas.Text = "tabPartidas";
-            this.tabPartidas.UseVisualStyleBackColor = true;
-            // 
-            // tabDependencia
-            // 
-            this.tabDependencia.Location = new System.Drawing.Point(4, 22);
-            this.tabDependencia.Name = "tabDependencia";
-            this.tabDependencia.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDependencia.Size = new System.Drawing.Size(1335, 635);
-            this.tabDependencia.TabIndex = 3;
-            this.tabDependencia.Text = "tabDependencia";
-            this.tabDependencia.UseVisualStyleBackColor = true;
-            // 
-            // tabAsignaciones
-            // 
-            this.tabAsignaciones.Location = new System.Drawing.Point(4, 22);
-            this.tabAsignaciones.Name = "tabAsignaciones";
-            this.tabAsignaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAsignaciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabAsignaciones.TabIndex = 4;
-            this.tabAsignaciones.Text = "tabAsignaciones";
-            this.tabAsignaciones.UseVisualStyleBackColor = true;
-            // 
-            // tabAdquisiciones
-            // 
-            this.tabAdquisiciones.Location = new System.Drawing.Point(4, 22);
-            this.tabAdquisiciones.Name = "tabAdquisiciones";
-            this.tabAdquisiciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdquisiciones.Size = new System.Drawing.Size(1335, 635);
-            this.tabAdquisiciones.TabIndex = 5;
-            this.tabAdquisiciones.Text = "tabAdquisiciones";
-            this.tabAdquisiciones.UseVisualStyleBackColor = true;
             // 
             // btnCrearSolicitud
             // 

@@ -174,6 +174,7 @@ namespace ARTEC.GUI
             GrillaSolicitudBuscar.Columns["UnEstado"].HeaderText = "Estado";
             GrillaSolicitudBuscar.Columns["AgenteResp"].HeaderText = "Responsable";
             GrillaSolicitudBuscar.Columns["DVH"].Visible = false;
+            GrillaSolicitudBuscar.Columns["RutaOrigenAdjunto"].Visible = false;
         }
 
         private void txtNroSolicitud_KeyPress(object sender, KeyPressEventArgs e)

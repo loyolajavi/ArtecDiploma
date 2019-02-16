@@ -31,6 +31,9 @@ namespace ARTEC.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolicitudBuscar));
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -402,25 +405,49 @@ namespace ARTEC.GUI
             // 
             this.GrillaSolicitudBuscar.AllowUserToAddRows = false;
             this.GrillaSolicitudBuscar.AllowUserToDeleteRows = false;
+            this.GrillaSolicitudBuscar.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AliceBlue;
+            this.GrillaSolicitudBuscar.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GrillaSolicitudBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaSolicitudBuscar.BackgroundColor = System.Drawing.Color.White;
+            this.GrillaSolicitudBuscar.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.GrillaSolicitudBuscar.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaSolicitudBuscar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaSolicitudBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaSolicitudBuscar.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaSolicitudBuscar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaSolicitudBuscar.Location = new System.Drawing.Point(7, 131);
             this.GrillaSolicitudBuscar.Name = "GrillaSolicitudBuscar";
             this.GrillaSolicitudBuscar.ReadOnly = true;
+            this.GrillaSolicitudBuscar.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrillaSolicitudBuscar.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.GrillaSolicitudBuscar.RowHeadersVisible = false;
+            this.GrillaSolicitudBuscar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GrillaSolicitudBuscar.ShowCellToolTips = false;
             this.GrillaSolicitudBuscar.ShowEditingIcon = false;
             this.GrillaSolicitudBuscar.ShowRowErrors = false;
-            this.GrillaSolicitudBuscar.Size = new System.Drawing.Size(824, 372);
+            this.GrillaSolicitudBuscar.Size = new System.Drawing.Size(882, 372);
             this.GrillaSolicitudBuscar.TabIndex = 47;
             this.GrillaSolicitudBuscar.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaSolicitudBuscar_CellDoubleClick);
             // 
@@ -456,8 +483,9 @@ namespace ARTEC.GUI
             this.txtResBusqueda.Location = new System.Drawing.Point(7, 131);
             this.txtResBusqueda.Name = "txtResBusqueda";
             this.txtResBusqueda.ReadOnly = true;
-            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n\\viewkind4\\uc1\\pard\\la" +
-    "ng11274\\ul\\b\\f0\\fs24 No hay resultados\\par\r\n}\r\n";
+            this.txtResBusqueda.Rtf = "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0\\fnil\\fcharset0 Segoe UI;}}\r\n{\\colortbl ;\\red0\\gree" +
+    "n0\\blue0;}\r\n\\viewkind4\\uc1\\pard\\cf1\\lang11274\\ul\\b\\f0\\fs24 No hay resultados\\par" +
+    "\r\n}\r\n";
             this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.txtResBusqueda.Size = new System.Drawing.Size(824, 372);
             this.txtResBusqueda.TabIndex = 48;
@@ -558,6 +586,7 @@ namespace ARTEC.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1265, 565);
             this.Controls.Add(this.txtFechaFin2);
             this.Controls.Add(this.txtFechaInicio2);
@@ -580,11 +609,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtBien);
             this.Controls.Add(this.comboBoxEx4);
             this.Controls.Add(this.comboBoxEx1);
-            this.Controls.Add(this.txtResBusqueda);
             this.Controls.Add(this.GrillaSolicitudBuscar);
+            this.Controls.Add(this.txtResBusqueda);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SolicitudBuscar";
+            this.ShowIcon = false;
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.SolicitudBuscar_Load);

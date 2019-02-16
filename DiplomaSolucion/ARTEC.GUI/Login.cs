@@ -99,7 +99,8 @@ namespace ARTEC.GUI
                     //}
                     
                 }
-                    
+
+                this.ActiveControl = txtNombreUsuario;
             }
             catch (Exception es)
             {

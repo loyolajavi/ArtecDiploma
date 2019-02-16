@@ -27,6 +27,72 @@ namespace ARTEC.GUI
         public frmPartidaAsociar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmPartidaAsociar = new Dictionary<string, string[]>();
+            string[] IdiomafrmPartidaAsociar = { "Asociar Partida" };
+            dicfrmPartidaAsociar.Add("Idioma", IdiomafrmPartidaAsociar);
+            this.Tag = dicfrmPartidaAsociar;
+
+            Dictionary<string, string[]> diclblIdSolicitud = new Dictionary<string, string[]>();
+            string[] IdiomalblIdSolicitud = { "Solicitud" };
+            diclblIdSolicitud.Add("Idioma", IdiomalblIdSolicitud);
+            this.lblIdSolicitud.Tag = diclblIdSolicitud;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclblIdPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblIdPartida = { "Partida" };
+            diclblIdPartida.Add("Idioma", IdiomalblIdPartida);
+            this.lblIdPartida.Tag = diclblIdPartida;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> diclblGrillaPartidas = new Dictionary<string, string[]>();
+            string[] IdiomalblGrillaPartidas = { "Grilla" };
+            diclblGrillaPartidas.Add("Idioma", IdiomalblGrillaPartidas);
+            this.lblGrillaPartidas.Tag = diclblGrillaPartidas;
+
+            Dictionary<string, string[]> dicgboxDetallesPartida = new Dictionary<string, string[]>();
+            string[] IdiomagboxDetallesPartida = { "Detalles Partida" };
+            dicgboxDetallesPartida.Add("Idioma", IdiomagboxDetallesPartida);
+            this.gboxDetallesPartida.Tag = dicgboxDetallesPartida;
+
+            Dictionary<string, string[]> diclblFechaEnvio = new Dictionary<string, string[]>();
+            string[] IdiomalblFechaEnvio = { "Fecha envío" };
+            diclblFechaEnvio.Add("Idioma", IdiomalblFechaEnvio);
+            this.lblFechaEnvio.Tag = diclblFechaEnvio;
+
+            Dictionary<string, string[]> diclblMontoSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoSolic = { "Monto" };
+            diclblMontoSolic.Add("Idioma", IdiomalblMontoSolic);
+            this.lblMontoSolic.Tag = diclblMontoSolic;
+
+            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
+            string[] IdiomachkCaja = { "Caja" };
+            dicchkCaja.Add("Idioma", IdiomachkCaja);
+            this.chkCaja.Tag = dicchkCaja;
+
+            Dictionary<string, string[]> diclblNroPartAsignada = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartAsignada = { "Partida" };
+            diclblNroPartAsignada.Add("Idioma", IdiomalblNroPartAsignada);
+            this.lblNroPartAsignada.Tag = diclblNroPartAsignada;
+
+            Dictionary<string, string[]> diclblMontoAcreditado = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoAcreditado = { "Monto" };
+            diclblMontoAcreditado.Add("Idioma", IdiomalblMontoAcreditado);
+            this.lblMontoAcreditado.Tag = diclblMontoAcreditado;
+
+            Dictionary<string, string[]> dicbtnAsociar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAsociar = { "Asociar" };
+            dicbtnAsociar.Add("Idioma", IdiomabtnAsociar);
+            this.btnAsociar.Tag = dicbtnAsociar;
+
         }
 
         private void frmPartidaAsociar_Load(object sender, EventArgs e)
@@ -181,12 +247,18 @@ namespace ARTEC.GUI
                         return;
                     else if (Int32.Parse(txtMontoOtorgado.Text) > 0)
                     {
-                        unaPartida.FechaAcreditacion = DateTime.Today;
-                        unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
-                        unaPartida.NroPartida = txtNroPartAsignado.Text;
+                        if (Int32.Parse(txtMontoOtorgado.Text) < unaPartida.MontoSolicitado)
+                            MessageBox.Show("El monto otorgado es menor al solicitado, por favor revíselo");
+                        else
+                        {
+                            unaPartida.FechaAcreditacion = DateTime.Today;
+                            unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
+                            unaPartida.NroPartida = txtNroPartAsignado.Text;
 
-                        if (ManagerPartida.PartidaAsociar(unaPartida))
-                            MessageBox.Show("Partida Asociada correctamente");
+                            if (ManagerPartida.PartidaAsociar(unaPartida))
+                                MessageBox.Show("Partida Asociada correctamente");
+                        }
+                        
                     }
                 }
                 else

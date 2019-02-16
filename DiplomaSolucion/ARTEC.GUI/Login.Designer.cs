@@ -90,7 +90,8 @@ namespace ARTEC.GUI
             this.cboIdioma.Name = "cboIdioma";
             this.cboIdioma.Size = new System.Drawing.Size(121, 22);
             this.cboIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboIdioma.TabIndex = 2;
+            this.cboIdioma.TabIndex = 12;
+            this.cboIdioma.TabStop = false;
             this.cboIdioma.SelectionChangeCommitted += new System.EventHandler(this.cboIdioma_SelectionChangeCommitted);
             // 
             // lblSalir
@@ -116,7 +117,7 @@ namespace ARTEC.GUI
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(84, 36);
             this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnLogin.TabIndex = 0;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.TextColor = System.Drawing.Color.White;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -161,12 +162,12 @@ namespace ARTEC.GUI
             this.txtPass.DisabledBackColor = System.Drawing.Color.White;
             this.txtPass.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPass.ForeColor = System.Drawing.Color.Black;
-            this.txtPass.Location = new System.Drawing.Point(70, 12);
+            this.txtPass.Location = new System.Drawing.Point(70, 13);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.PreventEnterBeep = true;
             this.txtPass.Size = new System.Drawing.Size(278, 35);
-            this.txtPass.TabIndex = 17;
+            this.txtPass.TabIndex = 2;
             this.vldtxtPass.SetValidator1(this.txtPass, this.customvldtxtPass1);
             this.txtPass.Enter += new System.EventHandler(this.txtPass_Enter);
             this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPass_KeyPress);
@@ -205,7 +206,7 @@ namespace ARTEC.GUI
             this.pnlNombreUsuario.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
             this.pnlNombreUsuario.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.pnlNombreUsuario.Style.GradientAngle = 90;
-            this.pnlNombreUsuario.TabIndex = 4;
+            this.pnlNombreUsuario.TabIndex = 1;
             // 
             // pictureBox1
             // 
@@ -232,7 +233,7 @@ namespace ARTEC.GUI
             this.txtNombreUsuario.Name = "txtNombreUsuario";
             this.txtNombreUsuario.PreventEnterBeep = true;
             this.txtNombreUsuario.Size = new System.Drawing.Size(278, 32);
-            this.txtNombreUsuario.TabIndex = 18;
+            this.txtNombreUsuario.TabIndex = 1;
             this.vldNombreUs.SetValidator1(this.txtNombreUsuario, this.customvldtxtNombreUsuario);
             this.txtNombreUsuario.Enter += new System.EventHandler(this.txtNombreUsuario_Enter);
             this.txtNombreUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombreUsuario_KeyPress);

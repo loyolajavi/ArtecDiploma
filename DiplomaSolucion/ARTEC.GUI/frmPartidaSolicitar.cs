@@ -427,7 +427,7 @@ namespace ARTEC.GUI
                 if (!vldfrmPartidaSolicitarGenerarPar.Validate())
                     return;
 
-                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Count(Y => Y.Seleccionada == true) > 2) && decimal.Parse(txtMontoTotal.Text) > 0)
+                if (grillaCotizaciones.DataSource != null && ListaSolicDet.Any(X => X.Seleccionado == true && X.unasCotizaciones.Count(Y => Y.Seleccionada == true) > 2) && decimal.Parse(txtMontoTotal.Text) > 0 && decimal.Parse(txtMontoTotal.Text) >= TotalAcumulado)
                 {
                     if (GenerarPartidaGlobal())
                     {
