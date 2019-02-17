@@ -414,7 +414,7 @@ namespace ARTEC.GUI
             this.GrillaSolicitudBuscar.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -487,7 +487,7 @@ namespace ARTEC.GUI
     "n0\\blue0;}\r\n\\viewkind4\\uc1\\pard\\cf1\\lang11274\\ul\\b\\f0\\fs24 No hay resultados\\par" +
     "\r\n}\r\n";
             this.txtResBusqueda.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtResBusqueda.Size = new System.Drawing.Size(824, 372);
+            this.txtResBusqueda.Size = new System.Drawing.Size(882, 372);
             this.txtResBusqueda.TabIndex = 48;
             this.txtResBusqueda.Text = "No hay resultados";
             this.txtResBusqueda.Visible = false;
@@ -609,8 +609,8 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtBien);
             this.Controls.Add(this.comboBoxEx4);
             this.Controls.Add(this.comboBoxEx1);
-            this.Controls.Add(this.GrillaSolicitudBuscar);
             this.Controls.Add(this.txtResBusqueda);
+            this.Controls.Add(this.GrillaSolicitudBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -46,6 +46,7 @@ namespace ARTEC.GUI
         List<Marca> unasMarcas = new List<Marca>();
         BLLModelo ManagerModelo = new BLLModelo();
         List<ModeloVersion> unosModelos = new List<ModeloVersion>();
+        int MontoTotalAcum = 0;
 
 
         public frmBienRegistrar()
@@ -86,6 +87,11 @@ namespace ARTEC.GUI
             string[] IdiomalblSerieKey = { "Serie" };
             diclblSerieKey.Add("Idioma", IdiomalblSerieKey);
             this.lblSerieKey.Tag = diclblSerieKey;
+
+            Dictionary<string, string[]> diclblSerie = new Dictionary<string, string[]>();
+            string[] IdiomalblSerie = { "Serie" };
+            diclblSerie.Add("Idioma", IdiomalblSerie);
+            this.lblSerie.Tag = diclblSerie;
 
             Dictionary<string, string[]> diclblSerial = new Dictionary<string, string[]>();
             string[] IdiomalblSerial = { "Serie" };
@@ -142,8 +148,15 @@ namespace ARTEC.GUI
             dicbtnCrearModelo.Add("Idioma", IdiomabtnCrearModelo);
             this.btnCrearModelo.Tag = dicbtnCrearModelo;
 
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
 
-
+            Dictionary<string, string[]> diclblDeposito = new Dictionary<string, string[]>();
+            string[] IdiomalblDeposito = { "Depósito" };
+            diclblDeposito.Add("Idioma", IdiomalblDeposito);
+            this.lblDeposito.Tag = diclblDeposito;
 
 
         }
@@ -210,6 +223,9 @@ namespace ARTEC.GUI
         {
             if (!vldFrmBienRegistrarBtnBuscar.Validate())
                 return;
+
+            txtResBusqueda.Visible = false;
+            GrillaDetallesBienes.Visible = true;
 
             BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
             unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text), EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
@@ -312,6 +328,11 @@ namespace ARTEC.GUI
 
                 //unosProveedores = unosProveedores.Where(X=>X.IdProveedor == )
             }
+            else
+            {
+                txtResBusqueda.Visible = true;
+                GrillaDetallesBienes.Visible = false;
+            }
         }
 
 
@@ -341,6 +362,25 @@ namespace ARTEC.GUI
             cboTipoBien.DisplayMember = "DescripTipoBien";
             cboTipoBien.ValueMember = "IdTipoBien";
 
+            if ((int)cboTipoBien.SelectedValue == 1)//Hardware
+            {
+                lblSerie.Visible = true;
+                lblDeposito.Visible = true;
+                cboDeposito.Visible = true;
+                lblSerieKey.Visible = false;
+                lblSerial.Visible = false;
+                txtSerialMaster.Visible = false;
+            }
+            if ((int)cboTipoBien.SelectedValue == 2)//Software
+            {
+                lblSerie.Visible = false;
+                lblDeposito.Visible = false;
+                cboDeposito.Visible = false;
+                lblSerieKey.Visible = true;
+                lblSerial.Visible = true;
+                txtSerialMaster.Visible = true;
+            }
+
             //Traigo categorias para dps filtrar por hard o soft
             //CREO QUE QUITAR
             BLLCategoria ManagerCategoria = new BLLCategoria();
@@ -367,6 +407,10 @@ namespace ARTEC.GUI
             cboEstadoInv.DataSource = unosEstadoInventario;
             cboEstadoInv.DisplayMember = "DescripEstadoInv";
             cboEstadoInv.ValueMember = "IdEstadoInventario";
+
+            //Cargar fecha Inicio
+            txtFechaCompra.MaxDate = DateTime.Today;
+            txtFechaCompra.Text = DateTime.Today.ToString("d");
         }
 
 
@@ -462,7 +506,8 @@ namespace ARTEC.GUI
                 unBienAUX.unModelo = unBien.unModelo;
                 unBienAUX.IdBien = unBien.IdBien;
                 unBienAUX.unInventarioAlta.Costo = Int32.Parse(txtCosto.Text);
-
+                MontoTotalAcum = MontoTotalAcum + Int32.Parse(txtCosto.Text);
+                txtMontoTotal.Text = MontoTotalAcum.ToString();
 
                 unaAdquisicion.BienesInventarioAsociados.Add(unBienAUX);
 
