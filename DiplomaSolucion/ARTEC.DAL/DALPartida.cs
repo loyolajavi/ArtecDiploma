@@ -237,11 +237,11 @@ namespace ARTEC.DAL
         }
 
 
-        public List<Partida> PartidasBuscarPorIdSolicitud(int NroPart)
+        public List<Partida> PartidasBuscarPorIdSolicitud(int NroSolic)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@IdSolicitud", NroPart)
+                new SqlParameter("@IdSolicitud", NroSolic)
             };
 
             try

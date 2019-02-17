@@ -331,43 +331,48 @@ namespace ARTEC.GUI
         {
             if (PDetallesBorrar != null && PDetallesBorrar.Count() > 0)
             {
-                ManagerPartida.PartidaModifDetalles(PDetallesBorrar);
-
-            }
-
-            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
-            {
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta
+                if (ManagerPartida.PartidaModifDetalles(PDetallesBorrar))
                 {
-                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
-                    CultureInfo ci = new CultureInfo("es-AR");
-                    doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
-                    ////Si se escribio una justificación
-                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                    //{
-                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                    //}
-                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                    //Crear el documento
+                    string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
+                    if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
+                    {
+                        using (DocX doc = DocX.Load(RutaPlantilla))
+                        {
+                            doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                            doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                            CultureInfo ci = new CultureInfo("es-AR");
+                            doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                        }
+                    }
+                    else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
+                    {
+                        RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Elevación Partida2 English.docx";
+                        using (DocX doc = DocX.Load(RutaPlantilla))
+                        {
+                            doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                            doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                            CultureInfo ci = new CultureInfo("es-AR");
+                            doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                        }
+                    }
+
+                    //Imprimir la partida
+                    using (PrintDialog printDialog1 = new PrintDialog())
+                    {
+                        if (printDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                            info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                            info.CreateNoWindow = true;
+                            info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            info.UseShellExecute = true;
+                            info.Verb = "PrintTo";
+                            System.Diagnostics.Process.Start(info);
+                        }
+                    }
                 }
             }
-            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
-            {
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
-                {
-                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
-                    CultureInfo ci = new CultureInfo("en-US");
-                    doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
-                    //Si se escribio una justificación
-                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                    //{
-                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                    //}
-                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-                }
-            }
-            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -410,40 +415,74 @@ namespace ARTEC.GUI
                     //Si fue acreditada generar documento de cancelación
                     if (unaPartida.MontoOtorgado > 0)
                     {
+                        if (ManagerPartida.PartidaCancelar(unaPartida))
+                        {
+                            //Crear el documento
+                            string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
+                            if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
+                            {
+                                using (DocX doc = DocX.Load(RutaPlantilla))
+                                {
+                                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                                    CultureInfo ci = new CultureInfo("es-AR");
+                                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                                }
+                            }
+                            else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
+                            {
+                                RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Elevación Partida2 English.docx";
+                                using (DocX doc = DocX.Load(RutaPlantilla))
+                                {
+                                    doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                                    doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
+                                    CultureInfo ci = new CultureInfo("es-AR");
+                                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                                }
+                            }
 
-                        if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
-                        {
-                            using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))//VER: Modificar ruta
+                            //Imprimir el documento de cancelación de Partida
+                            using (PrintDialog printDialog1 = new PrintDialog())
                             {
-                                doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                                doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
-                                CultureInfo ci = new CultureInfo("es-AR");
-                                doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
-                                doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                                if (printDialog1.ShowDialog() == DialogResult.OK)
+                                {
+                                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                                    info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                                    info.CreateNoWindow = true;
+                                    info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                                    info.UseShellExecute = true;
+                                    info.Verb = "PrintTo";
+                                    System.Diagnostics.Process.Start(info);
+                                }
                             }
-                        }
-                        else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
-                        {
-                            using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
-                            {
-                                doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                                doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
-                                CultureInfo ci = new CultureInfo("en-US");
-                                doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
-                                doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
-                            }
+
+                            MessageBox.Show("Partida Cancelada Correctamente");
+                            //Grisear Todo
+                            btnRegenerarPartida.Enabled = false;
+                            btnCancelar.Enabled = false;
+                            grillaDetallesPart.Enabled = false;
+                            grillaCotizaciones.Enabled = false;
+                            GrillaCotizAntiguas.Enabled = false;
+                            //DialogResult = DialogResult.No;
+                            //Cerrar formulario
+                            DialogResult = DialogResult.Cancel;
                         }
                     }
-                    if (ManagerPartida.PartidaCancelar(unaPartida))
-                    {
-                        MessageBox.Show("Partida Cancelada Correctamente");
-                        //Grisear Todo
-                        btnRegenerarPartida.Enabled = false;
-                        btnCancelar.Enabled = false;
-                        grillaDetallesPart.Enabled = false;
-                        grillaCotizaciones.Enabled = false;
-                        GrillaCotizAntiguas.Enabled = false;
-                        //DialogResult = DialogResult.No;
+                    else
+                    {   //Cancela sin generar documento de cancelación
+                        if (ManagerPartida.PartidaCancelar(unaPartida))
+                        {
+                            MessageBox.Show("Partida Cancelada Correctamente");
+                            //Grisear Todo
+                            btnRegenerarPartida.Enabled = false;
+                            btnCancelar.Enabled = false;
+                            grillaDetallesPart.Enabled = false;
+                            grillaCotizaciones.Enabled = false;
+                            GrillaCotizAntiguas.Enabled = false;
+                            //DialogResult = DialogResult.No;
+                            //Cerrar formulario
+                            DialogResult = DialogResult.Cancel;
+                        }
                     }
                 }
                 else
@@ -454,10 +493,10 @@ namespace ARTEC.GUI
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnCancelar_Click");
                 MessageBox.Show("Ocurrio un error al intentar cancelar la Partida: " + unaPartida.IdPartida.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
-            finally
-            {
-                DialogResult = DialogResult.Cancel;
-            }
+            //finally
+            //{
+            //    DialogResult = DialogResult.Cancel;
+            //}
         }
 
 

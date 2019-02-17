@@ -1508,6 +1508,8 @@ namespace ARTEC.GUI
                         btnNotas.Enabled = false;
                         btnModifSolicitud.Enabled = false;
                         btnAsociarAgente.Enabled = false;
+
+                        this.Close();
                     }
                 }
                 else

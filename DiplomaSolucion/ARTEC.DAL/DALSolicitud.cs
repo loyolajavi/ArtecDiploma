@@ -1006,8 +1006,10 @@ namespace ARTEC.DAL
                 SqlParameter[] parametersSolicCancelar = new SqlParameter[]
 		        {
                     new SqlParameter("@IdSolicitud", unaSolicitud.IdSolicitud),
-                    new SqlParameter("@NuevoEstado", EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+                    new SqlParameter("@NuevoEstado", EstadoSolicitud.EnumEstadoSolicitud.Cancelada),
+                    new SqlParameter("@FechaFin", DateTime.Today.ToString())
 		        };
+                unaSolicitud.FechaFin = DateTime.Today;
 
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudUpdateEstado", parametersSolicCancelar);
                 unaSolicitud.UnEstado.IdEstadoSolicitud = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
