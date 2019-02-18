@@ -27,12 +27,76 @@ namespace ARTEC.GUI
         public frmFamiliaGestion()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmFamiliaGestion = new Dictionary<string, string[]>();
+            string[] IdiomafrmFamiliaGestion = { "Gestión de Familias" };
+            dicfrmFamiliaGestion.Add("Idioma", IdiomafrmFamiliaGestion);
+            this.Tag = dicfrmFamiliaGestion;
+
+            Dictionary<string, string[]> diclblFamiliaBuscar = new Dictionary<string, string[]>();
+            string[] IdiomalblFamiliaBuscar = { "Familia" };
+            diclblFamiliaBuscar.Add("Idioma", IdiomalblFamiliaBuscar);
+            this.lblFamiliaBuscar.Tag = diclblFamiliaBuscar;
+
+            Dictionary<string, string[]> diclblNombre = new Dictionary<string, string[]>();
+            string[] IdiomalblNombre = { "Nombre" };
+            diclblNombre.Add("Idioma", IdiomalblNombre);
+            this.lblNombre.Tag = diclblNombre;
+
+            Dictionary<string, string[]> dicpnlPermisos = new Dictionary<string, string[]>();
+            string[] IdiomapnlPermisos = { "Permisos" };
+            dicpnlPermisos.Add("Idioma", IdiomapnlPermisos);
+            this.pnlPermisos.Tag = dicpnlPermisos;
+
+            Dictionary<string, string[]> diclblDisponibles = new Dictionary<string, string[]>();
+            string[] IdiomalblDisponibles = { "Disponibles" };
+            diclblDisponibles.Add("Idioma", IdiomalblDisponibles);
+            this.lblDisponibles.Tag = diclblDisponibles;
+
+            Dictionary<string, string[]> diclblAsignados = new Dictionary<string, string[]>();
+            string[] IdiomalblAsignados = { "Asignados" };
+            diclblAsignados.Add("Idioma", IdiomalblAsignados);
+            this.lblAsignados.Tag = diclblAsignados;
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
+
+            Dictionary<string, string[]> dicbtnQuitar = new Dictionary<string, string[]>();
+            string[] IdiomabtnQuitar = { "Quitar" };
+            dicbtnQuitar.Add("Idioma", IdiomabtnQuitar);
+            this.btnQuitar.Tag = dicbtnQuitar;
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
+            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] IdiomabtnModificar = { "Modificar" };
+            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
+            this.btnModificar.Tag = dicbtnModificar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
+            Dictionary<string, string[]> diclblPermisosTodos = new Dictionary<string, string[]>();
+            string[] IdiomalblPermisosTodos = { "Detalle de permisos" }; diclblPermisosTodos.Add("Idioma", IdiomalblPermisosTodos);
+            this.lblPermisosTodos.Tag = diclblPermisosTodos;
+
         }
 
         private void frmFamiliaGestion_Load(object sender, EventArgs e)
         {
             try
             {
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
+
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)

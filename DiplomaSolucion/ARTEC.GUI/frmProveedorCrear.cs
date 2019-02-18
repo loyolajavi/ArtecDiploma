@@ -75,6 +75,8 @@ namespace ARTEC.GUI
             this.btnAgregarProd.Tag = dicbtnAgregarProd;
 
             Dictionary<string, string[]> dicbtnCrearProveedor = new Dictionary<string, string[]>();
+            string[] PerbtnCrearProveedor = { "Proveedor Crear" };
+            dicbtnCrearProveedor.Add("Permisos", PerbtnCrearProveedor);
             string[] IdiomabtnCrearProveedor = { "Crear Proveedor" };
             dicbtnCrearProveedor.Add("Idioma", IdiomabtnCrearProveedor);
             this.btnCrearProveedor.Tag = dicbtnCrearProveedor;
@@ -110,16 +112,22 @@ namespace ARTEC.GUI
             this.lblTipo.Tag = diclblTipo;
 
             Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
+            string[] PerbtnModificar = { "Proveedor Modificar" };
+            dicbtnModificar.Add("Permisos", PerbtnModificar);
             string[] IdiomabtnModificar = { "Modificar" };
             dicbtnModificar.Add("Idioma", IdiomabtnModificar);
             this.btnModificar.Tag = dicbtnModificar;
 
             Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] PerbtnEliminar = { "Proveedor Eliminar" };
+            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
             string[] IdiomabtnEliminar = { "Eliminar" };
             dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
             this.btnEliminar.Tag = dicbtnEliminar;
 
             Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
+            string[] PerbtnReactivar = { "Proveedor Reactivar" };
+            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
             string[] IdiomabtnReactivar = { "Reactivar" };
             dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
             this.btnReactivar.Tag = dicbtnReactivar;

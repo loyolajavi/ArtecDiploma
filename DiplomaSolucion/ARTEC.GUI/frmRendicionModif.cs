@@ -32,6 +32,57 @@ namespace ARTEC.GUI
         public frmRendicionModif()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmRendicionModif = new Dictionary<string, string[]>();
+            string[] IdiomafrmRendicionModif = { "Modificar Rendición" };
+            dicfrmRendicionModif.Add("Idioma", IdiomafrmRendicionModif);
+            this.Tag = dicfrmRendicionModif;
+
+            Dictionary<string, string[]> diclblNroRendicion = new Dictionary<string, string[]>();
+            string[] IdiomalblNroRendicion = { "Rendición" };
+            diclblNroRendicion.Add("Idioma", IdiomalblNroRendicion);
+            this.lblNroRendicion.Tag = diclblNroRendicion;
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Número de Partida" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
+            Dictionary<string, string[]> diclblNroSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolic = { "Solicitud" };
+            diclblNroSolic.Add("Idioma", IdiomalblNroSolic);
+            this.lblNroSolic.Tag = diclblNroSolic;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Partida Referenciada" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclblMontoOtorgado = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoOtorgado = { "Monto Otorgado" };
+            diclblMontoOtorgado.Add("Idioma", IdiomalblMontoOtorgado);
+            this.lblMontoOtorgado.Tag = diclblMontoOtorgado;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Monto Empleado" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnGenerar = new Dictionary<string, string[]>();
+            string[] IdiomabtnGenerar = { "Generar" };
+            dicbtnGenerar.Add("Idioma", IdiomabtnGenerar);
+            this.btnGenerar.Tag = dicbtnGenerar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
         }
 
 
@@ -39,12 +90,66 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
             unaRendicionSelec = unaRen;
+
+            Dictionary<string, string[]> dicfrmRendicionModif = new Dictionary<string, string[]>();
+            string[] IdiomafrmRendicionModif = { "Modificar Rendición" };
+            dicfrmRendicionModif.Add("Idioma", IdiomafrmRendicionModif);
+            this.Tag = dicfrmRendicionModif;
+
+            Dictionary<string, string[]> diclblNroRendicion = new Dictionary<string, string[]>();
+            string[] IdiomalblNroRendicion = { "Rendición" };
+            diclblNroRendicion.Add("Idioma", IdiomalblNroRendicion);
+            this.lblNroRendicion.Tag = diclblNroRendicion;
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Número de Partida" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
+            Dictionary<string, string[]> diclblNroSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolic = { "Solicitud" };
+            diclblNroSolic.Add("Idioma", IdiomalblNroSolic);
+            this.lblNroSolic.Tag = diclblNroSolic;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Partida Referenciada" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclblMontoOtorgado = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoOtorgado = { "Monto Otorgado" };
+            diclblMontoOtorgado.Add("Idioma", IdiomalblMontoOtorgado);
+            this.lblMontoOtorgado.Tag = diclblMontoOtorgado;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Monto Empleado" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnGenerar = new Dictionary<string, string[]>();
+            string[] IdiomabtnGenerar = { "Generar" };
+            dicbtnGenerar.Add("Idioma", IdiomabtnGenerar);
+            this.btnGenerar.Tag = dicbtnGenerar;
+
+            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminar = { "Eliminar" };
+            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
+            this.btnEliminar.Tag = dicbtnEliminar;
+
         }
 
         private void frmRendicionModif_Load(object sender, EventArgs e)
         {
             try
             {
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
                 //Permisos
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
                 foreach (Control unControl in unosControles)

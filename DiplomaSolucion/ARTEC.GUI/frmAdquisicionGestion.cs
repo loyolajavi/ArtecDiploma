@@ -181,6 +181,10 @@ namespace ARTEC.GUI
         {
             try
             {
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
+                
                 //Permisos para Controles
                 //Obtengo todos los controles del formulario
                 IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);

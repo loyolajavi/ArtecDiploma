@@ -15,6 +15,11 @@ namespace ARTEC.GUI
         public GrillaRendicion()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> diclblFactura = new Dictionary<string, string[]>();
+            string[] IdiomalblFactura = { "Factura" };
+            diclblFactura.Add("Idioma", IdiomalblFactura);
+            this.lblFactura.Tag = diclblFactura;
         }
 
         public string unaFactura

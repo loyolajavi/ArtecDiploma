@@ -18,6 +18,22 @@ namespace ARTEC.GUI
         public GrillaAsignacion()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> diclblBien = new Dictionary<string, string[]>();
+            string[] IdiomalblBien = { "Bien" };
+            diclblBien.Add("Idioma", IdiomalblBien);
+            this.lblBien.Tag = diclblBien;
+
+            Dictionary<string, string[]> diclblCantidad = new Dictionary<string, string[]>();
+            string[] IdiomalblCantidad = { "Cantidad" };
+            diclblCantidad.Add("Idioma", IdiomalblCantidad);
+            this.lblCantidad.Tag = diclblCantidad;
+
+            Dictionary<string, string[]> dicGrillaInventarios = new Dictionary<string, string[]>();
+            string[] IdiomaGrillaInventarios = { "Agregar" };
+            dicGrillaInventarios.Add("Idioma", IdiomaGrillaInventarios);
+            this.GrillaInventarios.Tag = dicGrillaInventarios;
+
         }
 
         public string unBien

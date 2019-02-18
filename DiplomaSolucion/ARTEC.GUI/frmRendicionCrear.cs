@@ -16,6 +16,7 @@ using ARTEC.FRAMEWORK.Servicios;
 using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
 using Xceed.Words.NET;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -31,10 +32,58 @@ namespace ARTEC.GUI
         public frmRendicionCrear()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmRendicionCrear = new Dictionary<string, string[]>();
+            string[] IdiomafrmRendicionCrear = { "Crear Rendición" };
+            dicfrmRendicionCrear.Add("Idioma", IdiomafrmRendicionCrear);
+            this.Tag = dicfrmRendicionCrear;
+
+            Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
+            string[] IdiomalblNroPartida = { "Número de Partida" };
+            diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
+            this.lblNroPartida.Tag = diclblNroPartida;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> diclblNroSolic = new Dictionary<string, string[]>();
+            string[] IdiomalblNroSolic = { "Solicitud" };
+            diclblNroSolic.Add("Idioma", IdiomalblNroSolic);
+            this.lblNroSolic.Tag = diclblNroSolic;
+
+            Dictionary<string, string[]> diclblDependencia = new Dictionary<string, string[]>();
+            string[] IdiomalblDependencia = { "Dependencia" };
+            diclblDependencia.Add("Idioma", IdiomalblDependencia);
+            this.lblDependencia.Tag = diclblDependencia;
+
+            Dictionary<string, string[]> diclabelX1 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX1 = { "Partida Referenciada" };
+            diclabelX1.Add("Idioma", IdiomalabelX1);
+            this.labelX1.Tag = diclabelX1;
+
+            Dictionary<string, string[]> diclblMontoOtorgado = new Dictionary<string, string[]>();
+            string[] IdiomalblMontoOtorgado = { "Monto Otorgado" };
+            diclblMontoOtorgado.Add("Idioma", IdiomalblMontoOtorgado);
+            this.lblMontoOtorgado.Tag = diclblMontoOtorgado;
+
+            Dictionary<string, string[]> diclabelX3 = new Dictionary<string, string[]>();
+            string[] IdiomalabelX3 = { "Monto Empleado" };
+            diclabelX3.Add("Idioma", IdiomalabelX3);
+            this.labelX3.Tag = diclabelX3;
+
+            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrear = { "Crear" };
+            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
+            this.btnCrear.Tag = dicbtnCrear;
+
         }
 
         private void frmRendicionCrear_Load(object sender, EventArgs e)
         {
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
         }
 

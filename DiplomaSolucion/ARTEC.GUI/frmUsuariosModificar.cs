@@ -31,6 +31,97 @@ namespace ARTEC.GUI
         public frmUsuariosModificar()
         {
             InitializeComponent();
+
+            Dictionary<string, string[]> dicfrmUsuariosModificar = new Dictionary<string, string[]>();
+            string[] IdiomafrmUsuariosModificar = { "Modificar Usuarios" };
+            dicfrmUsuariosModificar.Add("Idioma", IdiomafrmUsuariosModificar);
+            this.Tag = dicfrmUsuariosModificar;
+
+            Dictionary<string, string[]> diclblNomUsBuscar = new Dictionary<string, string[]>();
+            string[] IdiomalblNomUsBuscar = { "Nombre Usuario" };
+            diclblNomUsBuscar.Add("Idioma", IdiomalblNomUsBuscar);
+            this.lblNomUsBuscar.Tag = diclblNomUsBuscar;
+
+            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
+            string[] IdiomabtnBuscar = { "Buscar" };
+            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
+            this.btnBuscar.Tag = dicbtnBuscar;
+
+            Dictionary<string, string[]> dicbtnCrearUsuario = new Dictionary<string, string[]>();
+            string[] IdiomabtnCrearUsuario = { "Crear Usuario" };
+            dicbtnCrearUsuario.Add("Idioma", IdiomabtnCrearUsuario);
+            this.btnCrearUsuario.Tag = dicbtnCrearUsuario;
+
+            Dictionary<string, string[]> dicbtnReactivarUs = new Dictionary<string, string[]>();
+            string[] IdiomabtnReactivarUs = { "Reactivar Usuario" };
+            dicbtnReactivarUs.Add("Idioma", IdiomabtnReactivarUs);
+            this.btnReactivarUs.Tag = dicbtnReactivarUs;
+
+            Dictionary<string, string[]> dicbtnEliminarUsuario = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminarUsuario = { "Eliminar Usuario" };
+            dicbtnEliminarUsuario.Add("Idioma", IdiomabtnEliminarUsuario);
+            this.btnEliminarUsuario.Tag = dicbtnEliminarUsuario;
+
+            Dictionary<string, string[]> diclblNomUs = new Dictionary<string, string[]>();
+            string[] IdiomalblNomUs = { "Nombre Usuario" };
+            diclblNomUs.Add("Idioma", IdiomalblNomUs);
+            this.lblNomUs.Tag = diclblNomUs;
+
+            Dictionary<string, string[]> diclblPass = new Dictionary<string, string[]>();
+            string[] IdiomalblPass = { "Contraseña" };
+            diclblPass.Add("Idioma", IdiomalblPass);
+            this.lblPass.Tag = diclblPass;
+
+            Dictionary<string, string[]> diclblBaja = new Dictionary<string, string[]>();
+            string[] IdiomalblBaja = { "Dado de Baja" };
+            diclblBaja.Add("Idioma", IdiomalblBaja);
+            this.lblBaja.Tag = diclblBaja;
+
+            Dictionary<string, string[]> diclblNombre = new Dictionary<string, string[]>();
+            string[] IdiomalblNombre = { "Nombre" };
+            diclblNombre.Add("Idioma", IdiomalblNombre);
+            this.lblNombre.Tag = diclblNombre;
+
+            Dictionary<string, string[]> diclblApellido = new Dictionary<string, string[]>();
+            string[] IdiomalblApellido = { "Apellido" };
+            diclblApellido.Add("Idioma", IdiomalblApellido);
+            this.lblApellido.Tag = diclblApellido;
+
+            Dictionary<string, string[]> diclblMail = new Dictionary<string, string[]>();
+            string[] IdiomalblMail = { "Mail" };
+            diclblMail.Add("Idioma", IdiomalblMail);
+            this.lblMail.Tag = diclblMail;
+
+            Dictionary<string, string[]> dicpnlPermisos = new Dictionary<string, string[]>();
+            string[] IdiomapnlPermisos = { "Permisos" };
+            dicpnlPermisos.Add("Idioma", IdiomapnlPermisos);
+            this.pnlPermisos.Tag = dicpnlPermisos;
+
+            Dictionary<string, string[]> diclblDisponibles = new Dictionary<string, string[]>();
+            string[] IdiomalblDisponibles = { "Disponibles" };
+            diclblDisponibles.Add("Idioma", IdiomalblDisponibles);
+            this.lblDisponibles.Tag = diclblDisponibles;
+
+            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
+            string[] IdiomabtnAgregar = { "Agregar" };
+            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
+            this.btnAgregar.Tag = dicbtnAgregar;
+
+            Dictionary<string, string[]> diclblAsignados = new Dictionary<string, string[]>();
+            string[] IdiomalblAsignados = { "Asignados" };
+            diclblAsignados.Add("Idioma", IdiomalblAsignados);
+            this.lblAsignados.Tag = diclblAsignados;
+
+            Dictionary<string, string[]> dicbtnQuitar = new Dictionary<string, string[]>();
+            string[] IdiomabtnQuitar = { "Quitar" };
+            dicbtnQuitar.Add("Idioma", IdiomabtnQuitar);
+            this.btnQuitar.Tag = dicbtnQuitar;
+
+            Dictionary<string, string[]> dicbtnModifUsuario = new Dictionary<string, string[]>();
+            string[] IdiomabtnModifUsuario = { "Modificar Usuario" };
+            dicbtnModifUsuario.Add("Idioma", IdiomabtnModifUsuario);
+            this.btnModifUsuario.Tag = dicbtnModifUsuario;
+
         }
 
         private void frmUsuariosGestion_Load(object sender, EventArgs e)
@@ -53,6 +144,10 @@ namespace ARTEC.GUI
                 btnModifUsuario.Enabled = false;
                 btnAgregar.Enabled = false;
                 btnQuitar.Enabled = false;
+
+                //Idioma
+                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+
 
             }
             catch (Exception es)
