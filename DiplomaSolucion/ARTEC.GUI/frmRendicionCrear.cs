@@ -39,7 +39,7 @@ namespace ARTEC.GUI
             this.Tag = dicfrmRendicionCrear;
 
             Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
-            string[] IdiomalblNroPartida = { "Número de Partida" };
+            string[] IdiomalblNroPartida = { "Partida" };
             diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
             this.lblNroPartida.Tag = diclblNroPartida;
 
@@ -205,6 +205,7 @@ namespace ARTEC.GUI
                         DocumentoRendicionCrear(IdRendRes);
                     }
                 }
+                MessageBox.Show("Rendición registrada correctamente");
             }
         }
 
@@ -212,22 +213,23 @@ namespace ARTEC.GUI
 
         private void DocumentoRendicionCrear(int NroRendicion)
         {
+            //Crear el documento
+            string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Rendicion.docx";
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
-                //VER: FALTA CREAR PLANTILLA
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion.docx"))
+                using (DocX doc = DocX.Load(RutaPlantilla))
                 {
-
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                     doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
-                    //Si se escribio una justificación
-                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                    //{
-                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                    //}
-                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "PruebaRendicion1"));
+                    var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
+                    for (var I = 0; I == unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados.Count(); I++)
+                    {
+                        doc.AddListItem(unaLista, unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[I].unaCategoria.DescripCategoria, 0);
+                    }
+                    doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
+                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + unaRendicion.IdRendicion.ToString() + ".docx");
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
@@ -272,6 +274,20 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
                         doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Retribucion1"));
                     }
+                }
+            }
+            //Imprimir la rendición
+            using (PrintDialog printDialog1 = new PrintDialog())
+            {
+                if (printDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + unaRendicion.IdRendicion.ToString() + ".docx");
+                    info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                    info.CreateNoWindow = true;
+                    info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    info.UseShellExecute = true;
+                    info.Verb = "PrintTo";
+                    System.Diagnostics.Process.Start(info);
                 }
             }
         }

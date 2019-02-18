@@ -240,6 +240,7 @@ namespace ARTEC.GUI
                         unaRendicion.IdRendicion = IdRendRes;
                         ManagerRendicion.RendicionModificar(unaRendicion);
                         DocumentoRendicionCrear(IdRendRes);
+                        MessageBox.Show("Rendición modificada correctamente");
                     }
                 }
             }

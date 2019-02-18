@@ -81,7 +81,7 @@ namespace ARTEC.GUI
             Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
             string[] PerbtnModificar = { "Dependencia Modificar" };
             dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Crear Solicitud" };
+            string[] IdiomabtnModificar = { "Modificar Dependencia" };
             dicbtnModificar.Add("Idioma", IdiomabtnModificar);
             this.btnModificar.Tag = dicbtnModificar;
 
