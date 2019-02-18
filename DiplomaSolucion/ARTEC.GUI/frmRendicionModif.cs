@@ -44,7 +44,7 @@ namespace ARTEC.GUI
             this.lblNroRendicion.Tag = diclblNroRendicion;
 
             Dictionary<string, string[]> diclblNroPartida = new Dictionary<string, string[]>();
-            string[] IdiomalblNroPartida = { "Número de Partida" };
+            string[] IdiomalblNroPartida = { "Partida" };
             diclblNroPartida.Add("Idioma", IdiomalblNroPartida);
             this.lblNroPartida.Tag = diclblNroPartida;
 

@@ -48,16 +48,22 @@ namespace ARTEC.GUI
             this.btnBuscar.Tag = dicbtnBuscar;
 
             Dictionary<string, string[]> dicbtnCrearUsuario = new Dictionary<string, string[]>();
+            string[] PerbtnCrearUsuario = { "Usuario Crear" };
+            dicbtnCrearUsuario.Add("Permisos", PerbtnCrearUsuario);
             string[] IdiomabtnCrearUsuario = { "Crear Usuario" };
             dicbtnCrearUsuario.Add("Idioma", IdiomabtnCrearUsuario);
             this.btnCrearUsuario.Tag = dicbtnCrearUsuario;
 
             Dictionary<string, string[]> dicbtnReactivarUs = new Dictionary<string, string[]>();
+            string[] PerbtnReactivarUs = { "Usuario Reactivar" };
+            dicbtnReactivarUs.Add("Permisos", PerbtnReactivarUs);
             string[] IdiomabtnReactivarUs = { "Reactivar Usuario" };
             dicbtnReactivarUs.Add("Idioma", IdiomabtnReactivarUs);
             this.btnReactivarUs.Tag = dicbtnReactivarUs;
 
             Dictionary<string, string[]> dicbtnEliminarUsuario = new Dictionary<string, string[]>();
+            string[] PerbtnEliminarUsuario = { "Usuario Eliminar" };
+            dicbtnEliminarUsuario.Add("Permisos", PerbtnEliminarUsuario);
             string[] IdiomabtnEliminarUsuario = { "Eliminar Usuario" };
             dicbtnEliminarUsuario.Add("Idioma", IdiomabtnEliminarUsuario);
             this.btnEliminarUsuario.Tag = dicbtnEliminarUsuario;
@@ -118,6 +124,8 @@ namespace ARTEC.GUI
             this.btnQuitar.Tag = dicbtnQuitar;
 
             Dictionary<string, string[]> dicbtnModifUsuario = new Dictionary<string, string[]>();
+            string[] PerbtnModifUsuario = { "Usuario Modificar" };
+            dicbtnModifUsuario.Add("Permisos", PerbtnModifUsuario);
             string[] IdiomabtnModifUsuario = { "Modificar Usuario" };
             dicbtnModifUsuario.Add("Idioma", IdiomabtnModifUsuario);
             this.btnModifUsuario.Tag = dicbtnModifUsuario;
