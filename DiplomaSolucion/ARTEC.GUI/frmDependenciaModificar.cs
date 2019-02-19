@@ -258,14 +258,21 @@ namespace ARTEC.GUI
             requiredFieldValidator2.Enabled = false;
             if (!vldFrmDependenciaModificar.Validate())
                 return;
-            
+
+            bool flagModificacion = false;
+
             if (txtDependencia.Enabled)
+            {
                 ManagerDependencia.DependenciaModifNombre(txtDependencia.Text, DepModif.IdDependencia);
+                flagModificacion = true;
+            }
+                
 
             if (DepModif.unTipoDep.IdTipoDependencia != (cboTipoDep.SelectedItem as TipoDependencia).IdTipoDependencia)
             {
                 ManagerDependencia.DependenciaModifTipoDep(DepModif.IdDependencia, (TipoDependencia)cboTipoDep.SelectedItem);
                 DepModif.unTipoDep = (TipoDependencia)cboTipoDep.SelectedItem;
+                flagModificacion = true;
             }
                 
                 
@@ -274,6 +281,7 @@ namespace ARTEC.GUI
             {
                 ManagerDependencia.DependenciaAgenteAgregar(AgentesNuevos, DepModif.IdDependencia);
                 AgentesNuevos.Clear();
+                flagModificacion = true;
             }
 
             if (AgentesAQuitar != null && AgentesAQuitar.Count > 0)
@@ -289,6 +297,8 @@ namespace ARTEC.GUI
                 //Limpio los agentesquitar
                 AgentesAQuitar.Clear();
                 AgentesAQuitarIndex.Clear();
+
+                flagModificacion = true;
             }
 
             //Regenero la grilla
@@ -296,6 +306,10 @@ namespace ARTEC.GUI
             //AgentesLista = ManagerDependencia.TraerAgentesDependencia(DepModif.IdDependencia);
             GrillaAgentesLista.DataSource = AgentesLista;
             FormatearGrillaAgentes();
+
+            if(flagModificacion)
+                MessageBox.Show("Dependencia modificada correctamente");
+
             AgentesListaBKP = AgentesLista.Where(X => X.IdAgente > 0).ToList() as List<Agente>;
 
             Modificacion = true;
