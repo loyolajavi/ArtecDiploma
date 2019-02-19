@@ -437,6 +437,11 @@ namespace ARTEC.GUI
                 return;
             BLL.Servicios.BLLServicioMail.CargarMailConfig();
 
+            if (ListaProv.Count == 0)
+            {
+                MessageBox.Show("Por favor ingrese al menos un Proveedor");
+                return;
+            }
             foreach (Proveedor unProv in ListaProv)
             {
                 FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
