@@ -16,6 +16,8 @@ using System.Globalization;
 using ARTEC.ENTIDADES.Servicios;
 using ARTEC.BLL.Servicios;
 using Xceed.Words.NET;
+using System.IO;
+using System.Drawing.Printing;
 
 namespace ARTEC.GUI
 {
@@ -32,6 +34,8 @@ namespace ARTEC.GUI
         BLLCotizacion ManagerCotizacion = new BLLCotizacion();
         Dependencia DepAsoc;
         List<PartidaDetalle> PDetallesBorrar = new List<PartidaDetalle>();
+        System.Drawing.Font printFont;
+        StreamReader streamToPrint;
 
         public frmPartidaModificar(int NroPartidaArg)
         {
@@ -504,6 +508,52 @@ namespace ARTEC.GUI
         {
             this.Close();
         }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            string NombreImpresora = "";
+            //Partida
+            //string file2 = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Cotizacion 2422.pdf";
+            using (PrintDialog printDialog1 = new PrintDialog())
+            {
+                if (printDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                    info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                    NombreImpresora = printDialog1.PrinterSettings.PrinterName;
+                    info.CreateNoWindow = true;
+                    info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    info.UseShellExecute = true;
+                    info.Verb = "Printto";
+                    System.Diagnostics.Process.Start(info);
+                }
+            }
+
+
+            //Cotiz
+            foreach (PartidaDetalle unaPDet in unaPartida.unasPartidasDetalles)
+            {
+                foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
+                {
+                    string file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
+                    using (var pd = new System.Drawing.Printing.PrintDocument())
+                    {
+                        pd.PrinterSettings.PrinterName = NombreImpresora;
+                        pd.PrintPage += (_, r) =>
+                        {
+                            var img = System.Drawing.Image.FromFile(file);
+                            // This uses a 50 pixel margin - adjust as needed
+                            r.Graphics.DrawImage(img, new Point(50, 50));
+                        };
+                        pd.Print();
+                        
+                    }
+                }
+            }
+        }
+
+        
+
 
 
 
