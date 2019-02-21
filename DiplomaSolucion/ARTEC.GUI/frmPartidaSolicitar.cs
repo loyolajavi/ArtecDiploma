@@ -512,58 +512,52 @@ namespace ARTEC.GUI
                 }
 
                 ////Imprimir la partida
-                //using (PrintDialog printDialog1 = new PrintDialog())
-                //{
-                //    if (printDialog1.ShowDialog() == DialogResult.OK)
-                //    {
-                //        System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
-                //        info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
-                //        info.CreateNoWindow = true;
-                //        info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                //        info.UseShellExecute = true;
-                //        info.Verb = "PrintTo";
-                //        System.Diagnostics.Process.Start(info);
-                //    }
-                //}
+                string NombreImpresora = "";
+                string file = "";
 
-                ////Imprimir las cotizaciones
-                //using (PrintDialog printDialog2 = new PrintDialog())
-                //{
-                //    if (printDialog2.ShowDialog() == DialogResult.OK)
-                //    {
-                //        foreach (PartidaDetalle unaPDet in nuevaPartida.unasPartidasDetalles)
-                //        {
-                //            foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
-                //            {
-                //                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg");
-                //                info.Arguments = "\"" + printDialog2.PrinterSettings.PrinterName + "\"";
-                //                info.CreateNoWindow = true;
-                //                info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                //                info.UseShellExecute = true;
-                //                info.Verb = "PrintTo";
-                //                System.Diagnostics.Process.Start(info);        
-                //            }
-                //        }
-                        
-                //    }
-                //}
-                foreach (PartidaDetalle unaPDet in nuevaPartida.unasPartidasDetalles)
+                //Partida
+                if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx"))
                 {
-                    foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
+                    using (PrintDialog printDialog1 = new PrintDialog())
                     {
-                        string file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
-                        using (var pd = new System.Drawing.Printing.PrintDocument())
+                        if (printDialog1.ShowDialog() == DialogResult.OK)
                         {
-                            pd.PrintPage += (_, e) =>
+                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + nuevaPartida.IdPartida.ToString() + ".docx");
+                            info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                            NombreImpresora = printDialog1.PrinterSettings.PrinterName;
+                            info.CreateNoWindow = true;
+                            info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            info.UseShellExecute = true;
+                            info.Verb = "Printto";
+                            System.Diagnostics.Process.Start(info);
+                        }
+                    }
+                    //Cotiz
+                    foreach (PartidaDetalle unaPDet in nuevaPartida.unasPartidasDetalles)
+                    {
+                        foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
+                        {
+                            if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg"))
                             {
-                                var img = System.Drawing.Image.FromFile(file);
-                                // This uses a 50 pixel margin - adjust as needed
-                                e.Graphics.DrawImage(img, new Point(50, 50));
-                            };
-                            pd.Print();
+                                file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
+                                using (var pd = new System.Drawing.Printing.PrintDocument())
+                                {
+                                    pd.PrinterSettings.PrinterName = NombreImpresora;
+                                    pd.PrintPage += (_, r) =>
+                                    {
+                                        var img = System.Drawing.Image.FromFile(file);
+                                        // This uses a 50 pixel margin - adjust as needed
+                                        r.Graphics.DrawImage(img, new Point(50, 50));
+                                    };
+                                    pd.Print();
+                                }
+                            }
                         }
                     }
                 }
+
+
+
 
                 
 

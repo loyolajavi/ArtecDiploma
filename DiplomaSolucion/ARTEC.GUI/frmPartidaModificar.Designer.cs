@@ -58,7 +58,7 @@ namespace ARTEC.GUI
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
             this.lblVolver = new DevComponents.DotNetBar.LabelX();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.btnImprimirPartida = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
             this.pnlResPartida.SuspendLayout();
@@ -460,18 +460,18 @@ namespace ARTEC.GUI
             this.lblVolver.Text = "lblVolver";
             this.lblVolver.Click += new System.EventHandler(this.lblVolver_Click);
             // 
-            // buttonX1
+            // btnImprimirPartida
             // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(193, 395);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(123, 37);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 85;
-            this.buttonX1.Tag = ((object)(resources.GetObject("buttonX1.Tag")));
-            this.buttonX1.Text = "buttonX1";
-            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
+            this.btnImprimirPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnImprimirPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnImprimirPartida.Location = new System.Drawing.Point(193, 395);
+            this.btnImprimirPartida.Name = "btnImprimirPartida";
+            this.btnImprimirPartida.Size = new System.Drawing.Size(123, 37);
+            this.btnImprimirPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnImprimirPartida.TabIndex = 85;
+            this.btnImprimirPartida.Tag = ((object)(resources.GetObject("btnImprimirPartida.Tag")));
+            this.btnImprimirPartida.Text = "btnImprimirPartida";
+            this.btnImprimirPartida.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // frmPartidaModificar
             // 
@@ -479,7 +479,7 @@ namespace ARTEC.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 521);
             this.ControlBox = false;
-            this.Controls.Add(this.buttonX1);
+            this.Controls.Add(this.btnImprimirPartida);
             this.Controls.Add(this.lblVolver);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.GrillaCotizAntiguas);
@@ -546,6 +546,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnRegenerarPartida;
         private DevComponents.DotNetBar.ButtonX btnCancelar;
         private DevComponents.DotNetBar.LabelX lblVolver;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnImprimirPartida;
     }
 }

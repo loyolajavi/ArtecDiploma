@@ -709,7 +709,7 @@ namespace ARTEC.GUI
                     grillaDetalles.Rows[IdSolDet - 1].Cells["unEstado"].Value = EstadoAUX;
                 }
             }
-            
+            this.BringToFront();
         }
 
 
