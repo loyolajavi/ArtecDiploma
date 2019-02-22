@@ -245,7 +245,14 @@ namespace ARTEC.GUI
                 {
                     if (!vldFrmPartidaAsociarAsoc.Validate())
                         return;
-                    else if (Int32.Parse(txtMontoOtorgado.Text) > 0)
+                    if(unaPartida.MontoOtorgado > 0 | !string.IsNullOrEmpty(unaPartida.NroPartida))
+                    {
+                        DialogResult resmbox = MessageBox.Show("La Partida ya está asociada con SGA con la referencia: " + unaPartida.NroPartida + ", con un monto otorgado de $" + unaPartida.MontoOtorgado.ToString() +
+                            "\n" + "¿Está seguro que quiere reemplazar la asociación existente?", "Confirmación", MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.No)
+                            return;
+                    }
+                    if (Int32.Parse(txtMontoOtorgado.Text) > 0)
                     {
                         if (Int32.Parse(txtMontoOtorgado.Text) < unaPartida.MontoSolicitado)
                             MessageBox.Show("El monto otorgado es menor al solicitado, por favor revíselo");

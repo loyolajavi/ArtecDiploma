@@ -170,43 +170,67 @@ namespace ARTEC.GUI
 
             try
             {
-                if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
+                List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
+                LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
+                foreach (var item2 in LisAUXDetalles)
                 {
-                    BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
-                    unaAdquisicion.NroFactura = txtNroFactura.Text;
-                    unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
-                    unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);
-                    unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
-                    unaAdquisicion.FechaAdq = DateTime.Now;
-
-                    ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
-
-                    List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
-                    LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
-                    foreach (var item2 in LisAUXDetalles)
+                    item2.Comprado = (from x in LisAUXCant
+                                      where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
+                                      select x.Comprado).FirstOrDefault();
+                }
+                if (LisAUXDetalles.Any(X => X.Comprado != X.Cantidad | X.Comprado == 0))
+                {
+                    LisAUXCant = null;
+                    if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
                     {
-                        item2.Comprado = (from x in LisAUXCant
-                                          where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
-                                          select x.Comprado).FirstOrDefault();
-                    }
-                    GrillaDetallesBienes.DataSource = null;
-                    GrillaDetallesBienes.DataSource = LisAUXDetalles;
+                        BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+                        unaAdquisicion.NroFactura = txtNroFactura.Text;
+                        unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+                        unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);
+                        unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
+                        unaAdquisicion.FechaAdq = DateTime.Now;
 
-                    //Coloca en estado Adquirido a un detalle de la solicitud cuando todos los bienes de ese detalle fueron adquiridos
-                    foreach (HLPDetallesAdquisicion AuxDet in LisAUXDetalles)
-                    {
-                        if (AuxDet.Cantidad == AuxDet.Comprado)
+                        ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
+                        unaAdquisicion = new Adquisicion();
+
+                        LisAUXCant = new List<HLPDetallesAdquisicion>();
+                        LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
+                        foreach (var item2 in LisAUXDetalles)
                         {
-                            BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-                            ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
+                            item2.Comprado = (from x in LisAUXCant
+                                              where x.IdSolicitudDetalle == item2.IdSolicitudDetalle
+                                              select x.Comprado).FirstOrDefault();
                         }
-                    }
+                        GrillaDetallesBienes.DataSource = null;
+                        GrillaDetallesBienes.DataSource = LisAUXDetalles;
+                        LisAUXCant = null;
+                        
 
+                        LimpiarDatosBien();
+
+                        //Coloca en estado Adquirido a un detalle de la solicitud cuando todos los bienes de ese detalle fueron adquiridos
+                        foreach (HLPDetallesAdquisicion AuxDet in LisAUXDetalles)
+                        {
+                            if (AuxDet.Cantidad == AuxDet.Comprado)
+                            {
+                                BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
+                                ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Faltan cargar los bienes adquiridos");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Faltan cargar los bienes adquiridos");
+                    MessageBox.Show("Todos los bienes de la partida asociada ya fueron adquiridos");
                 }
+
+
+                
             }
             catch (Exception es)
             {
@@ -217,6 +241,21 @@ namespace ARTEC.GUI
             
         }
 
+
+        private void LimpiarDatosBien()
+        {
+            cboTipoBien.Refresh();
+            cboBienCategoria.DataSource = null;
+            cboMarca.DataSource = null;
+            cboModelo.DataSource = null;
+            txtCosto.Clear();
+            txtSerieKey.Clear();
+            cboDeposito.Refresh();
+            cboEstadoInv.Refresh();
+            GrillaBienes.DataSource = null;
+            unosBieneshlp = new List<HLPBienInventario>();
+            
+        }
 
 
         private void btnBuscar_Click(object sender, EventArgs e)
