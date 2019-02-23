@@ -532,36 +532,34 @@ namespace ARTEC.GUI
                             System.Diagnostics.Process.Start(info);
                         }
                     }
+
+
                     //Cotiz
-                    foreach (PartidaDetalle unaPDet in nuevaPartida.unasPartidasDetalles)
+                    if (NombreImpresora != "")
                     {
-                        foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
+                        foreach (PartidaDetalle unaPDet in nuevaPartida.unasPartidasDetalles)
                         {
-                            if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg"))
+                            foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
                             {
-                                file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
-                                using (var pd = new System.Drawing.Printing.PrintDocument())
+                                if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg"))
                                 {
-                                    pd.PrinterSettings.PrinterName = NombreImpresora;
-                                    pd.PrintPage += (_, r) =>
+                                    file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
+                                    using (var pd = new System.Drawing.Printing.PrintDocument())
                                     {
-                                        var img = System.Drawing.Image.FromFile(file);
-                                        // This uses a 50 pixel margin - adjust as needed
-                                        r.Graphics.DrawImage(img, new Point(50, 50));
-                                    };
-                                    pd.Print();
+                                        pd.PrinterSettings.PrinterName = NombreImpresora;
+                                        pd.PrintPage += (_, r) =>
+                                        {
+                                            var img = System.Drawing.Image.FromFile(file);
+                                            // This uses a 50 pixel margin - adjust as needed
+                                            r.Graphics.DrawImage(img, new Point(50, 50));
+                                        };
+                                        pd.Print();
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
-
-
-
-                
-
-                
             }
             else
             {

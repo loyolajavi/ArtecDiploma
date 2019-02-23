@@ -361,18 +361,53 @@ namespace ARTEC.GUI
                         }
                     }
 
-                    //Imprimir la partida
-                    using (PrintDialog printDialog1 = new PrintDialog())
+                    ////Imprimir la partida
+                    string NombreImpresora = "";
+                    string file = "";
+
+                    //Partida
+                    if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx"))
                     {
-                        if (printDialog1.ShowDialog() == DialogResult.OK)
+                        using (PrintDialog printDialog1 = new PrintDialog())
                         {
-                            System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
-                            info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
-                            info.CreateNoWindow = true;
-                            info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            info.UseShellExecute = true;
-                            info.Verb = "PrintTo";
-                            System.Diagnostics.Process.Start(info);
+                            if (printDialog1.ShowDialog() == DialogResult.OK)
+                            {
+                                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
+                                info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                                NombreImpresora = printDialog1.PrinterSettings.PrinterName;
+                                info.CreateNoWindow = true;
+                                info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                                info.UseShellExecute = true;
+                                info.Verb = "Printto";
+                                System.Diagnostics.Process.Start(info);
+                            }
+                        }
+
+
+                        //Cotiz
+                        if (NombreImpresora != "")
+                        {
+                            foreach (PartidaDetalle unaPDet in unaPartida.unasPartidasDetalles)
+                            {
+                                foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
+                                {
+                                    if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg"))
+                                    {
+                                        file = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCoti.IdCotizacion.ToString() + ".jpg";
+                                        using (var pd = new System.Drawing.Printing.PrintDocument())
+                                        {
+                                            pd.PrinterSettings.PrinterName = NombreImpresora;
+                                            pd.PrintPage += (_, r) =>
+                                            {
+                                                var img = System.Drawing.Image.FromFile(file);
+                                                // This uses a 50 pixel margin - adjust as needed
+                                                r.Graphics.DrawImage(img, new Point(50, 50));
+                                            };
+                                            pd.Print();
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -534,7 +569,10 @@ namespace ARTEC.GUI
             }
             else
                 return;
+
                 //Cotiz
+            if (NombreImpresora != "")
+            {
                 foreach (PartidaDetalle unaPDet in unaPartida.unasPartidasDetalles)
                 {
                     foreach (Cotizacion unaCoti in unaPDet.unasCotizaciones)
@@ -556,6 +594,7 @@ namespace ARTEC.GUI
                         }
                     }
                 }
+            }
         }
 
 
