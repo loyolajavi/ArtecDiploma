@@ -887,14 +887,14 @@ namespace ARTEC.GUI
                     //Verificar que haya por lo menos un SolicDetalle
                     if (unaSolicitud.unosDetallesSolicitud.Count == 0)
                     {
-                        MessageBox.Show("Por favor revisar que la Solicitud posea al menos un detalle");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la Solicitud posea al menos un detalle").Texto);
                         return;
                     }
 
                     //Verificar que haya un adjunto
                     if (unosAdjuntosNombre.Count != 1)
                     {
-                        MessageBox.Show("Por favor adjuntar el oficio de la solicitud realizada");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor adjuntar el oficio de la solicitud realizada").Texto);
                         return;
                     }
 

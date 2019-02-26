@@ -30,6 +30,7 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdquisicionGestion));
             this.txtIdAdquisicion = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdAdquisicion = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
@@ -417,16 +418,8 @@ namespace ARTEC.GUI
             this.btnModificar.Size = new System.Drawing.Size(75, 30);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 68;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-            //this.btnModificar.Tag = new string[] { "Adquisicion Modificar" };
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Adquisicion Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
@@ -438,15 +431,8 @@ namespace ARTEC.GUI
             this.btnEliminar.Size = new System.Drawing.Size(75, 30);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 69;
+            this.btnEliminar.Tag = ((object)(resources.GetObject("btnEliminar.Tag")));
             this.btnEliminar.Text = "btnEliminar";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Adquisicion Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminar.Tag = dicbtnEliminar;
-
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // flowBienesAAdquirir
@@ -592,7 +578,6 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtResBusqueda);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.Name = "frmAdquisicionGestion";
             this.Text = "MetroForm";

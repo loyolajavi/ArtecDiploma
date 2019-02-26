@@ -22,6 +22,21 @@ namespace ARTEC.ENTIDADES
             set { _unasCotizaciones = value; }
         }
 
+        private List<Cotizacion> _unasCotizacionesBKP = new List<Cotizacion>();
+
+        public List<Cotizacion> unasCotizacionesBKP
+        {
+            get { return _unasCotizacionesBKP; }
+            set { _unasCotizacionesBKP = value; }
+        }
+
+        //Para agregar nuevas cotizaciones en PartidaDetalle
+        private List<Cotizacion> _unasCotizacionesEnSolic = new List<Cotizacion>();
+        public List<Cotizacion> unasCotizacionesEnSolic
+        {
+            get { return _unasCotizacionesEnSolic; }
+            set { _unasCotizacionesEnSolic = value; }
+        }
         
 
     }

@@ -16,6 +16,7 @@ using ARTEC.FRAMEWORK.Servicios;
 using System.Globalization;
 using ARTEC.BLL.Servicios;
 using Xceed.Words.NET;
+using System.IO;
 
 namespace ARTEC.GUI
 {
@@ -338,7 +339,7 @@ namespace ARTEC.GUI
             if (!vldFrmAsignacionModificar.Validate())
                 return;
 
-            //Verificar que quede al menos un permiso asignado
+            //Verificar que quede al menos un Detalle
             if (InventariosAgregar.Count == 0)
             {
                 MessageBox.Show("Por favor revisar que la asignación posea al menos un detalle");
@@ -387,40 +388,64 @@ namespace ARTEC.GUI
                     }   
                     ListaGrilla.Clear();
 
-                    if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)//VER SI ESTA bien el chequeo del idioma
+
+                    //Crear el documento
+                    string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Asignacion.docx";
+                    if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                     {
-                        using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2.docx"))
+                        using (DocX doc = DocX.Load(RutaPlantilla))
                         {
                             doc.AddCustomProperty(new CustomProperty("PFecha", unaAsignacionModif.Fecha.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                             doc.AddCustomProperty(new CustomProperty("PDependencia", unaAsignacionModif.unaDependencia.NombreDependencia));
                             CultureInfo ci = new CultureInfo("es-AR");
-                            //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                            //Si se escribio una justificación
-                            //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                            //{
-                            //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                            //}
-                            doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                            var unaLista = doc.AddList("Bien: " + unaAsignacionModif.unosAsigDetalles[0].unInventario.deBien.DescripBien + " - Serie: " + unaAsignacionModif.unosAsigDetalles[0].unInventario.SerieKey, 0, ListItemType.Bulleted, 1);
+                            for (var I = 1; I == unaAsignacionModif.unosAsigDetalles.Count() - 1; I++)
+                            {
+                                doc.AddListItem(unaLista, "Bien: " + unaAsignacionModif.unosAsigDetalles[I].unInventario.deBien.DescripBien + " - Serie: " + unaAsignacionModif.unosAsigDetalles[I].unInventario.SerieKey, 0);
+                            }
+                            doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
+                            doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Asignacion " + unaAsignacionModif.IdAsignacion.ToString() + ".docx");
                         }
                     }
                     else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                     {
-                        using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Elevación Partida2 English.docx"))
+                        RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Asignacion English.docx";
+                        using (DocX doc = DocX.Load(RutaPlantilla))
                         {
-                            //doc.AddCustomProperty(new CustomProperty("PFecha", nuevaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                            //doc.AddCustomProperty(new CustomProperty("PDependencia", unaSolicitud.laDependencia.NombreDependencia));
-                            //CultureInfo ci = new CultureInfo("es-AR");
-                            //doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", nuevaPartida.MontoSolicitado.ToString("C2", ci)));
-                            ////Si se escribio una justificación
-                            //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                            //{
-                            //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                            //}
-                            //doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Prueba1"));
+                            doc.AddCustomProperty(new CustomProperty("PFecha", unaAsignacionModif.Fecha.ToString("dd 'de' MMMM 'de' yyyy'.'")));
+                            doc.AddCustomProperty(new CustomProperty("PDependencia", unaAsignacionModif.unaDependencia.NombreDependencia));
+                            CultureInfo ci = new CultureInfo("es-AR");
+                            var unaLista = doc.AddList("Bien: " + unaAsignacionModif.unosAsigDetalles[0].unInventario.deBien.DescripBien + " - Serie: " + unaAsignacionModif.unosAsigDetalles[0].unInventario.SerieKey, 0, ListItemType.Bulleted, 1);
+                            for (var I = 1; I == unaAsignacionModif.unosAsigDetalles.Count() - 1; I++)
+                            {
+                                doc.AddListItem(unaLista, "Bien: " + unaAsignacionModif.unosAsigDetalles[I].unInventario.deBien.DescripBien + " - Serie: " + unaAsignacionModif.unosAsigDetalles[I].unInventario.SerieKey, 0);
+                            }
+                            doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
+                            doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Asignacion " + unaAsignacionModif.IdAsignacion.ToString() + ".docx");
                         }
                     }
 
-                    MessageBox.Show("Modificación realizada");
+                    ////Imprimir la Asignacion
+                    string NombreImpresora = "";
+
+                    if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Asignacion " + unaAsignacionModif.IdAsignacion.ToString() + ".docx"))
+                    {
+                        using (PrintDialog printDialog1 = new PrintDialog())
+                        {
+                            if (printDialog1.ShowDialog() == DialogResult.OK)
+                            {
+                                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Asignacion " + unaAsignacionModif.IdAsignacion.ToString() + ".docx");
+                                info.Arguments = "\"" + printDialog1.PrinterSettings.PrinterName + "\"";
+                                NombreImpresora = printDialog1.PrinterSettings.PrinterName;
+                                info.CreateNoWindow = true;
+                                info.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                                info.UseShellExecute = true;
+                                info.Verb = "Printto";
+                                System.Diagnostics.Process.Start(info);
+                            }
+                        }
+                    }
+                    MessageBox.Show("Modificación realizada correctamente");
                     DialogResult = DialogResult.OK;
                 }
             }

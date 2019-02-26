@@ -41,6 +41,7 @@ namespace ARTEC.GUI
         Marca unaMarca;
         BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
         BLLInventario ManagerInventario = new BLLInventario();
+        List<HLPDetallesAdquisicion> LisAUXCant;
         
 
         public frmAdquisicionGestion()
@@ -222,7 +223,6 @@ namespace ARTEC.GUI
                 foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
 	            {
                     unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
-                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
                     unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
@@ -308,9 +308,14 @@ namespace ARTEC.GUI
                             MessageBox.Show("El inventario no puede ser eliminado porque ya fue asignado");
                         else
                         {
+                            //Actualziar MontoCompra
+                            unaAdqModif.MontoCompra -= unaAdqModif.unosInventariosAsoc[e.RowIndex].Costo;
+                            //Quitar Inventario de memoria
                             unaAdqModif.unosInventariosAsoc.RemoveAt(e.RowIndex);
                             //Lo mismo con el helper
                             unosInventariosHlp.RemoveAt(e.RowIndex);
+
+                            
 
                             //Regenero la grilla
                             GrillaInventarios.DataSource = null;
@@ -582,12 +587,11 @@ namespace ARTEC.GUI
 
             unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
-            LisAUXDetalles = unaSolic.unosDetallesSolicitud.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
+            LisAUXDetalles = unaSolic.unosDetallesSolicitud.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle, UIDSolicDetalle = x.UIDSolicDetalle }).ToList();
 
             if (LisAUXDetalles.Count() > 0)
             {
-
-                List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
+                LisAUXCant = new List<HLPDetallesAdquisicion>();
                 LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
                 foreach (var item2 in LisAUXDetalles)
                 {
@@ -664,58 +668,105 @@ namespace ARTEC.GUI
             HLPBienInventario unInvAgregarHLP = new HLPBienInventario();
             Inventario unInvAgregar;
 
-            if (unAgregarInventarioCU.unaMarca != null & unAgregarInventarioCU.unModelo != null & unAgregarInventarioCU.unTipoBien != null && (int)unAgregarInventarioCU.unaMarca.SelectedValue > 0 & (int)unAgregarInventarioCU.unModelo.SelectedValue > 0 & (int)unAgregarInventarioCU.unTipoBien.SelectedValue > 0)
+            try
             {
-                if ((int)unAgregarInventarioCU.unTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
+                if (!unAgregarInventarioCU.unValidador.Validate())
+                    return;
+
+                if (unAgregarInventarioCU.unaMarca.Items.Count == 0 | unAgregarInventarioCU.unModelo.Items.Count == 0 | unAgregarInventarioCU.unTipoBien.Items.Count == 0 || (int)unAgregarInventarioCU.unaMarca.SelectedValue < 1 | (int)unAgregarInventarioCU.unModelo.SelectedValue < 1 | (int)unAgregarInventarioCU.unTipoBien.SelectedValue < 1)
                 {
-                    //unBienAUX = new Hardware();
-                    unInvAgregar = new XInventarioHard();
-                    unInvAgregar.deBien = new Hardware();
-                    unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
-                    //unBienAUX.unInventarioAlta = new XInventarioHard();
-                }
-                else
-                {
-                    //unBienAUX = new Software();
-                    unInvAgregar = new XInventarioSoft();
-                    unInvAgregar.deBien = new Software();
-                    unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
-                    //unBienAUX.unInventarioAlta = new XInventarioSoft();
+                    MessageBox.Show("Por favor seleccione un Bien a agregar y complete sus datos");
+                    return;
                 }
 
-                //Datos del Inventario
-                unInvAgregar.SerieKey = unAgregarInventarioCU.unSerie;
-                unInvAgregar.unEstado = new EstadoInventario() { IdEstadoInventario = (int)EstadoInventario.EnumEstadoInventario.Disponible };
-                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)unAgregarInventarioCU.unTipoBien.SelectedValue);
-                unInvAgregar.IdBienEspecif = ManagerBien.BienTraerIdPorDescripMarcaModelo(unaSolic.unosDetallesSolicitud.Where(x => x.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).First().unaCategoria.IdCategoria, (int)unAgregarInventarioCU.unaMarca.SelectedValue, (int)unAgregarInventarioCU.unModelo.SelectedValue);
-                unInvAgregar.Costo = unAgregarInventarioCU.unCosto;
-                unInvAgregar.unDeposito = new Deposito() { IdDeposito = 1 };
-                unInvAgregar.PartidaDetalleAsoc = new PartidaDetalle();
-                unInvAgregar.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
-                unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
-                unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitud;
-                unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitudDetalle;
+                if (unosInventariosHlp.Any(X => X.SerieKey == unAgregarInventarioCU.unSerie && X.DescripMarca == unAgregarInventarioCU.unaMarca.Text && X.DescripModeloVersion == unAgregarInventarioCU.unModelo.Text && X.DescripBien == unAgregarInventarioCU.unBien))
+                {
+                    MessageBox.Show("El serie ingresado ya existe para ese Bien");
+                    return;
+                }
 
-                BLLCategoria ManagerCategoria = new BLLCategoria();
-                unInvAgregar.deBien.unaCategoria = new Categoria();
-                unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.IdBienEspecif);
-                unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unIdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
-                //unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
+                if (LisAUXDetalles.Any(X => X.Comprado != X.Cantidad | X.Comprado == 0))
+                {
+                    if ((int)unAgregarInventarioCU.unTipoBien.SelectedValue == (int)TipoBien.EnumTipoBien.Hard)
+                    {
+                        //unBienAUX = new Hardware();
+                        unInvAgregar = new XInventarioHard();
+                        unInvAgregar.deBien = new Hardware();
+                        unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
+                        //unBienAUX.unInventarioAlta = new XInventarioHard();
+                    }
+                    else
+                    {
+                        //unBienAUX = new Software();
+                        unInvAgregar = new XInventarioSoft();
+                        unInvAgregar.deBien = new Software();
+                        unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
+                        //unBienAUX.unInventarioAlta = new XInventarioSoft();
+                    }
 
-                unInvAgregarHLP.DescripBien = unAgregarInventarioCU.unBien;
-                unInvAgregarHLP.DescripMarca = (unAgregarInventarioCU.unaMarca.SelectedItem as Marca).DescripMarca;
-                unInvAgregarHLP.DescripModeloVersion = (unAgregarInventarioCU.unModelo.SelectedItem as ModeloVersion).DescripModeloVersion;
-                unInvAgregarHLP.SerieKey = unAgregarInventarioCU.unSerie;
-                unInvAgregarHLP.Costo = unAgregarInventarioCU.unCosto;
+                    //Datos del Inventario
+                    unInvAgregar.SerieKey = unAgregarInventarioCU.unSerie;
+                    unInvAgregar.unEstado = new EstadoInventario() { IdEstadoInventario = (int)EstadoInventario.EnumEstadoInventario.Disponible };
+                    IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)unAgregarInventarioCU.unTipoBien.SelectedValue);
+                    unInvAgregar.IdBienEspecif = ManagerBien.BienTraerIdPorDescripMarcaModelo(unaSolic.unosDetallesSolicitud.Where(x => x.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).First().unaCategoria.IdCategoria, (int)unAgregarInventarioCU.unaMarca.SelectedValue, (int)unAgregarInventarioCU.unModelo.SelectedValue);
+                    unInvAgregar.Costo = unAgregarInventarioCU.unCosto;
+                    unInvAgregar.unDeposito = new Deposito() { IdDeposito = 1 };
+                    unInvAgregar.PartidaDetalleAsoc = new PartidaDetalle();
+                    unInvAgregar.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                    unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
+                    unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitud;
+                    unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitudDetalle;
+                    unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).UIDSolicDetalle;
 
-                unaAdqModif.unosInventariosAsoc.Add(unInvAgregar);
-                unosInventariosHlp.Add(unInvAgregarHLP);
+                    BLLCategoria ManagerCategoria = new BLLCategoria();
+                    unInvAgregar.deBien.unaCategoria = new Categoria();
+                    unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.IdBienEspecif);
+                    unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unIdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
+                    //unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 
-                //Regenero la grilla
-                GrillaInventarios.DataSource = null;
-                GrillaInventarios.DataSource = unosInventariosHlp;
-                FormatearGrillaInventarios();
+                    unInvAgregarHLP.DescripBien = unAgregarInventarioCU.unBien;
+                    unInvAgregarHLP.DescripMarca = (unAgregarInventarioCU.unaMarca.SelectedItem as Marca).DescripMarca;
+                    unInvAgregarHLP.DescripModeloVersion = (unAgregarInventarioCU.unModelo.SelectedItem as ModeloVersion).DescripModeloVersion;
+                    unInvAgregarHLP.SerieKey = unAgregarInventarioCU.unSerie;
+                    unInvAgregarHLP.Costo = unAgregarInventarioCU.unCosto;
+
+                    unaAdqModif.unosInventariosAsoc.Add(unInvAgregar);
+                    unosInventariosHlp.Add(unInvAgregarHLP);
+
+                    LisAUXDetalles.FirstOrDefault(X => X.UIDSolicDetalle == unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle).Comprado++;
+
+                    //Resetear Flow
+                    flowBienesAAdquirir.Visible = false;
+                    flowBienesAAdquirir.Controls.Clear();
+                    GrillaBienesAAdquirir.DataSource = null;
+                    GrillaBienesAAdquirir.CellClick -= new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
+                    unAgregarInventarioCU.unBtnAgregar.Click -= new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
+
+                    GrillaBienesAAdquirir.DataSource = null;
+                    GrillaBienesAAdquirir.DataSource = LisAUXDetalles;
+                    flowBienesAAdquirir.Controls.Add(GrillaBienesAAdquirir);
+                    GrillaBienesAAdquirir.CellClick += new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
+                    unAgregarInventarioCU.unBtnAgregar.Click += new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
+                    flowBienesAAdquirir.Visible = true;
+                    GrillaBienesAAdquirir.AutoSize = true;
+                    GrillaBienesAAdquirir.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    flowBienesAAdquirir.Controls.Add(unAgregarInventarioCU);
+
+                    //Regenero la grilla
+                    GrillaInventarios.DataSource = null;
+                    GrillaInventarios.DataSource = unosInventariosHlp;
+                    FormatearGrillaInventarios();
+
+                    unaAdqModif.MontoCompra += unAgregarInventarioCU.unCosto;
+                }
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmAdquisicionGestion - unAgregarInventarioCU_unBtnAgregar_Click");
+                MessageBox.Show("Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
+
+           
             
         }
 

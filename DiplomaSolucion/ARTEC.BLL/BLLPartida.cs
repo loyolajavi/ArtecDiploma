@@ -83,13 +83,21 @@ namespace ARTEC.BLL
             return false;
         }
 
-        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar)
+        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar, List<PartidaDetalle> unasPartidasDetalles, decimal MontoTotal)
         {
-            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Modificar" }))
-                throw new InvalidOperationException("No posee los permisos suficientes");
-            if (GestorPartida.PartidaModifDetalles(PDetallesBorrar))
-                return true;
-            return false;
+            try
+            {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                if (GestorPartida.PartidaModifDetalles(PDetallesBorrar, unasPartidasDetalles, MontoTotal))
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+
         }
         
 

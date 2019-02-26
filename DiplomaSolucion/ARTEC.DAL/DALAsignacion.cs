@@ -31,6 +31,7 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "AsignacionCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
+                unaAsig.IdAsignacion = IDDevuelto;
 
                 foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
                 {

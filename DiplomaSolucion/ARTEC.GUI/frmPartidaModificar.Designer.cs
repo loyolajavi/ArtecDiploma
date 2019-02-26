@@ -42,7 +42,6 @@ namespace ARTEC.GUI
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.chkCaja = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.lblMontoSolic = new DevComponents.DotNetBar.LabelX();
             this.txtMontoSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFechaEnvio = new DevComponents.DotNetBar.LabelX();
@@ -51,9 +50,6 @@ namespace ARTEC.GUI
             this.lblDetalles = new DevComponents.DotNetBar.LabelX();
             this.lblCotizaciones = new DevComponents.DotNetBar.LabelX();
             this.grillaCotizaciones = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.pnlResPartida = new DevComponents.DotNetBar.Controls.GroupPanel();
-            this.txtMontoTotal = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblMontoTotal = new DevComponents.DotNetBar.LabelX();
             this.btnRegenerarPartida = new DevComponents.DotNetBar.ButtonX();
             this.GrillaCotizAntiguas = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnCancelar = new DevComponents.DotNetBar.ButtonX();
@@ -61,7 +57,6 @@ namespace ARTEC.GUI
             this.btnImprimirPartida = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).BeginInit();
-            this.pnlResPartida.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaCotizAntiguas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +73,7 @@ namespace ARTEC.GUI
             this.txtNroPartida.Location = new System.Drawing.Point(115, 96);
             this.txtNroPartida.Name = "txtNroPartida";
             this.txtNroPartida.PreventEnterBeep = true;
+            this.txtNroPartida.ReadOnly = true;
             this.txtNroPartida.Size = new System.Drawing.Size(102, 22);
             this.txtNroPartida.TabIndex = 70;
             // 
@@ -107,6 +103,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Location = new System.Drawing.Point(115, 40);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
+            this.txtNroSolicitud.ReadOnly = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
             this.txtNroSolicitud.TabIndex = 68;
             // 
@@ -136,6 +133,7 @@ namespace ARTEC.GUI
             this.txtIdPartida.Location = new System.Drawing.Point(115, 12);
             this.txtIdPartida.Name = "txtIdPartida";
             this.txtIdPartida.PreventEnterBeep = true;
+            this.txtIdPartida.ReadOnly = true;
             this.txtIdPartida.Size = new System.Drawing.Size(102, 22);
             this.txtIdPartida.TabIndex = 66;
             // 
@@ -178,6 +176,7 @@ namespace ARTEC.GUI
             this.txtDependencia.Location = new System.Drawing.Point(115, 68);
             this.txtDependencia.Name = "txtDependencia";
             this.txtDependencia.PreventEnterBeep = true;
+            this.txtDependencia.ReadOnly = true;
             this.txtDependencia.Size = new System.Drawing.Size(315, 22);
             this.txtDependencia.TabIndex = 63;
             // 
@@ -196,19 +195,6 @@ namespace ARTEC.GUI
             this.cboDep.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboDep.TabIndex = 64;
             this.cboDep.Visible = false;
-            // 
-            // chkCaja
-            // 
-            // 
-            // 
-            // 
-            this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkCaja.Location = new System.Drawing.Point(258, 157);
-            this.chkCaja.Name = "chkCaja";
-            this.chkCaja.Size = new System.Drawing.Size(86, 22);
-            this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkCaja.TabIndex = 75;
-            this.chkCaja.Text = "chkCaja";
             // 
             // lblMontoSolic
             // 
@@ -236,6 +222,7 @@ namespace ARTEC.GUI
             this.txtMontoSolic.Location = new System.Drawing.Point(134, 157);
             this.txtMontoSolic.Name = "txtMontoSolic";
             this.txtMontoSolic.PreventEnterBeep = true;
+            this.txtMontoSolic.ReadOnly = true;
             this.txtMontoSolic.Size = new System.Drawing.Size(102, 22);
             this.txtMontoSolic.TabIndex = 74;
             // 
@@ -265,6 +252,7 @@ namespace ARTEC.GUI
             this.txtFechaEnvio.Location = new System.Drawing.Point(8, 157);
             this.txtFechaEnvio.Name = "txtFechaEnvio";
             this.txtFechaEnvio.PreventEnterBeep = true;
+            this.txtFechaEnvio.ReadOnly = true;
             this.txtFechaEnvio.Size = new System.Drawing.Size(102, 22);
             this.txtFechaEnvio.TabIndex = 72;
             // 
@@ -283,6 +271,7 @@ namespace ARTEC.GUI
             this.grillaDetallesPart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaDetallesPart.Location = new System.Drawing.Point(469, 33);
             this.grillaDetallesPart.Name = "grillaDetallesPart";
+            this.grillaDetallesPart.ReadOnly = true;
             this.grillaDetallesPart.Size = new System.Drawing.Size(476, 124);
             this.grillaDetallesPart.TabIndex = 76;
             this.grillaDetallesPart.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaDetallesPart_CellClick);
@@ -328,84 +317,16 @@ namespace ARTEC.GUI
             this.grillaCotizaciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaCotizaciones.Location = new System.Drawing.Point(469, 186);
             this.grillaCotizaciones.Name = "grillaCotizaciones";
+            this.grillaCotizaciones.ReadOnly = true;
             this.grillaCotizaciones.Size = new System.Drawing.Size(476, 136);
             this.grillaCotizaciones.TabIndex = 78;
-            // 
-            // pnlResPartida
-            // 
-            this.pnlResPartida.BackColor = System.Drawing.Color.White;
-            this.pnlResPartida.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.pnlResPartida.Controls.Add(this.txtMontoTotal);
-            this.pnlResPartida.Controls.Add(this.lblMontoTotal);
-            this.pnlResPartida.Controls.Add(this.btnRegenerarPartida);
-            this.pnlResPartida.DisabledBackColor = System.Drawing.Color.Empty;
-            this.pnlResPartida.Location = new System.Drawing.Point(115, 223);
-            this.pnlResPartida.Name = "pnlResPartida";
-            this.pnlResPartida.Size = new System.Drawing.Size(211, 137);
-            // 
-            // 
-            // 
-            this.pnlResPartida.Style.BackColor = System.Drawing.Color.White;
-            this.pnlResPartida.Style.BackColor2 = System.Drawing.Color.White;
-            this.pnlResPartida.Style.BackColorGradientAngle = 90;
-            this.pnlResPartida.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlResPartida.Style.BorderBottomWidth = 1;
-            this.pnlResPartida.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.pnlResPartida.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlResPartida.Style.BorderLeftWidth = 1;
-            this.pnlResPartida.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlResPartida.Style.BorderRightWidth = 1;
-            this.pnlResPartida.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.pnlResPartida.Style.BorderTopWidth = 1;
-            this.pnlResPartida.Style.CornerDiameter = 4;
-            this.pnlResPartida.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.pnlResPartida.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center;
-            this.pnlResPartida.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.pnlResPartida.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near;
-            // 
-            // 
-            // 
-            this.pnlResPartida.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.pnlResPartida.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.pnlResPartida.TabIndex = 80;
-            this.pnlResPartida.Text = "pnlResPartida";
-            // 
-            // txtMontoTotal
-            // 
-            this.txtMontoTotal.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMontoTotal.Border.Class = "TextBoxBorder";
-            this.txtMontoTotal.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMontoTotal.DisabledBackColor = System.Drawing.Color.White;
-            this.txtMontoTotal.ForeColor = System.Drawing.Color.Black;
-            this.txtMontoTotal.Location = new System.Drawing.Point(98, 3);
-            this.txtMontoTotal.Name = "txtMontoTotal";
-            this.txtMontoTotal.PreventEnterBeep = true;
-            this.txtMontoTotal.Size = new System.Drawing.Size(100, 22);
-            this.txtMontoTotal.TabIndex = 35;
-            // 
-            // lblMontoTotal
-            // 
-            // 
-            // 
-            // 
-            this.lblMontoTotal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblMontoTotal.Location = new System.Drawing.Point(8, 3);
-            this.lblMontoTotal.Name = "lblMontoTotal";
-            this.lblMontoTotal.Size = new System.Drawing.Size(75, 23);
-            this.lblMontoTotal.TabIndex = 36;
-            this.lblMontoTotal.Text = "lblMontoTotal";
+            this.grillaCotizaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaCotizaciones_CellClick);
             // 
             // btnRegenerarPartida
             // 
             this.btnRegenerarPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnRegenerarPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnRegenerarPartida.Location = new System.Drawing.Point(43, 52);
+            this.btnRegenerarPartida.Location = new System.Drawing.Point(216, 242);
             this.btnRegenerarPartida.Name = "btnRegenerarPartida";
             this.btnRegenerarPartida.Size = new System.Drawing.Size(123, 37);
             this.btnRegenerarPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -429,6 +350,7 @@ namespace ARTEC.GUI
             this.GrillaCotizAntiguas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaCotizAntiguas.Location = new System.Drawing.Point(469, 328);
             this.GrillaCotizAntiguas.Name = "GrillaCotizAntiguas";
+            this.GrillaCotizAntiguas.ReadOnly = true;
             this.GrillaCotizAntiguas.Size = new System.Drawing.Size(476, 136);
             this.GrillaCotizAntiguas.TabIndex = 81;
             this.GrillaCotizAntiguas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaCotizAntiguas_CellClick);
@@ -464,7 +386,7 @@ namespace ARTEC.GUI
             // 
             this.btnImprimirPartida.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnImprimirPartida.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnImprimirPartida.Location = new System.Drawing.Point(193, 395);
+            this.btnImprimirPartida.Location = new System.Drawing.Point(216, 306);
             this.btnImprimirPartida.Name = "btnImprimirPartida";
             this.btnImprimirPartida.Size = new System.Drawing.Size(123, 37);
             this.btnImprimirPartida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -481,14 +403,13 @@ namespace ARTEC.GUI
             this.ControlBox = false;
             this.Controls.Add(this.btnImprimirPartida);
             this.Controls.Add(this.lblVolver);
+            this.Controls.Add(this.btnRegenerarPartida);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.GrillaCotizAntiguas);
-            this.Controls.Add(this.pnlResPartida);
             this.Controls.Add(this.lblCotizaciones);
             this.Controls.Add(this.grillaCotizaciones);
             this.Controls.Add(this.lblDetalles);
             this.Controls.Add(this.grillaDetallesPart);
-            this.Controls.Add(this.chkCaja);
             this.Controls.Add(this.lblMontoSolic);
             this.Controls.Add(this.txtMontoSolic);
             this.Controls.Add(this.lblFechaEnvio);
@@ -513,7 +434,6 @@ namespace ARTEC.GUI
             this.Load += new System.EventHandler(this.frmPartidaModificar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grillaDetallesPart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grillaCotizaciones)).EndInit();
-            this.pnlResPartida.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaCotizAntiguas)).EndInit();
             this.ResumeLayout(false);
 
@@ -530,7 +450,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblDependencia;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDep;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkCaja;
         private DevComponents.DotNetBar.LabelX lblMontoSolic;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoSolic;
         private DevComponents.DotNetBar.LabelX lblFechaEnvio;
@@ -539,9 +458,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.LabelX lblDetalles;
         private DevComponents.DotNetBar.LabelX lblCotizaciones;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaCotizaciones;
-        private DevComponents.DotNetBar.Controls.GroupPanel pnlResPartida;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtMontoTotal;
-        private DevComponents.DotNetBar.LabelX lblMontoTotal;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaCotizAntiguas;
         private DevComponents.DotNetBar.ButtonX btnRegenerarPartida;
         private DevComponents.DotNetBar.ButtonX btnCancelar;

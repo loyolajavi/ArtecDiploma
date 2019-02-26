@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ARTEC.BLL.Servicios;
 
 namespace ARTEC.GUI
 {
@@ -95,6 +96,19 @@ namespace ARTEC.GUI
         {
             get { return this.btnAgregar; }
         }
+
+        public DevComponents.DotNetBar.Validator.SuperValidator unValidador
+        {
+            get { return vldCUAgregarInventarioCU; }
+            set { vldCUAgregarInventarioCU = value; }
+        }
+
+        private void AgregarInventarioCU_Load(object sender, EventArgs e)
+        {
+            //Idioma
+            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+        }
+
 
 
 

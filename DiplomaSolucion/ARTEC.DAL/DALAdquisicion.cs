@@ -215,6 +215,9 @@ namespace ARTEC.DAL
 
                     uno.Costo = (decimal)row["Costo"];
 
+                    uno.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
+                    uno.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
+
                     ResInventarios.Add(uno);
                 }
 

@@ -29,6 +29,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarInventarioCU));
             this.lblBien = new DevComponents.DotNetBar.LabelX();
             this.lblCosto = new DevComponents.DotNetBar.LabelX();
             this.txtCosto = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -43,6 +45,14 @@ namespace ARTEC.GUI
             this.txtSerieKey = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.txtIdBien = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.vldCUAgregarInventarioCU = new DevComponents.DotNetBar.Validator.SuperValidator();
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Costo");
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un Bien");
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese el Serie");
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblBien
@@ -86,6 +96,8 @@ namespace ARTEC.GUI
             this.txtCosto.PreventEnterBeep = true;
             this.txtCosto.Size = new System.Drawing.Size(121, 20);
             this.txtCosto.TabIndex = 42;
+            this.vldCUAgregarInventarioCU.SetValidator1(this.txtCosto, this.requiredFieldValidator3);
+            this.vldCUAgregarInventarioCU.SetValidator2(this.txtCosto, this.regularExpressionValidator1);
             // 
             // lblModelo
             // 
@@ -130,12 +142,13 @@ namespace ARTEC.GUI
             // 
             this.cboModelo.DisplayMember = "Text";
             this.cboModelo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboModelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboModelo.ForeColor = System.Drawing.Color.Black;
             this.cboModelo.FormattingEnabled = true;
-            this.cboModelo.ItemHeight = 16;
+            this.cboModelo.ItemHeight = 14;
             this.cboModelo.Location = new System.Drawing.Point(338, 39);
             this.cboModelo.Name = "cboModelo";
-            this.cboModelo.Size = new System.Drawing.Size(121, 22);
+            this.cboModelo.Size = new System.Drawing.Size(121, 20);
             this.cboModelo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboModelo.TabIndex = 37;
             // 
@@ -143,12 +156,13 @@ namespace ARTEC.GUI
             // 
             this.cboMarca.DisplayMember = "Text";
             this.cboMarca.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMarca.ForeColor = System.Drawing.Color.Black;
             this.cboMarca.FormattingEnabled = true;
-            this.cboMarca.ItemHeight = 16;
+            this.cboMarca.ItemHeight = 14;
             this.cboMarca.Location = new System.Drawing.Point(104, 39);
             this.cboMarca.Name = "cboMarca";
-            this.cboMarca.Size = new System.Drawing.Size(121, 22);
+            this.cboMarca.Size = new System.Drawing.Size(121, 20);
             this.cboMarca.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboMarca.TabIndex = 36;
             // 
@@ -156,12 +170,13 @@ namespace ARTEC.GUI
             // 
             this.cboTipoBien.DisplayMember = "Text";
             this.cboTipoBien.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboTipoBien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoBien.ForeColor = System.Drawing.Color.Black;
             this.cboTipoBien.FormattingEnabled = true;
-            this.cboTipoBien.ItemHeight = 16;
+            this.cboTipoBien.ItemHeight = 14;
             this.cboTipoBien.Location = new System.Drawing.Point(338, 11);
             this.cboTipoBien.Name = "cboTipoBien";
-            this.cboTipoBien.Size = new System.Drawing.Size(121, 22);
+            this.cboTipoBien.Size = new System.Drawing.Size(121, 20);
             this.cboTipoBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboTipoBien.TabIndex = 34;
             // 
@@ -181,6 +196,7 @@ namespace ARTEC.GUI
             this.txtBien.ReadOnly = true;
             this.txtBien.Size = new System.Drawing.Size(121, 20);
             this.txtBien.TabIndex = 35;
+            this.vldCUAgregarInventarioCU.SetValidator1(this.txtBien, this.requiredFieldValidator1);
             // 
             // lblSerieKey
             // 
@@ -210,6 +226,7 @@ namespace ARTEC.GUI
             this.txtSerieKey.PreventEnterBeep = true;
             this.txtSerieKey.Size = new System.Drawing.Size(121, 20);
             this.txtSerieKey.TabIndex = 45;
+            this.vldCUAgregarInventarioCU.SetValidator1(this.txtSerieKey, this.requiredFieldValidator2);
             // 
             // btnAgregar
             // 
@@ -220,15 +237,8 @@ namespace ARTEC.GUI
             this.btnAgregar.Size = new System.Drawing.Size(87, 25);
             this.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAgregar.TabIndex = 71;
+            this.btnAgregar.Tag = ((object)(resources.GetObject("btnAgregar.Tag")));
             this.btnAgregar.Text = "btnAgregar";
-
-            Dictionary<string, string[]> dicbtnAgregar = new Dictionary<string, string[]>();
-            string[] PerbtnAgregar = { "Inventario Agregar" };
-            dicbtnAgregar.Add("Permisos", PerbtnAgregar);
-            string[] IdiomabtnAgregar = { "Agregar" };
-            dicbtnAgregar.Add("Idioma", IdiomabtnAgregar);
-            this.btnAgregar.Tag = dicbtnAgregar;
-
             // 
             // txtIdBien
             // 
@@ -246,6 +256,42 @@ namespace ARTEC.GUI
             this.txtIdBien.Size = new System.Drawing.Size(121, 20);
             this.txtIdBien.TabIndex = 72;
             this.txtIdBien.Visible = false;
+            // 
+            // vldCUAgregarInventarioCU
+            // 
+            this.vldCUAgregarInventarioCU.ContainerControl = this.btnAgregar;
+            this.vldCUAgregarInventarioCU.ErrorProvider = this.errorProvider1;
+            this.vldCUAgregarInventarioCU.Highlighter = this.highlighter1;
+            // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Ingrese un Costo";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.ErrorMessage = "Solo números";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Ingrese un Bien";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Ingrese el Serie";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
             // 
             // AgregarInventarioCU
             // 
@@ -267,6 +313,8 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtBien);
             this.Name = "AgregarInventarioCU";
             this.Size = new System.Drawing.Size(465, 130);
+            this.Load += new System.EventHandler(this.AgregarInventarioCU_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -287,5 +335,12 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtSerieKey;
         private DevComponents.DotNetBar.ButtonX btnAgregar;
         private DevComponents.DotNetBar.Controls.TextBoxX txtIdBien;
+        private DevComponents.DotNetBar.Validator.SuperValidator vldCUAgregarInventarioCU;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
     }
 }

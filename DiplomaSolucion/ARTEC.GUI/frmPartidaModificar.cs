@@ -36,6 +36,7 @@ namespace ARTEC.GUI
         List<PartidaDetalle> PDetallesBorrar = new List<PartidaDetalle>();
         System.Drawing.Font printFont;
         StreamReader streamToPrint;
+        List<Cotizacion> CotizAntiguas;
 
         public frmPartidaModificar(int NroPartidaArg)
         {
@@ -69,11 +70,6 @@ namespace ARTEC.GUI
             diclblDependencia.Add("Idioma", IdiomalblDependencia);
             this.lblDependencia.Tag = diclblDependencia;
 
-            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
-            string[] IdiomachkCaja = { "Caja" };
-            dicchkCaja.Add("Idioma", IdiomachkCaja);
-            this.chkCaja.Tag = dicchkCaja;
-
             Dictionary<string, string[]> diclblMontoSolic = new Dictionary<string, string[]>();
             string[] IdiomalblMontoSolic = { "Monto Solicitado" };
             diclblMontoSolic.Add("Idioma", IdiomalblMontoSolic);
@@ -93,16 +89,6 @@ namespace ARTEC.GUI
             string[] IdiomalblCotizaciones = { "Cotizaciones" };
             diclblCotizaciones.Add("Idioma", IdiomalblCotizaciones);
             this.lblCotizaciones.Tag = diclblCotizaciones;
-
-            Dictionary<string, string[]> dicpnlResPartida = new Dictionary<string, string[]>();
-            string[] IdiomapnlResPartida = { "Partida" };
-            dicpnlResPartida.Add("Idioma", IdiomapnlResPartida);
-            this.pnlResPartida.Tag = dicpnlResPartida;
-
-            Dictionary<string, string[]> diclblMontoTotal = new Dictionary<string, string[]>();
-            string[] IdiomalblMontoTotal = { "Monto Total" };
-            diclblMontoTotal.Add("Idioma", IdiomalblMontoTotal);
-            this.lblMontoTotal.Tag = diclblMontoTotal;
 
             Dictionary<string, string[]> dicbtnRegenerarPartida = new Dictionary<string, string[]>();
             string[] IdiomabtnRegenerarPartida = { "Generar Partida" };
@@ -144,6 +130,8 @@ namespace ARTEC.GUI
                 foreach (PartidaDetalle pdet in unaPartida.unasPartidasDetalles)
                 {
                     pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.IdPartida);
+                    pdet.unasCotizacionesBKP = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.IdPartida);
+                    pdet.unasCotizacionesEnSolic = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(pdet.SolicDetalleAsociado.IdSolicitudDetalle, pdet.SolicDetalleAsociado.IdSolicitud, pdet.SolicDetalleAsociado.UIDSolicDetalle);
                 }
 
                 //Traigo la dependencia asociada
@@ -153,20 +141,13 @@ namespace ARTEC.GUI
                     DepAsoc = ListaDep.First();
                     txtDependencia.Text = DepAsoc.NombreDependencia;
                 }
-                    
-
-
-
             }
-
-
 
             txtIdPartida.Text = unaPartida.IdPartida.ToString();
             txtNroPartida.Text = !string.IsNullOrEmpty(unaPartida.NroPartida) ? unaPartida.NroPartida : "";
             txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
             txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
             txtNroSolicitud.Text = unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud.ToString();
-            chkCaja.Checked = unaPartida.Caja;
 
             List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
 
@@ -234,6 +215,14 @@ namespace ARTEC.GUI
 
                         grillaCotizaciones.DataSource = null;
                         GrillaCotizAntiguas.DataSource = null;
+                        //Elimina el boton de Quitar Cotiz si ya estaba agregado
+                        if (grillaCotizaciones.Columns.Contains("btnDinBorrar"))
+                            grillaCotizaciones.Columns.Remove("btnDinBorrar");
+                        //Antiguas
+                        //Elimina el boton de agergar Cotiz si ya estaba agregado
+                        if (GrillaCotizAntiguas.Columns.Contains("btnDinAgregar"))
+                            GrillaCotizAntiguas.Columns.Remove("btnDinAgregar");
+
                         CalcularMontoTotalPartida();
                     }
                 else
@@ -251,8 +240,8 @@ namespace ARTEC.GUI
                     //}
 
                     //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
-                    List<Cotizacion> CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.UIDSolicDetalle);
-                    ListaResCotizLoc = CotizAntiguas.SkipWhile(p => ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
+                    CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.UIDSolicDetalle);
+                    ListaResCotizLoc = CotizAntiguas.Where(p => !ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
                                .ToList();
                     GrillaCotizAntiguas.DataSource = null;
                     GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
@@ -267,35 +256,34 @@ namespace ARTEC.GUI
 
         private void GrillaCotizAntiguas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Si se hizo click en el header, salir
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            try
             {
-                return;
-            }
-            else
-            {
-                //Guardo en BD la asociacion de la cotiz con el partDet
-                if (ManagerCotizacion.CotizacionAsociarConPartidaDetalle(ListaResCotizLoc[e.RowIndex].IdCotizacion, unaPartida.unasPartidasDetalles[IndiceDetalleSeleccionado].UIDPartidaDetalle, unaPartida.IdPartida))
+                //Si se hizo click en el header, salir
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 {
-                    //Actualizo las grillas
+                    return;
+                }
+                else if (e.ColumnIndex == GrillaCotizAntiguas.Columns["btnDinAgregar"].Index)
+                {
+                    ////Si hizo click en Agregar
                     ListaLocalCotiz.Add(ListaResCotizLoc[e.RowIndex]);
+                    //Regenero la grilla
                     grillaCotizaciones.DataSource = null;
                     grillaCotizaciones.DataSource = ListaLocalCotiz;
+
                     ListaResCotizLoc.RemoveAt(e.RowIndex);
                     GrillaCotizAntiguas.DataSource = null;
                     GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
                     FormatearGrillaCotiz();
-                    //Actualizo campos
+                    //Actualizo Monto Total
                     CalcularMontoTotalPartida();
-                    //txtMontoSolic.Text = ListaLocalCotiz.Sum(X => X.MontoCotizado).ToString();
                 }
-                else
-                {
-                    MessageBox.Show("Error al asociar la cotización");
-                }
-
             }
-
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - GrillaCotizAntiguas_CellClick");
+                MessageBox.Show("Ocurrio un error al intengar agregar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+            }
         }
 
         private void CalcularMontoTotalPartida()
@@ -314,17 +302,52 @@ namespace ARTEC.GUI
                 {
                     TotalAcumulado += 0;
                 }
+                unaPartida.MontoSolicitado = TotalAcumulado;
             }
             txtMontoSolic.Text = TotalAcumulado.ToString();
-            ManagerPartida.PartidaModifMontoSolic(unaPartida.IdPartida, TotalAcumulado);
+            //ManagerPartida.PartidaModifMontoSolic(unaPartida.IdPartida, TotalAcumulado);//VER Modificaba de una el monto en BD
         }
 
 
         private void FormatearGrillaCotiz()
         {
+            //Elimina el boton si ya estaba agregado
+            if (grillaCotizaciones.Columns.Contains("btnDinBorrar"))
+                grillaCotizaciones.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+            grillaCotizaciones.Columns.Add(deleteButton);
+
+            //Formato GrillaCotizacion
+            grillaCotizaciones.Columns["IdCotizacion"].Visible = false;
+            grillaCotizaciones.Columns["MontoCotizado"].HeaderText = "Monto";
+            grillaCotizaciones.Columns["FechaCotizacion"].HeaderText = "Fecha";
+            grillaCotizaciones.Columns["unProveedor"].HeaderText = "Proveedor";
             grillaCotizaciones.Columns["unDetalleAsociado"].Visible = false;
             grillaCotizaciones.Columns["Seleccionada"].Visible = false;
             grillaCotizaciones.Columns["unaPartidaDetalleIDs"].Visible = false;
+
+            //Antiguas
+            //Elimina el boton si ya estaba agregado
+            if (GrillaCotizAntiguas.Columns.Contains("btnDinAgregar"))
+                GrillaCotizAntiguas.Columns.Remove("btnDinAgregar");
+            //Agrega boton para Borrar
+            var AddButtonAntiguas = new DataGridViewButtonColumn();
+            AddButtonAntiguas.Name = "btnDinAgregar";
+            AddButtonAntiguas.HeaderText = BLLServicioIdioma.MostrarMensaje("Agregar").Texto;
+            AddButtonAntiguas.Text = BLLServicioIdioma.MostrarMensaje("Agregar").Texto;
+            AddButtonAntiguas.UseColumnTextForButtonValue = true;
+            GrillaCotizAntiguas.Columns.Add(AddButtonAntiguas);
+
+            //Formato GrillaCotizacionAntiguas
+            GrillaCotizAntiguas.Columns["IdCotizacion"].Visible = false;
+            GrillaCotizAntiguas.Columns["MontoCotizado"].HeaderText = "Monto";
+            GrillaCotizAntiguas.Columns["FechaCotizacion"].HeaderText = "Fecha";
+            GrillaCotizAntiguas.Columns["unProveedor"].HeaderText = "Proveedor";
             GrillaCotizAntiguas.Columns["unDetalleAsociado"].Visible = false;
             GrillaCotizAntiguas.Columns["Seleccionada"].Visible = false;
             GrillaCotizAntiguas.Columns["unaPartidaDetalleIDs"].Visible = false;
@@ -333,9 +356,22 @@ namespace ARTEC.GUI
         //Genera el documento con la partida modificada
         private void btnGenerarDocumento_Click(object sender, EventArgs e)
         {
-            if (PDetallesBorrar != null && PDetallesBorrar.Count() > 0)
+            try
             {
-                if (ManagerPartida.PartidaModifDetalles(PDetallesBorrar))
+                //Si fue acreditada impedir la modificación
+                if (unaPartida.MontoOtorgado > 0 && !string.IsNullOrEmpty(unaPartida.NroPartida))
+                {
+                    MessageBox.Show("La partida se encuentra acreditada, no puede modificarse");
+                    return;
+                }
+
+                if (unaPartida.unasPartidasDetalles.Any(X => X.unasCotizaciones.Count < 3))
+                {
+                    MessageBox.Show("Cada detalle de la partida debe poseer al menos 3 cotizaciones");
+                    return;
+                }
+
+                if (ManagerPartida.PartidaModifDetalles(PDetallesBorrar, unaPartida.unasPartidasDetalles, unaPartida.MontoSolicitado))
                 {
                     //Crear el documento
                     string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
@@ -383,7 +419,6 @@ namespace ARTEC.GUI
                             }
                         }
 
-
                         //Cotiz
                         if (NombreImpresora != "")
                         {
@@ -410,8 +445,17 @@ namespace ARTEC.GUI
                             }
                         }
                     }
+                    MessageBox.Show("Solicitud de Partida modificada correctamente");
+                    this.Close();
                 }
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnGenerarDocumento_Click");
+                MessageBox.Show("Error al intentar modificar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");                
+            }
+
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -594,6 +638,42 @@ namespace ARTEC.GUI
                         }
                     }
                 }
+            }
+        }
+
+        private void grillaCotizaciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Si se hizo click en el header, salir
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                {
+                    return;
+                }
+                else if (e.ColumnIndex == grillaCotizaciones.Columns["btnDinBorrar"].Index)
+                {
+                    ////Si hizo click en Quitar
+                    //if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
+                    //{
+                    ListaLocalCotiz.RemoveAt(e.RowIndex);
+                    //Regenero la grilla
+                    grillaCotizaciones.DataSource = null;
+                    grillaCotizaciones.DataSource = ListaLocalCotiz;
+                    
+                    //Coloco las cotizaciones antiguas diferencia con lo quitado (no asociadas a la partida al momento de generarla)
+                    ListaResCotizLoc = CotizAntiguas.Where(p => !ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
+                               .ToList();
+                    GrillaCotizAntiguas.DataSource = null;
+                    GrillaCotizAntiguas.DataSource = ListaResCotizLoc;
+                    FormatearGrillaCotiz();
+                    //Actualizo Monto Total
+                    CalcularMontoTotalPartida();
+                }
+            }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - grillaCotizaciones_CellClick");
+                MessageBox.Show("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
         }
 

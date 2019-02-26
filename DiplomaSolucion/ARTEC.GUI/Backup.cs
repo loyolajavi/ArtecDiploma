@@ -110,19 +110,19 @@ namespace ARTEC.GUI
                 {
                     if (ServicioBackup.Respaldar(txtNombreRespaldar.Text, txtDestino.Text, txtObservaciones.Text))
                     {
-                        MessageBox.Show("Backup realizado correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Backup realizado correctamente").Texto);
                         ServicioLog.CrearLog("Realizar backup", "Backup realizado correctamente");
                     }
                     else
                     {
-                        MessageBox.Show("No pudo realizarse el Backup");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No pudo realizarse el Backup").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnRespaldar_Click");
-                MessageBox.Show("Ocurrio un error al intentar respaldar la base de datos, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar respaldar la base de datos, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
            
             
@@ -137,7 +137,7 @@ namespace ARTEC.GUI
                 {
                     if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
                     {
-                        MessageBox.Show("Se restauró la base de datos correctamente, por favor inicie nuevamente la aplicación");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Se restauró la base de datos correctamente, por favor inicie nuevamente la aplicación").Texto);
                         ServicioLog.CrearLog("Restaurar BD", "Restauración realizada correctamente");
                         //Para que no aparezca el login al sistema si no se restauró la BD
                         DialogResult = DialogResult.OK;
@@ -146,14 +146,14 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("No pudo restaurarse la base de datos");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No pudo restaurarse la base de datos").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnRestaurar_Click");
-                MessageBox.Show("Ocurrio un error al intentar restaurar la base de datos, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar restaurar la base de datos, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }

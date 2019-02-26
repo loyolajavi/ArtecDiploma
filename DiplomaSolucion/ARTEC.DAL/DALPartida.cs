@@ -424,35 +424,40 @@ namespace ARTEC.DAL
 
         }
 
-        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar)
+        public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar, List<PartidaDetalle> unasPartidasDetalles, decimal MontoTotal)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
+            int IdPartidaActual = unasPartidasDetalles[0].IdPartida;
 
             try
             {
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                foreach (PartidaDetalle pdet in PDetallesBorrar)
-                {
-                    foreach (Cotizacion unaCoti in pdet.unasCotizaciones)
-                    {
-                        parameters.Add(new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion));
-                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModifDetalles", parameters.ToArray());
-                        parameters.Clear();
-                    }
 
-                    //Elimina los detalles que fueron quitados de la partida
-                    SqlParameter[] parametersPartDet = new SqlParameter[]
+                if (PDetallesBorrar != null && PDetallesBorrar.Count() > 0)
+                {
+                    //Quitar DetallesPartida
+                    foreach (PartidaDetalle pdet in PDetallesBorrar)
+                    {
+                        foreach (Cotizacion unaCoti in pdet.unasCotizaciones)
+                        {
+                            parameters.Add(new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion));
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModifDetalles", parameters.ToArray());
+                            parameters.Clear();
+                        }
+
+                        //Elimina los detalles que fueron quitados de la partida
+                        SqlParameter[] parametersPartDet = new SqlParameter[]
                     {
                         new SqlParameter("@IdPartida", pdet.IdPartida),
                         new SqlParameter("@UIDPartidaDetalle", pdet.UIDPartidaDetalle),
                         new SqlParameter("@IdPartidaDetalle", pdet.IdPartidaDetalle)
                     };
 
-                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModEliminarDetalle", parametersPartDet);
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModEliminarDetalle", parametersPartDet);
 
-                    //Modifica el estado de los detalles de Solicitud
-                    SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
+                        //Modifica el estado de los detalles de Solicitud
+                        SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
 			        {
                         new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", pdet.SolicDetalleAsociado.IdSolicitudDetalle),
@@ -460,9 +465,59 @@ namespace ARTEC.DAL
                         new SqlParameter("@UIDSolicDetalle", pdet.SolicDetalleAsociado.UIDSolicDetalle)
 			        };
 
-                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
-
+                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersSolicDetEstadoUpdate);
+                    }
                 }
+
+                //Modificar DetallesPartida (Agregar o Quitar cotizaciones)
+                List<Cotizacion> unasCotizaBD = new List<Cotizacion>();
+                List<Cotizacion> unasCotizaQuitarMod = new List<Cotizacion>();
+                List<Cotizacion> unasCotizaAgregarMod = new List<Cotizacion>();
+                List<Cotizacion> unasCotizaBDBKP = new List<Cotizacion>();
+
+                foreach (PartidaDetalle pdet in unasPartidasDetalles)
+                {
+                    unasCotizaBD = pdet.unasCotizacionesBKP.ToList();
+                    unasCotizaQuitarMod = unasCotizaBD.Where(d => !pdet.unasCotizaciones.Any(a => a.IdCotizacion == d.IdCotizacion)).ToList();
+                    unasCotizaAgregarMod = pdet.unasCotizaciones.Where(d => !unasCotizaBD.Any(a => a.IdCotizacion == d.IdCotizacion)).ToList();
+
+                    //Quitar cotizaciones eliminadas
+                    if (unasCotizaQuitarMod.Count > 0)
+                    {
+                        foreach (Cotizacion unaCoti in unasCotizaQuitarMod)
+                        {
+                            //Eliminar RelCotSolDetalles
+                            SqlParameter[] parametersRelCotPDetEliminar = new SqlParameter[]
+			                    {
+                                    new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion)
+			                    };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaModifDetalles", parametersRelCotPDetEliminar);
+                        }
+                    }
+
+                    //Agregar Cotizaciones agregadas
+                    if (unasCotizaAgregarMod.Count > 0)
+                    {
+                        foreach (Cotizacion unaCoti in unasCotizaAgregarMod)
+                        {
+                            //Agregar RelCotSolDet entre Cotiz y PDet
+                            SqlParameter[] parametersRelCotPDetAgregar = new SqlParameter[]
+			                    {
+                                    new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion),
+                                    new SqlParameter("@IdPartida", pdet.IdPartida),
+                                    new SqlParameter("@UIDPartidaDetalle", pdet.UIDPartidaDetalle)
+			                    };
+                            FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotPDetAgregar);
+                        }
+                    }
+                }
+
+                SqlParameter[] parametersMontoTotal = new SqlParameter[]
+                {
+                    new SqlParameter("@IdPartida", IdPartidaActual),
+                    new SqlParameter("@MontoSolicitado", MontoTotal)
+                };
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaModifMontoSolic", parametersMontoTotal);
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return true;
@@ -470,7 +525,6 @@ namespace ARTEC.DAL
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                return false;
                 throw;
             }
             finally
