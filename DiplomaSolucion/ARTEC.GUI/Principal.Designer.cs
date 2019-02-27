@@ -52,6 +52,7 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
+            this.btnParametros = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +139,7 @@ namespace ARTEC.GUI
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.btnParametros);
             this.panelEx1.Controls.Add(this.btnFamilias);
             this.panelEx1.Controls.Add(this.btnBitacora);
             this.panelEx1.Controls.Add(this.btnBackup);
@@ -162,7 +164,7 @@ namespace ARTEC.GUI
             this.btnFamilias.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnFamilias.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnFamilias.CustomColorName = "Blue";
-            this.btnFamilias.Location = new System.Drawing.Point(894, 9);
+            this.btnFamilias.Location = new System.Drawing.Point(460, 9);
             this.btnFamilias.Name = "btnFamilias";
             this.btnFamilias.Size = new System.Drawing.Size(108, 40);
             this.btnFamilias.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -177,7 +179,7 @@ namespace ARTEC.GUI
             this.btnBitacora.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnBitacora.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnBitacora.CustomColorName = "Blue";
-            this.btnBitacora.Location = new System.Drawing.Point(751, 9);
+            this.btnBitacora.Location = new System.Drawing.Point(605, 9);
             this.btnBitacora.Name = "btnBitacora";
             this.btnBitacora.Size = new System.Drawing.Size(108, 40);
             this.btnBitacora.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -192,7 +194,7 @@ namespace ARTEC.GUI
             this.btnBackup.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnBackup.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnBackup.CustomColorName = "Blue";
-            this.btnBackup.Location = new System.Drawing.Point(600, 9);
+            this.btnBackup.Location = new System.Drawing.Point(751, 9);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(108, 40);
             this.btnBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -207,7 +209,7 @@ namespace ARTEC.GUI
             this.btnUsuarios.BackColor = System.Drawing.SystemColors.HotTrack;
             this.btnUsuarios.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnUsuarios.CustomColorName = "Blue";
-            this.btnUsuarios.Location = new System.Drawing.Point(456, 9);
+            this.btnUsuarios.Location = new System.Drawing.Point(312, 9);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(108, 40);
             this.btnUsuarios.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -378,6 +380,20 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
+            // btnParametros
+            // 
+            this.btnParametros.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnParametros.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnParametros.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnParametros.CustomColorName = "Blue";
+            this.btnParametros.Location = new System.Drawing.Point(893, 9);
+            this.btnParametros.Name = "btnParametros";
+            this.btnParametros.Size = new System.Drawing.Size(108, 40);
+            this.btnParametros.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnParametros.TabIndex = 13;
+            this.btnParametros.Text = "btnParametros";
+            this.btnParametros.TextColor = System.Drawing.Color.White;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -397,6 +413,7 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnAvanzadas);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -433,6 +450,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnFamilias;
         private System.Windows.Forms.TabPage tabAsignaciones;
         private System.Windows.Forms.TabPage tabAdquisiciones;
+        private DevComponents.DotNetBar.ButtonX btnParametros;
 
 
 
