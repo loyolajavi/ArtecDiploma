@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ARTEC.FRAMEWORK.Servicios;
+using System.IO;
 
 namespace ARTEC.FRAMEWORK.Persistencia
 {
@@ -17,16 +19,28 @@ namespace ARTEC.FRAMEWORK.Persistencia
         //    internal set { }
         //}//NO LO USO PORQUE EL CONNSTRINGNAME ES SOLAMENTE PARA USO INTERNO DE ESTA CLASE PORQ LO BUSCO DIRECTO DEL APP.CONFIG ACA ADENTRO
 
-        private static string _connectionStringName = System.Configuration.ConfigurationManager.ConnectionStrings["BDArtec"].ConnectionString;
+        //private static string _connectionStringName = System.Configuration.ConfigurationManager.ConnectionStrings["BDArtec"].ConnectionString; Deje de usarlo al serializar
+        private static string RutaArchivoXML = System.Configuration.ConfigurationManager.ConnectionStrings["BDArtec"].ConnectionString;//Para obtener ruta del xml con el connectionString
+        private static string _connectionStringName = "";
         private static SqlTransaction Transaccion;
         private static SqlCommand Comando;
         private static SqlConnection Conexion;
-
+        private static List<ConfiguracionConexion> ConfiguracionBase = new List<ConfiguracionConexion>();//Objeto en donde se deserializan los connectionString (Artec y Restore(master))
 
         public static void ConexionIniciar()
         {
             try
             {
+                //Solo la primera vez deserializo y obtengo el connectionstring de Artec
+                if(string.IsNullOrEmpty(_connectionStringName))
+                {
+                    using (StreamReader sr = new StreamReader(RutaArchivoXML))
+                    {
+                        MemoryStream ms = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(sr.ReadToEnd()));
+                        ConfiguracionBase = ServicioSerializadorXML.DeSerializar<List<ConfiguracionConexion>>(ms);
+                    }
+                    _connectionStringName = ConfiguracionBase[0].DataSourceBD + ConfiguracionBase[0].InitialCatalogBD + ConfiguracionBase[0].UsuarioBD + ConfiguracionBase[0].PasswordBD;
+                }
                 Conexion = new SqlConnection(_connectionStringName);
                 if (Conexion != null && Conexion.State == ConnectionState.Closed)
                 {
@@ -44,7 +58,10 @@ namespace ARTEC.FRAMEWORK.Persistencia
         {
             try
             {
-                string connectionStringNameRest = System.Configuration.ConfigurationManager.ConnectionStrings["Restaurar"].ConnectionString;
+                //string connectionStringNameRest = System.Configuration.ConfigurationManager.ConnectionStrings["Restaurar"].ConnectionString;
+                string connectionStringNameRest;
+                connectionStringNameRest = ConfiguracionBase[1].DataSourceBD + ConfiguracionBase[1].InitialCatalogBD + ConfiguracionBase[1].UsuarioBD + ConfiguracionBase[1].PasswordBD;
+
                 Conexion = new SqlConnection(connectionStringNameRest);
                 if (Conexion != null && Conexion.State == ConnectionState.Closed)
                 {

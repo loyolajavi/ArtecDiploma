@@ -215,6 +215,7 @@ namespace ARTEC.GUI
         {
             //Crear el documento
             string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Rendicion.docx";
+            string RutaPlantillaRetribucion = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Retribucion.docx";
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
                 using (DocX doc = DocX.Load(RutaPlantilla))
@@ -233,7 +234,7 @@ namespace ARTEC.GUI
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
-                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\RetribucionCajaChica.docx"))
+                    using (DocX doc = DocX.Load(RutaPlantillaRetribucion))
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
@@ -242,28 +243,31 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
                         doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
-                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Retribucion1"));
+                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + unaRendicion.IdRendicion.ToString() + ".docx");
                     }
                 }
             }
             else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
             {
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion English.docx"))
+                RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Rendicion English.docx";
+                RutaPlantillaRetribucion = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Retribucion English.docx";
+                using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                     doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
-                    ////Si se escribio una justificación
-                    //if (!string.IsNullOrWhiteSpace(JustifAUX))
-                    //{
-                    //    doc.AddCustomProperty(new CustomProperty("PJustificacion", "Finalmente, la presente erogación de fondos es solicitada por este curso debido a que " + JustifAUX));
-                    //}
-                    doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "PruebaRendicion English"));
+                    var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
+                    for (var I = 0; I == unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados.Count(); I++)
+                    {
+                        doc.AddListItem(unaLista, unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[I].unaCategoria.DescripCategoria, 0);
+                    }
+                    doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
+                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + unaRendicion.IdRendicion.ToString() + ".docx");
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
-                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\RetribucionCajaChica.docx"))
+                    using (DocX doc = DocX.Load(RutaPlantillaRetribucion))
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
@@ -272,7 +276,7 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
                         doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
-                        doc.SaveAs(string.Format(@"D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\{0}.docx", "Retribucion1"));
+                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + unaRendicion.IdRendicion.ToString() + ".docx");
                     }
                 }
             }
@@ -290,6 +294,8 @@ namespace ARTEC.GUI
                     System.Diagnostics.Process.Start(info);
                 }
             }
+            MessageBox.Show("Rendición creada correctamente");
+            this.Close();
         }
 
 

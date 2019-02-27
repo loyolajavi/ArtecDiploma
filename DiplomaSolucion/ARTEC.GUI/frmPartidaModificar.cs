@@ -382,6 +382,13 @@ namespace ARTEC.GUI
                             doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                             doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
                             CultureInfo ci = new CultureInfo("es-AR");
+                            doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                            var unaLista = doc.AddList(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.Cantidad.ToString() + " " + unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
+                            for (var I = 1; I == unaPartida.unasPartidasDetalles.Count() - 1; I++)
+                            {
+                                doc.AddListItem(unaLista, unaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.Cantidad.ToString() + " " + unaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0);
+                            }
+                            doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
                             doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
                         }
                     }
@@ -393,6 +400,13 @@ namespace ARTEC.GUI
                             doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                             doc.AddCustomProperty(new CustomProperty("PDependencia", DepAsoc.NombreDependencia));
                             CultureInfo ci = new CultureInfo("es-AR");
+                            doc.AddCustomProperty(new CustomProperty("PMontoSolicitado", unaPartida.MontoSolicitado.ToString("C2", ci)));
+                            var unaLista = doc.AddList(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.Cantidad.ToString() + " " + unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
+                            for (var I = 1; I == unaPartida.unasPartidasDetalles.Count() - 1; I++)
+                            {
+                                doc.AddListItem(unaLista, unaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.Cantidad.ToString() + " " + unaPartida.unasPartidasDetalles[I].SolicDetalleAsociado.unaCategoria.DescripCategoria, 0);
+                            }
+                            doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
                             doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Partida " + unaPartida.IdPartida.ToString() + ".docx");
                         }
                     }
