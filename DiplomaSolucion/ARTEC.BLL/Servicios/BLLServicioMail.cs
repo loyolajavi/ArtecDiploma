@@ -13,7 +13,15 @@ namespace ARTEC.BLL.Servicios
 
         public static void CargarMailConfig()
         {
-            DALServicioMail.CargarMailConfig();
+            try
+            {
+                DALServicioMail.CargarMailConfig();
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+            
         }
 
     }

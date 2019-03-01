@@ -59,8 +59,7 @@ namespace ARTEC.FRAMEWORK.Servicios
                     }
                     catch (Exception ex)
                     {
-                        //VER:Excepción log
-                        EnvioExitoso = false;
+                        throw;
                     }
                     finally
                     {

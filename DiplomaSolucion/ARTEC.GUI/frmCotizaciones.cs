@@ -136,13 +136,6 @@ namespace ARTEC.GUI
                 }
 
                 grillaCotizacion.DataSource = null;
-                if (unasCotizaciones.Count() > 0)
-                {
-                    grillaCotizacion.DataSource = unasCotizaciones;
-                    FormatearGrillaCotizacion();
-                }
-
-
 
                 unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
                 unosProveedoresSol = ManagerProveedor.ProveedorTraerTodosActivos();
@@ -158,28 +151,33 @@ namespace ARTEC.GUI
                     txtAsunto.Text = "MPF Quote";
                 }
 
-                //Agregar adjuntos cotizaciones
-                foreach (Cotizacion unaCotizacion in unasCotizaciones)
+                if (unasCotizaciones.Count() > 0)
                 {
-                    //Agrega el adjunto
-                    if (unaCotizacion.IdCotizacion > 0)
+                    //Agregar adjuntos cotizaciones
+                    foreach (Cotizacion unaCotizacion in unasCotizaciones)
                     {
-                        string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
-                        unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
-                        //Añado los adjuntos a los diccionarios
-                        //DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
-                        //DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
-                        DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreAdjunto });
-                        DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaDestinoAdjunto });
-                    }
-                    else
-                    {
-                        //Agarro el nombre del archivo
-                        string NombreArchivoAux = Path.GetFileName(unaCotizacion.RutaOrigenAdjunto);
-                        DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreArchivoAux });
-                        DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaOrigenAdjunto });
-                    }
+                        //Agrega el adjunto
+                        if (unaCotizacion.IdCotizacion > 0)
+                        {
+                            string NombreAdjunto = ManagerCotizacion.ObtenerNombreAdjuntoCotiz(unaCotizacion.IdCotizacion);
+                            unaCotizacion.RutaDestinoAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                            //Añado los adjuntos a los diccionarios
+                            //DicAdjuntos.Add(unaCotizacion.IdCotizacion, new List<string> { NombreAdjunto });
+                            //DicAdjuntosRutas.Add(unaCotizacion.IdCotizacion, new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                            DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreAdjunto });
+                            DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaDestinoAdjunto });
+                        }
+                        else
+                        {
+                            //Agarro el nombre del archivo
+                            string NombreArchivoAux = Path.GetFileName(unaCotizacion.RutaOrigenAdjunto);
+                            DicAdjuntos.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { NombreArchivoAux });
+                            DicAdjuntosRutas.Add(unasCotizaciones.IndexOf(unaCotizacion), new List<string> { unaCotizacion.RutaOrigenAdjunto });
+                        }
                     
+                    }
+                    grillaCotizacion.DataSource = unasCotizaciones;
+                    FormatearGrillaCotizacion();
                 }
 
                 ////Añado a la gilla de adjuntos el adjunto de la primer cotización(Solo con el primero por cuestión de que es dinámico)
@@ -433,19 +431,29 @@ namespace ARTEC.GUI
 
         private void btnSolicitar_Click(object sender, EventArgs e)
         {
-            if (!vldFrmCotizacionesSolic.Validate())
-                return;
-            BLL.Servicios.BLLServicioMail.CargarMailConfig();
+            try
+            {
+                if (!vldFrmCotizacionesSolic.Validate())
+                    return;
+                BLL.Servicios.BLLServicioMail.CargarMailConfig();
 
-            if (ListaProv.Count == 0)
-            {
-                MessageBox.Show("Por favor ingrese al menos un Proveedor");
-                return;
+                if (ListaProv.Count == 0)
+                {
+                    MessageBox.Show("Por favor ingrese al menos un Proveedor");
+                    return;
+                }
+                foreach (Proveedor unProv in ListaProv)
+                {
+                    FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
+                }
+                MessageBox.Show("Mails enviados correctamente");
             }
-            foreach (Proveedor unProv in ListaProv)
+            catch (Exception es)
             {
-                FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
+                string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnSolicitar_Click");
+                MessageBox.Show("Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro " + IdError + " del Log de Eventos");
             }
+            
             
         }
 
