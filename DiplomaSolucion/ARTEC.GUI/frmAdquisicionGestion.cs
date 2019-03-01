@@ -246,7 +246,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAsquisicionGestion - frmAdquisicionGestion_Load");
-                MessageBox.Show("Ocurrio un error al intentar cargar la pantalla de modificacion de Adquisicion, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar cargar la pantalla de modificacion de Adquisicion, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -305,7 +305,7 @@ namespace ARTEC.GUI
                     {
                         unEstadosInv = ManagerInventario.InventarioTraerEstadoPorIdInventario(unaAdqModif.unosInventariosAsoc[e.RowIndex].IdInventario);
                         if (unEstadosInv.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado)
-                            MessageBox.Show("El inventario no puede ser eliminado porque ya fue asignado");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El inventario no puede ser eliminado porque ya fue asignado").Texto);
                         else
                         {
                             //Actualziar MontoCompra
@@ -329,7 +329,7 @@ namespace ARTEC.GUI
                 catch (Exception es)
                 {
                     string IdError = ServicioLog.CrearLog(es, "frmAsquisicionGestion - GrillaInventarios_CellClick");
-                    MessageBox.Show("Ocurrio un error al eliminar un inventario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al eliminar un inventario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
                 }
             }
         }
@@ -497,7 +497,7 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un inventario
             if (unaAdqModif.unosInventariosAsoc.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la adquisicion posea al menos un inventario");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la adquisicion posea al menos un inventario").Texto);
                 //InventariosAgregar.Clear();
                 //InventariosAgregar = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsignacionSelec.IdAsignacion);
                 //InventariosAgregarBKP = InventariosAgregar.ToList();
@@ -552,14 +552,14 @@ namespace ARTEC.GUI
                     flowBienesAAdquirir.Controls.Clear();
                     GrillaBienesAAdquirir.DataSource = null;
 
-                    MessageBox.Show("Modificación realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                     DialogResult = DialogResult.OK;
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAdquisicionModificar - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -675,13 +675,13 @@ namespace ARTEC.GUI
 
                 if (unAgregarInventarioCU.unaMarca.Items.Count == 0 | unAgregarInventarioCU.unModelo.Items.Count == 0 | unAgregarInventarioCU.unTipoBien.Items.Count == 0 || (int)unAgregarInventarioCU.unaMarca.SelectedValue < 1 | (int)unAgregarInventarioCU.unModelo.SelectedValue < 1 | (int)unAgregarInventarioCU.unTipoBien.SelectedValue < 1)
                 {
-                    MessageBox.Show("Por favor seleccione un Bien a agregar y complete sus datos");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione un Bien a agregar y complete sus datos").Texto);
                     return;
                 }
 
                 if (unosInventariosHlp.Any(X => X.SerieKey == unAgregarInventarioCU.unSerie && X.DescripMarca == unAgregarInventarioCU.unaMarca.Text && X.DescripModeloVersion == unAgregarInventarioCU.unModelo.Text && X.DescripBien == unAgregarInventarioCU.unBien))
                 {
-                    MessageBox.Show("El serie ingresado ya existe para ese Bien");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El serie ingresado ya existe para ese Bien").Texto);
                     return;
                 }
 
@@ -763,7 +763,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAdquisicionGestion - unAgregarInventarioCU_unBtnAgregar_Click");
-                MessageBox.Show("Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
            
@@ -783,15 +783,15 @@ namespace ARTEC.GUI
                     unosEstadosInv.Add(ManagerInventario.InventarioTraerEstadoPorIdInventario(unInven.IdInventario));
                 }
                 if (unosEstadosInv.Any(X => X.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado))
-                    MessageBox.Show("La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados").Texto);
                 else
                 {
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Adquisición: " + unaAdqModif.IdAdquisicion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                     {
                         if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
                         {
-                            MessageBox.Show("Asignación: " + unaAdqModif.IdAdquisicion.ToString() + " eliminada correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAdqModif.IdAdquisicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                             DialogResult = DialogResult.No;
                         }
                     }
@@ -803,7 +803,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAdquisicionGestion - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la adquisición: " + unaAdqModif.IdAdquisicion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
             
@@ -824,7 +824,7 @@ namespace ARTEC.GUI
             unEstadoInv = ManagerInventario.InventarioTraerEstadoPorIdInventario(unaAdqModif.unosInventariosAsoc[e.RowIndex].IdInventario);
             if (unEstadoInv.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado)
             {
-                MessageBox.Show("El inventario no puede ser modificado porque ya fue asignado");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El inventario no puede ser modificado porque ya fue asignado").Texto);
             }
             else
             {

@@ -316,7 +316,7 @@ namespace ARTEC.GUI
                 //AGREGAR QUE SE ELIMINEN los detalles de USUARIOS ASOCIADOS en soft AL CAMBIAR LA FISCALIA (SIN TENER DETALLES AGREGADOS)
                 if (grillaDetalles.DataSource != null)
                 {
-                    DialogResult resmbox = MessageBox.Show("Si cambia de Fiscalía se eliminarán los detalles", "Confirmar", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Si cambia de Fiscalía se eliminarán los detalles").Texto, BLLServicioIdioma.MostrarMensaje("Confirmar").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                     {
                         //Elimino los datos que hayan quedado escritos para agregar detalles
@@ -678,7 +678,7 @@ namespace ARTEC.GUI
                         var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
                         if (resultado.Count() > 0)
                         {
-                            MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El agente ").Texto + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + BLLServicioIdioma.MostrarMensaje("ya se encuentra asociado a este software").Texto);
                             validCantBien.ClearFailedValidations();
                         }
                         else
@@ -786,7 +786,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede eliminarse");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede eliminarse").Texto);
                 }
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
@@ -924,7 +924,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnCrearSolicitud_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -942,7 +942,7 @@ namespace ARTEC.GUI
         {
             if (unosAdjuntosNombre.Count > 0)
             {
-                MessageBox.Show("No puede adjuntarse más de 1 archivo");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No puede adjuntarse más de 1 archivo").Texto);
             }
             else
             {
@@ -968,7 +968,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
                     }
                     /// BKP/Agarro la ruta de los archivos arrastrados
                     //string[] unArchivo = (string[])e.Data.GetData(DataFormats.FileDrop, false);

@@ -482,11 +482,121 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor adjun
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Solicitud posea al menos un detalle', N'Por favor revisar que la Solicitud posea al menos un detalle', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Solicitud posea al menos un detalle', N'Check if the request has one detail at least', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Si cambia de Fiscalía se eliminarán los detalles', N'Si cambia de Fiscalía se eliminarán los detalles', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Si cambia de Fiscalía se eliminarán los detalles', N'If you change the prosecutor's office, the details will be deleted.', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmar', N'Confirmar', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmar', N'Confirm', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Agente', N'El Agente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Agente', N'The agent', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'ya se encuentra asociado a este software', N'ya se encuentra asociado a este software', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'ya se encuentra asociado a este software', N'is already associated with this software', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El detalle está asociado a la Partida Nro:', N'El detalle está asociado a la Partida Nro:', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El detalle está asociado a la Partida Nro:', N'The detail is associated with Item Number:', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no puede eliminarse', N'no puede eliminarse', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no puede eliminarse', N'can not be removed', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro', N'Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear la Solicitud, por favor informe del error Nro', N'Error, please report the error number:', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' del Log de Eventos', N' del Log de Eventos', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' del Log de Eventos', N'Event log', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede adjuntarse más de 1 archivo', N'No puede adjuntarse más de 1 archivo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede adjuntarse más de 1 archivo', N'Can not attach more than 1 file', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El archivo', N'El archivo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El archivo', N'The file', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', N'does not have a valid extension (jpg, png, bmp, pdf, txt)', 2)
+
+--ADQUISICION BUSCAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error en la búsqueda, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error in the search, please report the error number ', 2)
+
+--ADQUISICION GESTION
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cargar la pantalla de modificacion de Adquisicion, por favor informe del error Nro ', N'Ocurrio un error al intentar cargar la pantalla de modificacion de Adquisicion, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cargar la pantalla de modificacion de Adquisicion, por favor informe del error Nro ', N'An error occurred trying to load the purchase modification screen, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser eliminado porque ya fue asignado', N'El inventario no puede ser eliminado porque ya fue asignado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser eliminado porque ya fue asignado', N'The inventory can not be eliminated because it has already been assigned', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al eliminar un inventario, por favor informe del error Nro ', N'Ocurrio un error al eliminar un inventario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al eliminar un inventario, por favor informe del error Nro ', N'An error occurred when removing an inventory, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la adquisicion posea al menos un inventario', N'Por favor revisar que la adquisicion posea al menos un inventario', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la adquisicion posea al menos un inventario', N'Please check that the acquisition has at least one inventory', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', N'An error occurred trying to modify the Assignment, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'Modificación realizada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'successful modification', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione un Bien a agregar y complete sus datos', N'Por favor seleccione un Bien a agregar y complete sus datos', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione un Bien a agregar y complete sus datos', N'Please add a good and complete your information', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El serie ingresado ya existe para ese Bien', N'El serie ingresado ya existe para ese Bien', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El serie ingresado ya existe para ese Bien', N'The entered series already exists for that good', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro ', N'Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar agregar un inventario, por favor informe del error Nro ', N'An error occurred trying to add an inventory, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados', N'La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados', N'The purchase can not be eliminated because it contains inventories that have already been assigned', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Adquisición: ', N'¿Está seguro que desea dar de baja la Adquisición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Adquisición: ', N'Are you sure you want to cancel the purchase ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Advertencia', N'Advertencia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Advertencia', N'Warning', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion', N'Asignacion', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion', N'assignment', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminada correctamente', N'Eliminada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminada correctamente', N'deleted correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la adquisición: ', N'Ocurrio un error al intentar eliminar la adquisición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la adquisición: ', N'An error occurred removing the purchase ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', please report error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'El inventario no puede ser modificado porque ya fue asignado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'The inventory can not be modified because it has already been assigned', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agente creado correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agent created successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el Agente: ', N'Ocurrio un error al intentar crear el Agente: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el Agente: ', N'An error occurred creating the Agent: ', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+--En todos los MessageBox.Show("XXX");
+--Delante de las comillas va:
+BLLServicioIdioma.MostrarMensaje(
+--Atras de las comillas va:
+).Texto

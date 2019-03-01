@@ -94,13 +94,13 @@ namespace ARTEC.GUI
                 NuevoAgente.unCargo.IdCargo = (int)cboCargo.SelectedValue;
                 NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
                 if (ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia) > 0)
-                    MessageBox.Show("Agente creado correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Agente creado correctamente").Texto);
                 DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAgenteCrear - btnCrearAgente_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear el Agente: " + NuevoAgente.NombreAgente + " " + NuevoAgente.ApellidoAgente + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear el Agente: ").Texto + NuevoAgente.NombreAgente + " " + NuevoAgente.ApellidoAgente + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
