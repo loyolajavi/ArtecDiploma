@@ -165,11 +165,15 @@ namespace ARTEC.GUI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+
             if (!vldFrmBienRegistrarBtnConfirmar.Validate())
                 return;
 
             try
             {
+                //ManagerAdquisicion.
+
                 List<HLPDetallesAdquisicion> LisAUXCant = new List<HLPDetallesAdquisicion>();
                 LisAUXCant = ManagerPartidaDetalle.InventarioAdquiridoCantPorPartDetalle(Int32.Parse(txtNroPartida.Text));
                 foreach (var item2 in LisAUXDetalles)
@@ -183,7 +187,7 @@ namespace ARTEC.GUI
                     LisAUXCant = null;
                     if (unaAdquisicion.BienesInventarioAsociados != null && unaAdquisicion.BienesInventarioAsociados.Count() > 0)
                     {
-                        BLLAdquisicion ManagerAdquisicion = new BLLAdquisicion();
+                        
                         unaAdquisicion.NroFactura = txtNroFactura.Text;
                         unaAdquisicion.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
                         unaAdquisicion.MontoCompra = decimal.Parse(txtMontoTotal.Text);

@@ -108,15 +108,22 @@ namespace ARTEC.GUI
                     ListaGrilla.Add(grillaAsig2);
                 }
 
+                
 
             }
 
-            foreach (GrillaAsignacion gri in ListaGrilla)
+            if (ListaGrilla.Count > 0)
             {
-                flowInventarios.Controls.Add(gri);
+                foreach (GrillaAsignacion gri in ListaGrilla)
+                {
+                    flowInventarios.Controls.Add(gri);
+                }
             }
-
-
+            else
+            {
+                MessageBox.Show("La Solicitud no posee bienes disponibles para asignar");
+                this.Close();
+            }
         }
 
 
@@ -217,7 +224,7 @@ namespace ARTEC.GUI
                     return;
                 }
 
-                if (ManagerAsignacion.AsignacionCrear(unaAsignacion))
+                if (ManagerAsignacion.AsignacionCrear(unaAsignacion, unaSolic))
                 {
                     //Crear el documento
                     string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Asignacion.docx";
