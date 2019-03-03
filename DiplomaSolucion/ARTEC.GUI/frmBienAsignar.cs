@@ -220,7 +220,7 @@ namespace ARTEC.GUI
             {
                 if (InventariosAsignar != null && InventariosAsignar.Count == 0)
                 {
-                    MessageBox.Show("Por favor seleccione al menos un bien a asignar");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione al menos un bien a asignar").Texto);
                     return;
                 }
 
@@ -282,14 +282,14 @@ namespace ARTEC.GUI
                             }
                         }
                     }
-                    MessageBox.Show("Asignacion Creada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignacion Creada correctamente").Texto);
                     this.Close();
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmBienAsignar - btnConfirmar_Click");
-                MessageBox.Show("Error al crear la asignación, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error al crear la asignación, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
                 

@@ -225,12 +225,12 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("Faltan cargar los bienes adquiridos");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Faltan cargar los bienes adquiridos").Texto);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Todos los bienes de la partida asociada ya fueron adquiridos");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Todos los bienes de la partida asociada ya fueron adquiridos").Texto);
                 }
 
 
@@ -239,7 +239,8 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - btnConfirmar_Click");
-                MessageBox.Show("Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto
+);
             }
 
             
@@ -484,7 +485,7 @@ namespace ARTEC.GUI
         {
             if (LisAUXDetalles == null || LisAUXDetalles.Count == 0)
             {
-                MessageBox.Show("Ingrese la partida asociada por favor");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ingrese la partida asociada por favor").Texto);
                 return;
             }
 
@@ -493,7 +494,7 @@ namespace ARTEC.GUI
 
             if (unDetSolic.Cantidad <= LisAUXDetalles.Where(x => x.IdSolicitudDetalle == unDetSolic.IdSolicitudDetalle).First().Comprado)//LisAUXDetalles[DetalleSeleccionado - 1].Comprado)
             {
-                MessageBox.Show("Ya se compró todo");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ya se compró todo").Texto);
             }
             else
             {
@@ -801,7 +802,7 @@ namespace ARTEC.GUI
             catch (Exception es )
             {
                 string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - TraerMarcas");
-                MessageBox.Show("Ocurrio un error al mostrar la marca creada, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al mostrar la marca creada, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -819,7 +820,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmBienRegistrar - TraerModelos");
-                MessageBox.Show("Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
