@@ -130,7 +130,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - frmFamiliaGestion_Load");
-                MessageBox.Show("Ocurrio un error al cargar la pantalla de Familias, por favor informe del error Nro " + IdError + " del Log de Eventos");    
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al cargar la pantalla de Familias, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);    
             }
             
 
@@ -239,7 +239,7 @@ namespace ARTEC.GUI
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa").Texto);
             else
             {
                 LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
@@ -259,7 +259,7 @@ namespace ARTEC.GUI
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa").Texto);
             else
             {
                 //LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);
@@ -286,13 +286,14 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un permiso asignado
             if (LisAuxAsig.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la Familia a crear posea al menos una patente asignada");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la Familia a crear posea al menos una patente asignada").Texto);
                 return;
             }
 
             if (LisAuxAsig.Count == 1 && LisAuxAsig.First().CantHijos > 0)
             {
-                MessageBox.Show("La Familia a crear no puede contener solamente una familia");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Familia a crear no puede contener solamente una familia").Texto
+);
                 return;
             }
 
@@ -301,7 +302,7 @@ namespace ARTEC.GUI
                 //FamiliaBuscar en BD lo reemplazo por una consulta en Linq
                 if(PermisosTodos.Any(X=>X.NombreIFamPat.ToLower() == txtNombre.Text.ToLower()))
                 {
-                    MessageBox.Show("La Familia ingresada ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Familia ingresada ya existe").Texto);
                     return;
                 }
 
@@ -310,7 +311,7 @@ namespace ARTEC.GUI
 
                 if (ManagerFamilia.FamiliaCrear(nuevaFamilia))
                 {
-                    MessageBox.Show("Familia creada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia creada correctamente").Texto);
 
                     PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                     PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
@@ -330,7 +331,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnCrear_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear una Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear una Familia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -346,13 +347,13 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un permiso asignado
             if (LisAuxAsig.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la Familia posea al menos una patente asignada");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la Familia posea al menos una patente asignada").Texto);
                 return;
             }
 
             if (LisAuxAsig.Count == 1 && LisAuxAsig.First().CantHijos > 0)
             {
-                MessageBox.Show("La Familia no puede contener solamente una familia");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Familia no puede contener solamente una familia").Texto);
                 return;
             }
 
@@ -364,7 +365,7 @@ namespace ARTEC.GUI
                     FamAux2 = ManagerFamilia.FamiliaBuscar(txtNombre.Text);
                 if (FamAux2 != null && FamAux2.IdIFamPat > 0)
                 {
-                    MessageBox.Show("La Familia ingresada ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Familia ingresada ya existe").Texto);
                     return;
                 }
 
@@ -390,13 +391,13 @@ namespace ARTEC.GUI
                     ListarPermisos(PermisosTodos, treeTodos);
                     cboFamilia.SelectedIndex = Seleccionado;
                     LisAuxAsigBKP = LisAuxAsig.ToList();
-                    MessageBox.Show("Modificación realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -423,11 +424,11 @@ namespace ARTEC.GUI
 		                    LisUs.Add(unUs.NombreUsuario);
 	                    }
                         string UsuariosCompString = string.Join(Environment.NewLine, LisUs);
-                        resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Familia: " + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?" + "\n" + "Se deberán modificar los permisos de los siguientes usuarios: \n" + UsuariosCompString, "Advertencia", MessageBoxButtons.YesNo);
+                        resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Familia: ").Texto + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?" + "\n" + BLLServicioIdioma.MostrarMensaje("Se deberán modificar los permisos de los siguientes usuarios: \n").Texto + UsuariosCompString, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     }
                     else
                     {
-                        resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Familia: " + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?", "Advertencia", MessageBoxButtons.YesNo);
+                        resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Familia: ").Texto + (cboFamilia.SelectedItem as Familia).NombreIFamPat + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     }
                     
                     if (resmbox == DialogResult.Yes)
@@ -479,19 +480,19 @@ namespace ARTEC.GUI
                             ListarPermisos(PermisosTodos, treeTodos);
                             ListarPermisos(LisAuxDisp, treeDisponibles);
                             ListarPermisos(LisAuxAsig, treeAsignados);
-                            MessageBox.Show("Familia eliminada correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia eliminada correctamente").Texto);
                         }
                     }
                     else
                         return;
                 }
                 else
-                    MessageBox.Show("Para dar de baja una Familia primero debe seleccionar una de la lista");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja una Familia primero debe seleccionar una de la lista").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmFamiliaGestion - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

@@ -235,7 +235,7 @@ namespace ARTEC.GUI
             //Para prevenir que se agregue un agente que ya está en la dependencia
             if (AgentesLista.Exists(x => x.IdAgente == unAgenSelect.IdAgente))
             {
-                MessageBox.Show("Atención: El agente ya se encuentra en la dependencia");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Atención: El agente ya se encuentra en la dependencia").Texto);
                 return;
             }
                 
@@ -308,7 +308,7 @@ namespace ARTEC.GUI
             FormatearGrillaAgentes();
 
             if(flagModificacion)
-                MessageBox.Show("Dependencia modificada correctamente");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia modificada correctamente").Texto);
 
             AgentesListaBKP = AgentesLista.Where(X => X.IdAgente > 0).ToList() as List<Agente>;
 
@@ -459,7 +459,7 @@ namespace ARTEC.GUI
             || flagColorGris || AgentesNuevos != null && AgentesNuevos.Count > 0)
             {
                 //VER: Grabar Msj en BD y utilizar servicioidioma.mostrarmensaje("").texto
-                DialogResult resmbox = MessageBox.Show("Hay cambios no persistidos ¿Desea salir sin guardar?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Hay cambios no persistidos ¿Desea salir sin guardar?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 e.Cancel = (resmbox == DialogResult.No);
             }
         }

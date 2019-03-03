@@ -127,7 +127,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("El Agente ingresado no existe");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El Agente ingresado no existe").Texto);
                         txtNombre.Clear();
                         txtApellido.Clear();
                         GrillaAgentes.DataSource = null;
@@ -136,7 +136,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("Por favor ingrese un Agente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor ingrese un Agente").Texto);
                     txtNombre.Clear();
                     txtApellido.Clear();
                     GrillaAgentes.DataSource = null;
@@ -147,7 +147,7 @@ namespace ARTEC.GUI
             {
                 MessageBox.Show(esr.Message);
                 string IdError = ServicioLog.CrearLog(esr, "frmAgentesGestion - btnBuscar_Click");
-                MessageBox.Show("Ocurrio un error al buscar el agente, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al buscar el agente, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -159,7 +159,7 @@ namespace ARTEC.GUI
             {
                 if (unAgente == null || string.IsNullOrEmpty(unAgente.NombreAgente))
                 {
-                    MessageBox.Show("Por favor busque un agente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor busque un agente").Texto);
                     return;
                 }
                     
@@ -172,13 +172,13 @@ namespace ARTEC.GUI
 
                 if (ManagerAgente.AgenteModificar(unAgente))
                 {
-                    MessageBox.Show("Modificación realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAgentesGestion - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar el agente, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar el agente, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -216,7 +216,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAgentesGestion - frmAgentesGestion_Load");
-                MessageBox.Show("Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

@@ -571,20 +571,282 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor inf
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'El inventario no puede ser modificado porque ya fue asignado', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'The inventory can not be modified because it has already been assigned', 2)
 
+--AGENTE CREAR
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agente creado correctamente', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agent created successfully', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el Agente: ', N'Ocurrio un error al intentar crear el Agente: ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el Agente: ', N'An error occurred creating the Agent: ', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+--Agente Gestion
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Agente ingresado no existe', N'El Agente ingresado no existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Agente ingresado no existe', N'The Agent entered does not exist', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor ingrese un Agente', N'Por favor ingrese un Agente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor ingrese un Agente', N'Please enter an Agent', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar el agente, por favor informe del error Nro ', N'Ocurrio un error al buscar el agente, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar el agente, por favor informe del error Nro ', N'An error occurred looking for the agent, please report error Number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor busque un agente', N'Por favor busque un agente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor busque un agente', N'Please look for an agent', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'Modificación realizada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'Modification executed', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar el agente, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar el agente, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar el agente, por favor informe del error Nro ', N'An error occurred trying to modify the agent, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro ', N'Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar iniciar la modificación de Agentes, por favor informe del error Nro ', N'An error occurred trying to start the modification of Agents, please report the error Number ', 2)
+
+--ASIGNACION BUSCAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error en la búsqueda, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error in search, please report the error number ', 2)
+
+--ASIGNACION MODIFICAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la asignación posea al menos un detalle', N'Por favor revisar que la asignación posea al menos un detalle', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la asignación posea al menos un detalle', N'Please check that the assignment has at least one detail', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada correctamente', N'Modificación realizada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada correctamente', N'Modification made correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ', N'An error occurred trying to modify the Assignment, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Asignación: ', N'¿Está seguro que desea dar de baja la Asignación: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Asignación: ', N'Are you sure you want to unsubscribe the Assignment: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion: ', N'Asignacion: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion: ', N'Warning: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' eliminada correctamente', N' eliminada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' eliminada correctamente', N' successfully deleted', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'Ocurrio un error al intentar eliminar la rendición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'An error occurred trying to eliminate the yield: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', please report error number ', 2)
+
+--BIEN ASIGNAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione al menos un bien a asignar', N'Por favor seleccione al menos un bien a asignar', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione al menos un bien a asignar', N'Please select at least one asset to be assigned', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion Creada correctamente', N'Asignacion Creada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Asignacion Creada correctamente', N'Assignment Created successfully', 2)
+
+--BIEN REGISTRAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Faltan cargar los bienes adquiridos', N'Faltan cargar los bienes adquiridos', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Faltan cargar los bienes adquiridos', N'Load the acquired goods', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Todos los bienes de la partida asociada ya fueron adquiridos', N'Todos los bienes de la partida asociada ya fueron adquiridos', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Todos los bienes de la partida asociada ya fueron adquiridos', N'All assets of the associated item have already been acquired', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro ', N'Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar registrar la adquisición, por favor informe del error Nro ', N'An error occurred trying to register the acquisition, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingrese la partida asociada por favor', N'Ingrese la partida asociada por favor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingrese la partida asociada por favor', N'Please, enter the associated item', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ya se compró todo', N'Ya se compró todo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ya se compró todo', N'Everything was bought', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar la marca creada, por favor informe del error Nro ', N'Ocurrio un error al mostrar la marca creada, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar la marca creada, por favor informe del error Nro ', N'An error occurred displaying the brand, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', N'An error occurred displaying the created model, please report the error number ', 2)
+
+--BITACORA
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', N'An error occurred loading the log, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar en la bitácora, por favor informe del error Nro ', N'Ocurrio un error al buscar en la bitácora, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar en la bitácora, por favor informe del error Nro ', N'An error occurred looking in the log, please report the error number ', 2)
+
+--CATEGORIA GESTION
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La categoría ingresada no existe', N'La categoría ingresada no existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La categoría ingresada no existe', N'The category entered does not exist', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No ha ingresado ninguna categoría', N'No ha ingresado ninguna categoría', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No ha ingresado ninguna categoría', N'You have not entered any category', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', N'An error occurred searching the category, please report the error number', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Categoría ingresada ya existe', N'La Categoría ingresada ya existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Categoría ingresada ya existe', N'The category entered already exists', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Categoría creada correctamente', N'Categoría creada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Categoría creada correctamente', N'Category created successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una categoría, por favor informe del error Nro ', N'Ocurrio un error al intentar crear una categoría, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una categoría, por favor informe del error Nro ', N'An error occurred trying to create a category, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'Modificación realizada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificación realizada', N'Modification carried out', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro ', N'An error occurred trying to modify the category, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Categoria: ', N'¿Está seguro que desea dar de baja la Categoria: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Categoria: ', N'Are you sure you want to cancel the Category: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Categoría: ', N'Categoría: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Categoría: ', N'Category: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' dada de baja correctamente', N' dada de baja correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' dada de baja correctamente', N' correctly unsubscribed', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja una Categoría primero debe buscarla', N'Para dar de baja una Categoría primero debe buscarla', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja una Categoría primero debe buscarla', N'To unsubscribe a Category you must search it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro ', N'Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro ', N'An error occurred trying to delete the category, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' reactivada correctamente', N' reactivada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' reactivada correctamente', N' reactivated correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar la Categoría: ', N'Ocurrio un error al intentar reactivar la Categoría: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar la Categoría: ', N'An error occurred trying to reactivate the Category: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', please report error number ', 2)
+
+--COTIZACIONES
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro ', N'Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro ', N'An error occurred loading the quotes, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor adjuntar la cotización', N'Por favor adjuntar la cotización', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor adjuntar la cotización', N'Please attach the quote', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro ', N'Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro ', N'An error occurred trying to add the quote, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor ingrese al menos un Proveedor', N'Por favor ingrese al menos un Proveedor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor ingrese al menos un Proveedor', N'Please enter at least one Provider', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Mails enviados correctamente', N'Mails enviados correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Mails enviados correctamente', N'Mails sent correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro ', N'Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro ', N'An error occurred sending mails to suppliers, please report error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontraron modificaciones a realizar', N'No se encontraron modificaciones a realizar', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontraron modificaciones a realizar', N'No modifications were found', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro ', N'Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro ', N'An error occurred registering the quotes, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', N'An error occurred trying to eliminate a quote, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede adjuntarse más de 1 archivo', N'No puede adjuntarse más de 1 archivo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede adjuntarse más de 1 archivo', N'Can not attach more than 1 file', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El archivo ', N'El archivo ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El archivo ', N'The file ', 2)
+
+--DEPENDENCIA BUSCAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Primero seleccione una dependencia', N'Primero seleccione una dependencia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Primero seleccione una dependencia', N'First select a dependency', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro ', N'Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro ', N'An error occurred opening the modification of the dependency, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Dependencia: ', N'¿Está seguro que desea dar de baja la Dependencia: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Dependencia: ', N'Are you sure you want to terminate the Unit:', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia: ', N'Dependencia: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia: Dependency: ', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro ', N'Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro ', N'An error occurred trying to eliminate the dependency, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar la Dependencia: ', N'Ocurrio un error al intentar reactivar la Dependencia: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar la Dependencia: ', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla para crear Dependencias, por favor informe del error Nro ', N'Ocurrio un error al cargar la pantalla para crear Dependencias, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla para crear Dependencias, por favor informe del error Nro ', N'An error occurred loading the screen to create dependencies, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Debe agregar al menos un Agente para crear la Dependencia', N'Debe agregar al menos un Agente para crear la Dependencia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Debe agregar al menos un Agente para crear la Dependencia', N'You must add at least one Agent to create the Unit', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Dependencia ingresada ya existe', N'La Dependencia ingresada ya existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Dependencia ingresada ya existe', N'The dependency entered already exists', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia creada correctamente', N'Dependencia creada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia creada correctamente', N'Dependency created successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro ', N'Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro ', N'An error occurred trying to create a dependency, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El agente ya se encuentra en la dependencia', N'El agente ya se encuentra en la dependencia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El agente ya se encuentra en la dependencia', N'The agent is already in the dependency', 2)
+
+--DEPENDENCIA MODIFICAR 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Atención: El agente ya se encuentra en la dependencia', N'Atención: El agente ya se encuentra en la dependencia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Atención: El agente ya se encuentra en la dependencia', N'Attention: The agent is already in the dependency', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia modificada correctamente', N'Dependencia modificada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Dependencia modificada correctamente', N'Dependency successfully modified', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Hay cambios no persistidos ¿Desea salir sin guardar?', N'Hay cambios no persistidos ¿Desea salir sin guardar?', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Hay cambios no persistidos ¿Desea salir sin guardar?', N'There are changes not persisted Do you want to exit without saving?', 2)
+
+--RECOMPONER
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar recomponer los Dígitos Verificadores, por favor informe del error Nro ', N'Ocurrio un error al intentar recomponer los Dígitos Verificadores, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar recomponer los Dígitos Verificadores, por favor informe del error Nro ', N'An error occurred trying to recompose the digits verifiers, please report the error number ', 2)
+
+--FAMILIA GESTION
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de Familias, por favor informe del error Nro ', N'Ocurrio un error al cargar la pantalla de Familias, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de Familias, por favor informe del error Nro ', N'An error occurred loading the Families screen, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa', N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa', N'Please select the family that contains the permit or the required patent directly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Please select the family that contains the permit or the patent to be eliminated directly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Familia a crear posea al menos una patente asignada', N'Por favor revisar que la Familia a crear posea al menos una patente asignada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Familia a crear posea al menos una patente asignada', N'Please check that the family to be created owns at least one assigned patent', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia a crear no puede contener solamente una familia', N'La Familia a crear no puede contener solamente una familia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia a crear no puede contener solamente una familia', N'The Family to create can not contain only one family', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia ingresada ya existe', N'La Familia ingresada ya existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia ingresada ya existe', N'The Family entered already exists', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Familia creada correctamente', N'Familia creada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Familia creada correctamente', N'Family created successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una Familia, por favor informe del error Nro ', N'Ocurrio un error al intentar crear una Familia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear una Familia, por favor informe del error Nro ', N'An error occurred trying to create a Family, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Familia posea al menos una patente asignada', N'Por favor revisar que la Familia posea al menos una patente asignada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Familia posea al menos una patente asignada', N'Please check that the Family has at least one assigned patent', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia no puede contener solamente una familia', N'La Familia no puede contener solamente una familia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Familia no puede contener solamente una familia', N'The Family can not contain only one family', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la Familia, por favor informe del error Nro ', N'An error occurred trying to modify the Family, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Familia: ', N'¿Está seguro que desea dar de baja la Familia: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Familia: ', N'Are you sure you want to delete the Family:', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Se deberán modificar los permisos de los siguientes usuarios: \n', N'Se deberán modificar los permisos de los siguientes usuarios: \n', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Se deberán modificar los permisos de los siguientes usuarios: \n', N'The permissions of the following users must be modified: \ n', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Familia eliminada correctamente', N'Familia eliminada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Familia eliminada correctamente', N'Family deleted successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja una Familia primero debe seleccionar una de la lista', N'Para dar de baja una Familia primero debe seleccionar una de la lista', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja una Familia primero debe seleccionar una de la lista', N'To unsubscribe a Family you must first select one from the list', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', N'An error occurred trying to delete the Family, please report the error number ', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)

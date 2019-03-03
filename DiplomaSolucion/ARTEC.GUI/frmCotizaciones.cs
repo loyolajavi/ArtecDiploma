@@ -187,7 +187,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - frmCotizaciones_Load");
-                MessageBox.Show("Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al cargar las cotizaciones, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
             
@@ -281,7 +281,7 @@ namespace ARTEC.GUI
             //Verificar que haya un adjunto
             if (unosAdjuntosNombre.Count != 1)
             {
-                MessageBox.Show("Por favor adjuntar la cotización");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor adjuntar la cotización").Texto);
                 return;
             }
 
@@ -334,7 +334,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnAgregar_Click");
-                MessageBox.Show("Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intengar agregar la cotización, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }
@@ -439,19 +439,19 @@ namespace ARTEC.GUI
 
                 if (ListaProv.Count == 0)
                 {
-                    MessageBox.Show("Por favor ingrese al menos un Proveedor");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor ingrese al menos un Proveedor").Texto);
                     return;
                 }
                 foreach (Proveedor unProv in ListaProv)
                 {
                     FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
                 }
-                MessageBox.Show("Mails enviados correctamente");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mails enviados correctamente").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnSolicitar_Click");
-                MessageBox.Show("Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al enviar mails a los proveedores, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
             
@@ -546,12 +546,12 @@ namespace ARTEC.GUI
                     this.Hide();
                 }
                 else
-                    MessageBox.Show("No se encontraron modificaciones a realizar");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No se encontraron modificaciones a realizar").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - btnConfirmar_Click");
-                MessageBox.Show("Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al registrar las cotizaciones, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -580,7 +580,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCotizaciones - grillaCotizacion_CellClick");
-                MessageBox.Show("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -598,7 +598,7 @@ namespace ARTEC.GUI
         {
             if (unosAdjuntosNombre.Count > 0)
             {
-                MessageBox.Show("No puede adjuntarse más de 1 archivo");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No puede adjuntarse más de 1 archivo").Texto);
             }
             else
             {
@@ -627,7 +627,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
                 }
             }
         }

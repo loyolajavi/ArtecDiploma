@@ -342,7 +342,7 @@ namespace ARTEC.GUI
             //Verificar que quede al menos un Detalle
             if (InventariosAgregar.Count == 0)
             {
-                MessageBox.Show("Por favor revisar que la asignación posea al menos un detalle");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la asignación posea al menos un detalle").Texto);
                 InventariosAgregar.Clear();
                 InventariosAgregar = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsignacionSelec.IdAsignacion);
                 InventariosAgregarBKP = InventariosAgregar.ToList();
@@ -445,14 +445,14 @@ namespace ARTEC.GUI
                             }
                         }
                     }
-                    MessageBox.Show("Modificación realizada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                     DialogResult = DialogResult.OK;
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAsignacionModificar - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar la Asignacion, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -460,11 +460,11 @@ namespace ARTEC.GUI
         {
             try
             {
-                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                 if (resmbox == DialogResult.Yes)
                     if (ManagerAsignacion.AsignacionEliminar(unaAsignacionModif))
                     {
-                        MessageBox.Show("Asignación: " + unaAsignacionModif.IdAsignacion.ToString() + " eliminada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.No;
                     }
                     else
@@ -473,7 +473,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmAsignacionModificar - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la rendición: " + unaAsignacionModif.IdAsignacion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la rendición: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

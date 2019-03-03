@@ -207,7 +207,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("La categoría ingresada no existe");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La categoría ingresada no existe").Texto);
                         txtCategoria.Clear();
                         cboTipo.Refresh();
                         cboProveedor.Refresh();
@@ -222,7 +222,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("No ha ingresado ninguna categoría");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No ha ingresado ninguna categoría").Texto);
                     txtCategoria.Clear();
                     cboTipo.Refresh();
                     cboProveedor.Refresh();
@@ -241,7 +241,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click");
-                MessageBox.Show("Ocurrio un error al buscar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al buscar la categoría, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -265,7 +265,7 @@ namespace ARTEC.GUI
                 Categoria CatAux = ManagerCategoria.CategoriaBuscar(txtCategoria.Text);
                 if (CatAux != null && CatAux.IdCategoria > 0)
                 {
-                    MessageBox.Show("La Categoría ingresada ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Categoría ingresada ya existe").Texto);
                     return;
                 }
                 Categoria nuevaCategoria = new Categoria();
@@ -273,13 +273,13 @@ namespace ARTEC.GUI
                 nuevaCategoria.unTipoBien = cboTipo.SelectedItem as TipoBien;
                 nuevaCategoria.LosProveedores = ProvsAgregar;
                 if(ManagerCategoria.CategoriaCrear(nuevaCategoria))
-                    MessageBox.Show("Categoría creada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría creada correctamente").Texto);
 
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnCrearCategoria_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear una categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear una categoría, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -323,7 +323,7 @@ namespace ARTEC.GUI
                     CatAux = ManagerCategoria.CategoriaBuscar(txtCategoria.Text);
                 if (CatAux != null && CatAux.IdCategoria > 0)
                 {
-                    MessageBox.Show("La Categoría ingresada ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Categoría ingresada ya existe").Texto);
                     return;
                 }
 
@@ -337,13 +337,13 @@ namespace ARTEC.GUI
                 {
                     ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
                     ProvsAgregarBKP = ProvsAgregar.ToList();
-                    MessageBox.Show("Modificación realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar la categoría, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -354,7 +354,7 @@ namespace ARTEC.GUI
             {
                  if (unaCategoria != null && !string.IsNullOrWhiteSpace(txtCategoria.Text) && unaCategoria.IdCategoria > 0)
                 {
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Categoria: " + unaCategoria.DescripCategoria + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Categoria: ").Texto + unaCategoria.DescripCategoria + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if(ManagerCategoria.CategoriaEliminar(unaCategoria))
                         {
@@ -369,18 +369,18 @@ namespace ARTEC.GUI
                             cboProveedor.Enabled = false;
                             cboTipo.Enabled = false;
                             GrillaProveedores.Enabled = false;
-                            MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " dada de baja correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
                         }
                     else
                         return;
                 }
                 else
-                    MessageBox.Show("Para dar de baja una Categoría primero debe buscarla");
+                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja una Categoría primero debe buscarla").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCategoriaGestion - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la categoría, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -403,14 +403,14 @@ namespace ARTEC.GUI
                         cboProveedor.Enabled = true;
                         cboTipo.Enabled = true;
                         GrillaProveedores.Enabled = true;
-                        MessageBox.Show("Categoría: " + unaCategoria.DescripCategoria + " reactivada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmCategoriaGestion - btnReactivar_Click");
-                MessageBox.Show("Ocurrio un error al intentar reactivar la Categoría: " + unaCategoria.DescripCategoria + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar reactivar la Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

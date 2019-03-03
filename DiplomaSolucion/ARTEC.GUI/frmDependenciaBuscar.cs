@@ -268,14 +268,14 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("Primero seleccione una dependencia");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Primero seleccione una dependencia").Texto);
                 }
                 
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al abrir la modificación de la dependencia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
             
@@ -307,7 +307,7 @@ namespace ARTEC.GUI
             {
                 if (DepSeleccionada != null && !string.IsNullOrWhiteSpace(txtDependencia.Text) && DepSeleccionada.IdDependencia > 0)
                 {
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Dependencia: " + DepSeleccionada.NombreDependencia + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Dependencia: ").Texto + DepSeleccionada.NombreDependencia + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if (ManagerDependencia.DependenciaEliminar(DepSeleccionada))
                         {
@@ -316,18 +316,18 @@ namespace ARTEC.GUI
                             btnEliminar.Enabled = false;
                             if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                                 btnReactivar.Enabled = true;
-                            MessageBox.Show("Dependencia: " + DepSeleccionada.NombreDependencia + " dada de baja correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
                         }
                         else
                             return;
                 }
                 else
-                    MessageBox.Show("Primero selecciona una Dependencia");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Primero seleccione una Dependencia").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la dependencia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -345,14 +345,14 @@ namespace ARTEC.GUI
                         if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnEliminar.Enabled = true;
                         btnReactivar.Enabled = false;
-                        MessageBox.Show("Categoría: " + DepSeleccionada.NombreDependencia + " reactivada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmDependenciaBuscar - btnReactivar_Click");
-                MessageBox.Show("Ocurrio un error al intentar reactivar la Dependencia: " + DepSeleccionada.NombreDependencia + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar reactivar la Dependencia: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

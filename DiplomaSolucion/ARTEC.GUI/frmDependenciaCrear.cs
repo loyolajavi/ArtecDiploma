@@ -103,7 +103,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmDependenciaCrear - frmDependenciaCrear_Load");
-                MessageBox.Show("Ocurrio un error al cargar la pantalla para crear Dependencias, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al cargar la pantalla para crear Dependencias, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -117,7 +117,7 @@ namespace ARTEC.GUI
 
             if (AgentesLista != null && AgentesLista.Count == 0)
             {
-                MessageBox.Show("Debe agregar al menos un Agente para crear la Dependencia");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Debe agregar al menos un Agente para crear la Dependencia").Texto);
                 return;
             }
 
@@ -126,7 +126,7 @@ namespace ARTEC.GUI
                 Dependencia DepAux = ManagerDependencia.DependenciaBuscar(txtDependencia.Text);
                 if (DepAux != null && DepAux.IdDependencia > 0)
                 {
-                    MessageBox.Show("La Dependencia ingresada ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Dependencia ingresada ya existe").Texto);
                     return;
                 }
                 nuevaDependencia = new Dependencia();
@@ -134,12 +134,12 @@ namespace ARTEC.GUI
                 nuevaDependencia.unTipoDep = cboTipoDep.SelectedItem as TipoDependencia;
                 nuevaDependencia.unosAgentes = AgentesLista;
                 if (ManagerDependencia.DependenciaCrear(nuevaDependencia))
-                    MessageBox.Show("Dependencia creada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia creada correctamente").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmDependenciaCrear - btnDependenciaCrear_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear una Dependencia, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -152,7 +152,7 @@ namespace ARTEC.GUI
             //Para prevenir que se agregue un agente que ya está en la dependencia
             if (AgentesLista.Exists(x => x.IdAgente == unAgenSelect.IdAgente))
             {
-                MessageBox.Show("El agente ya se encuentra en la dependencia");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El agente ya se encuentra en la dependencia").Texto);
                 return;
             }
 
