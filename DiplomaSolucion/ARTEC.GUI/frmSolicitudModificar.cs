@@ -470,8 +470,8 @@ namespace ARTEC.GUI
                 lstAdjuntos.DataSource = null;
                 lstAdjuntos.DataSource = unosAdjuntos;
 
-                //Si está cancelada inhabilito la modificación y botones
-                if (unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada)
+                //Si está Cancelada o Finalizada inhabilito la modificación y botones
+                if (unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada | unaSolicitud.UnEstado.IdEstadoSolicitud == (int)EstadoSolicitud.EnumEstadoSolicitud.Finalizado)
                 {
                     btnAgregarDetalle.Enabled = false;
                     btnNuevoDetalle.Enabled = false;

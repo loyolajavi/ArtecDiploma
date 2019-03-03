@@ -580,5 +580,35 @@ namespace ARTEC.DAL
         }
 
 
+        public int? PartidaTraerIDSiPuedeRendirse(int IdPartida)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdPartida", IdPartida)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int? IdPartRes = (int?)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaTraerIDSiPuedeRendirse", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IdPartRes;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
+
+
+
+
     }
 }

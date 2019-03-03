@@ -71,7 +71,7 @@ namespace ARTEC.DAL
 
 
 
-        public int RendicionCrear(Rendicion unaRendicion)
+        public int RendicionCrear(Rendicion unaRendicion, Partida unaPartida)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -87,14 +87,26 @@ namespace ARTEC.DAL
                 var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RendicionCrear", parameters);
                 int IDDevuelto = Decimal.ToInt32(Resultado);
 
+                //Colocar en estado Rendida a todos los detalles
+                foreach (PartidaDetalle unaParDet in unaPartida.unasPartidasDetalles)
+                {
+                    SqlParameter[] parametersDetSolicRendido = new SqlParameter[]
+			        {
+                        new SqlParameter("@UIDSolicDetalle", unaParDet.SolicDetalleAsociado.UIDSolicDetalle),
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetallePorUIDUpdateEstado", parametersDetSolicRendido);
+                }
+
+
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return IDDevuelto;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                return 0;
-                //throw;
+                throw;
             }
             finally
             {

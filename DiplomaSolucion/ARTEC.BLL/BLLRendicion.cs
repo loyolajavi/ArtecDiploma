@@ -26,13 +26,13 @@ namespace ARTEC.BLL
         }
 
 
-        public int RendicionCrear(Rendicion unaRendicion)
+        public int RendicionCrear(Rendicion unaRendicion, Partida unaPartida)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                int IdRendAUX = GestorRendicion.RendicionCrear(unaRendicion);
+                int IdRendAUX = GestorRendicion.RendicionCrear(unaRendicion, unaPartida);
                 if (IdRendAUX > 0)
                     //Retorno el idRendicion para dps usarlo en el nombre del documento a generar
                     return IdRendAUX;

@@ -99,58 +99,71 @@ namespace ARTEC.GUI
                 BLLPartida ManagerPartida = new BLLPartida();
                 unaPartida = ManagerPartida.PartidaTraerPorNroPart(Int32.Parse(txtNroPart.Text)).FirstOrDefault();
 
+                //TraerDatosSolicitud
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                Solicitud DatosSolic;
+                DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
+
                 if (unaPartida != null && unaPartida.IdPartida > 0)
                 {
+                    //Permitir Rendir sólo cuando todos los bienes de la Partida ingresada fueron adquiridos, Trae IDPartida si puede rendirse
+                    bool PartidaPuedeRendirse = ManagerPartida.PartidaTraerIDSiPuedeRendirse(unaPartida.IdPartida);
+                    
                     if (!string.IsNullOrEmpty(unaPartida.NroPartida))
                     {
-                        int? RelLocal = ManagerPartida.RelPDetAdqPartidaTieneAdq(unaPartida.IdPartida);
-                        if (RelLocal != null && unaPartida.IdPartida == RelLocal)
+                        if (PartidaPuedeRendirse)
                         {
-                            btnCrear.Enabled = true;
-
-                            //TraerDatosSolicitud
-                            BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                            Solicitud DatosSolic;
-                            DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
-                            txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
-                            txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
-                            txtPartRef.Text = unaPartida.NroPartida;
-
-
-                            txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
-
-
-                            unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
-                            unaRendicion.IdPartida = Int32.Parse(txtNroPart.Text);
-                            unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
-                            txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
-                            //Obtengo los nros de factura por distinct
-                            List<string> ListaNroFacturas = unaRendicion.unasAdquisiciones.Select(x => x.NroFactura).Distinct().ToList();
-
-
-                            foreach (string fact in ListaNroFacturas)
+                            int? RelLocal = ManagerPartida.RelPDetAdqPartidaTieneAdq(unaPartida.IdPartida);
+                            if (RelLocal != null && unaPartida.IdPartida == RelLocal)
                             {
-                                GrillaRendicion MultiGrillaRendicion = new GrillaRendicion();
-                                MultiGrillaRendicion.unaFactura = fact;
+                                btnCrear.Enabled = true;
 
-                                //guardo los inventarios si son de la fact
-                                HLPListaInventariosRend = unaRendicion.unasAdquisiciones.Where(z => z.NroFactura == fact)
-                                                                                    .Select(y => new HLPInvRendicion() { DescripCategoria = y.BienesInventarioAsociados[0].unaCategoria.DescripCategoria, SerieKey = y.BienesInventarioAsociados[0].unInventarioAlta.SerieKey, Costo = y.BienesInventarioAsociados[0].unInventarioAlta.Costo }).ToList();
-                                MultiGrillaRendicion.unaGrillaInv.DataSource = HLPListaInventariosRend;
 
-                                ListaMultiGrillaRendicion.Add(MultiGrillaRendicion);
+                                txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
+                                txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
+                                txtPartRef.Text = unaPartida.NroPartida;
+
+
+                                txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
+
+
+                                unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
+                                unaRendicion.IdPartida = Int32.Parse(txtNroPart.Text);
+                                unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
+                                txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
+                                //Obtengo los nros de factura por distinct
+                                List<string> ListaNroFacturas = unaRendicion.unasAdquisiciones.Select(x => x.NroFactura).Distinct().ToList();
+
+
+                                foreach (string fact in ListaNroFacturas)
+                                {
+                                    GrillaRendicion MultiGrillaRendicion = new GrillaRendicion();
+                                    MultiGrillaRendicion.unaFactura = fact;
+
+                                    //guardo los inventarios si son de la fact
+                                    HLPListaInventariosRend = unaRendicion.unasAdquisiciones.Where(z => z.NroFactura == fact)
+                                                                                        .Select(y => new HLPInvRendicion() { DescripCategoria = y.BienesInventarioAsociados[0].unaCategoria.DescripCategoria, SerieKey = y.BienesInventarioAsociados[0].unInventarioAlta.SerieKey, Costo = y.BienesInventarioAsociados[0].unInventarioAlta.Costo }).ToList();
+                                    MultiGrillaRendicion.unaGrillaInv.DataSource = HLPListaInventariosRend;
+
+                                    ListaMultiGrillaRendicion.Add(MultiGrillaRendicion);
+                                }
+
+                                //Para colocar las "grillas" (control users) en el flow
+                                foreach (GrillaRendicion gri in ListaMultiGrillaRendicion)
+                                {
+                                    flowInventariosRend.Controls.Add(gri);
+                                }
                             }
-
-                            //Para colocar las "grillas" (control users) en el flow
-                            foreach (GrillaRendicion gri in ListaMultiGrillaRendicion)
+                            else
                             {
-                                flowInventariosRend.Controls.Add(gri);
+                                LimpiarFormularioRendicion();
+                                MessageBox.Show("La partida no tiene detalles pendientes de rendición");
                             }
                         }
                         else
                         {
                             LimpiarFormularioRendicion();
-                            MessageBox.Show("La partida no tiene detalles pendientes de rendición");
+                            MessageBox.Show("La partida ingresada aún tiene bienes pendientes de adquisición");
                         }
                     }
                     else
@@ -187,7 +200,7 @@ namespace ARTEC.GUI
                 IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
                 if (IdRendRes == 0)
                 {
-                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion);
+                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
                     if (IdRendRes > 0)
                         DocumentoRendicionCrear(IdRendRes);
                     //Quizas esto lo maneje desde las excepciones mas q aca

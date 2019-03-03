@@ -224,7 +224,7 @@ namespace ARTEC.GUI
                 IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
                 if (IdRendRes == 0)
                 {
-                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion);
+                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
                     if (IdRendRes > 0)
                         DocumentoRendicionCrear(IdRendRes);
                 }

@@ -16,21 +16,21 @@ namespace ARTEC.BLL
         DALInventario GestorInventario = new DALInventario();
         DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
 
-        public bool AsignacionCrear(Asignacion unaAsig)
+        public bool AsignacionCrear(Asignacion unaAsig, Solicitud unaSolic)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorAsignacion.AsignacionCrear(unaAsig) > 0)
+                if (GestorAsignacion.AsignacionCrear(unaAsig, unaSolic) > 0)
                 {
-                    foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
-                    {
-                        if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.UIDSolicDetalle))
-                        {
-                            GestorSolicDetalle.SolicDetalleUpdateEstado(item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado, item.SolicDetalleAsoc.UIDSolicDetalle);
-                        }
-                    }
+                    //foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
+                    //{
+                    //    if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.UIDSolicDetalle))
+                    //    {
+                    //        GestorSolicDetalle.SolicDetalleUpdateEstado(item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado, item.SolicDetalleAsoc.UIDSolicDetalle);
+                    //    }
+                    //}
                 }
                 return true;
             }

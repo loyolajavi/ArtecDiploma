@@ -14,9 +14,11 @@ namespace ARTEC.DAL
     public class DALAsignacion
     {
 
-        public int AsignacionCrear(Asignacion unaAsig)
+        public int AsignacionCrear(Asignacion unaAsig, Solicitud unaSolic)
         {
             DALEstadoInventario GestorEstadoInventario = new DALEstadoInventario();
+            DALInventario GestorInventario = new DALInventario();
+            DALSolicDetalle GestorSolicDetalle = new DALSolicDetalle();
 
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -63,6 +65,27 @@ namespace ARTEC.DAL
 
                 }
 
+                foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
+                {
+                    if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.UIDSolicDetalle))
+                    {
+                        GestorSolicDetalle.SolicDetalleUpdateEstado2(item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado, item.SolicDetalleAsoc.UIDSolicDetalle);
+                        //Coloco el estado para el UIDSolicDetalle en cuestión en memoria (porque solo lo hago en la BD al cambio sino)
+                        EstadoSolicDetalle unEstadoAux = new EstadoSolicDetalle();
+                        unEstadoAux.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado;
+                        unEstadoAux.DescripEstadoSolicDetalle = "Entregado";
+                        unaSolic.unosDetallesSolicitud.FirstOrDefault(Z => Z.UIDSolicDetalle == item.SolicDetalleAsoc.UIDSolicDetalle).unEstado = unEstadoAux;
+                    }
+                }
+
+                //Revisar si se debe Finalizar la Solicitud
+                if (unaSolic.unosDetallesSolicitud.All(X => X.unEstado.IdEstadoSolicDetalle == (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado))
+                {
+                    //Finalizar la solicitud
+                    DALSolicitud GestorSolicitud = new DALSolicitud();
+                    GestorSolicitud.SolicitudFinalizar(unaSolic);
+                }
+                //FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 return IDDevuelto;
             }

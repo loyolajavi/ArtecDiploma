@@ -114,6 +114,26 @@ namespace ARTEC.DAL
 
         }
 
+        public void SolicDetalleUpdateEstado2(int IdSolic, int IdSolicDetalle, int nuevoEstado, int UIDSolicDetalle)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@IdSolicitud", IdSolic),
+                new SqlParameter("@IdSolicDetalle", IdSolicDetalle),
+                new SqlParameter("@NuevoEstado", nuevoEstado),
+                new SqlParameter("@UIDSolicDetalle", UIDSolicDetalle)
+            };
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parameters);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
 
 
         public List<Agente> SolicDetallesTraerAgentesAsociados(int IdSolicDetalle, int IdSolicitud, int UIDSolicDetalle)
@@ -170,6 +190,7 @@ namespace ARTEC.DAL
         //    }
 
         //}
+
 
 
 

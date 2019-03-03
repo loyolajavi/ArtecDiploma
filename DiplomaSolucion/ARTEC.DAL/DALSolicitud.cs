@@ -1112,5 +1112,34 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
             }
         }
+
+        public void SolicitudFinalizar(Solicitud unaSolic)
+        {
+            try
+            {
+                SqlParameter[] parametersSolicFinalizar = new SqlParameter[]
+		        {
+                    new SqlParameter("@IdSolicitud", unaSolic.IdSolicitud),
+                    new SqlParameter("@NuevoEstado", EstadoSolicitud.EnumEstadoSolicitud.Finalizado),
+                    new SqlParameter("@FechaFin", DateTime.Today.ToString())
+		        };
+                unaSolic.FechaFin = DateTime.Today;
+
+                int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicitudUpdateEstado", parametersSolicFinalizar);
+                unaSolic.UnEstado.IdEstadoSolicitud = (int)EstadoSolicitud.EnumEstadoSolicitud.Finalizado;
+
+                long ResAcum = ServicioDV.DVCalcularDVH(unaSolic);
+                if (ResAcum > 0)
+                {
+                    ServicioDV.DVActualizarDVH(unaSolic.IdSolicitud, ResAcum, unaSolic.GetType().Name, "IdSolicitud");
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

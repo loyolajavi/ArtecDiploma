@@ -118,5 +118,21 @@ namespace ARTEC.BLL
         }
 
 
+        public bool PartidaTraerIDSiPuedeRendirse(int IdPartida)
+        {
+            try
+            {
+                int? IdPartRes = GestorPartida.PartidaTraerIDSiPuedeRendirse(IdPartida);
+                if (IdPartRes != null && IdPartRes > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
     }
 }
