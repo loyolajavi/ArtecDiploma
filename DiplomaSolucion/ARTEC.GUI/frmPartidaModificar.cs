@@ -365,6 +365,12 @@ namespace ARTEC.GUI
                     return;
                 }
 
+                if (unaPartida.unasPartidasDetalles.Count == 0)
+                {
+                    MessageBox.Show("Debe haber por lo menos un Detalle de Partida Especial");
+                    return;
+                }
+
                 if (unaPartida.unasPartidasDetalles.Any(X => X.unasCotizaciones.Count < 3))
                 {
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Cada detalle de la partida debe poseer al menos 3 cotizaciones").Texto);
