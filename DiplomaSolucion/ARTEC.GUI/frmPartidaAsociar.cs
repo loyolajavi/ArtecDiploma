@@ -262,8 +262,8 @@ namespace ARTEC.GUI
                             unaPartida.MontoOtorgado = decimal.Parse(txtMontoOtorgado.Text);
                             unaPartida.NroPartida = txtNroPartAsignado.Text;
 
-                            if (ManagerPartida.PartidaAsociar(unaPartida))
-                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Asociada correctamente").Texto);
+                            ManagerPartida.PartidaAsociar(unaPartida);
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Asociada correctamente").Texto);
                         }
                         
                     }

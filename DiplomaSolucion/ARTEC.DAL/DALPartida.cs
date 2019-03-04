@@ -173,7 +173,7 @@ namespace ARTEC.DAL
 
 
 
-        public bool PartidaAsociar(Partida laPartida)
+        public void PartidaAsociar(Partida laPartida)
         {
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -188,13 +188,26 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaAsociar", parameters);
+
+
+                //Update Estado SolicDetalles a "Comprar"
+                foreach (PartidaDetalle unDetPart in laPartida.unasPartidasDetalles)
+                {
+                    SqlParameter[] parametersUpdateEstadSDet = new SqlParameter[]
+                    {
+                        new SqlParameter("@IdSolicitud", unDetPart.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicDetalle", unDetPart.SolicDetalleAsociado.IdSolicitudDetalle),
+                        new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
+                        new SqlParameter("@UIDSolicDetalle", unDetPart.SolicDetalleAsociado.UIDSolicDetalle)
+                    };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetalleUpdateEstado", parametersUpdateEstadSDet);    
+                }
+
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                return false;
                 throw;
             }
             finally

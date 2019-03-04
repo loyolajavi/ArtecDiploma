@@ -47,21 +47,18 @@ namespace ARTEC.BLL
         }
 
 
-        public bool PartidaAsociar(Partida laPartida)
+        public void PartidaAsociar(Partida laPartida)
         {
-            if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Asociar" }))
-                throw new InvalidOperationException("No posee los permisos suficientes");
-            if (GestorPartida.PartidaAsociar(laPartida))
+            try
             {
-                BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-                foreach (PartidaDetalle unDetPart in laPartida.unasPartidasDetalles)
-                {
-                    ManagerSolicDetalle.SolicDetalleUpdateEstado(unDetPart.SolicDetalleAsociado.IdSolicitud, unDetPart.SolicDetalleAsociado.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar, unDetPart.SolicDetalleAsociado.UIDSolicDetalle);    
-                }
-                return true;
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Partida Asociar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
+                GestorPartida.PartidaAsociar(laPartida);
             }
-                
-            return false;
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
 
