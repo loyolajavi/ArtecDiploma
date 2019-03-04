@@ -515,6 +515,12 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El archivo', N'
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'no tiene una extensión válida (jpg, png, bmp, pdf, txt)', N'does not have a valid extension (jpg, png, bmp, pdf, txt)', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud Nro ', N'Solicitud Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud Nro ', N'Request No ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' creada correctamente', N' creada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' creada correctamente', N' was created succesfully', 2)
+
 --ADQUISICION BUSCAR
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error en la búsqueda, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error in the search, please report the error number ', 2)

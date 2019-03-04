@@ -916,7 +916,7 @@ namespace ARTEC.GUI
                     if (unosAdjuntosNombre.Count > 0)
                     {
                         FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
-                        MessageBox.Show("Solicitud Nro " + unaSolicitud.IdSolicitud + " creada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud + BLLServicioIdioma.MostrarMensaje(" creada correctamente").Texto);
                         this.Close();
                     }
                 }
