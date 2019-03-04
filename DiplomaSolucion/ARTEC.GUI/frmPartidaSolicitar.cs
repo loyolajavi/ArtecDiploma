@@ -431,18 +431,18 @@ namespace ARTEC.GUI
                 {
                     if (GenerarPartidaGlobal())
                     {
-                        MessageBox.Show("Solicitud de Partida generada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud de Partida generada correctamente").Texto);
                         this.Close();
                     }
                         
                 }
                 else
-                    MessageBox.Show("Por favor revise los detalles, sus cotizaciones, y el Monto Total");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revise los detalles, sus cotizaciones, y el Monto Total").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaSolicitar - btnGenerarPartida_Click");
-                MessageBox.Show("Error al intentar generar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error al intentar generar la partida, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
             
@@ -622,7 +622,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaSolicitar - btnBuscar_Click");
-                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error en la búsqueda, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
 
@@ -714,13 +714,13 @@ namespace ARTEC.GUI
                         }
                         else
                         {
-                            MessageBox.Show("Por favor primero agregue 3 cotizaciones antes de generar una Partida");//VER:IDIOMA
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor primero agregue 3 cotizaciones antes de generar una Partida").Texto);
                             return false;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Esta Solicitud no tiene detalles disponibles para solicitar una partida");//VER:IDIOMA
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Esta Solicitud no tiene detalles disponibles para solicitar una partida").Texto);
                         return false;
                     }
                 //}

@@ -157,25 +157,25 @@ namespace ARTEC.GUI
                             else
                             {
                                 LimpiarFormularioRendicion();
-                                MessageBox.Show("La partida no tiene detalles pendientes de rendición");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida no tiene detalles pendientes de rendición").Texto);
                             }
                         }
                         else
                         {
                             LimpiarFormularioRendicion();
-                            MessageBox.Show("La partida ingresada aún tiene bienes pendientes de adquisición");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada aún tiene bienes pendientes de adquisición").Texto);
                         }
                     }
                     else
                     {
                         LimpiarFormularioRendicion();
-                        MessageBox.Show("La partida ingresada no fue acreditada aún");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada no fue acreditada aún").Texto);
                     }
                 }
                 else
                 {
                     LimpiarFormularioRendicion();
-                    MessageBox.Show("No se encontró la partida ingresada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No se encontró la partida ingresada").Texto);
                 }
             }
         }
@@ -210,7 +210,7 @@ namespace ARTEC.GUI
                 {
                     //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
                     //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                    DialogResult resmbox = MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString() + ". Desea actualizarla?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                     {
                         unaRendicion.IdRendicion = IdRendRes;
@@ -218,7 +218,7 @@ namespace ARTEC.GUI
                         DocumentoRendicionCrear(IdRendRes);
                     }
                 }
-                MessageBox.Show("Rendición registrada correctamente");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
             }
         }
 
@@ -307,7 +307,6 @@ namespace ARTEC.GUI
                     System.Diagnostics.Process.Start(info);
                 }
             }
-            MessageBox.Show("Rendición creada correctamente");
             this.Close();
         }
 

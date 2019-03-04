@@ -197,7 +197,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - ProveedorCrear_Load");
-                MessageBox.Show("Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
            
 
@@ -562,7 +562,7 @@ namespace ARTEC.GUI
                     catch (Exception es)
                     {
                         string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - cboProveedor_SelectionChangeCommitted");
-                        MessageBox.Show("Ocurrio un error al buscar la categoría, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al buscar la categoría, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
                     }
 
                 }
@@ -590,7 +590,7 @@ namespace ARTEC.GUI
                 Proveedor ProvAux = ManagerProveedor.ProveedorBuscar(txtNombreEmpresa.Text);
                 if (ProvAux != null && ProvAux.IdProveedor > 0)
                 {
-                    MessageBox.Show("El Proveedor ingresado ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El Proveedor ingresado ya existe").Texto);
                     return;
                 }
 
@@ -602,13 +602,13 @@ namespace ARTEC.GUI
                 nuevoProveedor.unasDirecciones = DirAgregar;
 
                 if(ManagerProveedor.ProveedorCrear(nuevoProveedor))
-                    MessageBox.Show("Proveedor creado correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor creado correctamente").Texto);
 
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnCrearProveedor_Click");
-                MessageBox.Show("Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -673,7 +673,7 @@ namespace ARTEC.GUI
                     ProvAux = ManagerProveedor.ProveedorBuscar(txtNombreEmpresa.Text);
                 if (ProvAux != null && ProvAux.IdProveedor > 0)
                 {
-                    MessageBox.Show("El proveedor ingresado ya existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El proveedor ingresado ya existe").Texto);
                     return;
                 }
 
@@ -701,13 +701,13 @@ namespace ARTEC.GUI
                     TelsAgregarBKP = TelsAgregar.ToList();
                     DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
                     DirAgregarBKP = DirAgregar.ToList();
-                    MessageBox.Show("Modificación realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }
@@ -840,7 +840,7 @@ namespace ARTEC.GUI
             {
                 if (unProvBuscar != null && !string.IsNullOrWhiteSpace(txtNombreEmpresa.Text) && unProvBuscar.IdProveedor > 0)
                 {
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja al Proveedor: " + unProvBuscar.AliasProv + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja al Proveedor: ").Texto + unProvBuscar.AliasProv + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if (ManagerProveedor.ProveedorEliminar(unProvBuscar))
                         {
@@ -859,18 +859,18 @@ namespace ARTEC.GUI
                             GrillaProductos.Enabled = false;
                             GrillaTelefonos.Enabled = false;
                             GrillaDirecciones.Enabled = false;
-                            MessageBox.Show("Proveedor: " + unProvBuscar.AliasProv + " dado de baja correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
                         }
                         else
                             return;
                 }
                 else
-                    MessageBox.Show("Para dar de baja un proveedor primero debe buscarlo");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja un proveedor primero debe buscarlo").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -898,14 +898,14 @@ namespace ARTEC.GUI
                         GrillaProductos.Enabled = true;
                         GrillaTelefonos.Enabled = true;
                         GrillaDirecciones.Enabled = true;
-                        MessageBox.Show("Proveedor: " + unProvBuscar.AliasProv + " reactivado correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmProveedorCrear - btnReactivar_Click");
-                MessageBox.Show("Ocurrio un error al intentar reactivar al proveedor: " + unProvBuscar.AliasProv + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar reactivar al proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

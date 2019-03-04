@@ -163,7 +163,7 @@ namespace ARTEC.GUI
                 {
                     if (ManagerInventario.InventarioModificar(unInvModif))
                     {
-                        MessageBox.Show("Modificación realizada");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                         DialogResult = DialogResult.OK;
                     }
                 }
@@ -171,7 +171,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnInventarioModif - btnModificar_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar el inventario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar el inventario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }

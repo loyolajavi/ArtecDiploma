@@ -150,7 +150,7 @@ namespace ARTEC.GUI
                                 GrillaPartidas.DataSource = null;
                                 txtResBusqueda.Visible = true;
                                 GrillaPartidas.Visible = false;
-                                MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud no posee Partidas solicitadas").Texto);
                             }
 
                             txtDependencia.Clear();
@@ -179,13 +179,13 @@ namespace ARTEC.GUI
                                     GrillaPartidas.DataSource = null;
                                     txtResBusqueda.Visible = true;
                                     GrillaPartidas.Visible = false;
-                                    MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud no posee Partidas solicitadas").Texto);
                                 }
                             }
                             else
                             {
                                 GrillaPartidas.DataSource = null;
-                                MessageBox.Show("La dependencia no posee solicitudes ni partidas");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La dependencia no posee solicitudes ni partidas").Texto);
                                 txtResBusqueda.Visible = true;
                                 GrillaPartidas.Visible = false;
                             }
@@ -203,7 +203,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaBuscar - btnBuscar_Click");
-                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error en la búsqueda, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
 

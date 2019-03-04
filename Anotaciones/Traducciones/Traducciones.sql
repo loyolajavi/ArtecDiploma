@@ -483,7 +483,7 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revis
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Solicitud posea al menos un detalle', N'Check if the request has one detail at least', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Si cambia de Fiscalía se eliminarán los detalles', N'Si cambia de Fiscalía se eliminarán los detalles', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Si cambia de Fiscalía se eliminarán los detalles', N'If you change the prosecutor's office, the details will be deleted.', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Si cambia de Fiscalía se eliminarán los detalles', N'If you change the prosecutors office, the details will be deleted.', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmar', N'Confirmar', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmar', N'Confirm', 2)
@@ -847,6 +847,197 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baj
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la Familia, por favor informe del error Nro ', N'An error occurred trying to delete the Family, please report the error number ', 2)
+
+--INVENTARIO MODIF
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar el inventario, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar el inventario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar el inventario, por favor informe del error Nro ', N'An error occurred trying to modify the inventory, please report the error number ', 2)
+
+--MARCA CREAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear la marca, por favor informe del error Nro ', N'Ocurrio un error al intentar crear la marca, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear la marca, por favor informe del error Nro ', N'An error occurred trying to create the brand, please report the error number ', 2)
+
+--MODELO CREAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el modelo, por favor informe del error Nro ', N'Ocurrio un error al intentar crear el modelo, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear el modelo, por favor informe del error Nro ', N'An error occurred trying to create the model, please report the error number ', 2)
+
+-- PARTIDA ASOCIAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error en la búsqueda, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error in search, please report error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida ya está asociada con SGA con la referencia: ', N'La Partida ya está asociada con SGA con la referencia: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida ya está asociada con SGA con la referencia: ', N'La Partida is already associated with SGA with the reference: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', con un monto otorgado de $', N', con un monto otorgado de $', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', con un monto otorgado de $', N', with a granted amount of $', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que quiere reemplazar la asociación existente?', N'¿Está seguro que quiere reemplazar la asociación existente?', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que quiere reemplazar la asociación existente?', N'Are you sure you want to replace the existing association?', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmación', N'Confirmación', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Confirmación', N'Confirmation', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El monto otorgado es menor al solicitado, por favor revíselo', N'El monto otorgado es menor al solicitado, por favor revíselo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El monto otorgado es menor al solicitado, por favor revíselo', N'The amount awarded is less than requested, please check it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Partida Asociada correctamente', N'Partida Asociada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Partida Asociada correctamente', N'Successfully Associated Match', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado', N'Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado', N'Please select a certificate and complete the assigned starting number and the credited amount', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar asociar la partida, por favor informe del error Nro ', N'Error al intentar asociar la partida, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar asociar la partida, por favor informe del error Nro ', N'Error trying to associate the certificate, please report the error number', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Solicitud no posee Partidas solicitadas', N'La Solicitud no posee Partidas solicitadas', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Solicitud no posee Partidas solicitadas', N'The Request does not have requested Items', 2)
+
+--PARTIDA BUSCAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La dependencia no posee solicitudes ni partidas', N'La dependencia no posee solicitudes ni partidas', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La dependencia no posee solicitudes ni partidas', N'The dependency does not have requests or items', 2)
+
+--PARTIDA MODIFICAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar agregar una cotización, por favor informe del error Nro ', N'Ocurrio un error al intentar agregar una cotización, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar agregar una cotización, por favor informe del error Nro ', N'An error occurred trying to add a quote, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida se encuentra acreditada, no puede modificarse', N'La partida se encuentra acreditada, no puede modificarse', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida se encuentra acreditada, no puede modificarse', N'The certificate is accredited, can not be modified', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Cada detalle de la partida debe poseer al menos 3 cotizaciones', N'Cada detalle de la partida debe poseer al menos 3 cotizaciones', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Cada detalle de la partida debe poseer al menos 3 cotizaciones', N'Each detail of the certificate must have at least 3 quotes', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud de Partida modificada correctamente', N'Solicitud de Partida modificada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud de Partida modificada correctamente', N'Successfully modified Match Request', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar modificar la partida, por favor informe del error Nro ', N'Error al intentar modificar la partida, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar modificar la partida, por favor informe del error Nro ', N'Error trying to modify the certificate, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida no puede ser cancelada porque contiene Adquisiciones asociadas', N'La Partida no puede ser cancelada porque contiene Adquisiciones asociadas', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida no puede ser cancelada porque contiene Adquisiciones asociadas', N'The item can not be canceled because it contains associated Acquisitions', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida no puede ser cancelada porque contiene Rendiciones asociadas', N'La Partida no puede ser cancelada porque contiene Rendiciones asociadas', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Partida no puede ser cancelada porque contiene Rendiciones asociadas', N'The certificate can not be canceled because it contains associated yields', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Partida: ', N'¿Está seguro que desea dar de baja la Partida: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Partida: ', N'Are you sure you want to cancel the certificate: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Partida Cancelada Correctamente', N'Partida Cancelada Correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Partida Cancelada Correctamente', N'Certificate canceled succesfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cancelar la Partida: ', N'Ocurrio un error al intentar cancelar la Partida: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cancelar la Partida: ', N'An error occurred trying to cancel the certificate:', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ', N'An error occurred trying to eliminate a quote, please report the error number ', 2)
+
+--PARTIDA SOLICITAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud de Partida generada correctamente', N'Solicitud de Partida generada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud de Partida generada correctamente', N'Successfully generated Match Request', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revise los detalles, sus cotizaciones, y el Monto Total', N'Por favor revise los detalles, sus cotizaciones, y el Monto Total', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revise los detalles, sus cotizaciones, y el Monto Total', N'Please check the details, your quotes, and the Total Amount', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar generar la partida, por favor informe del error Nro ', N'Error al intentar generar la partida, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al intentar generar la partida, por favor informe del error Nro ', N'Error trying to generate the certificate, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor primero agregue 3 cotizaciones antes de generar una Partida', N'Por favor primero agregue 3 cotizaciones antes de generar una Partida', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor primero agregue 3 cotizaciones antes de generar una Partida', N'Please first add 3 quotes before generating a certificate', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Esta Solicitud no tiene detalles disponibles para solicitar una partida', N'Esta Solicitud no tiene detalles disponibles para solicitar una partida', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Esta Solicitud no tiene detalles disponibles para solicitar una partida', N'This Request does not have details available to request a departure', 2)
+
+-- PROVEEDOR CREAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro ', N'Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de proveedores, por favor informe del error Nro ', N'An error occurred loading the providers screen, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar la categoría, por favor informe del error Nro ', N'An error occurred searching the category, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Proveedor ingresado ya existe', N'El Proveedor ingresado ya existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El Proveedor ingresado ya existe', N'The entered Provider already exists', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Proveedor creado correctamente', N'Proveedor creado correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Proveedor creado correctamente', N'Provider created correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro ', N'Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar crear un proveedor, por favor informe del error Nro ', N'An error occurred trying to create a provider, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar al proveedor, por favor informe del error Nro ', N'An error occurred trying to modify the provider, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja al Proveedor: ', N'¿Está seguro que desea dar de baja al Proveedor: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja al Proveedor: ', N'Are you sure you want to unsubscribe the Provider: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Proveedor: ', N'Proveedor: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Proveedor: ', N'Provider: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' dado de baja correctamente', N' dado de baja correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' dado de baja correctamente', N' successfully unsubscribed', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja un proveedor primero debe buscarlo', N'Para dar de baja un proveedor primero debe buscarlo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja un proveedor primero debe buscarlo', N'To unsubscribe a provider you must first look for it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro ', N'Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar al proveedor, por favor informe del error Nro ', N'An error occurred trying to eliminate the provider, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' reactivado correctamente', N' reactivado correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' reactivado correctamente', N' reactivated successfully', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar al proveedor: ', N'Ocurrio un error al intentar reactivar al proveedor: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar al proveedor: ', N'An error occurred trying to reactivate the provider: ', 2)
+
+--Rendicion crear
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida no tiene detalles pendientes de rendición', N'La partida no tiene detalles pendientes de rendición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida no tiene detalles pendientes de rendición', N'The certificate has no outstanding surrender details', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada aún tiene bienes pendientes de adquisición', N'La partida ingresada aún tiene bienes pendientes de adquisición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada aún tiene bienes pendientes de adquisición', N'The item entered still has assets pending acquisition', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada no fue acreditada aún', N'La partida ingresada no fue acreditada aún', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada no fue acreditada aún', N'The certificate entered was not yet accredited', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontró la partida ingresada', N'No se encontró la partida ingresada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontró la partida ingresada', N'The certificate entered was not found', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', N'The certificate entered was already rendered with the number of yield: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'. Desea actualizarla?', N'. Desea actualizarla?', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'. Desea actualizarla?', N'. Do you want to update it?', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición registrada correctamente', N'Rendición registrada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición registrada correctamente', N'Yield registrated correctly', 2)
+
+-- RENDICION MODIF
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de Rendiciones, por favor informe del error Nro ', N'Ocurrio un error al cargar la pantalla de Rendiciones, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la pantalla de Rendiciones, por favor informe del error Nro ', N'An error occurred loading the yields screen, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La partida ingresada ya fue rendida con el Nro de Rendicion: ', N'The certificate entered was already rendered with the yielded number: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición modificada correctamente', N'Rendición modificada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición modificada correctamente', N'Successfully modified yield', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al generar la Rendición, por favor informe del error Nro ', N'Ocurrio un error al generar la Rendición, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al generar la Rendición, por favor informe del error Nro ', N'An error occurred generating the yield, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Rendición: ', N'¿Está seguro que desea dar de baja la Rendición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Rendición: ', N'Are you sure you want to unsubscribe the yield: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendicion: ', N'Rendicion: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendicion: ', N'Yield: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'Ocurrio un error al intentar eliminar la rendición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'An error occurred trying to eliminate the yield: ', 2)
+
+-- SOLICITUD MODIFICAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)

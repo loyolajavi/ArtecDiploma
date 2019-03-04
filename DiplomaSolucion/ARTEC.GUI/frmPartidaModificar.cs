@@ -282,7 +282,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - GrillaCotizAntiguas_CellClick");
-                MessageBox.Show("Ocurrio un error al intengar agregar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar agregar una cotización, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -361,13 +361,13 @@ namespace ARTEC.GUI
                 //Si fue acreditada impedir la modificación
                 if (unaPartida.MontoOtorgado > 0 && !string.IsNullOrEmpty(unaPartida.NroPartida))
                 {
-                    MessageBox.Show("La partida se encuentra acreditada, no puede modificarse");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida se encuentra acreditada, no puede modificarse").Texto);
                     return;
                 }
 
                 if (unaPartida.unasPartidasDetalles.Any(X => X.unasCotizaciones.Count < 3))
                 {
-                    MessageBox.Show("Cada detalle de la partida debe poseer al menos 3 cotizaciones");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Cada detalle de la partida debe poseer al menos 3 cotizaciones").Texto);
                     return;
                 }
 
@@ -459,14 +459,14 @@ namespace ARTEC.GUI
                             }
                         }
                     }
-                    MessageBox.Show("Solicitud de Partida modificada correctamente");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud de Partida modificada correctamente").Texto);
                     this.Close();
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnGenerarDocumento_Click");
-                MessageBox.Show("Error al intentar modificar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");                
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error al intentar modificar la partida, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);                
             }
 
 
@@ -496,17 +496,17 @@ namespace ARTEC.GUI
                 unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(NroPartida);
                 if (unaRendicion != null && unaRendicion.unasAdquisiciones != null && unaRendicion.unasAdquisiciones.Count() > 0)
                 {
-                    MessageBox.Show("La Partida no puede ser cancelada porque contiene Adquisiciones asociadas");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Partida no puede ser cancelada porque contiene Adquisiciones asociadas").Texto);
                     return;
                 }
                 //Verificar que no exista una Rendicion asociada
                 int NroRenAsociada = ManagerRendicion.RendicionTraerIdRendPorIdPartida(NroPartida);
                 if (NroRenAsociada > 0)
                 {
-                    MessageBox.Show("La Partida no puede ser cancelada porque contiene Rendiciones asociadas");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Partida no puede ser cancelada porque contiene Rendiciones asociadas").Texto);
                     return;
                 }
-                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Partida: " + unaPartida.IdPartida.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Partida: ").Texto + unaPartida.IdPartida.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                 if (resmbox == DialogResult.Yes)
                 {
                     //Si fue acreditada generar documento de cancelación
@@ -553,7 +553,7 @@ namespace ARTEC.GUI
                                 }
                             }
 
-                            MessageBox.Show("Partida Cancelada Correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Cancelada Correctamente").Texto);
                             //Grisear Todo
                             btnRegenerarPartida.Enabled = false;
                             btnCancelar.Enabled = false;
@@ -569,7 +569,7 @@ namespace ARTEC.GUI
                     {   //Cancela sin generar documento de cancelación
                         if (ManagerPartida.PartidaCancelar(unaPartida))
                         {
-                            MessageBox.Show("Partida Cancelada Correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Cancelada Correctamente").Texto);
                             //Grisear Todo
                             btnRegenerarPartida.Enabled = false;
                             btnCancelar.Enabled = false;
@@ -588,7 +588,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - btnCancelar_Click");
-                MessageBox.Show("Ocurrio un error al intentar cancelar la Partida: " + unaPartida.IdPartida.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar cancelar la Partida: ").Texto + unaPartida.IdPartida.ToString() + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             //finally
             //{
@@ -687,7 +687,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaModificar - grillaCotizaciones_CellClick");
-                MessageBox.Show("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intengar eliminar una cotización, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 

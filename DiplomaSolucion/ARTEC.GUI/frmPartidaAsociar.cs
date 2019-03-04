@@ -231,7 +231,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaAsociar - btnBuscar_Click");
-                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error en la búsqueda, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -247,15 +247,15 @@ namespace ARTEC.GUI
                         return;
                     if(unaPartida.MontoOtorgado > 0 | !string.IsNullOrEmpty(unaPartida.NroPartida))
                     {
-                        DialogResult resmbox = MessageBox.Show("La Partida ya está asociada con SGA con la referencia: " + unaPartida.NroPartida + ", con un monto otorgado de $" + unaPartida.MontoOtorgado.ToString() +
-                            "\n" + "¿Está seguro que quiere reemplazar la asociación existente?", "Confirmación", MessageBoxButtons.YesNo);
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Partida ya está asociada con SGA con la referencia: ").Texto + unaPartida.NroPartida + BLLServicioIdioma.MostrarMensaje(", con un monto otorgado de $").Texto + unaPartida.MontoOtorgado.ToString() +
+                            "\n" + BLLServicioIdioma.MostrarMensaje("¿Está seguro que quiere reemplazar la asociación existente?").Texto, BLLServicioIdioma.MostrarMensaje("Confirmación").Texto, MessageBoxButtons.YesNo);
                         if (resmbox == DialogResult.No)
                             return;
                     }
                     if (Int32.Parse(txtMontoOtorgado.Text) > 0)
                     {
                         if (Int32.Parse(txtMontoOtorgado.Text) < unaPartida.MontoSolicitado)
-                            MessageBox.Show("El monto otorgado es menor al solicitado, por favor revíselo");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El monto otorgado es menor al solicitado, por favor revíselo").Texto);
                         else
                         {
                             unaPartida.FechaAcreditacion = DateTime.Today;
@@ -263,20 +263,20 @@ namespace ARTEC.GUI
                             unaPartida.NroPartida = txtNroPartAsignado.Text;
 
                             if (ManagerPartida.PartidaAsociar(unaPartida))
-                                MessageBox.Show("Partida Asociada correctamente");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Asociada correctamente").Texto);
                         }
                         
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione una Partida y complete el Nro de Partida asignada y el monto acreditado").Texto);
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmPartidaAsociar - btnAsociar_Click");
-                MessageBox.Show("Error al intentar asociar la partida, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error al intentar asociar la partida, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }
@@ -299,7 +299,7 @@ namespace ARTEC.GUI
                 if(unaListaPartidas.Count() > 0)
                     GrillaPartidas.DataSource = unaListaPartidas;
                 else
-                    MessageBox.Show("La Solicitud no posee Partidas solicitadas");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud no posee Partidas solicitadas").Texto);
             }
         }
 

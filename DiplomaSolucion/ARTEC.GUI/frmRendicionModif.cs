@@ -210,7 +210,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmRendicionModif - frmRendicionModif_Load");
-                MessageBox.Show("Ocurrio un error al cargar la pantalla de Rendiciones, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al cargar la pantalla de Rendiciones, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }
@@ -232,20 +232,20 @@ namespace ARTEC.GUI
                 {
                     //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
                     //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                    DialogResult resmbox = MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString() + ". Desea actualizarla?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                     {
                         unaRendicion.IdRendicion = IdRendRes;
                         ManagerRendicion.RendicionModificar(unaRendicion);
                         DocumentoRendicionCrear(IdRendRes);
-                        MessageBox.Show("Rendición modificada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición modificada correctamente").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmRendicionModif - btnGenerar_Click");
-                MessageBox.Show("Ocurrio un error al generar la Rendición, por favor informe del error Nro " + IdError + " del Log de Eventos"); ;
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al generar la Rendición, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto); ;
             }
             
         }
@@ -326,11 +326,11 @@ namespace ARTEC.GUI
         {
             try
             {
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Rendición: " + unaRendicionSelec.IdRendicion.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if (ManagerRendicion.RendicionEliminar(unaRendicionSelec))
                         {
-                            MessageBox.Show("Rendicion: " + unaRendicionSelec.IdRendicion.ToString() + " eliminada correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                             DialogResult = DialogResult.OK;
                         }
                         else
@@ -339,7 +339,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmRendicionModif - btnEliminar_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar la rendición: " + unaRendicionSelec.IdRendicion.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar la rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
