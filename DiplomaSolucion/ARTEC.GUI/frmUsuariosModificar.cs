@@ -161,7 +161,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "frmUsuariosGestion_Load");
-                MessageBox.Show("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
                 this.Close();
             }
             
@@ -272,7 +272,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El nombre de usuario ingresado no existe");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El nombre de usuario ingresado no existe").Texto);
                     txtNomUs.Clear();
                     txtPass.Clear();
                     txtNombre.Clear();
@@ -289,7 +289,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click");
-                MessageBox.Show("Ocurrio un error al buscar el Nombre de Usuario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al buscar el Nombre de Usuario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -321,7 +321,7 @@ namespace ARTEC.GUI
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa").Texto);
             else
             {
                 LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
@@ -340,7 +340,7 @@ namespace ARTEC.GUI
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa").Texto);
             else
             {
                 //LisAuxDisp.Add(LisAuxAsig[treeAsignados.SelectedNode.Index]);
@@ -370,20 +370,20 @@ namespace ARTEC.GUI
                         UsModif.IdUsuario = unUsuario.IdUsuario;
                     else
                     {
-                        MessageBox.Show("Busque un usuario a modificar por favor");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Busque un usuario a modificar por favor").Texto);
                         return;
                     }
                         
                     //Verificar que quede al menos un permiso asignado
                     if (LisAuxAsig.Count == 0)
                     {
-                        MessageBox.Show("Por favor revisar que el usuario posea al menos un permiso asignado");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que el usuario posea al menos un permiso asignado").Texto);
                         return;
                     }
                     //NombreUsuario
                     if (unUsuario.NombreUsuario != txtNomUs.Text)
                     {
-                        DialogResult resmbox = MessageBox.Show("¿Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema?", "Advertencia", MessageBoxButtons.YesNo);
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                         if (resmbox == DialogResult.Yes)
                         {
                             //Verificar que no existe el nombre de usuario ingresado
@@ -393,7 +393,7 @@ namespace ARTEC.GUI
                                 UsModif.NombreUsuario = txtNomUs.Text;
                             else
                             {
-                                MessageBox.Show("Ya existe el nombre de usuario ingresado, por favor modifíquelo");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ya existe el nombre de usuario ingresado, por favor modifíquelo").Texto);
                                 return;
                             }
                         }
@@ -405,7 +405,7 @@ namespace ARTEC.GUI
 
                     if (txtPass.Text != "******")
                     {
-                        DialogResult resmbox = MessageBox.Show("¿Está seguro que desea modificar la contraseña del Usuario?", "Advertencia", MessageBoxButtons.YesNo);
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea modificar la contraseña del Usuario?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                         if (resmbox == DialogResult.Yes)
                             //ManagerUsuario.UsuarioModificarPass(unUsuario.IdUsuario, ServicioSecurizacion.AplicarHash(txtPass.Text));VER: QUITAR
                             UsModif.Pass = ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text));
@@ -433,7 +433,7 @@ namespace ARTEC.GUI
                     {
                         LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
                         LisAuxAsigBKP = LisAuxAsig.ToList();
-                        MessageBox.Show("Modificación realizada");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                     }
                         
 
@@ -441,7 +441,7 @@ namespace ARTEC.GUI
                 catch (Exception es)
                 {
                     string IdError = ServicioLog.CrearLog(es, "btnModifUsuario_Click");
-                    MessageBox.Show("Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
                 }
         }
 
@@ -459,10 +459,10 @@ namespace ARTEC.GUI
                 {
                     if (unUsuario.NombreUsuario == ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario)
                     {
-                        MessageBox.Show("No puede eliminarse a sí mismo");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No puede eliminarse a sí mismo").Texto);
                         return;
                     }
-                    DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja el Usuario: " + unUsuario.NombreUsuario + "?", "Advertencia", MessageBoxButtons.YesNo);
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja el Usuario: ").Texto + unUsuario.NombreUsuario + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
                         if(ManagerUsuario.UsuarioEliminar(unUsuario))
                         {
@@ -478,18 +478,18 @@ namespace ARTEC.GUI
                             txtNombre.Enabled = false;
                             txtApellido.Enabled = false;
                             txtMail.Enabled = false;
-                            MessageBox.Show("Usuario: " + unUsuario.NombreUsuario + " dado de baja correctamente");
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
                         }
                     else
                         return;
                 }
                 else
-                    MessageBox.Show("Para dar de baja un usuario primero debe buscarlo");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja un usuario primero debe buscarlo").Texto);
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnEliminarUsuario_Click");
-                MessageBox.Show("Ocurrio un error al intentar eliminar el usuario: " + unUsuario.NombreUsuario + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar eliminar el usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }
@@ -515,14 +515,14 @@ namespace ARTEC.GUI
                         txtNombre.Enabled = true;
                         txtApellido.Enabled = true;
                         txtMail.Enabled = true;
-                        MessageBox.Show("Usuario: " + unUsuario.NombreUsuario + " reactivado correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
                     }
                 }
             }
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnReactivarUs_Click");
-                MessageBox.Show("Ocurrio un error al intentar reactivar el usuario: " + unUsuario.NombreUsuario + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar reactivar el usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
         }

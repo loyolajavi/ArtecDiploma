@@ -1030,23 +1030,142 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un erro
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'An error occurred trying to eliminate the yield: ', 2)
 
 -- SOLICITUD MODIFICAR
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El detalle está asociado a la Partida Nro: ', N'El detalle está asociado a la Partida Nro: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El detalle está asociado a la Partida Nro: ', N'The detail is associated with Item number: ', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', no puede eliminarse', N', no puede eliminarse', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', no puede eliminarse', N', can not be deleted', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado', N'Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado', N'Check that the details have at least 3 quotes and are in quoted status', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Revise que los detalles posean al menos 3 cotizaciones', N'Revise que los detalles posean al menos 3 cotizaciones', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Revise que los detalles posean al menos 3 cotizaciones', N'Check that the details have at least 3 quotes', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No hay bienes listos para ser entregados', N'No hay bienes listos para ser entregados', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No hay bienes listos para ser entregados', N'No goods ready to be delivered', 2)
 
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 1)
-INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'', N'', 2)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El agente ', N'El agente ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El agente ', N'The Agent ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'ya se encuentra asociado a este software', N'ya se encuentra asociado a este software', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'ya se encuentra asociado a este software', N'is already associated with this software', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', no puede modificarse', N', no puede modificarse', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', no puede modificarse', N', can not be modified', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La solicitud no puede ser cancelada porque contiene Partidas asociadas', N'La solicitud no puede ser cancelada porque contiene Partidas asociadas', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La solicitud no puede ser cancelada porque contiene Partidas asociadas', N'The request can not be canceled because it contains associated items', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Solicitud: ', N'¿Está seguro que desea dar de baja la Solicitud: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja la Solicitud: ', N'Are you sure you want to unsubscribe the Application: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud cancelada correctamente', N'Solicitud cancelada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solicitud cancelada correctamente', N'Application successfully canceled', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cancelar la Solicitud: ', N'Ocurrio un error al intentar cancelar la Solicitud: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar cancelar la Solicitud: ', N'An error occurred trying to cancel the Request: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Solicitud posea al menos un detalle', N'Por favor revisar que la Solicitud posea al menos un detalle', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que la Solicitud posea al menos un detalle', N'Please check that the Request has at least one detail', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor adjuntar el oficio de la solicitud realizada', N'Por favor adjuntar el oficio de la solicitud realizada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor adjuntar el oficio de la solicitud realizada', N'Please attach the official letter of the request', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro ', N'Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro ', N'An error occurred trying to modify the request, please report the error number ', 2)
+
+--Usuario crear
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que el usuario posea al menos un permiso asignado', N'Por favor revisar que el usuario posea al menos un permiso asignado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que el usuario posea al menos un permiso asignado', N'Please check that the user has at least one assigned permission', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Usuario creado correctamente', N'Usuario creado correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Usuario creado correctamente', N'User created correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ya existe el nombre de usuario ingresado, por favor modifíquelo', N'Ya existe el nombre de usuario ingresado, por favor modifíquelo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ya existe el nombre de usuario ingresado, por favor modifíquelo', N'The username already exists, please modify it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en la creación del usuario, por favor informe del error Nro ', N'Ocurrio un error en la creación del usuario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en la creación del usuario, por favor informe del error Nro ', N'An error occurred in the creation of the user, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', N'Please select the Family that contains the selected permit or the required patent directly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Please select the Family that contains the selected permit or the patent to be eliminated directly', 2)
+
+-- USUARIO MODIFICAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro ', N'Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en el módulo de Usuarios, por favor informe del error Nro ', N'An error occurred in the Users module, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El nombre de usuario ingresado no existe', N'El nombre de usuario ingresado no existe', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El nombre de usuario ingresado no existe', N'The username entered does not exist', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar el Nombre de Usuario, por favor informe del error Nro ', N'Ocurrio un error al buscar el Nombre de Usuario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al buscar el Nombre de Usuario, por favor informe del error Nro ', N'An error occurred searching the User Name, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa', N'Please select the Family that contains the selected permit or the required patent directly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa', N'Please select the Family that contains the selected permit or the patent to be eliminated directly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Busque un usuario a modificar por favor', N'Busque un usuario a modificar por favor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Busque un usuario a modificar por favor', N'Look for a user to modify please', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que el usuario posea al menos un permiso asignado', N'Por favor revisar que el usuario posea al menos un permiso asignado', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor revisar que el usuario posea al menos un permiso asignado', N'Please check that the user has at least one assigned permission', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema', N'Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Está seguro que desea modificar el Nombre de Usuario utilizado para ingresar al sistema', N'Are you sure you want to modify the Username used to enter the system', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea modificar la contraseña del Usuario?', N'¿Está seguro que desea modificar la contraseña del Usuario?', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea modificar la contraseña del Usuario?', N'Are you sure you want to change the Users password?', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro ', N'Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al modificar los datos del usuario, por favor informe del error Nro ', N'An error occurred modifying the user data, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede eliminarse a sí mismo', N'No puede eliminarse a sí mismo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No puede eliminarse a sí mismo', N'You can not eliminate yourself', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja el Usuario: ', N'¿Está seguro que desea dar de baja el Usuario: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'¿Está seguro que desea dar de baja el Usuario: ', N'Are you sure you want to unsubscribe the User: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Usuario: ', N'Usuario: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Usuario: ', N'User: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja un usuario primero debe buscarlo', N'Para dar de baja un usuario primero debe buscarlo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Para dar de baja un usuario primero debe buscarlo', N'To unsubscribe a user you must first look for it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar el usuario: ', N'Ocurrio un error al intentar eliminar el usuario: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar el usuario: ', N'An error occurred trying to delete the user: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar el usuario: ', N'Ocurrio un error al intentar reactivar el usuario: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar reactivar el usuario: ', N'An error occurred trying to reactivate the user: ', 2)
+
+-- LOGIN
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo', N'Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo', N'There are inconsistencies in the Database, only a user with administrator permission can log in to try to solve it', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al iniciar el sistema, por favor informe del error Nro ', N'Ocurrio un error al iniciar el sistema, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al iniciar el sistema, por favor informe del error Nro ', N'An error occurred starting the system, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores', N'Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores', N'There are inconsistencies in the Database, Do you want to open the menu to restore it? Otherwise it will be redirected to the menu to regenerate the Verifying Digits', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias', N'Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias', N'Only a user with System Administration or total permissions can login if the DB has inconsistencies', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en el logueo, por favor informe del error Nro ', N'Ocurrio un error en el logueo, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error en el logueo, por favor informe del error Nro ', N'An error occurred in the log, please report the error number ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error en la búsqueda, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la búsqueda, por favor informe del error Nro ', N'Error in search, please report the error number ', 2)
+
+-- solicitud BUSCAR
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error loading the search screen, please report error number ', 2)
+
 
 --En todos los MessageBox.Show("XXX");
 --Delante de las comillas va:

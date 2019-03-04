@@ -84,7 +84,7 @@ namespace ARTEC.GUI
                 {
                     //VER:Que pida login y que solo lo pueda hacer un usuario con permisos de Administrador
                     FlagSinIntegridad = true;
-                    MessageBox.Show("Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Existen inconsistencias en la Base de Datos, solo podrá loguearse un usuario con permisos de administrador para intentar solucionarlo").Texto);
                     //DialogResult resmbox = MessageBox.Show("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores", "Advertencia", MessageBoxButtons.YesNo);
                     //if (resmbox == DialogResult.Yes)
                     //{
@@ -105,7 +105,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "Login_Load");
-                MessageBox.Show("Ocurrio un error al iniciar el sistema, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al iniciar el sistema, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
                 this.Close();
             }
         }
@@ -162,7 +162,7 @@ namespace ARTEC.GUI
                             {
                                 this.Close();
                                 ServicioLog.CrearLog("Login", "Ingreso Correcto");
-                                DialogResult resmbox = MessageBox.Show("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores", "Advertencia", MessageBoxButtons.YesNo);
+                                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                                 if (resmbox == DialogResult.Yes)
                                 {
                                     //Backup unFrmBackup = new Backup();
@@ -178,7 +178,7 @@ namespace ARTEC.GUI
                                 }
                             }
                             else
-                                MessageBox.Show("Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias");
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solo un usuario con permisos de Administración del sistema o total puede loguearse si la BD tiene inconsistencias").Texto);
                             
                         }
                         else
@@ -192,7 +192,7 @@ namespace ARTEC.GUI
                 catch (Exception es)
                 {
                     string IdError = ServicioLog.CrearLog(es, "btnLogin_Click");
-                    MessageBox.Show("Ocurrio un error en el logueo, por favor informe del error Nro " + IdError + " en el Log de Eventos");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error en el logueo, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" en el Log de Eventos").Texto);
                 }
 
             }

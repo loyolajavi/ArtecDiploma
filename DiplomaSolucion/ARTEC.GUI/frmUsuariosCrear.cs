@@ -150,7 +150,7 @@ namespace ARTEC.GUI
                 //Verificar que quede al menos un permiso asignado
                 if (LisAuxAsig.Count == 0)
                 {
-                    MessageBox.Show("Por favor revisar que el usuario posea al menos un permiso asignado");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que el usuario posea al menos un permiso asignado").Texto);
                     return;
                 }
 
@@ -166,11 +166,11 @@ namespace ARTEC.GUI
                     unUsuario.Permisos = LisAuxAsig;
                     unUsuario.IdiomaUsuarioActual = Idioma.unIdiomaActual;
                     if(ManagerUsuario.UsuarioCrear(unUsuario))
-                        MessageBox.Show("Usuario creado correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario creado correctamente").Texto);
                 }
                 else
                 {
-                    MessageBox.Show("Ya existe el nombre de usuario ingresado, por favor modifíquelo");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ya existe el nombre de usuario ingresado, por favor modifíquelo").Texto);
                     return;
                 }
 
@@ -178,7 +178,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnCrearUsuario_Click");
-                MessageBox.Show("Ocurrio un error en la creación del usuario, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error en la creación del usuario, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
         }
 
@@ -227,7 +227,7 @@ namespace ARTEC.GUI
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (treeDisponibles.SelectedNode == null || treeDisponibles.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso selecionado o la patente requerida en forma directa").Texto);
             else
             {
                 LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
@@ -264,7 +264,7 @@ namespace ARTEC.GUI
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             if (treeAsignados.SelectedNode == null || treeAsignados.SelectedNode.Parent != null)
-                MessageBox.Show("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente a eliminar en forma directa").Texto);
             else
             {
                 LisAuxAsig.RemoveAt(treeAsignados.SelectedNode.Index);

@@ -156,7 +156,7 @@ namespace ARTEC.GUI
             catch (Exception es)
             {
                 string IdError = ServicioLog.CrearLog(es, "btnBuscar_Click");
-                MessageBox.Show("Error en la búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error en la búsqueda, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
             
@@ -247,7 +247,7 @@ namespace ARTEC.GUI
             catch (Exception es1)
             {
                 string IdError = ServicioLog.CrearLog(es1, "SolicitudBuscar_Load");
-                MessageBox.Show("Error al cargar la pantalla de búsqueda, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Error al cargar la pantalla de búsqueda, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
             
         }

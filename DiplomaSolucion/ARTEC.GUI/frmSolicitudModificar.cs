@@ -602,7 +602,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede eliminarse");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede eliminarse").Texto);
                 }
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
@@ -730,12 +730,12 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Revise que los detalles posean al menos 3 cotizaciones y estén en estado Cotizado").Texto);
                 }
             }
             else
             {
-                MessageBox.Show("Revise que los detalles posean al menos 3 cotizaciones");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Revise que los detalles posean al menos 3 cotizaciones").Texto);
             }
         }
 
@@ -772,7 +772,7 @@ namespace ARTEC.GUI
             else
             {
                 //VER: Traduccion
-                MessageBox.Show("No hay bienes listos para ser entregados");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No hay bienes listos para ser entregados").Texto);
             }
 
         }
@@ -1023,7 +1023,8 @@ namespace ARTEC.GUI
                     var resultado = unosAgentesAsociados.Where(x => x.IdAgente == unAgen.IdAgente);
                     if (resultado.Count() > 0)
                     {
-                        MessageBox.Show("El agente " + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + "ya se encuentra asociado a este software");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El agente ").Texto + unAgen.NombreAgente + " " + unAgen.ApellidoAgente + " " + BLLServicioIdioma.MostrarMensaje("ya se encuentra asociado a este software").Texto
+);
                         validCantBien.ClearFailedValidations();
                     }
                     else
@@ -1150,7 +1151,7 @@ namespace ARTEC.GUI
                         }
                         else
                         {
-                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
+                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                             if (resmbox == DialogResult.Yes)
                             {
                                 AgregarDetalleConfirmado(ref unDetalleSolicitud);
@@ -1283,7 +1284,7 @@ namespace ARTEC.GUI
         {
             if (unosAdjuntos.Count > 0)
             {
-                MessageBox.Show("No puede adjuntarse más de 1 archivo");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No puede adjuntarse más de 1 archivo").Texto);
             }
             else
             {
@@ -1308,7 +1309,7 @@ namespace ARTEC.GUI
                     }
                     else
                     {
-                        MessageBox.Show("El archivo " + "\"" + NombreArchivo + "\"" + " no tiene una extensión válida (jpg, png, bmp, pdf, txt)");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
                     }
                 }
             }
@@ -1441,7 +1442,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show("El detalle está asociado a la Partida Nro: " + unaPartDet.IdPartida + ", no puede modificarse");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede modificarse").Texto);
                 }
             }
         }
@@ -1472,15 +1473,15 @@ namespace ARTEC.GUI
                 unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(unaSolicitud.IdSolicitud);
                 if (unaListaPartidas != null && unaListaPartidas.Count > 0)
                 {
-                    MessageBox.Show("La solicitud no puede ser cancelada porque contiene Partidas asociadas");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La solicitud no puede ser cancelada porque contiene Partidas asociadas").Texto);
                     return;
                 }
-                DialogResult resmbox = MessageBox.Show("¿Está seguro que desea dar de baja la Solicitud: " + unaSolicitud.IdSolicitud.ToString() + "?", "Advertencia", MessageBoxButtons.YesNo);
+                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Solicitud: ").Texto + unaSolicitud.IdSolicitud.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                 if (resmbox == DialogResult.Yes)
                 {
                     if (ManagerSolicitud.SolicitudCancelar(unaSolicitud))
                     {
-                        MessageBox.Show("Solicitud cancelada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud cancelada correctamente").Texto);
                         //Grisear todo
                         cboEstadoSolicitud.SelectedValue = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
                         unaSolicitud.UnEstado = new EstadoSolicitud() { IdEstadoSolicitud = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada, DescripEstadoSolic = "Cancelada" };
@@ -1527,7 +1528,7 @@ namespace ARTEC.GUI
                     IdError = es.Data["IdLog"].ToString();
                 else
                     IdError = ServicioLog.CrearLog(es, "frmSolicitudModificar - btnCancelar_Click");
-                MessageBox.Show("Ocurrio un error al intentar cancelar la Solicitud: " + unaSolicitud.IdSolicitud.ToString() + ", por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar cancelar la Solicitud: ").Texto + unaSolicitud.IdSolicitud.ToString() + BLLServicioIdioma.MostrarMensaje(", por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
 
@@ -1553,14 +1554,14 @@ namespace ARTEC.GUI
                 //Verificar que quede por lo menos un SolicDetalle
                 if (unaSolicitud.unosDetallesSolicitud.Count == 0)
                 {
-                    MessageBox.Show("Por favor revisar que la Solicitud posea al menos un detalle");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor revisar que la Solicitud posea al menos un detalle").Texto);
                     return;
                 }
 
                 //Verificar que haya un adjunto
                 if (unosAdjuntos.Count != 1)
                 {
-                    MessageBox.Show("Por favor adjuntar el oficio de la solicitud realizada");
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor adjuntar el oficio de la solicitud realizada").Texto);
                     return;
                 }
 
@@ -1599,7 +1600,7 @@ namespace ARTEC.GUI
                         //    } 
                             
                         //}
-                        MessageBox.Show("Modificación realizada correctamente");
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                     }
                     
                 }
@@ -1616,7 +1617,7 @@ namespace ARTEC.GUI
                     IdError = es.Data["IdLog"].ToString();
                 else
                     IdError = ServicioLog.CrearLog(es, "btnModifSolicitud_Click");
-                MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + IdError + " del Log de Eventos");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto);
             }
 
            
