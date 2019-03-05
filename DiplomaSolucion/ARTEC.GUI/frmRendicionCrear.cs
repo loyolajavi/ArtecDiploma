@@ -216,9 +216,10 @@ namespace ARTEC.GUI
                         unaRendicion.IdRendicion = IdRendRes;
                         ManagerRendicion.RendicionModificar(unaRendicion);
                         DocumentoRendicionCrear(IdRendRes);
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
+                        this.Close();
                     }
                 }
-                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
             }
         }
 
@@ -307,7 +308,7 @@ namespace ARTEC.GUI
                     System.Diagnostics.Process.Start(info);
                 }
             }
-            this.Close();
+            
         }
 
 
