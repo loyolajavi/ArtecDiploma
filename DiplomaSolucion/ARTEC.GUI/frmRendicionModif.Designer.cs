@@ -29,6 +29,7 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRendicionModif));
             this.txtNroRendicion = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblNroRendicion = new DevComponents.DotNetBar.LabelX();
             this.btnEliminar = new DevComponents.DotNetBar.ButtonX();
@@ -61,6 +62,7 @@ namespace ARTEC.GUI
             this.txtNroRendicion.Location = new System.Drawing.Point(162, 12);
             this.txtNroRendicion.Name = "txtNroRendicion";
             this.txtNroRendicion.PreventEnterBeep = true;
+            this.txtNroRendicion.ReadOnly = true;
             this.txtNroRendicion.Size = new System.Drawing.Size(85, 22);
             this.txtNroRendicion.TabIndex = 89;
             // 
@@ -86,15 +88,8 @@ namespace ARTEC.GUI
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 88;
+            this.btnEliminar.Tag = ((object)(resources.GetObject("btnEliminar.Tag")));
             this.btnEliminar.Text = "btnEliminar";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Rendicion Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminar.Tag = dicbtnEliminar;
-
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // txtPartRef
@@ -135,15 +130,8 @@ namespace ARTEC.GUI
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
             this.btnGenerar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGenerar.TabIndex = 84;
+            this.btnGenerar.Tag = ((object)(resources.GetObject("btnGenerar.Tag")));
             this.btnGenerar.Text = "btnGenerar";
-
-            Dictionary<string, string[]> dicbtnGenerar = new Dictionary<string, string[]>();
-            string[] PerbtnGenerar = { "Rendicion Regenerar" };
-            dicbtnGenerar.Add("Permisos", PerbtnGenerar);
-            string[] IdiomabtnGenerar = { "Regenerar" };
-            dicbtnGenerar.Add("Idioma", IdiomabtnGenerar);
-            this.btnGenerar.Tag = dicbtnGenerar;
-
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // txtMontoEmpleado
@@ -232,6 +220,7 @@ namespace ARTEC.GUI
             this.txtNroPart.Location = new System.Drawing.Point(162, 40);
             this.txtNroPart.Name = "txtNroPart";
             this.txtNroPart.PreventEnterBeep = true;
+            this.txtNroPart.ReadOnly = true;
             this.txtNroPart.Size = new System.Drawing.Size(85, 22);
             this.txtNroPart.TabIndex = 77;
             // 

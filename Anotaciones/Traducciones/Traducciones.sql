@@ -664,6 +664,13 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un erro
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al mostrar el modelo creado, por favor informe del error Nro ', N'An error occurred displaying the created model, please report the error number ', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición Nro ', N'Rendición Nro ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición Nro ', N'Yield No', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' registrada correctamente', N' registrada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' registrada correctamente', N' was registered succesfully', 2)
+
+
 --BITACORA
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', N'An error occurred loading the log, please report the error number ', 2)
@@ -1034,6 +1041,9 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendicion: ', N
 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'Ocurrio un error al intentar eliminar la rendición: ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al intentar eliminar la rendición: ', N'An error occurred trying to eliminate the yield: ', 2)
+
+INSERT INTO Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Solicitud se encuentra Finalizada o Cancelada', N'La Solicitud se encuentra Finalizada o Cancelada', 1)
+INSERT INTO Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Solicitud se encuentra Finalizada o Cancelada', N'The request is finished or cancelled', 2)
 
 -- SOLICITUD MODIFICAR
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El detalle está asociado a la Partida Nro: ', N'El detalle está asociado a la Partida Nro: ', 1)

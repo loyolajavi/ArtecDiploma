@@ -186,5 +186,17 @@ namespace ARTEC.BLL
             }
             
         }
+
+        public int SolicitudTraerEstadoPorIdRendicion(int IdRendicion)
+        {
+            try
+            {
+                return GestorSolicitud.SolicitudTraerEstadoPorIdRendicion(IdRendicion);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
     }
 }

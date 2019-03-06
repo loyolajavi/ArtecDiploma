@@ -1141,5 +1141,32 @@ namespace ARTEC.DAL
         }
 
 
+
+        public int SolicitudTraerEstadoPorIdRendicion(int IdRendicion)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@IdRendicion", IdRendicion)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                int IdRendRes = (int)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "SolicitudTraerEstadoPorIdRendicion", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+                return IdRendRes;
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

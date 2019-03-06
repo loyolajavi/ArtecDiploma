@@ -193,34 +193,39 @@ namespace ARTEC.GUI
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            int IdRendRes = 0;
-            if (validlblNroPartida.Validate())
+            try
             {
-                unaRendicion.FechaRen = DateTime.Today;
-                IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
-                if (IdRendRes == 0)
+                int IdRendRes = 0;
+                if (validlblNroPartida.Validate())
                 {
-                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
-                    if (IdRendRes > 0)
-                        DocumentoRendicionCrear(IdRendRes);
-                    //Quizas esto lo maneje desde las excepciones mas q aca
-                    //MessageBox.Show("No se pudo crear la Rendicion correctamente");
-                }
-                else
-                {
-                    //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
-                    //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                    if (resmbox == DialogResult.Yes)
+                    unaRendicion.FechaRen = DateTime.Today;
+                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                    if (IdRendRes == 0)
                     {
-                        unaRendicion.IdRendicion = IdRendRes;
-                        ManagerRendicion.RendicionModificar(unaRendicion);
-                        DocumentoRendicionCrear(IdRendRes);
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
-                        this.Close();
+                        IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
+                        if (IdRendRes > 0)
+                            DocumentoRendicionCrear(IdRendRes);
+                    }
+                    else
+                    {
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                        {
+                            unaRendicion.IdRendicion = IdRendRes;
+                            ManagerRendicion.RendicionModificar(unaRendicion);
+                            DocumentoRendicionCrear(IdRendRes);
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
+                            this.Close();
+                        }
                     }
                 }
             }
+            catch (Exception es)
+            {
+                string IdError = ServicioLog.CrearLog(es, "frmRendicionCrear - btnCrear_Click");
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ocurrio un error al generar la Rendición, por favor informe del error Nro ").Texto + IdError + BLLServicioIdioma.MostrarMensaje(" del Log de Eventos").Texto); ;
+            }
+
         }
 
 

@@ -219,27 +219,35 @@ namespace ARTEC.GUI
         {
             try
             {
-                int IdRendRes = 0;
-                unaRendicion.FechaRen = DateTime.Today;
-                IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
-                if (IdRendRes == 0)
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                int EstadoSolic = ManagerSolicitud.SolicitudTraerEstadoPorIdRendicion(unaRendicionSelec.IdRendicion);
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
-                    IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
-                    if (IdRendRes > 0)
-                        DocumentoRendicionCrear(IdRendRes);
+                    int IdRendRes = 0;
+                    unaRendicion.FechaRen = DateTime.Today;
+                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                    if (IdRendRes == 0)
+                    {
+                        IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
+                        if (IdRendRes > 0)
+                            DocumentoRendicionCrear(IdRendRes);
+                    }
+                    else
+                    {
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                        {
+                            unaRendicion.IdRendicion = IdRendRes;
+                            ManagerRendicion.RendicionModificar(unaRendicion);
+                            DocumentoRendicionCrear(IdRendRes);
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición modificada correctamente").Texto);
+                            this.Close();
+                        }
+                    }
                 }
                 else
                 {
-                    //MessageBox.Show("La partida ingresada ya fue rendida con el Nro de Rendicion: " + IdRendRes.ToString());
-                    //DialogResult resmbox = MessageBox.Show(ServicioIdioma.MostrarMensaje("Mensaje1").Texto, "Advertencia", MessageBoxButtons.YesNo);
-                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                    if (resmbox == DialogResult.Yes)
-                    {
-                        unaRendicion.IdRendicion = IdRendRes;
-                        ManagerRendicion.RendicionModificar(unaRendicion);
-                        DocumentoRendicionCrear(IdRendRes);
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición modificada correctamente").Texto);
-                    }
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud se encuentra Finalizada o Cancelada").Texto);
                 }
             }
             catch (Exception es)
@@ -326,15 +334,20 @@ namespace ARTEC.GUI
         {
             try
             {
-                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                int EstadoSolic = ManagerSolicitud.SolicitudTraerEstadoPorIdRendicion(unaRendicionSelec.IdRendicion);
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
+                {
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if (ManagerRendicion.RendicionEliminar(unaRendicionSelec))
-                        {
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
-                            DialogResult = DialogResult.OK;
-                        }
-                        else
-                            return;
+                        ManagerRendicion.RendicionEliminar(unaRendicionSelec);
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
+                        DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud se encuentra Finalizada o Cancelada").Texto);
+                }
             }
             catch (Exception es)
             {

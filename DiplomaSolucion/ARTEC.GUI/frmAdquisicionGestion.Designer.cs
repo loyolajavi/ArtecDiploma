@@ -29,7 +29,7 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdquisicionGestion));
             this.txtIdAdquisicion = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblIdAdquisicion = new DevComponents.DotNetBar.LabelX();
@@ -79,6 +79,7 @@ namespace ARTEC.GUI
             this.txtIdAdquisicion.Location = new System.Drawing.Point(133, 9);
             this.txtIdAdquisicion.Name = "txtIdAdquisicion";
             this.txtIdAdquisicion.PreventEnterBeep = true;
+            this.txtIdAdquisicion.ReadOnly = true;
             this.txtIdAdquisicion.Size = new System.Drawing.Size(102, 22);
             this.txtIdAdquisicion.TabIndex = 78;
             // 
@@ -151,6 +152,7 @@ namespace ARTEC.GUI
             this.txtDep.Location = new System.Drawing.Point(133, 70);
             this.txtDep.Name = "txtDep";
             this.txtDep.PreventEnterBeep = true;
+            this.txtDep.ReadOnly = true;
             this.txtDep.Size = new System.Drawing.Size(306, 22);
             this.txtDep.TabIndex = 75;
             this.txtDep.TextChanged += new System.EventHandler(this.txtDependencia_TextChanged);
@@ -301,6 +303,7 @@ namespace ARTEC.GUI
             this.txtNroSolicitud.Location = new System.Drawing.Point(560, 39);
             this.txtNroSolicitud.Name = "txtNroSolicitud";
             this.txtNroSolicitud.PreventEnterBeep = true;
+            this.txtNroSolicitud.ReadOnly = true;
             this.txtNroSolicitud.Size = new System.Drawing.Size(102, 22);
             this.txtNroSolicitud.TabIndex = 82;
             // 
@@ -353,14 +356,14 @@ namespace ARTEC.GUI
             this.GrillaInventarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaInventarios.BackgroundColor = System.Drawing.Color.White;
             this.GrillaInventarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaInventarios.DefaultCellStyle = dataGridViewCellStyle2;
             this.GrillaInventarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaInventarios.Location = new System.Drawing.Point(12, 98);
             this.GrillaInventarios.Name = "GrillaInventarios";

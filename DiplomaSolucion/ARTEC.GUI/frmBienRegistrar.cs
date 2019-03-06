@@ -194,7 +194,7 @@ namespace ARTEC.GUI
                         unaAdquisicion.ProveedorAdquisicion = ProvSeleccionado;
                         unaAdquisicion.FechaAdq = DateTime.Now;
 
-                        ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
+                        int IdAdq = ManagerAdquisicion.AdquisicionCrear(unaAdquisicion);
                         unaAdquisicion = new Adquisicion();
 
                         LisAUXCant = new List<HLPDetallesAdquisicion>();
@@ -222,6 +222,8 @@ namespace ARTEC.GUI
                             }
                         }
 
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + IdAdq + BLLServicioIdioma.MostrarMensaje(" registrada correctamente").Texto);
+                        this.Close();
                     }
                     else
                     {
@@ -272,7 +274,7 @@ namespace ARTEC.GUI
             GrillaDetallesBienes.Visible = true;
 
             BLLPartidaDetalle ManagerPartidaDetalle = new BLLPartidaDetalle();
-            unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text), EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+            unosDetallesBienes = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(Int32.Parse(txtNroPartida.Text), (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
             //List<HLPDetallesAdquisicion> LisAUXDetalles 
             //LisAUXDetalles = unosDetallesBienes.Where(y => y.unEstado.IdEstadoSolicDetalle < (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido).Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle }).ToList();
@@ -664,6 +666,13 @@ namespace ARTEC.GUI
             cboMarca.DataSource = unasMarcas;
             cboMarca.DisplayMember = "DescripMarca";
             cboMarca.ValueMember = "IdMarca";
+
+            //Traer Modelos asociadas a la marca
+            unosModelos = ManagerModelo.ModeloTraerPorMarcaCategoria(unDetSolic.unaCategoria.IdCategoria, unasMarcas[0].IdMarca);
+            cboModelo.DataSource = null;
+            cboModelo.DataSource = unosModelos;
+            cboModelo.DisplayMember = "DescripModeloVersion";
+            cboModelo.ValueMember = "IdModeloVersion";
 
 
 

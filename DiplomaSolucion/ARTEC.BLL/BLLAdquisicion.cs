@@ -16,7 +16,7 @@ namespace ARTEC.BLL
         BLLInventarioHard ManagerInventarioHard = new BLLInventarioHard();
         BLLInventarioSoft ManagerInventarioSoft = new BLLInventarioSoft();
 
-        public void AdquisicionCrear(Adquisicion unaAdquisicion)
+        public int AdquisicionCrear(Adquisicion unaAdquisicion)
         {
             try
             {
@@ -36,6 +36,7 @@ namespace ARTEC.BLL
                     }
                 }
                 GestorAdquisicion.ConfirmarAdquisicion();
+                return IdAdq;
             }
             catch (Exception)
             {

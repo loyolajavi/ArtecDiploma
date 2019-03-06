@@ -216,32 +216,36 @@ namespace ARTEC.GUI
                 unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
                 InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
 
-                unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
-                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
-                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+                unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
 
-                foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
-	            {
-                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
-                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
-                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
-                    unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
+                if (unaSolic.unosDetallesSolicitud.Count > 0)
+                {
+                    foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
+                    {
+                        unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                        unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
+                        unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
+                        unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 
 
-		            HLPBienInventario unInvHlp = new HLPBienInventario();
-                    unInvHlp.IdInventario = unInv.IdInventario;
-                    unInvHlp.DescripBien = unInv.deBien.DescripBien;
-                    unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
-                    unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
-                    unInvHlp.SerieKey = unInv.SerieKey;
-                    unInvHlp.Costo = unInv.Costo;
+                        HLPBienInventario unInvHlp = new HLPBienInventario();
+                        unInvHlp.IdInventario = unInv.IdInventario;
+                        unInvHlp.DescripBien = unInv.deBien.DescripBien;
+                        unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
+                        unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
+                        unInvHlp.SerieKey = unInv.SerieKey;
+                        unInvHlp.Costo = unInv.Costo;
 
-                    unosInventariosHlp.Add(unInvHlp);
-	            }
-                
-                GrillaInventarios.DataSource = null;
-                GrillaInventarios.DataSource = unosInventariosHlp;
-                FormatearGrillaInventarios();
+                        unosInventariosHlp.Add(unInvHlp);
+                    }
+
+                    GrillaInventarios.DataSource = null;
+                    GrillaInventarios.DataSource = unosInventariosHlp;
+                    FormatearGrillaInventarios();
+                }
             }            
             catch (Exception es)
             {
@@ -585,7 +589,7 @@ namespace ARTEC.GUI
             GrillaBienesAAdquirir.DataSource = null;
             
 
-            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
             LisAUXDetalles = unaSolic.unosDetallesSolicitud.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle, UIDSolicDetalle = x.UIDSolicDetalle }).ToList();
 
@@ -845,33 +849,37 @@ namespace ARTEC.GUI
             unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
             InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
 
-            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
-            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
-            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
 
-            foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
+            if (unaSolic.unosDetallesSolicitud.Count > 0)
             {
-                unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
-                unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
-                unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
-                unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
-                unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
+                foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
+                {
+                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
+                    unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
+                    unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 
 
-                HLPBienInventario unInvHlp = new HLPBienInventario();
-                unInvHlp.IdInventario = unInv.IdInventario;
-                unInvHlp.DescripBien = unInv.deBien.DescripBien;
-                unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
-                unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
-                unInvHlp.SerieKey = unInv.SerieKey;
-                unInvHlp.Costo = unInv.Costo;
+                    HLPBienInventario unInvHlp = new HLPBienInventario();
+                    unInvHlp.IdInventario = unInv.IdInventario;
+                    unInvHlp.DescripBien = unInv.deBien.DescripBien;
+                    unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
+                    unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
+                    unInvHlp.SerieKey = unInv.SerieKey;
+                    unInvHlp.Costo = unInv.Costo;
 
-                unosInventariosHlp.Add(unInvHlp);
+                    unosInventariosHlp.Add(unInvHlp);
+                }
+
+                GrillaInventarios.DataSource = null;
+                GrillaInventarios.DataSource = unosInventariosHlp;
+                FormatearGrillaInventarios();
             }
-
-            GrillaInventarios.DataSource = null;
-            GrillaInventarios.DataSource = unosInventariosHlp;
-            FormatearGrillaInventarios();
         }
 
     }

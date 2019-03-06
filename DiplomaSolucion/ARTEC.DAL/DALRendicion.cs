@@ -254,7 +254,7 @@ namespace ARTEC.DAL
 
 
 
-        public bool RendicionEliminar(int IdRendicion)
+        public void RendicionEliminar(int IdRendicion)
         {
             SqlParameter[] parametersRenEliminar = new SqlParameter[]
 			{
@@ -267,9 +267,8 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RendicionEliminar", parametersRenEliminar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
+                if (FilasAfectadas == 0)
+                    throw new Exception();
             }
             catch (Exception es)
             {
