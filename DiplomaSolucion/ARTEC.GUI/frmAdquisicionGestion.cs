@@ -521,43 +521,47 @@ namespace ARTEC.GUI
 
             try
             {
-
-                InvQuitarMod = InventariosAgregarBKP.Where(d => !unaAdqModif.unosInventariosAsoc.Any(a => a.IdInventario == d.IdInventario)).ToList();
-                InvAgregarMod = unaAdqModif.unosInventariosAsoc.Where(d => !InventariosAgregarBKP.Any(a => a.IdInventario == d.IdInventario)).ToList();
-
-                unaAdqModif.FechaAdq = DateTime.Parse(txtFecha.Text);
-                unaAdqModif.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
-                unaAdqModif.NroFactura = txtNroFactura.Text;
-                //unaAdqModif.ProveedorAdquisicion = txtProveedor.Text; VER:
-
-                if (ManagerAdquisicion.AdquisicionModificar(unaAdqModif, InvQuitarMod, InvAgregarMod))
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
-                    unaAdqModif.unosInventariosAsoc.Clear();
-                    unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
-                    InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
-                    unosInventariosHlp.Clear();
-                    foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
+                    InvQuitarMod = InventariosAgregarBKP.Where(d => !unaAdqModif.unosInventariosAsoc.Any(a => a.IdInventario == d.IdInventario)).ToList();
+                    InvAgregarMod = unaAdqModif.unosInventariosAsoc.Where(d => !InventariosAgregarBKP.Any(a => a.IdInventario == d.IdInventario)).ToList();
+
+                    unaAdqModif.FechaAdq = DateTime.Parse(txtFecha.Text);
+                    unaAdqModif.FechaCompra = DateTime.Parse(txtFechaCompra.Text);
+                    unaAdqModif.NroFactura = txtNroFactura.Text;
+                    //unaAdqModif.ProveedorAdquisicion = txtProveedor.Text; VER:
+
+                    if (ManagerAdquisicion.AdquisicionModificar(unaAdqModif, InvQuitarMod, InvAgregarMod))
                     {
-                        HLPBienInventario unInvHlp = new HLPBienInventario();
-                        unInvHlp.IdInventario = unInv.IdInventario;
-                        unInvHlp.DescripBien = unInv.deBien.DescripBien;
-                        unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
-                        unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
-                        unInvHlp.SerieKey = unInv.SerieKey;
-                        unInvHlp.Costo = unInv.Costo;
+                        unaAdqModif.unosInventariosAsoc.Clear();
+                        unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
+                        InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
+                        unosInventariosHlp.Clear();
+                        foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
+                        {
+                            HLPBienInventario unInvHlp = new HLPBienInventario();
+                            unInvHlp.IdInventario = unInv.IdInventario;
+                            unInvHlp.DescripBien = unInv.deBien.DescripBien;
+                            unInvHlp.DescripMarca = unInv.deBien.unaMarca.DescripMarca;
+                            unInvHlp.DescripModeloVersion = unInv.deBien.unModelo.DescripModeloVersion;
+                            unInvHlp.SerieKey = unInv.SerieKey;
+                            unInvHlp.Costo = unInv.Costo;
 
-                        unosInventariosHlp.Add(unInvHlp);
+                            unosInventariosHlp.Add(unInvHlp);
+                        }
+
+                        GrillaInventarios.DataSource = null;
+                        GrillaInventarios.DataSource = unosInventariosHlp;
+                        FormatearGrillaInventarios();
+                        flowBienesAAdquirir.Visible = false;
+                        flowBienesAAdquirir.Controls.Clear();
+                        GrillaBienesAAdquirir.DataSource = null;
+
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
+                        DialogResult = DialogResult.OK;
                     }
-
-                    GrillaInventarios.DataSource = null;
-                    GrillaInventarios.DataSource = unosInventariosHlp;
-                    FormatearGrillaInventarios();
-                    flowBienesAAdquirir.Visible = false;
-                    flowBienesAAdquirir.Controls.Clear();
-                    GrillaBienesAAdquirir.DataSource = null;
-
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
-                    DialogResult = DialogResult.OK;
                 }
             }
             catch (Exception es)
@@ -743,14 +747,14 @@ namespace ARTEC.GUI
                     flowBienesAAdquirir.Visible = false;
                     flowBienesAAdquirir.Controls.Clear();
                     GrillaBienesAAdquirir.DataSource = null;
-                    GrillaBienesAAdquirir.CellClick -= new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
-                    unAgregarInventarioCU.unBtnAgregar.Click -= new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
+                    //GrillaBienesAAdquirir.CellClick -= new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
+                    //unAgregarInventarioCU.unBtnAgregar.Click -= new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
 
                     GrillaBienesAAdquirir.DataSource = null;
                     GrillaBienesAAdquirir.DataSource = LisAUXDetalles;
                     flowBienesAAdquirir.Controls.Add(GrillaBienesAAdquirir);
-                    GrillaBienesAAdquirir.CellClick += new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
-                    unAgregarInventarioCU.unBtnAgregar.Click += new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
+                    //GrillaBienesAAdquirir.CellClick += new DataGridViewCellEventHandler(this.GrillaBienesAAdquirir_CellClick);
+                    //unAgregarInventarioCU.unBtnAgregar.Click += new EventHandler(this.unAgregarInventarioCU_unBtnAgregar_Click);
                     flowBienesAAdquirir.Visible = true;
                     GrillaBienesAAdquirir.AutoSize = true;
                     GrillaBienesAAdquirir.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -782,25 +786,34 @@ namespace ARTEC.GUI
 
             try
             {
-                foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
-                    unosEstadosInv.Add(ManagerInventario.InventarioTraerEstadoPorIdInventario(unInven.IdInventario));
+                    foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
+                    {
+                        unosEstadosInv.Add(ManagerInventario.InventarioTraerEstadoPorIdInventario(unInven.IdInventario));
+                    }
+                    if (unosEstadosInv.Any(X => X.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado))
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados").Texto);
+                    else
+                    {
+                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                        if (resmbox == DialogResult.Yes)
+                        {
+                            if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
+                            {
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
+                                DialogResult = DialogResult.No;
+                            }
+                        }
+                        else
+                            return;
+                    }
                 }
-                if (unosEstadosInv.Any(X => X.IdEstadoInventario == (int)EstadoInventario.EnumEstadoInventario.Entregado))
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La adquisición no puede ser eliminada porque contiene inventarios que ya fueron asignados").Texto);
                 else
                 {
-                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                    if (resmbox == DialogResult.Yes)
-                    {
-                        if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
-                        {
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAdqModif.IdAdquisicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
-                            DialogResult = DialogResult.No;
-                        }
-                    }
-                    else
-                        return;
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Adquisición no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada").Texto);
                 }
 
             }

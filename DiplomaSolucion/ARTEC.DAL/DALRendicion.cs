@@ -254,7 +254,7 @@ namespace ARTEC.DAL
 
 
 
-        public void RendicionEliminar(int IdRendicion)
+        public void RendicionEliminar(int IdRendicion, Partida unaPartida)
         {
             SqlParameter[] parametersRenEliminar = new SqlParameter[]
 			{
@@ -266,6 +266,19 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "RendicionEliminar", parametersRenEliminar);
+
+                //Colocar en estado Adquirido a todos los detalles (Revierte el estado)
+                foreach (PartidaDetalle unaParDet in unaPartida.unasPartidasDetalles)
+                {
+                    SqlParameter[] parametersDetSolicRendido = new SqlParameter[]
+			        {
+                        new SqlParameter("@UIDSolicDetalle", unaParDet.SolicDetalleAsociado.UIDSolicDetalle),
+                        new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido)
+			        };
+
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "SolicDetallePorUIDUpdateEstado", parametersDetSolicRendido);
+                }
+
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 if (FilasAfectadas == 0)
                     throw new Exception();

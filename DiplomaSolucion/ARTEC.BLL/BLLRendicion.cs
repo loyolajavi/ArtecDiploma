@@ -80,13 +80,13 @@ namespace ARTEC.BLL
             
         }
 
-        public void RendicionEliminar(Rendicion unaRendicion)
+        public void RendicionEliminar(Rendicion unaRendicion, Partida unaPartida)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Rendicion Eliminar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                GestorRendicion.RendicionEliminar(unaRendicion.IdRendicion);
+                GestorRendicion.RendicionEliminar(unaRendicion.IdRendicion, unaPartida);
             }
             catch (Exception es)
             {

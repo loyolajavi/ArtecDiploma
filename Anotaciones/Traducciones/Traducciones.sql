@@ -577,6 +577,12 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor inf
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'El inventario no puede ser modificado porque ya fue asignado', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'El inventario no puede ser modificado porque ya fue asignado', N'The inventory can not be modified because it has already been assigned', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Adquisición no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', N'La Adquisición no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Adquisición no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', N'The purchase can not be deleted because the associated request is finished or cancelled', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Adquisición: ', N'Adquisición: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Adquisición: ', N'Purchase: ', 2)
+
 --AGENTE CREAR
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agente creado correctamente', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Agente creado correctamente', N'Agent created successfully', 2)

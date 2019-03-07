@@ -1143,21 +1143,23 @@ namespace ARTEC.GUI
                         }
                     }
                     else
-                    {
-                        BLLPolitica ManagerPolitica = new BLLPolitica();
-                        if (ManagerPolitica.VerificarPolitica(unaSolicitud.laDependencia.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
-                        {
-                            AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                        }
-                        else
-                        {
-                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                            if (resmbox == DialogResult.Yes)
-                            {
-                                AgregarDetalleConfirmado(ref unDetalleSolicitud);
-                            }
-                        }
-                    }
+                        AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                    //else
+                    //{
+                        //BLLPolitica ManagerPolitica = new BLLPolitica();
+                        //if (ManagerPolitica.VerificarPolitica(unaSolicitud.laDependencia.IdDependencia, unDetalleSolicitud.unaCategoria.IdCategoria, unDetalleSolicitud.Cantidad))
+                        //{
+                            //AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                        //}
+                        //else
+                        //{
+                            //DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje1").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                            //if (resmbox == DialogResult.Yes)
+                            //{
+                                //AgregarDetalleConfirmado(ref unDetalleSolicitud);
+                            //}
+                        //}
+                    //}
                 }
             }
 

@@ -340,7 +340,7 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        ManagerRendicion.RendicionEliminar(unaRendicionSelec);
+                        ManagerRendicion.RendicionEliminar(unaRendicionSelec, unaPartida);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.OK;
                 }

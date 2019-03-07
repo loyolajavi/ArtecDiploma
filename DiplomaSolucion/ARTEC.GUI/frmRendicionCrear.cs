@@ -28,6 +28,7 @@ namespace ARTEC.GUI
         List<GrillaRendicion> ListaMultiGrillaRendicion = new List<GrillaRendicion>();
         List<HLPInvRendicion> HLPListaInventariosRend = new List<HLPInvRendicion>();
         Partida unaPartida = new Partida();
+        Solicitud DatosSolic;
 
         public frmRendicionCrear()
         {
@@ -101,7 +102,6 @@ namespace ARTEC.GUI
 
                 //TraerDatosSolicitud
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                Solicitud DatosSolic;
                 DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(Int32.Parse(txtNroPart.Text));
 
                 if (unaPartida != null && unaPartida.IdPartida > 0)
@@ -195,29 +195,38 @@ namespace ARTEC.GUI
         {
             try
             {
-                int IdRendRes = 0;
-                if (validlblNroPartida.Validate())
+                BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(DatosSolic.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
-                    unaRendicion.FechaRen = DateTime.Today;
-                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
-                    if (IdRendRes == 0)
+                    int IdRendRes = 0;
+                    if (validlblNroPartida.Validate())
                     {
-                        IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
-                        if (IdRendRes > 0)
-                            DocumentoRendicionCrear(IdRendRes);
-                    }
-                    else
-                    {
-                        DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                        if (resmbox == DialogResult.Yes)
+                        unaRendicion.FechaRen = DateTime.Today;
+                        IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                        if (IdRendRes == 0)
                         {
-                            unaRendicion.IdRendicion = IdRendRes;
-                            ManagerRendicion.RendicionModificar(unaRendicion);
-                            DocumentoRendicionCrear(IdRendRes);
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
-                            this.Close();
+                            IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
+                            if (IdRendRes > 0)
+                                DocumentoRendicionCrear(IdRendRes);
+                        }
+                        else
+                        {
+                            DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada ya fue rendida con el Nro de Rendicion: ").Texto + IdRendRes.ToString() + BLLServicioIdioma.MostrarMensaje(". Desea actualizarla?").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                            if (resmbox == DialogResult.Yes)
+                            {
+                                unaRendicion.IdRendicion = IdRendRes;
+                                ManagerRendicion.RendicionModificar(unaRendicion);
+                                DocumentoRendicionCrear(IdRendRes);
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
+                                this.Close();
+                            }
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Solicitud se encuentra Finalizada o Cancelada").Texto);
                 }
             }
             catch (Exception es)
