@@ -53,15 +53,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool InventarioModificar(Inventario unInvModif)
+        public void InventarioModificar(Inventario unInvModif)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Inventario Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorInventario.InventarioModificar(unInvModif))
-                    return true;
-                return false;
+                GestorInventario.InventarioModificar(unInvModif);
             }
             catch (Exception es)
             {

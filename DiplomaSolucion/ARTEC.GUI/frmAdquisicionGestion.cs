@@ -845,7 +845,7 @@ namespace ARTEC.GUI
             }
             else
             {
-                frmInventarioModif unFrmInventarioModif = new frmInventarioModif(unaAdqModif.unosInventariosAsoc[e.RowIndex]);
+                frmInventarioModif unFrmInventarioModif = new frmInventarioModif(unaAdqModif.unosInventariosAsoc[e.RowIndex], unaAdqModif.MontoCompra);
                 ResFrmInventarioModif = unFrmInventarioModif.ShowDialog();
 
                 if (ResFrmInventarioModif == DialogResult.OK)

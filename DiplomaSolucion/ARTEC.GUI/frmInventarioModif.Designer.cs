@@ -45,17 +45,15 @@ namespace ARTEC.GUI
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.txtSerialMaster = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.cboEstadoInv = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblSerial = new DevComponents.DotNetBar.LabelX();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.cboDeposito = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.lblDeposito = new DevComponents.DotNetBar.LabelX();
             this.vldFrmInventarioModif = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,20 +233,13 @@ namespace ARTEC.GUI
             // 
             this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnModificar.Location = new System.Drawing.Point(201, 156);
+            this.btnModificar.Location = new System.Drawing.Point(201, 136);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(86, 25);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 72;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Inventario Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // txtSerialMaster
@@ -267,20 +258,6 @@ namespace ARTEC.GUI
             this.txtSerialMaster.Size = new System.Drawing.Size(121, 22);
             this.txtSerialMaster.TabIndex = 73;
             // 
-            // cboEstadoInv
-            // 
-            this.cboEstadoInv.DisplayMember = "Text";
-            this.cboEstadoInv.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboEstadoInv.Enabled = false;
-            this.cboEstadoInv.ForeColor = System.Drawing.Color.Black;
-            this.cboEstadoInv.FormattingEnabled = true;
-            this.cboEstadoInv.ItemHeight = 16;
-            this.cboEstadoInv.Location = new System.Drawing.Point(109, 119);
-            this.cboEstadoInv.Name = "cboEstadoInv";
-            this.cboEstadoInv.Size = new System.Drawing.Size(121, 22);
-            this.cboEstadoInv.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cboEstadoInv.TabIndex = 75;
-            // 
             // lblSerial
             // 
             // 
@@ -293,19 +270,6 @@ namespace ARTEC.GUI
             this.lblSerial.Size = new System.Drawing.Size(91, 17);
             this.lblSerial.TabIndex = 74;
             this.lblSerial.Text = "lblSerial";
-            // 
-            // labelX3
-            // 
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Font = new System.Drawing.Font("Meiryo", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX3.Location = new System.Drawing.Point(12, 124);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(91, 17);
-            this.labelX3.TabIndex = 76;
-            this.labelX3.Text = "lblEstado";
             // 
             // cboDeposito
             // 
@@ -339,15 +303,6 @@ namespace ARTEC.GUI
             this.vldFrmInventarioModif.ErrorProvider = this.errorProvider1;
             this.vldFrmInventarioModif.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
             // requiredFieldValidator1
             // 
             this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
@@ -364,17 +319,24 @@ namespace ARTEC.GUI
             this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
             // frmInventarioModif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 186);
+            this.ClientSize = new System.Drawing.Size(493, 171);
             this.Controls.Add(this.cboDeposito);
             this.Controls.Add(this.lblDeposito);
             this.Controls.Add(this.txtSerialMaster);
-            this.Controls.Add(this.cboEstadoInv);
             this.Controls.Add(this.lblSerial);
-            this.Controls.Add(this.labelX3);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.lblSerieKey);
             this.Controls.Add(this.txtSerieKey);
@@ -414,9 +376,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtBien;
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.Controls.TextBoxX txtSerialMaster;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cboEstadoInv;
         private DevComponents.DotNetBar.LabelX lblSerial;
-        private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cboDeposito;
         private DevComponents.DotNetBar.LabelX lblDeposito;
         private DevComponents.DotNetBar.Validator.SuperValidator vldFrmInventarioModif;

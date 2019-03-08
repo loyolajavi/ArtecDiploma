@@ -215,14 +215,16 @@ namespace ARTEC.DAL
 
 
 
-        public bool InventarioModificar(Inventario unInvModif)
+        public void InventarioModificar(Inventario unInvModif)
         {
             SqlParameter[] parametersInvModif = new SqlParameter[]
 			{
                 new SqlParameter("@IdInventario", unInvModif.IdInventario),
                 new SqlParameter("@IdBien", unInvModif.IdBienEspecif),
                 new SqlParameter("@SerieKey", unInvModif.SerieKey),
-                new SqlParameter("@Costo", unInvModif.Costo)
+                new SqlParameter("@Costo", unInvModif.Costo),
+                new SqlParameter("@MontoCompra", unInvModif.unaAdquisicion.MontoCompra),
+                new SqlParameter("@IdAdquisicion", unInvModif.unaAdquisicion.IdAdquisicion)
 			};
 
             try
@@ -231,7 +233,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "InventarioModificar", parametersInvModif);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {

@@ -32,16 +32,18 @@ namespace ARTEC.GUI
         BLLInventario ManagerInventario = new BLLInventario();
         Marca unaMarca;
         int IdBienAsociado;
+        decimal MontoCompraActual;
 
         public frmInventarioModif()
         {
             InitializeComponent();
         }
 
-        public frmInventarioModif(Inventario unInvSelec)
+        public frmInventarioModif(Inventario unInvSelec, decimal MontoCompra)
         {
             InitializeComponent();
             unInventarioModif = unInvSelec;
+            MontoCompraActual = MontoCompra;
         }
 
         private void frmInventarioModif_Load(object sender, EventArgs e)
@@ -109,18 +111,6 @@ namespace ARTEC.GUI
                 cboDeposito.DisplayMember = "NombreDeposito";
                 cboDeposito.ValueMember = "IdDeposito";
 
-                //Traer EstadosInventario
-                BLLEstadoInventario ManagerEstadoInventario = new BLLEstadoInventario();
-                List<EstadoInventario> unosEstadoInventario = new List<EstadoInventario>();
-                cboEstadoInv.DataSource = null;
-                unosEstadoInventario = ManagerEstadoInventario.EstadoInvTraerTodos();
-                cboEstadoInv.DataSource = unosEstadoInventario;
-                cboEstadoInv.DisplayMember = "DescripEstadoInv";
-                cboEstadoInv.ValueMember = "IdEstadoInventario";
-
-
-                //cboDeposito.SelectedValue = unInventarioModif.unDeposito.IdDeposito;
-                //cboEstadoInv.SelectedValue = unInventarioModif.unEstado.IdEstadoInventario;
 
             }
             catch (Exception es)
@@ -156,16 +146,19 @@ namespace ARTEC.GUI
                 unInvModif.deBien.unaMarca = cboMarca.SelectedItem as Marca;
                 unInvModif.deBien.unModelo = cboModelo.SelectedItem as ModeloVersion;
                 unInvModif.SerieKey = txtSerieKey.Text;
+                //Actualiza MontoCompra
+                unInvModif.unaAdquisicion.MontoCompra += MontoCompraActual;
+                unInvModif.unaAdquisicion.MontoCompra -= unInvModif.Costo;
                 unInvModif.Costo = decimal.Parse(txtCosto.Text);
+                unInvModif.unaAdquisicion.MontoCompra += unInvModif.Costo;
                 unInvModif.IdBienEspecif = IdBienAsociado;
+                
 
                 if ((int)cboMarca.SelectedValue > 0 & (int)cboModelo.SelectedValue > 0)
                 {
-                    if (ManagerInventario.InventarioModificar(unInvModif))
-                    {
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
-                        DialogResult = DialogResult.OK;
-                    }
+                    ManagerInventario.InventarioModificar(unInvModif);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
+                    DialogResult = DialogResult.OK;
                 }
             }
             catch (Exception es)
