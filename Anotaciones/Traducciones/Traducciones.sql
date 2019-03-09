@@ -641,6 +641,9 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un erro
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N', por favor informe del error Nro ', N', please report error number ', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Asignación no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', N'La Asignación no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'La Asignación no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada', N'The Assignment can not be deleted', 2)
+
 --BIEN ASIGNAR
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione al menos un bien a asignar', N'Por favor seleccione al menos un bien a asignar', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Por favor seleccione al menos un bien a asignar', N'Please select at least one asset to be assigned', 2)

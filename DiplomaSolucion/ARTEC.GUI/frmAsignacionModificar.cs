@@ -371,8 +371,7 @@ namespace ARTEC.GUI
                 InvQuitarMod = InventariosAgregarBKP.Where(d => !InventariosAgregar.Any(a => a.IdInventario == d.IdInventario)).ToList();
                 InvAgregarMod = InventariosAgregar.Where(d => !InventariosAgregarBKP.Any(a => a.IdInventario == d.IdInventario)).ToList();
 
-                if (ManagerAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod))
-                {
+                ManagerAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod);
                     InventariosAgregar.Clear();
                     InventariosAgregar = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsignacionSelec.IdAsignacion);
                     InventariosAgregarBKP = InventariosAgregar.ToList();
@@ -447,7 +446,6 @@ namespace ARTEC.GUI
                     }
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                     DialogResult = DialogResult.OK;
-                }
             }
             catch (Exception es)
             {
@@ -460,15 +458,24 @@ namespace ARTEC.GUI
         {
             try
             {
-                DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
-                if (resmbox == DialogResult.Yes)
-                    if (ManagerAsignacion.AsignacionEliminar(unaAsignacionModif))
+                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
+                 int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAsignacionSelec.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
+                {
+                    DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
+                    if (resmbox == DialogResult.Yes)
                     {
+                        ManagerAsignacion.AsignacionEliminar(unaAsignacionModif);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.No;
                     }
                     else
                         return;
+                }
+                else
+                {
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La Asignación no puede eliminarse ya que la Solicitud asociada se encuentra Finalizada o Cancelada").Texto);
+                }
             }
             catch (Exception es)
             {

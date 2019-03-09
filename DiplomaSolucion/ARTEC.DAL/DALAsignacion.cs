@@ -247,7 +247,7 @@ namespace ARTEC.DAL
 
 
 
-        public bool AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        public void AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
         {
             DALEstadoInventario GestorEstadoInventario = new DALEstadoInventario();
             DALInventario GestorInventario = new DALInventario();
@@ -360,7 +360,6 @@ namespace ARTEC.DAL
                     }
                 }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {
@@ -421,7 +420,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool AsignacionEliminar(Asignacion unaAsignacionModif)
+        public void AsignacionEliminar(Asignacion unaAsignacionModif)
         {
             try
             {
@@ -468,9 +467,8 @@ namespace ARTEC.DAL
 
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AsignacionEliminar", parametersAsigEliminar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
+                if (FilasAfectadas == 0)
+                    throw new Exception();
             }
             catch (Exception es)
             {

@@ -70,15 +70,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
+        public void AsignacionModificar(Asignacion unaAsignacionModif, List<Inventario> InvQuitarMod, List<Inventario> InvAgregarMod)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod))
-                    return true;
-                return false;
+                GestorAsignacion.AsignacionModificar(unaAsignacionModif, InvQuitarMod, InvAgregarMod);
             }
             catch (Exception es)
             {
@@ -98,15 +96,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool AsignacionEliminar(Asignacion unaAsignacionModif)
+        public void AsignacionEliminar(Asignacion unaAsignacionModif)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Asignacion Eliminar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorAsignacion.AsignacionEliminar(unaAsignacionModif))
-                    return true;
-                return false;
+                GestorAsignacion.AsignacionEliminar(unaAsignacionModif);
             }
             catch (Exception es)
             {
