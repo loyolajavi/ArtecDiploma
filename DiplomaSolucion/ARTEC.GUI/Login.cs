@@ -145,13 +145,13 @@ namespace ARTEC.GUI
                         if (unManagerUsuario.UsuarioTraerPorLogin(txtNombreUsuario.Text, ServicioSecurizacion.Encriptar(ServicioSecurizacion.AplicarHash(txtPass.Text))))
                         {
                             this.Close();
-                            ServicioLog.CrearLog("Login", "Ingreso Correcto");
+                            ServicioLog.CrearLog("Login", BLLServicioIdioma.MostrarMensaje("Ingreso Correcto").Texto);
                             DialogResult = DialogResult.OK;
                         }
                         else
                         {
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
-                            ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
+                            ServicioLog.CrearLog("Login", BLLServicioIdioma.MostrarMensaje("Ingreso Incorrecto").Texto);
                         }
                     }
                     else
@@ -161,7 +161,7 @@ namespace ARTEC.GUI
                             if (FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos.Exists(x => x.NombreIFamPat == "Administracion Total" | x.NombreIFamPat == "Administracion Sistema"))
                             {
                                 this.Close();
-                                ServicioLog.CrearLog("Login", "Ingreso Correcto");
+                                ServicioLog.CrearLog("Login", BLLServicioIdioma.MostrarMensaje("Ingreso Correcto").Texto);
                                 DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Existen inconsistencias en la Base de Datos ¿Desea abrir el menú para restaurar la misma? De lo contrario se redirigirá al menú para regenerar los Digitos Verificadores").Texto, BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                                 if (resmbox == DialogResult.Yes)
                                 {
@@ -184,7 +184,7 @@ namespace ARTEC.GUI
                         else
                         {
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mensaje2").Texto);
-                            ServicioLog.CrearLog("Login", "Ingreso Incorrecto");
+                            ServicioLog.CrearLog("Login", BLLServicioIdioma.MostrarMensaje("Ingreso Incorrecto").Texto);
                         }
                         
                     }

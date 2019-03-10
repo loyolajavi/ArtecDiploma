@@ -1196,8 +1196,85 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la bú
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error loading the search screen, please report error number ', 2)
 
+--LOGS----------------------------------------------------------------------
+------------------------------------------------------------------------------
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Realizar backup', N'Realizar backup', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Realizar backup', N'Backup', 2)
 
---En todos los MessageBox.Show("XXX");
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Restaurar BD', N'Restaurar BD', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Restaurar BD', N'Restore', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Restauración realizada correctamente', N'Restauración realizada correctamente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Restauración realizada correctamente', N'Restoration performed correctly', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Adquisición', N'Modificar Adquisición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Adquisición', N'Modify Acquisition', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Adquisición', N'Eliminar Adquisición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Adquisición', N'Delete Acquisition', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Agente', N'Modificar Agente', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Agente', N'Modify Agent', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Adquisición', N'Crear Adquisición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Adquisición', N'Create Acquisition', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Categoría', N'Crear Categoría', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Categoría', N'Create Category', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Categoría', N'Modificar Categoría', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Categoría', N'Modify Category', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Categoría', N'Eliminar Categoría', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Categoría', N'Delete Category', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Reactivar Categoría', N'Reactivar Categoría', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Reactivar Categoría', N'Reactivate Category', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Recomponer DV', N'Recomponer DV', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Recomponer DV', N'Recompose DV', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'DV recompuesto', N'DV recompuesto', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'DV recompuesto', N'DV recomposed', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Familia', N'Crear Familia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Crear Familia', N'Create family', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Familia', N'Modificar Familia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Familia', N'Modify Family', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Familia', N'Eliminar Familia', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Familia', N'Delete family', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Inventario: ', N'Inventario: ', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Inventario: ', N'Inventory: ', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Proveedor', N'Modificar Proveedor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Proveedor', N'Modify supplier', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Proveedor', N'Eliminar Proveedor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Proveedor', N'Delete Supplier', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Reactivar Proveedor', N'Reactivar Proveedor', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Reactivar Proveedor', N'Reactivate Supplier', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Rendición', N'Eliminar Rendición', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Rendición', N'Delete Yield', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Solicitud', N'Eliminar Solicitud', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Eliminar Solicitud', N'Delete Apply', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Solicitud', N'Modificar Solicitud', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Modificar Solicitud', N'Modify Apply', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Correcto', N'Ingreso Correcto', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Correcto', N'Successful Entry', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Incorrecto', N'Ingreso Incorrecto', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Incorrecto', N'Incorrect Entry', 2)
+
+--En casi todos los CrearLog();
+--Los que son CrearLog(es,   .. No hay que modificarlo ni poner texto en traducciones 
 --Delante de las comillas va:
 BLLServicioIdioma.MostrarMensaje(
 --Atras de las comillas va:

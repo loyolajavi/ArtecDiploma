@@ -311,7 +311,7 @@ namespace ARTEC.GUI
 
                 if (ManagerFamilia.FamiliaCrear(nuevaFamilia))
                 {
-                    ServicioLog.CrearLog("Crear Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + nuevaFamilia.NombreIFamPat);
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Familia").Texto, BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + nuevaFamilia.NombreIFamPat);
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia creada correctamente").Texto);
 
                     PermisosTodos = ManagerFamilia.PermisosTraerTodos();
@@ -392,7 +392,7 @@ namespace ARTEC.GUI
                     ListarPermisos(PermisosTodos, treeTodos);
                     cboFamilia.SelectedIndex = Seleccionado;
                     LisAuxAsigBKP = LisAuxAsig.ToList();
-                    ServicioLog.CrearLog("Modificar Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + AModifFamilia.IdIFamPat.ToString());
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Familia").Texto, BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + AModifFamilia.IdIFamPat.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
@@ -485,7 +485,7 @@ namespace ARTEC.GUI
                             ListarPermisos(PermisosTodos, treeTodos);
                             ListarPermisos(LisAuxDisp, treeDisponibles);
                             ListarPermisos(LisAuxAsig, treeAsignados);
-                            ServicioLog.CrearLog("Eliminar Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + FamiliaLog.NombreIFamPat);
+                            ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Familia").Texto, BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + FamiliaLog.NombreIFamPat);
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia eliminada correctamente").Texto);
                         }
                     }

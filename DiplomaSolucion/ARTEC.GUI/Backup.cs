@@ -110,7 +110,7 @@ namespace ARTEC.GUI
                 {
                     if (ServicioBackup.Respaldar(txtNombreRespaldar.Text, txtDestino.Text, txtObservaciones.Text))
                     {
-                        ServicioLog.CrearLog("Realizar backup", "Backup realizado correctamente");
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Realizar backup").Texto, BLLServicioIdioma.MostrarMensaje("Backup realizado correctamente").Texto);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Backup realizado correctamente").Texto);
                     }
                     else
@@ -137,7 +137,7 @@ namespace ARTEC.GUI
                 {
                     if (ServicioBackup.Restaurar(txtNombreRestaurar.Text, txtUbicacion.Text))
                     {
-                        ServicioLog.CrearLog("Restaurar BD", "Restauración realizada correctamente");
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Restaurar BD").Texto, BLLServicioIdioma.MostrarMensaje("Restauración realizada correctamente").Texto);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Se restauró la base de datos correctamente, por favor inicie nuevamente la aplicación").Texto);
                         //Para que no aparezca el login al sistema si no se restauró la BD
                         DialogResult = DialogResult.OK;

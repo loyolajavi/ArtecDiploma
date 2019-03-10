@@ -157,7 +157,7 @@ namespace ARTEC.GUI
                 if ((int)cboMarca.SelectedValue > 0 & (int)cboModelo.SelectedValue > 0)
                 {
                     ManagerInventario.InventarioModificar(unInvModif);
-                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Inventario").Texto, "Inventario: " + unInvModif.IdInventario.ToString());
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Inventario").Texto, BLLServicioIdioma.MostrarMensaje("Inventario: ").Texto + unInvModif.IdInventario.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                     DialogResult = DialogResult.OK;
                 }

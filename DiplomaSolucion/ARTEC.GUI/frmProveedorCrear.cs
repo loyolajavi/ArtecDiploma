@@ -701,7 +701,7 @@ namespace ARTEC.GUI
                 TelsAgregarBKP = TelsAgregar.ToList();
                 DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
                 DirAgregarBKP = DirAgregar.ToList();
-                ServicioLog.CrearLog("Modificar Proveedor", BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.IdProveedor.ToString());
+                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Proveedor").Texto, BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.IdProveedor.ToString());
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)
@@ -859,7 +859,7 @@ namespace ARTEC.GUI
                         GrillaProductos.Enabled = false;
                         GrillaTelefonos.Enabled = false;
                         GrillaDirecciones.Enabled = false;
-                        ServicioLog.CrearLog("Eliminar Proveedor", BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv);
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Proveedor").Texto, BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
                     }
                 }
@@ -896,7 +896,7 @@ namespace ARTEC.GUI
                     GrillaProductos.Enabled = true;
                     GrillaTelefonos.Enabled = true;
                     GrillaDirecciones.Enabled = true;
-                    ServicioLog.CrearLog("Reactivar Proveedor", BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.IdProveedor.ToString());
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Reactivar Proveedor").Texto, BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.IdProveedor.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
                 }
             }

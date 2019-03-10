@@ -221,7 +221,7 @@ namespace ARTEC.GUI
                                 ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
                             }
                         }
-                        ServicioLog.CrearLog("Crear Adquisición", BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + IdAdq.ToString());
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Adquisición").Texto, BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + IdAdq.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + IdAdq + BLLServicioIdioma.MostrarMensaje(" registrada correctamente").Texto);
                         this.Close();
                     }

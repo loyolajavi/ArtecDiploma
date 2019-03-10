@@ -1483,7 +1483,7 @@ namespace ARTEC.GUI
                 {
                     if (ManagerSolicitud.SolicitudCancelar(unaSolicitud))
                     {
-                        ServicioLog.CrearLog("Eliminar Solicitud", BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Solicitud").Texto, BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud cancelada correctamente").Texto);
                         //Grisear todo
                         cboEstadoSolicitud.SelectedValue = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
@@ -1593,7 +1593,7 @@ namespace ARTEC.GUI
                         if (RutaCompletaAdjuntoGuardado == null)
                         {
                             FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
-                            ServicioLog.CrearLog("Modificar Solicitud", BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
+                            ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Solicitud").Texto, BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                         }
                         

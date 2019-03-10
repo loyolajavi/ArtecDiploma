@@ -343,7 +343,7 @@ namespace ARTEC.GUI
                     if (resmbox == DialogResult.Yes)
                     {
                         ManagerRendicion.RendicionEliminar(unaRendicionSelec, unaPartida);
-                        ServicioLog.CrearLog("Eliminar Rendición", BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString());
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Rendición").Texto, BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.OK;
                     }
