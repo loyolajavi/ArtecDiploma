@@ -163,7 +163,7 @@ namespace ARTEC.GUI
                         else
                         {
                             LimpiarFormularioRendicion();
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada aún tiene bienes pendientes de adquisición").Texto);
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada no puede rendirse").Texto);
                         }
                     }
                     else
