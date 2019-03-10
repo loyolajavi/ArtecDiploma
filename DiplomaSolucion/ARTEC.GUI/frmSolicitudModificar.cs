@@ -1592,11 +1592,12 @@ namespace ARTEC.GUI
                     {
                         if (RutaCompletaAdjuntoGuardado == null)
                             FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
-                            ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Solicitud").Texto, BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
-                        }
-                        
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Solicitud").Texto, BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                     }
+
+                }
+            }
             //catch (InvalidOperationException es)
             //{
             //    MessageBox.Show("Ocurrio un error al intentar modificar la solicitud, por favor informe del error Nro " + es.Data["IdLog"] + " del Log de Eventos");
