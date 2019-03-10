@@ -263,6 +263,7 @@ namespace ARTEC.GUI
                             unaPartida.NroPartida = txtNroPartAsignado.Text;
 
                             ManagerPartida.PartidaAsociar(unaPartida);
+                            ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Asociar Partida").Texto, BLLServicioIdioma.MostrarMensaje("Partida").Texto + " " + unaPartida.IdPartida.ToString());
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Partida Asociada correctamente").Texto);
                         }
                         

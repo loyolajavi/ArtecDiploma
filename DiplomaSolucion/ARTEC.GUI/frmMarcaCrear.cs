@@ -63,6 +63,7 @@ namespace ARTEC.GUI
                 NuevoBien.unaMarca = NuevaMarca;
                 NuevoBien.unModelo = NuevoModelo;
                 ManagerMarca.MarcaCrear(NuevoBien, IdTipoBien);
+                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Marca").Texto, BLLServicioIdioma.MostrarMensaje("Marca").Texto + " " + NuevaMarca.DescripMarca);
                 //Actualiza Marca y Modelo en frmBienRegistrar por Evento
                 this.EventoActualizarMarcaModelo(NuevoBien);
                 this.Close();

@@ -465,6 +465,7 @@ namespace ARTEC.GUI
                             }
                         }
                     }
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Partida").Texto, BLLServicioIdioma.MostrarMensaje("Partida").Texto + " " + unaPartida.IdPartida.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud de Partida modificada correctamente").Texto);
                     this.Close();
                 }

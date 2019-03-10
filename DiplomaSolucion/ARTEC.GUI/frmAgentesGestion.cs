@@ -171,6 +171,7 @@ namespace ARTEC.GUI
                 unAgente.ApellidoAgente = txtApellido.Text;
 
                 ManagerAgente.AgenteModificar(unAgente);
+                ServicioLog.CrearLog("Modificar Agente", BLLServicioIdioma.MostrarMensaje("Agente").Texto + " " + unAgente.NombreAgente + " " + unAgente.ApellidoAgente);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)

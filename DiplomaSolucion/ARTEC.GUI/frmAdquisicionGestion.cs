@@ -558,7 +558,7 @@ namespace ARTEC.GUI
                         flowBienesAAdquirir.Visible = false;
                         flowBienesAAdquirir.Controls.Clear();
                         GrillaBienesAAdquirir.DataSource = null;
-
+                        ServicioLog.CrearLog("Modificar Adquisición", BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + unaAdqModif.IdAdquisicion.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                         DialogResult = DialogResult.OK;
                     }
@@ -803,6 +803,7 @@ namespace ARTEC.GUI
                         {
                             if (ManagerAdquisicion.AdquisicionEliminar(unaAdqModif))
                             {
+                                ServicioLog.CrearLog("Eliminar Adquisición", BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + unaAdqModif.IdAdquisicion.ToString());
                                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Adquisición: ").Texto + unaAdqModif.IdAdquisicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                                 DialogResult = DialogResult.No;
                             }

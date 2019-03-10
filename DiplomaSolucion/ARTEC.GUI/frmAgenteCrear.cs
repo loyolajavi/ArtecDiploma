@@ -96,6 +96,7 @@ namespace ARTEC.GUI
                 NuevoAgente.unCargo.IdCargo = (int)cboCargo.SelectedValue;
                 NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
                 ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia);
+                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Agente").Texto, BLLServicioIdioma.MostrarMensaje("Agente").Texto + " " + NuevoAgente.NombreAgente + " " + NuevoAgente.ApellidoAgente);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Agente creado correctamente").Texto);
                 DialogResult = DialogResult.OK;
             }

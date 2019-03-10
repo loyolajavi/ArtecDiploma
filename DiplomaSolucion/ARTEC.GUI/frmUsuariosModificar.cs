@@ -433,6 +433,7 @@ namespace ARTEC.GUI
                     {
                         LisAuxAsig = ManagerUsuario.UsuarioTraerPermisos(unUsuario.IdUsuario);
                         LisAuxAsigBKP = LisAuxAsig.ToList();
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Usuario").Texto, BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                     }
                         
@@ -464,24 +465,23 @@ namespace ARTEC.GUI
                     }
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja el Usuario: ").Texto + unUsuario.NombreUsuario + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if(ManagerUsuario.UsuarioEliminar(unUsuario))
-                        {
-                            lblBaja.Visible = true;
-                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivarUs.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                                btnReactivarUs.Enabled = true;
-                            btnEliminarUsuario.Enabled = false;
-                            btnModifUsuario.Enabled = false;
-                            btnAgregar.Enabled = false;
-                            btnQuitar.Enabled = false;
-                            txtNomUs.Enabled = false;
-                            txtPass.Enabled = false;
-                            txtNombre.Enabled = false;
-                            txtApellido.Enabled = false;
-                            txtMail.Enabled = false;
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
-                        }
-                    else
-                        return;
+                    {
+                        ManagerUsuario.UsuarioEliminar(unUsuario);
+                        lblBaja.Visible = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivarUs.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnReactivarUs.Enabled = true;
+                        btnEliminarUsuario.Enabled = false;
+                        btnModifUsuario.Enabled = false;
+                        btnAgregar.Enabled = false;
+                        btnQuitar.Enabled = false;
+                        txtNomUs.Enabled = false;
+                        txtPass.Enabled = false;
+                        txtNombre.Enabled = false;
+                        txtApellido.Enabled = false;
+                        txtMail.Enabled = false;
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Usuario").Texto, BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario);
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
+                    }
                 }
                 else
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja un usuario primero debe buscarlo").Texto);
@@ -500,23 +500,21 @@ namespace ARTEC.GUI
             {
                 if (unUsuario != null && !string.IsNullOrWhiteSpace(unUsuario.NombreUsuario) && unUsuario.IdUsuario > 0)
                 {
-                    if (ManagerUsuario.UsuarioReactivar(unUsuario))
-                    {
-                        lblBaja.Visible = false;
-                        btnReactivarUs.Enabled = false;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminarUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                            btnEliminarUsuario.Enabled = true;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModifUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                            btnModifUsuario.Enabled = true;
-                        btnAgregar.Enabled = true;
-                        btnQuitar.Enabled = true;
-                        txtNomUs.Enabled = true;
-                        txtPass.Enabled = true;
-                        txtNombre.Enabled = true;
-                        txtApellido.Enabled = true;
-                        txtMail.Enabled = true;
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
-                    }
+                    ManagerUsuario.UsuarioReactivar(unUsuario);
+                    lblBaja.Visible = false;
+                    btnReactivarUs.Enabled = false;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminarUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                        btnEliminarUsuario.Enabled = true;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModifUsuario.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                        btnModifUsuario.Enabled = true;
+                    btnAgregar.Enabled = true;
+                    btnQuitar.Enabled = true;
+                    txtNomUs.Enabled = true;
+                    txtPass.Enabled = true;
+                    txtNombre.Enabled = true;
+                    txtApellido.Enabled = true;
+                    txtMail.Enabled = true;
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Reactivar Usuario").Texto + BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario);
                 }
             }
             catch (Exception es)

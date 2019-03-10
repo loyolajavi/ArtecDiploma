@@ -165,8 +165,9 @@ namespace ARTEC.GUI
                     unUsuario.Mail = txtMail.Text;
                     unUsuario.Permisos = LisAuxAsig;
                     unUsuario.IdiomaUsuarioActual = Idioma.unIdiomaActual;
-                    if(ManagerUsuario.UsuarioCrear(unUsuario))
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario creado correctamente").Texto);
+                    ManagerUsuario.UsuarioCrear(unUsuario);
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Usuarios").Texto, BLLServicioIdioma.MostrarMensaje("Usuario: ").Texto + unUsuario.NombreUsuario);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Usuario creado correctamente").Texto);
                 }
                 else
                 {

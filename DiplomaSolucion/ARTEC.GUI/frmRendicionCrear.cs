@@ -218,6 +218,7 @@ namespace ARTEC.GUI
                                 unaRendicion.IdRendicion = IdRendRes;
                                 ManagerRendicion.RendicionModificar(unaRendicion);
                                 DocumentoRendicionCrear(IdRendRes);
+                                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Rendición").Texto, BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicion.IdRendicion.ToString());
                                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
                                 this.Close();
                             }

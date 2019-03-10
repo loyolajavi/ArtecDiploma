@@ -282,6 +282,7 @@ namespace ARTEC.GUI
                             }
                         }
                     }
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Asignación").Texto, BLLServicioIdioma.MostrarMensaje("Asignacion: ").Texto + unaAsignacion.IdAsignacion.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignacion Creada correctamente").Texto);
                     this.Close();
                 }

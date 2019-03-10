@@ -491,7 +491,7 @@ namespace ARTEC.DAL
         }
 
 
-        public bool UsuarioCrear(Usuario unUsuario)
+        public void UsuarioCrear(Usuario unUsuario)
         {
             SqlParameter[] parametersUsCrear = new SqlParameter[]
 			{
@@ -523,14 +523,10 @@ namespace ARTEC.DAL
                 long ResAcum = ServicioDV.DVCalcularDVH(unUsuario);
                 if (ResAcum > 0)
                 {
-                    if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
-                    {
-                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                        return true;
-                    }
+                    ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario");
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                return false;
             }
             catch (Exception es)
             {
@@ -548,7 +544,7 @@ namespace ARTEC.DAL
 
 
 
-        public bool UsuarioEliminar(Usuario unUsuario, long unDVH)
+        public void UsuarioEliminar(Usuario unUsuario, long unDVH)
         {
             SqlParameter[] parametersUsEliminar = new SqlParameter[]
 			{
@@ -564,16 +560,9 @@ namespace ARTEC.DAL
                 long ResAcum = ServicioDV.DVCalcularDVH(unUsuario);
                 if (ResAcum > 0)
                 {
-                    if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
-                    {
-                        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                        return true;
-                    }
+                    ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario");
+                    FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 }
-                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                //if (FilasAfectadas > 0)
-                    //return true;
-                return false;
             }
             catch (Exception es)
             {
@@ -587,7 +576,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool UsuarioReactivar(Usuario unUsuario, long unDVH)
+        public void UsuarioReactivar(Usuario unUsuario, long unDVH)
         {
             SqlParameter[] parametersUsReactivar = new SqlParameter[]
 			{
@@ -606,13 +595,8 @@ namespace ARTEC.DAL
                     if (ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario"))
                     {
                         FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                        return true;
                     }
                 }
-                //FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                //if (FilasAfectadas > 0)
-                    //return true;
-                return false;
             }
             catch (Exception es)
             {

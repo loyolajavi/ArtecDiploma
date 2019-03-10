@@ -134,6 +134,7 @@ namespace ARTEC.GUI
                 nuevaDependencia.unTipoDep = cboTipoDep.SelectedItem as TipoDependencia;
                 nuevaDependencia.unosAgentes = AgentesLista;
                 ManagerDependencia.DependenciaCrear(nuevaDependencia);
+                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Dependencia").Texto, BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + nuevaDependencia.NombreDependencia);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia creada correctamente").Texto);
             }
             catch (Exception es)

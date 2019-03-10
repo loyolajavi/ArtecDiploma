@@ -274,6 +274,7 @@ namespace ARTEC.GUI
                 nuevaCategoria.unTipoBien = cboTipo.SelectedItem as TipoBien;
                 nuevaCategoria.LosProveedores = ProvsAgregar;
                 ManagerCategoria.CategoriaCrear(nuevaCategoria);
+                ServicioLog.CrearLog("Crear Categoría", BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + nuevaCategoria.DescripCategoria);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría creada correctamente").Texto);
                 btnLimpiar_Click(this, new EventArgs());
 
@@ -338,6 +339,7 @@ namespace ARTEC.GUI
                 ManagerCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod);
                 ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
                 ProvsAgregarBKP = ProvsAgregar.ToList();
+                ServicioLog.CrearLog("Modificar Categoría", BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)
@@ -369,6 +371,7 @@ namespace ARTEC.GUI
                         cboProveedor.Enabled = false;
                         cboTipo.Enabled = false;
                         GrillaProveedores.Enabled = false;
+                        ServicioLog.CrearLog("Eliminar Categoría", BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria);
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
                     }
                         
@@ -401,6 +404,7 @@ namespace ARTEC.GUI
                     cboProveedor.Enabled = true;
                     cboTipo.Enabled = true;
                     GrillaProveedores.Enabled = true;
+                    ServicioLog.CrearLog("Reactivar Categoría", BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria);
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                 }
             }

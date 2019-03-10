@@ -1483,6 +1483,7 @@ namespace ARTEC.GUI
                 {
                     if (ManagerSolicitud.SolicitudCancelar(unaSolicitud))
                     {
+                        ServicioLog.CrearLog("Eliminar Solicitud", BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud cancelada correctamente").Texto);
                         //Grisear todo
                         cboEstadoSolicitud.SelectedValue = (int)EstadoSolicitud.EnumEstadoSolicitud.Cancelada;
@@ -1589,20 +1590,13 @@ namespace ARTEC.GUI
                     //Guardo el archivo adjunto
                     if (unosAdjuntos.Count > 0)
                     {
-                        if(RutaCompletaAdjuntoGuardado == null)
+                        if (RutaCompletaAdjuntoGuardado == null)
+                        {
                             FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unosAdjuntosRutas.First(), @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Solicitud " + unaSolicitud.IdSolicitud.ToString() + ext);
-
-                        ////Adjuntos cotizaciones
-                        //foreach (SolicDetalle unDetSolic in unaSolicitud.unosDetallesSolicitud)
-                        //{
-                        //    foreach (Cotizacion unaCotiz in unDetSolic.unasCotizaciones)
-                        //    {
-                        //        string extCotiz = Path.GetExtension(unaCotiz.RutaOrigenAdjunto).ToLower();
-                        //        FRAMEWORK.Servicios.ManejoArchivos.CopiarArchivo(unaCotiz.RutaOrigenAdjunto, @FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + "Cotizacion " + unaCotiz.IdCotizacion.ToString() + extCotiz);
-                        //    } 
-                            
-                        //}
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
+                            ServicioLog.CrearLog("Modificar Solicitud", BLLServicioIdioma.MostrarMensaje("Solicitud Nro ").Texto + unaSolicitud.IdSolicitud.ToString());
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
+                        }
+                        
                     }
                     
                 }

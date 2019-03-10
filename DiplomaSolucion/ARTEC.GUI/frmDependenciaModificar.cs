@@ -308,6 +308,7 @@ namespace ARTEC.GUI
             FormatearGrillaAgentes();
 
             if(flagModificacion)
+                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Dependencia").Texto, BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + DepModif.NombreDependencia);
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia modificada correctamente").Texto);
 
             AgentesListaBKP = AgentesLista.Where(X => X.IdAgente > 0).ToList() as List<Agente>;

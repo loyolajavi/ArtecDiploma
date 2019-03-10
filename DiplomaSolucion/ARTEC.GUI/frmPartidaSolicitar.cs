@@ -431,6 +431,7 @@ namespace ARTEC.GUI
                 {
                     if (GenerarPartidaGlobal())
                     {
+                        ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Generar Partida").Texto, BLLServicioIdioma.MostrarMensaje("Partida").Texto + " " + nuevaPartida.IdPartida.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Solicitud de Partida generada correctamente").Texto);
                         this.Close();
                     }

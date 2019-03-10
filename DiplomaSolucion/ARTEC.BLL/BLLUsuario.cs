@@ -222,16 +222,14 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool UsuarioCrear(Usuario unUsuario)
+        public void UsuarioCrear(Usuario unUsuario)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Usuario Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 unUsuario.Activo = 1;
-                if (GestorUsuario.UsuarioCrear(unUsuario))
-                        return true;
-                return false;
+                GestorUsuario.UsuarioCrear(unUsuario);
             }
             catch (Exception es)
             {
@@ -239,7 +237,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool UsuarioEliminar(Usuario unUsuario)
+        public void UsuarioEliminar(Usuario unUsuario)
         {
             try
             {
@@ -250,10 +248,8 @@ namespace ARTEC.BLL
                 if (ResAcum > 0)
                 {
                     unUsuario.DVH = ResAcum;
-                    if (GestorUsuario.UsuarioEliminar(unUsuario, unUsuario.DVH))
-                        return true;
+                    GestorUsuario.UsuarioEliminar(unUsuario, unUsuario.DVH);
                 }
-                return false;
             }
             catch (Exception es)
             {
@@ -261,7 +257,7 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool UsuarioReactivar(Usuario unUsuario)
+        public void UsuarioReactivar(Usuario unUsuario)
         {
             try
             {
@@ -272,10 +268,8 @@ namespace ARTEC.BLL
                  if (ResAcum > 0)
                  {
                      unUsuario.DVH = ResAcum;
-                     if (GestorUsuario.UsuarioReactivar(unUsuario, unUsuario.DVH))
-                         return true;
+                     GestorUsuario.UsuarioReactivar(unUsuario, unUsuario.DVH);
                  }
-                return false;
             }
             catch (Exception es)
             {

@@ -444,6 +444,7 @@ namespace ARTEC.GUI
                             }
                         }
                     }
+                    ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Asignación").Texto, BLLServicioIdioma.MostrarMensaje("Asignacion: ").Texto + unaAsignacionModif.IdAsignacion.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada correctamente").Texto);
                     DialogResult = DialogResult.OK;
             }
@@ -466,6 +467,7 @@ namespace ARTEC.GUI
                     if (resmbox == DialogResult.Yes)
                     {
                         ManagerAsignacion.AsignacionEliminar(unaAsignacionModif);
+                        ServicioLog.CrearLog("Eliminar Asignación", BLLServicioIdioma.MostrarMensaje("Asignacion: ").Texto + unaAsignacionModif.IdAsignacion.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.No;
                     }

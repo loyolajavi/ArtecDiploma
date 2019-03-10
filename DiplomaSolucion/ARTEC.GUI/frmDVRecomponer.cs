@@ -28,6 +28,7 @@ namespace ARTEC.GUI
                 //Login frmLogin = new Login();
                 //frmLogin.FormClosed += (s, args) => this.Close();
                 //frmLogin.Show();
+                ServicioLog.CrearLog("Recomponer DV", "DV recompuesto");
                 this.Close();
             }
             catch (Exception es)

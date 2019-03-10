@@ -240,6 +240,7 @@ namespace ARTEC.GUI
                             unaRendicion.IdRendicion = IdRendRes;
                             ManagerRendicion.RendicionModificar(unaRendicion);
                             DocumentoRendicionCrear(IdRendRes);
+                            ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Modificar Rendición").Texto, BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicion.IdRendicion.ToString());
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición modificada correctamente").Texto);
                             this.Close();
                         }
@@ -340,9 +341,12 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Rendición: ").Texto + unaRendicionSelec.IdRendicion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
+                    {
                         ManagerRendicion.RendicionEliminar(unaRendicionSelec, unaPartida);
+                        ServicioLog.CrearLog("Eliminar Rendición", BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString());
                         MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicionSelec.IdRendicion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.OK;
+                    }
                 }
                 else
                 {

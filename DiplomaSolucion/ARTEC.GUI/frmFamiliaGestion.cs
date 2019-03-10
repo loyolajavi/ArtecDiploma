@@ -311,6 +311,7 @@ namespace ARTEC.GUI
 
                 if (ManagerFamilia.FamiliaCrear(nuevaFamilia))
                 {
+                    ServicioLog.CrearLog("Crear Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + nuevaFamilia.NombreIFamPat);
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia creada correctamente").Texto);
 
                     PermisosTodos = ManagerFamilia.PermisosTraerTodos();
@@ -391,6 +392,7 @@ namespace ARTEC.GUI
                     ListarPermisos(PermisosTodos, treeTodos);
                     cboFamilia.SelectedIndex = Seleccionado;
                     LisAuxAsigBKP = LisAuxAsig.ToList();
+                    ServicioLog.CrearLog("Modificar Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + AModifFamilia.IdIFamPat.ToString());
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
                 }
             }
@@ -463,6 +465,9 @@ namespace ARTEC.GUI
                         
                         if (ManagerFamilia.FamiliaEliminar((cboFamilia.SelectedItem as Familia)))
                         {
+                            //Resguardo el nombre de la familia eliminada para el log
+                            Familia FamiliaLog = cboFamilia.SelectedItem as Familia;
+
                             PermisosTodos = ManagerFamilia.PermisosTraerTodos();
                             PermisosCbo = PermisosTodos.Where(X => X.CantHijos > 0).ToList();
                             txtNombre.Clear();
@@ -480,6 +485,7 @@ namespace ARTEC.GUI
                             ListarPermisos(PermisosTodos, treeTodos);
                             ListarPermisos(LisAuxDisp, treeDisponibles);
                             ListarPermisos(LisAuxAsig, treeAsignados);
+                            ServicioLog.CrearLog("Eliminar Familia", BLLServicioIdioma.MostrarMensaje("Familia").Texto + " " + FamiliaLog.NombreIFamPat);
                             MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Familia eliminada correctamente").Texto);
                         }
                     }
