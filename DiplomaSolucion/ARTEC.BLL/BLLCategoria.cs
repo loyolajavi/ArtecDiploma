@@ -44,15 +44,13 @@ namespace ARTEC.BLL
             return GestorCategoria.CategoriaTraerTodosActivos();
         }
 
-        public bool CategoriaCrear(Categoria nuevaCategoria)
+        public void CategoriaCrear(Categoria nuevaCategoria)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Categoria Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorCategoria.CategoriaCrear(nuevaCategoria))
-                    return true;
-                return false;
+                GestorCategoria.CategoriaCrear(nuevaCategoria);
             }
             catch (Exception es)
             {
@@ -88,15 +86,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool CategoriaModificar(Categoria unaCategoria, List<Proveedor> ProvQuitarMod, List<Proveedor> ProvAgregarMod)
+        public void CategoriaModificar(Categoria unaCategoria, List<Proveedor> ProvQuitarMod, List<Proveedor> ProvAgregarMod)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Categoria Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if(GestorCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
-                    return true;
-                return false;
+                GestorCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod);
             }
             catch (Exception es)
             {
@@ -104,16 +100,14 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool CategoriaEliminar(Categoria unaCategoria)
+        public void CategoriaEliminar(Categoria unaCategoria)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Categoria Eliminar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 unaCategoria.Activo = 0;
-                if (GestorCategoria.CategoriaEliminar(unaCategoria.IdCategoria))
-                    return true;
-                return false;
+                GestorCategoria.CategoriaEliminar(unaCategoria.IdCategoria);
             }
             catch (Exception es)
             {
@@ -121,16 +115,14 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool CategoriaReactivar(Categoria unaCategoria)
+        public void CategoriaReactivar(Categoria unaCategoria)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Categoria Reactivar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 unaCategoria.Activo = 1;
-                if (GestorCategoria.CategoriaReactivar(unaCategoria.IdCategoria))
-                    return true;
-                return false;
+                GestorCategoria.CategoriaReactivar(unaCategoria.IdCategoria);
             }
             catch (Exception es)
             {

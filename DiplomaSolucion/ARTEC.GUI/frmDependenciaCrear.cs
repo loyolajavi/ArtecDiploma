@@ -133,8 +133,8 @@ namespace ARTEC.GUI
                 nuevaDependencia.NombreDependencia = txtDependencia.Text;
                 nuevaDependencia.unTipoDep = cboTipoDep.SelectedItem as TipoDependencia;
                 nuevaDependencia.unosAgentes = AgentesLista;
-                if (ManagerDependencia.DependenciaCrear(nuevaDependencia))
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia creada correctamente").Texto);
+                ManagerDependencia.DependenciaCrear(nuevaDependencia);
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia creada correctamente").Texto);
             }
             catch (Exception es)
             {

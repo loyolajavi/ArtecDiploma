@@ -144,10 +144,10 @@ namespace ARTEC.GUI
                 cboTipo.DataSource = unosTiposBien;
                 cboTipo.DisplayMember = "DescripTipoBien";
                 cboTipo.ValueMember = "IdTipoBien";
-            }
-            catch (Exception)
-            {
                 
+            }
+            catch (Exception es)
+            {
                 throw;
             }
             
@@ -203,6 +203,7 @@ namespace ARTEC.GUI
 
                         GrillaProveedores.DataSource = null;
                         GrillaProveedores.DataSource = ProvsAgregar;
+                        FormatearGrillaProveedores();
                         btnCrearCategoria.Enabled = false;
                     }
                     else
@@ -272,8 +273,9 @@ namespace ARTEC.GUI
                 nuevaCategoria.DescripCategoria = txtCategoria.Text;
                 nuevaCategoria.unTipoBien = cboTipo.SelectedItem as TipoBien;
                 nuevaCategoria.LosProveedores = ProvsAgregar;
-                if(ManagerCategoria.CategoriaCrear(nuevaCategoria))
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría creada correctamente").Texto);
+                ManagerCategoria.CategoriaCrear(nuevaCategoria);
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría creada correctamente").Texto);
+                btnLimpiar_Click(this, new EventArgs());
 
             }
             catch (Exception es)
@@ -333,12 +335,10 @@ namespace ARTEC.GUI
                 ProvQuitarMod = ProvsAgregarBKP.Where(d => !ProvsAgregar.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
                 ProvAgregarMod = ProvsAgregar.Where(d => !ProvsAgregarBKP.Any(a => a.IdProveedor == d.IdProveedor)).ToList();
 
-                if (ManagerCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod))
-                {
-                    ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
-                    ProvsAgregarBKP = ProvsAgregar.ToList();
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
-                }
+                ManagerCategoria.CategoriaModificar(unaCategoria, ProvQuitarMod, ProvAgregarMod);
+                ProvsAgregar = ManagerCategoria.CategoriaTraerProveedores(unaCategoria.IdCategoria);
+                ProvsAgregarBKP = ProvsAgregar.ToList();
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)
             {
@@ -356,23 +356,22 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Categoria: ").Texto + unaCategoria.DescripCategoria + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if(ManagerCategoria.CategoriaEliminar(unaCategoria))
-                        {
-                            lblBaja.Visible = true;
-                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    {
+                        ManagerCategoria.CategoriaEliminar(unaCategoria);
+                        lblBaja.Visible = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnReactivar.Enabled = true;
-                            btnEliminar.Enabled = false;
-                            btnModificar.Enabled = false;
-                            btnCrearCategoria.Enabled = false;
-                            btnAgregar.Enabled = false;
-                            txtCategoria.Enabled = false;
-                            cboProveedor.Enabled = false;
-                            cboTipo.Enabled = false;
-                            GrillaProveedores.Enabled = false;
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
-                        }
-                    else
-                        return;
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                        btnCrearCategoria.Enabled = false;
+                        btnAgregar.Enabled = false;
+                        txtCategoria.Enabled = false;
+                        cboProveedor.Enabled = false;
+                        cboTipo.Enabled = false;
+                        GrillaProveedores.Enabled = false;
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
+                    }
+                        
                 }
                 else
                      MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja una Categoría primero debe buscarla").Texto);
@@ -390,21 +389,19 @@ namespace ARTEC.GUI
             {
                 if (unaCategoria != null && !string.IsNullOrWhiteSpace(txtCategoria.Text) && unaCategoria.IdCategoria > 0)
                 {
-                    if (ManagerCategoria.CategoriaReactivar(unaCategoria))
-                    {
-                        lblBaja.Visible = false;
-                        btnReactivar.Enabled = false;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                        btnModificar.Enabled = true;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                        btnEliminar.Enabled = true;
-                        btnAgregar.Enabled = true;
-                        txtCategoria.Enabled = true;
-                        cboProveedor.Enabled = true;
-                        cboTipo.Enabled = true;
-                        GrillaProveedores.Enabled = true;
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
-                    }
+                    ManagerCategoria.CategoriaReactivar(unaCategoria);
+                    lblBaja.Visible = false;
+                    btnReactivar.Enabled = false;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    btnModificar.Enabled = true;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    btnEliminar.Enabled = true;
+                    btnAgregar.Enabled = true;
+                    txtCategoria.Enabled = true;
+                    cboProveedor.Enabled = true;
+                    cboTipo.Enabled = true;
+                    GrillaProveedores.Enabled = true;
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + unaCategoria.DescripCategoria + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                 }
             }
             catch (Exception es)
@@ -414,8 +411,69 @@ namespace ARTEC.GUI
             }
         }
 
+        private void GrillaProveedores_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //Si se hizo click en el header, salir
+                if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                {
+                    return;
+                }
+                else
+                {
+                    //Si hizo click en Quitar
+                    if (e.ColumnIndex == GrillaProveedores.Columns["btnDinBorrar"].Index)
+                    {
+                            ProvsAgregar.RemoveAt(e.RowIndex);
+                            //Regenero la grilla de proveedores
+                            GrillaProveedores.DataSource = null;
+                            GrillaProveedores.DataSource = ProvsAgregar;
+                            //AgregarBotonEliminar();
+                            FormatearGrillaProveedores();
+                    }
+                }
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
 
 
+        private void FormatearGrillaProveedores()
+        {
+            //Elimina el boton si ya estaba agregado
+            if (GrillaProveedores.Columns.Contains("btnDinBorrar"))
+                GrillaProveedores.Columns.Remove("btnDinBorrar");
+            //Agrega boton para Borrar el agente
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "btnDinBorrar";
+            deleteButton.HeaderText = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.Text = BLLServicioIdioma.MostrarMensaje("btnDinBorrar").Texto;
+            deleteButton.UseColumnTextForButtonValue = true;
+
+            Dictionary<string, string[]> dicdeleteButton = new Dictionary<string, string[]>();
+            string[] PerdeleteButton = { "Proveedor Eliminar" };
+            dicdeleteButton.Add("Permisos", PerdeleteButton);
+            string[] IdiomadeleteButton = { "Eliminar" };
+            dicdeleteButton.Add("Idioma", IdiomadeleteButton);
+            deleteButton.Tag = dicdeleteButton;
+
+            GrillaProveedores.Columns.Add(deleteButton);
+
+            if (!string.IsNullOrEmpty(deleteButton.Name) && deleteButton.Tag != null && deleteButton.Tag.GetType() == typeof(Dictionary<string, string[]>) && (deleteButton.Tag as Dictionary<string, string[]>).ContainsKey("Permisos"))
+            {
+                deleteButton.Visible = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((deleteButton.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
+            }
+
+            //Formato
+            GrillaProveedores.Columns["IdProveedor"].Visible = false;
+            GrillaProveedores.Columns["AliasProv"].HeaderText = "Nombre";
+            GrillaProveedores.Columns["ContactoProv"].HeaderText = "Contacto";
+            GrillaProveedores.Columns["MailContactoProv"].HeaderText = "Mail";
+            GrillaProveedores.Columns["Activo"].Visible = false;
+        }
 
         
     }

@@ -21,12 +21,14 @@ namespace ARTEC.GUI
         string NombreDependencia;
         List<Cargo> unosCargos;
         BLLAgente ManagerAgente = new BLLAgente();
+        List<Agente> AgentesLista = new List<Agente>();
 
-        public frmAgenteCrear(int IdDep, string NomDep)
+        public frmAgenteCrear(Dependencia unaDep)
         {
             InitializeComponent();
-            IdDependencia = IdDep;
-            NombreDependencia = NomDep;
+            IdDependencia = unaDep.IdDependencia;
+            NombreDependencia = unaDep.NombreDependencia;
+            AgentesLista = unaDep.unosAgentes;
 
             Dictionary<string, string[]> dicfrmAgenteCrear = new Dictionary<string, string[]>();
             string[] IdiomafrmAgenteCrear = { "Crear Agente" };
@@ -93,8 +95,8 @@ namespace ARTEC.GUI
                 NuevoAgente.unCargo = new Cargo();
                 NuevoAgente.unCargo.IdCargo = (int)cboCargo.SelectedValue;
                 NuevoAgente.unCargo.DescripCargo = cboCargo.SelectedText;
-                if (ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia) > 0)
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Agente creado correctamente").Texto);
+                ManagerAgente.AgenteCrear(NuevoAgente, IdDependencia);
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Agente creado correctamente").Texto);
                 DialogResult = DialogResult.OK;
             }
             catch (Exception es)

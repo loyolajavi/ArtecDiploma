@@ -309,17 +309,13 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Dependencia: ").Texto + DepSeleccionada.NombreDependencia + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if (ManagerDependencia.DependenciaEliminar(DepSeleccionada))
-                        {
-                            lblBaja.Visible = true;
-                            btnModificar.Enabled = false;
-                            btnEliminar.Enabled = false;
-                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                                btnReactivar.Enabled = true;
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
-                        }
-                        else
-                            return;
+                        ManagerDependencia.DependenciaEliminar(DepSeleccionada);
+                        lblBaja.Visible = true;
+                        btnModificar.Enabled = false;
+                        btnEliminar.Enabled = false;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                            btnReactivar.Enabled = true;
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" dada de baja correctamente").Texto);
                 }
                 else
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Primero seleccione una Dependencia").Texto);
@@ -337,16 +333,14 @@ namespace ARTEC.GUI
             {
                 if (DepSeleccionada != null && !string.IsNullOrWhiteSpace(txtDependencia.Text) && DepSeleccionada.IdDependencia > 0)
                 {
-                    if (ManagerDependencia.DependenciaReactivar(DepSeleccionada))
-                    {
-                        lblBaja.Visible = false;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                            btnModificar.Enabled = true;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                            btnEliminar.Enabled = true;
-                        btnReactivar.Enabled = false;
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
-                    }
+                    ManagerDependencia.DependenciaReactivar(DepSeleccionada);
+                    lblBaja.Visible = false;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                        btnModificar.Enabled = true;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                        btnEliminar.Enabled = true;
+                    btnReactivar.Enabled = false;
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                 }
             }
             catch (Exception es)

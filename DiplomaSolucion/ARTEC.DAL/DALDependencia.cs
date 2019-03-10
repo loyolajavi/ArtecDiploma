@@ -376,7 +376,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool DependenciaCrear(Dependencia nuevaDependencia)
+        public void DependenciaCrear(Dependencia nuevaDependencia)
         {
             SqlParameter[] parametersDepCrear = new SqlParameter[]
 			{
@@ -408,7 +408,6 @@ namespace ARTEC.DAL
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {
@@ -422,7 +421,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool DependenciaEliminar(int IdDependencia)
+        public void DependenciaEliminar(int IdDependencia)
         {
             SqlParameter[] parametersDepEliminar = new SqlParameter[]
 			{
@@ -435,9 +434,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaEliminar", parametersDepEliminar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
             }
             catch (Exception es)
             {
@@ -451,7 +447,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool DependenciaReactivar(int IdDependencia)
+        public void DependenciaReactivar(int IdDependencia)
         {
             SqlParameter[] parametersDepReactivar = new SqlParameter[]
 			  {
@@ -464,9 +460,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "DependenciaReactivar", parametersDepReactivar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
             }
             catch (Exception es)
             {

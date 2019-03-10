@@ -466,7 +466,7 @@ namespace ARTEC.GUI
 
         private void btnNuevoAgente_Click(object sender, EventArgs e)
         {
-            frmAgenteCrear unfrmAgenteCrear = new frmAgenteCrear(DepModif.IdDependencia, DepModif.NombreDependencia);
+            frmAgenteCrear unfrmAgenteCrear = new frmAgenteCrear(DepModif);
             ////CON ESTO hago que al cerrar el formulario del showdialog (frmAgenteCrear), 
             ////voy a la funcion unfrmdependenciamodificar_formclosing y actualizo las dependencias desde la bd para ver el cambio realizado en el otro formulario
             //unfrmAgenteCrear.FormClosing += unfrmAgenteCrear_FormClosing;

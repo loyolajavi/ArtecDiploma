@@ -188,7 +188,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool ProveedorCrear(Proveedor nuevoProveedor)
+        public void ProveedorCrear(Proveedor nuevoProveedor)
         {
             SqlParameter[] parametersProvCrear = new SqlParameter[]
 			{
@@ -276,7 +276,6 @@ namespace ARTEC.DAL
                 }
 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {
@@ -290,7 +289,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
+        public void ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
         {
             SqlParameter[] parametersProvModif = new SqlParameter[]
 			{
@@ -417,7 +416,6 @@ namespace ARTEC.DAL
                     }
                 }
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return true;
             }
             catch (Exception es)
             {
@@ -433,7 +431,7 @@ namespace ARTEC.DAL
 
 
 
-        public bool ProveedorEliminar(int IdProveedor)
+        public void ProveedorEliminar(int IdProveedor)
         {
             SqlParameter[] parametersProvEliminar = new SqlParameter[]
 			{
@@ -446,9 +444,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorEliminar", parametersProvEliminar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
             }
             catch (Exception es)
             {
@@ -462,7 +457,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool ProveedorReactivar(int IdProveedor)
+        public void ProveedorReactivar(int IdProveedor)
         {
             SqlParameter[] parametersProvReactivar = new SqlParameter[]
 			  {
@@ -475,9 +470,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ProveedorReactivar", parametersProvReactivar);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
             }
             catch (Exception es)
             {

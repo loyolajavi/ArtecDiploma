@@ -25,16 +25,13 @@ namespace ARTEC.BLL
             return GestorAgente.AgentesTraerTodos();
         }
 
-        public int AgenteCrear(Agente NuevoAgente, int IdDep)
+        public void AgenteCrear(Agente NuevoAgente, int IdDep)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Agente Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                int IdAgenteNuevo = GestorAgente.AgenteCrear(NuevoAgente, IdDep);
-                if (IdAgenteNuevo > 0)
-                    return IdAgenteNuevo;
-                return 0;
+                GestorAgente.AgenteCrear(NuevoAgente, IdDep);
             }
             catch (Exception es)
             {
@@ -84,15 +81,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool AgenteModificar(Agente unAgente)
+        public void AgenteModificar(Agente unAgente)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Agente Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorAgente.AgenteModificar(unAgente))
-                    return true;
-                return false;
+                GestorAgente.AgenteModificar(unAgente);
             }
             catch (Exception es)
             {

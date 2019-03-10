@@ -170,10 +170,8 @@ namespace ARTEC.GUI
                 unAgente.NombreAgente = txtNombre.Text;
                 unAgente.ApellidoAgente = txtApellido.Text;
 
-                if (ManagerAgente.AgenteModificar(unAgente))
-                {
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
-                }
+                ManagerAgente.AgenteModificar(unAgente);
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)
             {

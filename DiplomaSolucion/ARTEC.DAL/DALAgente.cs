@@ -52,7 +52,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public int AgenteCrear(Agente NuevoAgente, int IdDep)
+        public void AgenteCrear(Agente NuevoAgente, int IdDep)
         {
 
             SqlParameter[] parameters = new SqlParameter[]
@@ -79,7 +79,6 @@ namespace ARTEC.DAL
                     FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelDepAgenteCargoCrear", parametersRelDepAgenteCargo);
                 
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return IDDevuelto;
             }
             catch (Exception es)
             {
@@ -161,7 +160,7 @@ namespace ARTEC.DAL
             }
         }
 
-        public bool AgenteModificar(Agente unAgente)
+        public void AgenteModificar(Agente unAgente)
         {
             SqlParameter[] parameters = new SqlParameter[]
 			{
@@ -176,9 +175,6 @@ namespace ARTEC.DAL
                 FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                 int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "AgenteModificar", parameters);
                 FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                if (FilasAfectadas > 0)
-                    return true;
-                return false;
             }
             catch (Exception es)
             {

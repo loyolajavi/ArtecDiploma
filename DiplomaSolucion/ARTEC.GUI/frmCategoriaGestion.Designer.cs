@@ -30,8 +30,8 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoriaGestion));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBuscar = new DevComponents.DotNetBar.PanelEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblCategoriaBuscar = new DevComponents.DotNetBar.LabelX();
@@ -87,15 +87,8 @@ namespace ARTEC.GUI
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 78;
+            this.btnBuscar.Tag = ((object)(resources.GetObject("btnBuscar.Tag")));
             this.btnBuscar.Text = "btnBuscar";
-
-            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
-            string[] PerbtnBuscar = { "Categoria Buscar" };
-            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
-            string[] IdiomabtnBuscar = { "Buscar" };
-            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
-            this.btnBuscar.Tag = dicbtnBuscar;
-
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblCategoriaBuscar
@@ -239,6 +232,7 @@ namespace ARTEC.GUI
             this.GrillaProveedores.ReadOnly = true;
             this.GrillaProveedores.Size = new System.Drawing.Size(324, 186);
             this.GrillaProveedores.TabIndex = 89;
+            this.GrillaProveedores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaProveedores_CellClick);
             // 
             // btnCrearCategoria
             // 
@@ -249,15 +243,8 @@ namespace ARTEC.GUI
             this.btnCrearCategoria.Size = new System.Drawing.Size(87, 35);
             this.btnCrearCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearCategoria.TabIndex = 90;
+            this.btnCrearCategoria.Tag = ((object)(resources.GetObject("btnCrearCategoria.Tag")));
             this.btnCrearCategoria.Text = "btnCrear";
-
-            Dictionary<string, string[]> dicbtnCrearCategoria = new Dictionary<string, string[]>();
-            string[] PerbtnCrearCategoria = { "Categoria Crear" };
-            dicbtnCrearCategoria.Add("Permisos", PerbtnCrearCategoria);
-            string[] IdiomabtnCrearCategoria = { "Crear" };
-            dicbtnCrearCategoria.Add("Idioma", IdiomabtnCrearCategoria);
-            this.btnCrearCategoria.Tag = dicbtnCrearCategoria;
-
             this.btnCrearCategoria.Click += new System.EventHandler(this.btnCrearCategoria_Click);
             // 
             // btnModificar
@@ -270,15 +257,8 @@ namespace ARTEC.GUI
             this.btnModificar.Size = new System.Drawing.Size(87, 35);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 91;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Categoria Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
@@ -291,15 +271,8 @@ namespace ARTEC.GUI
             this.btnEliminar.Size = new System.Drawing.Size(87, 35);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 92;
+            this.btnEliminar.Tag = ((object)(resources.GetObject("btnEliminar.Tag")));
             this.btnEliminar.Text = "btnEliminar";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Categoria Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminar.Tag = dicbtnEliminar;
-
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
@@ -370,15 +343,8 @@ namespace ARTEC.GUI
             this.btnReactivar.Size = new System.Drawing.Size(87, 35);
             this.btnReactivar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReactivar.TabIndex = 102;
+            this.btnReactivar.Tag = ((object)(resources.GetObject("btnReactivar.Tag")));
             this.btnReactivar.Text = "btnReactivar";
-
-            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
-            string[] PerbtnReactivar = { "Categoria Reactivar" };
-            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
-            string[] IdiomabtnReactivar = { "Reactivar" };
-            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
-            this.btnReactivar.Tag = dicbtnReactivar;
-
             this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
             // 
             // frmCategoriaGestion

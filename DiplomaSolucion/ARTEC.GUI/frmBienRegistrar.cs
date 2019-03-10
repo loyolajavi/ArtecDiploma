@@ -775,9 +775,14 @@ namespace ARTEC.GUI
 
         private void btnCrearMarca_Click(object sender, EventArgs e)
         {
-            frmMarcaCrear unFrmMarcaCrear = new frmMarcaCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue);
-            unFrmMarcaCrear.EventoActualizarMarcaModelo += new frmMarcaCrear.DelegaActualizarMarcaModelo(ActualizarMarcaModelo);
-            unFrmMarcaCrear.Show();
+            if (unDetSolic != null && unDetSolic.unaCategoria != null && unDetSolic.unaCategoria.IdCategoria > 0 && cboTipoBien.Items != null)
+            {
+                frmMarcaCrear unFrmMarcaCrear = new frmMarcaCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue);
+                unFrmMarcaCrear.EventoActualizarMarcaModelo += new frmMarcaCrear.DelegaActualizarMarcaModelo(ActualizarMarcaModelo);
+                unFrmMarcaCrear.Show();
+            }
+            else
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Seleccione la Categoría y el Tipo de Bien").Texto);
         }
 
         public void ActualizarMarcaModelo(Bien unNuevoBien)
@@ -836,9 +841,14 @@ namespace ARTEC.GUI
 
         private void btnCrearModelo_Click(object sender, EventArgs e)
         {
-            frmModeloCrear unFrmMarcaCrear = new frmModeloCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue, unaMarca);
-            unFrmMarcaCrear.EventoActualizarModelo += new frmModeloCrear.DelegaActualizarModelo(ActualizarModelo);
-            unFrmMarcaCrear.Show();
+            if (unDetSolic != null && unDetSolic.unaCategoria != null && unDetSolic.unaCategoria.IdCategoria > 0 && cboTipoBien.Items != null && unaMarca != null)
+            {
+                frmModeloCrear unFrmMarcaCrear = new frmModeloCrear(unDetSolic.unaCategoria, (int)cboTipoBien.SelectedValue, unaMarca);
+                unFrmMarcaCrear.EventoActualizarModelo += new frmModeloCrear.DelegaActualizarModelo(ActualizarModelo);
+                unFrmMarcaCrear.Show();
+            }
+             else
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Seleccione la Categoría, el Tipo de Bien y la Marca").Texto);
         }
 
 

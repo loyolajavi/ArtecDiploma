@@ -601,8 +601,8 @@ namespace ARTEC.GUI
                 nuevoProveedor.unosTelefonos = TelsAgregar;
                 nuevoProveedor.unasDirecciones = DirAgregar;
 
-                if(ManagerProveedor.ProveedorCrear(nuevoProveedor))
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor creado correctamente").Texto);
+                ManagerProveedor.ProveedorCrear(nuevoProveedor);
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor creado correctamente").Texto);
 
             }
             catch (Exception es)
@@ -693,16 +693,14 @@ namespace ARTEC.GUI
                 DirQuitarMod = DirAgregarBKP.Where(d => !DirAgregar.Any(a => a.IdDireccion == d.IdDireccion)).ToList();
                 DirAgregarMod = DirAgregar.Where(d => !DirAgregarBKP.Any(a => a.IdDireccion == d.IdDireccion)).ToList();
 
-                if (ManagerProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod))
-                {
-                    CategoriasAgregar = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
-                    CategoriasAgregarBKP = CategoriasAgregar.ToList();
-                    TelsAgregar = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
-                    TelsAgregarBKP = TelsAgregar.ToList();
-                    DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
-                    DirAgregarBKP = DirAgregar.ToList();
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
-                }
+                ManagerProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod);
+                CategoriasAgregar = ManagerProveedor.ProveedorTraerCategorias(unProvBuscar.IdProveedor);
+                CategoriasAgregarBKP = CategoriasAgregar.ToList();
+                TelsAgregar = ManagerProveedor.ProveedorTraerTelefonos(unProvBuscar.IdProveedor);
+                TelsAgregarBKP = TelsAgregar.ToList();
+                DirAgregar = ManagerProveedor.ProveedorTraerDirecciones(unProvBuscar.IdProveedor);
+                DirAgregarBKP = DirAgregar.ToList();
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Modificación realizada").Texto);
             }
             catch (Exception es)
             {
@@ -842,27 +840,25 @@ namespace ARTEC.GUI
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja al Proveedor: ").Texto + unProvBuscar.AliasProv + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);
                     if (resmbox == DialogResult.Yes)
-                        if (ManagerProveedor.ProveedorEliminar(unProvBuscar))
-                        {
-                            lblBaja.Visible = true;
-                            if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    {
+                        ManagerProveedor.ProveedorEliminar(unProvBuscar);
+                        lblBaja.Visible = true;
+                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnReactivar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                             btnReactivar.Enabled = true;
-                            btnEliminar.Enabled = false;
-                            btnModificar.Enabled = false;
-                            btnCrearProveedor.Enabled = false;
-                            btnAgregarProd.Enabled = false;
-                            btnTelefono.Enabled = false;
-                            btnDireccion.Enabled = false;
-                            txtNombreEmpresa.Enabled = false;
-                            txtContacto.Enabled = false;
-                            txtMailContacto.Enabled = false;
-                            GrillaProductos.Enabled = false;
-                            GrillaTelefonos.Enabled = false;
-                            GrillaDirecciones.Enabled = false;
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
-                        }
-                        else
-                            return;
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
+                        btnCrearProveedor.Enabled = false;
+                        btnAgregarProd.Enabled = false;
+                        btnTelefono.Enabled = false;
+                        btnDireccion.Enabled = false;
+                        txtNombreEmpresa.Enabled = false;
+                        txtContacto.Enabled = false;
+                        txtMailContacto.Enabled = false;
+                        GrillaProductos.Enabled = false;
+                        GrillaTelefonos.Enabled = false;
+                        GrillaDirecciones.Enabled = false;
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" dado de baja correctamente").Texto);
+                    }
                 }
                 else
                     MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Para dar de baja un proveedor primero debe buscarlo").Texto);
@@ -880,26 +876,24 @@ namespace ARTEC.GUI
             {
                 if (unProvBuscar != null && !string.IsNullOrWhiteSpace(txtNombreEmpresa.Text) && unProvBuscar.IdProveedor > 0)
                 {
-                    if (ManagerProveedor.ProveedorReactivar(unProvBuscar.IdProveedor))
-                    {
-                        lblBaja.Visible = false;
-                        btnReactivar.Enabled = false;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                        btnEliminar.Enabled = true;
-                        if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
-                        btnModificar.Enabled = true;
-                        btnCrearProveedor.Enabled = false;
-                        btnAgregarProd.Enabled = true;
-                        btnTelefono.Enabled = true;
-                        btnDireccion.Enabled = true;
-                        txtNombreEmpresa.Enabled = true;
-                        txtContacto.Enabled = true;
-                        txtMailContacto.Enabled = true;
-                        GrillaProductos.Enabled = true;
-                        GrillaTelefonos.Enabled = true;
-                        GrillaDirecciones.Enabled = true;
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
-                    }
+                    ManagerProveedor.ProveedorReactivar(unProvBuscar.IdProveedor);
+                    lblBaja.Visible = false;
+                    btnReactivar.Enabled = false;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    btnEliminar.Enabled = true;
+                    if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnModificar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
+                    btnModificar.Enabled = true;
+                    btnCrearProveedor.Enabled = false;
+                    btnAgregarProd.Enabled = true;
+                    btnTelefono.Enabled = true;
+                    btnDireccion.Enabled = true;
+                    txtNombreEmpresa.Enabled = true;
+                    txtContacto.Enabled = true;
+                    txtMailContacto.Enabled = true;
+                    GrillaProductos.Enabled = true;
+                    GrillaTelefonos.Enabled = true;
+                    GrillaDirecciones.Enabled = true;
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Proveedor: ").Texto + unProvBuscar.AliasProv + BLLServicioIdioma.MostrarMensaje(" reactivado correctamente").Texto);
                 }
             }
             catch (Exception es)

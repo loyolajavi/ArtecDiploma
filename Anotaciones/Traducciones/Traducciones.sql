@@ -679,6 +679,11 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Rendición Nro 
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' registrada correctamente', N' registrada correctamente', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N' registrada correctamente', N' was registered succesfully', 2)
 
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Seleccione la Categoría, el Tipo de Bien y la Marca', N'Seleccione la Categoría, el Tipo de Bien y la Marca', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Seleccione la Categoría, el Tipo de Bien y la Marca', N'Select Category, Asset and brand', 2)
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Seleccione la Categoría y el Tipo de Bien', N'Seleccione la Categoría y el Tipo de Bien', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Seleccione la Categoría y el Tipo de Bien', N'Select the Category and Asset', 2)
 
 --BITACORA
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', N'Ocurrio un error al cargar la bitácora, por favor informe del error Nro ', 1)

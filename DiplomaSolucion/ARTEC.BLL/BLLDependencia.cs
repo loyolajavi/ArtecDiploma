@@ -127,15 +127,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool DependenciaCrear(Dependencia nuevaDependencia)
+        public void DependenciaCrear(Dependencia nuevaDependencia)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorDependencia.DependenciaCrear(nuevaDependencia))
-                    return true;
-                return false;
+                GestorDependencia.DependenciaCrear(nuevaDependencia);
             }
             catch (Exception es)
             {
@@ -143,16 +141,14 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool DependenciaEliminar(Dependencia unaDependencia)
+        public void DependenciaEliminar(Dependencia unaDependencia)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Eliminar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 unaDependencia.Activo = 0;
-                if (GestorDependencia.DependenciaEliminar(unaDependencia.IdDependencia))
-                    return true;
-                return false;
+                GestorDependencia.DependenciaEliminar(unaDependencia.IdDependencia);
             }
             catch (Exception es)
             {
@@ -160,16 +156,14 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool DependenciaReactivar(Dependencia unaDependencia)
+        public void DependenciaReactivar(Dependencia unaDependencia)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Dependencia Reactivar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
                 unaDependencia.Activo = 1;
-                if (GestorDependencia.DependenciaReactivar(unaDependencia.IdDependencia))
-                    return true;
-                return false;
+                GestorDependencia.DependenciaReactivar(unaDependencia.IdDependencia);
             }
             catch (Exception es)
             {

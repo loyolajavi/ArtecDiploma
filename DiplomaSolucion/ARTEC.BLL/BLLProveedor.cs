@@ -76,15 +76,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool ProveedorCrear(Proveedor nuevoProveedor)
+        public void ProveedorCrear(Proveedor nuevoProveedor)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Crear" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorProveedor.ProveedorCrear(nuevoProveedor))
-                    return true;
-                return false;
+                GestorProveedor.ProveedorCrear(nuevoProveedor);
             }
             catch (Exception es)
             {
@@ -92,15 +90,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
+        public void ProveedorModificar(Proveedor unProvBuscar, List<Categoria> CatQuitarMod, List<Categoria> CatAgregarMod, List<Telefono> TelQuitarMod, List<Telefono> TelAgregarMod, List<Direccion> DirQuitarMod, List<Direccion> DirAgregarMod)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Modificar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod))
-                    return true;
-                return false;
+                GestorProveedor.ProveedorModificar(unProvBuscar, CatQuitarMod, CatAgregarMod, TelQuitarMod, TelAgregarMod, DirQuitarMod, DirAgregarMod);
             }
             catch (Exception es)
             {
@@ -110,15 +106,13 @@ namespace ARTEC.BLL
 
 
 
-        public bool ProveedorEliminar(Proveedor unProvBuscar)
+        public void ProveedorEliminar(Proveedor unProvBuscar)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Eliminar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorProveedor.ProveedorEliminar(unProvBuscar.IdProveedor))
-                    return true;
-                return false;
+                GestorProveedor.ProveedorEliminar(unProvBuscar.IdProveedor);
             }
             catch (Exception es)
             {
@@ -126,15 +120,13 @@ namespace ARTEC.BLL
             }
         }
 
-        public bool ProveedorReactivar(int IdProveedor)
+        public void ProveedorReactivar(int IdProveedor)
         {
             try
             {
                 if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Proveedor Reactivar" }))
                     throw new InvalidOperationException("No posee los permisos suficientes");
-                if (GestorProveedor.ProveedorReactivar(IdProveedor))
-                    return true;
-                return false;
+                GestorProveedor.ProveedorReactivar(IdProveedor);
             }
             catch (Exception es)
             {

@@ -122,7 +122,7 @@ namespace ARTEC.DAL
 
 
 
-          public bool CategoriaCrear(Categoria nuevaCategoria)
+          public void CategoriaCrear(Categoria nuevaCategoria)
           {
               SqlParameter[] parametersCatCrear = new SqlParameter[]
 			{
@@ -153,7 +153,6 @@ namespace ARTEC.DAL
                   }
                  
                   FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                  return true;
               }
               catch (Exception es)
               {
@@ -213,7 +212,7 @@ namespace ARTEC.DAL
               }
           }
 
-          public bool CategoriaModificar(Categoria unaCategoria, List<Proveedor> ProvQuitarMod, List<Proveedor> ProvAgregarMod)
+          public void CategoriaModificar(Categoria unaCategoria, List<Proveedor> ProvQuitarMod, List<Proveedor> ProvAgregarMod)
           {
               SqlParameter[] parametersCatModif = new SqlParameter[]
 			{
@@ -257,7 +256,6 @@ namespace ARTEC.DAL
                       }
                   }
                   FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                  return true;
               }
               catch (Exception es)
               {
@@ -271,7 +269,7 @@ namespace ARTEC.DAL
               }
           }
 
-          public bool CategoriaEliminar(int IdCategoria)
+          public void CategoriaEliminar(int IdCategoria)
           {
               SqlParameter[] parametersCatEliminar = new SqlParameter[]
 			{
@@ -284,9 +282,6 @@ namespace ARTEC.DAL
                   FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                   int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaEliminar", parametersCatEliminar);
                   FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                  if (FilasAfectadas > 0)
-                      return true;
-                  return false;
               }
               catch (Exception es)
               {
@@ -300,7 +295,7 @@ namespace ARTEC.DAL
               }
           }
 
-          public bool CategoriaReactivar(int IdCategoria)
+          public void CategoriaReactivar(int IdCategoria)
           {
               SqlParameter[] parametersCatReactivar = new SqlParameter[]
 			  {
@@ -313,9 +308,6 @@ namespace ARTEC.DAL
                   FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
                   int FilasAfectadas = FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "CategoriaReactivar", parametersCatReactivar);
                   FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                  if (FilasAfectadas > 0)
-                      return true;
-                  return false;
               }
               catch (Exception es)
               {
