@@ -96,34 +96,12 @@ namespace ARTEC.FRAMEWORK.Servicios
         }
 
 
-        public static string CrearLog(string Accion, string Mensaje)//Bitacora Eventos
+        public static void CrearLog(string Accion, string Mensaje)//Bitacora Eventos
         {
-            System.Diagnostics.EventLogEntryType tipo_entrada = EventLogEntryType.Error;
-            EventLog Elog = new EventLog();
-            string NombreCarpeta = "ArtecLogs";
-            string NombreAplicacion = "Artec1";
-            string NombreUsuario = "SIN_USUARIO";
-
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado != null && ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario != null)
-            {
                 GrabarLogBD(ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario, DateTime.Now, "Evento", Accion, Mensaje);
-                NombreUsuario = ServicioLogin.GetLoginUnico().UsuarioLogueado.NombreUsuario;
-            }
             else
-            {
                 GrabarLogBD(0, "SIN_USUARIO", DateTime.Now, "Evento", Accion, Mensaje);
-                NombreUsuario = "SIN_USUARIO";
-            }
-
-
-            if (!EventLog.SourceExists(NombreAplicacion))
-                EventLog.CreateEventSource(NombreAplicacion, NombreCarpeta);
-            Elog.Source = NombreAplicacion;
-            Elog.WriteEntry("Usuario: " + NombreUsuario, tipo_entrada, 1);
-            Elog.Close();
-            Elog.Dispose();
-            return ObtenerUltimoIdLog(NombreCarpeta);
-            
         }
 
 

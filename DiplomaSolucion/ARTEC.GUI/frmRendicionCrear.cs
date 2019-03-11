@@ -163,7 +163,7 @@ namespace ARTEC.GUI
                         else
                         {
                             LimpiarFormularioRendicion();
-                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida ingresada no puede rendirse").Texto);
+                            MessageBox.Show(BLLServicioIdioma.MostrarMensaje("La partida no tiene detalles pendientes de rendición").Texto);
                         }
                     }
                     else
@@ -208,7 +208,12 @@ namespace ARTEC.GUI
                         {
                             IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
                             if (IdRendRes > 0)
+                            {
                                 DocumentoRendicionCrear(IdRendRes);
+                                ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Rendición").Texto, BLLServicioIdioma.MostrarMensaje("Rendicion: ").Texto + unaRendicion.IdRendicion.ToString());
+                                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Rendición registrada correctamente").Texto);
+                                this.Close();
+                            }
                         }
                         else
                         {

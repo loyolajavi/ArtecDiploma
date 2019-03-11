@@ -1273,6 +1273,8 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Correct
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Incorrecto', N'Ingreso Incorrecto', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Ingreso Incorrecto', N'Incorrect Entry', 2)
 
+--Aplicado hasta aca el 10/03/2019
+
 --En casi todos los CrearLog();
 --Los que son CrearLog(es,   .. No hay que modificarlo ni poner texto en traducciones 
 --Delante de las comillas va:

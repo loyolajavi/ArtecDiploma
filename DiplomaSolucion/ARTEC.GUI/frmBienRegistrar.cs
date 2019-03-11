@@ -494,7 +494,7 @@ namespace ARTEC.GUI
             if (!vldFrmBienRegistrarBtnAgregar.Validate())
                 return;
 
-            if (unDetSolic.Cantidad <= LisAUXDetalles.Where(x => x.IdSolicitudDetalle == unDetSolic.IdSolicitudDetalle).First().Comprado)//LisAUXDetalles[DetalleSeleccionado - 1].Comprado)
+            if (unDetSolic.Cantidad <= LisAUXDetalles.Where(x => x.IdSolicitudDetalle == unDetSolic.IdSolicitudDetalle).First().Comprado | unosBieneshlp.Count == LisAUXDetalles.Where(x => x.IdSolicitudDetalle == unDetSolic.IdSolicitudDetalle).First().Cantidad)//LisAUXDetalles[DetalleSeleccionado - 1].Comprado)
             {
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Ya se compró todo").Texto);
             }

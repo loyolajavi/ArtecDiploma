@@ -444,7 +444,7 @@ namespace ARTEC.GUI
                 }
                 foreach (Proveedor unProv in ListaProv)
                 {
-                    FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, unProv.AliasProv, txtAsunto.Text, txtCuerpo.Text);
+                    FRAMEWORK.Servicios.ServicioMail.EnviarCorreo(unProv.MailContactoProv, "MPF", txtAsunto.Text, txtCuerpo.Text);
                 }
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Mails enviados correctamente").Texto);
             }

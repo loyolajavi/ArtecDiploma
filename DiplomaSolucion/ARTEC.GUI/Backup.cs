@@ -93,11 +93,13 @@ namespace ARTEC.GUI
 
         private void btnExaminarRestaurar_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog Directorio = new FolderBrowserDialog();
+            OpenFileDialog Directorio = new OpenFileDialog();
 
             if (Directorio.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                txtUbicacion.Text = Directorio.SelectedPath;
+                if(!Directorio.CheckFileExists)
+                    return;
+                txtUbicacion.Text = Directorio.FileName;
             }
         }
 
