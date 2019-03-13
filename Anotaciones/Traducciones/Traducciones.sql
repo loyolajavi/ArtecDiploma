@@ -1196,6 +1196,12 @@ INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error en la bú
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', 1)
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Error al cargar la pantalla de búsqueda, por favor informe del error Nro ', N'Error loading the search screen, please report error number ', 2)
 
+--Varios sueltos
+
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontró el archivo', N'No se encontró el archivo', 1)
+INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'No se encontró el archivo', N'File not found', 2)
+
+
 --LOGS----------------------------------------------------------------------
 ------------------------------------------------------------------------------
 INSERT Etiqueta ([NombreControl], [Texto], [IdIdioma]) VALUES (N'Realizar backup', N'Realizar backup', 1)

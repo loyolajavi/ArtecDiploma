@@ -1,0 +1,1 @@
+sqlcmd -S .\SQLEXPRESS -E -d Artec -Q "UPDATE Ruta SET DescripRuta = '%1\' WHERE IdRuta = 1"

@@ -227,7 +227,7 @@ namespace ARTEC.GUI
                 if (ManagerAsignacion.AsignacionCrear(unaAsignacion, unaSolic))
                 {
                     //Crear el documento
-                    string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Asignacion.docx";
+                    string RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Asignacion.docx";
                     if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                     {
                         using (DocX doc = DocX.Load(RutaPlantilla))
@@ -246,7 +246,7 @@ namespace ARTEC.GUI
                     }
                     else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                     {
-                        RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Asignacion English.docx";
+                        RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Asignacion English.docx";
                         using (DocX doc = DocX.Load(RutaPlantilla))
                         {
                             doc.AddCustomProperty(new CustomProperty("PFecha", unaAsignacion.Fecha.ToString("dd 'de' MMMM 'de' yyyy'.'")));

@@ -28,25 +28,27 @@ namespace BDConfigXML
                 ConfiguracionConexion unDatosDB = new ConfiguracionConexion();
                 ConfiguracionConexion unDatosDB2 = new ConfiguracionConexion();
 
-                unDatosDB.DataSourceBD = "Data Source=" + txtServidor.Text + ";";
-                unDatosDB.InitialCatalogBD = "Initial Catalog=" + txtBase.Text + ";";
-                unDatosDB.UsuarioBD = "user Id=" + txtUsuario.Text + ";";
-                unDatosDB.PasswordBD = "Password=" + txtPass.Text + ";";
+                unDatosDB.DataSourceBD = ServicioSecurizacion.Encriptar("Data Source=" + txtServidor.Text + ";");
+                unDatosDB.InitialCatalogBD = ServicioSecurizacion.Encriptar("Initial Catalog=" + txtBase.Text + ";");
+                unDatosDB.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
+                unDatosDB.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
                 ListaDatosBD.Add(unDatosDB);
 
-                unDatosDB2.DataSourceBD = "Data Source=" + txtServidor.Text + ";";
-                unDatosDB2.InitialCatalogBD = "Initial Catalog=master;";
-                unDatosDB2.UsuarioBD = "user Id=" + txtUsuario.Text + ";";
-                unDatosDB2.PasswordBD = "Password=" + txtPass.Text + ";";
+                unDatosDB2.DataSourceBD = ServicioSecurizacion.Encriptar("Data Source=" + txtServidor.Text + ";");
+                unDatosDB2.InitialCatalogBD = ServicioSecurizacion.Encriptar("Initial Catalog=master;");
+                unDatosDB2.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
+                unDatosDB2.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
                 ListaDatosBD.Add(unDatosDB2);
 
                 var Resultado = ServicioSerializadorXML.Serializar(ListaDatosBD);
 
-                using (StreamWriter sw = new StreamWriter(txtDestino.Text + "\\DatosBD.xml"))
+                using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "DatosBD.xml"))
                 {
                     sw.Write(ServicioSerializadorXML.StreamAString(Resultado));
                     sw.Close();
                 }
+                MessageBox.Show("Archivo de conexión a Base de datos creado correctamente");
+                this.Close();
             }
             catch (Exception es)
             {
@@ -55,23 +57,8 @@ namespace BDConfigXML
            
         }
 
-        private void btnExaminar_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog Directorio = new FolderBrowserDialog();
-
-            try
-            {
-                if (Directorio.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    txtDestino.Text = Directorio.SelectedPath;
-                }
-            }
-            catch (Exception es)
-            {
-                MessageBox.Show("Error: " + es.Message);
-            }
 
 
-        }
+       
     }
 }

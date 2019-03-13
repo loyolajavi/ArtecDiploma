@@ -1663,10 +1663,15 @@ namespace ARTEC.GUI
             {
                 using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
                 {
-                    string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
-                    proc.StartInfo.FileName = RutaCompletaAdjunto;
-                    proc.Start();
-                    proc.Close();
+                    if (File.Exists(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto))
+                    {
+                        string RutaCompletaAdjunto = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaAdjuntos() + NombreAdjunto;
+                        proc.StartInfo.FileName = RutaCompletaAdjunto;
+                        proc.Start();
+                        proc.Close();
+                    }
+                    else
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo no existe").Texto);
                 }
                 
             }

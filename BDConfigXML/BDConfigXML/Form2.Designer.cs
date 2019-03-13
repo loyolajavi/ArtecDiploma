@@ -39,16 +39,13 @@ namespace BDConfigXML
             this.lblBase = new DevComponents.DotNetBar.LabelX();
             this.lblUsuario = new DevComponents.DotNetBar.LabelX();
             this.lblPassword = new DevComponents.DotNetBar.LabelX();
-            this.txtDestino = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblDestino = new DevComponents.DotNetBar.LabelX();
-            this.btnExaminar = new DevComponents.DotNetBar.ButtonX();
             this.validador = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator4 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -57,12 +54,12 @@ namespace BDConfigXML
             // 
             this.btnGenerarXML.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnGenerarXML.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarXML.Location = new System.Drawing.Point(210, 155);
+            this.btnGenerarXML.Location = new System.Drawing.Point(114, 130);
             this.btnGenerarXML.Name = "btnGenerarXML";
             this.btnGenerarXML.Size = new System.Drawing.Size(83, 29);
             this.btnGenerarXML.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnGenerarXML.TabIndex = 0;
-            this.btnGenerarXML.Text = "btnGenerarXML";
+            this.btnGenerarXML.Text = "Generar XML";
             this.btnGenerarXML.Click += new System.EventHandler(this.btnGenerarXML_Click);
             // 
             // txtServidor
@@ -75,7 +72,7 @@ namespace BDConfigXML
             this.txtServidor.Location = new System.Drawing.Point(114, 18);
             this.txtServidor.Name = "txtServidor";
             this.txtServidor.PreventEnterBeep = true;
-            this.txtServidor.Size = new System.Drawing.Size(304, 20);
+            this.txtServidor.Size = new System.Drawing.Size(180, 20);
             this.txtServidor.TabIndex = 1;
             this.validador.SetValidator1(this.txtServidor, this.requiredFieldValidator4);
             // 
@@ -89,7 +86,7 @@ namespace BDConfigXML
             this.txtBase.Location = new System.Drawing.Point(114, 44);
             this.txtBase.Name = "txtBase";
             this.txtBase.PreventEnterBeep = true;
-            this.txtBase.Size = new System.Drawing.Size(304, 20);
+            this.txtBase.Size = new System.Drawing.Size(180, 20);
             this.txtBase.TabIndex = 2;
             this.validador.SetValidator1(this.txtBase, this.requiredFieldValidator1);
             // 
@@ -103,7 +100,7 @@ namespace BDConfigXML
             this.txtUsuario.Location = new System.Drawing.Point(114, 70);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PreventEnterBeep = true;
-            this.txtUsuario.Size = new System.Drawing.Size(304, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(180, 20);
             this.txtUsuario.TabIndex = 3;
             this.validador.SetValidator1(this.txtUsuario, this.requiredFieldValidator2);
             // 
@@ -117,7 +114,7 @@ namespace BDConfigXML
             this.txtPass.Location = new System.Drawing.Point(114, 95);
             this.txtPass.Name = "txtPass";
             this.txtPass.PreventEnterBeep = true;
-            this.txtPass.Size = new System.Drawing.Size(304, 20);
+            this.txtPass.Size = new System.Drawing.Size(180, 20);
             this.txtPass.TabIndex = 4;
             this.validador.SetValidator1(this.txtPass, this.requiredFieldValidator3);
             // 
@@ -173,59 +170,16 @@ namespace BDConfigXML
             this.lblPassword.TabIndex = 8;
             this.lblPassword.Text = "Password";
             // 
-            // txtDestino
-            // 
-            // 
-            // 
-            // 
-            this.txtDestino.Border.Class = "TextBoxBorder";
-            this.txtDestino.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDestino.Location = new System.Drawing.Point(114, 121);
-            this.txtDestino.Name = "txtDestino";
-            this.txtDestino.PreventEnterBeep = true;
-            this.txtDestino.Size = new System.Drawing.Size(304, 20);
-            this.txtDestino.TabIndex = 9;
-            this.validador.SetValidator1(this.txtDestino, this.requiredFieldValidator5);
-            // 
-            // lblDestino
-            // 
-            // 
-            // 
-            // 
-            this.lblDestino.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblDestino.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDestino.Location = new System.Drawing.Point(13, 121);
-            this.lblDestino.Name = "lblDestino";
-            this.lblDestino.Size = new System.Drawing.Size(75, 20);
-            this.lblDestino.TabIndex = 10;
-            this.lblDestino.Text = "Destino";
-            // 
-            // btnExaminar
-            // 
-            this.btnExaminar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnExaminar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExaminar.Location = new System.Drawing.Point(424, 121);
-            this.btnExaminar.Name = "btnExaminar";
-            this.btnExaminar.Size = new System.Drawing.Size(67, 20);
-            this.btnExaminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnExaminar.TabIndex = 11;
-            this.btnExaminar.Text = "Examinar";
-            this.btnExaminar.Click += new System.EventHandler(this.btnExaminar_Click);
-            // 
             // validador
             // 
             this.validador.ContainerControl = this.btnGenerarXML;
             this.validador.ErrorProvider = this.errorProvider1;
             this.validador.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
+            // requiredFieldValidator4
             // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
+            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // requiredFieldValidator1
             // 
@@ -242,10 +196,14 @@ namespace BDConfigXML
             this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
-            // requiredFieldValidator4
+            // errorProvider1
             // 
-            this.requiredFieldValidator4.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator4.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
             // 
             // requiredFieldValidator5
             // 
@@ -254,10 +212,7 @@ namespace BDConfigXML
             // 
             // Form2
             // 
-            this.ClientSize = new System.Drawing.Size(498, 189);
-            this.Controls.Add(this.btnExaminar);
-            this.Controls.Add(this.lblDestino);
-            this.Controls.Add(this.txtDestino);
+            this.ClientSize = new System.Drawing.Size(307, 171);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.lblBase);
@@ -272,7 +227,7 @@ namespace BDConfigXML
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.ShowIcon = false;
-            this.Text = "Form2";
+            this.Text = "Conexión BD";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -289,9 +244,6 @@ namespace BDConfigXML
         private DevComponents.DotNetBar.LabelX lblBase;
         private DevComponents.DotNetBar.LabelX lblUsuario;
         private DevComponents.DotNetBar.LabelX lblPassword;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtDestino;
-        private DevComponents.DotNetBar.LabelX lblDestino;
-        private DevComponents.DotNetBar.ButtonX btnExaminar;
         private DevComponents.DotNetBar.Validator.SuperValidator validador;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;

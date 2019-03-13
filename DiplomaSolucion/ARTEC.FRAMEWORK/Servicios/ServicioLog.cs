@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 
 namespace ARTEC.FRAMEWORK.Servicios
@@ -63,6 +64,8 @@ namespace ARTEC.FRAMEWORK.Servicios
 	                catch (Exception es)
 	                {
                         System.Windows.Forms.MessageBox.Show("Error crítico y general de conexión a la base de datos");
+                        Application.Exit();
+
 	                }
                 }
 
