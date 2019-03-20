@@ -27,6 +27,8 @@ namespace ARTEC.DAL.Servicios
                         FRAMEWORK.Servicios.ServicioMail.remitente = row["Remitente"].ToString();
                         FRAMEWORK.Servicios.ServicioMail.remps = row["Remps"].ToString();
                         FRAMEWORK.Servicios.ServicioMail.remps = FRAMEWORK.Servicios.ServicioSecurizacion.Desencriptar(FRAMEWORK.Servicios.ServicioMail.remps);
+                        if (string.IsNullOrEmpty(FRAMEWORK.Servicios.ServicioMail.remitente = row["Remitente"].ToString()))
+                            throw new Exception("Se debe registrar la dirección del remitente");
                     }
                 }
             }
@@ -38,5 +40,36 @@ namespace ARTEC.DAL.Servicios
 
 
 
+
+        public void ModificarMailConfig(string unMail, string unPass, int unPuerto, string unHost, bool unSSL)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+			{
+                new SqlParameter("@unMail", unMail),
+                new SqlParameter("@unPass", unPass),
+                new SqlParameter("@unPuerto", unPuerto),
+                new SqlParameter("@unHost", unHost),
+                new SqlParameter("@unSSL", unSSL)
+
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "ModificarMailConfig", parameters);
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

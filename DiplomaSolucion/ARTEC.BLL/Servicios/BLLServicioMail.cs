@@ -11,6 +11,8 @@ namespace ARTEC.BLL.Servicios
     public class BLLServicioMail
     {
 
+        DALServicioMail GestorServicioMail = new DALServicioMail();
+
         public static void CargarMailConfig()
         {
             try
@@ -22,6 +24,18 @@ namespace ARTEC.BLL.Servicios
                 throw;
             }
             
+        }
+
+        public void ModificarMailConfig(string unMail, string unPass, int unPuerto, string unHost, bool unSSL)
+        {
+            try
+            {
+                GestorServicioMail.ModificarMailConfig(unMail, unPass, unPuerto, unHost, unSSL);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
     }

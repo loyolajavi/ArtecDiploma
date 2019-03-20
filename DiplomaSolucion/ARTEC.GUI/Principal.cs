@@ -353,6 +353,12 @@ namespace ARTEC.GUI
             unFrmFamiliasGestion.Show();
         }
 
+        private void btnParametros_Click(object sender, EventArgs e)
+        {
+            frmParametros unFrmParametros = new frmParametros();
+            unFrmParametros.Show();
+        }
+
 
 
 

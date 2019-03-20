@@ -25,52 +25,54 @@ namespace ARTEC.FRAMEWORK.Servicios
 
         public static bool EnviarCorreo
             (
-            //string remitente,
-            //string pass,
-            //string nombre,
-            //string telefono,
                 string destinatario,
                 string nombreEmpresa,
                 string asunto,
                 string cuerpoCorreo
             )
         {
-            var serverSMTP = new SmtpClient();
-            NetworkCredential credencial = new NetworkCredential();
-            credencial.UserName = remitente;
-            credencial.SecurePassword = SecurizarMailPass(remps);
-            serverSMTP.Credentials = credencial;
-            serverSMTP.Port = Puerto;
-            serverSMTP.Host = Host;
-            var correo = new MailMessage();
-            correo.From = new MailAddress(remitente, nombreEmpresa);
-            correo.To.Add(destinatario);
-            correo.Subject = asunto;
-            correo.Body = cuerpoCorreo;
-            serverSMTP.EnableSsl = ssl;
+            try
+            {
+                var serverSMTP = new SmtpClient();
+                NetworkCredential credencial = new NetworkCredential();
+                credencial.UserName = remitente;
+                credencial.SecurePassword = SecurizarMailPass(remps);
+                serverSMTP.Credentials = credencial;
+                serverSMTP.Port = Puerto;
+                serverSMTP.Host = Host;
+                var correo = new MailMessage();
+                correo.From = new MailAddress(remitente, nombreEmpresa);
+                correo.To.Add(destinatario);
+                correo.Subject = asunto;
+                correo.Body = cuerpoCorreo;
+                serverSMTP.EnableSsl = ssl;
 
-            Thread ProcesoMailEnviar = new Thread
-                (delegate()
-                {
-                    try
+                Thread ProcesoMailEnviar = new Thread
+                    (delegate()
                     {
-                        serverSMTP.Send(correo);
-                        EnvioExitoso = true;
+                        try
+                        {
+                            serverSMTP.Send(correo);
+                            EnvioExitoso = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw;
+                        }
+                        finally
+                        {
+                            correo.Dispose();
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        throw;
-                    }
-                    finally
-                    {
-                        correo.Dispose();
-                    }
-                }
-                );
+                    );
 
-            ProcesoMailEnviar.Start();
-
-            return EnvioExitoso;
+                ProcesoMailEnviar.Start();
+                return EnvioExitoso;
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
         }
 
 
