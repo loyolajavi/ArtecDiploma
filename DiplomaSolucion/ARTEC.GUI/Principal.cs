@@ -154,6 +154,14 @@ namespace ARTEC.GUI
             dictabAdquisiciones.Add("Idioma", IdiomatabAdquisiciones);
             this.tabAdquisiciones.Tag = dictabAdquisiciones;
 
+            Dictionary<string, string[]> dicbtnParametros = new Dictionary<string, string[]>();
+            string[] PerbtnParametros = { "Mail Modificar" };
+            dicbtnParametros.Add("Permisos", PerbtnParametros);
+            string[] IdiomabtnParametros = { "Configurar Mail" };
+            dicbtnParametros.Add("Idioma", IdiomabtnParametros);
+            this.btnParametros.Tag = dicbtnParametros;
+            
+
             //END Diccionarios
 
             SolicitudBuscar frmSolicitudBuscar = new SolicitudBuscar();

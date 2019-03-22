@@ -30,6 +30,8 @@ namespace ARTEC.BLL.Servicios
         {
             try
             {
+                if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, new string[] { "Mail Modificar" }))
+                    throw new InvalidOperationException("No posee los permisos suficientes");
                 GestorServicioMail.ModificarMailConfig(unMail, unPass, unPuerto, unHost, unSSL);
             }
             catch (Exception es)

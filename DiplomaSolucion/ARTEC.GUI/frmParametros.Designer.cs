@@ -37,17 +37,17 @@ namespace ARTEC.GUI
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.vldFrmParametros = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.txtPuerto = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.txtHost = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             this.lblPuerto = new DevComponents.DotNetBar.LabelX();
             this.lblHost = new DevComponents.DotNetBar.LabelX();
             this.lblSSL = new DevComponents.DotNetBar.LabelX();
             this.chkSSL = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator2 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
-            this.requiredFieldValidator3 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,6 +138,11 @@ namespace ARTEC.GUI
             this.regularExpressionValidator1.ValidationExpression = "^([\\w\\d\\-\\.]+)@{1}(([\\w\\d\\-]{1,67})|([\\w\\d\\-]+\\.[\\w\\d\\-]{1,67}))\\.(([a-zA-Z\\d]{2," +
     "4})(\\.[a-zA-Z\\d]{2})?)$";
             // 
+            // requiredFieldValidator3
+            // 
+            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -164,6 +169,11 @@ namespace ARTEC.GUI
             this.txtPuerto.TabIndex = 63;
             this.vldFrmParametros.SetValidator1(this.txtPuerto, this.requiredFieldValidator1);
             // 
+            // requiredFieldValidator1
+            // 
+            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            // 
             // txtHost
             // 
             this.txtHost.BackColor = System.Drawing.Color.White;
@@ -180,6 +190,11 @@ namespace ARTEC.GUI
             this.txtHost.Size = new System.Drawing.Size(121, 22);
             this.txtHost.TabIndex = 64;
             this.vldFrmParametros.SetValidator1(this.txtHost, this.requiredFieldValidator2);
+            // 
+            // requiredFieldValidator2
+            // 
+            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
+            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
             // lblPuerto
             // 
@@ -232,21 +247,6 @@ namespace ARTEC.GUI
             this.chkSSL.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSSL.TabIndex = 65;
             // 
-            // requiredFieldValidator1
-            // 
-            this.requiredFieldValidator1.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator2
-            // 
-            this.requiredFieldValidator2.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator2.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
-            // requiredFieldValidator3
-            // 
-            this.requiredFieldValidator3.ErrorMessage = "Your error message here.";
-            this.requiredFieldValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            // 
             // frmParametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,8 +265,10 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtMail);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
             this.Name = "frmParametros";
             this.Text = "MetroForm";
+            this.Load += new System.EventHandler(this.frmParametros_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
