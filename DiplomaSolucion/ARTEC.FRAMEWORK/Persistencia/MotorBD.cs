@@ -40,7 +40,10 @@ namespace ARTEC.FRAMEWORK.Persistencia
                         ConfiguracionBase = ServicioSerializadorXML.DeSerializar<List<ConfiguracionConexion>>(ms);
                     }
                     DesencriptarConfigBDXML();
-                    _connectionStringName = ConfiguracionBase[0].DataSourceBD + ConfiguracionBase[0].InitialCatalogBD + ConfiguracionBase[0].UsuarioBD + ConfiguracionBase[0].PasswordBD;
+                    if (ConfiguracionBase[0].UsuarioBD != null && !string.IsNullOrEmpty(ConfiguracionBase[0].UsuarioBD))
+                        _connectionStringName = ConfiguracionBase[0].DataSourceBD + ConfiguracionBase[0].InitialCatalogBD + ConfiguracionBase[0].UsuarioBD + ConfiguracionBase[0].PasswordBD;
+                    else
+                        _connectionStringName = ConfiguracionBase[0].DataSourceBD + ConfiguracionBase[0].InitialCatalogBD + ConfiguracionBase[0].SSPI;
                 }
                 Conexion = new SqlConnection(_connectionStringName);
                 if (Conexion != null && Conexion.State == ConnectionState.Closed)
@@ -61,7 +64,10 @@ namespace ARTEC.FRAMEWORK.Persistencia
             {
                 //string connectionStringNameRest = System.Configuration.ConfigurationManager.ConnectionStrings["Restaurar"].ConnectionString; Ya no lo uso mas porque lo saco del archivo xml
                 string connectionStringNameRest;
-                connectionStringNameRest = ConfiguracionBase[1].DataSourceBD + ConfiguracionBase[1].InitialCatalogBD + ConfiguracionBase[1].UsuarioBD + ConfiguracionBase[1].PasswordBD;
+                if (ConfiguracionBase[1].UsuarioBD != null && !string.IsNullOrEmpty(ConfiguracionBase[1].UsuarioBD))
+                    connectionStringNameRest = ConfiguracionBase[1].DataSourceBD + ConfiguracionBase[1].InitialCatalogBD + ConfiguracionBase[1].UsuarioBD + ConfiguracionBase[1].PasswordBD;
+                else
+                    connectionStringNameRest = ConfiguracionBase[1].DataSourceBD + ConfiguracionBase[1].InitialCatalogBD + ConfiguracionBase[1].SSPI;
 
                 Conexion = new SqlConnection(connectionStringNameRest);
                 if (Conexion != null && Conexion.State == ConnectionState.Closed)
@@ -347,17 +353,32 @@ namespace ARTEC.FRAMEWORK.Persistencia
 
         private static void DesencriptarConfigBDXML()
         {
-            //Esquema Artec
-            ConfiguracionBase[0].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].DataSourceBD);
-            ConfiguracionBase[0].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].InitialCatalogBD);
-            ConfiguracionBase[0].UsuarioBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].UsuarioBD);
-            ConfiguracionBase[0].PasswordBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].PasswordBD);
+            if (ConfiguracionBase[0].UsuarioBD != null && !string.IsNullOrEmpty(ConfiguracionBase[0].UsuarioBD))
+            {
+                //Esquema Artec
+                ConfiguracionBase[0].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].DataSourceBD);
+                ConfiguracionBase[0].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].InitialCatalogBD);
+                ConfiguracionBase[0].UsuarioBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].UsuarioBD);
+                ConfiguracionBase[0].PasswordBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].PasswordBD);
 
-            //Esquema master
-            ConfiguracionBase[1].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].DataSourceBD);
-            ConfiguracionBase[1].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].InitialCatalogBD);
-            ConfiguracionBase[1].UsuarioBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].UsuarioBD);
-            ConfiguracionBase[1].PasswordBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].PasswordBD);
+                //Esquema master
+                ConfiguracionBase[1].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].DataSourceBD);
+                ConfiguracionBase[1].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].InitialCatalogBD);
+                ConfiguracionBase[1].UsuarioBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].UsuarioBD);
+                ConfiguracionBase[1].PasswordBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].PasswordBD);
+            }
+            else
+            {
+                //Esquema Artec
+                ConfiguracionBase[0].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].DataSourceBD);
+                ConfiguracionBase[0].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].InitialCatalogBD);
+                ConfiguracionBase[0].SSPI = ServicioSecurizacion.Desencriptar(ConfiguracionBase[0].SSPI);
+
+                //Esquema master
+                ConfiguracionBase[1].DataSourceBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].DataSourceBD);
+                ConfiguracionBase[1].InitialCatalogBD = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].InitialCatalogBD);
+                ConfiguracionBase[1].SSPI = ServicioSecurizacion.Desencriptar(ConfiguracionBase[1].SSPI);
+            }
         }
 
 

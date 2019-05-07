@@ -47,6 +47,8 @@ namespace BDConfigXML
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.requiredFieldValidator5 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Your error message here.");
+            this.cboxSSPI = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.lblSSO = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@ namespace BDConfigXML
             // 
             this.btnGenerarXML.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnGenerarXML.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnGenerarXML.Location = new System.Drawing.Point(114, 130);
+            this.btnGenerarXML.Location = new System.Drawing.Point(114, 153);
             this.btnGenerarXML.Name = "btnGenerarXML";
             this.btnGenerarXML.Size = new System.Drawing.Size(83, 29);
             this.btnGenerarXML.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -210,9 +212,38 @@ namespace BDConfigXML
             this.requiredFieldValidator5.ErrorMessage = "Your error message here.";
             this.requiredFieldValidator5.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             // 
+            // cboxSSPI
+            // 
+            // 
+            // 
+            // 
+            this.cboxSSPI.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cboxSSPI.CheckSignSize = new System.Drawing.Size(16, 16);
+            this.cboxSSPI.Location = new System.Drawing.Point(114, 123);
+            this.cboxSSPI.Name = "cboxSSPI";
+            this.cboxSSPI.Size = new System.Drawing.Size(100, 20);
+            this.cboxSSPI.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cboxSSPI.TabIndex = 9;
+            this.cboxSSPI.CheckValueChanged += new System.EventHandler(this.cboxSSPI_CheckValueChanged);
+            // 
+            // lblSSO
+            // 
+            // 
+            // 
+            // 
+            this.lblSSO.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblSSO.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSSO.Location = new System.Drawing.Point(13, 122);
+            this.lblSSO.Name = "lblSSO";
+            this.lblSSO.Size = new System.Drawing.Size(75, 20);
+            this.lblSSO.TabIndex = 10;
+            this.lblSSO.Text = "SSO";
+            // 
             // Form2
             // 
-            this.ClientSize = new System.Drawing.Size(307, 171);
+            this.ClientSize = new System.Drawing.Size(307, 212);
+            this.Controls.Add(this.lblSSO);
+            this.Controls.Add(this.cboxSSPI);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.lblBase);
@@ -252,5 +283,7 @@ namespace BDConfigXML
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator4;
+        private DevComponents.DotNetBar.LabelX lblSSO;
+        private DevComponents.DotNetBar.Controls.CheckBoxX cboxSSPI;
     }
 }

@@ -15,30 +15,66 @@ namespace BDConfigXML
         public Form2()
         {
             InitializeComponent();
+            txtUsuario.Enabled = true;
+            txtPass.Enabled = true;
         }
 
         private void btnGenerarXML_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!validador.Validate())
-                    return;
+                
 
                 List<ConfiguracionConexion> ListaDatosBD = new List<ConfiguracionConexion>();
                 ConfiguracionConexion unDatosDB = new ConfiguracionConexion();
                 ConfiguracionConexion unDatosDB2 = new ConfiguracionConexion();
 
+                //Artec
                 unDatosDB.DataSourceBD = ServicioSecurizacion.Encriptar("Data Source=" + txtServidor.Text + ";");
                 unDatosDB.InitialCatalogBD = ServicioSecurizacion.Encriptar("Initial Catalog=" + txtBase.Text + ";");
-                unDatosDB.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
-                unDatosDB.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
-                ListaDatosBD.Add(unDatosDB);
 
+                //Backup
                 unDatosDB2.DataSourceBD = ServicioSecurizacion.Encriptar("Data Source=" + txtServidor.Text + ";");
                 unDatosDB2.InitialCatalogBD = ServicioSecurizacion.Encriptar("Initial Catalog=master;");
-                unDatosDB2.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
-                unDatosDB2.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
-                ListaDatosBD.Add(unDatosDB2);
+
+                //Si está tildado SSO
+                if (cboxSSPI.Checked)
+                {
+                    requiredFieldValidator2.IsEmptyStringValid = true;
+                    requiredFieldValidator3.IsEmptyStringValid = true;
+                    
+
+                    //Artec
+                    unDatosDB.UsuarioBD = "";
+                    unDatosDB.PasswordBD = "";
+                    unDatosDB.SSPI = ServicioSecurizacion.Encriptar("Integrated Security=SSPI;");
+                    ListaDatosBD.Add(unDatosDB);
+
+                    //Backup    
+                    unDatosDB2.UsuarioBD = "";
+                    unDatosDB2.PasswordBD = "";
+                    unDatosDB2.SSPI = ServicioSecurizacion.Encriptar("Integrated Security=SSPI;");
+                    ListaDatosBD.Add(unDatosDB2);
+                }
+                else
+                {
+                    requiredFieldValidator2.IsEmptyStringValid = false;
+                    requiredFieldValidator3.IsEmptyStringValid = false;
+                    //Artec
+                    unDatosDB.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
+                    unDatosDB.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
+                    unDatosDB.SSPI = "";
+                    ListaDatosBD.Add(unDatosDB);
+
+                    //Backup
+                    unDatosDB2.UsuarioBD = ServicioSecurizacion.Encriptar("user Id=" + txtUsuario.Text + ";");
+                    unDatosDB2.PasswordBD = ServicioSecurizacion.Encriptar("Password=" + txtPass.Text + ";");
+                    unDatosDB2.SSPI = "";
+                    ListaDatosBD.Add(unDatosDB2);
+                }
+
+                if (!validador.Validate())
+                    return;
 
                 var Resultado = ServicioSerializadorXML.Serializar(ListaDatosBD);
 
@@ -55,6 +91,21 @@ namespace BDConfigXML
                 MessageBox.Show("Error: " + es.Message);
             }
            
+        }
+
+
+        private void cboxSSPI_CheckValueChanged(object sender, EventArgs e)
+        {
+            if (cboxSSPI.Checked)
+            {
+                txtUsuario.Enabled = false;
+                txtPass.Enabled = false;
+            }
+            else
+            {
+                txtUsuario.Enabled = true;
+                txtPass.Enabled = true;
+            }
         }
 
 

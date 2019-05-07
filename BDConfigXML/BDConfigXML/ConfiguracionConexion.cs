@@ -12,6 +12,7 @@ namespace BDConfigXML
         public string InitialCatalogBD { get; set; }
         public string UsuarioBD { get; set; }
         public string PasswordBD { get; set; }
+        public string SSPI { get; set; }
 
     }
 }
