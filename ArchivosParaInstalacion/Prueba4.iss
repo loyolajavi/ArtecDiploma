@@ -5,7 +5,7 @@
 ;   Result := NombreBD;
 ; end;
 
-#define MyAppName "ArtecPrueba19"
+#define MyAppName "ArtecPrueba21"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "MPF"
 #define MyAppExeName "ARTEC.GUI.exe"
@@ -14,14 +14,14 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{2E09EF89-8A5B-4607-AA27-798958135C24}
+AppId={{0E36C8BA-943C-4224-80D8-66EAA32656A1}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=ArtecPrueba19
+OutputBaseFilename=ArtecPrueba21
 Compression=lzma
 SolidCompression=yes
 DisableDirPage=no
@@ -100,6 +100,8 @@ Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.G
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\itextsharp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\itextsharp.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Xceed.Words.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\DevComponents.DotNetBar2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\DevComponents.DotNetBar2.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\BDConfigXML.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\BDScript\BDArtecDatos.sql"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\InstalarBDArtec.cmd"; DestDir: "{app}"; Flags: ignoreversion
