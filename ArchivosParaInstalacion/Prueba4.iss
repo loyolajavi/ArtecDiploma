@@ -5,7 +5,7 @@
 ;   Result := NombreBD;
 ; end;
 
-#define MyAppName "ArtecPrueba21"
+#define MyAppName "ArtecPrueba22"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "MPF"
 #define MyAppExeName "ARTEC.GUI.exe"
@@ -14,14 +14,14 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{0E36C8BA-943C-4224-80D8-66EAA32656A1}
+AppId={{C880208C-8F5B-48AB-90B0-DE51B36A0DFE}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=ArtecPrueba21
+OutputBaseFilename=ArtecPrueba22
 Compression=lzma
 SolidCompression=yes
 DisableDirPage=no
