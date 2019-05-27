@@ -242,6 +242,14 @@ namespace ARTEC.GUI
                 MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Por favor seleccione la Familia que contiene el permiso seleccionado o la patente requerida en forma directa").Texto);
             else
             {
+                //Verificar que no se esté agregando una referencia circular
+                if ((LisAuxDisp[treeDisponibles.SelectedNode.Index] as Familia).ElementosFamPat.Any(X=>X.NombreIFamPat==(cboFamilia.SelectedItem as Familia).NombreIFamPat))
+                {
+                    MessageBox.Show("No se puede agregar una referencia circular de Permisos");
+                    return;
+                }
+                    
+
                 LisAuxAsig.Add(LisAuxDisp[treeDisponibles.SelectedNode.Index]);
 
                 LisAuxDisp = PermisosTodos.ToList();

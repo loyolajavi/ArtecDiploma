@@ -526,7 +526,6 @@ namespace ARTEC.DAL
                     ServicioDV.DVActualizarDVH(unUsuario.IdUsuario, ResAcum, unUsuario.GetType().Name, "IdUsuario");
                     FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
                 }
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
             }
             catch (Exception es)
             {
