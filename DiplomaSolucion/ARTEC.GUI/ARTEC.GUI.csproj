@@ -233,6 +233,12 @@
     <Compile Include="frmModeloCrear.Designer.cs">
       <DependentUpon>frmModeloCrear.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNuevoIdioma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNuevoIdioma.Designer.cs">
+      <DependentUpon>frmNuevoIdioma.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmParametros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -414,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmModeloCrear.resx">
       <DependentUpon>frmModeloCrear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoIdioma.resx">
+      <DependentUpon>frmNuevoIdioma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmParametros.resx">
       <DependentUpon>frmParametros.cs</DependentUpon>

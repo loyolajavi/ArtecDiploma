@@ -136,5 +136,43 @@ namespace ARTEC.DAL.Servicios
         }
 
 
+
+        public static void CrearNuevoIdioma(string NombreNuevoIdioma)
+        {
+            SqlParameter[] parametersIdiomaCrear = new SqlParameter[]
+			{
+                new SqlParameter("@NombreIdioma", NombreNuevoIdioma)
+			};
+
+            try
+            {
+                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+                var Resultado = (decimal)FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "IdiomaCrear", parametersIdiomaCrear);
+                int IdIdiomaCreado = Decimal.ToInt32(Resultado);
+
+                foreach (ENTIDADES.Servicios.Etiqueta unaEtiqueta in ENTIDADES.Servicios.Idioma._EtiquetasCompartidas)
+                {
+                    SqlParameter[] parametersTextoIdioma = new SqlParameter[]
+			        {
+                        new SqlParameter("@NombreControl", unaEtiqueta.NombreControl),
+                        new SqlParameter("@Texto", unaEtiqueta.NuevoTexto),
+                        new SqlParameter("@IdIdioma", IdIdiomaCreado)
+			        };
+                    FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "NuevoTextoIdioma", parametersTextoIdioma);
+                }
+                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+            }
+            catch (Exception es)
+            {
+                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+                throw;
+            }
+            finally
+            {
+                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+            }
+        }
     }
 }

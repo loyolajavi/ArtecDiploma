@@ -304,6 +304,19 @@ namespace ARTEC.BLL.Servicios
             elCboBox.SelectedValue = seleccionado;
         }
 
+        public static void CrearNuevoIdioma(string NombreNuevoIdioma) 
+        {
+            try
+            {
+                DALServicioIdioma.CrearNuevoIdioma(NombreNuevoIdioma);
+            }
+            catch (Exception es)
+            {
+                throw;
+            }
+        }
+
+
         //YA NO UTILIZADA 21/03/2018
         //public static void IdiomaSetearDefault(Idioma unIdiomaDefault)
         //{

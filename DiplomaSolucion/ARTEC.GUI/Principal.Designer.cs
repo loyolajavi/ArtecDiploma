@@ -53,6 +53,7 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +140,7 @@ namespace ARTEC.GUI
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.buttonX1);
             this.panelEx1.Controls.Add(this.btnParametros);
             this.panelEx1.Controls.Add(this.btnFamilias);
             this.panelEx1.Controls.Add(this.btnBitacora);
@@ -395,11 +397,26 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.buttonX1.CustomColorName = "Blue";
+            this.buttonX1.Location = new System.Drawing.Point(1030, 9);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(108, 40);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 14;
+            this.buttonX1.Text = "buttonX1";
+            this.buttonX1.TextColor = System.Drawing.Color.White;
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click_1);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 732);
+            this.ClientSize = new System.Drawing.Size(1362, 732);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.btnProveedor);
             this.Controls.Add(this.btnCategorias);
@@ -451,6 +468,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabAsignaciones;
         private System.Windows.Forms.TabPage tabAdquisiciones;
         private DevComponents.DotNetBar.ButtonX btnParametros;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
 
 
 

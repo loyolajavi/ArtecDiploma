@@ -367,6 +367,20 @@ namespace ARTEC.GUI
             unFrmParametros.Show();
         }
 
+        private void buttonX1_Click_1(object sender, EventArgs e)
+        {
+            frmNuevoIdioma unFrmNuevoIdioma = new frmNuevoIdioma();
+            if (unFrmNuevoIdioma.ShowDialog(this) == DialogResult.OK)
+            {
+                //Traigo todos los idiomas
+                unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
+                cboIdioma.DataSource = null;
+                cboIdioma.DisplayMember = "NombreIdioma";
+                cboIdioma.ValueMember = "IdIdioma";
+                cboIdioma.DataSource = unosIdiomas;
+            }
+        }
+
 
 
 
