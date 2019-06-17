@@ -17,7 +17,7 @@ using ARTEC.ENTIDADES.Servicios;
 
 namespace ARTEC.GUI
 {
-    public partial class SolicitudBuscar : DevComponents.DotNetBar.Metro.MetroForm
+    public partial class SolicitudBuscar : DevComponents.DotNetBar.Metro.MetroForm, IObservador
     {
 
         private static SolicitudBuscar _unSolicitudBuscarInst;
@@ -216,6 +216,8 @@ namespace ARTEC.GUI
 
                 //Idioma
                 BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                IObservable.AgregarObservador(this);
+
 
                 ///Traer Estados Solicitud
                 BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
@@ -270,12 +272,20 @@ namespace ARTEC.GUI
 
         }
 
-        
+        void IObservador.Traducirme()
+        {
+            ///Actualizar idioma Estados Solicitud
 
+            foreach (EstadoSolicitud unEstSolic in unosEstadoSolicitud)
+            {
+                unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
+            }
+        }
 
-
-
-
+        private void SolicitudBuscar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IObservable.QuitarObservador(this);
+        }
 
 
 

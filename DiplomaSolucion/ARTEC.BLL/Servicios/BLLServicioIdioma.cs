@@ -15,7 +15,7 @@ using DevComponents.DotNetBar.Validator;
 
 namespace ARTEC.BLL.Servicios
 {
-    public static class BLLServicioIdioma
+    public static class BLLServicioIdioma : BLL.Servicios.IObservable
     {
         public static List<SuperValidator> LisAUX = new List<SuperValidator>();
         public static List<Idioma> IdiomaTraerTodos()

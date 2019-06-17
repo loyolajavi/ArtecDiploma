@@ -84,6 +84,8 @@
     <Compile Include="Servicios\BLLIdioma.cs" />
     <Compile Include="Servicios\BLLServicioIdioma.cs" />
     <Compile Include="Servicios\BLLServicioMail.cs" />
+    <Compile Include="Servicios\IObservable.cs" />
+    <Compile Include="Servicios\IObservador.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ARTEC.DAL\ARTEC.DAL.csproj">

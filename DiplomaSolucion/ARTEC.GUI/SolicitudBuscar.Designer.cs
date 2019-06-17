@@ -618,6 +618,7 @@ namespace ARTEC.GUI
             this.ShowIcon = false;
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SolicitudBuscar_FormClosing);
             this.Load += new System.EventHandler(this.SolicitudBuscar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
