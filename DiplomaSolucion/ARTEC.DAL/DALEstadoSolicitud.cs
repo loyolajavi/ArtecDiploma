@@ -16,27 +16,29 @@ namespace ARTEC.DAL
 
         public List<EstadoSolicitud> EstadoSolicitudTraerTodos()
         {
-            //using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolicitudTraerTodos"))
-            //{
-            //    List<EstadoSolicitud> unaLista = new List<EstadoSolicitud>();
-            //    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
-            //    return unaLista;
-            //}
-
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@IdIdioma", Idioma.unIdiomaActual)
-            };
             try
             {
-                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolicitudTraerTodosPorIdioma", parameters))
+                using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolicitudTraerTodos"))
                 {
                     List<EstadoSolicitud> unaLista = new List<EstadoSolicitud>();
-                    unaLista = MapearEstadoSolicitud(ds);
+                    unaLista = FRAMEWORK.Persistencia.Mapeador.Mapear<EstadoSolicitud>(ds);
                     return unaLista;
                 }
             }
+
+            //SqlParameter[] parameters = new SqlParameter[]
+            //{
+            //    new SqlParameter("@IdIdioma", Idioma.unIdiomaActual)
+            //};
+            //try
+            //{
+            //    using (DataSet ds = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSet(CommandType.StoredProcedure, "EstadoSolicitudTraerTodosPorIdioma", parameters))
+            //    {
+            //        List<EstadoSolicitud> unaLista = new List<EstadoSolicitud>();
+            //        unaLista = MapearEstadoSolicitud(ds);
+            //        return unaLista;
+            //    }
+            //}
             catch (Exception)
             {
                 throw;

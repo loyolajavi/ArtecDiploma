@@ -32,7 +32,7 @@ namespace ARTEC.GUI
         private void frmMarcaCrear_Load(object sender, EventArgs e)
         {
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
         }
 
         private void btnCrear_Click(object sender, EventArgs e)

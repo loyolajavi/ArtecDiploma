@@ -115,7 +115,7 @@ namespace ARTEC.GUI
             }
 
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLLDependencia ManagerDependencia = new BLLDependencia();

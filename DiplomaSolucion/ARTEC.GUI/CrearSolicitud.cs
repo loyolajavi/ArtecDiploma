@@ -249,7 +249,7 @@ namespace ARTEC.GUI
         private void CrearSolicitud_Load(object sender, EventArgs e)
         {
             //Traducir
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             ///Traigo Dependencias para busqueda dinámica
             BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
@@ -276,10 +276,16 @@ namespace ARTEC.GUI
             ///Traer Estados Solicitud
             BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
             unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+            foreach (EstadoSolicitud unEstSolic in unosEstadoSolicitud)
+            {
+                if (!string.IsNullOrWhiteSpace(unEstSolic.DescripEstadoSolic))
+                    unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
+            }
             cboEstadoSolicitud.DataSource = null;
             cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
             cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
             cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+
 
 
             ///Traer Prioridad

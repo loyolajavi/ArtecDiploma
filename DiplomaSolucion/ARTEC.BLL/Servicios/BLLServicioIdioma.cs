@@ -15,15 +15,29 @@ using DevComponents.DotNetBar.Validator;
 
 namespace ARTEC.BLL.Servicios
 {
-    public static class BLLServicioIdioma : BLL.Servicios.IObservable
+    public class BLLServicioIdioma : IObservable
     {
+        //SINGLETON
+        private static BLLServicioIdioma _BLLServicioIdiomaUnico;
+
+        private BLLServicioIdioma() { }
+
+        public static BLLServicioIdioma GetBLLServicioIdiomaUnico()
+        {
+            if (_BLLServicioIdiomaUnico == null)
+                _BLLServicioIdiomaUnico = new BLLServicioIdioma();
+            return _BLLServicioIdiomaUnico;
+        }
+
+        //END SINGLETON
+
         public static List<SuperValidator> LisAUX = new List<SuperValidator>();
         public static List<Idioma> IdiomaTraerTodos()
         {
             return DALServicioIdioma.IdiomaTraerTodos();
         }
 
-        public static void Traducir(Control unForm, int elIdioma)
+        public void Traducir(Control unForm, int elIdioma)
         {
             try
             {
@@ -117,6 +131,7 @@ namespace ARTEC.BLL.Servicios
 
                     }
                 }
+                ActualizarEstadoObservadores();
             }
             catch (Exception es)
             {
@@ -162,7 +177,7 @@ namespace ARTEC.BLL.Servicios
         }
 
 
-        public static bool CambiarIdioma(Control unControlCI, int unIdioma)
+        public bool CambiarIdioma(Control unControlCI, int unIdioma)
         {
             bool Cambiar;
 
@@ -201,6 +216,7 @@ namespace ARTEC.BLL.Servicios
                         FRAMEWORK.Servicios.ServicioDV.DVActualizarDVHIniBD(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdUsuario, FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.DVH, FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.GetType().Name, "IdUsuario");
                     }
                 }
+                //ActualizarEstadoObservadores();
                 return true;
             }
             return false;
@@ -222,7 +238,7 @@ namespace ARTEC.BLL.Servicios
 
             if (unCboBox.Name == "cboEstadoSolicitud")
             {
-                CambiarIdiomacboEstadoSolicitud(unCboBox);
+                //CambiarIdiomacboEstadoSolicitud(unCboBox);
             }
             else if (unCboBox.Name == "cboPrioridad")
             {

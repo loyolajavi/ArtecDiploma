@@ -34,7 +34,7 @@ namespace ARTEC.GUI
         private void frmModeloCrear_Load(object sender, EventArgs e)
         {
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             txtMarca.Text = unaMarca.DescripMarca;
         }

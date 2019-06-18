@@ -215,13 +215,18 @@ namespace ARTEC.GUI
                 }
 
                 //Idioma
-                BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
                 IObservable.AgregarObservador(this);
+                BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
 
                 ///Traer Estados Solicitud
                 BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
                 unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+                foreach (EstadoSolicitud unEstSolic in unosEstadoSolicitud)
+                {
+                    if (!string.IsNullOrWhiteSpace(unEstSolic.DescripEstadoSolic))
+                        unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
+                }
                 cboEstadoSolicitud.DataSource = null;
                 unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
                 cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
@@ -275,10 +280,24 @@ namespace ARTEC.GUI
         void IObservador.Traducirme()
         {
             ///Actualizar idioma Estados Solicitud
+            int seleccionado = 0;
+            if (cboEstadoSolicitud.SelectedValue != null)
+                seleccionado = (int)cboEstadoSolicitud.SelectedValue;
+
+            BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
+            unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+
+            cboEstadoSolicitud.DataSource = null;
+            unosEstadoSolicitud.Insert(0, new EstadoSolicitud(-1, ""));
+            cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
+            cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";
+            cboEstadoSolicitud.ValueMember = "IdEstadoSolicitud";
+            cboEstadoSolicitud.SelectedValue = seleccionado;
 
             foreach (EstadoSolicitud unEstSolic in unosEstadoSolicitud)
             {
-                unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
+                if(!string.IsNullOrWhiteSpace(unEstSolic.DescripEstadoSolic))
+                    unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
             }
         }
 

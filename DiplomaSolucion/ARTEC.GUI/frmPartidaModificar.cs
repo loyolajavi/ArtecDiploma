@@ -122,7 +122,7 @@ namespace ARTEC.GUI
             }
 
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             unaPartida = ManagerPartida.PartidaTraerPorNroPartConCanceladas(NroPartida).FirstOrDefault();
             if (unaPartida != null && unaPartida.IdPartida > 0)

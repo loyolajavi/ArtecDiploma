@@ -73,7 +73,7 @@ namespace ARTEC.GUI
             }
 
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
             
             txtNroSolic.Text = unaSolic.IdSolicitud.ToString();
             txtDependencia.Text = unaSolic.laDependencia.NombreDependencia;

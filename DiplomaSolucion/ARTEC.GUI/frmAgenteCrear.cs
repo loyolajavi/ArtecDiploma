@@ -65,7 +65,7 @@ namespace ARTEC.GUI
         private void frmAgenteCrear_Load(object sender, EventArgs e)
         {
             //Idioma
-            BLLServicioIdioma.Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
             //Traigo los cargos
             BLLCargo ManagerCargo = new BLLCargo();

@@ -114,7 +114,7 @@ namespace ARTEC.GUI
             unasDependencias = ManagerDependencia.TraerTodos();
 
             //Traducir
-            BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
         }
 

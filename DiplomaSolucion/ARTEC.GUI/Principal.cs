@@ -182,7 +182,7 @@ namespace ARTEC.GUI
                 //Traduzco con el IdiomaActual del usuario logueado
                 Idioma.unIdiomaActual = ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual;
                 Idioma._EtiquetasCompartidas = null;
-                BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+                BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), Idioma.unIdiomaActual);
                 //Traigo todos los idiomas
                 unosIdiomas = BLLServicioIdioma.IdiomaTraerTodos();
                 cboIdioma.DataSource = null;
@@ -295,11 +295,11 @@ namespace ARTEC.GUI
 
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (BLLServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue))
+            if (BLLServicioIdioma.GetBLLServicioIdiomaUnico().CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue))
             {
                 foreach (Control unForm in Application.OpenForms)
                 {
-                    BLLServicioIdioma.Traducir(unForm, Idioma.unIdiomaActual);
+                    BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(unForm, Idioma.unIdiomaActual);
                 }
             }
 

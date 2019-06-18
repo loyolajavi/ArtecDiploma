@@ -76,7 +76,7 @@ namespace ARTEC.GUI
                 Idioma.unIdiomaActual = Idioma.unIdiomaDefault.IdIdioma;
 
                 //Traduzco con el idioma Default
-                BLLServicioIdioma.Traducir(this.FindForm(), Idioma.unIdiomaActual);
+                BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), Idioma.unIdiomaActual);
 
                 //Verifica Integridad Base Datos
                 List<bool> IntegridadDVV = ARTEC.FRAMEWORK.Servicios.ServicioDV.DVVerificarIntegridadBD();
@@ -120,7 +120,7 @@ namespace ARTEC.GUI
         private void cboIdioma_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Idioma._EtiquetasCompartidas = null;
-            BLLServicioIdioma.CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
+            BLLServicioIdioma.GetBLLServicioIdiomaUnico().CambiarIdioma(this.FindForm(), (int)cboIdioma.SelectedValue);
         }
 
 

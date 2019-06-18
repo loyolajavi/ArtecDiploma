@@ -252,7 +252,7 @@ namespace ARTEC.GUI
                 }
 
                 //Traducir formulario
-                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
 
                 txtNroSolic.Text = unaSolicitud.IdSolicitud.ToString();
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
@@ -292,6 +292,11 @@ namespace ARTEC.GUI
                 ///Traer Estados Solicitud
                 BLLEstadoSolicitud ManagerEstadoSolicitud = new BLLEstadoSolicitud();
                 unosEstadoSolicitud = ManagerEstadoSolicitud.EstadoSolicitudTraerTodos();
+                foreach (EstadoSolicitud unEstSolic in unosEstadoSolicitud)
+                {
+                    if (!string.IsNullOrWhiteSpace(unEstSolic.DescripEstadoSolic))
+                        unEstSolic.DescripEstadoSolic = BLLServicioIdioma.MostrarMensaje(unEstSolic.DescripEstadoSolic).Texto;
+                }
                 cboEstadoSolicitud.DataSource = null;
                 cboEstadoSolicitud.DataSource = unosEstadoSolicitud;
                 cboEstadoSolicitud.DisplayMember = "DescripEstadoSolic";

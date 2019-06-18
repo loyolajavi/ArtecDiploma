@@ -99,7 +99,7 @@ namespace ARTEC.GUI
         {
             try
             {
-                BLLServicioIdioma.Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
+                BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
                 ///Traigo Dependencias para busqueda dinámica
                 BLL.BLLDependencia ManagerDependencia = new BLL.BLLDependencia();
                 unasDependencias = ManagerDependencia.TraerTodos();
