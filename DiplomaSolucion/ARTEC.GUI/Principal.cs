@@ -160,7 +160,12 @@ namespace ARTEC.GUI
             string[] IdiomabtnParametros = { "Configurar Mail" };
             dicbtnParametros.Add("Idioma", IdiomabtnParametros);
             this.btnParametros.Tag = dicbtnParametros;
-            
+
+            Dictionary<string, string[]> dicbtnNuevoIdioma = new Dictionary<string, string[]>();
+            string[] IdiomabtnNuevoIdioma = { "Idioma" };
+            dicbtnNuevoIdioma.Add("Idioma", IdiomabtnNuevoIdioma);
+            this.btnNuevoIdioma.Tag = dicbtnNuevoIdioma;
+
 
             //END Diccionarios
 

@@ -37,6 +37,7 @@ namespace ARTEC.GUI
             this.tabAsignaciones = new System.Windows.Forms.TabPage();
             this.tabAdquisiciones = new System.Windows.Forms.TabPage();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnNuevoIdioma = new DevComponents.DotNetBar.ButtonX();
             this.btnParametros = new DevComponents.DotNetBar.ButtonX();
             this.btnFamilias = new DevComponents.DotNetBar.ButtonX();
             this.btnBitacora = new DevComponents.DotNetBar.ButtonX();
@@ -53,7 +54,6 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -140,7 +140,7 @@ namespace ARTEC.GUI
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx1.Controls.Add(this.buttonX1);
+            this.panelEx1.Controls.Add(this.btnNuevoIdioma);
             this.panelEx1.Controls.Add(this.btnParametros);
             this.panelEx1.Controls.Add(this.btnFamilias);
             this.panelEx1.Controls.Add(this.btnBitacora);
@@ -159,6 +159,21 @@ namespace ARTEC.GUI
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 8;
             this.panelEx1.Visible = false;
+            // 
+            // btnNuevoIdioma
+            // 
+            this.btnNuevoIdioma.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnNuevoIdioma.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnNuevoIdioma.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnNuevoIdioma.CustomColorName = "Blue";
+            this.btnNuevoIdioma.Location = new System.Drawing.Point(1030, 9);
+            this.btnNuevoIdioma.Name = "btnNuevoIdioma";
+            this.btnNuevoIdioma.Size = new System.Drawing.Size(108, 40);
+            this.btnNuevoIdioma.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnNuevoIdioma.TabIndex = 14;
+            this.btnNuevoIdioma.Text = "btnNuevoIdioma";
+            this.btnNuevoIdioma.TextColor = System.Drawing.Color.White;
+            this.btnNuevoIdioma.Click += new System.EventHandler(this.buttonX1_Click_1);
             // 
             // btnParametros
             // 
@@ -397,21 +412,6 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
-            // buttonX1
-            // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.buttonX1.CustomColorName = "Blue";
-            this.buttonX1.Location = new System.Drawing.Point(1030, 9);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(108, 40);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 14;
-            this.buttonX1.Text = "buttonX1";
-            this.buttonX1.TextColor = System.Drawing.Color.White;
-            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click_1);
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -468,7 +468,7 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabAsignaciones;
         private System.Windows.Forms.TabPage tabAdquisiciones;
         private DevComponents.DotNetBar.ButtonX btnParametros;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnNuevoIdioma;
 
 
 
