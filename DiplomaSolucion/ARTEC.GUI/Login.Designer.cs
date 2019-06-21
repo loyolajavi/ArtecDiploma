@@ -51,6 +51,7 @@ namespace ARTEC.GUI
             this.customvldtxtPass1 = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.pnlBotonLogin.SuspendLayout();
             this.pnlPass.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -317,6 +318,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter2.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,10 +334,14 @@ namespace ARTEC.GUI
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.helpProvider1.SetHelpKeyword(this, "Logueo al Sistema");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.KeyPreview = true;
             this.Name = "Login";
+            this.helpProvider1.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Login_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Login_KeyDown);
             this.pnlBotonLogin.ResumeLayout(false);
             this.pnlPass.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -367,5 +376,6 @@ namespace ARTEC.GUI
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter2;
         private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtPass1;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

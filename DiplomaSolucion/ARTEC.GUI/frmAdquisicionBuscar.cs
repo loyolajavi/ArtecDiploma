@@ -28,6 +28,8 @@ namespace ARTEC.GUI
             InitializeComponent();
 
             Dictionary<string, string[]> dicfrmAdquisicionBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmAdquisicionBuscar = { "Adquisicion Buscar" };
+            dicfrmAdquisicionBuscar.Add("Permisos", PerfrmAdquisicionBuscar);
             string[] IdiomafrmAdquisicionBuscar = { "Buscar Adquisición" };
             dicfrmAdquisicionBuscar.Add("Idioma", IdiomafrmAdquisicionBuscar);
             this.Tag = dicfrmAdquisicionBuscar;
@@ -272,6 +274,16 @@ namespace ARTEC.GUI
                 }
             }
         }
+
+
+        public void Recargar()
+        {
+            GrillaAdquisicionBuscar.DataSource = null;
+            txtResBusqueda.Visible = false;
+            unasAdquisiciones = new List<Adquisicion>();
+            frmAdquisicionBuscar_Load(this, new EventArgs());
+        }
+
 
 
     }

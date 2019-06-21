@@ -27,6 +27,8 @@ namespace ARTEC.GUI
             InitializeComponent();
 
             Dictionary<string, string[]> dicfrmDependenciaBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmDependenciaBuscar = { "Dependencia Buscar" };
+            dicfrmDependenciaBuscar.Add("Permisos", PerfrmDependenciaBuscar);
             string[] IdiomafrmDependenciaBuscar = { "Buscar Dependencia" };
             dicfrmDependenciaBuscar.Add("Idioma", IdiomafrmDependenciaBuscar);
             this.Tag = dicfrmDependenciaBuscar;
@@ -351,7 +353,10 @@ namespace ARTEC.GUI
         }
 
 
-
+        public void Recargar()
+        {
+            frmDependenciaBuscar_Load(this, new EventArgs());
+        }
 
 
 

@@ -35,11 +35,6 @@ namespace ARTEC.GUI
             dicfrmAsigBuscar.Add("Permisos", PerfrmAsigBuscar);
             this.Tag = dicfrmAsigBuscar;
 
-            Dictionary<string, string[]> dicfrmAsignacionBuscar = new Dictionary<string, string[]>();
-            string[] IdiomafrmAsignacionBuscar = { "Buscar Asignación" };
-            dicfrmAsignacionBuscar.Add("Idioma", IdiomafrmAsignacionBuscar);
-            this.Tag = dicfrmAsignacionBuscar;
-
             Dictionary<string, string[]> diclblNroAsignacion = new Dictionary<string, string[]>();
             string[] IdiomalblNroAsignacion = { "Asignación" };
             diclblNroAsignacion.Add("Idioma", IdiomalblNroAsignacion);
@@ -100,19 +95,19 @@ namespace ARTEC.GUI
                 this.Enabled = BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((this.Tag as Dictionary<string, string[]>)["Permisos"] as string[]));
             }
 
-            //Permisos para Controles
-            //Obtengo todos los controles del formulario
-            IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
-            foreach (Control unControl in unosControles)
-            {
-                if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
-                {
-                    if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
-                    {
-                        unControl.Enabled = false;
-                    }
-                }
-            }
+            ////Permisos para Controles
+            ////Obtengo todos los controles del formulario
+            //IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
+            //foreach (Control unControl in unosControles)
+            //{
+            //    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
+            //    {
+            //        if (!BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, this.Tag as string[]))
+            //        {
+            //            unControl.Enabled = false;
+            //        }
+            //    }
+            //}
 
             //Idioma
             BLLServicioIdioma.GetBLLServicioIdiomaUnico().Traducir(this.FindForm(), FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual);
@@ -379,7 +374,13 @@ namespace ARTEC.GUI
 
 
 
-
+        public void Recargar()
+        {
+            flowAsignaciones.Controls.Clear();
+            ListaGrilla.Clear();
+            txtResBusqueda.Visible = false;
+            frmAsignacionBuscar_Load(this, new EventArgs());
+        }
 
 
 

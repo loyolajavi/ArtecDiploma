@@ -306,6 +306,20 @@ namespace ARTEC.GUI
             IObservable.QuitarObservador(this);
         }
 
+        private void SolicitudBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.KeywordIndex);
+        }
+
+        public void Recargar()
+        {
+            txtResBusqueda.Visible = false;
+            GrillaSolicitudBuscar.Visible = true;
+            GrillaSolicitudBuscar.DataSource = null;
+            unasSolicitudes = new List<Solicitud>();
+            SolicitudBuscar_Load(this, new EventArgs());
+        }
 
 
 

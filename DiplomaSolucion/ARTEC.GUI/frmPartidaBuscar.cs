@@ -28,6 +28,11 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
 
+            Dictionary<string, string[]> dicFrmPartidaBuscar = new Dictionary<string, string[]>();
+            string[] PerFrmPartidaBuscar = { "Partida Buscar" };
+            dicFrmPartidaBuscar.Add("Permisos", PerFrmPartidaBuscar);
+            this.Tag = dicFrmPartidaBuscar;
+
             Dictionary<string, string[]> dicGrillaPartidas = new Dictionary<string, string[]>();
             string[] IdiomaGrillaPartidas = { "Partidas" };
             dicGrillaPartidas.Add("Idioma", IdiomaGrillaPartidas);
@@ -317,7 +322,14 @@ namespace ARTEC.GUI
 
 
 
-
+        public void Recargar()
+        {
+            txtResBusqueda.Visible = false;
+            GrillaPartidas.Visible = true;
+            GrillaPartidas.DataSource = null;
+            unaListaPartidas = new List<Partida>();
+            frmPartidaBuscar_Load(this, new EventArgs());
+        }
 
 
 

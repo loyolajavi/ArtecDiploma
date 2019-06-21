@@ -29,6 +29,11 @@ namespace ARTEC.GUI
         {
             InitializeComponent();
 
+            Dictionary<string, string[]> dicfrmRendicionBuscar = new Dictionary<string, string[]>();
+            string[] PerfrmRendicionBuscar = { "Rendicion Buscar" };
+            dicfrmRendicionBuscar.Add("Permisos", PerfrmRendicionBuscar);
+            this.Tag = dicfrmRendicionBuscar;
+
             Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
             string[] IdiomabtnBuscar = { "Buscar" };
             dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
@@ -265,6 +270,15 @@ namespace ARTEC.GUI
             }
         }
 
+
+        public void Recargar()
+        {
+            txtResBusqueda.Visible = false;
+            GrillaRendicionBuscar.Visible = true;
+            GrillaRendicionBuscar.DataSource = null;
+            unasRendiciones = new List<Rendicion>();
+            frmRendicionBuscar_Load(this, new EventArgs());
+        }
 
 
 

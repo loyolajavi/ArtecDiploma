@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuracion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFiles>
+    <string>.\Artec - Manual de Ayuda 5.docx</string>
+  </SourceFiles>
+  <Compilar>true</Compilar>
+  <DirectorioDestino>.\Artec - Manual de Ayuda 5-project</DirectorioDestino>
+  <HtmlCabecera />
+  <HtmlPie />
+  <TituloAyuda />
+  <NivelCorte>0</NivelCorte>
+  <GenerarWeb>false</GenerarWeb>
+  <ArchivosAdicionales />
+  <AbrirProyecto>false</AbrirProyecto>
+  <DirectorioWeb>.\Artec - Manual de Ayuda 5-web</DirectorioWeb>
+  <NivelArbolContenidos>0</NivelArbolContenidos>
+  <NivelTemasIndice>0</NivelTemasIndice>
+  <ArchivoAyuda>.\Artec - Manual de Ayuda.chm</ArchivoAyuda>
+  <CommandLine />
+  <GeneratePdf>false</GeneratePdf>
+  <PdfPath>.\Artec - Manual de Ayuda 5.pdf</PdfPath>
+  <WebKeywords />
+  <WebDescription />
+  <WebHeaderFile />
+  <WebFooterFile />
+  <GenerateSitemap>false</GenerateSitemap>
+  <WebBase />
+  <ChangeFrequency>monthly</ChangeFrequency>
+  <WebLanguage>English</WebLanguage>
+  <ConfigurationVersion>1.7</ConfigurationVersion>
+  <FullTextSearch>false</FullTextSearch>
+  <PdfGeneration>OfficeAddin</PdfGeneration>
+  <GenerateXps>false</GenerateXps>
+  <XpsPath>.\Artec - Manual de Ayuda 5.xps</XpsPath>
+  <GenerateJavaHelp>false</GenerateJavaHelp>
+  <JavaHelpPath>.\Artec - Manual de Ayuda 5.jar</JavaHelpPath>
+  <HeadTagFile />
+  <ChmLocaleID>11274</ChmLocaleID>
+  <WebTemplateName>jQuery</WebTemplateName>
+  <CustomTemplateDirectory />
+</Configuracion>

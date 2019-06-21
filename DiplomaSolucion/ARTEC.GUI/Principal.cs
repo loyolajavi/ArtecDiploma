@@ -166,10 +166,14 @@ namespace ARTEC.GUI
             dicbtnNuevoIdioma.Add("Idioma", IdiomabtnNuevoIdioma);
             this.btnNuevoIdioma.Tag = dicbtnNuevoIdioma;
 
+            Dictionary<string, string[]> dicbtnLogOut = new Dictionary<string, string[]>();
+            string[] IdiomabtnLogOut = { "Logout" };
+            dicbtnLogOut.Add("Idioma", IdiomabtnLogOut);
+            this.btnLogOut.Tag = dicbtnLogOut;
 
             //END Diccionarios
 
-            SolicitudBuscar frmSolicitudBuscar = new SolicitudBuscar();
+            SolicitudBuscar frmSolicitudBuscar = SolicitudBuscar.ObtenerInstancia();
             frmSolicitudBuscar.TopLevel = false;
             frmSolicitudBuscar.FormBorderStyle = FormBorderStyle.None;
             frmSolicitudBuscar.Visible = true;
@@ -385,6 +389,51 @@ namespace ARTEC.GUI
                 cboIdioma.DataSource = unosIdiomas;
             }
         }
+
+        private void Principal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.TableOfContents);
+        }
+
+        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cerrando la sesión").Texto);
+            FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = null;
+            ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cierre de sesión satisfactorio").Texto);
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cerrando la sesión").Texto);
+            //Recarga de los form Buscar
+            SolicitudBuscar.ObtenerInstancia().Recargar();
+            frmRendicionBuscar.ObtenerInstancia().Recargar();
+            frmPartidaBuscar.ObtenerInstancia().Recargar();
+            frmDependenciaBuscar.ObtenerInstancia().Recargar();
+            frmAsignacionBuscar.ObtenerInstancia().Recargar();
+            frmAdquisicionBuscar.ObtenerInstancia().Recargar();
+            FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = null;
+            ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cierre de sesión satisfactorio").Texto);
+            //FormCollection FormulariosAbiertos = Application.OpenForms;
+            //foreach (Control unForm in FormulariosAbiertos)
+            //{
+            //    if (unForm != this && unForm.GetType().ToString() != "ARTEC.GUI.SolicitudBuscar")
+            //        (unForm as Form).Close();
+            //}
+            //HACER UN OBSERVER PARA QUE LOS FORMULARIOS QUE SE ENCUENTREN ABIERTOS (MENOS PRINCIPAL Y LOS BUSCAR) SE CIERREN AL CLICKEAR EN LOGOUT
+
+
+
+            Login unFrmLogin = new Login();
+            DialogResult Res = unFrmLogin.ShowDialog();
+            if (Res == DialogResult.OK)
+                this.Principal_Load(this, new EventArgs());
+            else
+                this.Close();
+            
+        }
+
 
 
 

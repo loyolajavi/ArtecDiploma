@@ -62,6 +62,7 @@ namespace ARTEC.GUI
             this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.txtFechaInicio2 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtFechaFin2 = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).BeginInit();
@@ -582,6 +583,10 @@ namespace ARTEC.GUI
             this.txtFechaFin2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtFechaFin2.TabIndex = 50;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // SolicitudBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -614,12 +619,16 @@ namespace ARTEC.GUI
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Solicitudes");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "SolicitudBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.ShowIcon = false;
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SolicitudBuscar_FormClosing);
             this.Load += new System.EventHandler(this.SolicitudBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SolicitudBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaSolicitudBuscar)).EndInit();
@@ -659,5 +668,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaFin2;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput txtFechaInicio2;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

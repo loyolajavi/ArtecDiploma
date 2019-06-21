@@ -54,6 +54,8 @@ namespace ARTEC.GUI
             this.btnAvanzadas = new DevComponents.DotNetBar.ButtonX();
             this.btnCategorias = new DevComponents.DotNetBar.ButtonX();
             this.btnProveedor = new DevComponents.DotNetBar.ButtonX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.btnLogOut = new DevComponents.DotNetBar.ButtonX();
             this.tabsPrincipal.SuspendLayout();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -412,11 +414,31 @@ namespace ARTEC.GUI
             this.btnProveedor.TextColor = System.Drawing.Color.White;
             this.btnProveedor.Click += new System.EventHandler(this.btnProveedor_Click);
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnLogOut.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnLogOut.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnLogOut.CustomColorName = "Blue";
+            this.btnLogOut.Location = new System.Drawing.Point(1286, 1);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(69, 18);
+            this.btnLogOut.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnLogOut.TabIndex = 15;
+            this.btnLogOut.Text = "btnLogOut";
+            this.btnLogOut.TextColor = System.Drawing.Color.White;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 732);
+            this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.btnProveedor);
             this.Controls.Add(this.btnCategorias);
@@ -431,11 +453,15 @@ namespace ARTEC.GUI
             this.Controls.Add(this.btnAvanzadas);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.TableOfContents);
             this.MaximizeBox = false;
             this.Name = "Principal";
+            this.helpProvider1.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARTEC";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Principal_FormClosed);
             this.Load += new System.EventHandler(this.Principal_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Principal_KeyDown);
             this.tabsPrincipal.ResumeLayout(false);
             this.panelEx1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -469,6 +495,8 @@ namespace ARTEC.GUI
         private System.Windows.Forms.TabPage tabAdquisiciones;
         private DevComponents.DotNetBar.ButtonX btnParametros;
         private DevComponents.DotNetBar.ButtonX btnNuevoIdioma;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
+        private DevComponents.DotNetBar.ButtonX btnLogOut;
 
 
 

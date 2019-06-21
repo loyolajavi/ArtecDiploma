@@ -264,7 +264,7 @@ namespace ARTEC.GUI
                         doc.AddListItem(unaLista, unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[I].unaCategoria.DescripCategoria, 0);
                     }
                     doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
-                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + unaRendicion.IdRendicion.ToString() + ".docx");
+                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + NroRendicion.ToString() + ".docx");
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
@@ -277,7 +277,7 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
                         doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
-                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + unaRendicion.IdRendicion.ToString() + ".docx");
+                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + NroRendicion.ToString() + ".docx");
                     }
                 }
             }
@@ -297,7 +297,7 @@ namespace ARTEC.GUI
                         doc.AddListItem(unaLista, unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[I].unaCategoria.DescripCategoria, 0);
                     }
                     doc.Tables[0].Rows[0].Cells[0].InsertList(unaLista);
-                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + unaRendicion.IdRendicion.ToString() + ".docx");
+                    doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Rendicion " + NroRendicion.ToString() + ".docx");
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
@@ -310,7 +310,7 @@ namespace ARTEC.GUI
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
                         doc.AddCustomProperty(new CustomProperty("PMontoRetribucion", montoRetrib.ToString("C2", ci)));
-                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + unaRendicion.IdRendicion.ToString() + ".docx");
+                        doc.SaveAs(FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaDocumentos() + "Retribucion Rendicion" + NroRendicion.ToString() + ".docx");
                     }
                 }
             }
