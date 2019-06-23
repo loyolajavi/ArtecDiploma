@@ -52,6 +52,7 @@ namespace ARTEC.GUI
             this.requiredFieldValidator1 = new DevComponents.DotNetBar.Validator.RequiredFieldValidator("Ingrese un nombre");
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.pnlBuscar.SuspendLayout();
             this.pnlPermisos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -251,15 +252,8 @@ namespace ARTEC.GUI
             this.btnEliminar.Size = new System.Drawing.Size(87, 35);
             this.btnEliminar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminar.TabIndex = 105;
+            this.btnEliminar.Tag = ((object)(resources.GetObject("btnEliminar.Tag")));
             this.btnEliminar.Text = "btnEliminar";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Familia Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminar.Tag = dicbtnEliminar;
-
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
@@ -272,15 +266,8 @@ namespace ARTEC.GUI
             this.btnModificar.Size = new System.Drawing.Size(87, 35);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 104;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Familia Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnCrear
@@ -292,15 +279,8 @@ namespace ARTEC.GUI
             this.btnCrear.Size = new System.Drawing.Size(87, 35);
             this.btnCrear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrear.TabIndex = 103;
+            this.btnCrear.Tag = ((object)(resources.GetObject("btnCrear.Tag")));
             this.btnCrear.Text = "btnCrear";
-
-            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
-            string[] PerbtnCrear = { "Familia Crear" };
-            dicbtnCrear.Add("Permisos", PerbtnCrear);
-            string[] IdiomabtnCrear = { "Crear" };
-            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
-            this.btnCrear.Tag = dicbtnCrear;
-
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // treeTodos
@@ -343,6 +323,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmFamiliaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,10 +343,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
+            this.helpProvider1.SetHelpKeyword(this, "Familias");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmFamiliaGestion";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmFamiliaGestion_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmFamiliaGestion_KeyDown);
             this.pnlBuscar.ResumeLayout(false);
             this.pnlPermisos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -393,5 +380,6 @@ namespace ARTEC.GUI
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

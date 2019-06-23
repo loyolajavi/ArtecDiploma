@@ -53,6 +53,7 @@ namespace ARTEC.GUI
             this.vldTXTMontoEmpleado = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.txtPartRef = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -314,6 +315,10 @@ namespace ARTEC.GUI
             this.txtDependencia.Size = new System.Drawing.Size(298, 22);
             this.txtDependencia.TabIndex = 50;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmRendicionCrear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,9 +341,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.lblNroSolic);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Crear Rendición");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmRendicionCrear";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionCrear_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmRendicionCrear_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -369,5 +378,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtPartRef;
         private DevComponents.DotNetBar.Validator.CustomValidator vldIdPartida;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDependencia;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

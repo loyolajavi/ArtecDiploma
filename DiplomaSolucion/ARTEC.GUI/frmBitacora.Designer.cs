@@ -29,7 +29,8 @@ namespace ARTEC.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBitacora));
             this.txtFechaFin = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.txtFechaInicio = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.cboTipoLog = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -39,6 +40,7 @@ namespace ARTEC.GUI
             this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
             this.GrillaBuscar = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBuscar)).BeginInit();
@@ -213,14 +215,14 @@ namespace ARTEC.GUI
             this.GrillaBuscar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaBuscar.BackgroundColor = System.Drawing.Color.White;
             this.GrillaBuscar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaBuscar.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaBuscar.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaBuscar.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaBuscar.Location = new System.Drawing.Point(3, 86);
             this.GrillaBuscar.Name = "GrillaBuscar";
@@ -237,16 +239,13 @@ namespace ARTEC.GUI
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 58;
+            this.btnBuscar.Tag = ((object)(resources.GetObject("btnBuscar.Tag")));
             this.btnBuscar.Text = "Buscar";
-
-            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
-            string[] PerbtnBuscar = { "Bitacora Buscar" };
-            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
-            string[] IdiomabtnBuscar = { "Buscar" };
-            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
-            this.btnBuscar.Tag = dicbtnBuscar;
-
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
             // 
             // frmBitacora
             // 
@@ -264,9 +263,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtResBusqueda);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Bitácora");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmBitacora";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmBitacora_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmBitacora_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaBuscar)).EndInit();
@@ -285,5 +288,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
         private DevComponents.DotNetBar.Controls.DataGridViewX GrillaBuscar;
         private DevComponents.DotNetBar.ButtonX btnBuscar;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

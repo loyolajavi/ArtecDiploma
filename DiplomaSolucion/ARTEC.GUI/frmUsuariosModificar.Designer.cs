@@ -65,6 +65,7 @@ namespace ARTEC.GUI
             this.btnEliminarUsuario = new DevComponents.DotNetBar.ButtonX();
             this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.btnReactivarUs = new DevComponents.DotNetBar.ButtonX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.pnlPermisos.SuspendLayout();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -345,15 +346,8 @@ namespace ARTEC.GUI
             this.btnModifUsuario.Size = new System.Drawing.Size(88, 30);
             this.btnModifUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModifUsuario.TabIndex = 73;
+            this.btnModifUsuario.Tag = ((object)(resources.GetObject("btnModifUsuario.Tag")));
             this.btnModifUsuario.Text = "btnModifUsuario";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Usuario Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModifUsuario.Tag = dicbtnModificar;
-
             this.btnModifUsuario.Click += new System.EventHandler(this.btnModifUsuario_Click);
             // 
             // pnlBuscar
@@ -384,15 +378,8 @@ namespace ARTEC.GUI
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 78;
+            this.btnBuscar.Tag = ((object)(resources.GetObject("btnBuscar.Tag")));
             this.btnBuscar.Text = "btnBuscar";
-
-            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
-            string[] PerbtnBuscar = { "Usuario Buscar" };
-            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
-            string[] IdiomabtnBuscar = { "Buscar" };
-            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
-            this.btnBuscar.Tag = dicbtnBuscar;
-
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblNomUs
@@ -474,15 +461,8 @@ namespace ARTEC.GUI
             this.btnCrearUsuario.Size = new System.Drawing.Size(87, 35);
             this.btnCrearUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCrearUsuario.TabIndex = 83;
+            this.btnCrearUsuario.Tag = ((object)(resources.GetObject("btnCrearUsuario.Tag")));
             this.btnCrearUsuario.Text = "btnCrearUsuario";
-
-            Dictionary<string, string[]> dicbtnCrear = new Dictionary<string, string[]>();
-            string[] PerbtnCrear = { "Usuario Crear" };
-            dicbtnCrear.Add("Permisos", PerbtnCrear);
-            string[] IdiomabtnCrear = { "Crear" };
-            dicbtnCrear.Add("Idioma", IdiomabtnCrear);
-            this.btnCrearUsuario.Tag = dicbtnCrear;
-
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
             // btnEliminarUsuario
@@ -494,15 +474,8 @@ namespace ARTEC.GUI
             this.btnEliminarUsuario.Size = new System.Drawing.Size(87, 30);
             this.btnEliminarUsuario.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnEliminarUsuario.TabIndex = 84;
+            this.btnEliminarUsuario.Tag = ((object)(resources.GetObject("btnEliminarUsuario.Tag")));
             this.btnEliminarUsuario.Text = "btnEliminarUsuario";
-
-            Dictionary<string, string[]> dicbtnEliminar = new Dictionary<string, string[]>();
-            string[] PerbtnEliminar = { "Usuario Eliminar" };
-            dicbtnEliminar.Add("Permisos", PerbtnEliminar);
-            string[] IdiomabtnEliminar = { "Eliminar" };
-            dicbtnEliminar.Add("Idioma", IdiomabtnEliminar);
-            this.btnEliminarUsuario.Tag = dicbtnEliminar;
-
             this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
             // lblBaja
@@ -529,16 +502,13 @@ namespace ARTEC.GUI
             this.btnReactivarUs.Size = new System.Drawing.Size(87, 35);
             this.btnReactivarUs.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnReactivarUs.TabIndex = 90;
+            this.btnReactivarUs.Tag = ((object)(resources.GetObject("btnReactivarUs.Tag")));
             this.btnReactivarUs.Text = "btnReactivarUs";
-
-            Dictionary<string, string[]> dicbtnReactivar = new Dictionary<string, string[]>();
-            string[] PerbtnReactivar = { "Usuario Reactivar" };
-            dicbtnReactivar.Add("Permisos", PerbtnReactivar);
-            string[] IdiomabtnReactivar = { "Reactivar" };
-            dicbtnReactivar.Add("Idioma", IdiomabtnReactivar);
-            this.btnReactivarUs.Tag = dicbtnReactivar;
-
             this.btnReactivarUs.Click += new System.EventHandler(this.btnReactivarUs_Click);
+            // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
             // 
             // frmUsuariosModificar
             // 
@@ -564,10 +534,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
+            this.helpProvider1.SetHelpKeyword(this, "Usuarios");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmUsuariosModificar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmUsuariosGestion_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmUsuariosModificar_KeyDown);
             this.pnlPermisos.ResumeLayout(false);
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -611,5 +584,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCrearUsuario;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
         private DevComponents.DotNetBar.ButtonX btnReactivarUs;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

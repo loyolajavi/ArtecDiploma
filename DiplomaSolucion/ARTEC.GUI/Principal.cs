@@ -18,6 +18,12 @@ namespace ARTEC.GUI
     public partial class Principal : DevComponents.DotNetBar.Metro.MetroForm
     {
         List<Idioma> unosIdiomas = new List<Idioma>();
+        SolicitudBuscar frmSolicitudBuscar;
+        frmRendicionBuscar unFrmRendicionBuscar;
+        frmPartidaBuscar unFrmPartidaBuscar;
+        frmDependenciaBuscar unFrmDependenciaBuscar;
+        frmAsignacionBuscar unFrmAsignacionBuscar;
+        frmAdquisicionBuscar unFrmAdquisicionBuscar;
 
         public Principal()
         {
@@ -173,7 +179,7 @@ namespace ARTEC.GUI
 
             //END Diccionarios
 
-            SolicitudBuscar frmSolicitudBuscar = SolicitudBuscar.ObtenerInstancia();
+            frmSolicitudBuscar = SolicitudBuscar.ObtenerInstancia();
             frmSolicitudBuscar.TopLevel = false;
             frmSolicitudBuscar.FormBorderStyle = FormBorderStyle.None;
             frmSolicitudBuscar.Visible = true;
@@ -228,9 +234,15 @@ namespace ARTEC.GUI
             switch ((sender as System.Windows.Forms.TabControl).SelectedIndex)
             {
                 case 0:
+                                frmSolicitudBuscar = SolicitudBuscar.ObtenerInstancia();
+            frmSolicitudBuscar.TopLevel = false;
+            frmSolicitudBuscar.FormBorderStyle = FormBorderStyle.None;
+            frmSolicitudBuscar.Visible = true;
+            frmSolicitudBuscar.Dock = DockStyle.Fill;
+            tabSolic.Controls.Add(frmSolicitudBuscar);
                     break;
                 case 1:
-                    frmRendicionBuscar unFrmRendicionBuscar = frmRendicionBuscar.ObtenerInstancia();
+                    unFrmRendicionBuscar = frmRendicionBuscar.ObtenerInstancia();
                     unFrmRendicionBuscar.TopLevel = false;
                     unFrmRendicionBuscar.FormBorderStyle = FormBorderStyle.None;
                     unFrmRendicionBuscar.Visible = true;
@@ -238,7 +250,7 @@ namespace ARTEC.GUI
                     tabRendiciones.Controls.Add(unFrmRendicionBuscar);
                     break;
                 case 2:
-                    frmPartidaBuscar unFrmPartidaBuscar = frmPartidaBuscar.ObtenerInstancia();
+                    unFrmPartidaBuscar = frmPartidaBuscar.ObtenerInstancia();
                     unFrmPartidaBuscar.TopLevel = false;
                     unFrmPartidaBuscar.FormBorderStyle = FormBorderStyle.None;
                     unFrmPartidaBuscar.Visible = true;
@@ -246,7 +258,7 @@ namespace ARTEC.GUI
                     tabPartidas.Controls.Add(unFrmPartidaBuscar);
                     break;
                 case 3:
-                    frmDependenciaBuscar unFrmDependenciaBuscar = frmDependenciaBuscar.ObtenerInstancia();
+                    unFrmDependenciaBuscar = frmDependenciaBuscar.ObtenerInstancia();
                     unFrmDependenciaBuscar.TopLevel = false;
                     unFrmDependenciaBuscar.FormBorderStyle = FormBorderStyle.None;
                     unFrmDependenciaBuscar.Visible = true;
@@ -254,7 +266,7 @@ namespace ARTEC.GUI
                     tabDependencia.Controls.Add(unFrmDependenciaBuscar);
                     break;
                 case 4:
-                    frmAsignacionBuscar unFrmAsignacionBuscar = frmAsignacionBuscar.ObtenerInstancia();
+                    unFrmAsignacionBuscar = frmAsignacionBuscar.ObtenerInstancia();
                     unFrmAsignacionBuscar.TopLevel = false;
                     unFrmAsignacionBuscar.FormBorderStyle = FormBorderStyle.None;
                     unFrmAsignacionBuscar.Visible = true;
@@ -262,7 +274,7 @@ namespace ARTEC.GUI
                     tabAsignaciones.Controls.Add(unFrmAsignacionBuscar);
                     break;
                 case 5:
-                    frmAdquisicionBuscar unFrmAdquisicionBuscar = frmAdquisicionBuscar.ObtenerInstancia();
+                    unFrmAdquisicionBuscar = frmAdquisicionBuscar.ObtenerInstancia();
                     unFrmAdquisicionBuscar.TopLevel = false;
                     unFrmAdquisicionBuscar.FormBorderStyle = FormBorderStyle.None;
                     unFrmAdquisicionBuscar.Visible = true;
@@ -415,15 +427,15 @@ namespace ARTEC.GUI
             frmAdquisicionBuscar.ObtenerInstancia().Recargar();
             FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = null;
             ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cierre de sesión satisfactorio").Texto);
-            //FormCollection FormulariosAbiertos = Application.OpenForms;
-            //foreach (Control unForm in FormulariosAbiertos)
-            //{
-            //    if (unForm != this && unForm.GetType().ToString() != "ARTEC.GUI.SolicitudBuscar")
-            //        (unForm as Form).Close();
-            //}
-            //HACER UN OBSERVER PARA QUE LOS FORMULARIOS QUE SE ENCUENTREN ABIERTOS (MENOS PRINCIPAL Y LOS BUSCAR) SE CIERREN AL CLICKEAR EN LOGOUT
+            //Cerrar formularios abiertos
+            List<Form> otherFormList = Application.OpenForms
+                .OfType<Form>()
+                .Where(frm => !frm.Name.Contains(this.Name) && !frm.Name.Contains("SolicitudBuscar") && !frm.Name.Contains("frmRendicionBuscar") && !frm.Name.Contains("frmPartidaBuscar") && !frm.Name.Contains("frmDependenciaBuscar")
+                    && !frm.Name.Contains("frmAsignacionBuscar") && !frm.Name.Contains("frmAdquisicionBuscar"))
+                .ToList<Form>();
 
-
+            foreach (Form othrFrm in otherFormList) othrFrm.Close();
+            //End Cerrar forms abiertos
 
             Login unFrmLogin = new Login();
             DialogResult Res = unFrmLogin.ShowDialog();

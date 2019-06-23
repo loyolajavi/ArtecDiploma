@@ -55,7 +55,6 @@ namespace ARTEC.GUI
             this.btnEliminarAdjunto = new DevComponents.DotNetBar.ButtonX();
             this.lstAdjuntos = new DevComponents.DotNetBar.ListBoxAdv();
             this.gboxBienes = new System.Windows.Forms.GroupBox();
-            this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.btnNuevoDetalle = new DevComponents.DotNetBar.ButtonX();
             this.gboxAsociados = new System.Windows.Forms.GroupBox();
             this.grillaAgentesAsociados = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -64,12 +63,13 @@ namespace ARTEC.GUI
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.cboAgentesAsociados = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cboTipoBien = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.btnAgregarDetalle = new DevComponents.DotNetBar.ButtonX();
             this.grillaDetalles = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.txtCantBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblCantidad = new DevComponents.DotNetBar.LabelX();
             this.txtBien = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.cboBien = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.btnModificar = new DevComponents.DotNetBar.ButtonX();
+            this.btnAgregarDetalle = new DevComponents.DotNetBar.ButtonX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx4 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -96,6 +96,7 @@ namespace ARTEC.GUI
             this.customtxtNota = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider6 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter6 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.panel1.SuspendLayout();
             this.gboxNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).BeginInit();
@@ -411,7 +412,6 @@ namespace ARTEC.GUI
             // 
             this.lstAdjuntos.BackgroundStyle.Class = "ListBoxAdv";
             this.lstAdjuntos.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAdjuntos.CheckStateMember = null;
             this.lstAdjuntos.ContainerControlProcessDialogKey = true;
             this.lstAdjuntos.DragDropSupport = true;
             this.lstAdjuntos.Location = new System.Drawing.Point(7, 6);
@@ -437,19 +437,6 @@ namespace ARTEC.GUI
             this.gboxBienes.TabIndex = 2;
             this.gboxBienes.TabStop = false;
             this.gboxBienes.Text = "Agregar Bienes";
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnModificar.Location = new System.Drawing.Point(196, 255);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(97, 29);
-            this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnModificar.TabIndex = 30;
-            this.btnModificar.Text = "btnModificar";
-            this.btnModificar.Visible = false;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnNuevoDetalle
             // 
@@ -568,18 +555,6 @@ namespace ARTEC.GUI
             this.cboTipoBien.TabIndex = 8;
             this.cboTipoBien.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBien_SelectionChangeCommitted);
             // 
-            // btnAgregarDetalle
-            // 
-            this.btnAgregarDetalle.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnAgregarDetalle.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAgregarDetalle.Location = new System.Drawing.Point(196, 255);
-            this.btnAgregarDetalle.Name = "btnAgregarDetalle";
-            this.btnAgregarDetalle.Size = new System.Drawing.Size(97, 29);
-            this.btnAgregarDetalle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnAgregarDetalle.TabIndex = 6;
-            this.btnAgregarDetalle.Text = "Agregar";
-            this.btnAgregarDetalle.Click += new System.EventHandler(this.txtAgregarDetalle_Click);
-            // 
             // grillaDetalles
             // 
             this.grillaDetalles.AllowUserToAddRows = false;
@@ -682,6 +657,31 @@ namespace ARTEC.GUI
             this.cboBien.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cboBien.TabIndex = 10;
             this.cboBien.SelectionChangeCommitted += new System.EventHandler(this.cboBien_SelectionChangeCommitted);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnModificar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnModificar.Location = new System.Drawing.Point(196, 255);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(97, 29);
+            this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnModificar.TabIndex = 30;
+            this.btnModificar.Text = "btnModificar";
+            this.btnModificar.Visible = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnAgregarDetalle
+            // 
+            this.btnAgregarDetalle.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAgregarDetalle.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAgregarDetalle.Location = new System.Drawing.Point(196, 255);
+            this.btnAgregarDetalle.Name = "btnAgregarDetalle";
+            this.btnAgregarDetalle.Size = new System.Drawing.Size(97, 29);
+            this.btnAgregarDetalle.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAgregarDetalle.TabIndex = 6;
+            this.btnAgregarDetalle.Text = "Agregar";
+            this.btnAgregarDetalle.Click += new System.EventHandler(this.txtAgregarDetalle_Click);
             // 
             // lblDependencia
             // 
@@ -852,6 +852,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter6.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // CrearSolicitud
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,9 +864,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Crear Solicitud");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "CrearSolicitud";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "Crear Solicitud";
             this.Load += new System.EventHandler(this.CrearSolicitud_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CrearSolicitud_KeyDown);
             this.panel1.ResumeLayout(false);
             this.gboxNotas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaNotas)).EndInit();
@@ -945,5 +953,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnNuevoDetalle;
         private DevComponents.DotNetBar.ButtonX btnModificar;
         private DevComponents.DotNetBar.ButtonX btnEliminarAdjunto;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

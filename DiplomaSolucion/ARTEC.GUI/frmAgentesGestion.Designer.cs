@@ -30,8 +30,8 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAgentesGestion));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBuscar = new DevComponents.DotNetBar.PanelEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblAgenteBuscar = new DevComponents.DotNetBar.LabelX();
@@ -50,6 +50,7 @@ namespace ARTEC.GUI
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.txtCargo = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -83,15 +84,8 @@ namespace ARTEC.GUI
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnBuscar.TabIndex = 78;
+            this.btnBuscar.Tag = ((object)(resources.GetObject("btnBuscar.Tag")));
             this.btnBuscar.Text = "btnBuscar";
-
-            Dictionary<string, string[]> dicbtnBuscar = new Dictionary<string, string[]>();
-            string[] PerbtnBuscar = { "Agente Buscar" };
-            dicbtnBuscar.Add("Permisos", PerbtnBuscar);
-            string[] IdiomabtnBuscar = { "Buscar" };
-            dicbtnBuscar.Add("Idioma", IdiomabtnBuscar);
-            this.btnBuscar.Tag = dicbtnBuscar;
-
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblAgenteBuscar
@@ -199,14 +193,14 @@ namespace ARTEC.GUI
             this.GrillaAgentes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaAgentes.BackgroundColor = System.Drawing.Color.White;
             this.GrillaAgentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle4;
             this.GrillaAgentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentes.Location = new System.Drawing.Point(4, 159);
             this.GrillaAgentes.Name = "GrillaAgentes";
@@ -250,15 +244,8 @@ namespace ARTEC.GUI
             this.btnModificar.Size = new System.Drawing.Size(87, 35);
             this.btnModificar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnModificar.TabIndex = 94;
+            this.btnModificar.Tag = ((object)(resources.GetObject("btnModificar.Tag")));
             this.btnModificar.Text = "btnModificar";
-
-            Dictionary<string, string[]> dicbtnModificar = new Dictionary<string, string[]>();
-            string[] PerbtnModificar = { "Agente Modificar" };
-            dicbtnModificar.Add("Permisos", PerbtnModificar);
-            string[] IdiomabtnModificar = { "Modificar" };
-            dicbtnModificar.Add("Idioma", IdiomabtnModificar);
-            this.btnModificar.Tag = dicbtnModificar;
-
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // vldFrmAgentesGestion
@@ -303,6 +290,10 @@ namespace ARTEC.GUI
             this.txtCargo.Size = new System.Drawing.Size(227, 22);
             this.txtCargo.TabIndex = 95;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmAgentesGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,9 +311,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Gestión de Agentes");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmAgentesGestion";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmAgentesGestion_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAgentesGestion_KeyDown);
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -350,5 +345,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Controls.TextBoxX txtCargo;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -358,6 +358,12 @@ namespace ARTEC.GUI
             frmDependenciaBuscar_Load(this, new EventArgs());
         }
 
+        private void frmDependenciaBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.KeywordIndex);
+        }
+
 
 
 

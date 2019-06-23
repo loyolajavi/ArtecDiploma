@@ -48,6 +48,7 @@ namespace ARTEC.GUI
             this.lblHost = new DevComponents.DotNetBar.LabelX();
             this.lblSSL = new DevComponents.DotNetBar.LabelX();
             this.chkSSL = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -247,6 +248,10 @@ namespace ARTEC.GUI
             this.chkSSL.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.chkSSL.TabIndex = 65;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmParametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,10 +270,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtMail);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Parámetros");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.MaximizeBox = false;
             this.Name = "frmParametros";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmParametros_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmParametros_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -294,5 +303,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator2;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator1;
         private DevComponents.DotNetBar.Validator.RequiredFieldValidator requiredFieldValidator3;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

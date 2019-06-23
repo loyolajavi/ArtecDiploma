@@ -61,6 +61,7 @@ namespace ARTEC.GUI
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAdquisicionBuscar)).BeginInit();
@@ -492,6 +493,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmAdquisicionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,16 +524,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.GrillaAdquisicionBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Adquisiciones");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmAdquisicionBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
+            this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
-            //this.Tag = new string[] { "Adquisicion Buscar" };
-
-            Dictionary<string, string[]> dicfrmAdquisicionBuscar = new Dictionary<string, string[]>();
-            string[] PerfrmAdquisicionBuscar = { "Adquisicion Buscar" };
-            dicfrmAdquisicionBuscar.Add("Permisos", PerfrmAdquisicionBuscar);
-            this.Tag = dicfrmAdquisicionBuscar;
-
             this.Load += new System.EventHandler(this.frmAdquisicionBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAdquisicionBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txtFecha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaCompra)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAdquisicionBuscar)).EndInit();
@@ -568,5 +571,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator4;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator5;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator6;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

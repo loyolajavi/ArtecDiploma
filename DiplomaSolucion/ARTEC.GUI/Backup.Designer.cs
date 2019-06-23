@@ -57,6 +57,7 @@ namespace ARTEC.GUI
             this.customvldtxtNombreRestaurar = new DevComponents.DotNetBar.Validator.CustomValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.gboxRespaldar.SuspendLayout();
             this.gboxRestaurar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -89,15 +90,8 @@ namespace ARTEC.GUI
             this.btnRespaldar.Size = new System.Drawing.Size(75, 23);
             this.btnRespaldar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRespaldar.TabIndex = 2;
+            this.btnRespaldar.Tag = ((object)(resources.GetObject("btnRespaldar.Tag")));
             this.btnRespaldar.Text = "Respaldar";
-
-            Dictionary<string, string[]> dicbtnRespaldar = new Dictionary<string, string[]>();
-            string[] PerbtnRespaldar = { "Backup BD" };
-            dicbtnRespaldar.Add("Permisos", PerbtnRespaldar);
-            string[] IdiomabtnRespaldar = { "Respaldar" };
-            dicbtnRespaldar.Add("Idioma", IdiomabtnRespaldar);
-            this.btnRespaldar.Tag = dicbtnRespaldar;
-
             this.btnRespaldar.Click += new System.EventHandler(this.btnRespaldar_Click);
             // 
             // btnExaminarRespaldar
@@ -223,15 +217,8 @@ namespace ARTEC.GUI
             this.btnRestaurar.Size = new System.Drawing.Size(75, 23);
             this.btnRestaurar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnRestaurar.TabIndex = 2;
+            this.btnRestaurar.Tag = ((object)(resources.GetObject("btnRestaurar.Tag")));
             this.btnRestaurar.Text = "Restaurar";
-
-            Dictionary<string, string[]> dicbtnRestaurar = new Dictionary<string, string[]>();
-            string[] PerbtnRestaurar = { "Restore BD" };
-            dicbtnRestaurar.Add("Permisos", PerbtnRestaurar);
-            string[] IdiomabtnRestaurar = { "Restaurar" };
-            dicbtnRestaurar.Add("Idioma", IdiomabtnRestaurar);
-            this.btnRestaurar.Tag = dicbtnRestaurar;
-
             this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
             // btnExaminarRestaurar
@@ -358,6 +345,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter2.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // Backup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,9 +358,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.gboxRespaldar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Backup");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "Backup";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "Respaldo y Restauración de la BD";
             this.Load += new System.EventHandler(this.Backup_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Backup_KeyDown);
             this.gboxRespaldar.ResumeLayout(false);
             this.gboxRestaurar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -406,6 +401,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtDestino;
         private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtNombreRestaurar;
         private DevComponents.DotNetBar.Validator.CustomValidator customvldtxtUbicacion;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
 
     }
 }

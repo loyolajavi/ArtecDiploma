@@ -347,6 +347,12 @@ namespace ARTEC.GUI
             }
         }
 
+        private void frmRendicionCrear_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.KeywordIndex);
+        }
+
 
 
 

@@ -49,6 +49,7 @@ namespace ARTEC.GUI
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
             this.txtResBusqueda = new DevComponents.DotNetBar.Controls.RichTextBoxEx();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -271,6 +272,10 @@ namespace ARTEC.GUI
             this.txtResBusqueda.Text = "No hay resultados";
             this.txtResBusqueda.Visible = false;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmPartidaBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,10 +295,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Partidas");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmPartidaBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmPartidaBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPartidaBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaPartidas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -319,5 +328,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
         private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

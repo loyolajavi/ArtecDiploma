@@ -45,11 +45,12 @@ namespace ARTEC.GUI
             this.GrillaRendicionBuscar = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.cboDep = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.vldFrmRendicionBuscar = new DevComponents.DotNetBar.Validator.SuperValidator();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaRendicionBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -248,22 +249,6 @@ namespace ARTEC.GUI
             this.vldFrmRendicionBuscar.ErrorProvider = this.errorProvider1;
             this.vldFrmRendicionBuscar.Highlighter = this.highlighter1;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
-            // 
-            // highlighter1
-            // 
-            this.highlighter1.ContainerControl = this;
-            // 
-            // regularExpressionValidator1
-            // 
-            this.regularExpressionValidator1.EmptyValueIsValid = true;
-            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
-            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
-            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
-            // 
             // regularExpressionValidator2
             // 
             this.regularExpressionValidator2.EmptyValueIsValid = true;
@@ -277,6 +262,26 @@ namespace ARTEC.GUI
             this.regularExpressionValidator3.ErrorMessage = "Your error message here.";
             this.regularExpressionValidator3.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
             this.regularExpressionValidator3.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // regularExpressionValidator1
+            // 
+            this.regularExpressionValidator1.EmptyValueIsValid = true;
+            this.regularExpressionValidator1.ErrorMessage = "Your error message here.";
+            this.regularExpressionValidator1.HighlightColor = DevComponents.DotNetBar.Validator.eHighlightColor.Red;
+            this.regularExpressionValidator1.ValidationExpression = "^[0-9]{1,9}$";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            this.errorProvider1.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider1.Icon")));
+            // 
+            // highlighter1
+            // 
+            this.highlighter1.ContainerControl = this;
+            // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
             // 
             // frmRendicionBuscar
             // 
@@ -297,10 +302,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.txtResBusqueda);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Rendiciones");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmRendicionBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmRendicionBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmRendicionBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaRendicionBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -327,6 +336,7 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator3;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
 
     }
 }

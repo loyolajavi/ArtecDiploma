@@ -50,6 +50,7 @@ namespace ARTEC.GUI
             this.regularExpressionValidator1 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter1 = new DevComponents.DotNetBar.Validator.Highlighter();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).BeginInit();
             this.flowAsignaciones.SuspendLayout();
@@ -351,6 +352,10 @@ namespace ARTEC.GUI
             // 
             this.highlighter1.ContainerControl = this;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmAsignacionBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,9 +376,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Asignaciones");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmAsignacionBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmAsignacionBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAsignacionBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaHasta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFechaDesde)).EndInit();
             this.flowAsignaciones.ResumeLayout(false);
@@ -403,5 +412,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator1;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
         private DevComponents.DotNetBar.Controls.RichTextBoxEx txtResBusqueda;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -1201,6 +1201,12 @@ private void btnModificar_Click(object sender, EventArgs e)
 
 }
 
+private void CrearSolicitud_KeyDown(object sender, KeyEventArgs e)
+{
+    if (e.KeyCode == Keys.F1)
+        Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.KeywordIndex);
+}
+
 
 
 

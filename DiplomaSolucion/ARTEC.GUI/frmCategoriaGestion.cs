@@ -479,6 +479,12 @@ namespace ARTEC.GUI
             GrillaProveedores.Columns["Activo"].Visible = false;
         }
 
+        private void frmCategoriaGestion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                Help.ShowHelp(this, "Artec - Manual de Ayuda.chm", HelpNavigator.KeywordIndex);
+        }
+
         
     }
 }

@@ -30,7 +30,7 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDependenciaBuscar));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnModificar = new DevComponents.DotNetBar.ButtonX();
             this.lblDependencia = new DevComponents.DotNetBar.LabelX();
             this.txtDependencia = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -43,6 +43,7 @@ namespace ARTEC.GUI
             this.btnCrear = new DevComponents.DotNetBar.ButtonX();
             this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
             this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,14 +135,14 @@ namespace ARTEC.GUI
             // GrillaAgentes
             // 
             this.GrillaAgentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaAgentes.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaAgentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaAgentes.Location = new System.Drawing.Point(12, 113);
             this.GrillaAgentes.Name = "GrillaAgentes";
@@ -216,6 +217,10 @@ namespace ARTEC.GUI
             this.lblBaja.Text = "<b><font size=\"+4\"><font color=\"#B02B2C\">Dado de baja</font></font></b>";
             this.lblBaja.Visible = false;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmDependenciaBuscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,10 +240,14 @@ namespace ARTEC.GUI
             this.Controls.Add(this.cboDep);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Buscar Dependencias");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmDependenciaBuscar";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Tag = ((object)(resources.GetObject("$this.Tag")));
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmDependenciaBuscar_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmDependenciaBuscar_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaAgentes)).EndInit();
             this.ResumeLayout(false);
 
@@ -258,5 +267,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnCrear;
         private DevComponents.DotNetBar.ButtonX btnReactivar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

@@ -31,7 +31,7 @@ namespace ARTEC.GUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoriaGestion));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBuscar = new DevComponents.DotNetBar.PanelEx();
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.lblCategoriaBuscar = new DevComponents.DotNetBar.LabelX();
@@ -54,6 +54,7 @@ namespace ARTEC.GUI
             this.btnAgregar = new DevComponents.DotNetBar.ButtonX();
             this.lblBaja = new DevComponents.DotNetBar.Controls.ReflectionLabel();
             this.btnReactivar = new DevComponents.DotNetBar.ButtonX();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.pnlBuscar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -218,14 +219,14 @@ namespace ARTEC.GUI
             this.GrillaProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GrillaProveedores.BackgroundColor = System.Drawing.Color.White;
             this.GrillaProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaProveedores.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaProveedores.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaProveedores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaProveedores.Location = new System.Drawing.Point(21, 174);
             this.GrillaProveedores.Name = "GrillaProveedores";
@@ -347,6 +348,10 @@ namespace ARTEC.GUI
             this.btnReactivar.Text = "btnReactivar";
             this.btnReactivar.Click += new System.EventHandler(this.btnReactivar_Click);
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "Artec - Manual de Ayuda.chm";
+            // 
             // frmCategoriaGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,9 +374,13 @@ namespace ARTEC.GUI
             this.Controls.Add(this.pnlBuscar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider1.SetHelpKeyword(this, "Categorías");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "frmCategoriaGestion";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Text = "MetroForm";
             this.Load += new System.EventHandler(this.frmCategoriaGestion_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmCategoriaGestion_KeyDown);
             this.pnlBuscar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrillaProveedores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -403,5 +412,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.ButtonX btnAgregar;
         private DevComponents.DotNetBar.Controls.ReflectionLabel lblBaja;
         private DevComponents.DotNetBar.ButtonX btnReactivar;
+        internal System.Windows.Forms.HelpProvider helpProvider1;
     }
 }
