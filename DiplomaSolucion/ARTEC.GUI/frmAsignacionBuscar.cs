@@ -97,8 +97,8 @@ namespace ARTEC.GUI
 
             ////Permisos para Controles
             ////Obtengo todos los controles del formulario
-            //IEnumerable<Control> unosControles = BLLServicioIdioma.ObtenerControles(this);
-            //foreach (Control unControl in unosControles)
+            //IEnumerable<Control> unosTextBox = BLLServicioIdioma.ObtenerControles(this);
+            //foreach (Control unControl in unosTextBox)
             //{
             //    if (!string.IsNullOrEmpty(unControl.Name) && unControl.Tag != null && unControl.Tag.GetType() == typeof(string[]))
             //    {
@@ -380,6 +380,17 @@ namespace ARTEC.GUI
             ListaGrilla.Clear();
             txtResBusqueda.Visible = false;
             frmAsignacionBuscar_Load(this, new EventArgs());
+
+            //Limpiar textbox y cbobox
+            List<Control> unosTextBox = this.Controls
+            .OfType<TextBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosTextBox) unControl.Text = null;
+
+            List<Control> unosComboBox = this.Controls
+            .OfType<ComboBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosComboBox) if ((unControl as ComboBox).Items.Count > 0) (unControl as ComboBox).SelectedIndex = 0;
         }
 
         private void frmAsignacionBuscar_KeyDown(object sender, KeyEventArgs e)

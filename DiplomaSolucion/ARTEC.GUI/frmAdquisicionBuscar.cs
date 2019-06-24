@@ -282,6 +282,17 @@ namespace ARTEC.GUI
             txtResBusqueda.Visible = false;
             unasAdquisiciones = new List<Adquisicion>();
             frmAdquisicionBuscar_Load(this, new EventArgs());
+
+            //Limpiar textbox y cbobox
+            List<Control> unosTextBox = this.Controls
+            .OfType<TextBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosTextBox) unControl.Text = null;
+
+            List<Control> unosComboBox = this.Controls
+            .OfType<ComboBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosComboBox) if ((unControl as ComboBox).Items.Count > 0) (unControl as ComboBox).SelectedIndex = 0;
         }
 
         private void frmAdquisicionBuscar_KeyDown(object sender, KeyEventArgs e)

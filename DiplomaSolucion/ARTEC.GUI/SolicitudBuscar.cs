@@ -319,6 +319,45 @@ namespace ARTEC.GUI
             GrillaSolicitudBuscar.DataSource = null;
             unasSolicitudes = new List<Solicitud>();
             SolicitudBuscar_Load(this, new EventArgs());
+
+            //Limpiar textbox y cbobox
+            List<Control> unosTextBox = this.Controls
+            .OfType<TextBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosTextBox) unControl.Text = null;
+
+            List<Control> unosComboBox = this.Controls
+            .OfType<ComboBox>()
+            .ToList<Control>();
+            foreach (Control unControl in unosComboBox) if ((unControl as ComboBox).Items.Count > 0) (unControl as ComboBox).SelectedIndex = 0;
+
+            //foreach (Control unControl in this.Controls)
+            //{
+            //    if (unControl is TextBox)
+            //    {
+            //        TextBox textBox = (TextBox)unControl;
+            //        textBox.Text = null;
+            //    }
+
+            //    if (unControl is ComboBox)
+            //    {
+            //        ComboBox comboBox = (ComboBox)unControl;
+            //        if (comboBox.Items.Count > 0)
+            //            comboBox.SelectedIndex = 0;
+            //    }
+
+            //    if (unControl is CheckBox)
+            //    {
+            //        CheckBox checkBox = (CheckBox)unControl;
+            //        checkBox.Checked = false;
+            //    }
+
+            //    if (unControl is ListBox)
+            //    {
+            //        ListBox listBox = (ListBox)unControl;
+            //        listBox.ClearSelected();
+            //    }
+            //}
         }
 
 

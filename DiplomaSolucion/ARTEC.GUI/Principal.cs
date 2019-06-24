@@ -427,13 +427,13 @@ namespace ARTEC.GUI
             frmAdquisicionBuscar.ObtenerInstancia().Recargar();
             FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado = null;
             ServicioLog.CrearLog("Logout", BLLServicioIdioma.MostrarMensaje("Cierre de sesión satisfactorio").Texto);
+            
             //Cerrar formularios abiertos
             List<Form> otherFormList = Application.OpenForms
                 .OfType<Form>()
                 .Where(frm => !frm.Name.Contains(this.Name) && !frm.Name.Contains("SolicitudBuscar") && !frm.Name.Contains("frmRendicionBuscar") && !frm.Name.Contains("frmPartidaBuscar") && !frm.Name.Contains("frmDependenciaBuscar")
                     && !frm.Name.Contains("frmAsignacionBuscar") && !frm.Name.Contains("frmAdquisicionBuscar"))
                 .ToList<Form>();
-
             foreach (Form othrFrm in otherFormList) othrFrm.Close();
             //End Cerrar forms abiertos
 
