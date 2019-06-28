@@ -41,8 +41,7 @@ namespace ARTEC.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@FechaEnvio", laPartida.FechaEnvio),
-                new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado),
-                new SqlParameter("@Caja", laPartida.Caja)
+                new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado)
                 //new SqlParameter("@MontoOtorgado", laPartida.MontoOtorgado),
                 //new SqlParameter("@FechaAcreditacion", laPartida.FechaAcreditacion),
                 //new SqlParameter("@NroPartida", laPartida.NroPartida)
@@ -239,7 +238,6 @@ namespace ARTEC.DAL
                     unaParti.FechaEnvio = DateTime.Parse(row["FechaEnvio"].ToString());
                     if (row["FechaAcreditacion"].ToString() != "")
                         unaParti.FechaAcreditacion = DateTime.Parse(row["FechaAcreditacion"].ToString());
-                    unaParti.Caja = (bool)row["Caja"];
                 }
                 return unaParti;
             }
@@ -298,7 +296,6 @@ namespace ARTEC.DAL
                     unaParti.FechaEnvio = DateTime.Parse(row["FechaEnvio"].ToString());
                     if (row["FechaAcreditacion"].ToString() != "")
                         unaParti.FechaAcreditacion = DateTime.Parse(row["FechaAcreditacion"].ToString());
-                    unaParti.Caja = (bool)row["Caja"];
                     LisResPartidas.Add(unaParti);
                 }
                 return LisResPartidas;
@@ -340,70 +337,70 @@ namespace ARTEC.DAL
 
 
 
-        public int PartidaModificar(Partida laPartida)
-        {
-            laPartida.IdPartida = PartidasBuscarPorIdSolicitud(laPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud).FirstOrDefault().IdPartida;
+        //public int PartidaModificar(Partida laPartida)
+        //{
+        //    laPartida.IdPartida = PartidasBuscarPorIdSolicitud(laPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud).FirstOrDefault().IdPartida;
 
-            SqlParameter[] parameters = new SqlParameter[]
-			{
-                new SqlParameter("@IdPartida", laPartida.IdPartida),
-                new SqlParameter("@FechaEnvio", laPartida.FechaEnvio),
-                new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado),
-                new SqlParameter("@Caja", laPartida.Caja)
-			};
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@IdPartida", laPartida.IdPartida),
+        //        new SqlParameter("@FechaEnvio", laPartida.FechaEnvio),
+        //        new SqlParameter("@MontoSolicitado", laPartida.MontoSolicitado),
+        //        new SqlParameter("@Caja", laPartida.Caja)
+        //    };
 
-            try
-            {
+        //    try
+        //    {
 
-                FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
-                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaModificar", parameters);
+        //        FRAMEWORK.Persistencia.MotorBD.ConexionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionIniciar();
+        //        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaModificar", parameters);
 
-                foreach (PartidaDetalle item in laPartida.unasPartidasDetalles)
-                {
+        //        foreach (PartidaDetalle item in laPartida.unasPartidasDetalles)
+        //        {
 
-                    SqlParameter[] parametersPartidaDetalles = new SqlParameter[]
-			        {
-                        new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle),
-                        new SqlParameter("@IdPartida", laPartida.IdPartida),
-                        //*********************GUARDA CON IDSOLICITUD****************************//
-                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
-                        new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
-                        new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
+        //            SqlParameter[] parametersPartidaDetalles = new SqlParameter[]
+        //            {
+        //                new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle),
+        //                new SqlParameter("@IdPartida", laPartida.IdPartida),
+        //                //*********************GUARDA CON IDSOLICITUD****************************//
+        //                new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
+        //                new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
+        //                new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
                         
-			        };
+        //            };
 
-                    FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
+        //            FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "PartidaDetalleCrearSinCotiz", parametersPartidaDetalles);
 
-                    foreach (Cotizacion cotiz in item.unasCotizaciones)
-                    {
-                        SqlParameter[] parametersRelCotizPartidaDetalle = new SqlParameter[]
-			            {
-                            new SqlParameter("@IdCotizacion", cotiz.IdCotizacion),
-                            new SqlParameter("@IdPartida", laPartida.IdPartida),
-                            new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle)
-			            };
+        //            foreach (Cotizacion cotiz in item.unasCotizaciones)
+        //            {
+        //                SqlParameter[] parametersRelCotizPartidaDetalle = new SqlParameter[]
+        //                {
+        //                    new SqlParameter("@IdCotizacion", cotiz.IdCotizacion),
+        //                    new SqlParameter("@IdPartida", laPartida.IdPartida),
+        //                    new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle)
+        //                };
 
-                        FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotizPartidaDetalle);
+        //                FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotizPartidaDetalle);
 
-                    }
+        //            }
 
-                }
+        //        }
 
-                FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
-                return laPartida.IdPartida;
-            }
-            catch (Exception es)
-            {
-                FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
-                throw;
-            }
-            finally
-            {
-                if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
-                    FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
-            }
-        }
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionAceptar();
+        //        return laPartida.IdPartida;
+        //    }
+        //    catch (Exception es)
+        //    {
+        //        FRAMEWORK.Persistencia.MotorBD.TransaccionCancelar();
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (FRAMEWORK.Persistencia.MotorBD.ConexionGetEstado())
+        //            FRAMEWORK.Persistencia.MotorBD.ConexionFinalizar();
+        //    }
+        //}
 
 
 

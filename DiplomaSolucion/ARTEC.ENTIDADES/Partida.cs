@@ -22,7 +22,6 @@ namespace ARTEC.ENTIDADES
             get { return _unasPartidasDetalles; }
             set { _unasPartidasDetalles = value; }
         }
-        public bool Caja { get; set; }
 
 
         

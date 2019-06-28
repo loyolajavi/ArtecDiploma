@@ -30,9 +30,9 @@ namespace ARTEC.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPartidaAsociar));
             this.btnBuscar = new DevComponents.DotNetBar.ButtonX();
             this.txtIdPartida = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -51,7 +51,6 @@ namespace ARTEC.GUI
             this.txtFechaEnvio = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblFechaEnvio = new DevComponents.DotNetBar.LabelX();
             this.gboxDetallesPartida = new System.Windows.Forms.GroupBox();
-            this.chkCaja = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.lblMontoSolic = new DevComponents.DotNetBar.LabelX();
             this.txtMontoSolic = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.grillaSolicitudes = new DevComponents.DotNetBar.Controls.DataGridViewX();
@@ -172,14 +171,14 @@ namespace ARTEC.GUI
             this.grillaDetallesPart.AllowUserToDeleteRows = false;
             this.grillaDetallesPart.BackgroundColor = System.Drawing.Color.White;
             this.grillaDetallesPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaDetallesPart.DefaultCellStyle = dataGridViewCellStyle1;
             this.grillaDetallesPart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaDetallesPart.Location = new System.Drawing.Point(11, 86);
             this.grillaDetallesPart.Name = "grillaDetallesPart";
@@ -321,7 +320,6 @@ namespace ARTEC.GUI
             // gboxDetallesPartida
             // 
             this.gboxDetallesPartida.Controls.Add(this.grillaDetallesPart);
-            this.gboxDetallesPartida.Controls.Add(this.chkCaja);
             this.gboxDetallesPartida.Controls.Add(this.lblMontoSolic);
             this.gboxDetallesPartida.Controls.Add(this.txtMontoSolic);
             this.gboxDetallesPartida.Controls.Add(this.lblFechaEnvio);
@@ -332,21 +330,6 @@ namespace ARTEC.GUI
             this.gboxDetallesPartida.TabIndex = 44;
             this.gboxDetallesPartida.TabStop = false;
             this.gboxDetallesPartida.Text = "groupBox1";
-            // 
-            // chkCaja
-            // 
-            // 
-            // 
-            // 
-            this.chkCaja.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkCaja.Enabled = false;
-            this.chkCaja.Location = new System.Drawing.Point(261, 46);
-            this.chkCaja.Name = "chkCaja";
-            this.chkCaja.Size = new System.Drawing.Size(86, 22);
-            this.chkCaja.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkCaja.TabIndex = 47;
-            this.chkCaja.Tag = ((object)(resources.GetObject("chkCaja.Tag")));
-            this.chkCaja.Text = "chkCaja";
             // 
             // lblMontoSolic
             // 
@@ -384,14 +367,14 @@ namespace ARTEC.GUI
             this.grillaSolicitudes.AllowUserToDeleteRows = false;
             this.grillaSolicitudes.BackgroundColor = System.Drawing.Color.White;
             this.grillaSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grillaSolicitudes.DefaultCellStyle = dataGridViewCellStyle2;
             this.grillaSolicitudes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.grillaSolicitudes.Location = new System.Drawing.Point(12, 127);
             this.grillaSolicitudes.Name = "grillaSolicitudes";
@@ -406,14 +389,14 @@ namespace ARTEC.GUI
             this.GrillaPartidas.AllowUserToDeleteRows = false;
             this.GrillaPartidas.BackgroundColor = System.Drawing.Color.White;
             this.GrillaPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.GrillaPartidas.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.GrillaPartidas.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrillaPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.GrillaPartidas.Location = new System.Drawing.Point(13, 242);
             this.GrillaPartidas.Name = "GrillaPartidas";
@@ -590,7 +573,6 @@ namespace ARTEC.GUI
         private DevComponents.DotNetBar.Controls.TextBoxX txtFechaEnvio;
         private DevComponents.DotNetBar.LabelX lblFechaEnvio;
         private System.Windows.Forms.GroupBox gboxDetallesPartida;
-        private DevComponents.DotNetBar.Controls.CheckBoxX chkCaja;
         private DevComponents.DotNetBar.LabelX lblMontoSolic;
         private DevComponents.DotNetBar.Controls.TextBoxX txtMontoSolic;
         private DevComponents.DotNetBar.Controls.DataGridViewX grillaSolicitudes;

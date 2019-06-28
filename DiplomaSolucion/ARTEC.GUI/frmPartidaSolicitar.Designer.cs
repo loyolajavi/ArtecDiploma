@@ -57,7 +57,6 @@ namespace ARTEC.GUI
             this.regularExpressionValidator2 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter2 = new DevComponents.DotNetBar.Validator.Highlighter();
-            this.vldFrmPartidaSolicitarCaja = new DevComponents.DotNetBar.Validator.SuperValidator();
             this.regularExpressionValidator3 = new DevComponents.DotNetBar.Validator.RegularExpressionValidator();
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
             this.highlighter3 = new DevComponents.DotNetBar.Validator.Highlighter();
@@ -281,7 +280,6 @@ namespace ARTEC.GUI
             this.txtMontoTotal.Size = new System.Drawing.Size(100, 22);
             this.txtMontoTotal.TabIndex = 35;
             this.vldfrmPartidaSolicitarGenerarPar.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator2);
-            this.vldFrmPartidaSolicitarCaja.SetValidator1(this.txtMontoTotal, this.regularExpressionValidator3);
             // 
             // lblMontoTotal
             // 
@@ -398,11 +396,6 @@ namespace ARTEC.GUI
             // 
             this.highlighter2.ContainerControl = this;
             // 
-            // vldFrmPartidaSolicitarCaja
-            // 
-            this.vldFrmPartidaSolicitarCaja.ErrorProvider = this.errorProvider3;
-            this.vldFrmPartidaSolicitarCaja.Highlighter = this.highlighter3;
-            // 
             // regularExpressionValidator3
             // 
             this.regularExpressionValidator3.ErrorMessage = "Your error message here.";
@@ -487,7 +480,6 @@ namespace ARTEC.GUI
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter2;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator2;
-        private DevComponents.DotNetBar.Validator.SuperValidator vldFrmPartidaSolicitarCaja;
         private System.Windows.Forms.ErrorProvider errorProvider3;
         private DevComponents.DotNetBar.Validator.Highlighter highlighter3;
         private DevComponents.DotNetBar.Validator.RegularExpressionValidator regularExpressionValidator3;

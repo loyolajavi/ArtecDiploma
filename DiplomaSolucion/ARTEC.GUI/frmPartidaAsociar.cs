@@ -73,11 +73,6 @@ namespace ARTEC.GUI
             diclblMontoSolic.Add("Idioma", IdiomalblMontoSolic);
             this.lblMontoSolic.Tag = diclblMontoSolic;
 
-            Dictionary<string, string[]> dicchkCaja = new Dictionary<string, string[]>();
-            string[] IdiomachkCaja = { "Caja" };
-            dicchkCaja.Add("Idioma", IdiomachkCaja);
-            this.chkCaja.Tag = dicchkCaja;
-
             Dictionary<string, string[]> diclblNroPartAsignada = new Dictionary<string, string[]>();
             string[] IdiomalblNroPartAsignada = { "Partida" };
             diclblNroPartAsignada.Add("Idioma", IdiomalblNroPartAsignada);
@@ -137,7 +132,6 @@ namespace ARTEC.GUI
                         {
                             txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
                             txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-                            chkCaja.Checked = unaPartida.Caja;
 
                             unaListaPartidas.Clear();
                             unaListaPartidas.Add(unaPartida);
@@ -201,7 +195,6 @@ namespace ARTEC.GUI
                             grillaDetallesPart.DataSource = null;
                             txtFechaEnvio.Clear();
                             txtMontoSolic.Clear();
-                            chkCaja.Checked = false;
                         }
                         else
                         {
@@ -225,7 +218,6 @@ namespace ARTEC.GUI
                     grillaDetallesPart.DataSource = null;
                     txtFechaEnvio.Clear();
                     txtMontoSolic.Clear();
-                    chkCaja.Checked = false;
                 }
             }
             catch (Exception es)
@@ -295,7 +287,6 @@ namespace ARTEC.GUI
                 grillaDetallesPart.DataSource = null;
                 txtFechaEnvio.Clear();
                 txtMontoSolic.Clear();
-                chkCaja.Checked = false;
                 unaListaPartidas = ManagerPartida.PartidasBuscarPorIdSolicitud(unasSolicitudes[e.RowIndex].IdSolicitud);
                 if(unaListaPartidas.Count() > 0)
                     GrillaPartidas.DataSource = unaListaPartidas;
@@ -397,8 +388,6 @@ namespace ARTEC.GUI
                 unaPartida = ManagerPartida.PartidaTraerPorNroPart(unaListaPartidas[e.RowIndex].IdPartida).FirstOrDefault();
                 txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
                 txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-                chkCaja.Checked = unaPartida.Caja;
-
 
                 foreach (PartidaDetalle unPartDet in unaPartida.unasPartidasDetalles)
                 {
