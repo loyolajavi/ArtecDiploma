@@ -5,7 +5,7 @@
 ;   Result := NombreBD;
 ; end;
 
-#define MyAppName "ArtecPrueba22"
+#define MyAppName "ArtecPrueba26"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "MPF"
 #define MyAppExeName "ARTEC.GUI.exe"
@@ -14,14 +14,14 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{C880208C-8F5B-48AB-90B0-DE51B36A0DFE}
+AppId={{4FBCAF9B-923D-4D6B-9191-98CA29EDBB42}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=ArtecPrueba22
+OutputBaseFilename=ArtecPrueba26
 Compression=lzma
 SolidCompression=yes
 DisableDirPage=no
@@ -108,7 +108,9 @@ Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\ModificarAdjuntos.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\ModificarPlantillas.cmd"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\ModificarDocumentos.cmd"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Plantillas\*"; DestDir: "{app}\Plantillas"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Artec - Manual de Ayuda.chm"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Artec - Manual de Ayuda.chw"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Plantillas\*"; DestDir: "{code:ObtenerPlantillas}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

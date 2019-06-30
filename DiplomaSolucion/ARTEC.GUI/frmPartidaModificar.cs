@@ -380,7 +380,7 @@ namespace ARTEC.GUI
                 if (ManagerPartida.PartidaModifDetalles(PDetallesBorrar, unaPartida.unasPartidasDetalles, unaPartida.MontoSolicitado))
                 {
                     //Crear el documento
-                    string RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Elevación Partida.docx";
+                    string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
                     if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                     {
                         using (DocX doc = DocX.Load(RutaPlantilla))
@@ -400,7 +400,7 @@ namespace ARTEC.GUI
                     }
                     else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                     {
-                        RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Elevación Partida2 English.docx";
+                        RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Elevación Partida2 English.docx";
                         using (DocX doc = DocX.Load(RutaPlantilla))
                         {
                             doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));
@@ -522,7 +522,7 @@ namespace ARTEC.GUI
                         if (ManagerPartida.PartidaCancelar(unaPartida))
                         {
                             //Crear el documento
-                            string RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Elevación Partida.docx";
+                            string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Elevación Partida.docx";
                             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
                             {
                                 using (DocX doc = DocX.Load(RutaPlantilla))
@@ -535,7 +535,7 @@ namespace ARTEC.GUI
                             }
                             else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
                             {
-                                RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Elevación Partida2 English.docx";
+                                RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Elevación Partida2 English.docx";
                                 using (DocX doc = DocX.Load(RutaPlantilla))
                                 {
                                     doc.AddCustomProperty(new CustomProperty("PFecha", unaPartida.FechaEnvio.ToString("dd 'de' MMMM 'de' yyyy'.'")));

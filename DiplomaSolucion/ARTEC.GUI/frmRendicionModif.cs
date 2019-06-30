@@ -263,8 +263,8 @@ namespace ARTEC.GUI
         private void DocumentoRendicionCrear(int NroRendicion)
         {
             //Crear el documento
-            string RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Rendicion.docx";
-            string RutaPlantillaRetribucion = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Retribucion.docx";
+            string RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Rendicion.docx";
+            string RutaPlantillaRetribucion = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Retribucion.docx";
             if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.Español)
             {
                 using (DocX doc = DocX.Load(RutaPlantilla))
@@ -298,9 +298,9 @@ namespace ARTEC.GUI
             }
             else if (ServicioLogin.GetLoginUnico().UsuarioLogueado.IdiomaUsuarioActual == (int)Idioma.EnumIdioma.English)
             {
-                RutaPlantilla = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Rendicion English.docx";
-                RutaPlantillaRetribucion = AppDomain.CurrentDomain.BaseDirectory + "Plantillas\\Plantilla Retribucion English.docx";
-                using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\Rendicion English.docx"))
+                RutaPlantilla = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Rendicion English.docx";
+                RutaPlantillaRetribucion = FRAMEWORK.Servicios.ManejoArchivos.obtenerRutaPlantillas() + "Plantilla Retribucion English.docx";
+                using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
                     doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
@@ -316,7 +316,7 @@ namespace ARTEC.GUI
                 }
                 if (unaPartida.MontoOtorgado < unaRendicion.MontoGasto)
                 {
-                    using (DocX doc = DocX.Load("D:\\DocumentosDescargas\\uni\\Diploma\\ArtecDiploma\\Prueba Docx\\RetribucionCajaChica.docx"))
+                    using (DocX doc = DocX.Load(RutaPlantillaRetribucion))
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
