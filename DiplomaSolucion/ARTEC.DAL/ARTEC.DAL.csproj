@@ -72,7 +72,6 @@
     <Compile Include="DALTipoBien.cs" />
     <Compile Include="DALTipoDependencia.cs" />
     <Compile Include="DALUsuario.cs" />
-    <Compile Include="IDALBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\DALBitacora.cs" />
     <Compile Include="Servicios\DALDV.cs" />
