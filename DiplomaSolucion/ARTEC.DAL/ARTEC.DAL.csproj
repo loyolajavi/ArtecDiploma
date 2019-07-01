@@ -62,7 +62,6 @@
     <Compile Include="DALModelo.cs" />
     <Compile Include="DALPartida.cs" />
     <Compile Include="DALPartidaDetalle.cs" />
-    <Compile Include="DALPolitica.cs" />
     <Compile Include="DALPrioridad.cs" />
     <Compile Include="DALProveedor.cs" />
     <Compile Include="DALRendicion.cs" />

@@ -30,32 +30,6 @@ namespace ARTEC.ENTIDADES
 
     }
 
-//public class SAraza
-//{
-//    Bien bien = new Hardware();
-//     public SAraza()
-//    {
-
-        
-//        bien.unosInventarios.Add(new XInventarioHard());
-//        bien.unosInventarios.Add(new XInventarioSoft());
-
-//        //bien.unosInventarios.Add(new Hardware());
-
-//        IList<Inventario> lista = bien.unosInventarios;
-//        foreach (var item in  bien.unosInventarios)
-//        {
-//            if (item is XInventarioHard){
-                
-
-//            }
-//        }
-       
-            
-        
-
-//    }
-//}
 
 }
 
