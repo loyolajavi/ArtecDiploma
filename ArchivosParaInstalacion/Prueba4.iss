@@ -5,7 +5,7 @@
 ;   Result := NombreBD;
 ; end;
 
-#define MyAppName "ArtecPrueba26"
+#define MyAppName "ArtecDiploma1"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "MPF"
 #define MyAppExeName "ARTEC.GUI.exe"
@@ -14,14 +14,14 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{4FBCAF9B-923D-4D6B-9191-98CA29EDBB42}
+AppId={{D50365F2-8712-45AA-8168-7DCCCBEB8F5C}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=ArtecPrueba26
+OutputBaseFilename=ArtecDiploma1
 Compression=lzma
 SolidCompression=yes
 DisableDirPage=no
@@ -40,8 +40,120 @@ var
   RutaAdjuntos: String;
   RutaPlantillas: String;
   RutaDocumentos: String;
+  version: String;
+
+//ChequearSQLServerEstaInstalado
+
+function stringtoversion(var temp: String): Integer;
+var
+	part: String;
+	pos1: Integer;
+
+begin
+	if (Length(temp) = 0) then begin
+		Result := -1;
+		Exit;
+	end;
+
+	pos1 := Pos('.', temp);
+	if (pos1 = 0) then begin
+		Result := StrToInt(temp);
+		temp := '';
+	end else begin
+		part := Copy(temp, 1, pos1 - 1);
+		temp := Copy(temp, pos1 + 1, Length(temp));
+		Result := StrToInt(part);
+	end;
+end;
 
 
+function compareinnerversion(var x, y: String): Integer;
+var
+	num1, num2: Integer;
+
+begin
+	num1 := stringtoversion(x);
+	num2 := stringtoversion(y);
+	if (num1 = -1) and (num2 = -1) then begin
+		Result := 0;
+		Exit;
+	end;
+
+	if (num1 < 0) then begin
+		num1 := 0;
+	end;
+	if (num2 < 0) then begin
+		num2 := 0;
+	end;
+
+	if (num1 < num2) then begin
+		Result := -1;
+	end else if (num1 > num2) then begin
+		Result := 1;
+	end else begin
+		Result := compareinnerversion(x, y);
+	end;
+end;
+
+function compareversion(versionA, versionB: String): Integer;
+var
+  temp1, temp2: String;
+
+begin
+	temp1 := versionA;
+	temp2 := versionB;
+	Result := compareinnerversion(temp1, temp2);
+end;
+
+function ChequearSQLServer: boolean;
+var
+  ErrorCode: Integer;
+
+begin
+  RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Microsoft SQL Server\SQLEXPRESS\MSSQLServer\CurrentVersion', 'CurrentVersion', version);
+	if (compareversion(version, '11.0') < 1) then
+    //Si NO está el SQL apropiado (2012 en adelante)
+    begin
+      ExtractTemporaryFile('SQLEXPR_x64_ESN.exe');
+      ShellExec('', ExpandConstant('{tmp}\SQLEXPR_x64_ESN.exe'), '', '', SW_SHOW, ewWaitUntilTerminated, ErrorCode);
+      if (ErrorCode > 0) then
+      begin
+        // Si hubo un error en la instalación del SQL, retorno falso
+        Result := false;
+      end
+      else
+        //Corroboro que haya quedado instalado
+        RegQueryStringValue(HKLM, 'SOFTWARE\Microsoft\Microsoft SQL Server\SQLEXPRESS\MSSQLServer\CurrentVersion', 'CurrentVersion', version);
+        if (compareversion(version, '11.0') < 1) then
+          begin
+            Result := false;
+          end
+        else //Se instaló correctamente, retorno True
+          begin
+            Result := true;
+          end
+    end
+  else
+    //Si está Instalado ya
+    Result := true;
+end;
+
+function InitializeSetup: boolean;
+var SQLOK: Boolean;
+begin
+  SQLOK := ChequearSQLServer;
+  if SQLOK then 
+    begin
+      Result := true;
+    end
+  else
+    begin
+      MsgBox('Se necesita instalar el motor de SQL Server para poder continuar', mbError, MB_OK);
+      Result := false;
+    end
+end;
+
+//Pantallas personalizadas
 procedure InitializeWizard();
 begin
   Page := CreateInputQueryPage(wpWelcome,
@@ -82,6 +194,8 @@ begin
   RutaDocumentos := Page.Values[3];
   Result := RutaDocumentos;
 end;
+
+
        
 [Files]
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\ARTEC.GUI.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -111,6 +225,7 @@ Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Artec - Manual de Ayuda.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Artec - Manual de Ayuda.chw"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\DiplomaSolucion\ARTEC.GUI\bin\Debug\Plantillas\*"; DestDir: "{code:ObtenerPlantillas}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\DocumentosDescargas\uni\Diploma\ArtecDiploma\ArchivosParaInstalacion\SQLEXPR_x64_ESN.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -118,7 +233,7 @@ Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent;
 Filename: "{app}\InstalarBDArtec.cmd"; Parameters: "{code:ObtenerServer}";
 Filename: "{app}\ModificarAdjuntos.cmd"; Parameters: "{code:ObtenerAdjuntos}";
 Filename: "{app}\ModificarPlantillas.cmd"; Parameters: "{code:ObtenerPlantillas}";
