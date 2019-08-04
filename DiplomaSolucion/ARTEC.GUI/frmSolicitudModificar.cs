@@ -213,6 +213,11 @@ namespace ARTEC.GUI
             dicbtnNotas.Add("Idioma", IdiomabtnNotas);
             this.btnNotas.Tag = dicbtnNotas;
 
+            Dictionary<string, string[]> dicbtnExaminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnExaminar = { "Examinar" };
+            dicbtnExaminar.Add("Idioma", IdiomabtnExaminar);
+            this.btnExaminar.Tag = dicbtnExaminar;
+
             
             
             
@@ -1681,6 +1686,40 @@ namespace ARTEC.GUI
                 
             }
             
+        }
+
+        private void btnExaminar_Click(object sender, EventArgs e)
+        {
+            DialogResult Resultado = openFileDialog1.ShowDialog();
+            string RutaOrigenCompletaAdjunto = null;
+
+            if (unosAdjuntos.Count > 0)
+            {
+                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("No puede adjuntarse más de 1 archivo").Texto);
+            }
+            else
+            {
+                //Agarro la ruta del archivo
+                if (Resultado == System.Windows.Forms.DialogResult.OK)
+                {
+                    RutaOrigenCompletaAdjunto = openFileDialog1.FileName;
+                }
+                //Agarro el nombre del archivo
+                string NombreArchivo = Path.GetFileName(RutaOrigenCompletaAdjunto);
+                if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(RutaOrigenCompletaAdjunto))
+                {
+                    //Añado a la grilla el nombre del archivo
+                    unosAdjuntos.Add(NombreArchivo);
+                    unosAdjuntosRutas.Add(RutaOrigenCompletaAdjunto);
+                    lstAdjuntos.DataSource = null;
+                    lstAdjuntos.DataSource = unosAdjuntos;
+                    //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+                }
+                else
+                {
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
+                }
+            }
         }
 
 

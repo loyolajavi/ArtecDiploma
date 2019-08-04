@@ -114,6 +114,16 @@ namespace ARTEC.GUI
             string[] IdiomabtnConfirmar = { "Confirmar" };
             dicbtnConfirmar.Add("Idioma", IdiomabtnConfirmar);
             this.btnConfirmar.Tag = dicbtnConfirmar;
+
+            Dictionary<string, string[]> dicbtnExaminar = new Dictionary<string, string[]>();
+            string[] IdiomabtnExaminar = { "Examinar" };
+            dicbtnExaminar.Add("Idioma", IdiomabtnExaminar);
+            this.btnExaminar.Tag = dicbtnExaminar;
+
+            Dictionary<string, string[]> dicbtnEliminarAdjunto = new Dictionary<string, string[]>();
+            string[] IdiomabtnEliminarAdjunto = { "Quitar" };
+            dicbtnEliminarAdjunto.Add("Idioma", IdiomabtnEliminarAdjunto);
+            this.btnEliminarAdjunto.Tag = dicbtnEliminarAdjunto;
         }
 
         private void frmCotizaciones_Load(object sender, EventArgs e)
@@ -567,14 +577,16 @@ namespace ARTEC.GUI
                 else if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
                 {
                     ////Si hizo click en Quitar
-                    //if (e.ColumnIndex == grillaCotizacion.Columns["btnDinBorrar"].Index)
-                    //{
-                        unasCotizaciones.RemoveAt(e.RowIndex);
-                        //Regenero la grilla
-                        grillaCotizacion.DataSource = null;
-                        grillaCotizacion.DataSource = unasCotizaciones;
-                        FormatearGrillaCotizacion();
-                    //}
+                    //Quito el adjunto
+                    DicAdjuntos.Remove(e.RowIndex);
+                    DicAdjuntosRutas.Remove(e.RowIndex);    
+                    //Quito la cotizacion
+                    unasCotizaciones.RemoveAt(e.RowIndex);
+                        
+                    //Regenero la grilla
+                    grillaCotizacion.DataSource = null;
+                    grillaCotizacion.DataSource = unasCotizaciones;
+                    FormatearGrillaCotizacion();
                 }
             }
             catch (Exception es)
@@ -621,7 +633,7 @@ namespace ARTEC.GUI
 
                     lstAdjuntos.DataSource = null;
                     lstAdjuntos.DataSource = unosAdjuntosNombre;
-
+                    FormatearGrillaCotizacion();
                     //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
 
                 }
@@ -725,7 +737,6 @@ namespace ARTEC.GUI
                     unosAdjuntosRutas.Add(RutaOrigenCompletaAdjunto);
                     lstAdjuntos.DataSource = null;
                     lstAdjuntos.DataSource = unosAdjuntosNombre;
-
                     //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
                 }
                 else
