@@ -212,7 +212,8 @@ namespace ARTEC.DAL
                     }
                     uno.IdInventario = (int)row["IdInventario"];
                     uno.IdBienEspecif = (int)row["IdBien"];
-                    uno.unTipoBien = (int)row["IdTipoBien"];
+                    uno.elTipoBien = new TipoBien();
+                    uno.elTipoBien.IdTipoBien = (int)row["IdTipoBien"];
                     //if (uno.TipoBien == (int)TipoBien.EnumTipoBien.Soft)
                     //{
                     //    (uno as XInventarioSoft).SerialMaster = row["SerialMaster"].ToString();

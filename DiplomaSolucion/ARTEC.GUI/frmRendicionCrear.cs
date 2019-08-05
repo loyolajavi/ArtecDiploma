@@ -128,7 +128,8 @@ namespace ARTEC.GUI
 
 
                                 unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(Int32.Parse(txtNroPart.Text));
-                                unaRendicion.IdPartida = Int32.Parse(txtNroPart.Text);
+                                unaRendicion.unaPartida = new Partida();
+                                unaRendicion.unaPartida.IdPartida = Int32.Parse(txtNroPart.Text);
                                 unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
                                 txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
                                 //Obtengo los nros de factura por distinct
@@ -203,7 +204,7 @@ namespace ARTEC.GUI
                     if (validlblNroPartida.Validate())
                     {
                         unaRendicion.FechaRen = DateTime.Today;
-                        IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                        IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.unaPartida.IdPartida);
                         if (IdRendRes == 0)
                         {
                             IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
@@ -255,7 +256,7 @@ namespace ARTEC.GUI
                 using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                     var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
@@ -272,7 +273,7 @@ namespace ARTEC.GUI
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
@@ -288,7 +289,7 @@ namespace ARTEC.GUI
                 using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                     var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
@@ -305,7 +306,7 @@ namespace ARTEC.GUI
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;

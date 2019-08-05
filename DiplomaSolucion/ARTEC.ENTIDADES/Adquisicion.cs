@@ -26,8 +26,8 @@ namespace ARTEC.ENTIDADES
 
         public Dependencia unaDependencia { get; set; }
 
-        public int unIdPartida { get; set; }
-        public int unIdSolicitud { get; set; }
+        public Partida unaPartidaParaId { get; set; }
+        public Solicitud unaSolicParaId { get; set; }
 
         private List<Inventario> _unosInventariosAsoc = new List<Inventario>();
 

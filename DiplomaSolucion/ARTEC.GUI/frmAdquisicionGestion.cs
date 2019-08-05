@@ -205,27 +205,34 @@ namespace ARTEC.GUI
                 unosProveedores = ManagerProveedor.ProveedorTraerTodosActivos();
 
                 txtIdAdquisicion.Text = unaAdqModif.IdAdquisicion.ToString();
-                txtNroPartida.Text = unaAdqModif.unIdPartida.ToString();
+                //txtNroPartida.Text = unaAdqModif.unIdPartida.ToString();
+                txtNroPartida.Text = unaAdqModif.unaPartidaParaId.IdPartida.ToString();
                 txtDep.Text = unaAdqModif.unaDependencia.NombreDependencia;
                 txtFecha.Text = unaAdqModif.FechaAdq.ToString();
                 txtFechaCompra.Text = unaAdqModif.FechaCompra.ToString();
                 txtNroFactura.Text = unaAdqModif.NroFactura.ToString();
-                txtNroSolicitud.Text = unaAdqModif.unIdSolicitud.ToString();
+                //txtNroSolicitud.Text = unaAdqModif.unIdSolicitud.ToString();
+                txtNroSolicitud.Text = unaAdqModif.unaSolicParaId.IdSolicitud.ToString();
                 txtProveedor.Text = unaAdqModif.ProveedorAdquisicion.AliasProv;
 
                 unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
                 InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
 
-                unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
-                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
-                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
-                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
+                //unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+                //unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+                //unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+                //unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
+                unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+                unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
 
                 if (unaSolic.unosDetallesSolicitud.Count > 0)
                 {
                     foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
                     {
-                        unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                        //unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                        unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                         unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
                         unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
                         unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
@@ -522,7 +529,8 @@ namespace ARTEC.GUI
             try
             {
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                //int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unaSolicParaId.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
                 if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
                     InvQuitarMod = InventariosAgregarBKP.Where(d => !unaAdqModif.unosInventariosAsoc.Any(a => a.IdInventario == d.IdInventario)).ToList();
@@ -593,7 +601,7 @@ namespace ARTEC.GUI
             GrillaBienesAAdquirir.DataSource = null;
             
 
-            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
 
             LisAUXDetalles = unaSolic.unosDetallesSolicitud.Select(x => new HLPDetallesAdquisicion() { DescripCategoria = x.unaCategoria.DescripCategoria, Cantidad = x.Cantidad, IdCategoria = x.unaCategoria.IdCategoria, IdSolicitudDetalle = x.IdSolicitudDetalle, UIDSolicDetalle = x.UIDSolicDetalle }).ToList();
 
@@ -700,7 +708,8 @@ namespace ARTEC.GUI
                         //unBienAUX = new Hardware();
                         unInvAgregar = new XInventarioHard();
                         unInvAgregar.deBien = new Hardware();
-                        unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Hard;
+                        unInvAgregar.elTipoBien = new TipoBien();
+                        unInvAgregar.elTipoBien.IdTipoBien = (int)TipoBien.EnumTipoBien.Hard;
                         //unBienAUX.unInventarioAlta = new XInventarioHard();
                     }
                     else
@@ -708,7 +717,8 @@ namespace ARTEC.GUI
                         //unBienAUX = new Software();
                         unInvAgregar = new XInventarioSoft();
                         unInvAgregar.deBien = new Software();
-                        unInvAgregar.unTipoBien = (int)TipoBien.EnumTipoBien.Soft;
+                        unInvAgregar.elTipoBien = new TipoBien();
+                        unInvAgregar.elTipoBien.IdTipoBien = (int)TipoBien.EnumTipoBien.Soft;
                         //unBienAUX.unInventarioAlta = new XInventarioSoft();
                     }
 
@@ -720,7 +730,7 @@ namespace ARTEC.GUI
                     unInvAgregar.Costo = unAgregarInventarioCU.unCosto;
                     unInvAgregar.unDeposito = new Deposito() { IdDeposito = 1 };
                     unInvAgregar.PartidaDetalleAsoc = new PartidaDetalle();
-                    unInvAgregar.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                    unInvAgregar.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitud;
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitudDetalle;
@@ -729,7 +739,7 @@ namespace ARTEC.GUI
                     BLLCategoria ManagerCategoria = new BLLCategoria();
                     unInvAgregar.deBien.unaCategoria = new Categoria();
                     unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.IdBienEspecif);
-                    unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unIdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
+                    unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
                     //unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 
                     unInvAgregarHLP.DescripBien = unAgregarInventarioCU.unBien;
@@ -787,7 +797,8 @@ namespace ARTEC.GUI
             try
             {
                 BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                //int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unIdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAdqModif.unaSolicParaId.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
                 if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
                     foreach (Inventario unInven in unaAdqModif.unosInventariosAsoc)
@@ -863,16 +874,16 @@ namespace ARTEC.GUI
             unaAdqModif.unosInventariosAsoc = ManagerAdquisicion.AdquisicionInventariosAsoc(txtNroPartida.Text, txtIdAdquisicion.Text);
             InventariosAgregarBKP = unaAdqModif.unosInventariosAsoc.ToList();
 
-            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
-            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
-            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
-            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unIdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
+            unaSolic.unosDetallesSolicitud = ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar);
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido));
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado));
+            unaSolic.unosDetallesSolicitud.AddRange(ManagerPartidaDetalle.CategoriaDetBienesTraerPorIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Rendido));
 
             if (unaSolic.unosDetallesSolicitud.Count > 0)
             {
                 foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
                 {
-                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
+                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;

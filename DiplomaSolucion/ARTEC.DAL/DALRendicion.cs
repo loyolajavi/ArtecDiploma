@@ -76,7 +76,7 @@ namespace ARTEC.DAL
             SqlParameter[] parameters = new SqlParameter[]
 			{
                 new SqlParameter("@FechaRen", unaRendicion.FechaRen),
-                new SqlParameter("@IdPartida", unaRendicion.IdPartida),
+                new SqlParameter("@IdPartida", unaRendicion.unaPartida.IdPartida),
                 new SqlParameter("@MontoGasto", unaRendicion.MontoGasto)
 			};
 
@@ -123,7 +123,7 @@ namespace ARTEC.DAL
 			{
                 new SqlParameter("@IdRendicion", unaRendicion.IdRendicion),
                 new SqlParameter("@FechaRen", unaRendicion.FechaRen),
-                new SqlParameter("@IdPartida", unaRendicion.IdPartida),
+                new SqlParameter("@IdPartida", unaRendicion.unaPartida.IdPartida),
                 new SqlParameter("@MontoGasto", unaRendicion.MontoGasto)
 			};
 
@@ -236,7 +236,8 @@ namespace ARTEC.DAL
                 {
                     Rendicion ResRendicion = new Rendicion();
                     ResRendicion.IdRendicion = (int)row["IdRendicion"];
-                    ResRendicion.IdPartida = (int)row["IdPartida"];
+                    ResRendicion.unaPartida = new Partida();
+                    ResRendicion.unaPartida.IdPartida = (int)row["IdPartida"];
                     ResRendicion.MontoGasto = (decimal)row["MontoGasto"];
                     ResRendicion.FechaRen = DateTime.Parse(row["FechaRen"].ToString());
 

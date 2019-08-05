@@ -125,8 +125,12 @@ namespace ARTEC.DAL
                     ResAdquisicion.unaDependencia = new Dependencia();
                     ResAdquisicion.unaDependencia.IdDependencia = (int)row["IdDependencia"];
                     ResAdquisicion.unaDependencia.NombreDependencia = row["NombreDependencia"].ToString();
-                    ResAdquisicion.unIdPartida = (int)row["IdPartida"];
-                    ResAdquisicion.unIdSolicitud = (int)row["IdSolicitud"];
+                    //ResAdquisicion.unIdPartida = (int)row["IdPartida"];
+                    ResAdquisicion.unaPartidaParaId = new Partida();
+                    ResAdquisicion.unaPartidaParaId.IdPartida = (int)row["IdPartida"];
+                    ResAdquisicion.unaSolicParaId = new Solicitud();
+                    //ResAdquisicion.unIdSolicitud = (int)row["IdSolicitud"];
+                    ResAdquisicion.unaSolicParaId.IdSolicitud = (int)row["IdSolicitud"];
 
                     unasAdquisiciones.Add(ResAdquisicion);
                 }
@@ -194,8 +198,10 @@ namespace ARTEC.DAL
                     uno.deBien.unModelo = new ModeloVersion();
                     uno.deBien.unModelo.IdModeloVersion = (int)row["IdModeloVersion"];
                     uno.deBien.unModelo.DescripModeloVersion = row["DescripModeloVersion"].ToString();
-                    uno.unTipoBien = (int)row["IdTipoBien"];
-                    if (uno.unTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    //uno.unTipoBien = (int)row["IdTipoBien"];
+                    uno.elTipoBien = new TipoBien();
+                    uno.elTipoBien.IdTipoBien = (int)row["IdTipoBien"];
+                    if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
                     {
                         (uno as XInventarioSoft).SerialMaster = row["SerialMaster"].ToString();
                     }
@@ -205,7 +211,7 @@ namespace ARTEC.DAL
                     uno.PartidaDetalleAsoc = new PartidaDetalle();
                     uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
                     uno.PartidaDetalleAsoc.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
-                    if (uno.unTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
                     {
                         (uno as XInventarioHard).unDeposito = new Deposito();
                         (uno as XInventarioHard).unDeposito.IdDeposito = (int)row["IdDeposito"];
@@ -295,7 +301,7 @@ namespace ARTEC.DAL
                     foreach (Inventario unInv in InvAgregarMod)
                     {
                         int IDDevuelto;
-                        if (unInv.unTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                        if (unInv.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
                         {
                             SqlParameter[] parametersInvHard = new SqlParameter[]
 			                {
@@ -329,7 +335,7 @@ namespace ARTEC.DAL
                         SqlParameter[] parametersRelPdetAdq = new SqlParameter[]
 			            {
                             new SqlParameter("@IdInventario", IDDevuelto),
-                            new SqlParameter("@IdPartida", unaAdqModif.unIdPartida),
+                            new SqlParameter("@IdPartida", unaAdqModif.unaPartidaParaId.IdPartida),
                             new SqlParameter("@UIDPartidaDetalle", unInv.PartidaDetalleAsoc.UIDPartidaDetalle),
                             new SqlParameter("@IdAdquisicion", unaAdqModif.IdAdquisicion)
 			            };

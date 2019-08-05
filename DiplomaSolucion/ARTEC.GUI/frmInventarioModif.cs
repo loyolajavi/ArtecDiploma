@@ -82,7 +82,7 @@ namespace ARTEC.GUI
 
 
                 txtBien.Text = unInventarioModif.deBien.DescripBien;
-                cboTipoBien.SelectedValue = unInventarioModif.unTipoBien;
+                cboTipoBien.SelectedValue = unInventarioModif.elTipoBien.IdTipoBien;
                 cboMarca.SelectedValue = unInventarioModif.deBien.unaMarca.IdMarca;
 
                 //Traer Modelos asociados a la Marca seleccionada
@@ -95,7 +95,7 @@ namespace ARTEC.GUI
                 cboModelo.SelectedValue = unInventarioModif.deBien.unModelo.IdModeloVersion;
 
                 //Obtener IdBien asociado a Marca y Modelo y Categoria
-                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien(unInventarioModif.unTipoBien);
+                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien(unInventarioModif.elTipoBien.IdTipoBien);
                 IdBienAsociado = ManagerBien.BienTraerIdPorDescripMarcaModelo(ResIdCat, unInventarioModif.deBien.unaMarca.IdMarca, unInventarioModif.deBien.unModelo.IdModeloVersion);
                 
                 txtSerieKey.Text = unInventarioModif.SerieKey;
@@ -195,7 +195,7 @@ namespace ARTEC.GUI
                 ModeloVersion unModelo = new ModeloVersion();
                 unModelo = (ModeloVersion)cbo.SelectedItem;
                 //Obtener IdBien asociado a Marca y Modelo y Categoria
-                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien(unInventarioModif.unTipoBien);
+                IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien(unInventarioModif.elTipoBien.IdTipoBien);
                 IdBienAsociado = ManagerBien.BienTraerIdPorDescripMarcaModelo(ResIdCat, (cboMarca.SelectedItem as Marca).IdMarca, unModelo.IdModeloVersion);
             }
 

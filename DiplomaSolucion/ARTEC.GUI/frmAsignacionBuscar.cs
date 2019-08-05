@@ -154,7 +154,7 @@ namespace ARTEC.GUI
                             GrillaAux.unaGrilla.Columns["PartidaDetalleAsoc"].Visible = false;
                             GrillaAux.unaGrilla.Columns["Costo"].Visible = false;
                             GrillaAux.unaGrilla.Columns["unaAdquisicion"].Visible = false;
-                            GrillaAux.unaGrilla.Columns["unTipoBien"].Visible = false;
+                            GrillaAux.unaGrilla.Columns["elTipoBien"].Visible = false;
 
                             ListaGrilla.Add(GrillaAux);
                         }
@@ -228,7 +228,7 @@ namespace ARTEC.GUI
                         GrillaAux.unaGrilla.Columns["PartidaDetalleAsoc"].Visible = false;
                         GrillaAux.unaGrilla.Columns["Costo"].Visible = false;
                         GrillaAux.unaGrilla.Columns["unaAdquisicion"].Visible = false;
-                        GrillaAux.unaGrilla.Columns["unTipoBien"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["elTipoBien"].Visible = false;
 
                         ListaGrilla.Add(GrillaAux);
                     }

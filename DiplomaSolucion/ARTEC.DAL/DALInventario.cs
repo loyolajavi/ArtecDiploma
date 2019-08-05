@@ -110,8 +110,9 @@ namespace ARTEC.DAL
                     }
                     uno.IdInventario = (int)row["IdInventario"];
                     uno.IdBienEspecif = (int)row["IdBien"];
-                    uno.unTipoBien = (int)row["IdTipoBien"];
-                    if(uno.unTipoBien == (int)TipoBien.EnumTipoBien.Soft)
+                    uno.elTipoBien = new TipoBien();
+                    uno.elTipoBien.IdTipoBien = (int)row["IdTipoBien"];
+                    if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
                     {
                         (uno as XInventarioSoft).SerialMaster = row["SerialMaster"].ToString();
                     }
@@ -121,7 +122,7 @@ namespace ARTEC.DAL
                     uno.PartidaDetalleAsoc = new PartidaDetalle();
                     uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
                     uno.PartidaDetalleAsoc.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
-                    if (uno.unTipoBien == (int)TipoBien.EnumTipoBien.Hard)
+                    if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
                     {
                         (uno as XInventarioHard).unDeposito = new Deposito();
                         (uno as XInventarioHard).unDeposito.IdDeposito = (int)row["IdDeposito"];

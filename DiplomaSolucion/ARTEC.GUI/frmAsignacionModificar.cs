@@ -304,7 +304,7 @@ namespace ARTEC.GUI
             GrillaBienesAsignados.Columns["PartidaDetalleAsoc"].Visible = false;
             GrillaBienesAsignados.Columns["Costo"].Visible = false;
             GrillaBienesAsignados.Columns["unaAdquisicion"].Visible = false;
-            GrillaBienesAsignados.Columns["unTipoBien"].Visible = false;
+            GrillaBienesAsignados.Columns["elTipoBien"].Visible = false;
         }
 
 

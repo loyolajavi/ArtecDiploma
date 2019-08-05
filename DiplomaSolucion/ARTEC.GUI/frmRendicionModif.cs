@@ -165,22 +165,23 @@ namespace ARTEC.GUI
                     //TraerDatosSolicitud
                     BLLSolicitud ManagerSolicitud = new BLLSolicitud();
                     Solicitud DatosSolic;
-                    DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(unaRendicionSelec.IdPartida);
+                    DatosSolic = ManagerSolicitud.SolicitudTraerIdsolNomdepPorIdPartida(unaRendicionSelec.unaPartida.IdPartida);
                     txtNroSolic.Text = DatosSolic.IdSolicitud.ToString();
                     txtDependencia.Text = DatosSolic.laDependencia.NombreDependencia;
 
                     //Cargar montos partida
                     BLLPartida ManagerPartida = new BLLPartida();
-                    unaPartida = ManagerPartida.PartidaTraerPorNroPart(unaRendicionSelec.IdPartida).FirstOrDefault();
+                    unaPartida = ManagerPartida.PartidaTraerPorNroPart(unaRendicionSelec.unaPartida.IdPartida).FirstOrDefault();
 
                     txtPartRef.Text = unaPartida.NroPartida;
                     txtMontoOtorgado.Text = unaPartida.MontoOtorgado.ToString();
 
                     txtNroRendicion.Text = unaRendicionSelec.IdRendicion.ToString();
-                    txtNroPart.Text = unaRendicionSelec.IdPartida.ToString();
+                    txtNroPart.Text = unaRendicionSelec.unaPartida.IdPartida.ToString();
 
-                    unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(unaRendicionSelec.IdPartida);
-                    unaRendicion.IdPartida = unaRendicionSelec.IdPartida;
+                    unaRendicion = ManagerRendicion.AdquisicionesConBienesPorIdPartida(unaRendicionSelec.unaPartida.IdPartida);
+                    unaRendicion.unaPartida = new Partida();
+                    unaRendicion.unaPartida.IdPartida = unaRendicionSelec.unaPartida.IdPartida;
                     unaRendicion.MontoGasto = unaRendicion.unasAdquisiciones.Select(suma => suma.BienesInventarioAsociados[0].unInventarioAlta.Costo).Sum();
                     txtMontoEmpleado.Text = unaRendicion.MontoGasto.ToString();
                     //Obtengo los nros de factura por distinct
@@ -225,7 +226,7 @@ namespace ARTEC.GUI
                 {
                     int IdRendRes = 0;
                     unaRendicion.FechaRen = DateTime.Today;
-                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.IdPartida);
+                    IdRendRes = ManagerRendicion.RendicionTraerIdRendPorIdPartida(unaRendicion.unaPartida.IdPartida);
                     if (IdRendRes == 0)
                     {
                         IdRendRes = ManagerRendicion.RendicionCrear(unaRendicion, unaPartida);
@@ -270,7 +271,7 @@ namespace ARTEC.GUI
                 using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                     var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
@@ -287,7 +288,7 @@ namespace ARTEC.GUI
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
@@ -303,7 +304,7 @@ namespace ARTEC.GUI
                 using (DocX doc = DocX.Load(RutaPlantilla))
                 {
                     doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                    doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                     CultureInfo ci = new CultureInfo("es-AR");
                     doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                     var unaLista = doc.AddList(unaRendicion.unasAdquisiciones[0].BienesInventarioAsociados[0].unaCategoria.DescripCategoria, 0, ListItemType.Bulleted, 1);
@@ -320,7 +321,7 @@ namespace ARTEC.GUI
                     {
 
                         doc.AddCustomProperty(new CustomProperty("PFecha", DateTime.Today.ToString("dd 'de' MMMM 'de' yyyy'.'")));
-                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.IdPartida));
+                        doc.AddCustomProperty(new CustomProperty("PNroPartida", unaRendicion.unaPartida.IdPartida));
                         CultureInfo ci = new CultureInfo("es-AR");
                         doc.AddCustomProperty(new CustomProperty("PMontoUtilizado", unaRendicion.MontoGasto.ToString("C2", ci)));
                         decimal montoRetrib = unaRendicion.MontoGasto - unaPartida.MontoOtorgado;
