@@ -123,7 +123,8 @@ namespace ARTEC.DAL
                     uno.unEstado.IdEstadoInventario = (int)row["IdEstadoInventario"];
                     uno.SerieKey = row["SerieKey"].ToString();
                     uno.PartidaDetalleAsoc = new PartidaDetalle();
-                    uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
+                    //uno.PartidaDetalleAsoc.IdPartida = (int)row["IdPartida"];
+                    uno.PartidaDetalleAsoc.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     uno.PartidaDetalleAsoc.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
                     if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Hard)
                     {

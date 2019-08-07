@@ -129,8 +129,8 @@ namespace ARTEC.GUI
             {
                 foreach (PartidaDetalle pdet in unaPartida.unasPartidasDetalles)
                 {
-                    pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.IdPartida);
-                    pdet.unasCotizacionesBKP = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.IdPartida);
+                    pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.PartidaAsociada.IdPartida);
+                    pdet.unasCotizacionesBKP = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.PartidaAsociada.IdPartida);
                     pdet.unasCotizacionesEnSolic = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(pdet.SolicDetalleAsociado.IdSolicitudDetalle, pdet.SolicDetalleAsociado.IdSolicitud, pdet.SolicDetalleAsociado.UIDSolicDetalle);
                 }
 

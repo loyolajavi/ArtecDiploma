@@ -39,7 +39,7 @@ namespace ARTEC.DAL
                 SqlParameter[] parametersRelPdetAdq = new SqlParameter[]
 			    {
                     new SqlParameter("@IdInventario", IDDevuelto),
-                    new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.IdPartida),
+                    new SqlParameter("@IdPartida", unBien.unInventarioAlta.PartidaDetalleAsoc.PartidaAsociada.IdPartida),
                     new SqlParameter("@UIDPartidaDetalle", unBien.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle),
                     new SqlParameter("@IdAdquisicion", IdAdq)
 			    };

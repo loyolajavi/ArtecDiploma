@@ -415,6 +415,7 @@ namespace ARTEC.DAL
                     ResAsigDetalle.SolicDetalleAsoc = new SolicDetalle();
                     ResAsigDetalle.SolicDetalleAsoc.IdSolicitud = (int)row["IdSolicitud"];
                     ResAsigDetalle.SolicDetalleAsoc.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
+                    ResAsigDetalle.SolicDetalleAsoc.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
                     unosAsigDetalles.Add(ResAsigDetalle);
                 }
                 return unosAsigDetalles;

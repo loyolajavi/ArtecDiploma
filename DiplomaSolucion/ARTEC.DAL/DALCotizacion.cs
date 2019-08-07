@@ -171,7 +171,8 @@ namespace ARTEC.DAL
                     unaCotizacion.unProveedor.AliasProv = row["AliasProv"].ToString();
                     unaCotizacion.unaPartidaDetalleIDs = new PartidaDetalle();
                     unaCotizacion.unaPartidaDetalleIDs.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
-                    unaCotizacion.unaPartidaDetalleIDs.IdPartida = (int)row["IdPartida"];
+                    //unaCotizacion.unaPartidaDetalleIDs.IdPartida = (int)row["IdPartida"];
+                    unaCotizacion.unaPartidaDetalleIDs.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     unaCotizacion.unaPartidaDetalleIDs.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
 
 

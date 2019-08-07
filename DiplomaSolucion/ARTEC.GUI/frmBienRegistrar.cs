@@ -545,7 +545,7 @@ namespace ARTEC.GUI
                 //unBien.unInventarioAlta = unInven;
                 unBienAUX.unInventarioAlta.PartidaDetalleAsoc = new PartidaDetalle();
                 unBienAUX.unInventarioAlta.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(Int32.Parse(txtNroPartida.Text), unDetSolic.unaCategoria.IdCategoria);
-                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.IdPartida = Int32.Parse(txtNroPartida.Text);
+                unBienAUX.unInventarioAlta.PartidaDetalleAsoc.PartidaAsociada.IdPartida = Int32.Parse(txtNroPartida.Text);
 
                 unBienAUX.unaCategoria = unBien.unaCategoria;
                 unBienAUX.unaMarca = unBien.unaMarca;

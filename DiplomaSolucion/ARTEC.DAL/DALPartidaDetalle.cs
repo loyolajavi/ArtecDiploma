@@ -48,7 +48,8 @@ namespace ARTEC.DAL
                 {
                     PartidaDetalle unDet = new PartidaDetalle();
                     unDet.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
-                    unDet.IdPartida = (int)row["IdPartida"];
+                    //unDet.IdPartida = (int)row["IdPartida"];
+                    unDet.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unDet.SolicDetalleAsociado = new SolicDetalle();
                     unDet.SolicDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
@@ -78,7 +79,8 @@ namespace ARTEC.DAL
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     unDet.UIDPartidaDetalle = (int)row["UIDPartidaDetalle"];
-                    unDet.IdPartida = (int)row["IdPartida"];
+                    //unDet.IdPartida = (int)row["IdPartida"];
+                    unDet.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unDet.SolicDetalleAsociado = new SolicDetalle();
                     unDet.SolicDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];

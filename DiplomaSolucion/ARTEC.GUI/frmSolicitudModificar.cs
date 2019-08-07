@@ -550,7 +550,7 @@ namespace ARTEC.GUI
                 PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
                 unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, unaSolicitud.unosDetallesSolicitud[e.RowIndex].IdSolicitudDetalle, unaSolicitud.unosDetallesSolicitud[e.RowIndex].UIDSolicDetalle);
-                if (unaPartDet.IdPartida == 0)
+                if (unaPartDet.PartidaAsociada.IdPartida == 0)
                 {
                     //elimino las columnas dinámicas (sino aparecen delante de todo al regenerar la grilla)
                     grillaDetalles.Columns.RemoveAt(e.ColumnIndex);
@@ -612,7 +612,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede eliminarse").Texto);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.PartidaAsociada.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede eliminarse").Texto);
                 }
             }
             else //si hizo click en cualquier otro lado, muestra los datos del detalle en el formulario de carga de datos
@@ -1384,7 +1384,7 @@ namespace ARTEC.GUI
                  PartidaDetalle unaPartDet = new PartidaDetalle();
                 //Compruebo que no tenga partidas asociadas
                  unaPartDet = ManagerPartidaDetalle.SolicDetallePartidaDetalleAsociacionTraer(unaSolicitud.IdSolicitud, DetalleSeleccionado, unaSolicitud.unosDetallesSolicitud.First(x => x.IdSolicitudDetalle == DetalleSeleccionado).UIDSolicDetalle);
-                if (unaPartDet.IdPartida == 0)
+                if (unaPartDet.PartidaAsociada.IdPartida == 0)
                 {
                     SolicDetalle unDetalleSolicitud = new SolicDetalle();
                     unDetalleSolicitud.unaCategoria = unaCat;
@@ -1454,7 +1454,7 @@ namespace ARTEC.GUI
                 }
                 else
                 {
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede modificarse").Texto);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El detalle está asociado a la Partida Nro: ").Texto + unaPartDet.PartidaAsociada.IdPartida + BLLServicioIdioma.MostrarMensaje(", no puede modificarse").Texto);
                 }
             }
         }

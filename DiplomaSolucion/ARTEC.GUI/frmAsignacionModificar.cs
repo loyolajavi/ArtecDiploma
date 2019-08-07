@@ -468,7 +468,7 @@ namespace ARTEC.GUI
                     {
                         ManagerAsignacion.AsignacionEliminar(unaAsignacionModif);
                         ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Eliminar Asignación").Texto, BLLServicioIdioma.MostrarMensaje("Asignacion: ").Texto + unaAsignacionModif.IdAsignacion.ToString());
-                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
+                        MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Asignacion: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + BLLServicioIdioma.MostrarMensaje(" eliminada correctamente").Texto);
                         DialogResult = DialogResult.No;
                     }
                     else

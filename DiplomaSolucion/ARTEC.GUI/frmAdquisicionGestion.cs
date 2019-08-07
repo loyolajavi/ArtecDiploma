@@ -232,7 +232,7 @@ namespace ARTEC.GUI
                     foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
                     {
                         //unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unIdPartida;
-                        unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
+                        unInv.PartidaDetalleAsoc.PartidaAsociada.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                         unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
                         unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;
                         unInv.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unInv.deBien.DescripBien).PartidaDetalleAsoc.UIDPartidaDetalle;
@@ -731,7 +731,7 @@ namespace ARTEC.GUI
                     unInvAgregar.Costo = unAgregarInventarioCU.unCosto;
                     unInvAgregar.unDeposito = new Deposito() { IdDeposito = 1 };
                     unInvAgregar.PartidaDetalleAsoc = new PartidaDetalle();
-                    unInvAgregar.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
+                    unInvAgregar.PartidaDetalleAsoc.PartidaAsociada.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitud;
                     unInvAgregar.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).IdSolicitudDetalle;
@@ -884,7 +884,7 @@ namespace ARTEC.GUI
             {
                 foreach (Inventario unInv in unaAdqModif.unosInventariosAsoc)
                 {
-                    unInv.PartidaDetalleAsoc.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
+                    unInv.PartidaDetalleAsoc.PartidaAsociada.IdPartida = unaAdqModif.unaPartidaParaId.IdPartida;
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado = new SolicDetalle();
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitud;
                     unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle = unaSolic.unosDetallesSolicitud.Find(X => X.unaCategoria.DescripCategoria == unInv.deBien.DescripBien).IdSolicitudDetalle;

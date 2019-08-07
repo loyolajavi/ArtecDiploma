@@ -455,7 +455,7 @@ namespace ARTEC.DAL
                         {
                             SqlParameter[] parametersPartDetEliminar = new SqlParameter[]
                             {
-                                new SqlParameter("@IdPartida", unaPartidaDetalle.IdPartida),
+                                new SqlParameter("@IdPartida", unaPartidaDetalle.PartidaAsociada.IdPartida),
                                 new SqlParameter("@UIDPartidaDetalle", unaPartidaDetalle.UIDPartidaDetalle),
                                 new SqlParameter("@IdPartidaDetalle", unaPartidaDetalle.IdPartidaDetalle)
                             };
@@ -464,12 +464,12 @@ namespace ARTEC.DAL
                         }
 
                         //Si no quedaron PDetalles en la Partida, se elimina
-                        if (unaPartidaDetalle.IdPartida > 0)
+                        if (unaPartidaDetalle.PartidaAsociada.IdPartida > 0)
                         {
                             List<PartidaDetalle> unaListaPartidaDetalles = new List<PartidaDetalle>();
                             SqlParameter[] parametersParti = new SqlParameter[]
                             {
-                                new SqlParameter("@IdPartida", unaPartidaDetalle.IdPartida)
+                                new SqlParameter("@IdPartida", unaPartidaDetalle.PartidaAsociada.IdPartida)
                             };
                             DataSet ds2 = FRAMEWORK.Persistencia.MotorBD.EjecutarDataSetPrueba(CommandType.StoredProcedure, "PartidaDetalleTraerTodosPorNroPart", parametersParti);
                             unaListaPartidaDetalles = DALPartidaDetalle.MapearPartidaDetalles(ds);
@@ -477,7 +477,7 @@ namespace ARTEC.DAL
                             {
                                 SqlParameter[] parametersPartiEliminar = new SqlParameter[]
                             {
-                                new SqlParameter("@IdPartida", unaPartidaDetalle.IdPartida)
+                                new SqlParameter("@IdPartida", unaPartidaDetalle.PartidaAsociada.IdPartida)
                             };
                                 FRAMEWORK.Persistencia.MotorBD.EjecutarNonQuery(CommandType.StoredProcedure, "PartidaEliminar", parametersPartiEliminar);
                             }

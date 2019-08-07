@@ -437,7 +437,7 @@ namespace ARTEC.DAL
         public bool PartidaModifDetalles(List<PartidaDetalle> PDetallesBorrar, List<PartidaDetalle> unasPartidasDetalles, decimal MontoTotal)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            int IdPartidaActual = unasPartidasDetalles[0].IdPartida;
+            int IdPartidaActual = unasPartidasDetalles[0].PartidaAsociada.IdPartida;
 
             try
             {
@@ -459,7 +459,7 @@ namespace ARTEC.DAL
                         //Elimina los detalles que fueron quitados de la partida
                         SqlParameter[] parametersPartDet = new SqlParameter[]
                     {
-                        new SqlParameter("@IdPartida", pdet.IdPartida),
+                        new SqlParameter("@IdPartida", pdet.PartidaAsociada.IdPartida),
                         new SqlParameter("@UIDPartidaDetalle", pdet.UIDPartidaDetalle),
                         new SqlParameter("@IdPartidaDetalle", pdet.IdPartidaDetalle)
                     };
@@ -514,7 +514,7 @@ namespace ARTEC.DAL
                             SqlParameter[] parametersRelCotPDetAgregar = new SqlParameter[]
 			                    {
                                     new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion),
-                                    new SqlParameter("@IdPartida", pdet.IdPartida),
+                                    new SqlParameter("@IdPartida", pdet.PartidaAsociada.IdPartida),
                                     new SqlParameter("@UIDPartidaDetalle", pdet.UIDPartidaDetalle)
 			                    };
                             FRAMEWORK.Persistencia.MotorBD.EjecutarScalar(CommandType.StoredProcedure, "RelCotizPartDetalleCrear", parametersRelCotPDetAgregar);

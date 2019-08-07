@@ -11,7 +11,13 @@ namespace ARTEC.ENTIDADES
 
         public int UIDPartidaDetalle { get; set; }
         public int IdPartidaDetalle { get; set; }
-        public int IdPartida { get; set; }
+        //public int IdPartida { get; set; }
+        private Partida _PartidaAsociada = new Partida();
+        public Partida PartidaAsociada 
+        {
+            get { return _PartidaAsociada; }
+            set { _PartidaAsociada = value; }
+        }
         public SolicDetalle SolicDetalleAsociado { get; set; }
         
         private List<Cotizacion> _unasCotizaciones = new List<Cotizacion>();
