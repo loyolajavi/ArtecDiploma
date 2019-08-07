@@ -299,7 +299,7 @@ namespace ARTEC.GUI
 
             //Formato GrillaBienesAsignados
             GrillaBienesAsignados.Columns["IdInventario"].Visible = false;
-            GrillaBienesAsignados.Columns["IdBienEspecif"].Visible = false;
+            GrillaBienesAsignados.Columns["deBien"].Visible = false;
             GrillaBienesAsignados.Columns["unEstado"].Visible = false;
             GrillaBienesAsignados.Columns["PartidaDetalleAsoc"].Visible = false;
             GrillaBienesAsignados.Columns["Costo"].Visible = false;

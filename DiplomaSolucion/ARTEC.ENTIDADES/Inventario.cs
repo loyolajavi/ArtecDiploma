@@ -10,7 +10,7 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdInventario { get; set; }
-        public int IdBienEspecif { get; set; }
+        //public int IdBienEspecif { get; set; }
         //public string SerialMaster { get; set; }
         public string SerieKey { get; set; }
         public EstadoInventario unEstado { get; set; }

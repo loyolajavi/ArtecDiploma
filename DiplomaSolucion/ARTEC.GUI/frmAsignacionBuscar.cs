@@ -149,7 +149,7 @@ namespace ARTEC.GUI
                             GrillaAux.unaGrilla.DataSource = null;
                             GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);
                             GrillaAux.unaGrilla.Columns["IdInventario"].Visible = false;
-                            GrillaAux.unaGrilla.Columns["IdBienEspecif"].Visible = false;
+                            GrillaAux.unaGrilla.Columns["deBien"].Visible = false;
                             GrillaAux.unaGrilla.Columns["unEstado"].Visible = false;
                             GrillaAux.unaGrilla.Columns["PartidaDetalleAsoc"].Visible = false;
                             GrillaAux.unaGrilla.Columns["Costo"].Visible = false;
@@ -223,7 +223,7 @@ namespace ARTEC.GUI
                         GrillaAux.unaGrilla.DataSource = null;
                         GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);
                         GrillaAux.unaGrilla.Columns["IdInventario"].Visible = false;
-                        GrillaAux.unaGrilla.Columns["IdBienEspecif"].Visible = false;
+                        GrillaAux.unaGrilla.Columns["deBien"].Visible = false;
                         GrillaAux.unaGrilla.Columns["unEstado"].Visible = false;
                         GrillaAux.unaGrilla.Columns["PartidaDetalleAsoc"].Visible = false;
                         GrillaAux.unaGrilla.Columns["Costo"].Visible = false;

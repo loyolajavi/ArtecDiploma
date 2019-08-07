@@ -189,7 +189,7 @@ namespace ARTEC.DAL
                         uno.deBien = new Software();
                     }
                     uno.IdInventario = (int)row["IdInventario"];
-                    uno.IdBienEspecif = (int)row["IdBien"];
+                    //uno.IdBienEspecif = (int)row["IdBien"];
                     uno.deBien.IdBien = (int)row["IdBien"];
                     uno.deBien.DescripBien = row["DescripCategoria"].ToString();
                     uno.deBien.unaMarca = new Marca();
@@ -305,7 +305,7 @@ namespace ARTEC.DAL
                         {
                             SqlParameter[] parametersInvHard = new SqlParameter[]
 			                {
-                                new SqlParameter("@IdBienEspecif", unInv.IdBienEspecif),
+                                new SqlParameter("@IdBienEspecif", unInv.deBien.IdBien),
                                 new SqlParameter("@SerieKey", unInv.SerieKey),
                                 new SqlParameter("@IdDeposito", unInv.unDeposito.IdDeposito),
                                 new SqlParameter("@IdEstadoInventario", unInv.unEstado.IdEstadoInventario),
@@ -319,7 +319,7 @@ namespace ARTEC.DAL
                         {
                             SqlParameter[] parametersInvSoft = new SqlParameter[]
 			                {
-                                new SqlParameter("@IdBienEspecif", unInv.IdBienEspecif),
+                                new SqlParameter("@IdBienEspecif", unInv.deBien.IdBien),
                                 new SqlParameter("@SerieKey ", unInv.SerieKey),
                                 new SqlParameter("@SerialMaster", ""),
                                 new SqlParameter("@IdEstadoInventario", unInv.unEstado.IdEstadoInventario),

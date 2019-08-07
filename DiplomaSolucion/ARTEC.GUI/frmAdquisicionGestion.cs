@@ -726,7 +726,8 @@ namespace ARTEC.GUI
                     unInvAgregar.SerieKey = unAgregarInventarioCU.unSerie;
                     unInvAgregar.unEstado = new EstadoInventario() { IdEstadoInventario = (int)EstadoInventario.EnumEstadoInventario.Disponible };
                     IBLLBien ManagerBien = BLLFactoryBien.CrearManagerBien((int)unAgregarInventarioCU.unTipoBien.SelectedValue);
-                    unInvAgregar.IdBienEspecif = ManagerBien.BienTraerIdPorDescripMarcaModelo(unaSolic.unosDetallesSolicitud.Where(x => x.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).First().unaCategoria.IdCategoria, (int)unAgregarInventarioCU.unaMarca.SelectedValue, (int)unAgregarInventarioCU.unModelo.SelectedValue);
+                    //unInvAgregar.IdBienEspecif = ManagerBien.BienTraerIdPorDescripMarcaModelo(unaSolic.unosDetallesSolicitud.Where(x => x.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).First().unaCategoria.IdCategoria, (int)unAgregarInventarioCU.unaMarca.SelectedValue, (int)unAgregarInventarioCU.unModelo.SelectedValue);
+                    unInvAgregar.deBien.IdBien = ManagerBien.BienTraerIdPorDescripMarcaModelo(unaSolic.unosDetallesSolicitud.Where(x => x.unaCategoria.DescripCategoria == unAgregarInventarioCU.unBien).First().unaCategoria.IdCategoria, (int)unAgregarInventarioCU.unaMarca.SelectedValue, (int)unAgregarInventarioCU.unModelo.SelectedValue);
                     unInvAgregar.Costo = unAgregarInventarioCU.unCosto;
                     unInvAgregar.unDeposito = new Deposito() { IdDeposito = 1 };
                     unInvAgregar.PartidaDetalleAsoc = new PartidaDetalle();
@@ -738,7 +739,7 @@ namespace ARTEC.GUI
 
                     BLLCategoria ManagerCategoria = new BLLCategoria();
                     unInvAgregar.deBien.unaCategoria = new Categoria();
-                    unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.IdBienEspecif);
+                    unInvAgregar.deBien.unaCategoria.IdCategoria = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInvAgregar.deBien.IdBien);
                     unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = ManagerPartidaDetalle.PartidaDetalleUIDPorIdCategoriaIdPartida(unaAdqModif.unaPartidaParaId.IdPartida, unInvAgregar.deBien.unaCategoria.IdCategoria);
                     //unInvAgregar.PartidaDetalleAsoc.UIDPartidaDetalle = unaAdqModif.unosInventariosAsoc.Find(X => X.deBien.DescripBien == unAgregarInventarioCU.unBien).PartidaDetalleAsoc.UIDPartidaDetalle;
 

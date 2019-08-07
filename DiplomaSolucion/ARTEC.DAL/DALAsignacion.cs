@@ -205,13 +205,16 @@ namespace ARTEC.DAL
                     if (IdTipoAUX == (int)TipoBien.EnumTipoBien.Hard)
                     {
                         uno = new XInventarioHard();
+                        uno.deBien = new Hardware();
                     }
                     else
                     {
                         uno = new XInventarioSoft();
+                        uno.deBien = new Software();
                     }
                     uno.IdInventario = (int)row["IdInventario"];
-                    uno.IdBienEspecif = (int)row["IdBien"];
+                    //uno.IdBienEspecif = (int)row["IdBien"];
+                    uno.deBien.IdBien = (int)row["IdBien"];
                     uno.elTipoBien = new TipoBien();
                     uno.elTipoBien.IdTipoBien = (int)row["IdTipoBien"];
                     //if (uno.TipoBien == (int)TipoBien.EnumTipoBien.Soft)
@@ -231,7 +234,7 @@ namespace ARTEC.DAL
                     //}
                     //uno.unaAdquisicion = new Adquisicion();
                     //uno.unaAdquisicion.IdAdquisicion = (int)row["IdAdquisicion"];
-                    uno.deBien = new Hardware();
+                    //uno.deBien = new Hardware(); 06/08/2019
                     uno.deBien.DescripBien = row["DescripCategoria"].ToString(); ;
 
                     ResInventarios.Add(uno);
@@ -405,7 +408,9 @@ namespace ARTEC.DAL
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     AsigDetalle ResAsigDetalle = new AsigDetalle();
-                    ResAsigDetalle.IdAsignacion = (int)row["IdAsignacion"];
+                    ResAsigDetalle.AsigAsociada = new Asignacion();
+                    //ResAsigDetalle.IdAsignacion = (int)row["IdAsignacion"];
+                    ResAsigDetalle.AsigAsociada.IdAsignacion = (int)row["IdAsignacion"];
                     ResAsigDetalle.IdAsigDetalle = (int)row["IdAsigDetalle"];
                     ResAsigDetalle.SolicDetalleAsoc = new SolicDetalle();
                     ResAsigDetalle.SolicDetalleAsoc.IdSolicitud = (int)row["IdSolicitud"];

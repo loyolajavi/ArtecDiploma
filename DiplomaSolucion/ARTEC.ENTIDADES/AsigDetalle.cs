@@ -10,7 +10,8 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdAsigDetalle { get; set; }
-        public int IdAsignacion { get; set; }
+        //public int IdAsignacion { get; set; }
+        public Asignacion AsigAsociada { get; set; }
         public Inventario unInventario { get; set; }
         public SolicDetalle SolicDetalleAsoc { get; set; }
         public Agente unAgente { get; set; }

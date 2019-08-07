@@ -72,7 +72,8 @@ namespace ARTEC.GUI
                 cboTipoBien.ValueMember = "IdTipoBien";
 
                 //Traer Marcas asociadas al bien
-                ResIdCat = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInventarioModif.IdBienEspecif);
+                //ResIdCat = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInventarioModif.IdBienEspecif);
+                ResIdCat = ManagerCategoria.CategoriaTraerIdCatPorIdBien(unInventarioModif.deBien.IdBien);
                 unasMarcasAsoc = ManagerMarca.MarcaTraerPorIdCategoria(ResIdCat);
                 unasMarcasAsoc.Insert(0, new Marca { IdMarca = 0, DescripMarca = "<Seleccionar>" });
                 cboMarca.DataSource = null;
@@ -151,7 +152,8 @@ namespace ARTEC.GUI
                 unInvModif.unaAdquisicion.MontoCompra -= unInvModif.Costo;
                 unInvModif.Costo = decimal.Parse(txtCosto.Text);
                 unInvModif.unaAdquisicion.MontoCompra += unInvModif.Costo;
-                unInvModif.IdBienEspecif = IdBienAsociado;
+                //unInvModif.IdBienEspecif = IdBienAsociado;
+                unInvModif.deBien.IdBien = IdBienAsociado;
                 
 
                 if ((int)cboMarca.SelectedValue > 0 & (int)cboModelo.SelectedValue > 0)

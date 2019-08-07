@@ -103,13 +103,16 @@ namespace ARTEC.DAL
                     if (IdTipoAUX == (int)TipoBien.EnumTipoBien.Hard)
                     {
                         uno = new XInventarioHard();
+                        uno.deBien = new Hardware();
                     }
                     else
                     {
                         uno = new XInventarioSoft();
+                        uno.deBien = new Software();
                     }
                     uno.IdInventario = (int)row["IdInventario"];
-                    uno.IdBienEspecif = (int)row["IdBien"];
+                    //uno.IdBienEspecif = (int)row["IdBien"];
+                    uno.deBien.IdBien = (int)row["IdBien"];
                     uno.elTipoBien = new TipoBien();
                     uno.elTipoBien.IdTipoBien = (int)row["IdTipoBien"];
                     if (uno.elTipoBien.IdTipoBien == (int)TipoBien.EnumTipoBien.Soft)
@@ -221,7 +224,8 @@ namespace ARTEC.DAL
             SqlParameter[] parametersInvModif = new SqlParameter[]
 			{
                 new SqlParameter("@IdInventario", unInvModif.IdInventario),
-                new SqlParameter("@IdBien", unInvModif.IdBienEspecif),
+                //new SqlParameter("@IdBien", unInvModif.IdBienEspecif),
+                new SqlParameter("@IdBien", unInvModif.deBien.IdBien),
                 new SqlParameter("@SerieKey", unInvModif.SerieKey),
                 new SqlParameter("@Costo", unInvModif.Costo),
                 new SqlParameter("@MontoCompra", unInvModif.unaAdquisicion.MontoCompra),
