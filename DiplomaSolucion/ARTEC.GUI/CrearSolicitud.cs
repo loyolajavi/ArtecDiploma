@@ -1229,21 +1229,21 @@ private void CrearSolicitud_KeyDown(object sender, KeyEventArgs e)
             if (Resultado == System.Windows.Forms.DialogResult.OK)
             {
                 RutaOrigenCompletaAdjunto = openFileDialog1.FileName;
-            }
-            //Agarro el nombre del archivo
-            string NombreArchivo = Path.GetFileName(RutaOrigenCompletaAdjunto);
-            if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(RutaOrigenCompletaAdjunto))
-            {
-                //Añado a la grilla el nombre del archivo
-                unosAdjuntosNombre.Add(NombreArchivo);
-                unosAdjuntosRutas.Add(RutaOrigenCompletaAdjunto);
-                lstAdjuntos.DataSource = null;
-                lstAdjuntos.DataSource = unosAdjuntosNombre;
-                //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
-            }
-            else
-            {
-                MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
+                //Agarro el nombre del archivo
+                string NombreArchivo = Path.GetFileName(RutaOrigenCompletaAdjunto);
+                if (FRAMEWORK.Servicios.ManejoArchivos.ValidarAdjunto(RutaOrigenCompletaAdjunto))
+                {
+                    //Añado a la grilla el nombre del archivo
+                    unosAdjuntosNombre.Add(NombreArchivo);
+                    unosAdjuntosRutas.Add(RutaOrigenCompletaAdjunto);
+                    lstAdjuntos.DataSource = null;
+                    lstAdjuntos.DataSource = unosAdjuntosNombre;
+                    //GrillaAdjuntos.Columns[0].HeaderText = "Archivos";
+                }
+                else
+                {
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("El archivo ").Texto + "\"" + NombreArchivo + "\"" + BLLServicioIdioma.MostrarMensaje(" no tiene una extensión válida (jpg, png, bmp, pdf, txt)").Texto);
+                }
             }
         }
     }

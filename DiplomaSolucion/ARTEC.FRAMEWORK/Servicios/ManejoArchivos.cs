@@ -42,10 +42,13 @@ namespace ARTEC.FRAMEWORK.Servicios
         /// <returns></returns>
         public static bool ValidarAdjunto(string RutaCompletaArchivo)
         {
-            string ext = Path.GetExtension(RutaCompletaArchivo).ToLower();
-            if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp") || (ext == ".pdf") || (ext == ".txt"))
+            if (!string.IsNullOrEmpty(RutaCompletaArchivo))
             {
-                return true;
+                string ext = Path.GetExtension(RutaCompletaArchivo).ToLower();
+                if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp") || (ext == ".pdf") || (ext == ".txt"))
+                {
+                    return true;
+                }
             }
             return false;
         }
