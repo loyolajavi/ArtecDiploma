@@ -52,7 +52,7 @@ namespace ARTEC.DAL
                     unDet.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unDet.SolicDetalleAsociado = new SolicDetalle();
-                    unDet.SolicDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+                    unDet.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     unDet.SolicDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
                     unDet.SolicDetalleAsociado.unaCategoria.DescripCategoria = row["DescripCategoria"].ToString();
                     unDet.SolicDetalleAsociado.Cantidad = (int)row["Cantidad"];
@@ -83,7 +83,7 @@ namespace ARTEC.DAL
                     unDet.PartidaAsociada.IdPartida = (int)row["IdPartida"];
                     unDet.IdPartidaDetalle = (int)row["IdPartidaDetalle"];
                     unDet.SolicDetalleAsociado = new SolicDetalle();
-                    unDet.SolicDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+                    unDet.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     unDet.SolicDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
                     unDet.SolicDetalleAsociado.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
                     //unDet.SolicDetalleAsociado.unaCategoria.DescripCategoria = row["DescripCategoria"].ToString();

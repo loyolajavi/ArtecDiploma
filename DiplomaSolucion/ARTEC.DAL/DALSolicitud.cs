@@ -415,7 +415,7 @@ namespace ARTEC.DAL
                             SqlParameter[] parametersRelCotSolDetEliminar2 = new SqlParameter[]
 			                {
                                 new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
-                                new SqlParameter("@IdSolicitud", unSolDet.IdSolicitud),
+                                new SqlParameter("@IdSolicitud", unSolDet.SolicitudAsociada.IdSolicitud),
                                 new SqlParameter("@UIDSolicDetalle", unSolDet.UIDSolicDetalle)
 			                };
 
@@ -669,7 +669,7 @@ namespace ARTEC.DAL
                                 SqlParameter[] parametersRelCotSolDetEliminar = new SqlParameter[]
 			                    {
                                     new SqlParameter("@IdSolicitudDetalle", unSolDet.IdSolicitudDetalle),
-                                    new SqlParameter("@IdSolicitud", unSolDet.IdSolicitud),
+                                    new SqlParameter("@IdSolicitud", unSolDet.SolicitudAsociada.IdSolicitud),
                                     new SqlParameter("@IdCotizacion", unaCoti.IdCotizacion),
                                     new SqlParameter("@UIDSolicDetalle", unSolDet.UIDSolicDetalle)
 			                    };

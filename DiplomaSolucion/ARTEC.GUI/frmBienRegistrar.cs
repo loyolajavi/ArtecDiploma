@@ -218,7 +218,7 @@ namespace ARTEC.GUI
                             if (AuxDet.Cantidad == AuxDet.Comprado)
                             {
                                 BLLSolicDetalle ManagerSolicDetalle = new BLLSolicDetalle();
-                                ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
+                                ManagerSolicDetalle.SolicDetalleUpdateEstado(unosDetallesBienes[0].SolicitudAsociada.IdSolicitud, AuxDet.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido, AuxDet.UIDSolicDetalle);
                             }
                         }
                         ServicioLog.CrearLog(BLLServicioIdioma.MostrarMensaje("Crear Adquisición").Texto, BLLServicioIdioma.MostrarMensaje("Adquisición Nro ").Texto + IdAdq.ToString());

@@ -306,7 +306,7 @@ namespace ARTEC.GUI
                     unaCotiz.FechaCotizacion = DateTime.Today;
                     unaCotiz.unProveedor = ProvSeleccionado;
                     unaCotiz.unDetalleAsociado = new SolicDetalle();
-                    unaCotiz.unDetalleAsociado.IdSolicitud = unDetSolic.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
+                    unaCotiz.unDetalleAsociado.SolicitudAsociada.IdSolicitud = unDetSolic.SolicitudAsociada.IdSolicitud;//unasCotizaciones[0].unDetalleAsociado.IdSolicitud;
                     unaCotiz.unDetalleAsociado.IdSolicitudDetalle = unDetSolic.IdSolicitudDetalle;//unasCotizaciones[0].unDetalleAsociado.IdSolicitudDetalle;
                     unaCotiz.unaPartidaDetalleIDs = new PartidaDetalle();
                     //unaCotiz.IdCotizacion = ManagerCotizacion.CotizacionCrear(unaCotiz);

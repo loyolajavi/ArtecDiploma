@@ -67,7 +67,7 @@ namespace ARTEC.DAL
                     unDet.unEstado.IdEstadoSolicDetalle = (int)row["IdEstadoSolicDetalle"];
                     unDet.unEstado.DescripEstadoSolicDetalle = row["DescripEstadoSolicDetalle"].ToString();
                     //unDet.unEstado = DALEstadoSolicDetalle.MapearEstadoUno(ds);
-                    unDet.IdSolicitud = (int)row["IdSolicitud"];
+                    unDet.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     //unDet.unosAgentes = DALAgente.MapearAgentes(ds);
                     //unDet.unasCotizaciones = DALCotizacion.MapearCotizaciones(ds);
                     unDet.UIDSolicDetalle = (int)row["UIDSolicDetalle"];

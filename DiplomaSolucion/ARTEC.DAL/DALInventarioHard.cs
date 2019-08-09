@@ -70,7 +70,7 @@ namespace ARTEC.DAL
         {
             SqlParameter[] parametersInvHard = new SqlParameter[]
 			{
-                new SqlParameter("@IdSolicitud", unSolicDetalle.IdSolicitud),
+                new SqlParameter("@IdSolicitud", unSolicDetalle.SolicitudAsociada.IdSolicitud),
                 new SqlParameter("@IdSolicitudDetalle", unSolicDetalle.IdSolicitudDetalle),
                 new SqlParameter("@UIDSolicDetalle", unSolicDetalle.UIDSolicDetalle)
                 //,

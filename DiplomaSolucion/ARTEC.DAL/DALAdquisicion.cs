@@ -270,7 +270,7 @@ namespace ARTEC.DAL
                         //Actualizar SolicDetalle a "Comprar" (Revierto desde Adquirido)
                         SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
                             {
-                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
                                 new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)                                
@@ -346,7 +346,7 @@ namespace ARTEC.DAL
                             //Busco Cantidad, IdSolicitud y IdSolicDetalle
                             SqlParameter[] parametersCantUIDSolicDetalle = new SqlParameter[]
                                 {
-                                    new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                    new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                                     new SqlParameter("@IdSolicitudDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
                                     new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)
                                 };
@@ -365,7 +365,7 @@ namespace ARTEC.DAL
                             //Actualizo EstadoSolicDetalle
                             SqlParameter[] parametersEstadoSolicDetModif = new SqlParameter[]
                             {
-                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicitud", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido),
                                 new SqlParameter("@UIDSolicDetalle", unInv.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)
@@ -401,7 +401,7 @@ namespace ARTEC.DAL
                 {
                     SqlParameter[] parametersEstadoSolicDetRevertir = new SqlParameter[]
                             {
-                                new SqlParameter("@IdSolicitud", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitud),
+                                new SqlParameter("@IdSolicitud", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                                 new SqlParameter("@IdSolicDetalle", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.IdSolicitudDetalle),
                                 new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
                                 new SqlParameter("@UIDSolicDetalle", unInven.PartidaDetalleAsoc.SolicDetalleAsociado.UIDSolicDetalle)

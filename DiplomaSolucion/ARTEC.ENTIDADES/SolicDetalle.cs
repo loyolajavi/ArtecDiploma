@@ -10,7 +10,14 @@ namespace ARTEC.ENTIDADES
     {
 
         public int IdSolicitudDetalle { get; set; }
-        public int IdSolicitud { get; set; }
+        //public int IdSolicitud { get; set; }
+
+        private Solicitud _SolicitudAsociada = new Solicitud();
+        public Solicitud SolicitudAsociada
+        {
+            get { return _SolicitudAsociada; }
+            set { _SolicitudAsociada = value; } 
+        }
         
         private Categoria _unaCategoria = new Categoria();
         public Categoria unaCategoria
@@ -64,7 +71,8 @@ namespace ARTEC.ENTIDADES
             {
                 Cantidad = this.Cantidad,
                 IdSolicitudDetalle = this.IdSolicitudDetalle,
-                IdSolicitud = this.IdSolicitud,
+                //IdSolicitud = this.IdSolicitud,
+                SolicitudAsociada = this.SolicitudAsociada,
                 Seleccionado = this.Seleccionado,
                 UIDSolicDetalle = this.UIDSolicDetalle,
                 unaCategoria = this.unaCategoria,

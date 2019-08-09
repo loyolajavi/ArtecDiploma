@@ -342,7 +342,7 @@ namespace ARTEC.GUI
                     if (BLLFamilia.BuscarPermiso(FRAMEWORK.Servicios.ServicioLogin.GetLoginUnico().UsuarioLogueado.Permisos, ((btnEliminar.Tag as Dictionary<string, string[]>)["Permisos"] as string[])))
                         btnEliminar.Enabled = true;
                     btnReactivar.Enabled = false;
-                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Categoría: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
+                    MessageBox.Show(BLLServicioIdioma.MostrarMensaje("Dependencia: ").Texto + DepSeleccionada.NombreDependencia + BLLServicioIdioma.MostrarMensaje(" reactivada correctamente").Texto);
                 }
             }
             catch (Exception es)

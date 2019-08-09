@@ -64,7 +64,7 @@ namespace ARTEC.DAL
 			        {
                         new SqlParameter("@IdPartidaDetalle", item.IdPartidaDetalle),
                         new SqlParameter("@IdPartida", IDDevuelto),
-                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
                         new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
 			        };
@@ -89,7 +89,7 @@ namespace ARTEC.DAL
                     //Modifica el estado de los detalles de Solicitud
                     SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
 			        {
-                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", item.SolicDetalleAsociado.IdSolicitudDetalle),
                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Partida),
                         new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsociado.UIDSolicDetalle)
@@ -194,7 +194,7 @@ namespace ARTEC.DAL
                 {
                     SqlParameter[] parametersUpdateEstadSDet = new SqlParameter[]
                     {
-                        new SqlParameter("@IdSolicitud", unDetPart.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", unDetPart.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", unDetPart.SolicDetalleAsociado.IdSolicitudDetalle),
                         new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Comprar),
                         new SqlParameter("@UIDSolicDetalle", unDetPart.SolicDetalleAsociado.UIDSolicDetalle)
@@ -469,7 +469,7 @@ namespace ARTEC.DAL
                         //Modifica el estado de los detalles de Solicitud
                         SqlParameter[] parametersSolicDetEstadoUpdate = new SqlParameter[]
 			        {
-                        new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", pdet.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", pdet.SolicDetalleAsociado.IdSolicitudDetalle),
                         new SqlParameter("@NuevoEstado", EstadoSolicDetalle.EnumEstadoSolicDetalle.Cotizado),
                         new SqlParameter("@UIDSolicDetalle", pdet.SolicDetalleAsociado.UIDSolicDetalle)

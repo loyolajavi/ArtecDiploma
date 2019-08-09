@@ -23,7 +23,10 @@ namespace ARTEC.ENTIDADES
             set { _unasPartidasDetalles = value; }
         }
 
-
+        public override string ToString()
+        {
+            return this.IdPartida.ToString();
+        }
         
 
         

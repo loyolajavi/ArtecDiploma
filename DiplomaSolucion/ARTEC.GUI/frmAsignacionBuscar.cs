@@ -144,7 +144,7 @@ namespace ARTEC.GUI
 
                             GrillaAux.IdAsignacion = unaAsig.IdAsignacion.ToString();
                             GrillaAux.NombreDependencia = unaAsig.unaDependencia.NombreDependencia;
-                            GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud.ToString();
+                            GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.SolicitudAsociada.IdSolicitud.ToString();
                             GrillaAux.laFecha = unaAsig.Fecha.ToString();
                             GrillaAux.unaGrilla.DataSource = null;
                             GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);
@@ -218,7 +218,7 @@ namespace ARTEC.GUI
 
                         GrillaAux.IdAsignacion = unaAsig.IdAsignacion.ToString();
                         GrillaAux.NombreDependencia = unaAsig.unaDependencia.NombreDependencia;
-                        GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud.ToString();
+                        GrillaAux.IdSolicitud = unaAsig.unosAsigDetalles[0].SolicDetalleAsoc.SolicitudAsociada.IdSolicitud.ToString();
                         GrillaAux.laFecha = unaAsig.Fecha.ToString();
                         GrillaAux.unaGrilla.DataSource = null;
                         GrillaAux.unaGrilla.DataSource = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsig.IdAsignacion);

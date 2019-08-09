@@ -87,7 +87,7 @@ namespace ARTEC.DAL
                 SqlParameter[] parametersRelCotizSolicDetalle = new SqlParameter[]
 			    {
                     new SqlParameter("@IdSolicitudDetalle", laCotizacion.unDetalleAsociado.IdSolicitudDetalle),
-                    new SqlParameter("@IdSolicitud", laCotizacion.unDetalleAsociado.IdSolicitud),
+                    new SqlParameter("@IdSolicitud", laCotizacion.unDetalleAsociado.SolicitudAsociada.IdSolicitud),
                     new SqlParameter("@IdCotizacion", IDDevuelto),
                     new SqlParameter("@UIDSolicDetalle", laCotizacion.unDetalleAsociado.UIDSolicDetalle)
 			    };
@@ -133,7 +133,7 @@ namespace ARTEC.DAL
                     unaCotizacion.unProveedor.AliasProv = row["AliasProv"].ToString();
                     unaCotizacion.unDetalleAsociado = new SolicDetalle();
                     unaCotizacion.unDetalleAsociado.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
-                    unaCotizacion.unDetalleAsociado.IdSolicitud = (int)row["IdSolicitud"];
+                    unaCotizacion.unDetalleAsociado.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     unaCotizacion.unDetalleAsociado.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
 
 

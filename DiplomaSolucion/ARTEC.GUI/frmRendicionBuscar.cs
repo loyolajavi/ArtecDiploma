@@ -241,7 +241,7 @@ namespace ARTEC.GUI
             //Formato GrillaRendicionBuscar
             GrillaRendicionBuscar.Columns["IdRendicion"].HeaderText = "Rendición";
             GrillaRendicionBuscar.Columns["MontoGasto"].HeaderText = "Monto";
-            GrillaRendicionBuscar.Columns["IdPartida"].HeaderText = "Partida";
+            GrillaRendicionBuscar.Columns["unaPartida"].HeaderText = "Partida";
             GrillaRendicionBuscar.Columns["FechaRen"].HeaderText = "Fecha";
         }
 

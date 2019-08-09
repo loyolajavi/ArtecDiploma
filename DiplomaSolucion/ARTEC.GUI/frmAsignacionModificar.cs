@@ -162,7 +162,7 @@ namespace ARTEC.GUI
                 {
                     txtAsignacion.Text = unaAsignacionSelec.IdAsignacion.ToString();
                     txtDep.Text = unaAsignacionSelec.unaDependencia.NombreDependencia;
-                    txtNroSolicitud.Text = unaAsignacionSelec.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud.ToString();
+                    txtNroSolicitud.Text = unaAsignacionSelec.unosAsigDetalles[0].SolicDetalleAsoc.SolicitudAsociada.IdSolicitud.ToString();
                     txtFecha.Text = unaAsignacionSelec.Fecha.ToString();
                     InventariosAgregar.Clear();
                     InventariosAgregar = ManagerAsignacion.AsignacionTraerBienesAsignados(unaAsignacionSelec.IdAsignacion);
@@ -195,7 +195,7 @@ namespace ARTEC.GUI
             flowBienesAAsignar.Controls.Clear();
             ListaGrilla.Clear();
 
-            unaSolic.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaAsignacionModif.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud).unosDetallesSolicitud;
+            unaSolic.unosDetallesSolicitud = ManagerSolicitud.SolicitudTraerDetalles(unaAsignacionModif.unosAsigDetalles[0].SolicDetalleAsoc.SolicitudAsociada.IdSolicitud).unosDetallesSolicitud;
 
             foreach (SolicDetalle det in unaSolic.unosDetallesSolicitud)
             {
@@ -460,7 +460,7 @@ namespace ARTEC.GUI
             try
             {
                  BLLSolicitud ManagerSolicitud = new BLLSolicitud();
-                 int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAsignacionSelec.unosAsigDetalles[0].SolicDetalleAsoc.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
+                 int EstadoSolic = ManagerSolicitud.SolicitudBuscar(unaAsignacionSelec.unosAsigDetalles[0].SolicDetalleAsoc.SolicitudAsociada.IdSolicitud).FirstOrDefault().UnEstado.IdEstadoSolicitud;
                 if (EstadoSolic == (int)EstadoSolicitud.EnumEstadoSolicitud.Pendiente)
                 {
                     DialogResult resmbox = MessageBox.Show(BLLServicioIdioma.MostrarMensaje("¿Está seguro que desea dar de baja la Asignación: ").Texto + unaAsignacionModif.IdAsignacion.ToString() + "?", BLLServicioIdioma.MostrarMensaje("Advertencia").Texto, MessageBoxButtons.YesNo);

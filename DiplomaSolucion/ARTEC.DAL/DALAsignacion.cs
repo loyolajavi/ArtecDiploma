@@ -44,7 +44,7 @@ namespace ARTEC.DAL
                         new SqlParameter("@IdAsignacion", IDDevuelto),
                         new SqlParameter("@IdInventario", item.unInventario.IdInventario),
                         new SqlParameter("@IdSolicitudDetalle", item.SolicDetalleAsoc.IdSolicitudDetalle),
-                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsoc.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", item.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@UIDSolicDetalle", item.SolicDetalleAsoc.UIDSolicDetalle)
                         //VER TEMA DE HARD SOFT POR LO DEL AGENTE
 			        };
@@ -67,9 +67,9 @@ namespace ARTEC.DAL
 
                 foreach (AsigDetalle item in unaAsig.unosAsigDetalles)
                 {
-                    if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.UIDSolicDetalle))
+                    if (item.SolicDetalleAsoc.Cantidad == GestorInventario.InventarioEntregadoPorSolicDetalle2(item.SolicDetalleAsoc.IdSolicitudDetalle, item.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud, item.SolicDetalleAsoc.UIDSolicDetalle))
                     {
-                        GestorSolicDetalle.SolicDetalleUpdateEstado2(item.SolicDetalleAsoc.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado, item.SolicDetalleAsoc.UIDSolicDetalle);
+                        GestorSolicDetalle.SolicDetalleUpdateEstado2(item.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud, item.SolicDetalleAsoc.IdSolicitudDetalle, (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado, item.SolicDetalleAsoc.UIDSolicDetalle);
                         //Coloco el estado para el UIDSolicDetalle en cuestión en memoria (porque solo lo hago en la BD al cambio sino)
                         EstadoSolicDetalle unEstadoAux = new EstadoSolicDetalle();
                         unEstadoAux.IdEstadoSolicDetalle = (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Entregado;
@@ -151,7 +151,7 @@ namespace ARTEC.DAL
                     ResAsignacion.unosAsigDetalles = new List<AsigDetalle>();
                     AsigDetalle unAsigDet = new AsigDetalle();
                     unAsigDet.SolicDetalleAsoc = new SolicDetalle();
-                    unAsigDet.SolicDetalleAsoc.IdSolicitud = (int)row["IdSolicitud"];
+                    unAsigDet.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     ResAsignacion.unosAsigDetalles.Add(unAsigDet);
 
                     unasAsignaciones.Add(ResAsignacion);
@@ -277,7 +277,7 @@ namespace ARTEC.DAL
                     {
                         int IdSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
                         int UIDSolicDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.UIDSolicDetalle;
-                        int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
+                        int IdSolicitudAUX = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.SolicitudAsociada.IdSolicitud;
                         int IdAsigDetalleAUX = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().IdAsigDetalle;
 
                         //Eliminar el AsigDetalle
@@ -330,7 +330,7 @@ namespace ARTEC.DAL
 
                         int IdSolicDetalleAUX2 = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.IdSolicitudDetalle;
                         int UIDSolicDetalleAUX2 = unaAsignacionModif.unosAsigDetalles.Where(x => x.unInventario != null && x.unInventario.IdInventario == unInv.IdInventario).First().SolicDetalleAsoc.UIDSolicDetalle;
-                        int IdSolicitudAUX2 = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.IdSolicitud;
+                        int IdSolicitudAUX2 = unaAsignacionModif.unosAsigDetalles.First().SolicDetalleAsoc.SolicitudAsociada.IdSolicitud;
 
                         SqlParameter[] parametersAsigDetalles = new SqlParameter[]
 			            {
@@ -413,7 +413,7 @@ namespace ARTEC.DAL
                     ResAsigDetalle.AsigAsociada.IdAsignacion = (int)row["IdAsignacion"];
                     ResAsigDetalle.IdAsigDetalle = (int)row["IdAsigDetalle"];
                     ResAsigDetalle.SolicDetalleAsoc = new SolicDetalle();
-                    ResAsigDetalle.SolicDetalleAsoc.IdSolicitud = (int)row["IdSolicitud"];
+                    ResAsigDetalle.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud = (int)row["IdSolicitud"];
                     ResAsigDetalle.SolicDetalleAsoc.IdSolicitudDetalle = (int)row["IdSolicitudDetalle"];
                     ResAsigDetalle.SolicDetalleAsoc.UIDSolicDetalle = (int)row["UIDSolicDetalle"];
                     unosAsigDetalles.Add(ResAsigDetalle);
@@ -451,7 +451,7 @@ namespace ARTEC.DAL
                 {
                     SqlParameter[] parametersEstadoSolicDet = new SqlParameter[]
                     {
-                        new SqlParameter("@IdSolicitud", unAsigDet2.SolicDetalleAsoc.IdSolicitud),
+                        new SqlParameter("@IdSolicitud", unAsigDet2.SolicDetalleAsoc.SolicitudAsociada.IdSolicitud),
                         new SqlParameter("@IdSolicDetalle", unAsigDet2.SolicDetalleAsoc.IdSolicitudDetalle),
                         new SqlParameter("@NuevoEstado", (int)EstadoSolicDetalle.EnumEstadoSolicDetalle.Adquirido),
                         new SqlParameter("@UIDSolicDetalle", unAsigDet2.SolicDetalleAsoc.UIDSolicDetalle)

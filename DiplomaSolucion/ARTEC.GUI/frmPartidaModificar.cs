@@ -131,12 +131,12 @@ namespace ARTEC.GUI
                 {
                     pdet.unasCotizaciones = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.PartidaAsociada.IdPartida);
                     pdet.unasCotizacionesBKP = unManagerCotizacion.CotizacionTraerPorUIDPartidaDetalle(pdet.UIDPartidaDetalle, pdet.PartidaAsociada.IdPartida);
-                    pdet.unasCotizacionesEnSolic = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(pdet.SolicDetalleAsociado.IdSolicitudDetalle, pdet.SolicDetalleAsociado.IdSolicitud, pdet.SolicDetalleAsociado.UIDSolicDetalle);
+                    pdet.unasCotizacionesEnSolic = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(pdet.SolicDetalleAsociado.IdSolicitudDetalle, pdet.SolicDetalleAsociado.SolicitudAsociada.IdSolicitud, pdet.SolicDetalleAsociado.UIDSolicDetalle);
                 }
 
                 //Traigo la dependencia asociada
                 BLLDependencia ManagerDependencia = new BLLDependencia();
-                List<Dependencia> ListaDep = ManagerDependencia.DependenciaTraerNombrePorIDSolicitud(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud);
+                List<Dependencia> ListaDep = ManagerDependencia.DependenciaTraerNombrePorIDSolicitud(unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.SolicitudAsociada.IdSolicitud);
                 if (ListaDep != null){
                     DepAsoc = ListaDep.First();
                     txtDependencia.Text = DepAsoc.NombreDependencia;
@@ -147,7 +147,7 @@ namespace ARTEC.GUI
             txtNroPartida.Text = !string.IsNullOrEmpty(unaPartida.NroPartida) ? unaPartida.NroPartida : "";
             txtFechaEnvio.Text = unaPartida.FechaEnvio.ToString();
             txtMontoSolic.Text = unaPartida.MontoSolicitado.ToString();
-            txtNroSolicitud.Text = unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.IdSolicitud.ToString();
+            txtNroSolicitud.Text = unaPartida.unasPartidasDetalles[0].SolicDetalleAsociado.SolicitudAsociada.IdSolicitud.ToString();
 
             List<HLPPartidaDetalle> ListaHelperPartidaDetalle = new List<HLPPartidaDetalle>();
 
@@ -240,7 +240,7 @@ namespace ARTEC.GUI
                     //}
 
                     //Coloco las cotizaciones antiguas (no asociadas a la partida al momento de generarla)
-                    CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitud, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.UIDSolicDetalle);
+                    CotizAntiguas = unManagerCotizacion.CotizacionTraerPorSolicitudYDetalle(unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.IdSolicitudDetalle, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.SolicitudAsociada.IdSolicitud, unaPartida.unasPartidasDetalles[e.RowIndex].SolicDetalleAsociado.UIDSolicDetalle);
                     ListaResCotizLoc = CotizAntiguas.Where(p => !ListaLocalCotiz.Any(l => p.IdCotizacion == l.IdCotizacion))
                                .ToList();
                     GrillaCotizAntiguas.DataSource = null;
